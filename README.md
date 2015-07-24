@@ -6,9 +6,27 @@ Slack Ruby Client
 
 A Ruby wrapper for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs.
 
+## Installation
+
+Add to Gemfile.
+
+```
+gem 'slack-ruby-client'
+```
+
+Run `bundle install`.
+
 ## Usage
 
-TODO
+### Create a New Bot Integration
+
+This is something done in Slack, under [integrations](https://artsy.slack.com/services). Create a [new bot](https://artsy.slack.com/services/new/bot), and note its API token.
+
+```ruby
+Slack.configure do |config|
+  config.token = 'token'
+end
+```
 
 ## Contributing
 
