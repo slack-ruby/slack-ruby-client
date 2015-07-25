@@ -51,17 +51,34 @@ client.on :hello do
 end
 
 client.on :message do |data|
+  puts data
+end
+
+client.start!
+```
+
+### Combinging RealTime and Web Clients
+
+Since the web client is used to obtain the RealTime client's WebSocket URL, you can continue using the web client in combination with the RealTime client.
+
+```ruby
+client = Slack::RealTime::Client.new
+
+client.on :message do |data|
   case data['text']
-    when 'bot hi'
-      web_client.chat_postMessage channel: data['channel'], text: "Hi <@#{data.user}>!"
-    when /^bot/
-      web_client.chat_postMessage channel: data['channel'], text: "Sorry <@#{data.user}>, what?"
-    end
+  when 'bot hi' then
+    client.web_client.chat_postMessage channel: data['channel'], text: "Hi <@#{data['user']}>!"
+  when /^bot/ then
+    client.web_client.chat_postMessage channel: data['channel'], text: "Sorry <@#{data['user']}>, what?"
   end
 end
 
-client.start
+client.start!
 ```
+
+See a fullly working example in [examples/hi](examples/hi).
+
+![](examples/hi/hi.gif)
 
 ## History
 

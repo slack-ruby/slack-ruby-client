@@ -1,2 +1,6 @@
 rvm:
   - 2.2
+
+git:
+  submodules: false
+
