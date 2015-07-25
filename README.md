@@ -22,10 +22,45 @@ Run `bundle install`.
 
 This is something done in Slack, under [integrations](https://artsy.slack.com/services). Create a [new bot](https://artsy.slack.com/services/new/bot), and note its API token.
 
+### Use the API Token
+
 ```ruby
 Slack.configure do |config|
   config.token = 'token'
 end
+```
+
+### Web Client
+
+The Slack Web API allows you to build applications that interact with Slack in more complex ways than the integrations we provide out of the box. For example, send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
+
+```ruby
+client = Slack::Web::Client.new
+client.chat_postMessage(channel: 'general', text: 'Hello World')
+```
+
+### RealTime Client
+
+The Real Time Messaging API is a WebSocket-based API that allows you to receive events from Slack in real time and send messages as user.
+
+```ruby
+client = Slack::RealTime::Client.new
+
+client.on :hello do
+  puts 'Successfully connected.'
+end
+
+client.on :message do |data|
+  case data['text']
+    when 'bot hi'
+      web_client.chat_postMessage channel: data['channel'], text: "Hi <@#{data.user}>!"
+    when /^bot/
+      web_client.chat_postMessage channel: data['channel'], text: "Sorry <@#{data.user}>, what?"
+    end
+  end
+end
+
+client.start
 ```
 
 ## History

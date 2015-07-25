@@ -4,11 +4,17 @@ module Slack
       class ClientNotStartedError < StandardError; end
       class ClientAlreadyStartedError < StandardError; end
 
-      attr_accessor :url
+      attr_accessor :web_client
 
-      def initialize(url)
-        @url = url
-        @callbacks ||= {}
+      def initialize
+        @callbacks = {}
+        @web_client = Slack::Web::Client.new
+      end
+
+      [:url, :team, :self, :users, :channels, :ims, :bots].each do |attr|
+        define_method attr do
+          @options[attr.to_s] if @options
+        end
       end
 
       def on(type, &block)
@@ -20,29 +26,32 @@ module Slack
       def start!
         fail ClientAlreadyStartedError if started?
         EM.run do
-          @ws = Faye::WebSocket::Client.new(@url)
+          @options = web_client.rtm_start
+          @socket = Slack::RealTime::Socket.new(@options['url'])
 
-          @ws.on :open do |event|
-            open(event)
-          end
+          @socket.connect! do |ws|
+            ws.on :open do |event|
+              open(event)
+            end
 
-          @ws.on :message do |event|
-            dispatch(event)
-          end
+            ws.on :message do |event|
+              dispatch(event)
+            end
 
-          @ws.on :close do |event|
-            close(event)
+            ws.on :close do |event|
+              close(event)
+            end
           end
         end
       end
 
       def stop!
         fail ClientNotStartedError unless started?
-        @ws.close if @ws
+        @socket.disconnect! if @socket
       end
 
       def started?
-        !@ws.nil?
+        @socket && @socket.connected?
       end
 
       protected
@@ -51,7 +60,7 @@ module Slack
       end
 
       def close(_event)
-        @ws = nil
+        @socket = nil
         EM.stop
       end
 
