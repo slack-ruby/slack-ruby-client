@@ -40,6 +40,21 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           end.to raise_error Slack::RealTime::Client::ClientNotStartedError
         end
       end
+      describe '#message' do
+        before do
+          allow(client).to receive(:next_id).and_return(42)
+        end
+        it 'sends message' do
+          expect(socket).to receive(:send_data).with({ type: 'message', id: 42, text: 'hello world', channel: 'channel' }.to_json)
+          client.message(text: 'hello world', channel: 'channel')
+        end
+      end
+      describe '#next_id' do
+        it 'increments' do
+          previous_id = client.send(:next_id)
+          expect(client.send(:next_id)).to eq previous_id + 1
+        end
+      end
     end
   end
 end

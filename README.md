@@ -51,11 +51,20 @@ client.on :hello do
 end
 
 client.on :message do |data|
-  puts data
+  case data['text']
+  when 'bot hi' then
+    client.message channel: data['channel'], text: "Hi <@#{data['user']}>!"
+  when /^bot/ then
+    client.message channel: data['channel'], text: "Sorry <@#{data['user']}>, what?"
+  end
 end
 
 client.start!
 ```
+
+See a fullly working example in [examples/hi_real_time](examples/hi_real_time).
+
+![](examples/hi_real_time/hi.gif)
 
 ### Combinging RealTime and Web Clients
 
@@ -76,9 +85,9 @@ end
 client.start!
 ```
 
-See a fullly working example in [examples/hi](examples/hi).
+See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web).
 
-![](examples/hi/hi.gif)
+![](examples/hi_real_time_and_web/hi.gif)
 
 ## History
 

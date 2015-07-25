@@ -7,6 +7,10 @@ module Slack
         @url = url
       end
 
+      def send_data(data)
+        @ws.send(data) if @ws
+      end
+
       def connect!(&_block)
         return if connected?
 

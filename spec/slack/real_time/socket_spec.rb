@@ -27,5 +27,16 @@ RSpec.describe Slack::RealTime::Socket do
         socket.disconnect!
       end
     end
+    describe 'send_data' do
+      before do
+        allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)
+        allow(ws).to receive(:on)
+        socket.connect!
+      end
+      it 'sends data' do
+        expect(ws).to receive(:send).with('data')
+        socket.send_data('data')
+      end
+    end
   end
 end

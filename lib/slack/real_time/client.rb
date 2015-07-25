@@ -4,6 +4,8 @@ module Slack
       class ClientNotStartedError < StandardError; end
       class ClientAlreadyStartedError < StandardError; end
 
+      include Slack::RealTime::Api::Message
+
       attr_accessor :web_client
 
       def initialize
@@ -55,6 +57,11 @@ module Slack
       end
 
       protected
+
+      def send_json(data)
+        fail ClientNotStartedError unless started?
+        @socket.send_data(data.to_json)
+      end
 
       def open(_event)
       end
