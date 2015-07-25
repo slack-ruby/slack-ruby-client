@@ -4,7 +4,7 @@ Slack Ruby Client
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
 [![Build Status](https://travis-ci.org/dblock/slack-ruby-client.png)](https://travis-ci.org/dblock/slack-ruby-client)
 
-A Ruby wrapper for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs.
+A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs.
 
 ## Installation
 
@@ -22,11 +22,13 @@ Run `bundle install`.
 
 This is something done in Slack, under [integrations](https://artsy.slack.com/services). Create a [new bot](https://artsy.slack.com/services/new/bot), and note its API token.
 
+![](screenshots/register-bot.png)
+
 ### Use the API Token
 
 ```ruby
 Slack.configure do |config|
-  config.token = 'token'
+  config.token = ENV['SLACK_API_TOKEN']
 end
 ```
 
@@ -36,8 +38,19 @@ The Slack Web API allows you to build applications that interact with Slack in m
 
 ```ruby
 client = Slack::Web::Client.new
-client.chat_postMessage(channel: 'general', text: 'Hello World')
+
+client.auth_test
+
+general_channel = client.channels_list['channels'].detect { |c| c['name'] == 't3' }
+
+client.chat_postMessage(channel: general_channel['id'], text: 'Hello World', as_user: true)
 ```
+
+See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
+
+![](examples/hi_web/hi.gif)
+
+Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
 
 ### RealTime Client
 
@@ -68,7 +81,7 @@ You can also send typing indicators.
 client.typing channel: data['channel']
 ```
 
-See a fullly working example in [examples/hi_real_time](examples/hi_real_time).
+See a fullly working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
 
 ![](examples/hi_real_time/hi.gif)
 
@@ -91,7 +104,7 @@ end
 client.start!
 ```
 
-See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web).
+See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb).
 
 ![](examples/hi_real_time_and_web/hi.gif)
 

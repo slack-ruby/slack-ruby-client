@@ -11,4 +11,3 @@ RSpec.shared_context 'connected client' do
     client.start!
   end
 end
-
