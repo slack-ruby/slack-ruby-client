@@ -28,6 +28,10 @@ Slack.configure do |config|
 end
 ```
 
+## History
+
+This gem is based on [slack-ruby-gem](https://github.com/aki017/slack-ruby-gem), but it more clearly separates the Web and RTM APIs, is more thoroughly tested and is in active development.
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md).
