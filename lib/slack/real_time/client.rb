@@ -4,7 +4,10 @@ module Slack
       class ClientNotStartedError < StandardError; end
       class ClientAlreadyStartedError < StandardError; end
 
-      include Slack::RealTime::Api::Message
+      include Api::MessageId
+      include Api::Ping
+      include Api::Message
+      include Api::Typing
 
       attr_accessor :web_client
 

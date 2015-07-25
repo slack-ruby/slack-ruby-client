@@ -14,23 +14,6 @@ module Slack
           throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
           send_json({ type: 'message', id: next_id }.merge(options))
         end
-
-        #
-        # Send a typing indicator to indicate that the user is currently writing a message.
-        #
-        # @option options [channel] :channel
-        #   Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
-        def typing(options = {})
-          throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-          send_json({ type: 'typing', id: next_id }.merge(options))
-        end
-
-        private
-
-        def next_id
-          @next_id ||= 0
-          @next_id += 1
-        end
       end
     end
   end
