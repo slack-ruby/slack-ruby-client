@@ -34,7 +34,7 @@ end
 
 ### Web Client
 
-The Slack Web API allows you to build applications that interact with Slack in more complex ways than the integrations we provide out of the box. For example, send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
+The Slack Web API allows you to build applications that interact with Slack. For example, send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
 
 ```ruby
 client = Slack::Web::Client.new
