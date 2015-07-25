@@ -62,6 +62,12 @@ end
 client.start!
 ```
 
+You can also send typing indicators.
+
+```ruby
+client.typing channel: data['channel']
+```
+
 See a fullly working example in [examples/hi_real_time](examples/hi_real_time).
 
 ![](examples/hi_real_time/hi.gif)

@@ -13,6 +13,9 @@ end
 
 client.on :message do |data|
   puts data
+
+  client.typing channel: data['channel']
+
   case data['text']
   when 'bot hi' then
     client.message channel: data['channel'], text: "Hi <@#{data['user']}>!"
