@@ -16,7 +16,7 @@ module Slack
         @web_client = Slack::Web::Client.new
       end
 
-      [:url, :team, :self, :users, :channels, :ims, :bots].each do |attr|
+      [:url, :team, :self, :users, :channels, :groups, :ims, :bots].each do |attr|
         define_method attr do
           @options[attr.to_s] if @options
         end

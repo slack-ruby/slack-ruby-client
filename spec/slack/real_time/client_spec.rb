@@ -14,8 +14,35 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         allow(ws).to receive(:on)
         client.start!
       end
-      it 'sets url' do
-        expect(client.url).to eq url
+      context 'properties provided upon connection' do
+        it 'sets url' do
+          expect(client.url).to eq url
+        end
+        it 'sets team' do
+          expect(client.team['domain']).to eq 'dblockdotorg'
+        end
+        it 'sets self' do
+          expect(client.self['id']).to eq 'U07518DTL'
+        end
+        it 'sets users' do
+          expect(client.users.count).to eq 7
+          expect(client.users.first['id']).to eq 'U07KECJ77'
+        end
+        it 'sets channels' do
+          expect(client.channels.count).to eq 8
+          expect(client.channels.first['name']).to eq 'demo'
+        end
+        it 'sets ims' do
+          expect(client.ims.count).to eq 2
+          expect(client.ims.first['user']).to eq 'USLACKBOT'
+        end
+        it 'sets bots' do
+          expect(client.bots.count).to eq 5
+          expect(client.bots.first['name']).to eq 'bot'
+        end
+        it 'sets groups' do
+          expect(client.groups.count).to eq 0
+        end
       end
       it 'uses web client to fetch url' do
         expect(client.web_client).to be_a Slack::Web::Client
