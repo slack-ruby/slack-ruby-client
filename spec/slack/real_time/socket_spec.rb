@@ -12,12 +12,16 @@ RSpec.describe Slack::RealTime::Socket do
     end
     describe '#connect!' do
       before do
-        allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)
+        allow(ws).to receive(:on).with(:close)
       end
       it 'connects' do
-        expect(ws).to receive(:on).with(:close)
+        allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)
         socket.connect!
         expect(socket.instance_variable_get('@ws')).to eq ws
+      end
+      it 'pings every 30s' do
+        expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 30).and_return(ws)
+        socket.connect!
       end
     end
     describe '#disconnect!' do

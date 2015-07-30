@@ -1,5 +1,6 @@
 ### 0.1.1 (Next)
 
+* [#2](https://github.com/dblock/slack-ruby-client/pull/2): `Slack::RealTime::Socket` now pings frames every 30s, as recommended by Slack - [@samdoiron](https://github.com/samdoiron).
 * Your contribution here.
 
 ### 0.1.0 (7/25/2015)

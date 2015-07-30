@@ -14,7 +14,7 @@ module Slack
       def connect!(&_block)
         return if connected?
 
-        @ws = Faye::WebSocket::Client.new(url)
+        @ws = Faye::WebSocket::Client.new(url, nil, ping: 30)
 
         @ws.on :close do |event|
           close(event)
