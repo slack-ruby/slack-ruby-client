@@ -1,5 +1,16 @@
 rvm:
   - 2.2
+  - 2.1
+  - 2.0.0
+  - rbx-2.2.10
+  - jruby-19mode
+  - ruby-head
+  - jruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
 
 git:
   submodules: false
