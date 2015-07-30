@@ -1,6 +1,6 @@
-# Releasing SlackRubyClient
+# Releasing Slack-Ruby-Client
 
-There're no particular rules about when to release slack-ruby-client. Release bug fixes frequenty, features not so frequently and breaking API changes rarely.
+There're no hard rules about when to release slack-ruby-client. Release bug fixes frequenty, features not so frequently and breaking API changes rarely.
 
 ### Release
 
