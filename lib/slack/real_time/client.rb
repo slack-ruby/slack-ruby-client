@@ -39,6 +39,7 @@ module Slack
 
           socket_options = {}
           socket_options[:ping] = websocket_ping if websocket_ping
+          socket_options[:proxy] = websocket_proxy if websocket_proxy
           @socket = Slack::RealTime::Socket.new(@options['url'], socket_options)
 
           @socket.connect! do |ws|

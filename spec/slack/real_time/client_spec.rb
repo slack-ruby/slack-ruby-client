@@ -81,6 +81,9 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       it 'sets ping' do
         expect(client.websocket_ping).to eq 30
       end
+      it "doesn't set proxy" do
+        expect(client.websocket_proxy).to be nil
+      end
       Slack::RealTime::Config::ATTRIBUTES.each do |key|
         it "sets #{key}" do
           expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
@@ -118,6 +121,35 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         end
         it 'creates a connection with custom ping' do
           expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 15).and_return(ws)
+          client.start!
+        end
+      end
+    end
+    context 'proxy' do
+      before do
+        Slack::RealTime::Client.configure do |config|
+          config.websocket_proxy = {
+            origin: 'http://username:password@proxy.example.com',
+            headers: { 'User-Agent' => 'ruby' }
+          }
+        end
+      end
+      describe '#initialize' do
+        it 'sets proxy' do
+          expect(client.websocket_proxy).to eq(
+            origin: 'http://username:password@proxy.example.com',
+            headers: { 'User-Agent' => 'ruby' }
+          )
+        end
+        it 'creates a connection with custom proxy' do
+          expect(Faye::WebSocket::Client).to receive(:new).with(
+            url,
+            nil,
+            ping: 30,
+            proxy: {
+              origin: 'http://username:password@proxy.example.com',
+              headers: { 'User-Agent' => 'ruby' }
+            }).and_return(ws)
           client.start!
         end
       end

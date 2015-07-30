@@ -4,7 +4,8 @@ module Slack
       extend self
 
       ATTRIBUTES = [
-        :websocket_ping
+        :websocket_ping,
+        :websocket_proxy
       ]
 
       attr_accessor(*Config::ATTRIBUTES)
