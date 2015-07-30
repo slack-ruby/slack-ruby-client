@@ -2,9 +2,11 @@ module Slack
   module RealTime
     class Socket
       attr_accessor :url
+      attr_accessor :options
 
-      def initialize(url)
+      def initialize(url, options = {})
         @url = url
+        @options = options
       end
 
       def send_data(data)
@@ -14,7 +16,7 @@ module Slack
       def connect!(&_block)
         return if connected?
 
-        @ws = Faye::WebSocket::Client.new(url, nil, ping: 30)
+        @ws = Faye::WebSocket::Client.new(url, nil, options)
 
         @ws.on :close do |event|
           close(event)

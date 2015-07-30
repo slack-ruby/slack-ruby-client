@@ -52,7 +52,7 @@ See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
 
-You can configure the web client either globally or via the initializer.
+You can configure the Web client either globally or via the initializer.
 
 ```ruby
 Slack::Web::Client.config do |config|
@@ -97,10 +97,16 @@ end
 client.start!
 ```
 
-You can also send typing indicators.
+You can send typing indicators with `typing`.
 
 ```ruby
 client.typing channel: data['channel']
+```
+
+You can send a ping with `ping`.
+
+```ruby
+client.ping
 ```
 
 The client exposes the properties of [rtm.start](https://api.slack.com/methods/rtm.start) upon a successful connection.
@@ -116,13 +122,33 @@ groups   | A list of group objects, one for every group the authenticated user i
 ims      | A list of IM objects, one for every direct message channel visible to the authenticated user.
 bots     | Details of the integrations set up on this team.
 
+You can configure the RealTime client either globally or via the initializer.
+
+```ruby
+Slack::RealTime::Client.config do |config|
+  config.websocket_ping = 42
+end
+```
+
+```ruby
+client = Slack::RealTime::Client.new(websocket_ping: 42)
+```
+
+The following settings are supported.
+
+setting        | description
+---------------|--------------------------------------------------------------------------------------
+websocket_ping | The number of seconds that indicates how often the WebSocket should send ping frames.
+
+Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start), configure Web client options via `Slack::Web::Client.configure` as described above.
+
 See a fullly working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
 
 ![](examples/hi_real_time/hi.gif)
 
 ### Combinging RealTime and Web Clients
 
-Since the web client is used to obtain the RealTime client's WebSocket URL, you can continue using the web client in combination with the RealTime client.
+Since the Web client is used to obtain the RealTime client's WebSocket URL, you can continue using the Web client in combination with the RealTime client.
 
 ```ruby
 client = Slack::RealTime::Client.new

@@ -2,16 +2,17 @@ require 'spec_helper'
 
 RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
   let(:client) { Slack::RealTime::Client.new }
-  let(:ws) { double(Faye::WebSocket::Client) }
+  let(:ws) { double(Faye::WebSocket::Client, on: true) }
   let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
-  let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+  before do
+    allow(EM).to receive(:run).and_yield
+  end
   context 'started' do
     describe '#start!' do
+      let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
       before do
-        allow(EM).to receive(:run).and_yield
-        allow(Slack::RealTime::Socket).to receive(:new).with(url).and_return(socket)
+        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30).and_return(socket)
         allow(socket).to receive(:connect!).and_yield(ws)
-        allow(ws).to receive(:on)
         client.start!
       end
       context 'properties provided upon connection' do
@@ -71,6 +72,53 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         it 'increments' do
           previous_id = client.send(:next_id)
           expect(client.send(:next_id)).to eq previous_id + 1
+        end
+      end
+    end
+  end
+  context 'with defaults' do
+    describe '#initialize' do
+      it 'sets ping' do
+        expect(client.websocket_ping).to eq 30
+      end
+      Slack::RealTime::Config::ATTRIBUTES.each do |key|
+        it "sets #{key}" do
+          expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
+        end
+      end
+    end
+  end
+  context 'with custom settings' do
+    describe '#initialize' do
+      Slack::RealTime::Config::ATTRIBUTES.each do |key|
+        context key do
+          let(:client) { Slack::RealTime::Client.new(key => 'custom') }
+          it "sets #{key}" do
+            expect(client.send(key)).to_not eq Slack::RealTime::Config.send(key)
+            expect(client.send(key)).to eq 'custom'
+          end
+        end
+      end
+    end
+  end
+  context 'global config' do
+    after do
+      Slack::RealTime::Client.config.reset
+    end
+    let(:client) { Slack::RealTime::Client.new }
+    context 'ping' do
+      before do
+        Slack::RealTime::Client.configure do |config|
+          config.websocket_ping = 15
+        end
+      end
+      describe '#initialize' do
+        it 'sets ping' do
+          expect(client.websocket_ping).to eq 15
+        end
+        it 'creates a connection with custom ping' do
+          expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 15).and_return(ws)
+          client.start!
         end
       end
     end

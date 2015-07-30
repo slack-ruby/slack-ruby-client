@@ -10,10 +10,14 @@ module Slack
       include Api::Typing
 
       attr_accessor :web_client
+      attr_accessor(*Config::ATTRIBUTES)
 
-      def initialize
+      def initialize(options = {})
         @callbacks = {}
         @web_client = Slack::Web::Client.new
+        Slack::RealTime::Config::ATTRIBUTES.each do |key|
+          send("#{key}=", options[key] || Slack::RealTime.config.send(key))
+        end
       end
 
       [:url, :team, :self, :users, :channels, :groups, :ims, :bots].each do |attr|
@@ -32,7 +36,10 @@ module Slack
         fail ClientAlreadyStartedError if started?
         EM.run do
           @options = web_client.rtm_start
-          @socket = Slack::RealTime::Socket.new(@options['url'])
+
+          socket_options = {}
+          socket_options[:ping] = websocket_ping if websocket_ping
+          @socket = Slack::RealTime::Socket.new(@options['url'], socket_options)
 
           @socket.connect! do |ws|
             ws.on :open do |event|
@@ -57,6 +64,16 @@ module Slack
 
       def started?
         @socket && @socket.connected?
+      end
+
+      class << self
+        def configure
+          block_given? ? yield(Config) : Config
+        end
+
+        def config
+          Config
+        end
       end
 
       protected

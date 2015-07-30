@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Slack::RealTime::Socket do
   context 'with url' do
     let(:url) { 'wss://ms174.slack-msgs.com/websocket/xyz' }
-    let(:socket) { Slack::RealTime::Socket.new(url) }
+    let(:socket) { Slack::RealTime::Socket.new(url, ping: 42) }
     let(:ws) { double(Faye::WebSocket::Client) }
     describe '#initialize' do
       it 'sets url' do
@@ -20,7 +20,7 @@ RSpec.describe Slack::RealTime::Socket do
         expect(socket.instance_variable_get('@ws')).to eq ws
       end
       it 'pings every 30s' do
-        expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 30).and_return(ws)
+        expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 42).and_return(ws)
         socket.connect!
       end
     end
