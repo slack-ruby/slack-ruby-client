@@ -52,6 +52,28 @@ See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
 
+You can configure the web client either globally or via the initializer.
+
+```ruby
+Slack::Web::Client.config do |config|
+  config.user_agent = 'Slack Ruby Client/1.0'
+end
+```
+
+```ruby
+client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
+```
+
+The following settings are supported.
+
+setting      | description
+-------------|-------------------------------------------------------------------------------------------------
+user_agent   | User-agent, defaults to _Slack Ruby Client/version_.
+proxy        | Optional HTTP proxy.
+ca_path      | Optional SSL certificates path.
+ca_file      | Optional SSL certificates file.
+endpoint     | Slack endpoint, default is _https://slack.com/api_.
+
 ### RealTime Client
 
 The Real Time Messaging API is a WebSocket-based API that allows you to receive events from Slack in real time and send messages as user.

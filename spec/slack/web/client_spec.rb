@@ -28,4 +28,62 @@ RSpec.describe Slack::Web::Client do
       end
     end
   end
+  context 'global config' do
+    after do
+      Slack::Web::Client.config.reset
+    end
+    let(:client) { Slack::Web::Client.new }
+    context 'user-agent' do
+      before do
+        Slack::Web::Client.configure do |config|
+          config.user_agent = 'custom/user-agent'
+        end
+      end
+      describe '#initialize' do
+        it 'sets user-agent' do
+          expect(client.user_agent).to eq 'custom/user-agent'
+        end
+        it 'creates a connection with the custom user-agent' do
+          expect(client.send(:connection).headers).to eq(
+            'Accept' => 'application/json; charset=utf-8',
+            'User-Agent' => 'custom/user-agent'
+          )
+        end
+      end
+    end
+    context 'proxy' do
+      before do
+        Slack::Web::Client.configure do |config|
+          config.proxy = 'http://localhost:8080'
+        end
+      end
+      describe '#initialize' do
+        it 'sets proxy' do
+          expect(client.proxy).to eq 'http://localhost:8080'
+        end
+        it 'creates a connection with the proxy' do
+          expect(client.send(:connection).proxy.uri.to_s).to eq 'http://localhost:8080'
+        end
+      end
+    end
+    context 'SSL options' do
+      before do
+        Slack::Web::Client.configure do |config|
+          config.ca_path = '/ca_path'
+          config.ca_file = '/ca_file'
+        end
+      end
+      describe '#initialize' do
+        it 'sets ca_path and ca_file' do
+          expect(client.ca_path).to eq '/ca_path'
+          expect(client.ca_file).to eq '/ca_file'
+        end
+        it 'creates a connection with ssl options' do
+          ssl = client.send(:connection).ssl
+          expect(ssl.ca_path).to eq '/ca_path'
+          expect(ssl.ca_file).to eq '/ca_file'
+        end
+      end
+    end
+  end
 end

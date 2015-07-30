@@ -6,11 +6,14 @@ module Slack
 
         def connection
           options = {
-            headers: { 'Accept' => 'application/json; charset=utf-8', 'User-Agent' => user_agent },
-            url: endpoint
+            headers: { 'Accept' => 'application/json; charset=utf-8' }
           }
 
-          ::Faraday::Connection.new(options) do |connection|
+          options[:headers]['User-Agent'] = user_agent if user_agent
+          options[:proxy] = proxy if proxy
+          options[:ssl] = { ca_path: ca_path, ca_file: ca_file }
+
+          ::Faraday::Connection.new(endpoint, options) do |connection|
             connection.use ::Faraday::Request::Multipart
             connection.use ::Faraday::Request::UrlEncoded
             connection.use ::Faraday::Response::RaiseError
