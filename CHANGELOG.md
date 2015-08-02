@@ -1,8 +1,7 @@
-### 0.2.1 (Next)
+### 0.2.1 (8/2/2015)
 
 * Set Slack API token via `Slack::RealTime::Client.new(token: 'token')` and `Slack::Web::Client.new(token: 'token')` - [@dblock](https://github.com/dblock).
 * Set Slack API token via `Slack::RealTime::Client.configure` and `Slack::Web::Client.configure` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.2.0 (7/31/2015)
 
