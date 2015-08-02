@@ -32,6 +32,8 @@ Slack.configure do |config|
 end
 ```
 
+This sets a global default token. You can also pass a token into the initializer of both `Slack::Web::Client` and `Slack::RealTime::Client` or configure those separately via `Slack::Web::Config.configure` and `Slack::RealTime::Config.configure`. The instance token will be used over the client type token over the global default.
+
 ### Web Client
 
 The Slack Web API allows you to build applications that interact with Slack. For example, send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
@@ -68,6 +70,7 @@ The following settings are supported.
 
 setting      | description
 -------------|-------------------------------------------------------------------------------------------------
+token        | Slack API token.
 user_agent   | User-agent, defaults to _Slack Ruby Client/version_.
 proxy        | Optional HTTP proxy.
 ca_path      | Optional SSL certificates path.
@@ -138,6 +141,7 @@ The following settings are supported.
 
 setting         | description
 ----------------|-----------------------------------------------------------------------------------------------------
+token           | Slack API token.
 websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 

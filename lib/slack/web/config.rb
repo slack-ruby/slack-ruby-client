@@ -8,7 +8,8 @@ module Slack
         :user_agent,
         :ca_path,
         :ca_file,
-        :endpoint
+        :endpoint,
+        :token
       ]
 
       attr_accessor(*Config::ATTRIBUTES)
@@ -18,6 +19,8 @@ module Slack
         self.user_agent = "Slack Ruby Client/#{Slack::VERSION}"
         self.ca_path = `openssl version -a | grep OPENSSLDIR | awk '{print $2}'|sed -e 's/\"//g'`
         self.ca_file = "#{ca_path}/ca-certificates.crt"
+        self.token = nil
+        self.proxy = nil
       end
     end
 

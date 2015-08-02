@@ -51,6 +51,32 @@ RSpec.describe Slack::Web::Client do
         end
       end
     end
+    context 'token' do
+      before do
+        Slack.configure do |config|
+          config.token = 'global default'
+        end
+      end
+      it 'defaults token to global default' do
+        client = Slack::Web::Client.new
+        expect(client.token).to eq 'global default'
+      end
+      context 'with web config' do
+        before do
+          Slack::Web::Client.configure do |config|
+            config.token = 'custom web token'
+          end
+        end
+        it 'overrides token to web config' do
+          client = Slack::Web::Client.new
+          expect(client.token).to eq 'custom web token'
+        end
+        it 'overrides token to specific token' do
+          client = Slack::Web::Client.new(token: 'local token')
+          expect(client.token).to eq 'local token'
+        end
+      end
+    end
     context 'proxy' do
       before do
         Slack::Web::Client.configure do |config|

@@ -21,7 +21,7 @@ module Slack
         private
 
         def request(method, path, options)
-          options = options.merge(token: Slack.config.token)
+          options = options.merge(token: token)
           response = connection.send(method) do |request|
             case method
             when :get, :delete

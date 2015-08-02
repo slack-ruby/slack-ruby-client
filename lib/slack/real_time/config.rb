@@ -4,6 +4,7 @@ module Slack
       extend self
 
       ATTRIBUTES = [
+        :token,
         :websocket_ping,
         :websocket_proxy
       ]
@@ -12,6 +13,8 @@ module Slack
 
       def reset
         self.websocket_ping = 30
+        self.websocket_proxy = nil
+        self.token = nil
       end
     end
 

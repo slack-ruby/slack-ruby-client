@@ -14,10 +14,11 @@ module Slack
 
       def initialize(options = {})
         @callbacks = {}
-        @web_client = Slack::Web::Client.new
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
           send("#{key}=", options[key] || Slack::RealTime.config.send(key))
         end
+        @token ||= Slack.config.token
+        @web_client = Slack::Web::Client.new(token: token)
       end
 
       [:url, :team, :self, :users, :channels, :groups, :ims, :bots].each do |attr|
