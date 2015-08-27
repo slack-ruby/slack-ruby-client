@@ -1,3 +1,3 @@
-[submodule "lib/slack/web/api/slack-api-docs"]
-	path = lib/slack/web/api/slack-api-docs
-	url = git@github.com:slackhq/slack-api-docs.git
+[submodule "lib/slack/web/api/slack-api-ref"]
+	path = lib/slack/web/api/slack-api-ref
+	url = git@github.com:dblock/slack-api-ref.git

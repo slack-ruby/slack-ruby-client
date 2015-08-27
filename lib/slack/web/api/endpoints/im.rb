@@ -11,8 +11,7 @@ module Slack
           # @option options [im] :channel
           #   Direct message channel to close.
           # @see https://api.slack.com/methods/im.close
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.close.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.close.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.close.json
           def im_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             post('im.close', options)
@@ -30,8 +29,7 @@ module Slack
           # @option options [Object] :count
           #   Number of messages to return, between 1 and 1000.
           # @see https://api.slack.com/methods/im.history
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.history.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.history.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.history.json
           def im_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             post('im.history', options)
@@ -41,8 +39,7 @@ module Slack
           # Lists direct message channels for the calling user.
           #
           # @see https://api.slack.com/methods/im.list
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.list.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.list.json
           def im_list(options = {})
             post('im.list', options)
           end
@@ -55,8 +52,7 @@ module Slack
           # @option options [timestamp] :ts
           #   Timestamp of the most recently seen message.
           # @see https://api.slack.com/methods/im.mark
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.mark.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.mark.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.mark.json
           def im_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
@@ -69,8 +65,7 @@ module Slack
           # @option options [user] :user
           #   User to open a direct message channel with.
           # @see https://api.slack.com/methods/im.open
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.open.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/im.open.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.open.json
           def im_open(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             post('im.open', options)

@@ -5,7 +5,7 @@ require 'erubis'
 namespace :slack do
   namespace :web do
     namespace :api do
-      # update slack-api-docs from https://github.com/slackhq/slack-api-docs
+      # update slack-api-ref from https://github.com/dblock/slack-api-ref
       task :git_update do
         sh 'git submodule update --init --recursive'
         sh 'git submodule foreach git pull origin master'
@@ -14,7 +14,7 @@ namespace :slack do
       desc 'Update API.'
       task update: [:git_update] do
         method_schema = JSON.parse(File.read('lib/slack/web/api/schema/method.json'))
-        data = Dir.glob('lib/slack/web/api/slack-api-docs/methods/*.json').each_with_object({}) do |path, result|
+        data = Dir.glob('lib/slack/web/api/slack-api-ref/methods/*.json').each_with_object({}) do |path, result|
           name = File.basename(path, '.json')
           prefix, name = name.split('.')
           result[prefix] ||= {}

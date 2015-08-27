@@ -9,8 +9,7 @@ module Slack
           # Lists custom emoji for a team.
           #
           # @see https://api.slack.com/methods/emoji.list
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/emoji.list.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/emoji.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/emoji.list.json
           def emoji_list(options = {})
             post('emoji.list', options)
           end

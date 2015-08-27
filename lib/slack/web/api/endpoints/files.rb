@@ -11,8 +11,7 @@ module Slack
           # @option options [file] :file
           #   File to fetch info for
           # @see https://api.slack.com/methods/files.info
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/files.info.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/files.info.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.info.json
           def files_info(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.info', options)
@@ -40,8 +39,7 @@ module Slack
           #
           #   You can pass multiple values in the types argument, like `types=posts,snippets`.The default value is `all`, which does not filter the list.
           # @see https://api.slack.com/methods/files.list
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/files.list.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/files.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.list.json
           def files_list(options = {})
             post('files.list', options)
           end
@@ -64,8 +62,7 @@ module Slack
           # @option options [channel] :channels
           #   Comma separated list of channels to share the file into.
           # @see https://api.slack.com/methods/files.upload
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/files.upload.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/files.upload.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.upload.json
           def files_upload(options = {})
             post('files.upload', options)
           end

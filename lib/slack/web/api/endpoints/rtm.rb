@@ -9,8 +9,7 @@ module Slack
           # Starts a Real Time Messaging session.
           #
           # @see https://api.slack.com/methods/rtm.start
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/rtm.start.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/rtm.start.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm.start.json
           def rtm_start(options = {})
             post('rtm.start', options)
           end

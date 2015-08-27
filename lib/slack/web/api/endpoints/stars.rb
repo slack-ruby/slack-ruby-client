@@ -11,8 +11,7 @@ module Slack
           # @option options [user] :user
           #   Show stars by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/stars.list
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/stars.list.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/stars.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.list.json
           def stars_list(options = {})
             post('stars.list', options)
           end

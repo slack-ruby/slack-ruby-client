@@ -1,5 +1,6 @@
 ### 0.2.2 (Next)
 
+* Your API reference schema from [github.com/dblock/slack-api-ref](https://github.com/dblock/slack-api-ref) - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.2.1 (8/2/2015)

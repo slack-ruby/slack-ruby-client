@@ -11,8 +11,7 @@ module Slack
           # @option options [user] :user
           #   User to get presence info on. Defaults to the authed user.
           # @see https://api.slack.com/methods/users.getPresence
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.getPresence.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.getPresence.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.getPresence.json
           def users_getPresence(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             post('users.getPresence', options)
@@ -24,8 +23,7 @@ module Slack
           # @option options [user] :user
           #   User to get info on
           # @see https://api.slack.com/methods/users.info
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.info.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.info.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.info.json
           def users_info(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             post('users.info', options)
@@ -35,8 +33,7 @@ module Slack
           # Lists all users in a Slack team.
           #
           # @see https://api.slack.com/methods/users.list
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.list.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.list.json
           def users_list(options = {})
             post('users.list', options)
           end
@@ -45,8 +42,7 @@ module Slack
           # Marks a user as active.
           #
           # @see https://api.slack.com/methods/users.setActive
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.setActive.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.setActive.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.setActive.json
           def users_setActive(options = {})
             post('users.setActive', options)
           end
@@ -57,8 +53,7 @@ module Slack
           # @option options [Object] :presence
           #   Either `auto` or `away`
           # @see https://api.slack.com/methods/users.setPresence
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.setPresence.md
-          # @see https://github.com/slackhq/slack-api-docs/blob/master/methods/users.setPresence.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.setPresence.json
           def users_setPresence(options = {})
             throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
             post('users.setPresence', options)
