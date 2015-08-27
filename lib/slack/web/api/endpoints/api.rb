@@ -9,9 +9,9 @@ module Slack
           # Checks API calling code.
           #
           # @option options [Object] :error
-          #   Error response to return
+          #   Error response to return.
           # @option options [Object] :foo
-          #   example property to return
+          #   Example property to return.
           # @see https://api.slack.com/methods/api.test
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/api.test.json
           def api_test(options = {})

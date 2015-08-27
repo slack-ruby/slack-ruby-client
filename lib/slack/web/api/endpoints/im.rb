@@ -26,6 +26,8 @@ module Slack
           #   Latest message timestamp to include in results.
           # @option options [timestamp] :oldest
           #   Oldest message timestamp to include in results.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
           # @option options [Object] :count
           #   Number of messages to return, between 1 and 1000.
           # @see https://api.slack.com/methods/im.history

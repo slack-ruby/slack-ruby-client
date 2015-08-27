@@ -29,6 +29,8 @@ module Slack
           #   Text of the message to send. See below for an explanation of formatting.
           # @option options [Object] :username
           #   Name of bot.
+          # @option options [Object] :as_user
+          #   Pass true to post the message as the authed user, instead of as a bot.
           # @option options [Object] :parse
           #   Change how messages are treated. See below.
           # @option options [Object] :link_names
@@ -40,7 +42,7 @@ module Slack
           # @option options [Object] :unfurl_media
           #   Pass false to disable unfurling of media content.
           # @option options [Object] :icon_url
-          #   URL to an image to use as the icon for this message
+          #   URL to an image to use as the icon for this message.
           # @option options [Object] :icon_emoji
           #   emoji to use as the icon for this message. Overrides `icon_url`.
           # @see https://api.slack.com/methods/chat.postMessage

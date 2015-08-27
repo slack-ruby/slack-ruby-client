@@ -21,7 +21,7 @@ module Slack
           # Gets information about a user.
           #
           # @option options [user] :user
-          #   User to get info on
+          #   User to get info on.
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.info.json
           def users_info(options = {})
@@ -32,6 +32,8 @@ module Slack
           #
           # Lists all users in a Slack team.
           #
+          # @option options [Object] :presence
+          #   Whether to include presence data in the output.
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.list.json
           def users_list(options = {})
@@ -51,7 +53,7 @@ module Slack
           # Manually sets user presence.
           #
           # @option options [Object] :presence
-          #   Either `auto` or `away`
+          #   Either `auto` or `away`.
           # @see https://api.slack.com/methods/users.setPresence
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.setPresence.json
           def users_setPresence(options = {})

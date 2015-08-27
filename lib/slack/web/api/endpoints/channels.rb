@@ -9,7 +9,7 @@ module Slack
           # Archives a channel.
           #
           # @option options [channel] :channel
-          #   Channel to archive
+          #   Channel to archive.
           # @see https://api.slack.com/methods/channels.archive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.archive.json
           def channels_archive(options = {})
@@ -21,7 +21,7 @@ module Slack
           # Creates a channel.
           #
           # @option options [Object] :name
-          #   Name of channel to create
+          #   Name of channel to create.
           # @see https://api.slack.com/methods/channels.create
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.create.json
           def channels_create(options = {})
@@ -38,6 +38,8 @@ module Slack
           #   Latest message timestamp to include in results.
           # @option options [timestamp] :oldest
           #   Oldest message timestamp to include in results.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
           # @option options [Object] :count
           #   Number of messages to return, between 1 and 1000.
           # @see https://api.slack.com/methods/channels.history
@@ -51,7 +53,7 @@ module Slack
           # Gets information about a channel.
           #
           # @option options [channel] :channel
-          #   Channel to get info on
+          #   Channel to get info for.
           # @see https://api.slack.com/methods/channels.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.info.json
           def channels_info(options = {})
@@ -78,7 +80,7 @@ module Slack
           # Joins a channel, creating it if needed.
           #
           # @option options [Object] :name
-          #   Name of channel to join
+          #   Name of channel to join.
           # @see https://api.slack.com/methods/channels.join
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.join.json
           def channels_join(options = {})
@@ -105,7 +107,7 @@ module Slack
           # Leaves a channel.
           #
           # @option options [channel] :channel
-          #   Channel to leave
+          #   Channel to leave.
           # @see https://api.slack.com/methods/channels.leave
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.leave.json
           def channels_leave(options = {})
@@ -143,7 +145,7 @@ module Slack
           # Renames a channel.
           #
           # @option options [channel] :channel
-          #   Channel to rename
+          #   Channel to rename.
           # @option options [Object] :name
           #   New name for channel.
           # @see https://api.slack.com/methods/channels.rename
@@ -158,9 +160,9 @@ module Slack
           # Sets the purpose for a channel.
           #
           # @option options [channel] :channel
-          #   Channel to set the purpose of
+          #   Channel to set the purpose of.
           # @option options [Object] :purpose
-          #   The new purpose
+          #   The new purpose.
           # @see https://api.slack.com/methods/channels.setPurpose
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.setPurpose.json
           def channels_setPurpose(options = {})
@@ -173,9 +175,9 @@ module Slack
           # Sets the topic for a channel.
           #
           # @option options [channel] :channel
-          #   Channel to set the topic of
+          #   Channel to set the topic of.
           # @option options [Object] :topic
-          #   The new topic
+          #   The new topic.
           # @see https://api.slack.com/methods/channels.setTopic
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.setTopic.json
           def channels_setTopic(options = {})
@@ -188,7 +190,7 @@ module Slack
           # Unarchives a channel.
           #
           # @option options [channel] :channel
-          #   Channel to unarchive
+          #   Channel to unarchive.
           # @see https://api.slack.com/methods/channels.unarchive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.unarchive.json
           def channels_unarchive(options = {})

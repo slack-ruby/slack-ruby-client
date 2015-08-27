@@ -1,6 +1,11 @@
 ### 0.2.2 (Next)
 
-* Your API reference schema from [github.com/dblock/slack-api-ref](https://github.com/dblock/slack-api-ref) - [@dblock](https://github.com/dblock).
+* Added `users.list#presence` - [@dblock](https://github.com/dblock).
+* Added `groups.info` - [@dblock](https://github.com/dblock).
+* Added `groups.history#inclusive` and `im.history#inclusive` - [@dblock](https://github.com/dblock).
+* Added `files.delete` - [@dblock](https://github.com/dblock).
+* Added `chat.postMessage#as_user` - [@dblock](https://github.com/dblock).
+* Use API reference schema from [github.com/dblock/slack-api-ref](https://github.com/dblock/slack-api-ref) - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.2.1 (8/2/2015)

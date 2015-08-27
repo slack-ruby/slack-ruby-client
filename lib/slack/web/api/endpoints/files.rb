@@ -6,10 +6,22 @@ module Slack
       module Endpoints
         module Files
           #
+          # This method deletes a file from your team.
+          #
+          # @option options [file] :file
+          #   ID of file to delete.
+          # @see https://api.slack.com/methods/files.delete
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.delete.json
+          def files_delete(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            post('files.delete', options)
+          end
+
+          #
           # Gets information about a team file.
           #
           # @option options [file] :file
-          #   File to fetch info for
+          #   File to fetch info for.
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.info.json
           def files_info(options = {})

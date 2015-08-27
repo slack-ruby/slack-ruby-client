@@ -9,7 +9,7 @@ module Slack
           # Archives a private group.
           #
           # @option options [group] :channel
-          #   Private group to archive
+          #   Private group to archive.
           # @see https://api.slack.com/methods/groups.archive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.archive.json
           def groups_archive(options = {})
@@ -21,7 +21,7 @@ module Slack
           # Closes a private group.
           #
           # @option options [group] :channel
-          #   Group to open.
+          #   Group to close.
           # @see https://api.slack.com/methods/groups.close
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.close.json
           def groups_close(options = {})
@@ -33,7 +33,7 @@ module Slack
           # Creates a private group.
           #
           # @option options [Object] :name
-          #   Name of group to create
+          #   Name of group to create.
           # @see https://api.slack.com/methods/groups.create
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.create.json
           def groups_create(options = {})
@@ -62,6 +62,8 @@ module Slack
           #   Latest message timestamp to include in results.
           # @option options [timestamp] :oldest
           #   Oldest message timestamp to include in results.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
           # @option options [Object] :count
           #   Number of messages to return, between 1 and 1000.
           # @see https://api.slack.com/methods/groups.history
@@ -69,6 +71,18 @@ module Slack
           def groups_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             post('groups.history', options)
+          end
+
+          #
+          # This method returns information about a private group.
+          #
+          # @option options [group] :channel
+          #   Group to get info on.
+          # @see https://api.slack.com/methods/groups.info
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.info.json
+          def groups_info(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            post('groups.info', options)
           end
 
           #
@@ -105,7 +119,7 @@ module Slack
           # Leaves a private group.
           #
           # @option options [group] :channel
-          #   Group to leave
+          #   Group to leave.
           # @see https://api.slack.com/methods/groups.leave
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.leave.json
           def groups_leave(options = {})
@@ -155,7 +169,7 @@ module Slack
           # Renames a private group.
           #
           # @option options [channel] :channel
-          #   Group to rename
+          #   Group to rename.
           # @option options [Object] :name
           #   New name for group.
           # @see https://api.slack.com/methods/groups.rename
@@ -170,9 +184,9 @@ module Slack
           # Sets the purpose for a private group.
           #
           # @option options [channel] :channel
-          #   Private group to set the purpose of
+          #   Private group to set the purpose of.
           # @option options [Object] :purpose
-          #   The new purpose
+          #   The new purpose.
           # @see https://api.slack.com/methods/groups.setPurpose
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.setPurpose.json
           def groups_setPurpose(options = {})
@@ -185,9 +199,9 @@ module Slack
           # Sets the topic for a private group.
           #
           # @option options [channel] :channel
-          #   Private group to set the topic of
+          #   Private group to set the topic of.
           # @option options [Object] :topic
-          #   The new topic
+          #   The new topic.
           # @see https://api.slack.com/methods/groups.setTopic
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.setTopic.json
           def groups_setTopic(options = {})
@@ -200,7 +214,7 @@ module Slack
           # Unarchives a private group.
           #
           # @option options [group] :channel
-          #   Group to unarchive
+          #   Group to unarchive.
           # @see https://api.slack.com/methods/groups.unarchive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.unarchive.json
           def groups_unarchive(options = {})

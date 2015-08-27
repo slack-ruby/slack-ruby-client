@@ -6,10 +6,10 @@ module Slack
       module Endpoints
         module Presence
           #
-          # Manually set user presence
+          # Manually set user presence.
           #
           # @option options [Object] :presence
-          #   Either `active` or `away`
+          #   Either `active` or `away`.
           # @see https://api.slack.com/methods/presence.set
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/presence.set.json
           def presence_set(options = {})
