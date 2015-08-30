@@ -10,6 +10,7 @@ require 'slack/web/api/endpoints/groups'
 require 'slack/web/api/endpoints/im'
 require 'slack/web/api/endpoints/oauth'
 require 'slack/web/api/endpoints/presence'
+require 'slack/web/api/endpoints/reactions'
 require 'slack/web/api/endpoints/rtm'
 require 'slack/web/api/endpoints/search'
 require 'slack/web/api/endpoints/stars'
@@ -29,6 +30,7 @@ module Slack
         include Im
         include Oauth
         include Presence
+        include Reactions
         include Rtm
         include Search
         include Stars
