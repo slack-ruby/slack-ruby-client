@@ -1,4 +1,4 @@
-### 0.2.2 (Next)
+### 0.3.0 (9/1/2015)
 
 * Added `team.info` and `accessLogs` - [@dblock](https://github.com/dblock).
 * Removed obsolete `presence` API - [@dblock](https://github.com/dblock).
@@ -10,7 +10,6 @@
 * Added `chat.postMessage#as_user` - [@dblock](https://github.com/dblock).
 * Use API reference schema from [github.com/dblock/slack-api-ref](https://github.com/dblock/slack-api-ref) - [@dblock](https://github.com/dblock).
 * Added `reactions.add`, `.list`, `.get` and `.remove` - [@jakedahn](https://github.com/jakedahn)
-* Your contribution here.
 
 ### 0.2.1 (8/2/2015)
 
