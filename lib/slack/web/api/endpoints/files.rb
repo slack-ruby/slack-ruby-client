@@ -8,7 +8,7 @@ module Slack
           #
           # This method deletes a file from your team.
           #
-          # @option options [file] :file
+          # @option options [Object] :file
           #   ID of file to delete.
           # @see https://api.slack.com/methods/files.delete
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.delete.json
@@ -18,9 +18,9 @@ module Slack
           end
 
           #
-          # Gets information about a team file.
+          # This method returns information about a file in your team.
           #
-          # @option options [file] :file
+          # @option options [Object] :file
           #   File to fetch info for.
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.info.json
@@ -30,9 +30,9 @@ module Slack
           end
 
           #
-          # Lists & filters team files.
+          # This method returns a list of files within the team. It can be filtered and sliced in various ways.
           #
-          # @option options [user] :user
+          # @option options [Object] :user
           #   Filter files created by a single user.
           # @option options [Object] :ts_from
           #   Filter files created after this timestamp (inclusive).
@@ -41,15 +41,17 @@ module Slack
           # @option options [Object] :types
           #   Filter files by type:
           #
-          #   * `all` - All files
-          #   * `posts` - Posts
-          #   * `snippets` - Snippets
-          #   * `images` - Image files
-          #   * `gdocs` - Google docs
-          #   * `zips` - Zip files
-          #   * `pdfs` - PDF files
+          #   all - All files
+          #   posts - Posts
+          #   snippets - Snippets
+          #   images - Image files
+          #   gdocs - Google docs
+          #   zips - Zip files
+          #   pdfs - PDF files
           #
-          #   You can pass multiple values in the types argument, like `types=posts,snippets`.The default value is `all`, which does not filter the list.
+          #
+          #   You can pass multiple values in the types argument, like types=posts,snippets.The default value is all, which does not filter the list.
+          #   .
           # @see https://api.slack.com/methods/files.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.list.json
           def files_list(options = {})
@@ -57,10 +59,10 @@ module Slack
           end
 
           #
-          # Uploads or creates a file.
+          # This method allows you to create or upload an existing file.
           #
           # @option options [Object] :file
-          #   File contents via `multipart/form-data`.
+          #   File contents via multipart/form-data.
           # @option options [Object] :content
           #   File contents via a POST var.
           # @option options [Object] :filetype
@@ -71,7 +73,7 @@ module Slack
           #   Title of file.
           # @option options [Object] :initial_comment
           #   Initial comment to add to file.
-          # @option options [channel] :channels
+          # @option options [Object] :channels
           #   Comma separated list of channels to share the file into.
           # @see https://api.slack.com/methods/files.upload
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.upload.json

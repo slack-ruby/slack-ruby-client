@@ -6,9 +6,9 @@ module Slack
       module Endpoints
         module Stars
           #
-          # Lists stars for a user.
+          # This method lists the items starred by a user.
           #
-          # @option options [user] :user
+          # @option options [Object] :user
           #   Show stars by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.list.json

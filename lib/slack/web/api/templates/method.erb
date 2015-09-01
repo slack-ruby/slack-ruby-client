@@ -10,7 +10,9 @@ module Slack
 
 <% end %>
           #
-          # <%= data["desc"] %>
+<% data["desc"].split("\n").each do |line| %>
+          # <%= line %>
+<% end %>
           #
 <% data["args"].each do |arg_name, arg_v| %>
           # @option options [<%= arg_v["type"] %>] :<%= arg_name %>

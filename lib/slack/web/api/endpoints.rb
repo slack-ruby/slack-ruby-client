@@ -9,11 +9,12 @@ require 'slack/web/api/endpoints/files'
 require 'slack/web/api/endpoints/groups'
 require 'slack/web/api/endpoints/im'
 require 'slack/web/api/endpoints/oauth'
-require 'slack/web/api/endpoints/presence'
+require 'slack/web/api/endpoints/pins'
 require 'slack/web/api/endpoints/reactions'
 require 'slack/web/api/endpoints/rtm'
 require 'slack/web/api/endpoints/search'
 require 'slack/web/api/endpoints/stars'
+require 'slack/web/api/endpoints/team'
 require 'slack/web/api/endpoints/users'
 
 module Slack
@@ -29,11 +30,12 @@ module Slack
         include Groups
         include Im
         include Oauth
-        include Presence
+        include Pins
         include Reactions
         include Rtm
         include Search
         include Stars
+        include Team
         include Users
       end
     end

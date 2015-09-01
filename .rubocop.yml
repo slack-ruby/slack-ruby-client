@@ -2,5 +2,6 @@ AllCops:
   Exclude:
     - vendor/**/*
     - bin/**/*
+    - lib/slack/web/api/slack-api-ref/**/*
 
 inherit_from: .rubocop_todo.yml

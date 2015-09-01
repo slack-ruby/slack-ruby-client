@@ -6,12 +6,12 @@ module Slack
       module Endpoints
         module Api
           #
-          # Checks API calling code.
+          # This method helps you test your calling code.
           #
           # @option options [Object] :error
           #   Error response to return.
           # @option options [Object] :foo
-          #   Example property to return.
+          #   example property to return.
           # @see https://api.slack.com/methods/api.test
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/api.test.json
           def api_test(options = {})

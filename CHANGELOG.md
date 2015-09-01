@@ -1,5 +1,8 @@
 ### 0.2.2 (Next)
 
+* Added `team.info` and `accessLogs` - [@dblock](https://github.com/dblock).
+* Removed obsolete `presence` API - [@dblock](https://github.com/dblock).
+* Added `pins.add`, `list` and `remove` - [@dblock](https://github.com/dblock).
 * Added `users.list#presence` - [@dblock](https://github.com/dblock).
 * Added `groups.info` - [@dblock](https://github.com/dblock).
 * Added `groups.history#inclusive` and `im.history#inclusive` - [@dblock](https://github.com/dblock).

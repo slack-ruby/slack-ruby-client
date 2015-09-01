@@ -6,14 +6,15 @@ module Slack
       module Endpoints
         module Oauth
           #
-          # Exchanges a temporary OAuth code for an API token.
+          # This method allows you to exchange a temporary OAuth code for an API access token.
+          # This is used as part of the OAuth authentication flow.
           #
           # @option options [Object] :client_id
           #   Issued when you created your application.
           # @option options [Object] :client_secret
           #   Issued when you created your application.
           # @option options [Object] :code
-          #   The `code` param returned via the OAuth callback.
+          #   The code param returned via the OAuth callback.
           # @option options [Object] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).
           # @see https://api.slack.com/methods/oauth.access

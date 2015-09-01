@@ -6,11 +6,11 @@ module Slack
       module Endpoints
         module Chat
           #
-          # Deletes a message.
+          # This method deletes a message from a channel.
           #
           # @option options [Object] :ts
           #   Timestamp of the message to be deleted.
-          # @option options [channel] :channel
+          # @option options [Object] :channel
           #   Channel containing the message to be deleted.
           # @see https://api.slack.com/methods/chat.delete
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.delete.json
@@ -21,10 +21,10 @@ module Slack
           end
 
           #
-          # Sends a message to a channel.
+          # This method posts a message to a public channel, private group, or IM channel.
           #
-          # @option options [channel] :channel
-          #   Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
+          # @option options [Object] :channel
+          #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [Object] :text
           #   Text of the message to send. See below for an explanation of formatting.
           # @option options [Object] :username
@@ -44,7 +44,7 @@ module Slack
           # @option options [Object] :icon_url
           #   URL to an image to use as the icon for this message.
           # @option options [Object] :icon_emoji
-          #   emoji to use as the icon for this message. Overrides `icon_url`.
+          #   emoji to use as the icon for this message. Overrides icon_url.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.postMessage.json
           def chat_postMessage(options = {})
@@ -54,14 +54,14 @@ module Slack
           end
 
           #
-          # Updates a message.
+          # This method updates a message in a channel.
           #
           # @option options [Object] :ts
           #   Timestamp of the message to be updated.
-          # @option options [channel] :channel
+          # @option options [Object] :channel
           #   Channel containing the message to be updated.
           # @option options [Object] :text
-          #   New text for the message, using the [default formatting rules](/docs/formatting).
+          #   New text for the message, using the default formatting rules.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.update.json
           def chat_update(options = {})
