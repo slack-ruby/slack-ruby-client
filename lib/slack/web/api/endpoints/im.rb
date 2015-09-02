@@ -8,7 +8,7 @@ module Slack
           #
           # This method closes a direct message channel.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Direct message channel to close.
           # @see https://api.slack.com/methods/im.close
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.close.json
@@ -22,11 +22,11 @@ module Slack
           # To read the entire history for a direct message channel, call the method with no latest or
           # oldest arguments, and then continue paging using the instructions below.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Direct message channel to fetch history for.
-          # @option options [Object] :latest
+          # @option options [timestamp] :latest
           #   End of time range of messages to include in results.
-          # @option options [Object] :oldest
+          # @option options [timestamp] :oldest
           #   Start of time range of messages to include in results.
           # @option options [Object] :inclusive
           #   Include messages with latest or oldest timestamp in results.
@@ -49,9 +49,9 @@ module Slack
           #
           # This method moves the read cursor in a direct message channel.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Direct message channel to set reading cursor in.
-          # @option options [Object] :ts
+          # @option options [timestamp] :ts
           #   Timestamp of the most recently seen message.
           # @see https://api.slack.com/methods/im.mark
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.mark.json
@@ -64,7 +64,7 @@ module Slack
           #
           # This method opens a direct message channel with another member of your Slack team.
           #
-          # @option options [Object] :user
+          # @option options [user] :user
           #   User to open a direct message channel with.
           # @see https://api.slack.com/methods/im.open
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.open.json

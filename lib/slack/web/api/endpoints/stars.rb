@@ -8,7 +8,7 @@ module Slack
           #
           # This method lists the items starred by a user.
           #
-          # @option options [Object] :user
+          # @option options [user] :user
           #   Show stars by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.list.json

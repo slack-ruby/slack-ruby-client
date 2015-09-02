@@ -9,9 +9,9 @@ module Slack
           # This method pins an item (file, file comment, channel message, or group message) to a particular channel.
           # The channel argument is required and one of file, file_comment, or timestamp must also be specified.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Channel to pin the item in.
-          # @option options [Object] :file
+          # @option options [file] :file
           #   File to pin.
           # @option options [Object] :file_comment
           #   File comment to pin.
@@ -27,7 +27,7 @@ module Slack
           #
           # This method lists the items pinned to a channel.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Channel to get pinned items for.
           # @see https://api.slack.com/methods/pins.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/pins.list.json
@@ -40,9 +40,9 @@ module Slack
           # This method un-pins an item (file, file comment, channel message, or group message) from a channel.
           # The channel argument is required and one of file, file_comment, or timestamp must also be specified.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Channel where the item is pinned to.
-          # @option options [Object] :file
+          # @option options [file] :file
           #   File to un-pin.
           # @option options [Object] :file_comment
           #   File comment to un-pin.

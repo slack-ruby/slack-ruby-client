@@ -8,7 +8,7 @@ module Slack
           #
           # This method archives a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Private group to archive.
           # @see https://api.slack.com/methods/groups.archive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.archive.json
@@ -20,7 +20,7 @@ module Slack
           #
           # This method closes a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to open.
           # @see https://api.slack.com/methods/groups.close
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.close.json
@@ -44,7 +44,7 @@ module Slack
           #
           # This method takes an existing private group and performs the following steps:
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to clone and archive.
           # @see https://api.slack.com/methods/groups.createChild
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.createChild.json
@@ -58,11 +58,11 @@ module Slack
           # To read the entire history for a group, call the method with no latest or
           # oldest arguments, and then continue paging using the instructions below.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to fetch history for.
-          # @option options [Object] :latest
+          # @option options [timestamp] :latest
           #   End of time range of messages to include in results.
-          # @option options [Object] :oldest
+          # @option options [timestamp] :oldest
           #   Start of time range of messages to include in results.
           # @option options [Object] :inclusive
           #   Include messages with latest or oldest timestamp in results.
@@ -76,7 +76,7 @@ module Slack
           #
           # This method returns information about a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to get info on.
           # @see https://api.slack.com/methods/groups.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.info.json
@@ -88,9 +88,9 @@ module Slack
           #
           # This method is used to invite a user to a private group. The calling user must be a member of the group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Private group to invite user to.
-          # @option options [Object] :user
+          # @option options [user] :user
           #   User to invite.
           # @see https://api.slack.com/methods/groups.invite
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.invite.json
@@ -103,9 +103,9 @@ module Slack
           #
           # This method allows a user to remove another member from a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to remove user from.
-          # @option options [Object] :user
+          # @option options [user] :user
           #   User to remove from group.
           # @see https://api.slack.com/methods/groups.kick
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.kick.json
@@ -118,7 +118,7 @@ module Slack
           #
           # This method is used to leave a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to leave.
           # @see https://api.slack.com/methods/groups.leave
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.leave.json
@@ -142,9 +142,9 @@ module Slack
           #
           # This method moves the read cursor in a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to set reading cursor in.
-          # @option options [Object] :ts
+          # @option options [timestamp] :ts
           #   Timestamp of the most recently seen message.
           # @see https://api.slack.com/methods/groups.mark
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.mark.json
@@ -157,7 +157,7 @@ module Slack
           #
           # This method opens a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to open.
           # @see https://api.slack.com/methods/groups.open
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.open.json
@@ -169,7 +169,7 @@ module Slack
           #
           # This method renames a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to rename.
           # @option options [Object] :name
           #   New name for group.
@@ -184,7 +184,7 @@ module Slack
           #
           # This method is used to change the purpose of a private group. The calling user must be a member of the private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Private group to set the purpose of.
           # @option options [Object] :purpose
           #   The new purpose.
@@ -199,7 +199,7 @@ module Slack
           #
           # This method is used to change the topic of a private group. The calling user must be a member of the private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Private group to set the topic of.
           # @option options [Object] :topic
           #   The new topic.
@@ -214,7 +214,7 @@ module Slack
           #
           # This method unarchives a private group.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Group to unarchive.
           # @see https://api.slack.com/methods/groups.unarchive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.unarchive.json

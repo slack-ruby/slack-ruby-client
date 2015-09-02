@@ -8,7 +8,7 @@ module Slack
           #
           # This method deletes a file from your team.
           #
-          # @option options [Object] :file
+          # @option options [file] :file
           #   ID of file to delete.
           # @see https://api.slack.com/methods/files.delete
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.delete.json
@@ -20,7 +20,7 @@ module Slack
           #
           # This method returns information about a file in your team.
           #
-          # @option options [Object] :file
+          # @option options [file] :file
           #   File to fetch info for.
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.info.json
@@ -32,7 +32,7 @@ module Slack
           #
           # This method returns a list of files within the team. It can be filtered and sliced in various ways.
           #
-          # @option options [Object] :user
+          # @option options [user] :user
           #   Filter files created by a single user.
           # @option options [Object] :ts_from
           #   Filter files created after this timestamp (inclusive).
@@ -61,7 +61,7 @@ module Slack
           #
           # This method allows you to create or upload an existing file.
           #
-          # @option options [Object] :file
+          # @option options [file] :file
           #   File contents via multipart/form-data.
           # @option options [Object] :content
           #   File contents via a POST var.

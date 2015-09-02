@@ -9,7 +9,7 @@ module Slack
           # This method lets you find out information about a user's presence.
           # Consult the presence documentation for more details.
           #
-          # @option options [Object] :user
+          # @option options [user] :user
           #   User to get presence info on. Defaults to the authed user.
           # @see https://api.slack.com/methods/users.getPresence
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.getPresence.json
@@ -21,7 +21,7 @@ module Slack
           #
           # This method returns information about a team member.
           #
-          # @option options [Object] :user
+          # @option options [user] :user
           #   User to get info on.
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.info.json

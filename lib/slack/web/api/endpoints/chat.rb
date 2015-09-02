@@ -8,9 +8,9 @@ module Slack
           #
           # This method deletes a message from a channel.
           #
-          # @option options [Object] :ts
+          # @option options [timestamp] :ts
           #   Timestamp of the message to be deleted.
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Channel containing the message to be deleted.
           # @see https://api.slack.com/methods/chat.delete
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.delete.json
@@ -23,7 +23,7 @@ module Slack
           #
           # This method posts a message to a public channel, private group, or IM channel.
           #
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [Object] :text
           #   Text of the message to send. See below for an explanation of formatting.
@@ -56,9 +56,9 @@ module Slack
           #
           # This method updates a message in a channel.
           #
-          # @option options [Object] :ts
+          # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
-          # @option options [Object] :channel
+          # @option options [channel] :channel
           #   Channel containing the message to be updated.
           # @option options [Object] :text
           #   New text for the message, using the default formatting rules.
