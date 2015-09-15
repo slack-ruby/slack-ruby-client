@@ -4,39 +4,65 @@ module Slack
       attr_accessor :url
       attr_accessor :options
 
+      attr_reader :driver
+
       def initialize(url, options = {})
         @url = url
         @options = options
+        @driver = nil
       end
 
       def send_data(data)
-        @ws.send(data) if @ws
+        driver.text(data) if driver
       end
 
       def connect!(&_block)
         return if connected?
 
-        @ws = Faye::WebSocket::Client.new(url, nil, options)
+        connect
 
-        @ws.on :close do |event|
-          close(event)
-        end
-
-        yield @ws if block_given?
+        yield driver if block_given?
       end
 
       def disconnect!
-        @ws.close if @ws
+        driver.close if driver
       end
 
       def connected?
-        !@ws.nil?
+        !driver.nil?
+      end
+
+      def self.run(&block)
+        yield
       end
 
       protected
 
+      def addr
+        URI(url).host
+      end
+
+      def secure?
+        port == URI::HTTPS::DEFAULT_PORT
+      end
+
+      def port
+        case (uri = URI(url)).scheme
+          when 'wss'.freeze, 'https'.freeze
+            URI::HTTPS::DEFAULT_PORT
+          when 'ws', 'http'.freeze
+            URI::HTTP::DEFAULT_PORT
+          else
+            uri.port
+        end
+      end
+
+      def connect
+        raise "Expected #{self.class} to implement #{__method__}"
+      end
+
       def close(_event)
-        @ws = nil
+        @driver = nil
       end
     end
   end

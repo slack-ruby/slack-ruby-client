@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Socket do
+RSpec.describe Slack::RealTime::Eventmachine::Socket do
   context 'with url' do
     let(:url) { 'wss://ms174.slack-msgs.com/websocket/xyz' }
-    let(:socket) { Slack::RealTime::Socket.new(url, ping: 42) }
+    let(:socket) { described_class.new(url, ping: 42) }
     let(:ws) { double(Faye::WebSocket::Client) }
     describe '#initialize' do
       it 'sets url' do
@@ -17,7 +17,7 @@ RSpec.describe Slack::RealTime::Socket do
       it 'connects' do
         allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)
         socket.connect!
-        expect(socket.instance_variable_get('@ws')).to eq ws
+        expect(socket.instance_variable_get('@driver')).to eq ws
       end
       it 'pings every 30s' do
         expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 42).and_return(ws)
@@ -26,7 +26,7 @@ RSpec.describe Slack::RealTime::Socket do
     end
     describe '#disconnect!' do
       it 'closes and nils the websocket' do
-        socket.instance_variable_set('@ws', ws)
+        socket.instance_variable_set('@driver', ws)
         expect(ws).to receive(:close)
         socket.disconnect!
       end
@@ -38,7 +38,7 @@ RSpec.describe Slack::RealTime::Socket do
         socket.connect!
       end
       it 'sends data' do
-        expect(ws).to receive(:send).with('data')
+        expect(ws).to receive(:text).with('data')
         socket.send_data('data')
       end
     end
