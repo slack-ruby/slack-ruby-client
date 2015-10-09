@@ -54,11 +54,11 @@ module Slack
 
         def build_socket
           socket = TCPSocket.new(addr, port)
-          socket = SSLSocket.new(socket, ssl_context) if secure?
+          socket = SSLSocket.new(socket, build_ssl_context) if secure?
           socket
         end
 
-        def ssl_context
+        def build_ssl_context
           OpenSSL::SSL::SSLContext.new(:TLSv1_2_client)
         end
 
