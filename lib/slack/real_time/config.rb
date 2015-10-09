@@ -30,11 +30,11 @@ module Slack
           begin
             return Slack::RealTime.const_get(concurrency)
           rescue LoadError
-            # could not be loaded, missing dependencies
+            false # could not be loaded, missing dependencies
           end
         end
 
-        raise NoConcurrencyError, 'could not find concurrency primitives, add faye-websocket or celluloid-io'
+        fail NoConcurrencyError, 'could not find concurrency primitives, add faye-websocket or celluloid-io'
       end
     end
 

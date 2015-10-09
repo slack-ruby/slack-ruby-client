@@ -49,7 +49,7 @@ module Slack
         protected
 
         def connected?
-          !!@connected
+          !@connected.nil?
         end
 
         def build_socket

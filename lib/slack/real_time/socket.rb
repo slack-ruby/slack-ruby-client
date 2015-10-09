@@ -32,7 +32,7 @@ module Slack
         !driver.nil?
       end
 
-      def self.run(&block)
+      def self.run(&_block)
         yield
       end
 
@@ -48,17 +48,17 @@ module Slack
 
       def port
         case (uri = URI(url)).scheme
-          when 'wss'.freeze, 'https'.freeze
-            URI::HTTPS::DEFAULT_PORT
-          when 'ws', 'http'.freeze
-            URI::HTTP::DEFAULT_PORT
-          else
-            uri.port
+        when 'wss'.freeze, 'https'.freeze
+          URI::HTTPS::DEFAULT_PORT
+        when 'ws', 'http'.freeze
+          URI::HTTP::DEFAULT_PORT
+        else
+          uri.port
         end
       end
 
       def connect
-        raise "Expected #{self.class} to implement #{__method__}"
+        fail "Expected #{self.class} to implement #{__method__}"
       end
 
       def close(_event)

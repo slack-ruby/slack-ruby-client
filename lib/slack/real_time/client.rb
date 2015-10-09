@@ -42,8 +42,6 @@ module Slack
         socket_options[:ping] = websocket_ping if websocket_ping
         socket_options[:proxy] = websocket_proxy if websocket_proxy
 
-        socket_class = concurrency::Socket
-
         socket_class.run(@options['url'], socket_options) do |socket|
           @socket = socket
 
@@ -84,6 +82,10 @@ module Slack
 
       protected
 
+      def socket_class
+        concurrency::Socket
+      end
+
       def send_json(data)
         fail ClientNotStartedError unless started?
         @socket.send_data(data.to_json)
@@ -94,7 +96,7 @@ module Slack
 
       def close(_event)
         @socket = nil
-        concurrency::Socket.close
+        socket_class.close
       end
 
       def dispatch(event)
