@@ -10,6 +10,8 @@ module Slack
         include ::Celluloid::IO
         include ::Celluloid::Logger
 
+        BLOCK_SIZE = 4096
+
         extend ::Forwardable
         def_delegator :socket, :write
         def_delegators :driver, :text, :binary, :close
@@ -34,7 +36,7 @@ module Slack
         end
 
         def read
-          buffer = socket.readpartial(4096)
+          buffer = socket.readpartial(BLOCK_SIZE)
           driver.parse buffer
         end
 
