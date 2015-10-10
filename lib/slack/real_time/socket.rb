@@ -12,8 +12,13 @@ module Slack
         @driver = nil
       end
 
-      def send_data(data)
-        driver.text(data) if driver
+      def send_data(message)
+        case message
+          when Numeric then driver.text(message.to_s)
+          when String  then driver.text(message)
+          when Array   then driver.binary(message)
+          else false
+        end
       end
 
       def connect!(&_block)
@@ -25,7 +30,7 @@ module Slack
       end
 
       def disconnect!
-        driver.close if driver
+        driver.close
       end
 
       def connected?
@@ -58,7 +63,7 @@ module Slack
       end
 
       def connect
-        fail "Expected #{self.class} to implement #{__method__}"
+        fail "Expected #{self.class} to implement #{__method__}."
       end
 
       def close(_event)

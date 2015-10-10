@@ -13,7 +13,7 @@ module Slack
       attr_accessor(*Config::ATTRIBUTES)
 
       def initialize(options = {})
-        @callbacks = {}
+        @callbacks = Hash.new{|h,k| h[k] = []}
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
           send("#{key}=", options[key] || Slack::RealTime.config.send(key))
         end
@@ -29,10 +29,10 @@ module Slack
 
       def on(type, &block)
         type = type.to_s
-        @callbacks[type] ||= []
-        @callbacks[type] << block
+        callbacks[type] << block
       end
 
+      # @yieldparam [Websocket::Driver] driver
       def start!
         fail ClientAlreadyStartedError if started?
 
@@ -45,16 +45,18 @@ module Slack
         socket_class.run(@options['url'], socket_options) do |socket|
           @socket = socket
 
-          @socket.connect! do |ws|
-            ws.on :open do |event|
+          @socket.connect! do |driver|
+            yield driver if block_given?
+
+            driver.on :open do |event|
               open(event)
             end
 
-            ws.on :message do |event|
+            driver.on :message do |event|
               dispatch(event)
             end
 
-            ws.on :close do |event|
+            driver.on :close do |event|
               close(event)
             end
           end
@@ -82,6 +84,7 @@ module Slack
 
       protected
 
+      attr_reader :callbacks
       def socket_class
         concurrency::Socket
       end
@@ -104,7 +107,7 @@ module Slack
         data = JSON.parse(event.data)
         type = data['type']
         return false unless type
-        callbacks = @callbacks[type.to_s]
+        callbacks = self.callbacks[type.to_s]
         return false unless callbacks
         callbacks.each do |c|
           c.call(data)

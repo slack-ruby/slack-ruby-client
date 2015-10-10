@@ -4,7 +4,7 @@ require 'eventmachine'
 module Slack
   module RealTime
     module Eventmachine
-      class Socket < Slack::RealTime::Socket
+      class Socket < ::Slack::RealTime::Socket
         def self.close
           ::EM.stop
         end
@@ -13,6 +13,10 @@ module Slack
           EM.run do
             yield new(*args)
           end
+        end
+
+        def send_data(message)
+          driver.send(message)
         end
 
         protected

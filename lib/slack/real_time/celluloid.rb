@@ -23,6 +23,7 @@ module Slack
           @driver = build_driver
         end
 
+        # @yieldparam [WebSocket::Driver] driver
         def connect!
           super
 
