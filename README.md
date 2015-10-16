@@ -4,7 +4,9 @@ Slack Ruby Client
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
 [![Build Status](https://travis-ci.org/dblock/slack-ruby-client.svg?branch=master)](https://travis-ci.org/dblock/slack-ruby-client)
 
-A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs.
+A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. 
+
+Writing a bot? Try [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot) instead.
 
 ![](slack.png)
 
