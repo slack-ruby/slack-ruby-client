@@ -1,5 +1,7 @@
 ### 0.3.1 (Next)
 
+* Added `stars.list`, `add` and `remove` - [@dblock](https://github.com/dblock).
+* Added `attachments`, `parse` and `link_names` to `chat.update` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.3.0 (9/1/2015)

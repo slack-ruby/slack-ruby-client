@@ -62,6 +62,12 @@ module Slack
           #   Channel containing the message to be updated.
           # @option options [Object] :text
           #   New text for the message, using the default formatting rules.
+          # @option options [Object] :attachments
+          #   Structured message attachments.
+          # @option options [Object] :parse
+          #   Change how messages are treated. See below.
+          # @option options [Object] :link_names
+          #   Find and link channel names and usernames.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.update.json
           def chat_update(options = {})
