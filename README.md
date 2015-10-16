@@ -6,6 +6,8 @@ Slack Ruby Client
 
 A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs.
 
+![](slack.png)
+
 ## Installation
 
 Add to Gemfile.
