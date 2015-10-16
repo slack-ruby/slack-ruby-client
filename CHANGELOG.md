@@ -1,3 +1,7 @@
+### 0.3.2 (Next)
+
+* Your contribution here.
+
 ### 0.3.1 (10/16/2015)
 
 * Added `stars.list`, `add` and `remove` - [@dblock](https://github.com/dblock).
