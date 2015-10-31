@@ -30,6 +30,8 @@ module Slack
           #   Start of time range of messages to include in results.
           # @option options [Object] :inclusive
           #   Include messages with latest or oldest timestamp in results.
+          # @option options [Object] :unreads
+          #   Include unread_count_display in the output?.
           # @see https://api.slack.com/methods/im.history
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.history.json
           def im_history(options = {})

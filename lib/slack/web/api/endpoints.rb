@@ -8,6 +8,7 @@ require 'slack/web/api/endpoints/emoji'
 require 'slack/web/api/endpoints/files'
 require 'slack/web/api/endpoints/groups'
 require 'slack/web/api/endpoints/im'
+require 'slack/web/api/endpoints/mpim'
 require 'slack/web/api/endpoints/oauth'
 require 'slack/web/api/endpoints/pins'
 require 'slack/web/api/endpoints/reactions'
@@ -29,6 +30,7 @@ module Slack
         include Files
         include Groups
         include Im
+        include Mpim
         include Oauth
         include Pins
         include Reactions

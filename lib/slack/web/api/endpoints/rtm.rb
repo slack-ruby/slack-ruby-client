@@ -13,6 +13,8 @@ module Slack
           #   Return timestamp only for latest message object of each channel (improves performance).
           # @option options [Object] :no_unreads
           #   Skip unread counts for each channel (improves performance).
+          # @option options [Object] :mpim_aware
+          #   Returns MPIMs to the client in the API response.
           # @see https://api.slack.com/methods/rtm.start
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm.start.json
           def rtm_start(options = {})

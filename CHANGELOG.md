@@ -1,5 +1,9 @@
 ### 0.3.2 (Next)
 
+* Added `mpim_aware` to `rtm.start` - [@dblock](https://github.com/dblock).
+* Added `mpim.close`, `history`, `list`, `mark` and `open` - [@dblock](https://github.com/dblock).
+* Added `unreads` to `channels.history`, `groups.history` and `im.history` - [@dblock](https://github.com/dblock).
+* Added `stars.add` and `stars.remove` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.3.1 (10/16/2015)
