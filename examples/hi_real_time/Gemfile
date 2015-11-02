@@ -1,3 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'slack-ruby-client', path: '../..'
+
+gem 'celluloid-io'
+# gem 'faye-websocket'
