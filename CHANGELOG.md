@@ -1,3 +1,7 @@
+### 0.4.1 (Next)
+
+* Your contribution here.
+
 ### 0.4.0 (11/8/2015)
 
 * Added `team_integrationLogs` to Web API - [@dblock](https://github.com/dblock).
