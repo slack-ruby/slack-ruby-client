@@ -9,6 +9,4 @@ client = Slack::Web::Client.new
 
 client.auth_test
 
-general_channel = client.channels_list['channels'].detect { |c| c['name'] == 't3' }
-
-client.chat_postMessage(channel: general_channel['id'], text: 'Hello World', as_user: true)
+client.chat_postMessage(channel: '#general', text: 'Hello World', as_user: true)

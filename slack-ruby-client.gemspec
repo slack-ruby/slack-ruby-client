@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday_middleware'
   s.add_dependency 'faye-websocket'
   s.add_dependency 'eventmachine'
+  s.add_dependency 'json'
   s.add_development_dependency 'erubis'
   s.add_development_dependency 'json-schema'
   s.add_development_dependency 'rake'
