@@ -49,7 +49,13 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.postMessage.json
           def chat_postMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
+            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
+            # attachments must be passed as an encoded JSON string
+            if options.key?(:attachments)
+              attachments = options[:attachments]
+              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+              options = options.merge(attachments: attachments)
+            end
             post('chat.postMessage', options)
           end
 

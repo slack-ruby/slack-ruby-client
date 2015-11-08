@@ -1,0 +1,17 @@
+diff --git a/lib/slack/web/api/endpoints/chat.rb b/lib/slack/web/api/endpoints/chat.rb
+index 1f7a8d7..89b1562 100644
+--- a/lib/slack/web/api/endpoints/chat.rb
++++ b/lib/slack/web/api/endpoints/chat.rb
+@@ -50,6 +50,12 @@ module Slack
+           def chat_postMessage(options = {})
+             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+             throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
++            # attachments must be passed as an encoded JSON string
++            if options.key?(:attachments)
++              attachments = options[:attachments]
++              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
++              options = options.merge(attachments: attachments)
++            end
+             post('chat.postMessage', options)
+           end
+

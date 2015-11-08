@@ -1,6 +1,7 @@
 ### 0.3.2 (Next)
 
-* [#20](https://github.com/dblock/slack-ruby-client/issues/20) - Web API `chat#post_Message` will automatically `to_json` attachments - [@dblock](https://github.com/dblock).
+* [#11](https://github.com/dblock/slack-ruby-client/pull/11) - Web API `chat_postMessage` errors only if both `attachments` and `text` are missing - [@dblock](https://github.com/dblock).
+* [#20](https://github.com/dblock/slack-ruby-client/issues/20) - Web API `chat_postMessage` will automatically `to_json` attachments - [@dblock](https://github.com/dblock).
 * Added `mpim_aware` to `rtm.start` - [@dblock](https://github.com/dblock).
 * Added `mpim.close`, `history`, `list`, `mark` and `open` - [@dblock](https://github.com/dblock).
 * Added `unreads` to `channels.history`, `groups.history` and `im.history` - [@dblock](https://github.com/dblock).

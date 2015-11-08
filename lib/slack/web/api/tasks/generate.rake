@@ -26,7 +26,12 @@ namespace :slack do
         method_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method.erb'))
         data.each_with_index do |(group, names), index|
           printf "%2d/%2d %10s %s\n", index, data.size, group, names.keys
-          File.write "lib/slack/web/api/endpoints/#{group}.rb", method_template.result(group: group, names: names)
+          rendered = method_template.result(group: group, names: names)
+          File.write "lib/slack/web/api/endpoints/#{group}.rb", rendered
+          Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
+            puts "- patching #{patch}"
+            system("git apply #{patch}") || fail('failed to apply patch')
+          end
         end
 
         endpoints_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/endpoints.erb'))

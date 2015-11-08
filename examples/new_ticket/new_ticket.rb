@@ -11,7 +11,6 @@ client.auth_test
 
 client.chat_postMessage(
   channel: '#general',
-  text: '',
   as_user: true,
   attachments: [
     {

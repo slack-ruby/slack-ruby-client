@@ -11,7 +11,6 @@ require 'slack/web/faraday/response/raise_error'
 require 'slack/web/faraday/connection'
 require 'slack/web/faraday/request'
 require 'slack/web/api/endpoints'
-require 'slack/web/api/patches'
 require 'slack/web/client'
 
 # RealTime API
