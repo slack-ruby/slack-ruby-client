@@ -8,7 +8,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         'chat.postMessage',
         channel: 'channel',
         text: 'text',
-        attachments: [].to_json
+        attachments: '[]'
       )
       client.chat_postMessage(channel: 'channel', text: 'text', attachments: [])
     end
