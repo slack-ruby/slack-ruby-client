@@ -1,31 +1,30 @@
-### 0.3.2 (Next)
+### 0.4.0 (11/8/2015)
 
-* Added `team_integrationLogs` - [@dblock](https://github.com/dblock).
+* Added `team_integrationLogs` to Web API - [@dblock](https://github.com/dblock).
 * [#11](https://github.com/dblock/slack-ruby-client/pull/11) - Web API `chat_postMessage` errors only if both `attachments` and `text` are missing - [@dblock](https://github.com/dblock).
 * [#20](https://github.com/dblock/slack-ruby-client/issues/20) - Web API `chat_postMessage` will automatically `to_json` attachments - [@dblock](https://github.com/dblock).
-* Added `mpim_aware` to `rtm_start` - [@dblock](https://github.com/dblock).
-* Added `mpim_close`, `mpim_history`, `mpim_list`, `mpim_mark` and `mpim_open` - [@dblock](https://github.com/dblock).
-* Added `unreads` to `channels_history`, `groups_history` and `im_history` - [@dblock](https://github.com/dblock).
-* Added `stars_add` and `stars_remove` - [@dblock](https://github.com/dblock).
-* Your contribution here.
+* Added `mpim_aware` to `rtm_start` to Web API - [@dblock](https://github.com/dblock).
+* Added `mpim_close`, `mpim_history`, `mpim_list`, `mpim_mark` and `mpim_open` to Web API - [@dblock](https://github.com/dblock).
+* Added `unreads` to `channels_history`, `groups_history` and `im_history` to Web API - [@dblock](https://github.com/dblock).
+* Added `stars_add` and `stars_remove` to Web API - [@dblock](https://github.com/dblock).
 
 ### 0.3.1 (10/16/2015)
 
-* Added `stars.list`, `add` and `remove` - [@dblock](https://github.com/dblock).
-* Added `attachments`, `parse` and `link_names` to `chat.update` - [@dblock](https://github.com/dblock).
+* Added `stars_list`, `stars_add` and `stars_remove` to Web API - [@dblock](https://github.com/dblock).
+* Added `attachments`, `parse` and `link_names` to `chat_update` in Web API - [@dblock](https://github.com/dblock).
 
 ### 0.3.0 (9/1/2015)
 
-* Added `team.info` and `accessLogs` - [@dblock](https://github.com/dblock).
-* Removed obsolete `presence` API - [@dblock](https://github.com/dblock).
-* Added `pins.add`, `list` and `remove` - [@dblock](https://github.com/dblock).
-* Added `users.list#presence` - [@dblock](https://github.com/dblock).
-* Added `groups.info` - [@dblock](https://github.com/dblock).
-* Added `groups.history#inclusive` and `im.history#inclusive` - [@dblock](https://github.com/dblock).
-* Added `files.delete` - [@dblock](https://github.com/dblock).
-* Added `chat.postMessage#as_user` - [@dblock](https://github.com/dblock).
+* Added `team.info` and `accessLogs` to Web API - [@dblock](https://github.com/dblock).
+* Removed obsolete `presence` Web API - [@dblock](https://github.com/dblock).
+* Added `pins_add`, `pins_list` and `pins_remove` from Web API - [@dblock](https://github.com/dblock).
+* Added `presence` to `users_list` in Web API - [@dblock](https://github.com/dblock).
+* Added `groups_info` to Web API - [@dblock](https://github.com/dblock).
+* Added `inclusive` to `groups_history` and `im_history` in Web API - [@dblock](https://github.com/dblock).
+* Added `files_delete` to Web API - [@dblock](https://github.com/dblock).
+* Added `as_user` to `chat_postMessage` in Web API - [@dblock](https://github.com/dblock).
 * Use API reference schema from [github.com/dblock/slack-api-ref](https://github.com/dblock/slack-api-ref) - [@dblock](https://github.com/dblock).
-* Added `reactions.add`, `.list`, `.get` and `.remove` - [@jakedahn](https://github.com/jakedahn)
+* Added `reactions_add`, `reactions_list`, `reactions_get` and `reactions_remove` to Web API - [@jakedahn](https://github.com/jakedahn)
 
 ### 0.2.1 (8/2/2015)
 
