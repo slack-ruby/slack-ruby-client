@@ -34,28 +34,8 @@ module Slack
       end
 
       def start!
-        fail ClientAlreadyStartedError if started?
         EM.run do
-          @options = web_client.rtm_start
-
-          socket_options = {}
-          socket_options[:ping] = websocket_ping if websocket_ping
-          socket_options[:proxy] = websocket_proxy if websocket_proxy
-          @socket = Slack::RealTime::Socket.new(@options['url'], socket_options)
-
-          @socket.connect! do |ws|
-            ws.on :open do |event|
-              open(event)
-            end
-
-            ws.on :message do |event|
-              dispatch(event)
-            end
-
-            ws.on :close do |event|
-              close(event)
-            end
-          end
+          rtm_start!
         end
       end
 
@@ -104,6 +84,33 @@ module Slack
           c.call(data)
         end
         true
+      end
+
+      private
+
+      def rtm_start!
+        fail ClientAlreadyStartedError if started?
+        @options = web_client.rtm_start
+
+        socket_options = {}
+        socket_options[:ping] = websocket_ping if websocket_ping
+        socket_options[:proxy] = websocket_proxy if websocket_proxy
+
+        @socket = Slack::RealTime::Socket.new(@options['url'], socket_options)
+
+        @socket.connect! do |ws|
+          ws.on :open do |event|
+            open(event)
+          end
+
+          ws.on :message do |event|
+            dispatch(event)
+          end
+
+          ws.on :close do |event|
+            close(event)
+          end
+        end
       end
     end
   end
