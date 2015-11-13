@@ -11,6 +11,10 @@ Writing a bot? Try [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot) in
 
 ![](slack.png)
 
+## Stable Release
+
+You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.4.0](https://github.com/dblock/slack-ruby-client/blob/v0.4.0/README.md) unless you're integrating with HEAD.
+
 ## Installation
 
 Add to Gemfile.
