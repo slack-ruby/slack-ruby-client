@@ -15,3 +15,6 @@ matrix:
 git:
   submodules: false
 
+env:
+  - CONCURRENCY=celluloid
+  - CONCURRENCY=eventmachine

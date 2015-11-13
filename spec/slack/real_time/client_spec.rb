@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
-  let(:ws) { double(Faye::WebSocket::Client, on: true) }
+  let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
   let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
   before do
-    allow(EM).to receive(:run).and_yield
+    Slack::RealTime.configure do |config|
+      config.concurrency = Slack::RealTime::Concurrency::Mock
+    end
   end
   context 'token' do
     before do
@@ -151,7 +153,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           expect(client.websocket_ping).to eq 15
         end
         it 'creates a connection with custom ping' do
-          expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 15).and_return(ws)
+          expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(url, nil, ping: 15).and_return(ws)
           client.start!
         end
       end
@@ -173,7 +175,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           )
         end
         it 'creates a connection with custom proxy' do
-          expect(Faye::WebSocket::Client).to receive(:new).with(
+          expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(
             url,
             nil,
             ping: 30,
