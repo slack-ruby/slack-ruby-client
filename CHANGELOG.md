@@ -1,6 +1,7 @@
 ### 0.5.0 (Next)
 
 * [#5](https://github.com/dblock/slack-ruby-client/issues/5): Added Celluloid support - [@mikz](https://github.com/mikz), [@dblock](https://github.com/dblock).
+* `Slack::RealTime::Client` supports `:open` and `:close` callbacks - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.4.0 (11/8/2015)

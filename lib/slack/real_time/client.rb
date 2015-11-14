@@ -49,6 +49,7 @@ module Slack
 
             driver.on :open do |event|
               open(event)
+              callback(event, :open)
             end
 
             driver.on :message do |event|
@@ -56,6 +57,7 @@ module Slack
             end
 
             driver.on :close do |event|
+              callback(event, :close)
               close(event)
             end
           end
@@ -99,6 +101,14 @@ module Slack
       def close(_event)
         @socket = nil
         socket_class.close
+      end
+
+      def callback(event, type)
+        callbacks = self.callbacks[type.to_s]
+        return false unless callbacks
+        callbacks.each do |c|
+          c.call(event)
+        end
       end
 
       def dispatch(event)
