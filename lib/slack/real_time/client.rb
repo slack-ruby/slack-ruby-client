@@ -32,36 +32,17 @@ module Slack
         callbacks[type] << block
       end
 
-      # @yieldparam [WebSocket::Driver] driver
+      # Start RealTime client and block until it disconnects.
+      # @yieldparam [Websocket::Driver] driver
       def start!(&_block)
-        fail ClientAlreadyStartedError if started?
-        @options = web_client.rtm_start
+        build_socket.run(@options.fetch('url'), socket_options) { |socket| run_loop(socket, &_block) }
+      end
 
-        socket_options = {}
-        socket_options[:ping] = websocket_ping if websocket_ping
-        socket_options[:proxy] = websocket_proxy if websocket_proxy
-
-        socket_class.run(@options['url'], socket_options) do |socket|
-          @socket = socket
-
-          @socket.connect! do |driver|
-            yield driver if block_given?
-
-            driver.on :open do |event|
-              open(event)
-              callback(event, :open)
-            end
-
-            driver.on :message do |event|
-              dispatch(event)
-            end
-
-            driver.on :close do |event|
-              callback(event, :close)
-              close(event)
-            end
-          end
-        end
+      # Start RealTime client and return immediately.
+      # The RealTime::Client will run in the background.
+      # @yieldparam [Websocket::Driver] driver
+      def start_async(&_block)
+        build_socket.run_async(@options.fetch('url'), socket_options) { |socket| run_loop(socket, &_block) }
       end
 
       def stop!
@@ -84,6 +65,42 @@ module Slack
       end
 
       protected
+
+      def build_socket
+        fail ClientAlreadyStartedError if started?
+        @options = web_client.rtm_start
+
+        socket_class
+      end
+
+      def socket_options
+        socket_options = {}
+        socket_options[:ping] = websocket_ping if websocket_ping
+        socket_options[:proxy] = websocket_proxy if websocket_proxy
+        socket_options
+      end
+
+      def run_loop(socket)
+        @socket = socket
+
+        @socket.connect! do |driver|
+          yield driver if block_given?
+
+          driver.on :open do |event|
+            open(event)
+            callback(event, :open)
+          end
+
+          driver.on :message do |event|
+            dispatch(event)
+          end
+
+          driver.on :close do |event|
+            callback(event, :close)
+            close(event)
+          end
+        end
+      end
 
       attr_reader :callbacks
       def socket_class

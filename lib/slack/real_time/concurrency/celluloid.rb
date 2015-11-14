@@ -43,11 +43,15 @@ module Slack
           end
 
           def self.run(*args)
+            Actor.join(async_run(*args))
+          end
+
+          def self.run_async(*args)
             actor = new(*args)
 
-            yield actor
+            yield actor if block_given?
 
-            Actor.join(actor)
+            actor
           end
 
           def self.close
