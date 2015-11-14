@@ -36,13 +36,6 @@ module Slack
         !driver.nil?
       end
 
-      def self.run(&_block)
-        yield
-      end
-
-      def self.close
-      end
-
       protected
 
       def addr
