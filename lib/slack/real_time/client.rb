@@ -32,7 +32,7 @@ module Slack
         callbacks[type] << block
       end
 
-      # @yieldparam [Websocket::Driver] driver
+      # @yieldparam [WebSocket::Driver] driver
       def start!(&_block)
         fail ClientAlreadyStartedError if started?
         @options = web_client.rtm_start

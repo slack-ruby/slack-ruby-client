@@ -196,7 +196,7 @@ See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real
 
 ##### Eventmachine
 
-Add the following to your Gemfile.
+This concurrency implementation uses Eventmachine with `Faye::WebSocket`. Add the following to your Gemfile.
 
 ```
 gem 'eventmachine'
@@ -211,15 +211,21 @@ Add the following to your Gemfile.
 gem 'celluloid-io'
 ```
 
-##### Custom Concurrency
+##### Faye
 
-You may want to implement custom concurrency. For example, [slack-bot-server](https://github.com/dblock/slack-bot-server) manages multiple RealTime clients. In order to handle their restarts it wants to control when `EM.run` is called. The custom driver implementation is identical to [Slack::RealTime::Concurrency::Eventmachine::Socket](lib/slack/real_time/concurrency/eventmachine.rb), but without the `EM.run` and `EM.close` calls.
+This is an implementation that uses `Faye::WebSocket` without a concurrency driver. For example, [slack-bot-server](https://github.com/dblock/slack-bot-server) manages multiple realtime clients. In order to handle their restarts it wants to control when `EM.run` is called. The [Slack::RealTime::Concurrency::Faye::Socket](lib/slack/real_time/concurrency/faye.rb) implementation is identical to [Slack::RealTime::Concurrency::Eventmachine::Socket](lib/slack/real_time/concurrency/eventmachine.rb), but without the `EM.run` and `EM.close` calls.
 
-Configure your custom concurrency class as follows.
+Add the following to your Gemfile.
+
+```
+gem 'faye-websocket'
+```
+
+To use the Faye concurrency model or another custom implementation, configure it as follows.
 
 ```ruby
 Slack::RealTime.configure do |config|
-  config.concurrency = Slack::RealTime::Concurrency::Custom::Socket
+  config.concurrency = Slack::RealTime::Concurrency::Faye::Socket
 end
 ```
 

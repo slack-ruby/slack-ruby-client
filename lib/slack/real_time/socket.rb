@@ -40,6 +40,9 @@ module Slack
         yield
       end
 
+      def self.close
+      end
+
       protected
 
       def addr

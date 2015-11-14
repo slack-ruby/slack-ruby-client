@@ -5,7 +5,7 @@ module Slack
   module RealTime
     module Concurrency
       module Eventmachine
-        class Socket < ::Slack::RealTime::Socket
+        class Socket < Slack::RealTime::Concurrency::Faye::Socket
           def self.close
             ::EM.stop
           end
@@ -14,16 +14,6 @@ module Slack
             ::EM.run do
               yield new(*args)
             end
-          end
-
-          def send_data(message)
-            driver.send(message)
-          end
-
-          protected
-
-          def connect
-            @driver = Faye::WebSocket::Client.new(url, nil, options)
           end
         end
       end
