@@ -26,10 +26,12 @@ Change "Next Release" in [CHANGELOG.md](CHANGELOG.md) to the new version.
 
 Remove the line with "Your contribution here.", since there will be no more contributions to this release.
 
+Remove the "Stable Release" section in README that warns users that they are reading the documentation for an unreleased version.
+
 Commit your changes.
 
 ```
-git add CHANGELOG.md lib/slack/version.rb
+git add README.md CHANGELOG.md lib/slack/version.rb
 git commit -m "Preparing for release, 0.2.2."
 git push origin master
 ```
