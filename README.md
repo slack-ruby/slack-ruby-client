@@ -225,7 +225,7 @@ To use the Faye concurrency model or another custom implementation, configure it
 
 ```ruby
 Slack::RealTime.configure do |config|
-  config.concurrency = Slack::RealTime::Concurrency::Faye::Socket
+  config.concurrency = Slack::RealTime::Concurrency::Faye
 end
 ```
 

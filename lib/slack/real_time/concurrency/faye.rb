@@ -5,6 +5,13 @@ module Slack
     module Concurrency
       module Faye
         class Socket < ::Slack::RealTime::Socket
+          def self.close
+          end
+
+          def self.run(*args)
+            yield new(*args)
+          end
+
           def send_data(message)
             driver.send(message)
           end
