@@ -7,7 +7,6 @@ module Slack
       module Eventmachine
         class Socket < Slack::RealTime::Socket
           def self.close
-            ::EM.stop
           end
 
           def self.run(*args)
