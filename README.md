@@ -213,7 +213,7 @@ gem 'celluloid-io'
 
 ##### Faye
 
-This is an implementation that uses `Faye::WebSocket` without a concurrency driver. For example, [slack-bot-server](https://github.com/dblock/slack-bot-server) manages multiple realtime clients. In order to handle their restarts it wants to control when `EM.run` is called. The [Slack::RealTime::Concurrency::Faye::Socket](lib/slack/real_time/concurrency/faye.rb) implementation is identical to [Slack::RealTime::Concurrency::Eventmachine::Socket](lib/slack/real_time/concurrency/eventmachine.rb), but without the `EM.run` and `EM.close` calls.
+This is an implementation that uses `Faye::WebSocket`, which uses EventMachine, without actively trying to manage concurrency for you. For example, [slack-bot-server](https://github.com/dblock/slack-bot-server) manages multiple realtime clients. In order to handle their restarts it wants to control when `EM.run` is called. The [Slack::RealTime::Concurrency::Faye::Socket](lib/slack/real_time/concurrency/faye.rb) implementation is identical to [Slack::RealTime::Concurrency::Eventmachine::Socket](lib/slack/real_time/concurrency/eventmachine.rb), but without the `EM.run` call.
 
 Add the following to your Gemfile.
 
