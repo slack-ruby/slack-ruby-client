@@ -5,7 +5,7 @@ module Slack
         class RaiseError < ::Faraday::Response::Middleware
           def on_complete(env)
             body = env.body
-            fail Slack::Web::Api::Error, body['error'] unless body['ok']
+            fail Slack::Web::Api::Error, (body ? body['error'] : env.status) unless body && body['ok']
           end
         end
       end
