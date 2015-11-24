@@ -34,15 +34,17 @@ module Slack
 
       # Start RealTime client and block until it disconnects.
       # @yieldparam [Websocket::Driver] driver
-      def start!(&_block)
-        build_socket.run(@options.fetch('url'), socket_options) { |socket| run_loop(socket, &_block) }
+      def start!(&block)
+        socket = build_socket
+        socket.start_sync { run_loop(socket, &block) }
       end
 
       # Start RealTime client and return immediately.
       # The RealTime::Client will run in the background.
       # @yieldparam [Websocket::Driver] driver
-      def start_async(&_block)
-        build_socket.run_async(@options.fetch('url'), socket_options) { |socket| run_loop(socket, &_block) }
+      def start_async(&block)
+        socket = build_socket
+        socket.start_async { run_loop(socket, &block) }
       end
 
       def stop!
@@ -66,11 +68,12 @@ module Slack
 
       protected
 
+      # @return [Slack::RealTime::Socket]
       def build_socket
         fail ClientAlreadyStartedError if started?
         @options = web_client.rtm_start
 
-        socket_class
+        socket_class.new(@options.fetch('url'), socket_options)
       end
 
       def socket_options
@@ -116,8 +119,12 @@ module Slack
       end
 
       def close(_event)
+        socket = @socket
         @socket = nil
-        socket_class.close
+
+        [socket, socket_class].each do |s|
+          s.close if s.respond_to?(:close)
+        end
       end
 
       def callback(event, type)

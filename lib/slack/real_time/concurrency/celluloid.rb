@@ -29,8 +29,7 @@ module Slack
             super
 
             driver.start
-
-            async.run_loop
+            future.run_loop
           end
 
           def run_loop
@@ -42,22 +41,25 @@ module Slack
             driver.parse buffer
           end
 
-          def self.run(*args)
-            Actor.join(async_run(*args))
-          end
+          def start_async(&_block)
+            future = yield self if block_given?
 
-          def self.run_async(*args)
-            actor = new(*args)
-
-            yield actor if block_given?
-
-            actor
-          end
-
-          def self.close
+            Actor.new(future)
           end
 
           protected
+
+          class Actor
+            attr_reader :future
+
+            def initialize(future)
+              @future = future
+            end
+
+            def join
+              @future.value
+            end
+          end
 
           def connected?
             !@connected.nil?

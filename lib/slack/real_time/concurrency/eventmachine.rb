@@ -6,21 +6,12 @@ module Slack
     module Concurrency
       module Eventmachine
         class Socket < Slack::RealTime::Socket
-          def self.close
-          end
+          def start_async(&_block)
+            thread = ensure_reactor_running
 
-          def self.run(*args, &block)
-            ::EM.run do
-              run_async(*args, &block)
-            end
-          end
+            yield self if block_given?
 
-          def self.run_async(*args)
-            ::Faye::WebSocket.ensure_reactor_running
-
-            socket = new(*args)
-            yield socket if block_given?
-            socket
+            thread
           end
 
           def send_data(message)
@@ -28,6 +19,15 @@ module Slack
           end
 
           protected
+
+          # @return [Thread]
+          def ensure_reactor_running
+            return if EventMachine.reactor_running?
+
+            reactor = Thread.new { EventMachine.run }
+            Thread.pass until EventMachine.reactor_running?
+            reactor
+          end
 
           def connect
             @driver = ::Faye::WebSocket::Client.new(url, nil, options)
