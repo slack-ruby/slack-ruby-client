@@ -16,10 +16,10 @@ module Slack
           ::Faraday::Connection.new(endpoint, options) do |connection|
             connection.use ::Faraday::Request::Multipart
             connection.use ::Faraday::Request::UrlEncoded
-            connection.use ::Faraday::Response::RaiseError
             connection.use ::Slack::Web::Faraday::Response::RaiseError
             connection.use ::FaradayMiddleware::ParseJson
-            connection.adapter(::Faraday.default_adapter)
+            connection.use ::Faraday::Response::RaiseError
+            connection.adapter ::Faraday.default_adapter
           end
         end
       end
