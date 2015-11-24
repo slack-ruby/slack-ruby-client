@@ -9,6 +9,7 @@ module Slack
         @url = url
         @options = options
         @driver = nil
+        super()
       end
 
       def send_data(message)
@@ -36,6 +37,18 @@ module Slack
         !driver.nil?
       end
 
+      def start_sync(&block)
+        thread = start_async(&block)
+        thread.join
+      rescue Interrupt
+        thread.exit
+      end
+
+      # @return [#join]
+      def start_async(&_block)
+        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+      end
+
       protected
 
       def addr
@@ -58,7 +71,7 @@ module Slack
       end
 
       def connect
-        fail "Expected #{self.class} to implement #{__method__}."
+        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
       def close(_event)

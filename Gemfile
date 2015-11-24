@@ -2,12 +2,13 @@ source 'http://rubygems.org'
 
 gemspec
 
-case ENV['CONCURRENCY']
-when 'eventmachine' then
-  gem 'eventmachine'
-  gem 'faye-websocket'
-when 'faye' then
-  gem 'faye-websocket'
-when 'celluloid' then
-  gem 'celluloid-io'
+concurrency = ENV['CONCURRENCY']
+
+gem 'faye-websocket', require: false, install_if: concurrency == 'eventmachine'
+gem 'celluloid-io', require: false, install_if: concurrency == 'celluloid'
+
+group :development, :test do
+  gem 'rubocop'
 end
+
+gem 'pry-byebug'
