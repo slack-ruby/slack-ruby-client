@@ -9,6 +9,7 @@ module Slack
         @url = url
         @options = options
         @driver = nil
+        super()
       end
 
       def send_data(message)
@@ -58,7 +59,7 @@ module Slack
       end
 
       def connect
-        fail "Expected #{self.class} to implement #{__method__}."
+        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
       def close(_event)

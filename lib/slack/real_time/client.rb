@@ -56,7 +56,7 @@ module Slack
 
       class << self
         def configure
-          block_given? ? yield(Config) : Config
+          block_given? ? yield(config) : config
         end
 
         def config
