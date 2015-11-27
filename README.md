@@ -192,14 +192,31 @@ See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real
 
 #### Concurrency
 
-`Slack::RealTime::Client` needs help from a concurrency library and supports [Eventmachine](https://github.com/eventmachine/eventmachine) and [Celluloid](https://github.com/celluloid/celluloid). It will auto-detect one or the other depending on the gems in your Gemfile.
+`Slack::RealTime::Client` needs help from a concurrency library and supports [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine) and [Celluloid](https://github.com/celluloid/celluloid). It will auto-detect one or the other depending on the gems in your Gemfile, but you can also set concurrency explicitly.
 
-##### Eventmachine
+```ruby
+Slack::RealTime.configure do |config|
+  config.concurrency = Slack::RealTime::Concurrency::Eventmachine
+end
+```
 
-This concurrency implementation uses Eventmachine with `Faye::WebSocket`. Add the following to your Gemfile.
+Use `client.start_async` instead of `client.start!` if you don't want the library to control the event run loop, such as when integrating into other applications that already use Eventmachine or Celluloid. A good example of such application is [slack-bot-server](https://github.com/dblock/slack-bot-server).
+
+```ruby
+client = Slack::RealTime::Client.new
+
+EM.run do
+  client.start_async
+end
+```
+
+See a fullly working example in [examples/hi_real_time_async](examples/hi_real_time_async/hi.rb).
+
+##### Faye::Websocket with Eventmachine
+
+Add the following to your Gemfile.
 
 ```
-gem 'eventmachine'
 gem 'faye-websocket'
 ```
 
@@ -209,24 +226,6 @@ Add the following to your Gemfile.
 
 ```
 gem 'celluloid-io'
-```
-
-##### Faye
-
-This is an implementation that uses `Faye::WebSocket`, which uses EventMachine, without actively trying to manage concurrency for you. For example, [slack-bot-server](https://github.com/dblock/slack-bot-server) manages multiple realtime clients. In order to handle their restarts it wants to control when `EM.run` is called. The [Slack::RealTime::Concurrency::Faye::Socket](lib/slack/real_time/concurrency/faye.rb) implementation is identical to [Slack::RealTime::Concurrency::Eventmachine::Socket](lib/slack/real_time/concurrency/eventmachine.rb), but without the `EM.run` call.
-
-Add the following to your Gemfile.
-
-```
-gem 'faye-websocket'
-```
-
-To use the Faye concurrency model or another custom implementation, configure it as follows.
-
-```ruby
-Slack::RealTime.configure do |config|
-  config.concurrency = Slack::RealTime::Concurrency::Faye
-end
 ```
 
 ## History

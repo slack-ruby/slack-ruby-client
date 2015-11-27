@@ -8,6 +8,7 @@ RSpec.shared_context 'connected client' do
       config.concurrency = Slack::RealTime::Concurrency::Mock
     end
     allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30).and_return(socket)
+    allow(socket).to receive(:start_sync).and_yield
     allow(socket).to receive(:connect!).and_yield(ws)
     allow(ws).to receive(:on)
     client.start!

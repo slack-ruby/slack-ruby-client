@@ -9,8 +9,10 @@ module Slack
           def self.close
           end
 
-          def self.run(*args)
-            yield new(*args)
+          def start_async
+            reactor = Thread.new {}
+            yield self if block_given?
+            reactor
           end
 
           def send_data(message)
