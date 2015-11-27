@@ -44,7 +44,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
         before do
           allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30).and_return(socket)
-          allow(socket).to receive(:connect!).and_yield(ws)
+          allow(socket).to receive(:connect!)
+          allow(socket).to receive(:start_sync).and_yield
           client.start!
         end
         context 'properties provided upon connection' do

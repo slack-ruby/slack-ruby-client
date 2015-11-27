@@ -16,5 +16,5 @@ git:
   submodules: false
 
 env:
-  - CONCURRENCY=celluloid
-  - CONCURRENCY=eventmachine
+  - CONCURRENCY=celluloid-io
+  - CONCURRENCY=faye-websocket

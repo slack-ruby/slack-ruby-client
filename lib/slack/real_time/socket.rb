@@ -20,7 +20,7 @@ module Slack
         end
       end
 
-      def connect!(&_block)
+      def connect!
         return if connected?
 
         connect
@@ -34,6 +34,18 @@ module Slack
 
       def connected?
         !driver.nil?
+      end
+
+      def start_sync(&block)
+        thread = start_async(&block)
+        thread.join if thread
+      rescue Interrupt
+        thread.exit if thread
+      end
+
+      # @return [#join]
+      def start_async
+        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
       protected
@@ -58,7 +70,7 @@ module Slack
       end
 
       def connect
-        fail "Expected #{self.class} to implement #{__method__}."
+        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
       def close(_event)
