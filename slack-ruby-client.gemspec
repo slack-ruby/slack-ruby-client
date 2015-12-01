@@ -3,6 +3,8 @@ require 'slack/version'
 
 Gem::Specification.new do |s|
   s.name = 'slack-ruby-client'
+  s.bindir = 'bin'
+  s.executables << 'slack'
   s.version = Slack::VERSION
   s.authors = ['Daniel Doubrovkine']
   s.email = 'dblock@dblock.org'
@@ -18,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday_middleware'
   s.add_dependency 'json'
   s.add_dependency 'websocket-driver'
+  s.add_dependency 'gli'
   s.add_development_dependency 'erubis'
   s.add_development_dependency 'json-schema'
   s.add_development_dependency 'rake'

@@ -5,7 +5,7 @@ Slack Ruby Client
 [![Build Status](https://travis-ci.org/dblock/slack-ruby-client.svg?branch=master)](https://travis-ci.org/dblock/slack-ruby-client)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/dblock/slack-ruby-client)
 
-A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs.
+A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. Comes with a handy command-line client, too.
 
 Writing a bot? Try [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot) instead.
 
@@ -227,6 +227,17 @@ Add the following to your Gemfile.
 
 ```
 gem 'celluloid-io'
+```
+
+### Command-Line Client
+
+The slack command-line client returns JSON data from the Slack API. Use `slack help` for details about the Slack command-line client.
+
+#### Authenticate with Slack.
+
+```
+$ slack --slack-api-token=[token] auth
+{"ok":true,"url":"...","team":"...","user":"...","team_id":"...","user_id":"..."}
 ```
 
 ## History
