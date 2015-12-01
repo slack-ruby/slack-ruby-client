@@ -8,6 +8,7 @@ module Slack
         :user_agent,
         :ca_path,
         :ca_file,
+        :logger,
         :endpoint,
         :token
       ]
@@ -21,6 +22,7 @@ module Slack
         self.ca_file = "#{ca_path}/ca-certificates.crt"
         self.token = nil
         self.proxy = nil
+        self.logger = nil
       end
     end
 

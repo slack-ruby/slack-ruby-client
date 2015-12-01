@@ -111,5 +111,21 @@ RSpec.describe Slack::Web::Client do
         end
       end
     end
+    context 'logger option' do
+      let(:logger) { Logger.new(STDOUT) }
+      before do
+        Slack::Web::Client.configure do |config|
+          config.logger = logger
+        end
+      end
+      describe '#initialize' do
+        it 'sets logger' do
+          expect(client.logger).to eq logger
+        end
+        it 'creates a connection with a logger' do
+          expect(client.send(:connection).builder.handlers).to include ::Faraday::Response::Logger
+        end
+      end
+    end
   end
 end

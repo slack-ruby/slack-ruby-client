@@ -92,6 +92,7 @@ proxy        | Optional HTTP proxy.
 ca_path      | Optional SSL certificates path.
 ca_file      | Optional SSL certificates file.
 endpoint     | Slack endpoint, default is _https://slack.com/api_.
+logger       | Optional `Logger` instance that logs HTTP requests.
 
 ### RealTime Client
 
