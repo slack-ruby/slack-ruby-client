@@ -14,7 +14,7 @@ command 'groups' do |g|
   g.desc 'This method closes a private group.'
   g.long_desc %( This method closes a private group. )
   g.command 'close' do |c|
-    c.flag 'channel', desc: 'Group to open.'
+    c.flag 'channel', desc: 'Group to close.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_close(options))
     end

@@ -21,7 +21,7 @@ module Slack
           # This method closes a private group.
           #
           # @option options [group] :channel
-          #   Group to open.
+          #   Group to close.
           # @see https://api.slack.com/methods/groups.close
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups.close.json
           def groups_close(options = {})

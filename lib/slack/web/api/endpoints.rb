@@ -16,6 +16,7 @@ require 'slack/web/api/endpoints/rtm'
 require 'slack/web/api/endpoints/search'
 require 'slack/web/api/endpoints/stars'
 require 'slack/web/api/endpoints/team'
+require 'slack/web/api/endpoints/usergroups'
 require 'slack/web/api/endpoints/users'
 
 module Slack
@@ -38,6 +39,7 @@ module Slack
         include Search
         include Stars
         include Team
+        include Usergroups
         include Users
       end
     end
