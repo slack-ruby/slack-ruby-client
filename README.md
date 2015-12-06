@@ -231,9 +231,9 @@ gem 'celluloid-io'
 
 ### Command-Line Client
 
-The slack command-line client returns JSON data from the Slack API. Use `slack help` for details about the Slack command-line client.
+The slack command-line client returns JSON data from the Slack API.
 
-#### Authenticate with Slack.
+#### Authenticate with Slack
 
 ```
 $ slack --slack-api-token=[token] auth test
