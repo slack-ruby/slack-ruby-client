@@ -7,8 +7,8 @@ namespace :slack do
     namespace :api do
       # update slack-api-ref from https://github.com/dblock/slack-api-ref
       task :git_update do
-        sh 'git submodule update --init --recursive'
-        sh 'git submodule foreach git pull origin master'
+        # sh 'git submodule update --init --recursive'
+        # sh 'git submodule foreach git pull origin master'
       end
 
       desc 'Update API.'
@@ -24,18 +24,26 @@ namespace :slack do
         end
 
         method_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method.erb'))
+        command_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/command.erb'))
         data.each_with_index do |(group, names), index|
           printf "%2d/%2d %10s %s\n", index, data.size, group, names.keys
-          rendered = method_template.result(group: group, names: names)
-          File.write "lib/slack/web/api/endpoints/#{group}.rb", rendered
+          # method
+          rendered_method = method_template.result(group: group, names: names)
+          File.write "lib/slack/web/api/endpoints/#{group}.rb", rendered_method
           Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
             puts "- patching #{patch}"
             system("git apply #{patch}") || fail('failed to apply patch')
           end
+          # command
+          rendered_command = command_template.result(group: group, names: names)
+          File.write "bin/commands/#{group}.rb", rendered_command
         end
 
         endpoints_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/endpoints.erb'))
         File.write 'lib/slack/web/api/endpoints.rb', endpoints_template.result(files: data.keys)
+
+        commands_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/commands.erb'))
+        File.write 'bin/commands.rb', commands_template.result(files: data.keys)
       end
     end
   end

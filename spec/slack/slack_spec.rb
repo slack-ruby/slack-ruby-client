@@ -10,25 +10,25 @@ describe Slack do
   end
   context 'globals' do
     it 'enables request and response logging with -d' do
-      output = `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token -d auth 2>&1`
+      output = `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token -d auth test 2>&1`
       expect(output).to include 'post https://slack.com/api/auth.test'
       expect(output).to include 'Status: 200'
     end
     it 'requires --slack-api-token' do
-      err = `"#{slack}" auth 2>&1`
+      err = `"#{slack}" auth test 2>&1`
       expect(err).to start_with 'error: parse error: Set Slack API token via --slack-api-token or SLACK_API_TOKEN.'
     end
   end
   describe '#auth' do
     context 'bad auth' do
       it 'fails with an exception' do
-        err = `"#{slack}" --vcr-cassette-name=web/auth_test_error --slack-api-token=token auth 2>&1`
+        err = `"#{slack}" --vcr-cassette-name=web/auth_test_error --slack-api-token=token auth test 2>&1`
         expect(err).to eq "error: not_authed\n"
       end
     end
     context 'good auth' do
       it 'succeeds' do
-        json = JSON.parse `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token auth 2>&1`
+        json = JSON.parse `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token auth test 2>&1`
         expect(json).to eq(
           'ok' => true,
           'url' => 'https://rubybot.slack.com/',
@@ -39,6 +39,14 @@ describe Slack do
         )
         expect(json['ok']).to be true
       end
+    end
+  end
+  describe '#users' do
+    it 'list' do
+      json = JSON.parse `"#{slack}" --vcr-cassette-name=web/users_list --slack-api-token=token users list --presence=true 2>&1`
+      expect(json['ok']).to be true
+      expect(json['members'].size).to eq 9
+      expect(json['members'].first['presence']).to eq 'away'
     end
   end
 end

@@ -13,7 +13,7 @@ switch [:d, :debug], desc: 'Enable debug-level logging.', default_value: false
 flag [:t, 'slack-api-token'], desc: 'Slack API token.', default_value: ENV['SLACK_API_TOKEN']
 flag ['vcr-cassette-name'], desc: 'Offline VCR cassette.'
 
-pre do |global_options, _command, _options, _args|
+pre do |global_options, _command, options, _args|
   # global Slack configuration
   Slack.config.token = global_options['slack-api-token']
   help_now! 'Set Slack API token via --slack-api-token or SLACK_API_TOKEN.' unless Slack.config.token && Slack.config.token.length > 0
@@ -37,13 +37,14 @@ pre do |global_options, _command, _options, _args|
     end
     VCR.insert_cassette global_options['vcr-cassette-name']
   end
+
+  # remove any nil values from options
+  options.select! { |_k, v| v }
+
+  true
 end
 
-desc 'Authenticate with Slack.'
-command :auth do |c|
-  c.action do |_global_options, _options, _args|
-    puts JSON.dump($client.auth_test)
-  end
-end
+$LOAD_PATH.push File.expand_path('..', __FILE__)
+require 'commands'
 
 exit run(ARGV)
