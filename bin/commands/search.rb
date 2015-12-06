@@ -13,6 +13,7 @@ command 'search' do |g|
       puts JSON.dump($client.search_all(options))
     end
   end
+
   g.desc 'This method returns files matching a search query.'
   g.long_desc %( This method returns files matching a search query. )
   g.command 'files' do |c|
@@ -24,6 +25,7 @@ command 'search' do |g|
       puts JSON.dump($client.search_files(options))
     end
   end
+
   g.desc 'This method returns messages matching a search query.'
   g.long_desc %( This method returns messages matching a search query. )
   g.command 'messages' do |c|

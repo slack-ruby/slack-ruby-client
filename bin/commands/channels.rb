@@ -10,6 +10,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_archive(options))
     end
   end
+
   g.desc 'This method is used to create a channel.'
   g.long_desc %( This method is used to create a channel. )
   g.command 'create' do |c|
@@ -18,6 +19,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_create(options))
     end
   end
+
   g.desc 'This method returns a portion of messages/events from the specified channel.'
   g.long_desc %( This method returns a portion of messages/events from the specified channel. To read the entire history for a channel, call the method with no latest or oldest arguments, and then continue paging using the instructions below. )
   g.command 'history' do |c|
@@ -30,6 +32,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_history(options))
     end
   end
+
   g.desc 'This method returns information about a team channel.'
   g.long_desc %( This method returns information about a team channel. )
   g.command 'info' do |c|
@@ -38,6 +41,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_info(options))
     end
   end
+
   g.desc 'This method is used to invite a user to a channel. The calling user must be a member of the channel.'
   g.long_desc %( This method is used to invite a user to a channel. The calling user must be a member of the channel. )
   g.command 'invite' do |c|
@@ -47,6 +51,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_invite(options))
     end
   end
+
   g.desc 'This method is used to join a channel. If the channel does not exist, it is'
   g.long_desc %( This method is used to join a channel. If the channel does not exist, it is created. )
   g.command 'join' do |c|
@@ -55,6 +60,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_join(options))
     end
   end
+
   g.desc 'This method allows a user to remove another member from a team channel.'
   g.long_desc %( This method allows a user to remove another member from a team channel. )
   g.command 'kick' do |c|
@@ -64,6 +70,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_kick(options))
     end
   end
+
   g.desc 'This method is used to leave a channel.'
   g.long_desc %( This method is used to leave a channel. )
   g.command 'leave' do |c|
@@ -72,6 +79,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_leave(options))
     end
   end
+
   g.desc 'This method returns a list of all channels in the team. This includes channels the caller is in, channels'
   g.long_desc %( This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels. The number of (non-deactivated) members in each channel is also returned. )
   g.command 'list' do |c|
@@ -80,6 +88,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_list(options))
     end
   end
+
   g.desc 'This method moves the read cursor in a channel.'
   g.long_desc %( This method moves the read cursor in a channel. )
   g.command 'mark' do |c|
@@ -89,6 +98,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_mark(options))
     end
   end
+
   g.desc 'This method renames a team channel.'
   g.long_desc %( This method renames a team channel. )
   g.command 'rename' do |c|
@@ -98,6 +108,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_rename(options))
     end
   end
+
   g.desc 'This method is used to change the purpose of a channel. The calling user must be a member of the channel.'
   g.long_desc %( This method is used to change the purpose of a channel. The calling user must be a member of the channel. )
   g.command 'setPurpose' do |c|
@@ -107,6 +118,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_setPurpose(options))
     end
   end
+
   g.desc 'This method is used to change the topic of a channel. The calling user must be a member of the channel.'
   g.long_desc %( This method is used to change the topic of a channel. The calling user must be a member of the channel. )
   g.command 'setTopic' do |c|
@@ -116,6 +128,7 @@ command 'channels' do |g|
       puts JSON.dump($client.channels_setTopic(options))
     end
   end
+
   g.desc 'This method unarchives a channel. The calling user is added to the channel.'
   g.long_desc %( This method unarchives a channel. The calling user is added to the channel. )
   g.command 'unarchive' do |c|

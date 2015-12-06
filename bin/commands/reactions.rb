@@ -14,6 +14,7 @@ command 'reactions' do |g|
       puts JSON.dump($client.reactions_add(options))
     end
   end
+
   g.desc 'This method returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message).'
   g.long_desc %( This method returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message). )
   g.command 'get' do |c|
@@ -26,6 +27,7 @@ command 'reactions' do |g|
       puts JSON.dump($client.reactions_get(options))
     end
   end
+
   g.desc 'This method returns a list of all items (file, file comment, channel message, group message, or direct message) reacted to by a user.'
   g.long_desc %( This method returns a list of all items (file, file comment, channel message, group message, or direct message) reacted to by a user. )
   g.command 'list' do |c|
@@ -35,6 +37,7 @@ command 'reactions' do |g|
       puts JSON.dump($client.reactions_list(options))
     end
   end
+
   g.desc 'This method removes a reaction (emoji) from an item (file, file comment, channel message, group message, or direct message).'
   g.long_desc %( This method removes a reaction (emoji) from an item (file, file comment, channel message, group message, or direct message). One of file, file_comment, or the combination of channel and timestamp must be specified. )
   g.command 'remove' do |c|

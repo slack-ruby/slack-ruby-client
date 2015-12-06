@@ -10,6 +10,7 @@ command 'im' do |g|
       puts JSON.dump($client.im_close(options))
     end
   end
+
   g.desc 'This method returns a portion of messages/events from the specified direct message channel.'
   g.long_desc %( This method returns a portion of messages/events from the specified direct message channel. To read the entire history for a direct message channel, call the method with no latest or oldest arguments, and then continue paging using the instructions below. )
   g.command 'history' do |c|
@@ -22,6 +23,7 @@ command 'im' do |g|
       puts JSON.dump($client.im_history(options))
     end
   end
+
   g.desc 'This method returns a list of all im channels that the user has.'
   g.long_desc %( This method returns a list of all im channels that the user has. )
   g.command 'list' do |c|
@@ -29,6 +31,7 @@ command 'im' do |g|
       puts JSON.dump($client.im_list(options))
     end
   end
+
   g.desc 'This method moves the read cursor in a direct message channel.'
   g.long_desc %( This method moves the read cursor in a direct message channel. )
   g.command 'mark' do |c|
@@ -38,6 +41,7 @@ command 'im' do |g|
       puts JSON.dump($client.im_mark(options))
     end
   end
+
   g.desc 'This method opens a direct message channel with another member of your Slack team.'
   g.long_desc %( This method opens a direct message channel with another member of your Slack team. )
   g.command 'open' do |c|

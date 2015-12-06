@@ -13,6 +13,7 @@ command 'stars' do |g|
       puts JSON.dump($client.stars_add(options))
     end
   end
+
   g.desc 'This method lists the items starred by a user.'
   g.long_desc %( This method lists the items starred by a user. )
   g.command 'list' do |c|
@@ -21,6 +22,7 @@ command 'stars' do |g|
       puts JSON.dump($client.stars_list(options))
     end
   end
+
   g.desc 'This method removes a star from an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user.'
   g.long_desc %( This method removes a star from an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user. One of file, file_comment, channel, or the combination of channel and timestamp must be specified. )
   g.command 'remove' do |c|

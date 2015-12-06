@@ -10,6 +10,7 @@ command 'mpim' do |g|
       puts JSON.dump($client.mpim_close(options))
     end
   end
+
   g.desc 'This method returns a portion of messages/events from the specified multiparty direct message channel.'
   g.long_desc %( This method returns a portion of messages/events from the specified multiparty direct message channel. To read the entire history for a multiparty direct message, call the method with no latest or oldest arguments, and then continue paging using the instructions below. )
   g.command 'history' do |c|
@@ -22,6 +23,7 @@ command 'mpim' do |g|
       puts JSON.dump($client.mpim_history(options))
     end
   end
+
   g.desc 'This method returns a list of all multiparty direct message channels that the user has.'
   g.long_desc %( This method returns a list of all multiparty direct message channels that the user has. )
   g.command 'list' do |c|
@@ -29,6 +31,7 @@ command 'mpim' do |g|
       puts JSON.dump($client.mpim_list(options))
     end
   end
+
   g.desc 'This method moves the read cursor in a multiparty direct message channel.'
   g.long_desc %( This method moves the read cursor in a multiparty direct message channel. )
   g.command 'mark' do |c|
@@ -38,6 +41,7 @@ command 'mpim' do |g|
       puts JSON.dump($client.mpim_mark(options))
     end
   end
+
   g.desc 'This method opens a multiparty direct message.'
   g.long_desc %( This method opens a multiparty direct message. )
   g.command 'open' do |c|

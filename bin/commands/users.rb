@@ -10,6 +10,7 @@ command 'users' do |g|
       puts JSON.dump($client.users_getPresence(options))
     end
   end
+
   g.desc 'This method returns information about a team member.'
   g.long_desc %( This method returns information about a team member. )
   g.command 'info' do |c|
@@ -18,6 +19,7 @@ command 'users' do |g|
       puts JSON.dump($client.users_info(options))
     end
   end
+
   g.desc 'This method returns a list of all users in the team. This includes deleted/deactivated users.'
   g.long_desc %( This method returns a list of all users in the team. This includes deleted/deactivated users. )
   g.command 'list' do |c|
@@ -26,6 +28,7 @@ command 'users' do |g|
       puts JSON.dump($client.users_list(options))
     end
   end
+
   g.desc 'This method lets the slack messaging server know that the authenticated user'
   g.long_desc %( This method lets the slack messaging server know that the authenticated user is currently active. Consult the presence documentation for more details. )
   g.command 'setActive' do |c|
@@ -33,6 +36,7 @@ command 'users' do |g|
       puts JSON.dump($client.users_setActive(options))
     end
   end
+
   g.desc "This method lets you set the calling user's manual presence."
   g.long_desc %( This method lets you set the calling user's manual presence. Consult the presence documentation for more details. )
   g.command 'setPresence' do |c|

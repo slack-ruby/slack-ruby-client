@@ -9,6 +9,7 @@ command 'team' do |g|
       puts JSON.dump($client.team_accessLogs(options))
     end
   end
+
   g.desc 'This method provides information about your team.'
   g.long_desc %( This method provides information about your team. )
   g.command 'info' do |c|
@@ -16,6 +17,7 @@ command 'team' do |g|
       puts JSON.dump($client.team_info(options))
     end
   end
+
   g.desc 'This method lists the integration activity logs for a team, including when integrations are added, modified and removed. This method can only be called by Admins.'
   g.long_desc %( This method lists the integration activity logs for a team, including when integrations are added, modified and removed. This method can only be called by Admins. )
   g.command 'integrationLogs' do |c|

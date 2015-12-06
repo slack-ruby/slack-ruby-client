@@ -10,6 +10,7 @@ command 'files' do |g|
       puts JSON.dump($client.files_delete(options))
     end
   end
+
   g.desc 'This method returns information about a file in your team.'
   g.long_desc %( This method returns information about a file in your team. )
   g.command 'info' do |c|
@@ -18,6 +19,7 @@ command 'files' do |g|
       puts JSON.dump($client.files_info(options))
     end
   end
+
   g.desc 'This method returns a list of files within the team. It can be filtered and sliced in various ways.'
   g.long_desc %( This method returns a list of files within the team. It can be filtered and sliced in various ways. )
   g.command 'list' do |c|
@@ -41,6 +43,7 @@ You can pass multiple values in the types argument, like types=posts,snippets.Th
       puts JSON.dump($client.files_list(options))
     end
   end
+
   g.desc 'This method allows you to create or upload an existing file.'
   g.long_desc %( This method allows you to create or upload an existing file. )
   g.command 'upload' do |c|

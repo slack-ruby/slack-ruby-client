@@ -11,6 +11,7 @@ command 'chat' do |g|
       puts JSON.dump($client.chat_delete(options))
     end
   end
+
   g.desc 'This method posts a message to a public channel, private group, or IM channel.'
   g.long_desc %( This method posts a message to a public channel, private group, or IM channel. )
   g.command 'postMessage' do |c|
@@ -29,6 +30,7 @@ command 'chat' do |g|
       puts JSON.dump($client.chat_postMessage(options))
     end
   end
+
   g.desc 'This method updates a message in a channel.'
   g.long_desc %( This method updates a message in a channel. )
   g.command 'update' do |c|

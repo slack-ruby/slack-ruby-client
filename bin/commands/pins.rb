@@ -13,6 +13,7 @@ command 'pins' do |g|
       puts JSON.dump($client.pins_add(options))
     end
   end
+
   g.desc 'This method lists the items pinned to a channel.'
   g.long_desc %( This method lists the items pinned to a channel. )
   g.command 'list' do |c|
@@ -21,6 +22,7 @@ command 'pins' do |g|
       puts JSON.dump($client.pins_list(options))
     end
   end
+
   g.desc 'This method un-pins an item (file, file comment, channel message, or group message) from a channel.'
   g.long_desc %( This method un-pins an item (file, file comment, channel message, or group message) from a channel. The channel argument is required and one of file, file_comment, or timestamp must also be specified. )
   g.command 'remove' do |c|

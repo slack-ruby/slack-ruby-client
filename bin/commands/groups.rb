@@ -10,6 +10,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_archive(options))
     end
   end
+
   g.desc 'This method closes a private group.'
   g.long_desc %( This method closes a private group. )
   g.command 'close' do |c|
@@ -18,6 +19,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_close(options))
     end
   end
+
   g.desc 'This method creates a private group.'
   g.long_desc %( This method creates a private group. )
   g.command 'create' do |c|
@@ -26,6 +28,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_create(options))
     end
   end
+
   g.desc 'This method takes an existing private group and performs the following steps:'
   g.long_desc %( This method takes an existing private group and performs the following steps: )
   g.command 'createChild' do |c|
@@ -34,6 +37,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_createChild(options))
     end
   end
+
   g.desc 'This method returns a portion of messages/events from the specified private group.'
   g.long_desc %( This method returns a portion of messages/events from the specified private group. To read the entire history for a group, call the method with no latest or oldest arguments, and then continue paging using the instructions below. )
   g.command 'history' do |c|
@@ -46,6 +50,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_history(options))
     end
   end
+
   g.desc 'This method returns information about a private group.'
   g.long_desc %( This method returns information about a private group. )
   g.command 'info' do |c|
@@ -54,6 +59,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_info(options))
     end
   end
+
   g.desc 'This method is used to invite a user to a private group. The calling user must be a member of the group.'
   g.long_desc %( This method is used to invite a user to a private group. The calling user must be a member of the group. )
   g.command 'invite' do |c|
@@ -63,6 +69,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_invite(options))
     end
   end
+
   g.desc 'This method allows a user to remove another member from a private group.'
   g.long_desc %( This method allows a user to remove another member from a private group. )
   g.command 'kick' do |c|
@@ -72,6 +79,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_kick(options))
     end
   end
+
   g.desc 'This method is used to leave a private group.'
   g.long_desc %( This method is used to leave a private group. )
   g.command 'leave' do |c|
@@ -80,6 +88,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_leave(options))
     end
   end
+
   g.desc 'This method returns a list of groups in the team that the caller is in and archived groups that the caller was in.'
   g.long_desc %( This method returns a list of groups in the team that the caller is in and archived groups that the caller was in. The list of (non-deactivated) members in each group is also returned. )
   g.command 'list' do |c|
@@ -88,6 +97,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_list(options))
     end
   end
+
   g.desc 'This method moves the read cursor in a private group.'
   g.long_desc %( This method moves the read cursor in a private group. )
   g.command 'mark' do |c|
@@ -97,6 +107,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_mark(options))
     end
   end
+
   g.desc 'This method opens a private group.'
   g.long_desc %( This method opens a private group. )
   g.command 'open' do |c|
@@ -105,6 +116,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_open(options))
     end
   end
+
   g.desc 'This method renames a private group.'
   g.long_desc %( This method renames a private group. )
   g.command 'rename' do |c|
@@ -114,6 +126,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_rename(options))
     end
   end
+
   g.desc 'This method is used to change the purpose of a private group. The calling user must be a member of the private group.'
   g.long_desc %( This method is used to change the purpose of a private group. The calling user must be a member of the private group. )
   g.command 'setPurpose' do |c|
@@ -123,6 +136,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_setPurpose(options))
     end
   end
+
   g.desc 'This method is used to change the topic of a private group. The calling user must be a member of the private group.'
   g.long_desc %( This method is used to change the topic of a private group. The calling user must be a member of the private group. )
   g.command 'setTopic' do |c|
@@ -132,6 +146,7 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_setTopic(options))
     end
   end
+
   g.desc 'This method unarchives a private group.'
   g.long_desc %( This method unarchives a private group. )
   g.command 'unarchive' do |c|

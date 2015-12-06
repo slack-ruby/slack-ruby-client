@@ -3,6 +3,9 @@
 desc '<%= group.capitalize %> methods.'
 command '<%= group %>' do |g|
 <% names.each_with_index do |(name, data), index| %>
+<% if index > 0 %>
+
+<% end %>
   <% short_desc = data["desc"].split("\n").first %>
   <% if short_desc.include?("'")  %>
   g.desc "<%= short_desc %>"
