@@ -1,4 +1,4 @@
-### 0.5.0 (Next)
+### 0.5.0 (12/7/2015)
 
 * Added `usergroups_create`, `usergroups_disable`, `usergroups_enable`, `usergroups_list`, `usergroups_update` and `usergroups_users` to Web API - [@dblock](https://github.com/dblock).
 * Added command-line `slack` client - [@dblock](https://github.com/dblock).
@@ -8,7 +8,6 @@
 * [#32](https://github.com/dblock/slack-ruby-client/issues/32): Fix: `on_complete: undefined method [] for nil:NilClass` when responding to Slack 400-500 errors - [@dblock](https://github.com/dblock).
 * [#22](https://github.com/dblock/slack-ruby-client/issues/22): Added `Slack::Web::Api::Error#response` - [@dblock](https://github.com/dblock).
 * Added `logger` to `Slack::Web::Client` configuration that logs HTTP requests - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.4.0 (11/8/2015)
 

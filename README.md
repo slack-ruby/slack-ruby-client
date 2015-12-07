@@ -13,7 +13,7 @@ Writing a bot? Try [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot) in
 
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.4.0](https://github.com/dblock/slack-ruby-client/blob/v0.4.0/README.md) unless you're integrating with HEAD.
+You're reading the documentation for [stable release, v0.5.0](https://github.com/dblock/slack-ruby-client/blob/v0.5.0/README.md). See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ## Installation
 
