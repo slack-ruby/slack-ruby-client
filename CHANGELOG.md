@@ -1,3 +1,7 @@
+### 0.5.1 (Next)
+
+* Your contribution here.
+
 ### 0.5.0 (12/7/2015)
 
 * Added `usergroups_create`, `usergroups_disable`, `usergroups_enable`, `usergroups_list`, `usergroups_update` and `usergroups_users` to Web API - [@dblock](https://github.com/dblock).
