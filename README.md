@@ -7,9 +7,14 @@ Slack Ruby Client
 
 A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. Comes with a handy command-line client, too.
 
-Writing a bot? Try [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot) instead.
-
 ![](slack.png)
+
+## Useful to Me?
+
+* This piece of the puzzle will help you send messages to Slack via the Web API and send and receive messages via the Real Time API.
+* If you're trying to respond to slash commands, just write a basic web application and use this library to call the Slack Web API.
+* If you're trying to build a Real Time bot, use [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot), which uses this library.
+* I you're trying to roll out a full service with Slack button integration to multiple teams, check out [slack-bot-server](https://github.com/dblock/slack-bot-server), which is built on top of slack-ruby-bot, which uses this library.
 
 ## Stable Release
 
