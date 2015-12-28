@@ -57,23 +57,57 @@ This sets a global default token. You can also pass a token into the initializer
 
 ### Web Client
 
-The Slack Web API allows you to build applications that interact with Slack. For example, send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
+The Slack Web API allows you to build applications that interact with Slack.
+
+#### Test Auth
 
 ```ruby
 client = Slack::Web::Client.new
-
 client.auth_test
+```
 
-general_channel = client.channels_list['channels'].detect { |c| c['name'] == 't3' }
+#### Send Messages
 
-client.chat_postMessage(channel: general_channel['id'], text: 'Hello World', as_user: true)
+Send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
+
+```ruby
+client.chat_postMessage(channel: '#general', text: 'Hello World', as_user: true)
 ```
 
 See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
 ![](examples/hi_web/hi.gif)
 
+#### List Channels
+
+List channels with [channels_list](https://api.slack.com/methods/channels.list).
+
+```ruby
+channels = client.channels_list['channels']
+
+general_channel = channels.detect { |c| c['name'] == 'general' }
+```
+
+#### Upload a File
+
+Upload a file with [files_upload](https://api.slack.com/methods/files.upload).
+
+```ruby
+client.files_upload(
+  channels: '#general',
+  as_user: true,
+  file: Faraday::UploadIO.new('/path/to/avatar.jpg', 'image/jpeg'),
+  title: 'My Avatar',
+  filename: 'avatar.jpg',
+  initial_comment: 'Attached a selfie.'
+)
+```
+
+#### Other
+
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
+
+#### Web Client Options
 
 You can configure the Web client either globally or via the initializer.
 
