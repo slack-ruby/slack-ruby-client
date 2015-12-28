@@ -1,8 +1,8 @@
 rvm:
   - 2.2
   - 2.1
-  - 2.0.0
-  - rbx-2.2.10
+  - 2.0
+  - rbx-2.9
   - jruby-19mode
   - ruby-head
   - jruby-head

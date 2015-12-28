@@ -11,9 +11,13 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
-require 'rubocop/rake_task'
-RuboCop::RakeTask.new
+if RUBY_ENGINE == 'rbx'
+  task default: [:spec]
+else
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
 
-task default: [:rubocop, :spec]
+  task default: [:rubocop, :spec]
+end
 
 load 'slack/web/api/tasks/generate.rake'
