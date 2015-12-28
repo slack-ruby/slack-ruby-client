@@ -196,6 +196,54 @@ See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real
 
 ![](examples/hi_real_time_and_web/hi.gif)
 
+#### Upload a file
+The RealTime client can be used to upload a file using the [Slack files.upload API](https://api.slack.com/methods/files.upload).  Here is a quick example of uploading a file to a Slack Channel:
+
+```ruby
+require 'slack-ruby-client'
+
+path_to_file = "/path/to/sample/file.txt"
+filetype = 'text'
+
+
+def send_file(client,data,path_to_file,filetype)
+  puts "sending file #{path_to_file} to #{data['user']}"
+  
+  client.web_client.chat_postMessage channel: data['channel'], as_user: true, text: "<@#{data['user']}>, getting your requested file"
+
+  client.web_client.files_upload(channels: data['channel'], as_user: true, 
+                                 file: Faraday::UploadIO.new("#{path_to_file}","#{filetype}"), 
+                                 title: File.basename(path_to_file),
+                                 filename: File.basename(path_to_file),
+                                 initial_comment: "<@#{data['user']}>, attached is the file you requested."
+                                )
+end
+
+
+Slack.configure do |config|
+  config.token = ENV['SLACKBOT_API_TOKEN']
+end
+
+client = Slack::RealTime::Client.new
+
+client.on :hello do
+  puts "Successfully connected, welcome '#{client.self['name']}' to the '#{client.team['name']}'" +
+       " team at https://#{client.team['domain']}.slack.com."
+end
+
+client.on :message do |data|
+  puts data
+  case data['text']
+    when /bot.*hi|hi.*bot/i then
+      client.web_client.chat_postMessage channel: data['channel'], text: "Hi, <@#{data['user']}>!"
+    when /bot.*send me a file/i then
+      send_file(client,data,path_to_file,filetype)
+  end
+end
+
+client.start!
+```
+
 #### Concurrency
 
 `Slack::RealTime::Client` needs help from a concurrency library and supports [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine) and [Celluloid](https://github.com/celluloid/celluloid). It will auto-detect one or the other depending on the gems in your Gemfile, but you can also set concurrency explicitly.
