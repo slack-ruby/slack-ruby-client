@@ -1,3 +1,7 @@
+### 0.5.2 (Next)
+
+* Your contribution here.
+
 ### 0.5.1 (1/4/2016)
 
 * Added `dnd_teamInfo`, `dnd_setSnooze`, `dnd_info`, `dnd_endSnooze` and `dnd_endDnd` - [@dblock](https://github.com/dblock).
