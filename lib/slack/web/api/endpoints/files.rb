@@ -74,10 +74,12 @@ module Slack
           # @option options [Object] :initial_comment
           #   Initial comment to add to file.
           # @option options [Object] :channels
-          #   Comma separated list of channels to share the file into.
+          #   Comma-separated list of channel names or IDs where the file will be shared.
           # @see https://api.slack.com/methods/files.upload
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.upload.json
           def files_upload(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            throw ArgumentError.new('Required arguments :filename missing') if options[:filename].nil?
             post('files.upload', options)
           end
         end

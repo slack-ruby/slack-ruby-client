@@ -53,7 +53,7 @@ You can pass multiple values in the types argument, like types=posts,snippets.Th
     c.flag 'filename', desc: 'Filename of file.'
     c.flag 'title', desc: 'Title of file.'
     c.flag 'initial_comment', desc: 'Initial comment to add to file.'
-    c.flag 'channels', desc: 'Comma separated list of channels to share the file into.'
+    c.flag 'channels', desc: 'Comma-separated list of channel names or IDs where the file will be shared.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_upload(options))
     end

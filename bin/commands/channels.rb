@@ -80,8 +80,8 @@ command 'channels' do |g|
     end
   end
 
-  g.desc 'This method returns a list of all channels in the team. This includes channels the caller is in, channels'
-  g.long_desc %( This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels. The number of (non-deactivated) members in each channel is also returned. )
+  g.desc 'This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels but does not include private channels. The number of (non-deactivated) members in each channel is also returned.'
+  g.long_desc %( This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels but does not include private channels. The number of (non-deactivated) members in each channel is also returned. )
   g.command 'list' do |c|
     c.flag 'exclude_archived', desc: "Don't return archived channels."
     c.action do |_global_options, options, _args|

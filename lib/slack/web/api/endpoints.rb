@@ -4,6 +4,7 @@ require 'slack/web/api/endpoints/api'
 require 'slack/web/api/endpoints/auth'
 require 'slack/web/api/endpoints/channels'
 require 'slack/web/api/endpoints/chat'
+require 'slack/web/api/endpoints/dnd'
 require 'slack/web/api/endpoints/emoji'
 require 'slack/web/api/endpoints/files'
 require 'slack/web/api/endpoints/groups'
@@ -27,6 +28,7 @@ module Slack
         include Auth
         include Channels
         include Chat
+        include Dnd
         include Emoji
         include Files
         include Groups

@@ -1,5 +1,7 @@
 ### 0.5.1 (Next)
 
+* Added `dnd_teamInfo`, `dnd_setSnooze`, `dnd_info`, `dnd_endSnooze` and `dnd_endDnd` - [@dblock](https://github.com/dblock).
+* The `files_upload` method now requires both `file` and `filename` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.0 (12/7/2015)
