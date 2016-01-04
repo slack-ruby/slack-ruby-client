@@ -18,7 +18,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.5.0](https://github.com/dblock/slack-ruby-client/blob/v0.5.0/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **stable** release of slack-ruby-client, 0.5.1. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ## Installation
 
@@ -315,6 +315,6 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
-Copyright (c) 2015, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
+Copyright (c) 2015-2016, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
 
 This project is licensed under the [MIT License](LICENSE.md).

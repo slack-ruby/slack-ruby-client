@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2015 Daniel Doubrovkine, Artsy and Contributors
+Copyright (c) 2015-2016 Daniel Doubrovkine, Artsy and Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
