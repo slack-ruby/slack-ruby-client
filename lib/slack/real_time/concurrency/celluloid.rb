@@ -32,6 +32,10 @@ module Slack
             future.run_loop
           end
 
+          def connected?
+            !@connected.nil?
+          end
+
           def run_loop
             loop { read } if socket
           rescue EOFError
@@ -61,10 +65,6 @@ module Slack
             def join
               @future.value
             end
-          end
-
-          def connected?
-            !@connected.nil?
           end
 
           def build_socket
