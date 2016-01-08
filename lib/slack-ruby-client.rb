@@ -1,6 +1,9 @@
 require 'slack/version'
 require 'slack/config'
 
+# Messages
+require 'slack/messages/formatting'
+
 # Web API
 require 'faraday'
 require 'faraday_middleware'
