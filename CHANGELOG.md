@@ -1,5 +1,6 @@
 ### 0.5.3 (Next)
 
+* Fixed JRuby file encoding regression - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.2 (1/8/2015)
