@@ -31,7 +31,7 @@ module Slack
         [:Eventmachine, :Celluloid].each do |concurrency|
           begin
             return Slack::RealTime::Concurrency.const_get(concurrency)
-          rescue LoadError
+          rescue LoadError, NameError
             false # could not be loaded, missing dependencies
           end
         end
