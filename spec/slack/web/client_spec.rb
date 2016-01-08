@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Client do
+  before do
+    Slack::Config.reset
+  end
   context 'with defaults' do
     let(:client) { Slack::Web::Client.new }
     describe '#initialize' do

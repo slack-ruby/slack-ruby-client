@@ -3,6 +3,10 @@ module Slack
     extend self
 
     attr_accessor :token
+
+    def reset
+      self.token = nil
+    end
   end
 
   class << self

@@ -1,8 +1,12 @@
-require 'slack'
-require 'logger'
-require 'support/queue_with_timeout'
+require 'spec_helper'
 
 RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLACK_API_TOKEN' do
+  around do |ex|
+    WebMock.allow_net_connect!
+    VCR.turned_off { ex.run }
+    WebMock.disable_net_connect!
+  end
+
   before do
     Thread.abort_on_exception = true
   end
