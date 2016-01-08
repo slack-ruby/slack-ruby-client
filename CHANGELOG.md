@@ -1,5 +1,6 @@
 ### 0.5.2 (Next)
 
+* [#41](https://github.com/dblock/slack-ruby-client/issues/41): Added `Slack::Messages::Formatting#unescape` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.1 (1/4/2016)
