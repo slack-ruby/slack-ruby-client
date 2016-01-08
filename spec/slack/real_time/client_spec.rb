@@ -4,9 +4,15 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
   let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
   before do
+    @token = ENV.delete('SLACK_API_TOKEN')
+    Slack::Config.reset
+    Slack::RealTime::Config.reset
     Slack::RealTime.configure do |config|
       config.concurrency = Slack::RealTime::Concurrency::Mock
     end
+  end
+  after do
+    ENV['SLACK_API_TOKEN'] = @token if @token
   end
   context 'token' do
     before do
