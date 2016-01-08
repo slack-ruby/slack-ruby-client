@@ -1,12 +1,13 @@
 ### 0.5.2 (Next)
 
 * [#41](https://github.com/dblock/slack-ruby-client/issues/41): Added `Slack::Messages::Formatting#unescape` - [@dblock](https://github.com/dblock).
+* Added `files_comments` to Web API - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.1 (1/4/2016)
 
-* Added `dnd_teamInfo`, `dnd_setSnooze`, `dnd_info`, `dnd_endSnooze` and `dnd_endDnd` - [@dblock](https://github.com/dblock).
-* The `files_upload` method now requires both `file` and `filename` - [@dblock](https://github.com/dblock).
+* Added `dnd_teamInfo`, `dnd_setSnooze`, `dnd_info`, `dnd_endSnooze` and `dnd_endDnd` to Web API - [@dblock](https://github.com/dblock).
+* The `files_upload` method now requires both `file` and `filename` to Web API - [@dblock](https://github.com/dblock).
 
 ### 0.5.0 (12/7/2015)
 
