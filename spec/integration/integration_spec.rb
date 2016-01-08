@@ -74,6 +74,7 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
         logger.debug data
         expect(data).to include('text' => message, 'subtype' => 'bot_message')
         logger.debug 'client.stop!'
+        expect(client.started?).to be true
         client.stop!
       end
 
@@ -85,6 +86,7 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
   it 'gets hello' do
     client.on :hello do |data|
       logger.debug "client.on :hello, data=#{data}"
+      expect(client.started?).to be true
       client.stop!
     end
 
