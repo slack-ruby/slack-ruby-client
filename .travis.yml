@@ -17,6 +17,8 @@ matrix:
     - rvm: jruby-head
     - rvm: jruby-19mode
     - rvm: rbx-2
+    - rvm: 2.0
+      env: CONCURRENCY=celluloid-io
 
 git:
   submodules: false
