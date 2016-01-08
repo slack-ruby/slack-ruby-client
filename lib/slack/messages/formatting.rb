@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Slack
   module Messages
     module Formatting
