@@ -39,7 +39,9 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
   end
 
   def start_server
-    logger.debug '#start_server'
+    dt = rand(5) + 1
+    logger.debug "#start_server, waiting #{dt} second(s)"
+    sleep dt # prevent Slack 429 rate limit errors
     # start server and wait for on :open
     c = connection
     logger.debug "connection is #{c}"
