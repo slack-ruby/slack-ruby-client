@@ -1,5 +1,6 @@
 require 'slack'
 require 'logger'
+require 'support/queue_with_timeout'
 
 RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLACK_API_TOKEN' do
   before do
@@ -8,7 +9,7 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
 
   let(:logger) { Logger.new(STDOUT) }
 
-  let(:queue) { Queue.new }
+  let(:queue) { QueueWithTimeout.new }
 
   let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
 
@@ -38,12 +39,12 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
     # start server and wait for on :open
     c = connection
     logger.debug "connection is #{c}"
-    queue.pop
+    queue.pop_with_timeout(5)
   end
 
   def wait_for_server
     logger.debug '#wait_for_server'
-    queue.pop
+    queue.pop_with_timeout(5)
     logger.debug '#wait_for_server, joined'
   end
 
