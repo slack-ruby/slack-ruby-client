@@ -1,5 +1,6 @@
 ### 0.5.3 (Next)
 
+* [#47](https://github.com/dblock/slack-ruby-client/pull/47): Fix: default to Celluloid newer API - [@jlyonsmith](https://github.com/jlyonsmith), [@dblock](https://github.com/dblock).
 * Fixed JRuby file encoding regression - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
