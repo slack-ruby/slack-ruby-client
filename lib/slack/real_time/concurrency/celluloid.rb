@@ -9,7 +9,7 @@ module Slack
       module Celluloid
         class Socket < Slack::RealTime::Socket
           include ::Celluloid::IO
-          include ::Celluloid::Logger
+          include ::Celluloid::Internals::Logger
 
           BLOCK_SIZE = 4096
 
