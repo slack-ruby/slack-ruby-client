@@ -24,4 +24,9 @@ client.on :message do |data|
   end
 end
 
+client.on :close do |_data|
+  puts 'Connection closed, exiting.'
+  EM.stop
+end
+
 client.start!
