@@ -1,3 +1,7 @@
+### 0.5.4 (Next)
+
+* Your contribution here.
+
 ### 0.5.3 (1/11/2016)
 
 * [#47](https://github.com/dblock/slack-ruby-client/pull/47): Fix: default to Celluloid newer API - [@jlyonsmith](https://github.com/jlyonsmith), [@dblock](https://github.com/dblock).
