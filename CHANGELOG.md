@@ -1,10 +1,9 @@
-### 0.5.3 (Next)
+### 0.5.3 (1/11/2016)
 
 * [#47](https://github.com/dblock/slack-ruby-client/pull/47): Fix: default to Celluloid newer API - [@jlyonsmith](https://github.com/jlyonsmith), [@dblock](https://github.com/dblock).
 * Fixed JRuby file encoding regression - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
-### 0.5.2 (1/8/2015)
+### 0.5.2 (1/8/2016)
 
 * [#41](https://github.com/dblock/slack-ruby-client/issues/41): Added `Slack::Messages::Formatting#unescape` - [@dblock](https://github.com/dblock).
 * Added `files_comments` to Web API - [@dblock](https://github.com/dblock).
