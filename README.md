@@ -207,7 +207,7 @@ See a fullly working example in [examples/hi_real_time](examples/hi_real_time/hi
 
 ![](examples/hi_real_time/hi.gif)
 
-### Combinging RealTime and Web Clients
+### Combining RealTime and Web Clients
 
 Since the Web client is used to obtain the RealTime client's WebSocket URL, you can continue using the Web client in combination with the RealTime client.
 
