@@ -20,7 +20,7 @@ module Slack
           send("#{key}=", options[key] || Slack::RealTime.config.send(key))
         end
         @token ||= Slack.config.token
-        @web_client = Slack::Web::Client.new(token: token)
+        @web_client = Slack::Web::Client.new(token: token, logger: logger)
       end
 
       [:url, :team, :self, :users, :channels, :groups, :ims, :bots].each do |attr|
@@ -82,7 +82,7 @@ module Slack
         socket_options = {}
         socket_options[:ping] = websocket_ping if websocket_ping
         socket_options[:proxy] = websocket_proxy if websocket_proxy
-        # TODO: pass logger
+        socket_options[:logger] = logger
         socket_options
       end
 

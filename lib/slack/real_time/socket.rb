@@ -5,15 +5,14 @@ module Slack
       attr_accessor :options
       attr_reader :driver
 
-
       attr_reader :logger
       protected :logger
 
       def initialize(url, options = {})
         @url = url
+        @logger = options.delete(:logger) { Slack::Config.logger }
         @options = options
         @driver = nil
-        @logger = options.fetch(:logger) { Slack::Config.logger }
       end
 
       def send_data(message)
