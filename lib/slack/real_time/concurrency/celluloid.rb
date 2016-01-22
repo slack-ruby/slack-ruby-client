@@ -50,6 +50,10 @@ module Slack
             Actor.new(future)
           end
 
+          def connected?
+            !@connected.nil?
+          end
+
           protected
 
           class Actor
@@ -62,10 +66,6 @@ module Slack
             def join
               @future.value
             end
-          end
-
-          def connected?
-            !@connected.nil?
           end
 
           def build_socket

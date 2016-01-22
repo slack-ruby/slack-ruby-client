@@ -69,6 +69,8 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
       start_server
     end
 
+    let(:channel) { "@#{client.self['name']}" }
+
     it 'responds to message' do
       message = SecureRandom.hex
 
@@ -81,8 +83,13 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
         client.stop!
       end
 
-      logger.debug "chat_postMessage, channel=@#{client.self['name']}, message=#{message}"
-      client.web_client.chat_postMessage channel: "@#{client.self['name']}", text: message
+      logger.debug "chat_postMessage, channel=#{channel}, message=#{message}"
+      client.web_client.chat_postMessage channel: channel, text: message
+    end
+
+    it 'sends message' do
+      client.message(channel: channel, text: 'Hello world!')
+      client.stop!
     end
   end
 
