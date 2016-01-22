@@ -41,12 +41,12 @@ module Slack
 
           def read
             buffer = socket.readpartial(BLOCK_SIZE)
-            logger.debug { "[socket#read] #{buffer}" }
+            logger.debug('#read') { buffer }
             driver.parse(buffer)
           end
 
           def write(data)
-            logger.debug { "[socket#write] #{data}" }
+            logger.debug('#write') { data }
             socket.write(data)
           end
 
