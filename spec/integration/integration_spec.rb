@@ -76,6 +76,8 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
 
       client.on :message do |data|
         logger.debug data
+        # concurrent execution of tests causes messages to arrive in any order
+        next unless data['text'] == message
         expect(data['text']).to eq message
         expect(data['subtype']).to eq 'bot_message'
         logger.debug 'client.stop!'
