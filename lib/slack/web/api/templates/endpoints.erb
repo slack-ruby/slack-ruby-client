@@ -8,6 +8,9 @@ module Slack
   module Web
     module Api
       module Endpoints
+        include Slack::Web::Api::Mixins::Channel
+        include Slack::Web::Api::Mixins::User
+
 <% files.each do |f| %>
         include <%= f.capitalize %>
 <% end %>

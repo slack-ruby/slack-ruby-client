@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/channels.list
+    body:
+      encoding: UTF-8
+      string: token=token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channels":[{"id":"C04KB5X4D","name":"general","is_channel":true,"created":1430222230,"creator":"U04KB5WQR","is_archived":false,"is_general":true,"is_member":true,"last_read":"1435863302.000026","latest":{"type":"message","user":"U0HPMN0GY","text":"```\n{\"ok\":true,\"args\":{\"token\":\"xoxb-17803748576-H794PZkqOo4DkjYddb438F2J\"}}```","ts":"1452025068.000045"},"unread_count":321,"unread_count_display":283,"members":["U04JPQ0JS","U04JZBDQQ","U04KB5WQR"],"topic":{"value":"","creator":"","last_set":0},"purpose":{"value":"This
+        channel is for team-wide communication and announcements. All team members
+        are in this channel.","creator":"","last_set":0}}]}'
+    http_version:
+  recorded_at: Fri, 22 Jan 2016 19:01:46 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/channels.info
+    body:
+      encoding: UTF-8
+      string: channel=C04KB5X4D&token=token
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":{"id":"C04KB5X4D","name":"general","is_channel":true,"created":1430222230,"creator":"U04KB5WQR","is_archived":false,"is_general":true,"is_member":true,"last_read":"1435863302.000026","latest":{"type":"message","user":"U0HPMN0GY","text":"```\n{\"ok\":true,\"args\":{\"token\":\"xoxb-17803748576-H794PZkqOo4DkjYddb438F2J\"}}```","ts":"1452025068.000045"},"unread_count":321,"unread_count_display":283,"members":["U04JPQ0JS","U04JZBDQQ","U04KB5WQR","U06JGTU5V","U07518DTL","U07KECJ77","U092BDCLV","U092V4E9L","U0EA7TZJN","U0H701CJZ","U0HLFUZLJ","U0HPMN0GY"],"topic":{"value":"","creator":"","last_set":0},"purpose":{"value":"This
+        channel is for team-wide communication and announcements. All team members
+        are in this channel.","creator":"","last_set":0}}}'
+    http_version:
+  recorded_at: Fri, 22 Jan 2016 19:01:46 GMT
+recorded_with: VCR 3.0.1

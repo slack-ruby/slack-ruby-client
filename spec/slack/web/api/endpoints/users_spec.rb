@@ -9,5 +9,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Users do
       expect(json['members'].size).to eq 9
       expect(json['members'].first['presence']).to eq 'away'
     end
+    it 'info', vcr: { cassette_name: 'web/users_info' } do
+      json = client.users_info(user: '@aws')
+      expect(json['user']['name']).to eq 'aws'
+    end
   end
 end

@@ -10,4 +10,4 @@ index 1f7a8d7..2ec4bed 100644
 +            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
              post('chat.postMessage', options)
            end
- 
+

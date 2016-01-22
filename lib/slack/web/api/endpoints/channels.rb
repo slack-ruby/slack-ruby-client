@@ -14,6 +14,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.archive.json
           def channels_archive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.archive', options)
           end
 
@@ -48,6 +49,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.history.json
           def channels_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.history', options)
           end
 
@@ -60,6 +62,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.info.json
           def channels_info(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.info', options)
           end
 
@@ -75,6 +78,8 @@ module Slack
           def channels_invite(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(user: get_user_id(options[:user])) if options[:user]
             post('channels.invite', options)
           end
 
@@ -103,6 +108,8 @@ module Slack
           def channels_kick(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(user: get_user_id(options[:user])) if options[:user]
             post('channels.kick', options)
           end
 
@@ -115,6 +122,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.leave.json
           def channels_leave(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.leave', options)
           end
 
@@ -141,6 +149,7 @@ module Slack
           def channels_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.mark', options)
           end
 
@@ -156,6 +165,7 @@ module Slack
           def channels_rename(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.rename', options)
           end
 
@@ -171,6 +181,7 @@ module Slack
           def channels_setPurpose(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.setPurpose', options)
           end
 
@@ -186,6 +197,7 @@ module Slack
           def channels_setTopic(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.setTopic', options)
           end
 
@@ -198,6 +210,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels.unarchive.json
           def channels_unarchive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('channels.unarchive', options)
           end
         end

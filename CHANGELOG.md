@@ -1,7 +1,8 @@
 ### 0.5.4 (Next)
 
-* Your contribution here.
+* [#45](https://github.com/dblock/slack-ruby-client/issues/45): Automatically lookup channel and user ID in Web API methods when Slack API doesn't accept #channel or @user names - [@dblock](https://github.com/dblock).
 * [#49](https://github.com/dblock/slack-ruby-client/pull/49): Fix: Celluloid `#connected?` method. - [@mikz](https://github.com/mikz), [@kandadaboggu](https://github.com/kandadaboggu).
+* Your contribution here.
 
 ### 0.5.3 (1/11/2016)
 

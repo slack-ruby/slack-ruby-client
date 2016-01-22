@@ -103,6 +103,30 @@ client.files_upload(
 )
 ```
 
+### Get Channel Info
+
+You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and calls `channels_list` in order to locate the channel ID.
+
+```ruby
+client.channels_info(channel: 'C04KB5X4D') # calls channels_info
+```
+
+```ruby
+client.channels_info(channel: '#general') # calls channels_list followed by channels_info
+```
+
+### Get User Info
+
+You can use a user ID or name (prefixed with `@`) in all functions that take a `:user` argument. Lookup by name is not supported by the Slack API and calls `users_list` in order to locate the user ID.
+
+```ruby
+client.users_info(user: 'U092BDCLV') # calls users_info
+```
+
+```ruby
+client.users_info(user: '@dblock') # calls users_list followed by users_info
+```
+
 #### Other
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
@@ -312,6 +336,13 @@ $ slack --slack-api-token=[token] auth test
 export SLACK_API_TOKEN=...
 $ slack chat postMessage --text="hello world" --channel="#general"
 {"ok":true,"channel":"...","ts":"...","message":{"text":"hello world","username":"bot","type":"message","subtype":"bot_message","ts":"..."}}
+```
+
+#### Get Channel Info
+
+```
+$ slack channels info --channel=#general
+{"ok":true,"channel":{"id":"C04KB5X4D","name":"general", ...}}
 ```
 
 #### List Users

@@ -20,6 +20,7 @@ module Slack
           # @see https://api.slack.com/methods/stars.add
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.add.json
           def stars_add(options = {})
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('stars.add', options)
           end
 
@@ -31,6 +32,7 @@ module Slack
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.list.json
           def stars_list(options = {})
+            options = options.merge(user: get_user_id(options[:user])) if options[:user]
             post('stars.list', options)
           end
 
@@ -49,6 +51,7 @@ module Slack
           # @see https://api.slack.com/methods/stars.remove
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.remove.json
           def stars_remove(options = {})
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
             post('stars.remove', options)
           end
         end

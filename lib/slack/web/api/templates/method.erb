@@ -10,13 +10,13 @@ module Slack
 
 <% end %>
           #
-<% data["desc"].split("\n").each do |line| %>
+<% data['desc'].split("\n").each do |line| %>
           # <%= line %>
 <% end %>
           #
-<% data["args"].each do |arg_name, arg_v| %>
-          # @option options [<%= arg_v["type"] %>] :<%= arg_name %>
-<% arg_v["desc"].lines.each do |l| %>
+<% data['args'].each do |arg_name, arg_v| %>
+          # @option options [<%= arg_v['type'] %>] :<%= arg_name %>
+<% arg_v['desc'].lines.each do |l| %>
 <% if l.strip.length > 0 %>
           #   <%= l.strip %>
 <% else %>
@@ -27,8 +27,14 @@ module Slack
           # @see https://api.slack.com/methods/<%= group %>.<%= name %>
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/<%= group %>.<%= name %>.json
           def <%= group %>_<%= name %>(options = {})
-<% data["args"].select{|k,v| v["required"]}.each do |arg_name, arg_v| %>
+<% data['args'].select{ |k, v| v['required'] }.each do |arg_name, arg_v| %>
             throw ArgumentError.new('Required arguments :<%= arg_name %> missing') if options[:<%= arg_name %>].nil?
+<% end %>
+<% if data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
+            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+<% end %>
+<% if data['args']['user'] %>
+            options = options.merge(user: get_user_id(options[:user])) if options[:user]
 <% end %>
             post('<%= group %>.<%= name %>', options)
           end
