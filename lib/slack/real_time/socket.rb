@@ -13,7 +13,7 @@ module Slack
         @url = url
         @options = options
         @driver = nil
-        @logger = options.fetch(:logger) { Logger.new($stderr) }
+        @logger = options.fetch(:logger) { Slack::Config.logger }
       end
 
       def send_data(message)

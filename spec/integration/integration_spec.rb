@@ -9,6 +9,11 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
 
   before do
     Thread.abort_on_exception = true
+
+    Slack.configure do |slack|
+      slack.logger = Slack::Logger.new($stdout)
+    end
+
   end
 
   let(:logger) { Logger.new(STDOUT) }

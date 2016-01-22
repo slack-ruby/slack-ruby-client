@@ -1,12 +1,17 @@
+require 'slack/logger'
+
 module Slack
   module Config
     extend self
 
-    attr_accessor :token
+    attr_accessor :token, :logger
 
     def reset
       self.token = nil
+      self.logger = Slack::Logger.default
     end
+
+    reset
   end
 
   class << self
