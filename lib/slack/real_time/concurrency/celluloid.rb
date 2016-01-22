@@ -41,7 +41,13 @@ module Slack
 
           def read
             buffer = socket.readpartial(BLOCK_SIZE)
-            driver.parse buffer
+            logger.debug { "[socket#read] #{buffer}" }
+            driver.parse(buffer)
+          end
+
+          def write(data)
+            logger.debug { "[socket#write] #{data}" }
+            socket.write(data)
           end
 
           def start_async

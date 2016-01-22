@@ -5,13 +5,19 @@ module Slack
       attr_accessor :options
       attr_reader :driver
 
+
+      attr_reader :logger
+      protected :logger
+
       def initialize(url, options = {})
         @url = url
         @options = options
         @driver = nil
+        @logger = options.fetch(:logger) { Logger.new($stderr) }
       end
 
       def send_data(message)
+        logger.debug { "[socket#send_data] #{message}" }
         case message
         when Numeric then driver.text(message.to_s)
         when String  then driver.text(message)

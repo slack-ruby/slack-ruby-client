@@ -80,6 +80,7 @@ module Slack
         socket_options = {}
         socket_options[:ping] = websocket_ping if websocket_ping
         socket_options[:proxy] = websocket_proxy if websocket_proxy
+        # TODO: pass logger
         socket_options
       end
 
