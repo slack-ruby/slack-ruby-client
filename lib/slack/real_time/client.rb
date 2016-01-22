@@ -12,6 +12,8 @@ module Slack
       attr_accessor :web_client
       attr_accessor(*Config::ATTRIBUTES)
 
+      protected :logger, :logger=
+
       def initialize(options = {})
         @callbacks = Hash.new { |h, k| h[k] = [] }
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
@@ -113,6 +115,7 @@ module Slack
 
       def send_json(data)
         fail ClientNotStartedError unless started?
+        logger.info('client#send_data') { data }
         @socket.send_data(data.to_json)
       end
 
@@ -129,6 +132,12 @@ module Slack
       end
 
       def callback(event, type)
+        logger.info("#callback(:#{type})") do
+          variables = event.instance_variables - [:@target, :@current_target]
+          variables.map!{ |ivar| "#{ivar}=#{event.instance_variable_get(ivar).inspect}" }
+          "<#{event.class} #{variables.join(' ')}>"
+        end
+
         callbacks = self.callbacks[type.to_s]
         return false unless callbacks
         callbacks.each do |c|
@@ -137,6 +146,12 @@ module Slack
       end
 
       def dispatch(event)
+        logger.info('#dispatch') do
+          variables = event.instance_variables - [:@target, :@current_target]
+          variables.map!{ |ivar| %Q{#{ivar}="#{event.instance_variable_get(ivar)}"} }
+          "<#{event.class} #{variables.join(' ')}>"
+        end
+
         return false unless event.data
         data = JSON.parse(event.data)
         type = data['type']
