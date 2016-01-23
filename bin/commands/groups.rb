@@ -155,4 +155,13 @@ command 'groups' do |g|
       puts JSON.dump($client.groups_unarchive(options))
     end
   end
+
+  g.desc 'This method returns the ID of a group.'
+  g.long_desc %( This method returns the ID of a group. )
+  g.command 'id' do |c|
+    c.flag 'channel', desc: 'Group channel to get ID for, prefixed with #.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.groups_id(options))
+    end
+  end
 end

@@ -31,7 +31,9 @@ module Slack
 <% data['args'].select{ |k, v| v['required'] }.each do |arg_name, arg_v| %>
             throw ArgumentError.new('Required arguments :<%= arg_name %> missing') if options[:<%= arg_name %>].nil?
 <% end %>
-<% if data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
+<% if data['group'] == 'groups' && data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+<% elsif data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
 <% end %>
 <% if data['args']['user'] %>

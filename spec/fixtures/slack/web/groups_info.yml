@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/groups.list
+    body:
+      encoding: UTF-8
+      string: token=token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"groups":[{"id":"G0K7EV5A7","name":"mpdm-dblock--rubybot--player1-1","is_group":true,"created":1453561861,"creator":"U04KB5WQR","is_archived":false,"is_mpim":true,"members":["U04KB5WQR","U0HLFUZLJ","U07518DTL"],"topic":{"value":"Group
+        messaging","creator":"U04KB5WQR","last_set":1453561861},"purpose":{"value":"Group
+        messaging with: @dblock @rubybot @player1","creator":"U04KB5WQR","last_set":1453561861}}]}'
+    http_version:
+  recorded_at: Sat, 23 Jan 2016 15:19:10 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/groups.info
+    body:
+      encoding: UTF-8
+      string: channel=G0K7EV5A7&token=token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"group":{"id":"G0K7EV5A7","name":"mpdm-dblock--rubybot--player1-1","is_group":true,"created":1453561861,"creator":"U04KB5WQR","is_archived":false,"is_mpim":true,"is_open":false,"last_read":"0000000000.000000","latest":null,"unread_count":0,"unread_count_display":0,"members":["U04KB5WQR","U0HLFUZLJ","U07518DTL"],"topic":{"value":"Group
+        messaging","creator":"U04KB5WQR","last_set":1453561861},"purpose":{"value":"Group
+        messaging with: @dblock @rubybot @player1","creator":"U04KB5WQR","last_set":1453561861}}}'
+    http_version:
+  recorded_at: Sat, 23 Jan 2016 15:19:46 GMT
+recorded_with: VCR 3.0.0

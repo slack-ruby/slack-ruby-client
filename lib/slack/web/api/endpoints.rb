@@ -26,6 +26,7 @@ module Slack
       module Endpoints
         include Slack::Web::Api::Mixins::Channels
         include Slack::Web::Api::Mixins::Users
+        include Slack::Web::Api::Mixins::Groups
 
         include Api
         include Auth
