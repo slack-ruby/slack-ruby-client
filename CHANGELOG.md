@@ -1,3 +1,7 @@
+### 0.5.5 (Next)
+
+* Your contribution here.
+
 ### 0.5.4 (1/23/2016)
 
 * [#45](https://github.com/dblock/slack-ruby-client/issues/45): Added `channels_id`, `groups_id` and `users_id` - [@dblock](https://github.com/dblock).
