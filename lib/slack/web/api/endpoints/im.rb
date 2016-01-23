@@ -14,7 +14,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.close.json
           def im_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('im.close', options)
           end
 
@@ -37,7 +37,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.history.json
           def im_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('im.history', options)
           end
 
@@ -62,7 +62,7 @@ module Slack
           def im_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('im.mark', options)
           end
 
@@ -75,7 +75,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im.open.json
           def im_open(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('im.open', options)
           end
         end

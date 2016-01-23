@@ -23,7 +23,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.add.json
           def reactions_add(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('reactions.add', options)
           end
 
@@ -43,7 +43,7 @@ module Slack
           # @see https://api.slack.com/methods/reactions.get
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.get.json
           def reactions_get(options = {})
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('reactions.get', options)
           end
 
@@ -57,7 +57,7 @@ module Slack
           # @see https://api.slack.com/methods/reactions.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.list.json
           def reactions_list(options = {})
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('reactions.list', options)
           end
 
@@ -79,7 +79,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.remove.json
           def reactions_remove(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('reactions.remove', options)
           end
         end

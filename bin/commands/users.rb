@@ -45,4 +45,13 @@ command 'users' do |g|
       puts JSON.dump($client.users_setPresence(options))
     end
   end
+
+  g.desc 'This method returns the ID of a team user.'
+  g.long_desc %( This method returns the ID of a team user. )
+  g.command 'id' do |c|
+    c.flag 'user', desc: 'User to get ID for, prefixed with @.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_id(options))
+    end
+  end
 end

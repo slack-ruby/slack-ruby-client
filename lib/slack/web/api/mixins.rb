@@ -1,2 +1,2 @@
-require 'slack/web/api/mixins/channel'
-require 'slack/web/api/mixins/user'
+require 'slack/web/api/mixins/channels.id'
+require 'slack/web/api/mixins/users.id'

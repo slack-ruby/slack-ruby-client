@@ -73,7 +73,7 @@ module Slack
           # @see https://api.slack.com/methods/files.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.list.json
           def files_list(options = {})
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('files.list', options)
           end
 

@@ -37,7 +37,7 @@ module Slack
           # @see https://api.slack.com/methods/team.integrationLogs
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team.integrationLogs.json
           def team_integrationLogs(options = {})
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('team.integrationLogs', options)
           end
         end

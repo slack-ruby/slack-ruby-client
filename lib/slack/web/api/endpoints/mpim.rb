@@ -14,7 +14,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim.close.json
           def mpim_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('mpim.close', options)
           end
 
@@ -37,7 +37,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim.history.json
           def mpim_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('mpim.history', options)
           end
 
@@ -62,7 +62,7 @@ module Slack
           def mpim_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('mpim.mark', options)
           end
 

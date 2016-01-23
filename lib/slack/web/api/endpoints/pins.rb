@@ -21,7 +21,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/pins.add.json
           def pins_add(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('pins.add', options)
           end
 
@@ -34,7 +34,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/pins.list.json
           def pins_list(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('pins.list', options)
           end
 
@@ -54,7 +54,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/pins.remove.json
           def pins_remove(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('pins.remove', options)
           end
         end

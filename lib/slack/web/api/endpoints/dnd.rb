@@ -31,7 +31,7 @@ module Slack
           # @see https://api.slack.com/methods/dnd.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd.info.json
           def dnd_info(options = {})
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('dnd.info', options)
           end
 

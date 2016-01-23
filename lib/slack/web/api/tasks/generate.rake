@@ -22,7 +22,10 @@ namespace :slack do
         end
 
         method_schema = JSON.parse(File.read('lib/slack/web/api/schema/method.json'))
-        data = Dir.glob('lib/slack/web/api/slack-api-ref/methods/**/*.json').each_with_object({}) do |path, result|
+        data = [
+          Dir.glob('lib/slack/web/api/slack-api-ref/methods/**/*.json'),
+          Dir.glob('lib/slack/web/api/mixins/**/*.json')
+        ].flatten.each_with_object({}) do |path, result|
           name = File.basename(path, '.json')
           prefix, name = name.split('.')
           result[prefix] ||= {}

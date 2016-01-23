@@ -15,7 +15,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.getPresence.json
           def users_getPresence(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.getPresence', options)
           end
 
@@ -28,7 +28,7 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.info.json
           def users_info(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
-            options = options.merge(user: get_user_id(options[:user])) if options[:user]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.info', options)
           end
 

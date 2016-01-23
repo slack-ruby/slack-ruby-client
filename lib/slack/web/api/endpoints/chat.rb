@@ -17,7 +17,7 @@ module Slack
           def chat_delete(options = {})
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('chat.delete', options)
           end
 
@@ -81,7 +81,7 @@ module Slack
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
-            options = options.merge(channel: get_channel_id(options[:channel])) if options[:channel]
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('chat.update', options)
           end
         end
