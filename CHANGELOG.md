@@ -1,5 +1,6 @@
 ### 0.5.5 (Next)
 
+* [#52](https://github.com/dblock/slack-ruby-client/issues/52): Added `users_search` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.4 (1/23/2016)

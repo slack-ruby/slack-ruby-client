@@ -17,6 +17,7 @@ require 'slack/web/faraday/request'
 require 'slack/web/api/mixins'
 require 'slack/web/api/endpoints'
 require 'slack/web/client'
+require 'picky'
 
 # RealTime API
 require 'slack/real_time/concurrency'

@@ -127,6 +127,14 @@ client.users_info(user: 'U092BDCLV') # calls users_info
 client.users_info(user: '@dblock') # calls users_list followed by users_info
 ```
 
+### Search for a User
+
+Constructs an in-memory index of users and searches it.
+
+```ruby
+client.users_search(user: 'dblock')
+```
+
 #### Other
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.

@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'json'
   s.add_dependency 'websocket-driver'
   s.add_dependency 'gli'
+  s.add_dependency 'picky'
   s.add_development_dependency 'erubis'
   s.add_development_dependency 'json-schema'
   s.add_development_dependency 'rake'

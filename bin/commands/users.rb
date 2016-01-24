@@ -54,4 +54,13 @@ command 'users' do |g|
       puts JSON.dump($client.users_id(options))
     end
   end
+
+  g.desc 'This method searches for users.'
+  g.long_desc %( This method searches for users. )
+  g.command 'search' do |c|
+    c.flag 'user', desc: 'User to search for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_search(options))
+    end
+  end
 end

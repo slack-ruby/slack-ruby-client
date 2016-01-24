@@ -13,5 +13,11 @@ RSpec.describe Slack::Web::Api::Endpoints::Users do
       json = client.users_info(user: '@aws')
       expect(json['user']['name']).to eq 'aws'
     end
+    it 'search', vcr: { cassette_name: 'web/users_info' } do
+      json = client.users_search(user: 'aws')
+      expect(json['ok']).to be true
+      expect(json['members'].size).to eq 1
+      expect(json['members'].first['name']).to eq 'aws'
+    end
   end
 end

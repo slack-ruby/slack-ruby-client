@@ -13,7 +13,8 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
     allow(subject).to receive(:users_list).and_return(
       'members' => [{
         'id' => 'UDEADBEEF',
-        'name' => 'aws'
+        'name' => 'aws',
+        'profile' => {}
       }]
     )
   end
@@ -26,6 +27,11 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
     end
     it 'fails with an exception' do
       expect { subject.users_id(user: '@foo') }.to raise_error Slack::Web::Api::Error, 'user_not_found'
+    end
+  end
+  context '#users_search' do
+    it 'finds a user' do
+      expect(subject.users_search(user: 'aws')).to eq('ok' => true, 'members' => [{ 'id' => 'UDEADBEEF', 'name' => 'aws', 'profile' => {} }])
     end
   end
 end
