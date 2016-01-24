@@ -43,4 +43,4 @@ module Slack
       end
     end
   end
-end
+end if defined?(Picky)

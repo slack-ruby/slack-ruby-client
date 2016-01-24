@@ -33,5 +33,5 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
     it 'finds a user' do
       expect(subject.users_search(user: 'aws')).to eq('ok' => true, 'members' => [{ 'id' => 'UDEADBEEF', 'name' => 'aws', 'profile' => {} }])
     end
-  end
+  end if defined?(Picky)
 end

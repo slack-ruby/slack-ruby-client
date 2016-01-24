@@ -9,6 +9,11 @@ require 'faraday'
 require 'faraday_middleware'
 require 'json'
 require 'logger'
+begin
+  require 'picky'
+rescue LoadError
+  # ignore, only used in users_search
+end
 require 'slack/web/config'
 require 'slack/web/api/error'
 require 'slack/web/faraday/response/raise_error'
@@ -17,7 +22,6 @@ require 'slack/web/faraday/request'
 require 'slack/web/api/mixins'
 require 'slack/web/api/endpoints'
 require 'slack/web/client'
-require 'picky'
 
 # RealTime API
 require 'slack/real_time/concurrency'

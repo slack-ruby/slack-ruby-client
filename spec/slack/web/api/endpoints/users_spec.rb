@@ -18,6 +18,6 @@ RSpec.describe Slack::Web::Api::Endpoints::Users do
       expect(json['ok']).to be true
       expect(json['members'].size).to eq 1
       expect(json['members'].first['name']).to eq 'aws'
-    end
+    end if defined?(Picky)
   end
 end

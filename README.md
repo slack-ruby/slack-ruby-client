@@ -129,7 +129,7 @@ client.users_info(user: '@dblock') # calls users_list followed by users_info
 
 ### Search for a User
 
-Constructs an in-memory index of users and searches it.
+Constructs an in-memory index of users and searches it. If you want to use this functionality, add the [picky](https://github.com/floere/picky) gem to your project's Gemfile.
 
 ```ruby
 client.users_search(user: 'dblock')
