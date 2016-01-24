@@ -32,7 +32,7 @@ module Slack
               )
               index.add(user)
             end
-            ids = Picky::Search.new(index).search(query).ids.uniq
+            ids = Picky::Search.new(index).search(query, 5, 0, unique: true).ids
             results = ids.map { |id| members[id] }
             {
               'ok' => true,
