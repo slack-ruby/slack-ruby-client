@@ -35,12 +35,18 @@ namespace :slack do
         end
 
         method_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method.erb'))
+        method_spec_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method_spec.erb'))
         command_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/command.erb'))
         data.each_with_index do |(group, names), index|
           printf "%2d/%2d %10s %s\n", index, data.size, group, names.keys
           # method
           rendered_method = method_template.result(group: group, names: names)
           File.write "lib/slack/web/api/endpoints/#{group}.rb", rendered_method
+          custom_spec_exists = File.exist?("spec/slack/web/api/endpoints/custom_specs/#{group}_spec.rb")
+          unless custom_spec_exists
+            rendered_method_spec = method_spec_template.result(group: group, names: names)
+            File.write "spec/slack/web/api/endpoints/#{group}_spec.rb", rendered_method_spec
+          end
           Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
             puts "- patching #{patch}"
             system("git apply #{patch}") || fail('failed to apply patch')
