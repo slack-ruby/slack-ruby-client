@@ -1,6 +1,8 @@
 module Slack
   module RealTime
     class Client
+      extend Forwardable
+
       class ClientNotStartedError < StandardError; end
       class ClientAlreadyStartedError < StandardError; end
 
@@ -9,7 +11,14 @@ module Slack
       include Api::Message
       include Api::Typing
 
+      @events = {}
+
+      class << self
+        attr_accessor :events
+      end
+
       attr_accessor :web_client
+      attr_accessor :store
       attr_accessor(*Config::ATTRIBUTES)
 
       def initialize(options = {})
@@ -21,7 +30,9 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token)
       end
 
-      [:url, :team, :self, :users, :channels, :groups, :ims, :bots].each do |attr|
+      def_delegators :@store, :users
+
+      [:url, :team, :self, :channels, :groups, :ims, :bots].each do |attr|
         define_method attr do
           @options[attr.to_s] if @options
         end
@@ -72,7 +83,7 @@ module Slack
       def build_socket
         fail ClientAlreadyStartedError if started?
         @options = web_client.rtm_start
-
+        @store = Slack::RealTime::Store::Memory.new(@options)
         socket_class.new(@options.fetch('url'), socket_options)
       end
 
@@ -140,7 +151,12 @@ module Slack
         data = JSON.parse(event.data)
         type = data['type']
         return false unless type
-        callbacks = self.callbacks[type.to_s]
+        type = type.to_s
+        # event handlers
+        handler = Slack::RealTime::Client.events[type]
+        handler.call(self, data) if handler
+        # callbacks
+        callbacks = self.callbacks[type]
         return false unless callbacks
         callbacks.each do |c|
           c.call(data)
