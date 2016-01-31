@@ -11,9 +11,13 @@ Upon a successful `rtm.start` the RealTime client keeps a local cache of objects
 
 The `client.self` object is now a `Slack::RealTime::Models::User`, which is a child of `Hash`, so no code changes should be required.
 
-##### client.users
+##### client.team
 
-The `client.users` collection has been changed from `Array` to `Hash`, with user ID as key. Replace any code iterating over the array with `client.users.values.each` or `client.users.each_pair`.
+The `client.team` object is now a `Slack::RealTime::Models::Team`, which is a child of `Hash`, so no code changes should be required.
+
+##### client .users, .channels, .groups, .ims
+
+The `client.users`, `.channels`, `.groups` and `.ims` collections have been changed from `Array` to `Hash`, with object ID as key. Replace any code iterating over the array, eg. `client.users.values.each` or `client.channels.each_pair { |id, channel| ... }`.
 
 ### Upgrading to >= 0.5.0
 

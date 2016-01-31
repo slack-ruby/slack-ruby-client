@@ -19,6 +19,7 @@ module Slack
 
       attr_accessor :web_client
       attr_accessor :store
+      attr_accessor :url
       attr_accessor(*Config::ATTRIBUTES)
 
       def initialize(options = {})
@@ -30,13 +31,7 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token)
       end
 
-      def_delegators :@store, :users, :self
-
-      [:url, :team, :channels, :groups, :ims, :bots].each do |attr|
-        define_method attr do
-          @options[attr.to_s] if @options
-        end
-      end
+      def_delegators :@store, :users, :self, :channels, :team, :groups, :ims, :bots
 
       def on(type, &block)
         type = type.to_s
@@ -82,9 +77,10 @@ module Slack
       # @return [Slack::RealTime::Socket]
       def build_socket
         fail ClientAlreadyStartedError if started?
-        @options = web_client.rtm_start
-        @store = Slack::RealTime::Store::Memory.new(@options)
-        socket_class.new(@options.fetch('url'), socket_options)
+        data = web_client.rtm_start
+        @url = data['url']
+        @store = Slack::RealTime::Store::Memory.new(data)
+        socket_class.new(@url, socket_options)
       end
 
       def socket_options
