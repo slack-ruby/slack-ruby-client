@@ -7,6 +7,10 @@ Upgrading Slack-Ruby-Client
 
 Upon a successful `rtm.start` the RealTime client keeps a local cache of objects, including `self` or `users`. It will now also track changes to these objects. The following changes have been made to the data structures.
 
+##### client.self
+
+The `client.self` object is now a `Slack::RealTime::Models::User`, which is a child of `Hash`, so no code changes should be required.
+
 ##### client.users
 
 The `client.users` collection has been changed from `Array` to `Hash`, with user ID as key. Replace any code iterating over the array with `client.users.values.each` or `client.users.each_pair`.

@@ -30,9 +30,9 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token)
       end
 
-      def_delegators :@store, :users
+      def_delegators :@store, :users, :self
 
-      [:url, :team, :self, :channels, :groups, :ims, :bots].each do |attr|
+      [:url, :team, :channels, :groups, :ims, :bots].each do |attr|
         define_method attr do
           @options[attr.to_s] if @options
         end

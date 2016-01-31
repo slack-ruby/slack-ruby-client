@@ -205,7 +205,7 @@ The client exposes and maintains a local store with the properties of [rtm.start
 property | description
 ---------|-------------------------------------------------------------------------------------------------
 url      | A WebSocket Message Server URL.
-self     | Details on the authenticated user.
+self     | The authenticated bot user.
 team     | Details on the authenticated user's team.
 users    | A hash of user objects by user ID.
 channels | A list of channel objects, one for every channel visible to the authenticated user.
