@@ -16,4 +16,7 @@ RuboCop::RakeTask.new
 
 task default: [:rubocop, :spec]
 
-load 'slack/web/api/tasks/generate.rake'
+load 'tasks/git.rake'
+load 'tasks/web.rake'
+load 'tasks/real_time.rake'
+load 'tasks/update.rake'
