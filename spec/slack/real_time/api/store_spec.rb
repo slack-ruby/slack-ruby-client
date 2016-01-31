@@ -46,5 +46,28 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         expect(client.self['prefs']['push_sound']).to eq 'updated.mp3'
       end
     end
+    describe 'presence_change' do
+      it 'updates user in store' do
+        expect(client.users['U07KECJ77']['presence']).to eq 'away'
+        event = Slack::RealTime::Event.new(
+          'type' => 'presence_change',
+          'user' => 'U07KECJ77',
+          'presence' => 'updated'
+        )
+        client.send(:dispatch, event)
+        expect(client.users['U07KECJ77']['presence']).to eq 'updated'
+      end
+    end
+    describe 'manual_presence_change' do
+      it 'updates user in store' do
+        expect(client.self['presence']).to eq 'away'
+        event = Slack::RealTime::Event.new(
+          'type' => 'manual_presence_change',
+          'presence' => 'updated'
+        )
+        client.send(:dispatch, event)
+        expect(client.self['presence']).to eq 'updated'
+      end
+    end
   end
 end
