@@ -5,7 +5,7 @@ Upgrading Slack-Ruby-Client
 
 #### Changes to API Response Data
 
-API responses in both Web and RealTime clients are now instances of [Slack::Messages::Message](lib/slack/messages/message), which provides method access to properties.
+API responses in both Web and RealTime clients are now instances of [Slack::Messages::Message](lib/slack/messages/message.rb), which provides method access to properties.
 
 Before:
 
