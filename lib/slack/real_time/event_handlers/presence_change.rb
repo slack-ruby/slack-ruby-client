@@ -6,7 +6,8 @@ module Slack
         # @see https://api.slack.com/events/presence_change
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/presence_change.json
         def self.call(client, data)
-          client.users[data['user']]['presence'] = data['presence']
+          user = client.users[data['user']]
+          user['presence'] = data['presence'] if user
         end
       end
     end
