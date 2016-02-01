@@ -5,9 +5,11 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
 
   context 'team' do
     it 'sets team data' do
+      expect(client.team['name']).to eq 'dblock'
       expect(client.team['domain']).to eq 'dblockdotorg'
       expect(client.team['email_domain']).to eq 'dblock.org'
       expect(client.team['prefs']['invites_only_admins']).to be true
+      expect(client.team['plan']).to eq ''
     end
   end
   describe 'team_domain_change' do
@@ -41,6 +43,26 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       )
       client.send(:dispatch, event)
       expect(client.team['prefs']['invites_only_admins']).to be false
+    end
+  end
+  describe 'team_rename' do
+    it 'updates team in store' do
+      event = Slack::RealTime::Event.new(
+        'type' => 'team_rename',
+        'name' => 'New Team Name Inc.'
+      )
+      client.send(:dispatch, event)
+      expect(client.team['name']).to eq 'New Team Name Inc.'
+    end
+  end
+  describe 'team_plan_change' do
+    it 'updates team in store' do
+      event = Slack::RealTime::Event.new(
+        'type' => 'team_plan_change',
+        'plan' => 'std'
+      )
+      client.send(:dispatch, event)
+      expect(client.team['plan']).to eq 'std'
     end
   end
 end
