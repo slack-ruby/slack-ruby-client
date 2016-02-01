@@ -1,32 +1,27 @@
 module Slack
   module RealTime
     class Store
-      attr_accessor :self_id
       attr_accessor :users
       attr_accessor :bots
       attr_accessor :channels
       attr_accessor :groups
-      attr_accessor :team
+      attr_accessor :teams
       attr_accessor :ims
 
       def self
         users[@self_id]
       end
 
+      def team
+        teams[@team_id]
+      end
+
       def initialize(attrs = {})
-        @self_id = attrs['self']['id']
-
-        @team = Models::Team.new(attrs['team'])
-
-        # users
-        @users = {}
-        attrs['users'].each do |data|
-          user = Models::User.new(data)
-          user.merge!(attrs['self']) if @self_id == user['id']
-          @users[data['id']] = user
-        end
+        @team_id = attrs['team']['id']
+        @teams = { @team_id => Models::Team.new(attrs['team']) }
 
         {
+          'users' => Models::User,
           'channels' => Models::Channel,
           'bots' => Models::Bot,
           'groups' => Models::Group,
@@ -37,6 +32,9 @@ module Slack
             instance_variable_get("@#{key}").send(:[]=, data['id'], klass.new(data))
           end
         end
+
+        @self_id = attrs['self']['id']
+        @users[@self_id].merge!(attrs['self'])
       end
     end
   end

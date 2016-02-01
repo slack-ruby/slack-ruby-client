@@ -1,6 +1,6 @@
 ### 0.6.0 (TBD)
 
-* [#54](https://github.com/dblock/slack-ruby-client/issues/54): RealTime client maintains a local store of team data - [@dblock](https://github.com/dblock).
+* [#54](https://github.com/dblock/slack-ruby-client/issues/54): RealTime client maintains a local store of team data for `client.team`, `.users`, `.channels` and `.groups` data - [@dblock](https://github.com/dblock).
 
 ### 0.5.5 (Next)
 

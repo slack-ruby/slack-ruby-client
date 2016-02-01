@@ -31,7 +31,7 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token)
       end
 
-      def_delegators :@store, :users, :self, :channels, :team, :groups, :ims, :bots
+      def_delegators :@store, :users, :self, :channels, :team, :teams, :groups, :ims, :bots
 
       def on(type, &block)
         type = type.to_s
