@@ -79,7 +79,7 @@ module Slack
         fail ClientAlreadyStartedError if started?
         data = web_client.rtm_start
         @url = data['url']
-        @store = Slack::RealTime::Store::Memory.new(data)
+        @store = Slack::RealTime::Store.new(data)
         socket_class.new(@url, socket_options)
       end
 
@@ -148,10 +148,16 @@ module Slack
         type = data['type']
         return false unless type
         type = type.to_s
-        # event handlers
-        handler = Slack::RealTime::Client.events[type]
+        run_handlers(type, data)
+        run_callbacks(type, data)
+      end
+
+      def run_handlers(type, data)
+        handler = self.class.events[type]
         handler.call(self, data) if handler
-        # callbacks
+      end
+
+      def run_callbacks(type, data)
         callbacks = self.callbacks[type]
         return false unless callbacks
         callbacks.each do |c|
