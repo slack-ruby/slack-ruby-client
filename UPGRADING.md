@@ -27,11 +27,11 @@ Upon a successful `rtm.start` the RealTime client keeps a local cache of objects
 
 ##### client.self
 
-The `client.self` object is now a `Slack::RealTime::Models::User`, which is a child of `Hash`, so no code changes should be required.
+The `client.self` object is now a `Slack::RealTime::Models::User`, which is a child of `Hashie::Mash`, so no code changes should be required.
 
 ##### client.team
 
-The `client.team` object is now a `Slack::RealTime::Models::Team`, which is a child of `Hash`, so no code changes should be required.
+The `client.team` object is now a `Slack::RealTime::Models::Team`, which is a child of `Hashie::Mash`, so no code changes should be required.
 
 ##### client .users, .channels, .groups, .ims
 
@@ -45,10 +45,10 @@ See [#55](https://github.com/dblock/slack-ruby-client/issues/55) for more inform
 
 Since 0.5.0 `Slack::RealTime::Client` supports [Celluloid](https://github.com/celluloid/celluloid) and no longer defaults to [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine). It will auto-detect one or the other depending on the gems in your Gemfile, which means you may need to add one or the other to your Gemfile.
 
-##### Faye::Websocket with Eventmachine
+##### Faye::WebSocket with Eventmachine
 
 ```
-gem 'faye-webSocket'
+gem 'faye-websocket'
 ```
 
 ##### Celluloid
@@ -57,7 +57,7 @@ gem 'faye-webSocket'
 gem 'celluloid-io'
 ```
 
-When in doubt, use Faye::WebSocket with Eventmachine.
+When in doubt, use `faye-websocket`.
 
 See [#5](https://github.com/dblock/slack-ruby-client/issues/5) for more information.
 
