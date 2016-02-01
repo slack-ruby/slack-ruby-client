@@ -61,27 +61,31 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           it 'sets team' do
             expect(client.team['domain']).to eq 'dblockdotorg'
           end
+          it 'sets teams' do
+            expect(client.teams.count).to eq 1
+            expect(client.teams.values.first).to eq client.team
+          end
           it 'sets self' do
             expect(client.self['id']).to eq 'U07518DTL'
           end
           it 'sets users' do
-            expect(client.users.count).to eq 7
-            expect(client.users.first['id']).to eq 'U07KECJ77'
+            expect(client.users.count).to eq 18
+            expect(client.users.values.first['id']).to eq 'U092BDCLV'
           end
           it 'sets channels' do
-            expect(client.channels.count).to eq 8
-            expect(client.channels.first['name']).to eq 'demo'
+            expect(client.channels.count).to eq 37
+            expect(client.channels.values.first['name']).to eq 'a1'
           end
           it 'sets ims' do
             expect(client.ims.count).to eq 2
-            expect(client.ims.first['user']).to eq 'USLACKBOT'
+            expect(client.ims.values.first['user']).to eq 'USLACKBOT'
           end
           it 'sets bots' do
-            expect(client.bots.count).to eq 5
-            expect(client.bots.first['name']).to eq 'bot'
+            expect(client.bots.count).to eq 16
+            expect(client.bots.values.first['name']).to eq 'bot'
           end
           it 'sets groups' do
-            expect(client.groups.count).to eq 0
+            expect(client.groups.count).to eq 1
           end
         end
         it 'uses web client to fetch url' do

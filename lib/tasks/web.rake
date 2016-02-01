@@ -5,12 +5,6 @@ require 'erubis'
 namespace :slack do
   namespace :web do
     namespace :api do
-      # update slack-api-ref from https://github.com/dblock/slack-api-ref
-      task :git_update do
-        sh 'git submodule update --init --recursive'
-        sh 'git submodule foreach git pull origin master'
-      end
-
       desc 'Update API.'
       task update: [:git_update] do
         group_schema = JSON.parse(File.read('lib/slack/web/api/schema/group.json'))

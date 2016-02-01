@@ -1,6 +1,8 @@
 module Slack
   module RealTime
     class Client
+      extend Forwardable
+
       class ClientNotStartedError < StandardError; end
       class ClientAlreadyStartedError < StandardError; end
 
@@ -9,7 +11,15 @@ module Slack
       include Api::Message
       include Api::Typing
 
+      @events = {}
+
+      class << self
+        attr_accessor :events
+      end
+
       attr_accessor :web_client
+      attr_accessor :store
+      attr_accessor :url
       attr_accessor(*Config::ATTRIBUTES)
 
       def initialize(options = {})
@@ -21,11 +31,7 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token)
       end
 
-      [:url, :team, :self, :users, :channels, :groups, :ims, :bots].each do |attr|
-        define_method attr do
-          @options[attr.to_s] if @options
-        end
-      end
+      def_delegators :@store, :users, :self, :channels, :team, :teams, :groups, :ims, :bots
 
       def on(type, &block)
         type = type.to_s
@@ -71,9 +77,10 @@ module Slack
       # @return [Slack::RealTime::Socket]
       def build_socket
         fail ClientAlreadyStartedError if started?
-        @options = web_client.rtm_start
-
-        socket_class.new(@options.fetch('url'), socket_options)
+        data = web_client.rtm_start
+        @url = data['url']
+        @store = Slack::RealTime::Store.new(data)
+        socket_class.new(@url, socket_options)
       end
 
       def socket_options
@@ -140,7 +147,18 @@ module Slack
         data = JSON.parse(event.data)
         type = data['type']
         return false unless type
-        callbacks = self.callbacks[type.to_s]
+        type = type.to_s
+        run_handlers(type, data)
+        run_callbacks(type, data)
+      end
+
+      def run_handlers(type, data)
+        handler = self.class.events[type]
+        handler.call(self, data) if handler
+      end
+
+      def run_callbacks(type, data)
+        callbacks = self.callbacks[type]
         return false unless callbacks
         callbacks.each do |c|
           c.call(data)

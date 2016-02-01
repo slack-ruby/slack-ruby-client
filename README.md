@@ -200,18 +200,20 @@ You can send a ping with `ping`.
 client.ping
 ```
 
-The client exposes the properties of [rtm.start](https://api.slack.com/methods/rtm.start) upon a successful connection.
+The client exposes and maintains a local store with the properties of [rtm.start](https://api.slack.com/methods/rtm.start) upon a successful connection.
 
 property | description
 ---------|-------------------------------------------------------------------------------------------------
 url      | A WebSocket Message Server URL.
-self     | Details on the authenticated user.
+self     | The authenticated bot user.
 team     | Details on the authenticated user's team.
-users    | A list of user objects, one for every member of the team.
+users    | A hash of user objects by user ID.
 channels | A list of channel objects, one for every channel visible to the authenticated user.
 groups   | A list of group objects, one for every group the authenticated user is in.
 ims      | A list of IM objects, one for every direct message channel visible to the authenticated user.
 bots     | Details of the integrations set up on this team.
+
+The RealTime client tracks changes, such as users being renamed, added or deleted, therefore `client.users` is always up-to-date.
 
 You can configure the RealTime client either globally or via the initializer.
 
