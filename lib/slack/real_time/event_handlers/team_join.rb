@@ -6,7 +6,7 @@ module Slack
         # @see https://api.slack.com/events/team_join
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/team_join.json
         def self.call(client, data)
-          client.users[data['user']['id']] = Models::User.new(data['user'])
+          client.users[data.user.id] = Models::User.new(data.user)
         end
       end
     end

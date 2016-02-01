@@ -13,8 +13,8 @@ module Slack
             throw ArgumentError.new('Required arguments :user missing') if name.nil?
             return { 'ok' => true, 'user' => { 'id' => name } } unless name[0] == '@'
             users_list.tap do |list|
-              list['members'].each do |user|
-                return { 'ok' => true, 'user' => { 'id' => user['id'] } } if user['name'] == name[1..-1]
+              list.members.each do |user|
+                return Slack::Messages::Message.new('ok' => true, 'user' => { 'id' => user.id }) if user.name == name[1..-1]
               end
             end
             fail Slack::Web::Api::Error, 'user_not_found'

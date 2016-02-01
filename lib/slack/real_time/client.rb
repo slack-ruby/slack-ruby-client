@@ -77,8 +77,8 @@ module Slack
       # @return [Slack::RealTime::Socket]
       def build_socket
         fail ClientAlreadyStartedError if started?
-        data = web_client.rtm_start
-        @url = data['url']
+        data = Slack::Messages::Message.new(web_client.rtm_start)
+        @url = data.url
         @store = Slack::RealTime::Store.new(data)
         socket_class.new(@url, socket_options)
       end
@@ -144,8 +144,8 @@ module Slack
 
       def dispatch(event)
         return false unless event.data
-        data = JSON.parse(event.data)
-        type = data['type']
+        data = Slack::Messages::Message.new(JSON.parse(event.data))
+        type = data.type
         return false unless type
         type = type.to_s
         run_handlers(type, data)

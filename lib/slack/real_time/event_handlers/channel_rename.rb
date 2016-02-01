@@ -6,8 +6,8 @@ module Slack
         # @see https://api.slack.com/events/channel_rename
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/channel_rename.json
         def self.call(client, data)
-          channel = client.channels[data['channel']['id']]
-          channel['name'] = data['channel']['name'] if channel
+          channel = client.channels[data.channel.id]
+          channel.name = data.channel.name if channel
         end
       end
     end

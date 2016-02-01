@@ -20,24 +20,21 @@ module Slack
               category :real_name
               category :email
             end
-            members = users_list['members']
+            members = users_list.members
             members.each_with_index do |member, id|
               user = Member.new(
                 id,
-                member['name'],
-                member['profile']['first_name'],
-                member['profile']['last_name'],
-                member['profile']['real_name'],
-                member['profile']['email']
+                member.name,
+                member.profile.first_name,
+                member.profile.last_name,
+                member.profile.real_name,
+                member.profile.email
               )
               index.add(user)
             end
             ids = Picky::Search.new(index).search(query, 5, 0, unique: true).ids
             results = ids.map { |id| members[id] }
-            {
-              'ok' => true,
-              'members' => results
-            }
+            Slack::Messages::Message.new('ok' => true, 'members' => results)
           end
         end
       end

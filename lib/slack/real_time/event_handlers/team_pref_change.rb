@@ -6,7 +6,7 @@ module Slack
         # @see https://api.slack.com/events/team_pref_change
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/team_pref_change.json
         def self.call(client, data)
-          client.team['prefs'][data['name']] = data['value']
+          client.team.prefs[data.name] = data.value
         end
       end
     end

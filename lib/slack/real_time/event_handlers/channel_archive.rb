@@ -6,8 +6,8 @@ module Slack
         # @see https://api.slack.com/events/channel_archive
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/channel_archive.json
         def self.call(client, data)
-          channel = client.channels[data['channel']]
-          channel['is_archived'] = true if channel
+          channel = client.channels[data.channel]
+          channel.is_archived = true if channel
         end
       end
     end

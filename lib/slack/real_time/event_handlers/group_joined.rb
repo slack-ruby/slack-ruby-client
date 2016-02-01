@@ -6,7 +6,7 @@ module Slack
         # @see https://api.slack.com/events/group_joined
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/group_joined.json
         def self.call(client, data)
-          client.groups[data['channel']['id']] = Models::Channel.new(data['channel'])
+          client.groups[data.channel.id] = Models::Channel.new(data.channel)
         end
       end
     end

@@ -5,7 +5,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Channels do
   context 'channels' do
     it 'info', vcr: { cassette_name: 'web/channels_info' } do
       json = client.channels_info(channel: '#general')
-      expect(json['channel']['name']).to eq 'general'
+      expect(json.channel.name).to eq 'general'
     end
   end
 end

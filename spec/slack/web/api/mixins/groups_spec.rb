@@ -10,12 +10,12 @@ RSpec.describe Slack::Web::Api::Mixins::Groups do
     klass.new
   end
   before do
-    allow(subject).to receive(:groups_list).and_return(
-      'groups' => [{
-        'id' => 'CDEADBEEF',
-        'name' => 'general'
-      }]
-    )
+    allow(subject).to receive(:groups_list).and_return(Slack::Messages::Message.new(
+                                                         'groups' => [{
+                                                           'id' => 'CDEADBEEF',
+                                                           'name' => 'general'
+                                                         }]
+    ))
   end
   context '#groups_id' do
     it 'leaves groups specified by ID alone' do

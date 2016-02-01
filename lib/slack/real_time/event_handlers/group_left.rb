@@ -6,8 +6,8 @@ module Slack
         # @see https://api.slack.com/events/group_left
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/group_left.json
         def self.call(client, data)
-          channel = client.groups[data['channel']]
-          channel['members'].delete(client.self['id']) if channel && channel.key?('members')
+          channel = client.groups[data.channel]
+          channel.members.delete(client.self.id) if channel && channel.key?('members')
         end
       end
     end

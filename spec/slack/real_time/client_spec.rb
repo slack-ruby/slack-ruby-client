@@ -59,14 +59,14 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             expect(client.url).to eq url
           end
           it 'sets team' do
-            expect(client.team['domain']).to eq 'dblockdotorg'
+            expect(client.team.domain).to eq 'dblockdotorg'
           end
           it 'sets teams' do
             expect(client.teams.count).to eq 1
             expect(client.teams.values.first).to eq client.team
           end
           it 'sets self' do
-            expect(client.self['id']).to eq 'U07518DTL'
+            expect(client.self.id).to eq 'U07518DTL'
           end
           it 'sets users' do
             expect(client.users.count).to eq 18

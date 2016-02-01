@@ -6,7 +6,7 @@ module Slack
         # @see https://api.slack.com/events/email_domain_changed
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/email_domain_changed.json
         def self.call(client, data)
-          client.team['email_domain'] = data['email_domain']
+          client.team.email_domain = data.email_domain
         end
       end
     end

@@ -13,8 +13,8 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if name.nil?
             return { 'ok' => true, 'group' => { 'id' => name } } unless name[0] == '#'
             groups_list.tap do |list|
-              list['groups'].each do |group|
-                return { 'ok' => true, 'group' => { 'id' => group['id'] } } if group['name'] == name[1..-1]
+              list.groups.each do |group|
+                return Slack::Messages::Message.new('ok' => true, 'group' => { 'id' => group.id }) if group.name == name[1..-1]
               end
             end
             fail Slack::Web::Api::Error, 'channel_not_found'

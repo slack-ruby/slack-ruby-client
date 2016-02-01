@@ -6,7 +6,7 @@ module Slack
         # @see https://api.slack.com/events/manual_presence_change
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/manual_presence_change.json
         def self.call(client, data)
-          client.self['presence'] = data['presence']
+          client.self.presence = data.presence
         end
       end
     end

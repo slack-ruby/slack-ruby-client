@@ -29,7 +29,7 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
 
   before do
     client.on :hello do
-      logger.info "Successfully connected, welcome '#{client.self['name']}' to the '#{client.team['name']}' team at https://#{client.team['domain']}.slack.com."
+      logger.info "Successfully connected, welcome '#{client.self.name}' to the '#{client.team.name}' team at https://#{client.team.domain}.slack.com."
     end
 
     client.on :close do
@@ -69,7 +69,7 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
       start_server
     end
 
-    let(:channel) { "@#{client.self['name']}" }
+    let(:channel) { "@#{client.self.name}" }
 
     it 'responds to message' do
       message = SecureRandom.hex
@@ -77,9 +77,9 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
       client.on :message do |data|
         logger.debug data
         # concurrent execution of tests causes messages to arrive in any order
-        next unless data['text'] == message
-        expect(data['text']).to eq message
-        expect(data['subtype']).to eq 'bot_message'
+        next unless data.text == message
+        expect(data.text).to eq message
+        expect(data.subtype).to eq 'bot_message'
         logger.debug 'client.stop!'
         expect(client.started?).to be true
         client.stop!

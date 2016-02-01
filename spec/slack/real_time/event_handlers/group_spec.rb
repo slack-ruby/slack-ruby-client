@@ -19,41 +19,41 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       group = client.groups['CDEADBEEF']
       expect(group).to_not be nil
-      expect(group['name']).to eq 'beef'
+      expect(group.name).to eq 'beef'
     end
     it 'group_left' do
       group = client.groups['G0K7EV5A7']
-      expect(group['members']).to include client.self['id']
+      expect(group.members).to include client.self.id
       event = Slack::RealTime::Event.new(
         'type' => 'group_left',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group['members']).to_not include client.self['id']
+      expect(group.members).to_not include client.self.id
     end
     it 'group_archive' do
       group = client.groups['G0K7EV5A7']
-      expect(group['is_archived']).to be false
+      expect(group.is_archived).to be false
       event = Slack::RealTime::Event.new(
         'type' => 'group_archive',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group['is_archived']).to be true
+      expect(group.is_archived).to be true
     end
     it 'group_unarchive' do
       group = client.groups['G0K7EV5A7']
-      group['is_archived'] = true
+      group.is_archived = true
       event = Slack::RealTime::Event.new(
         'type' => 'group_unarchive',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group['is_archived']).to be false
+      expect(group.is_archived).to be false
     end
     it 'group_rename' do
       group = client.groups['G0K7EV5A7']
-      expect(group['name']).to eq 'mpdm-dblock--rubybot--player1-1'
+      expect(group.name).to eq 'mpdm-dblock--rubybot--player1-1'
       event = Slack::RealTime::Event.new(
         'type' => 'group_rename',
         'channel' => {
@@ -63,7 +63,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         }
       )
       client.send(:dispatch, event)
-      expect(group['name']).to eq 'updated'
+      expect(group.name).to eq 'updated'
     end
   end
 end

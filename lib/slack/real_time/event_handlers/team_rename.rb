@@ -6,7 +6,7 @@ module Slack
         # @see https://api.slack.com/events/team_rename
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/team_rename.json
         def self.call(client, data)
-          client.team['name'] = data['name']
+          client.team.name = data.name
         end
       end
     end

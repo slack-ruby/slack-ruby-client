@@ -16,9 +16,9 @@ module Slack
         teams[@team_id]
       end
 
-      def initialize(attrs = {})
-        @team_id = attrs['team']['id']
-        @teams = { @team_id => Models::Team.new(attrs['team']) }
+      def initialize(attrs)
+        @team_id = attrs.team.id
+        @teams = { @team_id => Models::Team.new(attrs.team) }
 
         {
           'users' => Models::User,
@@ -29,12 +29,12 @@ module Slack
         }.each_pair do |key, klass|
           instance_variable_set "@#{key}", {}
           attrs[key].each do |data|
-            instance_variable_get("@#{key}").send(:[]=, data['id'], klass.new(data))
+            instance_variable_get("@#{key}").send(:[]=, data.id, klass.new(data))
           end
         end
 
-        @self_id = attrs['self']['id']
-        @users[@self_id].merge!(attrs['self'])
+        @self_id = attrs.self.id
+        @users[@self_id].merge!(attrs.self)
       end
     end
   end

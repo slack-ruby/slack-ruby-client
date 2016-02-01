@@ -34,7 +34,7 @@ describe Slack do
     end
     context 'good auth' do
       it 'succeeds' do
-        json = JSON.parse `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token auth test 2>&1`
+        json = Slack::Messages::Message.new(JSON.parse(`"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token auth test 2>&1`))
         expect(json).to eq(
           'ok' => true,
           'url' => 'https://rubybot.slack.com/',
@@ -43,16 +43,16 @@ describe Slack do
           'team_id' => 'TDEADBEEF',
           'user_id' => 'UBAADFOOD'
         )
-        expect(json['ok']).to be true
+        expect(json.ok).to be true
       end
     end
   end
   describe '#users' do
     it 'list' do
-      json = JSON.parse `"#{slack}" --vcr-cassette-name=web/users_list --slack-api-token=token users list --presence=true 2>&1`
-      expect(json['ok']).to be true
-      expect(json['members'].size).to eq 9
-      expect(json['members'].first['presence']).to eq 'away'
+      json = Slack::Messages::Message.new(JSON.parse(`"#{slack}" --vcr-cassette-name=web/users_list --slack-api-token=token users list --presence=true 2>&1`))
+      expect(json.ok).to be true
+      expect(json.members.size).to eq 9
+      expect(json.members.first['presence']).to eq 'away'
     end
   end
 end

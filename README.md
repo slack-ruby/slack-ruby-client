@@ -9,6 +9,8 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ![](slack.png)
 
+# IMPORTANT: 0.6.0 on HEAD has major interface changes, see [docs for last stable release, v0.5.4](https://github.com/dblock/slack-ruby-client/blob/v0.5.4/README.md).
+
 ## Useful to Me?
 
 * This piece of the puzzle will help you send messages to Slack via the Web API and send and receive messages via the Real Time API.
@@ -83,9 +85,9 @@ See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 List channels with [channels_list](https://api.slack.com/methods/channels.list).
 
 ```ruby
-channels = client.channels_list['channels']
+channels = client.channels_list.channels
 
-general_channel = channels.detect { |c| c['name'] == 'general' }
+general_channel = channels.detect { |c| c.name == 'general' }
 ```
 
 #### Upload a File
@@ -173,15 +175,15 @@ The Real Time Messaging API is a WebSocket-based API that allows you to receive 
 client = Slack::RealTime::Client.new
 
 client.on :hello do
-  puts "Successfully connected, welcome '#{client.self['name']}' to the '#{client.team['name']}' team at https://#{client.team['domain']}.slack.com."
+  puts "Successfully connected, welcome '#{client.self.name}' to the '#{client.team.name}' team at https://#{client.team.domain}.slack.com."
 end
 
 client.on :message do |data|
-  case data['text']
+  case data.text
   when 'bot hi' then
-    client.message channel: data['channel'], text: "Hi <@#{data['user']}>!"
+    client.message channel: data.channel, text: "Hi <@#{data.user}>!"
   when /^bot/ then
-    client.message channel: data['channel'], text: "Sorry <@#{data['user']}>, what?"
+    client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
   end
 end
 
@@ -191,7 +193,7 @@ client.start!
 You can send typing indicators with `typing`.
 
 ```ruby
-client.typing channel: data['channel']
+client.typing channel: data.channel
 ```
 
 You can send a ping with `ping`.
@@ -237,7 +239,7 @@ websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start), configure Web client options via `Slack::Web::Client.configure` as described above.
 
-See a fullly working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
+See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
 
 ![](examples/hi_real_time/hi.gif)
 
@@ -249,11 +251,11 @@ Since the Web client is used to obtain the RealTime client's WebSocket URL, you 
 client = Slack::RealTime::Client.new
 
 client.on :message do |data|
-  case data['text']
+  case data.text
   when 'bot hi' then
-    client.web_client.chat_postMessage channel: data['channel'], text: "Hi <@#{data['user']}>!"
+    client.web_client.chat_postMessage channel: data.channel, text: "Hi <@#{data.user}>!"
   when /^bot/ then
-    client.web_client.chat_postMessage channel: data['channel'], text: "Sorry <@#{data['user']}>, what?"
+    client.web_client.chat_postMessage channel: data.channel, text: "Sorry <@#{data.user}>, what?"
   end
 end
 

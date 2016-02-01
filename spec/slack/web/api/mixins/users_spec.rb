@@ -10,13 +10,13 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
     klass.new
   end
   before do
-    allow(subject).to receive(:users_list).and_return(
-      'members' => [{
-        'id' => 'UDEADBEEF',
-        'name' => 'aws',
-        'profile' => {}
-      }]
-    )
+    allow(subject).to receive(:users_list).and_return(Slack::Messages::Message.new(
+                                                        'members' => [{
+                                                          'id' => 'UDEADBEEF',
+                                                          'name' => 'aws',
+                                                          'profile' => {}
+                                                        }]
+    ))
   end
   context '#users_id' do
     it 'leaves users specified by ID alone' do

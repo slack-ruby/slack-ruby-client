@@ -2,6 +2,8 @@ require 'slack/version'
 require 'slack/config'
 
 # Messages
+require 'hashie'
+require 'slack/messages/message'
 require 'slack/messages/formatting'
 
 # Web API
