@@ -27,6 +27,7 @@ module Slack
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
           send("#{key}=", options[key] || Slack::RealTime.config.send(key))
         end
+        @store_class = options.key?(:store_class) ? options[:store_class] : Slack::RealTime::Store
         @token ||= Slack.config.token
         @web_client = Slack::Web::Client.new(token: token)
       end
@@ -79,7 +80,7 @@ module Slack
         fail ClientAlreadyStartedError if started?
         data = Slack::Messages::Message.new(web_client.rtm_start)
         @url = data.url
-        @store = Slack::RealTime::Store.new(data)
+        @store = @store_class.new(data) if @store_class
         socket_class.new(@url, socket_options)
       end
 
@@ -148,7 +149,7 @@ module Slack
         type = data.type
         return false unless type
         type = type.to_s
-        run_handlers(type, data)
+        run_handlers(type, data) if @store
         run_callbacks(type, data)
       end
 

@@ -202,7 +202,7 @@ You can send a ping with `ping`.
 client.ping
 ```
 
-The client exposes and maintains a local store with the properties of [rtm.start](https://api.slack.com/methods/rtm.start) upon a successful connection.
+By default, the RealTime client exposes and maintains a local store with the properties of [rtm.start](https://api.slack.com/methods/rtm.start) upon a successful connection.
 
 property | description
 ---------|-------------------------------------------------------------------------------------------------
@@ -210,12 +210,14 @@ url      | A WebSocket Message Server URL.
 self     | The authenticated bot user.
 team     | Details on the authenticated user's team.
 users    | A hash of user objects by user ID.
-channels | A list of channel objects, one for every channel visible to the authenticated user.
-groups   | A list of group objects, one for every group the authenticated user is in.
-ims      | A list of IM objects, one for every direct message channel visible to the authenticated user.
+channels | A hash of channel objects, one for every channel visible to the authenticated user.
+groups   | A hash of group objects, one for every group the authenticated user is in.
+ims      | A hash of IM objects, one for every direct message channel visible to the authenticated user.
 bots     | Details of the integrations set up on this team.
 
-The RealTime client tracks changes, such as users being renamed, added or deleted, therefore `client.users` is always up-to-date.
+It also tracks changes, such as users being renamed, added or deleted, therefore `client.users` is always up-to-date.
+
+Tracking with a local store can be disabled with `Slack::RealTime::Client.new(store_class: nil)`
 
 You can configure the RealTime client either globally or via the initializer.
 
@@ -236,6 +238,7 @@ setting         | description
 token           | Slack API token.
 websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
+store_class     | Local store class name, default is an in-memory `Slack::RealTime::Store`.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start), configure Web client options via `Slack::Web::Client.configure` as described above.
 

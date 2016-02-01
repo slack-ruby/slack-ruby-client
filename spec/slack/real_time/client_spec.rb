@@ -117,6 +117,20 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             expect(client.send(:next_id)).to eq previous_id + 1
           end
         end
+        context 'store_class: nil' do
+          let(:client) { Slack::RealTime::Client.new(store_class: nil) }
+          it 'sets store to nil' do
+            expect(client.store).to be nil
+          end
+          it "doesn't handle events" do
+            event = Slack::RealTime::Event.new(
+              'type' => 'team_rename',
+              'name' => 'New Team Name Inc.'
+            )
+            expect(client).to_not receive(:run_handlers)
+            client.send(:dispatch, event)
+          end
+        end
       end
     end
     context 'with defaults' do
