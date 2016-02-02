@@ -80,7 +80,8 @@ module Slack
       # @return [Slack::RealTime::Socket]
       def build_socket
         fail ClientAlreadyStartedError if started?
-        data = Slack::Messages::Message.new(web_client.rtm_start)
+        start = web_client.rtm_start(start_options)
+        data = Slack::Messages::Message.new(start)
         @url = data.url
         @store = @store_class.new(data) if @store_class
         socket_class.new(@url, socket_options)

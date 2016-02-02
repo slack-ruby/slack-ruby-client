@@ -198,6 +198,9 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(url, nil, ping: 15).and_return(ws)
           client.start!
         end
+        it 'sets start_options' do
+          expect(client.start_options).to eq({})
+        end
       end
     end
     context 'proxy' do
@@ -226,6 +229,30 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
               headers: { 'User-Agent' => 'ruby' }
             }).and_return(ws)
           client.start!
+        end
+      end
+    end
+    context 'start_options' do
+      before do
+        Slack::RealTime::Client.configure do |config|
+          config.start_options = { simple_latest: true }
+        end
+      end
+      describe '#initialize' do
+        it 'sets start_options' do
+          expect(client.start_options).to eq(simple_latest: true)
+        end
+        context 'start!' do
+          let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+          before do
+            allow(Slack::RealTime::Socket).to receive(:new).and_return(socket)
+            allow(socket).to receive(:connect!)
+            allow(socket).to receive(:start_sync).and_yield
+          end
+          it 'calls rtm_start with start options' do
+            expect(client.web_client).to receive(:rtm_start).with(simple_latest: true).and_call_original
+            client.start!
+          end
         end
       end
     end
