@@ -137,6 +137,17 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             expect(client.team).to be nil
           end
         end
+        context 'subclassed' do
+          let(:client) { Class.new(Slack::RealTime::Client).new }
+          it 'runs event handlers' do
+            event = Slack::RealTime::Event.new(
+              'type' => 'team_rename',
+              'name' => 'New Team Name Inc.'
+            )
+            client.send(:dispatch, event)
+            expect(client.store.team.name).to eq 'New Team Name Inc.'
+          end
+        end
       end
     end
     context 'with defaults' do

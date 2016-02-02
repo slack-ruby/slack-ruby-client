@@ -156,7 +156,7 @@ module Slack
       end
 
       def run_handlers(type, data)
-        handler = self.class.events[type]
+        handler = Slack::RealTime::Client.events[type]
         handler.call(self, data) if handler
       end
 
