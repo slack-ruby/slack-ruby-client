@@ -5,13 +5,18 @@ module Slack
       attr_accessor :options
       attr_reader :driver
 
+      attr_reader :logger
+      protected :logger
+
       def initialize(url, options = {})
         @url = url
+        @logger = options.delete(:logger) { Slack::Config.logger }
         @options = options
         @driver = nil
       end
 
       def send_data(message)
+        logger.debug('#send_data') { message }
         case message
         when Numeric then driver.text(message.to_s)
         when String  then driver.text(message)
@@ -24,6 +29,7 @@ module Slack
         return if connected?
 
         connect
+        logger.debug('#connect!')
 
         yield driver if block_given?
       end

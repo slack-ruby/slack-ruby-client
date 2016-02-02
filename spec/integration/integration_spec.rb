@@ -9,13 +9,18 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
 
   before do
     Thread.abort_on_exception = true
+
+    Slack.configure do |slack|
+      slack.logger = Slack::Logger.new($stdout)
+    end
+
   end
 
   let(:logger) { Logger.new(STDOUT) }
 
   let(:queue) { QueueWithTimeout.new }
 
-  let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
+  let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN'], logger: logger) }
 
   let(:connection) do
     # starts the client and pushes an item on a queue when connected

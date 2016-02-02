@@ -20,6 +20,8 @@ module Slack
       attr_accessor :url
       attr_accessor(*Config::ATTRIBUTES)
 
+      protected :logger, :logger=
+
       def initialize(options = {})
         @callbacks = Hash.new { |h, k| h[k] = [] }
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
@@ -27,7 +29,7 @@ module Slack
         end
         @store_class = options.key?(:store_class) ? options[:store_class] : Slack::RealTime::Store
         @token ||= Slack.config.token
-        @web_client = Slack::Web::Client.new(token: token)
+        @web_client = Slack::Web::Client.new(token: token, logger: logger)
       end
 
       [:users, :self, :channels, :team, :teams, :groups, :ims, :bots].each do |store_method|
@@ -90,6 +92,7 @@ module Slack
         socket_options = {}
         socket_options[:ping] = websocket_ping if websocket_ping
         socket_options[:proxy] = websocket_proxy if websocket_proxy
+        socket_options[:logger] = logger
         socket_options
       end
 
@@ -122,6 +125,7 @@ module Slack
 
       def send_json(data)
         fail ClientNotStartedError unless started?
+        logger.info('client#send_data') { data }
         @socket.send_data(data.to_json)
       end
 
@@ -138,6 +142,12 @@ module Slack
       end
 
       def callback(event, type)
+        logger.info("#callback(:#{type})") do
+          variables = event.instance_variables - [:@target, :@current_target]
+          variables.map!{ |ivar| "#{ivar}=#{event.instance_variable_get(ivar).inspect}" }
+          "<#{event.class} #{variables.join(' ')}>"
+        end
+
         callbacks = self.callbacks[type.to_s]
         return false unless callbacks
         callbacks.each do |c|
@@ -146,6 +156,12 @@ module Slack
       end
 
       def dispatch(event)
+        logger.info('#dispatch') do
+          variables = event.instance_variables - [:@target, :@current_target]
+          variables.map!{ |ivar| %Q{#{ivar}="#{event.instance_variable_get(ivar)}"} }
+          "<#{event.class} #{variables.join(' ')}>"
+        end
+
         return false unless event.data
         data = Slack::Messages::Message.new(JSON.parse(event.data))
         type = data.type
