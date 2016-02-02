@@ -130,6 +130,12 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             expect(client).to_not receive(:run_handlers)
             client.send(:dispatch, event)
           end
+          it 'self' do
+            expect(client.self).to be nil
+          end
+          it 'team' do
+            expect(client.team).to be nil
+          end
         end
       end
     end

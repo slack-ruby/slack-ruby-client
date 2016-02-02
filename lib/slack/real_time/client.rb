@@ -1,8 +1,6 @@
 module Slack
   module RealTime
     class Client
-      extend Forwardable
-
       class ClientNotStartedError < StandardError; end
       class ClientAlreadyStartedError < StandardError; end
 
@@ -32,7 +30,11 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token)
       end
 
-      def_delegators :@store, :users, :self, :channels, :team, :teams, :groups, :ims, :bots
+      [:users, :self, :channels, :team, :teams, :groups, :ims, :bots].each do |store_method|
+        define_method store_method do
+          store.send(store_method) if store
+        end
+      end
 
       def on(type, &block)
         type = type.to_s
