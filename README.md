@@ -239,7 +239,7 @@ token           | Slack API token.
 websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 store_class     | Local store class name, default is an in-memory `Slack::RealTime::Store`.
-start_options   | Options to pass into `rtm.start`, default is `{ simple_latest: true, no_unreads: true }`.
+start_options   | Options to pass into `rtm.start`, default is `{}`.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start), configure Web client options via `Slack::Web::Client.configure` as described above.
 

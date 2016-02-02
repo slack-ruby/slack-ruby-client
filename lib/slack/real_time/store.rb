@@ -17,8 +17,12 @@ module Slack
       end
 
       def initialize(attrs)
-        @team_id = attrs.team.id
-        @teams = { @team_id => Models::Team.new(attrs.team) }
+        if attrs.team
+          @team_id = attrs.team.id
+          @teams = { @team_id => Models::Team.new(attrs.team) }
+        else
+          @teams = {}
+        end
 
         {
           'users' => Models::User,
@@ -30,11 +34,13 @@ module Slack
           instance_variable_set "@#{key}", {}
           attrs[key].each do |data|
             instance_variable_get("@#{key}").send(:[]=, data.id, klass.new(data))
-          end
+          end if attrs.key?(key)
         end
 
-        @self_id = attrs.self.id
-        @users[@self_id].merge!(attrs.self)
+        if attrs.self
+          @self_id = attrs.self.id
+          @users[@self_id].merge!(attrs.self)
+        end
       end
     end
   end
