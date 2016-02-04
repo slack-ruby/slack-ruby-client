@@ -9,8 +9,6 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ![](slack.png)
 
-# IMPORTANT: 0.6.0 on HEAD has major interface changes, see [docs for last stable release, v0.5.4](https://github.com/dblock/slack-ruby-client/blob/v0.5.4/README.md).
-
 ## Useful to Me?
 
 * This piece of the puzzle will help you send messages to Slack via the Web API and send and receive messages via the Real Time API.
@@ -20,7 +18,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.5.4](https://github.com/dblock/slack-ruby-client/blob/v0.5.4/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **stable** release of slack-ruby-client, 0.6.0. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ## Installation
 

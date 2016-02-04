@@ -1,13 +1,9 @@
-### 0.6.0 (TBD)
+### 0.6.0 (2/4/2016)
 
 * [#54](https://github.com/dblock/slack-ruby-client/issues/54): RealTime client maintains a local store of team data for `client.self`, `team`, `users`, `channels`, `groups`, `ims` and `bots` data - [@dblock](https://github.com/dblock).
 * [#56](https://github.com/dblock/slack-ruby-client/issues/56): API responses in both Web and RealTime clients are now instances of [Slack::Messages::Message](lib/slack/messages/message), which provides method access to properties - [@dblock](https://github.com/dblock).
 * [#57](https://github.com/dblock/slack-ruby-client/issues/57): Configure arguments to pass to `rtm.start` via `config.start_options` - [@dblock](https://github.com/dblock).
-
-### 0.5.5 (Next)
-
 * [#52](https://github.com/dblock/slack-ruby-client/issues/52): Added `users_search` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.5.4 (1/23/2016)
 
