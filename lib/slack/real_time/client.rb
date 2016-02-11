@@ -20,6 +20,8 @@ module Slack
       attr_accessor :url
       attr_accessor(*Config::ATTRIBUTES)
 
+      protected :logger, :logger=
+
       def initialize(options = {})
         @callbacks = Hash.new { |h, k| h[k] = [] }
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
@@ -144,6 +146,10 @@ module Slack
         callbacks.each do |c|
           c.call(event)
         end
+        true
+      rescue StandardError => e
+        logger.error e
+        false
       end
 
       def dispatch(event)
@@ -154,11 +160,17 @@ module Slack
         type = type.to_s
         run_handlers(type, data) if @store
         run_callbacks(type, data)
+      rescue StandardError => e
+        logger.error e
+        false
       end
 
       def run_handlers(type, data)
         handler = Slack::RealTime::Client.events[type]
         handler.call(self, data) if handler
+      rescue StandardError => e
+        logger.error e
+        false
       end
 
       def run_callbacks(type, data)
@@ -168,6 +180,9 @@ module Slack
           c.call(data)
         end
         true
+      rescue StandardError => e
+        logger.error e
+        false
       end
     end
   end

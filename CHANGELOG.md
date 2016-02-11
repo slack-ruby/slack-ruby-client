@@ -1,5 +1,6 @@
 ### 0.6.1 (Next)
 
+* [#60](https://github.com/dblock/slack-ruby-client/issues/60): Exceptions in event handlers and commands are no longer fatal - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.6.0 (2/4/2016)

@@ -1,4 +1,5 @@
 require 'slack/version'
+require 'slack/logger'
 require 'slack/config'
 
 # Messages

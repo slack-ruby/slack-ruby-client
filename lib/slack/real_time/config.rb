@@ -10,7 +10,8 @@ module Slack
         :websocket_ping,
         :websocket_proxy,
         :concurrency,
-        :start_options
+        :start_options,
+        :logger
       ]
 
       attr_accessor(*Config::ATTRIBUTES)
@@ -21,6 +22,7 @@ module Slack
         self.token = nil
         self.concurrency = method(:detect_concurrency)
         self.start_options = {}
+        self.logger = Slack.config.logger
       end
 
       def concurrency

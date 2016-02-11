@@ -3,10 +3,14 @@ module Slack
     extend self
 
     attr_accessor :token
+    attr_accessor :logger
 
     def reset
       self.token = nil
+      self.logger = Slack::Logger.default
     end
+
+    reset
   end
 
   class << self
