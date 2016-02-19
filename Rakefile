@@ -18,5 +18,4 @@ task default: [:rubocop, :spec]
 
 load 'tasks/git.rake'
 load 'tasks/web.rake'
-load 'tasks/real_time.rake'
 load 'tasks/update.rake'

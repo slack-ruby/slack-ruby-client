@@ -215,7 +215,17 @@ bots     | Details of the integrations set up on this team.
 
 It also tracks changes, such as users being renamed, added or deleted, therefore `client.users` is always up-to-date.
 
-Tracking with a local store can be disabled with `Slack::RealTime::Client.new(store_class: nil)`
+Tracking with a local store can be disabled with `Slack::RealTime::Client.new(store_class: nil)`. Other stores are also available.
+
+#### Slack::RealTime::Stores::Store
+
+The default store that tracks all changes.
+
+#### Slack::RealTime::Stores::Starter
+
+A smaller store that only stores and tracks information about the bot user, but not channels, users, groups, ims or bots.
+
+### Configuring Slack::RealTime::Client
 
 You can configure the RealTime client either globally or via the initializer.
 
@@ -236,7 +246,7 @@ setting         | description
 token           | Slack API token.
 websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
-store_class     | Local store class name, default is an in-memory `Slack::RealTime::Store`.
+store_class     | Local store class name, default is an in-memory `Slack::RealTime::Stores::Store`.
 start_options   | Options to pass into `rtm.start`, default is `{}`.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start), configure Web client options via `Slack::Web::Client.configure` as described above.

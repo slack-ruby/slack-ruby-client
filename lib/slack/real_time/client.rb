@@ -166,8 +166,10 @@ module Slack
       end
 
       def run_handlers(type, data)
-        handler = Slack::RealTime::Client.events[type]
-        handler.call(self, data) if handler
+        handlers = store.class.events[type.to_s]
+        handlers.each do |handler|
+          store.instance_exec(data, &handler)
+        end if handlers
       rescue StandardError => e
         logger.error e
         false

@@ -70,7 +70,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           end
           it 'sets users' do
             expect(client.users.count).to eq 18
-            expect(client.users.values.first['id']).to eq 'U092BDCLV'
+            expect(client.users.values.first['id']).to eq 'U07518DTL'
           end
           it 'sets channels' do
             expect(client.channels.count).to eq 37
