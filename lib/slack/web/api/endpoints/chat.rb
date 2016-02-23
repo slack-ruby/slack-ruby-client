@@ -47,7 +47,7 @@ module Slack
           # @option options [Object] :icon_emoji
           #   emoji to use as the icon for this message. Overrides icon_url.
           # @see https://api.slack.com/methods/chat.postMessage
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.postMessage.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
