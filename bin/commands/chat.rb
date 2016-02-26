@@ -17,29 +17,30 @@ command 'chat' do |g|
   g.command 'postMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
     c.flag 'text', desc: 'Text of the message to send. See below for an explanation of formatting.'
-    c.flag 'username', desc: 'Name of bot.'
-    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot.'
-    c.flag 'parse', desc: 'Change how messages are treated. See below.'
+    c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
     c.flag 'attachments', desc: 'Structured message attachments.'
     c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
     c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
-    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
-    c.flag 'icon_emoji', desc: 'emoji to use as the icon for this message. Overrides icon_url.'
+    c.flag 'username', desc: "Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below."
+    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.'
+    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
+    c.flag 'icon_emoji', desc: 'emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_postMessage(options))
     end
   end
 
-  g.desc 'This method updates a message in a channel.'
-  g.long_desc %( This method updates a message in a channel. )
+  g.desc 'This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.'
+  g.long_desc %( This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently. )
   g.command 'update' do |c|
     c.flag 'ts', desc: 'Timestamp of the message to be updated.'
     c.flag 'channel', desc: 'Channel containing the message to be updated.'
     c.flag 'text', desc: 'New text for the message, using the default formatting rules.'
     c.flag 'attachments', desc: 'Structured message attachments.'
-    c.flag 'parse', desc: 'Change how messages are treated. See below.'
-    c.flag 'link_names', desc: 'Find and link channel names and usernames.'
+    c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.'
+    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.'
+    c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_update(options))
     end

@@ -39,7 +39,7 @@ module Slack
           # This method returns information about a file in your team.
           #
           # @option options [file] :file
-          #   File to fetch info for.
+          #   Specify a file by providing its ID.
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.info.json
           def files_info(options = {})
@@ -78,6 +78,30 @@ module Slack
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('files.list', options)
+          end
+
+          #
+          # This method disables public/external sharing for a file.
+          #
+          # @option options [file] :file
+          #   File to revoke.
+          # @see https://api.slack.com/methods/files.revokePublicURL
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.revokePublicURL.json
+          def files_revokePublicURL(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            post('files.revokePublicURL', options)
+          end
+
+          #
+          # This method enables public/external sharing for a file.
+          #
+          # @option options [file] :file
+          #   File to share.
+          # @see https://api.slack.com/methods/files.sharedPublicURL
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.sharedPublicURL.json
+          def files_sharedPublicURL(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            post('files.sharedPublicURL', options)
           end
 
           #

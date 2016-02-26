@@ -25,7 +25,7 @@ command 'files' do |g|
   g.desc 'This method returns information about a file in your team.'
   g.long_desc %( This method returns information about a file in your team. )
   g.command 'info' do |c|
-    c.flag 'file', desc: 'File to fetch info for.'
+    c.flag 'file', desc: 'Specify a file by providing its ID.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_info(options))
     end
@@ -53,6 +53,24 @@ You can pass multiple values in the types argument, like types=posts,snippets.Th
 .'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_list(options))
+    end
+  end
+
+  g.desc 'This method disables public/external sharing for a file.'
+  g.long_desc %( This method disables public/external sharing for a file. )
+  g.command 'revokePublicURL' do |c|
+    c.flag 'file', desc: 'File to revoke.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_revokePublicURL(options))
+    end
+  end
+
+  g.desc 'This method enables public/external sharing for a file.'
+  g.long_desc %( This method enables public/external sharing for a file. )
+  g.command 'sharedPublicURL' do |c|
+    c.flag 'file', desc: 'File to share.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_sharedPublicURL(options))
     end
   end
 

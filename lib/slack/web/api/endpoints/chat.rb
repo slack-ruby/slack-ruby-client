@@ -28,12 +28,8 @@ module Slack
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [Object] :text
           #   Text of the message to send. See below for an explanation of formatting.
-          # @option options [Object] :username
-          #   Name of bot.
-          # @option options [Object] :as_user
-          #   Pass true to post the message as the authed user, instead of as a bot.
           # @option options [Object] :parse
-          #   Change how messages are treated. See below.
+          #   Change how messages are treated. Defaults to none. See below.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :attachments
@@ -42,10 +38,14 @@ module Slack
           #   Pass true to enable unfurling of primarily text-based content.
           # @option options [Object] :unfurl_media
           #   Pass false to disable unfurling of media content.
+          # @option options [Object] :username
+          #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          # @option options [Object] :as_user
+          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
           # @option options [Object] :icon_url
-          #   URL to an image to use as the icon for this message.
+          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [Object] :icon_emoji
-          #   emoji to use as the icon for this message. Overrides icon_url.
+          #   emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
@@ -61,7 +61,7 @@ module Slack
           end
 
           #
-          # This method updates a message in a channel.
+          # This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.
           #
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
@@ -72,9 +72,11 @@ module Slack
           # @option options [Object] :attachments
           #   Structured message attachments.
           # @option options [Object] :parse
-          #   Change how messages are treated. See below.
+          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
           # @option options [Object] :link_names
-          #   Find and link channel names and usernames.
+          #   Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.
+          # @option options [Object] :as_user
+          #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
