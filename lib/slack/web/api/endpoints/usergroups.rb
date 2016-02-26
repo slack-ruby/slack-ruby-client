@@ -19,7 +19,7 @@ module Slack
           # @option options [Object] :include_count
           #   Include the number of users in each user group.
           # @see https://api.slack.com/methods/usergroups.create
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups.create.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
           def usergroups_create(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             post('usergroups.create', options)
@@ -33,7 +33,7 @@ module Slack
           # @option options [Object] :include_count
           #   Include the number of users in the user group.
           # @see https://api.slack.com/methods/usergroups.disable
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups.disable.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.disable.json
           def usergroups_disable(options = {})
             throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
             post('usergroups.disable', options)
@@ -47,7 +47,7 @@ module Slack
           # @option options [Object] :include_count
           #   Include the number of users in the user group.
           # @see https://api.slack.com/methods/usergroups.enable
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups.enable.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
           def usergroups_enable(options = {})
             throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
             post('usergroups.enable', options)
@@ -63,7 +63,7 @@ module Slack
           # @option options [Object] :include_users
           #   Include the list of users for each user group.
           # @see https://api.slack.com/methods/usergroups.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.list.json
           def usergroups_list(options = {})
             post('usergroups.list', options)
           end
@@ -84,7 +84,7 @@ module Slack
           # @option options [Object] :include_count
           #   Include the number of users in the user group.
           # @see https://api.slack.com/methods/usergroups.update
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups.update.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.update.json
           def usergroups_update(options = {})
             throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
             post('usergroups.update', options)
@@ -100,7 +100,7 @@ module Slack
           # @option options [Object] :include_count
           #   Include the number of users in the user group.
           # @see https://api.slack.com/methods/usergroups.users
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups.users.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.users.json
           def usergroups_users(options = {})
             throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
             throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?

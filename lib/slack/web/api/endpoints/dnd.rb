@@ -9,7 +9,7 @@ module Slack
           # Ends the user's currently scheduled Do Not Disturb session immediately.
           #
           # @see https://api.slack.com/methods/dnd.endDnd
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd.endDnd.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd/dnd.endDnd.json
           def dnd_endDnd(options = {})
             post('dnd.endDnd', options)
           end
@@ -18,7 +18,7 @@ module Slack
           # Ends the current user's snooze mode immediately.
           #
           # @see https://api.slack.com/methods/dnd.endSnooze
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd.endSnooze.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd/dnd.endSnooze.json
           def dnd_endSnooze(options = {})
             post('dnd.endSnooze', options)
           end
@@ -29,7 +29,7 @@ module Slack
           # @option options [user] :user
           #   User to fetch status for (defaults to current user).
           # @see https://api.slack.com/methods/dnd.info
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd.info.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd/dnd.info.json
           def dnd_info(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('dnd.info', options)
@@ -41,7 +41,7 @@ module Slack
           # @option options [Object] :num_minutes
           #   Number of minutes, from now, to snooze until.
           # @see https://api.slack.com/methods/dnd.setSnooze
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd.setSnooze.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd/dnd.setSnooze.json
           def dnd_setSnooze(options = {})
             throw ArgumentError.new('Required arguments :num_minutes missing') if options[:num_minutes].nil?
             post('dnd.setSnooze', options)
@@ -53,7 +53,7 @@ module Slack
           # @option options [Object] :users
           #   Comma-separated list of users to fetch Do Not Disturb status for.
           # @see https://api.slack.com/methods/dnd.teamInfo
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd.teamInfo.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dnd/dnd.teamInfo.json
           def dnd_teamInfo(options = {})
             post('dnd.teamInfo', options)
           end

@@ -13,7 +13,7 @@ module Slack
           # @option options [channel] :channel
           #   Channel containing the message to be deleted.
           # @see https://api.slack.com/methods/chat.delete
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.delete.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.delete.json
           def chat_delete(options = {})
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
@@ -47,7 +47,7 @@ module Slack
           # @option options [Object] :icon_emoji
           #   emoji to use as the icon for this message. Overrides icon_url.
           # @see https://api.slack.com/methods/chat.postMessage
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.postMessage.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
@@ -76,7 +76,7 @@ module Slack
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @see https://api.slack.com/methods/chat.update
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat.update.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?

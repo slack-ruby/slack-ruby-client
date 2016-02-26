@@ -13,7 +13,7 @@ module Slack
           # @option options [Object] :foo
           #   example property to return.
           # @see https://api.slack.com/methods/api.test
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/api.test.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/api/api.test.json
           def api_test(options = {})
             post('api.test', options)
           end

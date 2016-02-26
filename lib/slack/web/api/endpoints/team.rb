@@ -9,7 +9,7 @@ module Slack
           # This method is used to get the access logs for users on a team.
           #
           # @see https://api.slack.com/methods/team.accessLogs
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team.accessLogs.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team/team.accessLogs.json
           def team_accessLogs(options = {})
             post('team.accessLogs', options)
           end
@@ -18,7 +18,7 @@ module Slack
           # This method provides information about your team.
           #
           # @see https://api.slack.com/methods/team.info
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team.info.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team/team.info.json
           def team_info(options = {})
             post('team.info', options)
           end
@@ -35,7 +35,7 @@ module Slack
           # @option options [Object] :change_type
           #   Filter logs with this change type. Defaults to all logs.
           # @see https://api.slack.com/methods/team.integrationLogs
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team.integrationLogs.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team/team.integrationLogs.json
           def team_integrationLogs(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('team.integrationLogs', options)

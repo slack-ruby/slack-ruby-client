@@ -18,7 +18,7 @@ module Slack
           # @option options [Object] :timestamp
           #   Timestamp of the message to add star to.
           # @see https://api.slack.com/methods/stars.add
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.add.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.add.json
           def stars_add(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('stars.add', options)
@@ -30,7 +30,7 @@ module Slack
           # @option options [user] :user
           #   Show stars by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/stars.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.list.json
           def stars_list(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('stars.list', options)
@@ -49,7 +49,7 @@ module Slack
           # @option options [Object] :timestamp
           #   Timestamp of the message to remove star from.
           # @see https://api.slack.com/methods/stars.remove
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars.remove.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.remove.json
           def stars_remove(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('stars.remove', options)

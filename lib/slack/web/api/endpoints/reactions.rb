@@ -20,7 +20,7 @@ module Slack
           # @option options [Object] :timestamp
           #   Timestamp of the message to add reaction to.
           # @see https://api.slack.com/methods/reactions.add
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.add.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions/reactions.add.json
           def reactions_add(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -41,7 +41,7 @@ module Slack
           # @option options [Object] :full
           #   If true always return the complete reaction list.
           # @see https://api.slack.com/methods/reactions.get
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.get.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions/reactions.get.json
           def reactions_get(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('reactions.get', options)
@@ -55,7 +55,7 @@ module Slack
           # @option options [Object] :full
           #   If true always return the complete reaction list.
           # @see https://api.slack.com/methods/reactions.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.list.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions/reactions.list.json
           def reactions_list(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('reactions.list', options)
@@ -76,7 +76,7 @@ module Slack
           # @option options [Object] :timestamp
           #   Timestamp of the message to remove reaction from.
           # @see https://api.slack.com/methods/reactions.remove
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions.remove.json
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions/reactions.remove.json
           def reactions_remove(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
