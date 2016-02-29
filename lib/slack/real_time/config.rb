@@ -22,7 +22,7 @@ module Slack
         self.token = nil
         self.concurrency = method(:detect_concurrency)
         self.start_options = {}
-        self.logger = Slack.config.logger
+        self.logger = nil
       end
 
       def concurrency

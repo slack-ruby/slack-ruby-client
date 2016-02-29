@@ -49,7 +49,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       describe '#start!' do
         let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
         before do
-          allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30).and_return(socket)
+          allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
           allow(socket).to receive(:connect!)
           allow(socket).to receive(:start_sync).and_yield
           client.start!
@@ -158,7 +158,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         it "doesn't set proxy" do
           expect(client.websocket_proxy).to be nil
         end
-        Slack::RealTime::Config::ATTRIBUTES.each do |key|
+        (Slack::RealTime::Config::ATTRIBUTES - [:logger]).each do |key|
           it "sets #{key}" do
             expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
           end

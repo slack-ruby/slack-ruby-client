@@ -7,7 +7,7 @@ module Slack
 
     def reset
       self.token = nil
-      self.logger = Slack::Logger.default
+      self.logger = nil
     end
 
     reset

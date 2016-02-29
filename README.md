@@ -55,6 +55,15 @@ end
 
 This sets a global default token. You can also pass a token into the initializer of both `Slack::Web::Client` and `Slack::RealTime::Client` or configure those separately via `Slack::Web::Config.configure` and `Slack::RealTime::Config.configure`. The instance token will be used over the client type token over the global default.
 
+### Global Settings
+
+The following global settings are supported via `Slack.configure`.
+
+setting      | description
+-------------|-------------------------------------------------------------------------------------------------
+token        | Slack API token.
+logger       | An optional logger, defaults to `::Logger.new(STDOUT)` at `Logger::WARN` level.
+
 ### Web Client
 
 The Slack Web API allows you to build applications that interact with Slack.
@@ -248,8 +257,9 @@ websocket_ping  | The number of seconds that indicates how often the WebSocket s
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 store_class     | Local store class name, default is an in-memory `Slack::RealTime::Stores::Store`.
 start_options   | Options to pass into `rtm.start`, default is `{}`.
+logger          | Optional `Logger` instance that logs RealTime requests and socket data.
 
-Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start), configure Web client options via `Slack::Web::Client.configure` as described above.
+Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
 
 See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
 

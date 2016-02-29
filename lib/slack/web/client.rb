@@ -11,6 +11,7 @@ module Slack
         Slack::Web::Config::ATTRIBUTES.each do |key|
           send("#{key}=", options[key] || Slack::Web.config.send(key))
         end
+        @logger ||= Slack::Config.logger || Slack::Logger.default
         @token ||= Slack.config.token
       end
 
