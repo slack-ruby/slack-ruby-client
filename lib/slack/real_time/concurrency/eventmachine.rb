@@ -5,6 +5,26 @@ module Slack
   module RealTime
     module Concurrency
       module Eventmachine
+        class Client < Faye::WebSocket::Client
+          attr_reader :logger
+          protected :logger
+
+          def initialize(url, protocols = nil, options = {})
+            @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
+            super
+          end
+
+          def parse(data)
+            logger.debug("#{self.class}##{__method__}") { data }
+            super data
+          end
+
+          def write(data)
+            logger.debug("#{self.class}##{__method__}") { data }
+            super data
+          end
+        end
+
         class Socket < Slack::RealTime::Socket
           def start_async
             thread = ensure_reactor_running
@@ -15,6 +35,7 @@ module Slack
           end
 
           def send_data(message)
+            logger.debug("#{self.class}##{__method__}") { message }
             driver.send(message)
           end
 
@@ -30,7 +51,7 @@ module Slack
           end
 
           def connect
-            @driver = ::Faye::WebSocket::Client.new(url, nil, options)
+            @driver = Client.new(url, nil, options.merge(logger: logger))
           end
         end
       end

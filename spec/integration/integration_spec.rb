@@ -7,11 +7,23 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
     WebMock.disable_net_connect!
   end
 
-  before do
-    Thread.abort_on_exception = true
+  let(:logger) do
+    logger = Logger.new(STDOUT)
+    logger.level = Logger::DEBUG
+    logger
   end
 
-  let(:logger) { Logger.new(STDOUT) }
+  before do
+    Thread.abort_on_exception = true
+
+    Slack.configure do |slack|
+      slack.logger = logger
+    end
+  end
+
+  after do
+    Slack.config.reset
+  end
 
   let(:queue) { QueueWithTimeout.new }
 

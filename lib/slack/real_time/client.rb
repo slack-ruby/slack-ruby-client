@@ -29,7 +29,8 @@ module Slack
         end
         @store_class = options.key?(:store_class) ? options[:store_class] : Slack::RealTime::Store
         @token ||= Slack.config.token
-        @web_client = Slack::Web::Client.new(token: token)
+        @logger ||= Slack::Config.logger || Slack::Logger.default
+        @web_client = Slack::Web::Client.new(token: token, logger: logger)
       end
 
       [:users, :self, :channels, :team, :teams, :groups, :ims, :bots].each do |store_method|
@@ -93,6 +94,7 @@ module Slack
         socket_options = {}
         socket_options[:ping] = websocket_ping if websocket_ping
         socket_options[:proxy] = websocket_proxy if websocket_proxy
+        socket_options[:logger] = logger
         socket_options
       end
 
@@ -103,15 +105,18 @@ module Slack
           yield driver if block_given?
 
           driver.on :open do |event|
+            logger.debug("#{self.class}##{__method__}") { event.class.name }
             open(event)
             callback(event, :open)
           end
 
           driver.on :message do |event|
+            logger.debug("#{self.class}##{__method__}") { "#{event.class}, #{event.data}" }
             dispatch(event)
           end
 
           driver.on :close do |event|
+            logger.debug("#{self.class}##{__method__}") { event.class.name }
             callback(event, :close)
             close(event)
           end
@@ -125,6 +130,7 @@ module Slack
 
       def send_json(data)
         fail ClientNotStartedError unless started?
+        logger.debug("#{self.class}##{__method__}") { data }
         @socket.send_data(data.to_json)
       end
 
@@ -158,6 +164,7 @@ module Slack
         type = data.type
         return false unless type
         type = type.to_s
+        logger.debug("#{self.class}##{__method__}") { data.to_s }
         run_handlers(type, data) if @store
         run_callbacks(type, data)
       rescue StandardError => e

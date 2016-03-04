@@ -4,7 +4,8 @@ begin
   RSpec.describe Slack::RealTime::Concurrency::Celluloid::Socket do
     context 'with url' do
       let(:url) { 'wss://echo.websocket.org/websocket/xyz' }
-      subject(:socket) { described_class.new(url, ping: 42) }
+      let(:logger) { ::Logger.new(STDOUT) }
+      subject(:socket) { described_class.new(url, ping: 42, logger: logger) }
       let(:driver) { WebSocket::Driver::Client }
       let(:ws) { double(driver) }
 

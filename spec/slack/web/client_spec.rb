@@ -11,7 +11,7 @@ RSpec.describe Slack::Web::Client do
         expect(client.user_agent).to eq Slack::Web::Config.user_agent
         expect(client.user_agent).to include Slack::VERSION
       end
-      Slack::Web::Config::ATTRIBUTES.each do |key|
+      (Slack::Web::Config::ATTRIBUTES - [:logger]).each do |key|
         it "sets #{key}" do
           expect(client.send(key)).to eq Slack::Web::Config.send(key)
         end

@@ -1,5 +1,6 @@
 ### 0.6.1 (Next)
 
+* [#67](https://github.com/dblock/slack-ruby-client/pull/67): Make `logger` configurable and log HTTP requests and responses as well as RealTime events and socket data - [@mikz](https://github.com/mikz), [@dblock](https://github.com/dblock).
 * Added `Slack::RealTime::Stores::Store` and `Slack::RealTime::Stores::Starter` - [@dblock](https://github.com/dblock).
 * Added `files_revokePublicURL` and `files_sharedPublicURL` to Web API - [@dblock](https://github.com/dblock).
 * [#60](https://github.com/dblock/slack-ruby-client/issues/60): Exceptions in event handlers and commands are no longer fatal - [@dblock](https://github.com/dblock).
