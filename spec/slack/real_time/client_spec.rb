@@ -44,8 +44,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
     end
   end
   context 'client' do
-    let(:client) { Slack::RealTime::Client.new }
     context 'started' do
+      let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Store) }
       describe '#start!' do
         let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
         before do
@@ -138,7 +138,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           end
         end
         context 'subclassed' do
-          let(:client) { Class.new(Slack::RealTime::Client).new }
+          let(:client) { Class.new(Slack::RealTime::Client).new(store_class: Slack::RealTime::Stores::Store) }
           it 'runs event handlers' do
             event = Slack::RealTime::Event.new(
               'type' => 'team_rename',
@@ -151,6 +151,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       end
     end
     context 'with defaults' do
+      let(:client) { Slack::RealTime::Client.new }
       describe '#initialize' do
         it 'sets ping' do
           expect(client.websocket_ping).to eq 30
@@ -158,7 +159,13 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         it "doesn't set proxy" do
           expect(client.websocket_proxy).to be nil
         end
-        (Slack::RealTime::Config::ATTRIBUTES - [:logger]).each do |key|
+        it 'defaults logger' do
+          expect(client.send(:logger)).to be_a ::Logger
+        end
+        it 'sets default store_class' do
+          expect(client.send(:store_class)).to eq Slack::RealTime::Store
+        end
+        (Slack::RealTime::Config::ATTRIBUTES - [:logger, :store_class]).each do |key|
           it "sets #{key}" do
             expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
           end
@@ -252,6 +259,34 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           it 'calls rtm_start with start options' do
             expect(client.web_client).to receive(:rtm_start).with(simple_latest: true).and_call_original
             client.start!
+          end
+        end
+      end
+    end
+    context 'store_class' do
+      before do
+        Slack::RealTime::Client.configure do |config|
+          config.store_class = Slack::RealTime::Stores::Starter
+        end
+      end
+      describe '#initialize' do
+        it 'can be overriden explicitly' do
+          client = Slack::RealTime::Client.new(store_class: Slack::RealTime::Store)
+          expect(client.send(:store_class)).to eq Slack::RealTime::Store
+        end
+        it 'sets store_class' do
+          expect(client.send(:store_class)).to eq(Slack::RealTime::Stores::Starter)
+        end
+        context 'start!' do
+          let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+          before do
+            allow(Slack::RealTime::Socket).to receive(:new).and_return(socket)
+            allow(socket).to receive(:connect!)
+            allow(socket).to receive(:start_sync).and_yield
+          end
+          it 'instantiates the correct store class' do
+            client.start!
+            expect(client.store).to be_a Slack::RealTime::Stores::Starter
           end
         end
       end

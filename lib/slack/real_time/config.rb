@@ -11,6 +11,7 @@ module Slack
         :websocket_proxy,
         :concurrency,
         :start_options,
+        :store_class,
         :logger
       ]
 
@@ -22,6 +23,7 @@ module Slack
         self.token = nil
         self.concurrency = method(:detect_concurrency)
         self.start_options = {}
+        self.store_class = Slack::RealTime::Store
         self.logger = nil
       end
 

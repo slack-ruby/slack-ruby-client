@@ -21,15 +21,15 @@ module Slack
       attr_accessor(*Config::ATTRIBUTES)
 
       protected :logger, :logger=
+      protected :store_class, :store_class=
 
       def initialize(options = {})
         @callbacks = Hash.new { |h, k| h[k] = [] }
         Slack::RealTime::Config::ATTRIBUTES.each do |key|
-          send("#{key}=", options[key] || Slack::RealTime.config.send(key))
+          send("#{key}=", options.key?(key) ? options[key] : Slack::RealTime.config.send(key))
         end
-        @store_class = options.key?(:store_class) ? options[:store_class] : Slack::RealTime::Store
         @token ||= Slack.config.token
-        @logger ||= Slack::Config.logger || Slack::Logger.default
+        @logger ||= (Slack::Config.logger || Slack::Logger.default)
         @web_client = Slack::Web::Client.new(token: token, logger: logger)
       end
 

@@ -1,5 +1,5 @@
 RSpec.shared_context 'connected client' do |opts|
-  let(:client) { Slack::RealTime::Client.new(opts || {}) }
+  let(:client) { Slack::RealTime::Client.new(opts || { store_class: Slack::RealTime::Stores::Store }) }
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket) }
   let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
   let(:socket) { double(Slack::RealTime::Socket, connected?: true) }

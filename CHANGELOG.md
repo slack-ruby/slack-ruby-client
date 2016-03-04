@@ -1,5 +1,6 @@
-### 0.6.1 (Next)
+### 0.7.0 (Next)
 
+* [#68](https://github.com/dblock/slack-ruby-client/issues/68): The `Slack::RealTime::Config#store_class` is now globally configurable - [@dblock](https://github.com/dblock).
 * [#67](https://github.com/dblock/slack-ruby-client/pull/67): Make `logger` configurable and log HTTP requests and responses as well as RealTime events and socket data - [@mikz](https://github.com/mikz), [@dblock](https://github.com/dblock).
 * Added `Slack::RealTime::Stores::Store` and `Slack::RealTime::Stores::Starter` - [@dblock](https://github.com/dblock).
 * Added `files_revokePublicURL` and `files_sharedPublicURL` to Web API - [@dblock](https://github.com/dblock).
