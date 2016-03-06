@@ -1,3 +1,7 @@
+### 0.7.1 (Next)
+
+* Your contribution here.
+
 ### 0.7.0 (3/6/2016)
 
 * [#68](https://github.com/dblock/slack-ruby-client/issues/68): The `Slack::RealTime::Config#store_class` is now globally configurable - [@dblock](https://github.com/dblock).
