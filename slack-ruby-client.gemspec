@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'hashie'
   s.add_development_dependency 'erubis'
   s.add_development_dependency 'json-schema'
-  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rake', '~> 10'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'

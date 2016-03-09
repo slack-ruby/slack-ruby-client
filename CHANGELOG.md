@@ -1,6 +1,7 @@
 ### 0.7.1 (Next)
 
 * Your contribution here.
+* [#69](https://github.com/dblock/slack-ruby-client/issues/69): Add attachments support for `Slack::Web::Api::Endpoints::Chat.chat_update` - [@nicka](https://github.com/nicka).
 
 ### 0.7.0 (3/6/2016)
 
@@ -95,4 +96,3 @@
 ### 0.1.0 (7/25/2015)
 
 * Initial public release with Web and RealTime Messaging API support - [@dblock](https://github.com/dblock).
-
