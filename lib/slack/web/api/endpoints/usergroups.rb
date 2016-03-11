@@ -101,11 +101,26 @@ module Slack
           #   Include the number of users in the user group.
           # @see https://api.slack.com/methods/usergroups.users
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.users.json
-          def usergroups_users(options = {})
+          def usergroups_users_update(options = {})
             throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
             throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
-            post('usergroups.users', options)
+            post('usergroups.users.update', options)
           end
+
+          #
+          # This method updates the list of users that belong to a user group. This method replaces all users in a user group with the list of users provided in the users parameter.
+          #
+          # @option options [Object] :usergroup
+          #   The encoded ID of the user group to update.
+          # @option options [Object] :include_disabled
+          #   Allow results that involve disabled user groups.
+          # @see https://api.slack.com/methods/usergroups.users
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.users.json
+          def usergroups_users_list(options = {})
+            throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
+            get('usergroups.users.list', options)
+          end
+
         end
       end
     end
