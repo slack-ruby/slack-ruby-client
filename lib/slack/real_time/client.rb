@@ -119,6 +119,7 @@ module Slack
             logger.debug("#{self.class}##{__method__}") { event.class.name }
             callback(event, :close)
             close(event)
+            callback(event, :closed)
           end
         end
       end

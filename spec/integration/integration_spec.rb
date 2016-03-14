@@ -116,4 +116,24 @@ RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLA
 
     start_server
   end
+
+  it 'gets close, followed by closed' do
+    client.on :hello do
+      expect(client.started?).to be true
+      client.stop!
+    end
+
+    client.on :close do |data|
+      logger.debug "client.on :close, data=#{data}"
+      expect(client.started?).to be true
+      @close_called = true
+    end
+
+    client.on :closed do |data|
+      logger.debug "client.on :closed, data=#{data}"
+      expect(@close_called).to be true
+    end
+
+    start_server
+  end
 end

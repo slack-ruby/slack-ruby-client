@@ -194,6 +194,14 @@ client.on :message do |data|
   end
 end
 
+client.on :close do |_data|
+  puts "Client is about to disconnect"
+end
+
+client.on :closed do |_data|
+  puts "Client has disconnected successfully!"
+end
+
 client.start!
 ```
 
