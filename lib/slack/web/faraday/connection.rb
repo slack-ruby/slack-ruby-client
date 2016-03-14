@@ -12,6 +12,8 @@ module Slack
           options[:headers]['User-Agent'] = user_agent if user_agent
           options[:proxy] = proxy if proxy
           options[:ssl] = { ca_path: ca_path, ca_file: ca_file }
+          options[:timeout] = Slack::Config.timeout if Slack::Config.timeout
+          options[:open_timeout] = Slack::Config.timeout if Slack::Config.open_timeout
 
           ::Faraday::Connection.new(endpoint, options) do |connection|
             connection.use ::Faraday::Request::Multipart
