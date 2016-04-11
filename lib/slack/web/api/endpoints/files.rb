@@ -112,7 +112,7 @@ module Slack
           # @option options [Object] :content
           #   File contents via a POST var.
           # @option options [Object] :filetype
-          #   Slack-internal file type identifier.
+          #   A file type identifier.
           # @option options [Object] :filename
           #   Filename of file.
           # @option options [Object] :title
@@ -124,7 +124,6 @@ module Slack
           # @see https://api.slack.com/methods/files.upload
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.upload.json
           def files_upload(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :filename missing') if options[:filename].nil?
             post('files.upload', options)
           end

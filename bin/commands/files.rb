@@ -79,7 +79,7 @@ You can pass multiple values in the types argument, like types=posts,snippets.Th
   g.command 'upload' do |c|
     c.flag 'file', desc: 'File contents via multipart/form-data.'
     c.flag 'content', desc: 'File contents via a POST var.'
-    c.flag 'filetype', desc: 'Slack-internal file type identifier.'
+    c.flag 'filetype', desc: 'A file type identifier.'
     c.flag 'filename', desc: 'Filename of file.'
     c.flag 'title', desc: 'Title of file.'
     c.flag 'initial_comment', desc: 'Initial comment to add to file.'

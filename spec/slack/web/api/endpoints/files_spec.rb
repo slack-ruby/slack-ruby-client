@@ -36,11 +36,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
   context 'files_upload' do
-    it 'requires file' do
-      expect { client.files_upload(filename: 'foo.txt') }.to raise_error ArgumentError, /Required arguments :file missing/
-    end
     it 'requires filename' do
-      expect { client.files_upload(file: '...') }.to raise_error ArgumentError, /Required arguments :filename missing/
+      expect { client.files_upload }.to raise_error ArgumentError, /Required arguments :filename missing/
     end
   end
 end
