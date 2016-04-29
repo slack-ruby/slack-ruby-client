@@ -99,12 +99,12 @@ module Slack
           #   A comma separated string of encoded user IDs that represent the entire list of users for the User Group.
           # @option options [Object] :include_count
           #   Include the number of users in the User Group.
-          # @see https://api.slack.com/methods/usergroups.users
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.users.json
-          def usergroups_users(options = {})
+          # @see https://api.slack.com/methods/usergroups.users.update
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.users.update.json
+          def usergroups_users_update(options = {})
             throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
             throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
-            post('usergroups.users', options)
+            post('usergroups.users.update', options)
           end
         end
       end
