@@ -4,7 +4,7 @@ module Slack
   module Web
     module Api
       module Endpoints
-        module <%= group.capitalize %>
+        module <%= group.gsub(".", "_").camelize %>
 <% names.each_with_index do |(name, data), index| %>
 <% next if data['mixin'] %>
 <% if index > 0 %>
@@ -27,7 +27,7 @@ module Slack
 <% end %>
           # @see https://api.slack.com/methods/<%= group %>.<%= name %>
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/<%= group %>/<%= group %>.<%= name %>.json
-          def <%= group %>_<%= name %>(options = {})
+          def <%= group.gsub(".", "_") %>_<%= name %>(options = {})
 <% data['args'].select{ |k, v| v['required'] }.each do |arg_name, arg_v| %>
             throw ArgumentError.new('Required arguments :<%= arg_name %> missing') if options[:<%= arg_name %>].nil?
 <% end %>
