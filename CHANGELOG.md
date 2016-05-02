@@ -1,4 +1,4 @@
-### 0.7.1 (Next)
+### 0.7.1 (5/2/2016)
 
 * [#82](https://github.com/dblock/slack-ruby-client/pull/82): Fix `usergroups.users.{list,update}` and `files.comments.{add,edit,delete}` APIs - [@masatomo](https://github.com/masatomo).
 * [#73](https://github.com/dblock/slack-ruby-client/issues/73): Add a `closed` event - [@rkadyb](https://github.com/rkadyb).
@@ -6,8 +6,6 @@
 * [#85](https://github.com/dblock/slack-ruby-client/issues/85): Compatibility with WebMock 2.0 - [@dblock](https://github.com/dblock).
 * Added `as_user` to `chat_delete` Web API - [@dblock](https://github.com/dblock).
 * Added `reminders_add`, `reminders_complete`, `reminders_delete`, `reminders_info` and `reminders_list` to Web API - [@dblock](https://github.com/dblock).
-
-* Your contribution here.
 
 ### 0.7.0 (3/6/2016)
 
