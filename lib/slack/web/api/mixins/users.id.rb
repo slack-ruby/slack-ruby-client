@@ -17,7 +17,7 @@ module Slack
                 return Slack::Messages::Message.new('ok' => true, 'user' => { 'id' => user.id }) if user.name == name[1..-1]
               end
             end
-            fail Slack::Web::Api::Error, 'user_not_found'
+            raise Slack::Web::Api::Error, 'user_not_found'
           end
         end
       end

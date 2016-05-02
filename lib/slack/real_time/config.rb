@@ -13,7 +13,7 @@ module Slack
         :start_options,
         :store_class,
         :logger
-      ]
+      ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
 
@@ -42,7 +42,7 @@ module Slack
           end
         end
 
-        fail NoConcurrencyError, 'Missing concurrency. Add faye-websocket or celluloid-io to your Gemfile.'
+        raise NoConcurrencyError, 'Missing concurrency. Add faye-websocket or celluloid-io to your Gemfile.'
       end
     end
 

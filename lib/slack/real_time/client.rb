@@ -60,7 +60,7 @@ module Slack
       end
 
       def stop!
-        fail ClientNotStartedError unless started?
+        raise ClientNotStartedError unless started?
         @socket.disconnect! if @socket
       end
 
@@ -82,7 +82,7 @@ module Slack
 
       # @return [Slack::RealTime::Socket]
       def build_socket
-        fail ClientAlreadyStartedError if started?
+        raise ClientAlreadyStartedError if started?
         start = web_client.rtm_start(start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
@@ -130,7 +130,7 @@ module Slack
       end
 
       def send_json(data)
-        fail ClientNotStartedError unless started?
+        raise ClientNotStartedError unless started?
         logger.debug("#{self.class}##{__method__}") { data }
         @socket.send_data(data.to_json)
       end

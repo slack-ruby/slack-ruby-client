@@ -50,7 +50,7 @@ module Slack
 
       # @return [#join]
       def start_async
-        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+        raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
       protected
@@ -75,7 +75,7 @@ module Slack
       end
 
       def connect
-        fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+        raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
       def close(_event)
