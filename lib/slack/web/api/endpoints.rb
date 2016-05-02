@@ -6,6 +6,7 @@ require 'slack/web/api/endpoints/channels'
 require 'slack/web/api/endpoints/chat'
 require 'slack/web/api/endpoints/dnd'
 require 'slack/web/api/endpoints/emoji'
+require 'slack/web/api/endpoints/files_comments'
 require 'slack/web/api/endpoints/files'
 require 'slack/web/api/endpoints/groups'
 require 'slack/web/api/endpoints/im'
@@ -18,6 +19,7 @@ require 'slack/web/api/endpoints/search'
 require 'slack/web/api/endpoints/stars'
 require 'slack/web/api/endpoints/team'
 require 'slack/web/api/endpoints/usergroups'
+require 'slack/web/api/endpoints/usergroups_users'
 require 'slack/web/api/endpoints/users'
 
 module Slack
@@ -34,6 +36,7 @@ module Slack
         include Chat
         include Dnd
         include Emoji
+        include FilesComments
         include Files
         include Groups
         include Im
@@ -46,6 +49,7 @@ module Slack
         include Stars
         include Team
         include Usergroups
+        include UsergroupsUsers
         include Users
       end
     end

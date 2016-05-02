@@ -11,7 +11,7 @@ module Slack
         :logger,
         :endpoint,
         :token
-      ]
+      ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
 

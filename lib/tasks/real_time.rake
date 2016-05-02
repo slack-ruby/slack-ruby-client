@@ -5,7 +5,7 @@ require 'erubis'
 namespace :slack do
   namespace :real_time do
     namespace :api do
-      REAL_TIME_EVENTS_MARKER = '### RealTime Events'
+      REAL_TIME_EVENTS_MARKER = '### RealTime Events'.freeze
 
       desc 'Update API.'
       task update: [:git_update] do

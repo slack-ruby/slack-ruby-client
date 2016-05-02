@@ -13,7 +13,7 @@ module Slack
         :start_options,
         :store_class,
         :logger
-      ]
+      ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
 
