@@ -16,7 +16,7 @@ flag ['vcr-cassette-name'], desc: 'Offline VCR cassette.'
 pre do |global_options, _command, options, _args|
   # global Slack configuration
   Slack.config.token = global_options['slack-api-token']
-  help_now! 'Set Slack API token via --slack-api-token or SLACK_API_TOKEN.' unless Slack.config.token && Slack.config.token.length > 0
+  help_now! 'Set Slack API token via --slack-api-token or SLACK_API_TOKEN.' unless Slack.config.token && !Slack.config.token.empty?
 
   if global_options['debug']
     require 'logger'

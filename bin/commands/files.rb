@@ -2,17 +2,6 @@
 
 desc 'Get info on files uploaded to Slack, upload new files to Slack.'
 command 'files' do |g|
-  g.desc 'Edit an existing comment on a file. Only the user who created a comment may make edits. Teams may configure a limited time window during which file comment edits are allowed.'
-  g.long_desc %( Edit an existing comment on a file. Only the user who created a comment may make edits. Teams may configure a limited time window during which file comment edits are allowed. )
-  g.command 'comments' do |c|
-    c.flag 'file', desc: 'File containing the comment to edit.'
-    c.flag 'id', desc: 'The comment to edit.'
-    c.flag 'comment', desc: 'Text of the comment to edit.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_comments(options))
-    end
-  end
-
   g.desc 'This method deletes a file from your team.'
   g.long_desc %( This method deletes a file from your team. )
   g.command 'delete' do |c|

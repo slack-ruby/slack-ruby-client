@@ -26,7 +26,7 @@ class QueueWithTimeout
       if @queue.empty?
         @recieved.wait(@mutex, timeout) if timeout != 0
         # if we're still empty after the timeout, raise exception
-        fail ThreadError, 'queue empty' if @queue.empty?
+        raise ThreadError, 'queue empty' if @queue.empty?
       end
       @queue.shift
     end

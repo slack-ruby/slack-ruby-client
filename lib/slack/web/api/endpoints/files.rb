@@ -6,24 +6,6 @@ module Slack
       module Endpoints
         module Files
           #
-          # Edit an existing comment on a file. Only the user who created a comment may make edits. Teams may configure a limited time window during which file comment edits are allowed.
-          #
-          # @option options [file] :file
-          #   File containing the comment to edit.
-          # @option options [Object] :id
-          #   The comment to edit.
-          # @option options [Object] :comment
-          #   Text of the comment to edit.
-          # @see https://api.slack.com/methods/files.comments
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.comments.json
-          def files_comments(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
-            throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
-            post('files.comments', options)
-          end
-
-          #
           # This method deletes a file from your team.
           #
           # @option options [file] :file

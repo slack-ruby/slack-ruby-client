@@ -17,7 +17,7 @@ module Slack
                 return Slack::Messages::Message.new('ok' => true, 'channel' => { 'id' => channel.id }) if channel.name == name[1..-1]
               end
             end
-            fail Slack::Web::Api::Error, 'channel_not_found'
+            raise Slack::Web::Api::Error, 'channel_not_found'
           end
         end
       end
