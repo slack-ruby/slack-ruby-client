@@ -1,3 +1,7 @@
+### 0.7.2 (Next)
+
+* Your contribution here.
+
 ### 0.7.1 (5/2/2016)
 
 * [#82](https://github.com/dblock/slack-ruby-client/pull/82): Fix `usergroups.users.{list,update}` and `files.comments.{add,edit,delete}` APIs - [@masatomo](https://github.com/masatomo).
