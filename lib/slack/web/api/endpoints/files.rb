@@ -90,9 +90,9 @@ module Slack
           # This method allows you to create or upload an existing file.
           #
           # @option options [file] :file
-          #   File contents via multipart/form-data.
+          #   File contents via multipart/form-data. If omitting this parameter, you must submit content.
           # @option options [Object] :content
-          #   File contents via a POST var.
+          #   File contents via a POST variable. If omitting this parameter, you must provide a file.
           # @option options [Object] :filetype
           #   A file type identifier.
           # @option options [Object] :filename

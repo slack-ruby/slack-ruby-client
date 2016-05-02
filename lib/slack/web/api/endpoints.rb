@@ -14,6 +14,7 @@ require 'slack/web/api/endpoints/mpim'
 require 'slack/web/api/endpoints/oauth'
 require 'slack/web/api/endpoints/pins'
 require 'slack/web/api/endpoints/reactions'
+require 'slack/web/api/endpoints/reminders'
 require 'slack/web/api/endpoints/rtm'
 require 'slack/web/api/endpoints/search'
 require 'slack/web/api/endpoints/stars'
@@ -44,6 +45,7 @@ module Slack
         include Oauth
         include Pins
         include Reactions
+        include Reminders
         include Rtm
         include Search
         include Stars

@@ -66,8 +66,8 @@ You can pass multiple values in the types argument, like types=posts,snippets.Th
   g.desc 'This method allows you to create or upload an existing file.'
   g.long_desc %( This method allows you to create or upload an existing file. )
   g.command 'upload' do |c|
-    c.flag 'file', desc: 'File contents via multipart/form-data.'
-    c.flag 'content', desc: 'File contents via a POST var.'
+    c.flag 'file', desc: 'File contents via multipart/form-data. If omitting this parameter, you must submit content.'
+    c.flag 'content', desc: 'File contents via a POST variable. If omitting this parameter, you must provide a file.'
     c.flag 'filetype', desc: 'A file type identifier.'
     c.flag 'filename', desc: 'Filename of file.'
     c.flag 'title', desc: 'Title of file.'

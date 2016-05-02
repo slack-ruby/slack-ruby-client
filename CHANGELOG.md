@@ -4,6 +4,9 @@
 * [#73](https://github.com/dblock/slack-ruby-client/issues/73): Add a `closed` event - [@rkadyb](https://github.com/rkadyb).
 * [#69](https://github.com/dblock/slack-ruby-client/issues/69): Add attachments support for `Slack::Web::Api::Endpoints::Chat.chat_update` - [@nicka](https://github.com/nicka).
 * [#85](https://github.com/dblock/slack-ruby-client/issues/85): Compatibility with WebMock 2.0 - [@dblock](https://github.com/dblock).
+* Added `as_user` to `chat_delete` Web API - [@dblock](https://github.com/dblock).
+* Added `reminders_add`, `reminders_complete`, `reminders_delete`, `reminders_info` and `reminders_list` to Web API - [@dblock](https://github.com/dblock).
+
 * Your contribution here.
 
 ### 0.7.0 (3/6/2016)

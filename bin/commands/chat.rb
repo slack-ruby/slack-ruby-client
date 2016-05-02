@@ -7,6 +7,7 @@ command 'chat' do |g|
   g.command 'delete' do |c|
     c.flag 'ts', desc: 'Timestamp of the message to be deleted.'
     c.flag 'channel', desc: 'Channel containing the message to be deleted.'
+    c.flag 'as_user', desc: 'Pass true to delete the message as the authed user. Bot users in this context are considered authed users.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_delete(options))
     end
