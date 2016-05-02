@@ -1,9 +1,10 @@
 ### 0.7.1 (Next)
 
-* Your contribution here.
 * [#82](https://github.com/dblock/slack-ruby-client/pull/82): Fix `usergroups.users.{list,update}` and `files.comments.{add,edit,delete}` APIs - [@masatomo](https://github.com/masatomo).
 * [#73](https://github.com/dblock/slack-ruby-client/issues/73): Add a `closed` event - [@rkadyb](https://github.com/rkadyb).
 * [#69](https://github.com/dblock/slack-ruby-client/issues/69): Add attachments support for `Slack::Web::Api::Endpoints::Chat.chat_update` - [@nicka](https://github.com/nicka).
+* [#85](https://github.com/dblock/slack-ruby-client/issues/85): Compatibility with WebMock 2.0 - [@dblock](https://github.com/dblock).
+* Your contribution here.
 
 ### 0.7.0 (3/6/2016)
 
