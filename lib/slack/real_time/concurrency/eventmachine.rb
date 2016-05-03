@@ -26,10 +26,10 @@ module Slack
         end
 
         class Socket < Slack::RealTime::Socket
-          def start_async
+          def start_async(client)
             thread = ensure_reactor_running
 
-            yield self if block_given?
+            client.run_loop
 
             thread
           end

@@ -16,20 +16,8 @@ begin
       end
 
       describe '#connect!' do
-        before do
-          allow(ws).to receive(:on).with(:close)
-        end
-
-        xit 'connects' do
-          expect(socket.driver).to receive(:start)
-
-          socket.connect!
-        end
-
-        xit 'pings every 30s' do
-          expect(driver).to receive(:client).with(socket).and_return(ws)
-          socket.connect!
-        end
+        pending 'connects'
+        pending 'pings every 30s'
       end
 
       describe '#disconnect!' do
@@ -40,19 +28,7 @@ begin
         end
       end
 
-      describe 'send_data' do
-        let(:driver) { socket.driver }
-        before do
-          allow(driver).to receive(:start)
-          allow(subject).to receive(:run_loop)
-          socket.connect!
-        end
-
-        it 'sends data' do
-          expect(driver).to receive(:text).with('data')
-          subject.send_data('data')
-        end
-      end
+      pending 'send_data'
     end
   end
 rescue LoadError

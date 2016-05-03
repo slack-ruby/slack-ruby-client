@@ -41,15 +41,15 @@ module Slack
         !driver.nil?
       end
 
-      def start_sync(&block)
-        thread = start_async(&block)
+      def start_sync(client)
+        thread = start_async(client)
         thread.join if thread
       rescue Interrupt
         thread.exit if thread
       end
 
       # @return [#join]
-      def start_async
+      def start_async(_client)
         fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 

@@ -22,18 +22,17 @@ module Slack
 
           def initialize(*args)
             super
-            @driver = build_driver
           end
 
-          # @yieldparam [WebSocket::Driver] driver
           def connect!
             super
-
-            driver.start
-            future.run_loop
+            run_loop
           end
 
           def run_loop
+            @socket = build_socket
+            @connected = @socket.connect
+            driver.start
             loop { read } if socket
           rescue EOFError
             # connection closed
@@ -50,10 +49,13 @@ module Slack
             socket.write(data)
           end
 
-          def start_async
-            future = yield self if block_given?
+          def start_async(client)
+            @client = client
+            Actor.new(future.run_client_loop)
+          end
 
-            Actor.new(future)
+          def run_client_loop
+            @client.run_loop
           end
 
           def connected?
@@ -89,8 +91,7 @@ module Slack
           end
 
           def connect
-            @socket = build_socket
-            @connected = @socket.connect
+            @driver = build_driver
           end
         end
       end

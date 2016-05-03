@@ -45,18 +45,18 @@ module Slack
       end
 
       # Start RealTime client and block until it disconnects.
-      # @yieldparam [Websocket::Driver] driver
       def start!(&block)
-        socket = build_socket
-        socket.start_sync { run_loop(socket, &block) }
+        @callback = block if block_given?
+        @socket = build_socket
+        @socket.start_sync(self)
       end
 
       # Start RealTime client and return immediately.
       # The RealTime::Client will run in the background.
-      # @yieldparam [Websocket::Driver] driver
       def start_async(&block)
-        socket = build_socket
-        socket.start_async { run_loop(socket, &block) }
+        @callback = block if block_given?
+        @socket = build_socket
+        @socket.start_async(self)
       end
 
       def stop!
@@ -78,31 +78,9 @@ module Slack
         end
       end
 
-      protected
-
-      # @return [Slack::RealTime::Socket]
-      def build_socket
-        fail ClientAlreadyStartedError if started?
-        start = web_client.rtm_start(start_options)
-        data = Slack::Messages::Message.new(start)
-        @url = data.url
-        @store = @store_class.new(data) if @store_class
-        socket_class.new(@url, socket_options)
-      end
-
-      def socket_options
-        socket_options = {}
-        socket_options[:ping] = websocket_ping if websocket_ping
-        socket_options[:proxy] = websocket_proxy if websocket_proxy
-        socket_options[:logger] = logger
-        socket_options
-      end
-
-      def run_loop(socket)
-        @socket = socket
-
+      def run_loop
         @socket.connect! do |driver|
-          yield driver if block_given?
+          @callback.call(driver) if @callback
 
           driver.on :open do |event|
             logger.debug("#{self.class}##{__method__}") { event.class.name }
@@ -122,6 +100,26 @@ module Slack
             callback(event, :closed)
           end
         end
+      end
+
+      protected
+
+      # @return [Slack::RealTime::Socket]
+      def build_socket
+        fail ClientAlreadyStartedError if started?
+        start = web_client.rtm_start(start_options)
+        data = Slack::Messages::Message.new(start)
+        @url = data.url
+        @store = @store_class.new(data) if @store_class
+        socket_class.new(@url, socket_options)
+      end
+
+      def socket_options
+        socket_options = {}
+        socket_options[:ping] = websocket_ping if websocket_ping
+        socket_options[:proxy] = websocket_proxy if websocket_proxy
+        socket_options[:logger] = logger
+        socket_options
       end
 
       attr_reader :callbacks

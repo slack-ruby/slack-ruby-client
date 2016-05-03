@@ -51,7 +51,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         before do
           allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
           allow(socket).to receive(:connect!)
-          allow(socket).to receive(:start_sync).and_yield
+          allow(socket).to receive(:start_sync)
           client.start!
         end
         context 'properties provided upon connection' do
@@ -254,7 +254,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           before do
             allow(Slack::RealTime::Socket).to receive(:new).and_return(socket)
             allow(socket).to receive(:connect!)
-            allow(socket).to receive(:start_sync).and_yield
+            allow(socket).to receive(:start_sync)
           end
           it 'calls rtm_start with start options' do
             expect(client.web_client).to receive(:rtm_start).with(simple_latest: true).and_call_original
@@ -282,7 +282,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           before do
             allow(Slack::RealTime::Socket).to receive(:new).and_return(socket)
             allow(socket).to receive(:connect!)
-            allow(socket).to receive(:start_sync).and_yield
+            allow(socket).to receive(:start_sync)
           end
           it 'instantiates the correct store class' do
             client.start!
