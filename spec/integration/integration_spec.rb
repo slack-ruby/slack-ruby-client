@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe 'integration test', skip: !ENV['SLACK_API_TOKEN'] && 'missing SLACK_API_TOKEN' do
+RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCURRENCY']) && 'missing SLACK_API_TOKEN and/or CONCURRENCY' do
   around do |ex|
     WebMock.allow_net_connect!
     VCR.turned_off { ex.run }

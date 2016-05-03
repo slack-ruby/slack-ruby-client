@@ -2,17 +2,19 @@ language: ruby
 
 cache: bundler
 
-rvm:
-  - 2.3.0
-  - 2.2
-  - 2.1
-  - 2.0
-  - rbx-2
-  - jruby-19mode
-  - ruby-head
-  - jruby-head
-
 matrix:
+  include:
+    - rvm: 2.3.0
+      env: CONCURRENCY=celluloid-io
+    - rvm: 2.3.0
+      env: CONCURRENCY=faye-websocket
+    - rvm: 2.2
+    - rvm: 2.1
+    - rvm: 2.0
+    - rvm: rbx-2
+    - rvm: jruby-19mode
+    - rvm: ruby-head
+    - rvm: jruby-head
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
@@ -21,7 +23,3 @@ matrix:
 
 git:
   submodules: false
-
-env:
-  - CONCURRENCY=celluloid-io
-  - CONCURRENCY=faye-websocket
