@@ -1,7 +1,6 @@
-### 0.7.2 (Next)
+### 0.7.2 (5/5/2016)
 
 * [#84](https://github.com/dblock/slack-ruby-client/issues/84): Fix: Celluloid concurrency doesn't parallelize the connection setup - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.7.1 (5/2/2016)
 
