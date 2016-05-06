@@ -306,17 +306,13 @@ Slack::RealTime.configure do |config|
 end
 ```
 
-Use `client.start_async` instead of `client.start!` if you don't want the library to control the event run loop, such as when integrating into other applications that already use Eventmachine or Celluloid. A good example of such application is [slack-bot-server](https://github.com/dblock/slack-bot-server).
+Use `client.start_async` instead of `client.start!`. A good example of such application is [slack-bot-server](https://github.com/dblock/slack-bot-server).
 
 ```ruby
 client = Slack::RealTime::Client.new
 
-EM.run do
-  client.start_async
-end
+client.start_async
 ```
-
-See a fully working example in [examples/hi_real_time_async](examples/hi_real_time_async/hi.rb).
 
 ##### Faye::Websocket with Eventmachine
 
@@ -326,13 +322,19 @@ Add the following to your Gemfile.
 gem 'faye-websocket'
 ```
 
+See a fully working example in [examples/hi_real_time_async_eventmachine](examples/hi_real_time_async_eventmachine/hi.rb).
+
 ##### Celluloid
 
 Add the following to your Gemfile.
 
 ```
-gem 'celluloid-io'
+gem 'celluloid-io', require: ['celluloid/current', 'celluloid/io']
 ```
+
+See a fully working example in [examples/hi_real_time_async_celluloid](examples/hi_real_time_async_celluloid/hi.rb).
+
+Require
 
 ### Message Parsing
 
