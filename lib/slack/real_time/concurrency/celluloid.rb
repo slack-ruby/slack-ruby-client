@@ -30,12 +30,18 @@ module Slack
           end
 
           def run_loop
+            @closing = false
             @socket = build_socket
             @connected = @socket.connect
             driver.start
             loop { read } if socket
           rescue EOFError
-            # connection closed
+            driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
+          end
+
+          def close
+            @closing = true
+            driver.close
           end
 
           def read

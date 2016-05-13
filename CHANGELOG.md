@@ -1,5 +1,6 @@
 ### 0.7.3 (Next)
 
+* [#90](https://github.com/dblock/slack-ruby-client/issues/90): Fix: Celluloid concurrency handles server-side connection closing - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.7.2 (5/5/2016)
