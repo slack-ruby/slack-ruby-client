@@ -1,6 +1,7 @@
 ### 0.7.4 (Next)
 
 * Your contribution here.
+* [#93](https://github.com/dblock/slack-ruby-client/pull/93): Fix: When using Celluloid concurrency, handle input from the TCP socket asynchronously from reading more. - [@benzrf](https://github.com/benzrf).
 
 ### 0.7.3 (5/14/2016)
 
