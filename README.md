@@ -5,7 +5,7 @@ Slack Ruby Client
 [![Build Status](https://travis-ci.org/dblock/slack-ruby-client.svg?branch=master)](https://travis-ci.org/dblock/slack-ruby-client)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/dblock/slack-ruby-client)
 
-A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. Comes with a handy command-line client, too.
+A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 
 ![](slack.png)
 
