@@ -11,6 +11,14 @@ command 'users' do |g|
     end
   end
 
+  g.desc "After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity."
+  g.long_desc %( After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity. )
+  g.command 'identity' do |c|
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_identity(options))
+    end
+  end
+
   g.desc 'This method returns information about a team member.'
   g.long_desc %( This method returns information about a team member. )
   g.command 'info' do |c|

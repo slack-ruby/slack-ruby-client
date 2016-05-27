@@ -12,11 +12,14 @@ module Slack
           #   File to add a comment to.
           # @option options [Object] :comment
           #   Text of the comment to add.
+          # @option options [channel] :channel
+          #   Channel id (encoded) of which location to associate with the new comment.
           # @see https://api.slack.com/methods/files.comments.add
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.comments/files.comments.add.json
           def files_comments_add(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('files.comments.add', options)
           end
 

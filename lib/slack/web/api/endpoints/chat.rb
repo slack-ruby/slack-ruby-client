@@ -24,12 +24,12 @@ module Slack
           end
 
           #
-          # This method posts a message to a public channel, private group, or IM channel.
+          # This method posts a message to a public channel, private channel, or direct message/IM channel.
           #
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [Object] :text
-          #   Text of the message to send. See below for an explanation of formatting.
+          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead.
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @option options [Object] :link_names

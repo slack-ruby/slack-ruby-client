@@ -44,7 +44,7 @@ module Slack
           #   Filter files by type:
           #
           #   all - All files
-          #   posts - Posts
+          #   spaces - Posts
           #   snippets - Snippets
           #   images - Image files
           #   gdocs - Google docs
@@ -52,7 +52,7 @@ module Slack
           #   pdfs - PDF files
           #
           #
-          #   You can pass multiple values in the types argument, like types=posts,snippets.The default value is all, which does not filter the list.
+          #   You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
           #   .
           # @see https://api.slack.com/methods/files.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.list.json

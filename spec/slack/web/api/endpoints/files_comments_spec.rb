@@ -9,7 +9,7 @@ RSpec.describe Slack::Web::Api::Endpoints::FilesComments do
       expect { client.files_comments_add(comment: 'Everyone should take a moment to read this file.') }.to raise_error ArgumentError, /Required arguments :file missing/
     end
     it 'requires comment' do
-      expect { client.files_comments_add(file: 'F1234567890') }.to raise_error ArgumentError, /Required arguments :comment missing/
+      expect { client.files_comments_add(file: 'F1234467890') }.to raise_error ArgumentError, /Required arguments :comment missing/
     end
   end
   context 'files.comments_delete' do

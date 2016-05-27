@@ -13,11 +13,11 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method posts a message to a public channel, private group, or IM channel.'
-  g.long_desc %( This method posts a message to a public channel, private group, or IM channel. )
+  g.desc 'This method posts a message to a public channel, private channel, or direct message/IM channel.'
+  g.long_desc %( This method posts a message to a public channel, private channel, or direct message/IM channel. )
   g.command 'postMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
-    c.flag 'text', desc: 'Text of the message to send. See below for an explanation of formatting.'
+    c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead."
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
     c.flag 'attachments', desc: 'Structured message attachments.'

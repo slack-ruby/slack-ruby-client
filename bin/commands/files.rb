@@ -30,7 +30,7 @@ command 'files' do |g|
     c.flag 'types', desc: 'Filter files by type:
 
 all - All files
-posts - Posts
+spaces - Posts
 snippets - Snippets
 images - Image files
 gdocs - Google docs
@@ -38,7 +38,7 @@ zips - Zip files
 pdfs - PDF files
 
 
-You can pass multiple values in the types argument, like types=posts,snippets.The default value is all, which does not filter the list.
+You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
 .'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_list(options))

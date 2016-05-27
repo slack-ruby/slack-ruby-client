@@ -1,7 +1,9 @@
 ### 0.7.4 (Next)
 
-* Your contribution here.
 * [#93](https://github.com/dblock/slack-ruby-client/pull/93): Fix: When using Celluloid concurrency, handle input from the TCP socket asynchronously from reading more. - [@benzrf](https://github.com/benzrf).
+* Added `auth_revoke` and `users_identity` to Web API - [@dblock](https://github.com/dblock).
+* Added `channel` parameter to `files_comments_add` Web API - [@dblock](https://github.com/dblock).
+* Your contribution here.
 
 ### 0.7.3 (5/14/2016)
 

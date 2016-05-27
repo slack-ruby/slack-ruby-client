@@ -20,6 +20,15 @@ module Slack
           end
 
           #
+          # After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity.
+          #
+          # @see https://api.slack.com/methods/users.identity
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.identity.json
+          def users_identity(options = {})
+            post('users.identity', options)
+          end
+
+          #
           # This method returns information about a team member.
           #
           # @option options [user] :user
