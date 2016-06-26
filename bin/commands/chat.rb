@@ -13,6 +13,16 @@ command 'chat' do |g|
     end
   end
 
+  g.desc 'This method sends a me message to a channel from the calling user.'
+  g.long_desc %( This method sends a me message to a channel from the calling user. )
+  g.command 'meMessage' do |c|
+    c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.'
+    c.flag 'text', desc: 'Text of the message to send.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.chat_meMessage(options))
+    end
+  end
+
   g.desc 'This method posts a message to a public channel, private channel, or direct message/IM channel.'
   g.long_desc %( This method posts a message to a public channel, private channel, or direct message/IM channel. )
   g.command 'postMessage' do |c|
