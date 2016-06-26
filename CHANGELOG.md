@@ -1,6 +1,7 @@
 ### 0.7.5 (Next)
 
 * Your contribution here.
+* [#97](https://github.com/dblock/slack-ruby-client/issues/97): Add chat.meMessage - [@aaronpk](https://github.com/aaronpk)
 
 ### 0.7.4 (5/28/2016)
 
