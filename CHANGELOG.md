@@ -1,3 +1,7 @@
+### 0.7.6 (Next)
+
+* Your contribution here.
+
 ### 0.7.5 (6/27/2016)
 
 * Added `bots_info` to Web API - [@dblock](https://github.com/dblock).
