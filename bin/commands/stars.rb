@@ -14,10 +14,9 @@ command 'stars' do |g|
     end
   end
 
-  g.desc 'This method lists the items starred by a user.'
-  g.long_desc %( This method lists the items starred by a user. )
+  g.desc 'This method lists the items starred by the authed user.'
+  g.long_desc %( This method lists the items starred by the authed user. )
   g.command 'list' do |c|
-    c.flag 'user', desc: 'Show stars by this user. Defaults to the authed user.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.stars_list(options))
     end

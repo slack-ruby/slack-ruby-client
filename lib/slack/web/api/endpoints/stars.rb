@@ -25,14 +25,11 @@ module Slack
           end
 
           #
-          # This method lists the items starred by a user.
+          # This method lists the items starred by the authed user.
           #
-          # @option options [user] :user
-          #   Show stars by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.list.json
           def stars_list(options = {})
-            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('stars.list', options)
           end
 

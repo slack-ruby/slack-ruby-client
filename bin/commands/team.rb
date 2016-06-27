@@ -10,6 +10,15 @@ command 'team' do |g|
     end
   end
 
+  g.desc 'This method lists billable information for each user on the team. Currently this consists solely of whether the user is'
+  g.long_desc %( This method lists billable information for each user on the team. Currently this consists solely of whether the user is subject to billing per Slack's Fair Billing policy. )
+  g.command 'billableInfo' do |c|
+    c.flag 'user', desc: 'A user to retrieve the billable information for. Defaults to all users.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.team_billableInfo(options))
+    end
+  end
+
   g.desc 'This method provides information about your team.'
   g.long_desc %( This method provides information about your team. )
   g.command 'info' do |c|

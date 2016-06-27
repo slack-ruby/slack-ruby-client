@@ -1,5 +1,10 @@
 ### 0.7.5 (Next)
 
+* Added `bots_info` to Web API - [@dblock](https://github.com/dblock).
+* Added `team_profile_get` and `team_billableInfo` to Web API - [@dblock](https://github.com/dblock).
+* Added `chat_meMessage` to Web API - [@dblock](https://github.com/dblock), [@aaronpk](https://github.com/aaronpk).
+* Added `users_profile_get` and `users_profile_set` to Web API - [@dblock](https://github.com/dblock).
+* The `stars_list` method no longer takes a user - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.7.4 (5/28/2016)

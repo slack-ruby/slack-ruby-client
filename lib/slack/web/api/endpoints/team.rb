@@ -15,6 +15,19 @@ module Slack
           end
 
           #
+          # This method lists billable information for each user on the team. Currently this consists solely of whether the user is
+          # subject to billing per Slack's Fair Billing policy.
+          #
+          # @option options [user] :user
+          #   A user to retrieve the billable information for. Defaults to all users.
+          # @see https://api.slack.com/methods/team.billableInfo
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team/team.billableInfo.json
+          def team_billableInfo(options = {})
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            post('team.billableInfo', options)
+          end
+
+          #
           # This method provides information about your team.
           #
           # @see https://api.slack.com/methods/team.info

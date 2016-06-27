@@ -24,6 +24,21 @@ module Slack
           end
 
           #
+          # This method sends a me message to a channel from the calling user.
+          #
+          # @option options [channel] :channel
+          #   Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
+          # @option options [Object] :text
+          #   Text of the message to send.
+          # @see https://api.slack.com/methods/chat.meMessage
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.meMessage.json
+          def chat_meMessage(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
+            post('chat.meMessage', options)
+          end
+
+          #
           # This method posts a message to a public channel, private channel, or direct message/IM channel.
           #
           # @option options [channel] :channel

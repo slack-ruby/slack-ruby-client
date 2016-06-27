@@ -2,6 +2,7 @@
 
 require 'slack/web/api/endpoints/api'
 require 'slack/web/api/endpoints/auth'
+require 'slack/web/api/endpoints/bots'
 require 'slack/web/api/endpoints/channels'
 require 'slack/web/api/endpoints/chat'
 require 'slack/web/api/endpoints/dnd'
@@ -19,9 +20,11 @@ require 'slack/web/api/endpoints/rtm'
 require 'slack/web/api/endpoints/search'
 require 'slack/web/api/endpoints/stars'
 require 'slack/web/api/endpoints/team'
+require 'slack/web/api/endpoints/team_profile'
 require 'slack/web/api/endpoints/usergroups'
 require 'slack/web/api/endpoints/usergroups_users'
 require 'slack/web/api/endpoints/users'
+require 'slack/web/api/endpoints/users_profile'
 
 module Slack
   module Web
@@ -33,6 +36,7 @@ module Slack
 
         include Api
         include Auth
+        include Bots
         include Channels
         include Chat
         include Dnd
@@ -50,9 +54,11 @@ module Slack
         include Search
         include Stars
         include Team
+        include TeamProfile
         include Usergroups
         include UsergroupsUsers
         include Users
+        include UsersProfile
       end
     end
   end
