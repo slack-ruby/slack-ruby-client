@@ -1,3 +1,7 @@
+### 0.7.7 (Next)
+
+* Your contribution here.
+
 ### 0.7.6 (8/7/2016)
 
 * Added `url_verification`, `message.mpim`, `message.im`, `message.groups` and `message.channels` RealTime events - [@dblock](https://github.com/dblock).
