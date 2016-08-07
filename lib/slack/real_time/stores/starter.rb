@@ -14,6 +14,31 @@ module Slack
 
         ### RealTime Events
 
+        # Verifies ownership of an Events API Request URL.
+        # @see https://api.slack.com/events/url_verification
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/url_verification.json
+        # on :url_verification do |data|
+
+        # A message was posted in a multiparty direct message channel.
+        # @see https://api.slack.com/events/message.mpim
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/message.mpim.json
+        # on :message.mpim do |data|
+
+        # A message was posted in a direct message channel.
+        # @see https://api.slack.com/events/message.im
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/message.im.json
+        # on :message.im do |data|
+
+        # A message was posted to a private channel.
+        # @see https://api.slack.com/events/message.groups
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/message.groups.json
+        # on :message.groups do |data|
+
+        # A message was posted to a channel.
+        # @see https://api.slack.com/events/message.channels
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/message.channels.json
+        # on :message.channels do |data|
+
         # A channel member is typing a message.
         # @see https://api.slack.com/events/user_typing
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/user_typing.json

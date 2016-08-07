@@ -71,6 +71,8 @@ module Slack
           #
           # @option options [user] :user
           #   User to open a direct message channel with.
+          # @option options [Object] :return_im
+          #   Boolean, indicates you want the full IM channel definition in the response.
           # @see https://api.slack.com/methods/im.open
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.open.json
           def im_open(options = {})

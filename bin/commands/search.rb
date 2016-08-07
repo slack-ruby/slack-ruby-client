@@ -2,8 +2,8 @@
 
 desc "Search your team's files and messages."
 command 'search' do |g|
-  g.desc 'This method allows to to search both messages and files in a single call.'
-  g.long_desc %( This method allows to to search both messages and files in a single call. )
+  g.desc 'This method allows users and applications to search both messages and files in a single call.'
+  g.long_desc %( This method allows users and applications to search both messages and files in a single call. )
   g.command 'all' do |c|
     c.flag 'query', desc: 'Search query. May contains booleans, etc.'
     c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'

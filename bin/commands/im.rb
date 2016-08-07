@@ -46,6 +46,7 @@ command 'im' do |g|
   g.long_desc %( This method opens a direct message channel with another member of your Slack team. )
   g.command 'open' do |c|
     c.flag 'user', desc: 'User to open a direct message channel with.'
+    c.flag 'return_im', desc: 'Boolean, indicates you want the full IM channel definition in the response.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.im_open(options))
     end
