@@ -1,5 +1,6 @@
 ### 0.7.7 (Next)
 
+* [101](https://github.com/dblock/slack-ruby-client/issues/101): Fix: protected method `close` called with EventMachine - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.7.6 (8/7/2016)
