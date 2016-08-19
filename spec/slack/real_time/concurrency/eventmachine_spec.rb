@@ -1,17 +1,14 @@
 require 'spec_helper'
+require_relative './it_behaves_like_a_realtime_socket'
 
 begin
   RSpec.describe Slack::RealTime::Concurrency::Eventmachine::Socket do
+    it_behaves_like 'a realtime socket'
     context 'with url' do
       let(:url) { 'wss://ms174.slack-msgs.com/websocket/xyz' }
       let(:logger) { ::Logger.new($stdout) }
       let(:socket) { described_class.new(url, ping: 42, logger: logger) }
       let(:ws) { double(Faye::WebSocket::Client) }
-      describe '#initialize' do
-        it 'sets url' do
-          expect(socket.url).to eq url
-        end
-      end
       describe '#connect!' do
         before do
           allow(ws).to receive(:on).with(:close)

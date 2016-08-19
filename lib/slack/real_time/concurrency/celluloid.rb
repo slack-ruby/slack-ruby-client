@@ -43,6 +43,7 @@ module Slack
           def close
             @closing = true
             driver.close
+            super
           end
 
           def read

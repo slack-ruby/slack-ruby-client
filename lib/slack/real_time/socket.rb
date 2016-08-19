@@ -53,6 +53,10 @@ module Slack
         fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
+      def close
+        @driver = nil
+      end
+
       protected
 
       def addr
@@ -76,10 +80,6 @@ module Slack
 
       def connect
         fail NotImplementedError, "Expected #{self.class} to implement #{__method__}."
-      end
-
-      def close(_event)
-        @driver = nil
       end
     end
   end
