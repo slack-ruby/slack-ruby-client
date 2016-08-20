@@ -2,8 +2,8 @@ Slack Ruby Client
 =================
 
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
-[![Build Status](https://travis-ci.org/dblock/slack-ruby-client.svg?branch=master)](https://travis-ci.org/dblock/slack-ruby-client)
-[![Code Climate](https://codeclimate.com/github/dblock/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/dblock/slack-ruby-client)
+[![Build Status](https://travis-ci.org/slack-ruby/slack-ruby-client.svg?branch=master)](https://travis-ci.org/slack-ruby/slack-ruby-client)
+[![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-client)
 
 A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 
@@ -18,7 +18,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.7.6](https://github.com/dblock/slack-ruby-client/blob/v0.7.6/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.7.6](https://github.com/slack-ruby/slack-ruby-client/blob/v0.7.6/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ## Installation
 

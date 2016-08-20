@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- spec/*`.split("\n")
   s.require_paths = ['lib']
-  s.homepage = 'http://github.com/dblock/slack-ruby-client'
+  s.homepage = 'http://github.com/slack-ruby/slack-ruby-client'
   s.licenses = ['MIT']
   s.summary = 'Slack Web and RealTime API client.'
   s.add_dependency 'activesupport'

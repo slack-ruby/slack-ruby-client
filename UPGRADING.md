@@ -19,7 +19,7 @@ After:
 puts "Welcome #{client.self.name} to the #{client.team.name} team."
 ```
 
-See [#56](https://github.com/dblock/slack-ruby-client/issues/56) for more information.
+See [#56](https://github.com/slack-ruby/slack-ruby-client/issues/56) for more information.
 
 #### Changes to RealTime Local Store
 
@@ -37,7 +37,7 @@ The `client.team` object is now a `Slack::RealTime::Models::Team`, which is a ch
 
 The `client.users`, `.channels`, `.groups` and `.ims` collections have been changed from `Array` to `Hash`, with object ID as key. Replace any code iterating over the array, eg. `client.users.values.each` or `client.channels.each_pair { |id, channel| ... }`.
 
-See [#55](https://github.com/dblock/slack-ruby-client/issues/55) for more information.
+See [#55](https://github.com/slack-ruby/slack-ruby-client/issues/55) for more information.
 
 ### Upgrading to >= 0.5.0
 
@@ -59,6 +59,6 @@ gem 'celluloid-io'
 
 When in doubt, use `faye-websocket`.
 
-See [#5](https://github.com/dblock/slack-ruby-client/issues/5) for more information.
+See [#5](https://github.com/slack-ruby/slack-ruby-client/issues/5) for more information.
 
 
