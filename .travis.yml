@@ -5,6 +5,9 @@ cache: bundler
 matrix:
   include:
     - rvm: 2.3.0
+      script:
+        - bundle exec danger
+    - rvm: 2.3.0
       env: CONCURRENCY=celluloid-io
     - rvm: 2.3.0
       env: CONCURRENCY=faye-websocket

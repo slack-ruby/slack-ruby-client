@@ -1,19 +1,19 @@
 # Contributing to Slack-Ruby-Client
 
-This project is work of [many contributors](https://github.com/dblock/slack-ruby-client/graphs/contributors).
+This project is work of [many contributors](https://github.com/slack-ruby/slack-ruby-client/graphs/contributors).
 
-You're encouraged to submit [pull requests](https://github.com/dblock/slack-ruby-client/pulls), [propose features and discuss issues](https://github.com/dblock/slack-ruby-client/issues).
+You're encouraged to submit [pull requests](https://github.com/slack-ruby/slack-ruby-client/pulls), [propose features and discuss issues](https://github.com/slack-ruby/slack-ruby-client/issues).
 
 In the examples below, substitute your Github username for `contributor` in URLs.
 
 ### Fork the Project
 
-Fork the [project on Github](https://github.com/dblock/slack-ruby-client) and check out your copy.
+Fork the [project on Github](https://github.com/slack-ruby/slack-ruby-client) and check out your copy.
 
 ```
 git clone https://github.com/contributor/slack-ruby-client.git
 cd slack-ruby-client
-git remote add upstream https://github.com/dblock/slack-ruby-client.git
+git remote add upstream https://github.com/slack-ruby/slack-ruby-client.git
 ```
 
 ### Bundle Install and Test
@@ -73,7 +73,7 @@ rake slack:api:update
 
 #### Patching Slack Web API
 
-Sometimes it's necessary to patch auto-generated Slack Web API methods. For example, we want to help clients with calling `to_json` on the `attachments` parameter sent to `chat_postMessage`. See [#20](https://github.com/dblock/slack-ruby-client/issues/20).
+Sometimes it's necessary to patch auto-generated Slack Web API methods. For example, we want to help clients with calling `to_json` on the `attachments` parameter sent to `chat_postMessage`. See [#20](https://github.com/slack-ruby/slack-ruby-client/issues/20).
 
 Make a change to a generated file, for example `lib/slack/web/api/endpoints/chat.rb` and generate a patch.
 
@@ -124,7 +124,7 @@ Go to https://github.com/contributor/slack-ruby-client and select your feature b
 Update the [CHANGELOG](CHANGELOG.md) with the pull request number. A typical entry looks as follows.
 
 ```
-* [#123](https://github.com/dblock/slack-ruby-client/pull/123): Reticulated splines - [@contributor](https://github.com/contributor).
+* [#123](https://github.com/slack-ruby/slack-ruby-client/pull/123): Reticulated splines - [@contributor](https://github.com/contributor).
 ```
 
 Amend your previous commit and force push the changes.
