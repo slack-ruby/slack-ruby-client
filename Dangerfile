@@ -1,1 +1,1 @@
-# inherits from https://github.com/ruby-grape/danger
+# inherits from https://github.com/slack-ruby/danger
