@@ -38,6 +38,8 @@ module Slack
           rescue EOFError => e
             logger.debug("#{self.class}##{__method__}") { e }
             driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
+          ensure
+            terminate
           end
 
           def close

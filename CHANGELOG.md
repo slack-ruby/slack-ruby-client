@@ -2,6 +2,7 @@
 
 * [#103](https://github.com/slack-ruby/slack-ruby-client/pull/103): Added Danger, PR linting - [@dblock](https://github.com/dblock).
 * [#101](https://github.com/slack-ruby/slack-ruby-client/issues/101): Fix: protected method `close` called with EventMachine - [@dblock](https://github.com/dblock).
+* [#104](https://github.com/slack-ruby/slack-ruby-client/issues/104): Fix: thread leak in `start_async` with Celluloid - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.7.6 (8/7/2016)
