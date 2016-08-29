@@ -1,3 +1,7 @@
+### 0.7.8 (Next)
+
+* Your contribition here.
+
 ### 0.7.7 (8/29/2016)
 
 * [#103](https://github.com/slack-ruby/slack-ruby-client/pull/103): Added Danger, PR linting - [@dblock](https://github.com/dblock).
