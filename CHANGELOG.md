@@ -1,6 +1,6 @@
 ### 0.7.8 (Next)
 
-* Your contribition here.
+* Your contribution here.
 
 ### 0.7.7 (8/29/2016)
 
