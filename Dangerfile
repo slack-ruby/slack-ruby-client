@@ -1,1 +1,1 @@
-# inherits from https://github.com/slack-ruby/danger
+danger.import_dangerfile 'slack-ruby/danger'
