@@ -1,1 +1,1 @@
-danger.import_dangerfile 'slack-ruby/danger'
+danger.import_dangerfile(gem: 'slack-ruby-danger')
