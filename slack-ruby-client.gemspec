@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.licenses = ['MIT']
   s.summary = 'Slack Web and RealTime API client.'
   s.add_dependency 'activesupport'
-  s.add_dependency 'faraday'
+  s.add_dependency 'faraday', '>= 0.9'
   s.add_dependency 'faraday_middleware'
   s.add_dependency 'json'
   s.add_dependency 'websocket-driver'
