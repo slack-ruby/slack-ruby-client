@@ -6,6 +6,15 @@ module Slack
       module Endpoints
         module Users
           #
+          # This method allows the user to delete their profile image. It will clear whatever image is currently set.
+          #
+          # @see https://api.slack.com/methods/users.deletePhoto
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.deletePhoto.json
+          def users_deletePhoto(options = {})
+            post('users.deletePhoto', options)
+          end
+
+          #
           # This method lets you find out information about a user's presence.
           # Consult the presence documentation for more details.
           #
@@ -61,6 +70,24 @@ module Slack
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setActive.json
           def users_setActive(options = {})
             post('users.setActive', options)
+          end
+
+          #
+          # This method allows the user to set their profile image. The caller can pass image data via image.
+          #
+          # @option options [Object] :image
+          #   File contents via multipart/form-data.
+          # @option options [Object] :crop_x
+          #   X coordinate of top-left corner of crop box.
+          # @option options [Object] :crop_y
+          #   Y coordinate of top-left corner of crop box.
+          # @option options [Object] :crop_w
+          #   Width/height of crop box (always square).
+          # @see https://api.slack.com/methods/users.setPhoto
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setPhoto.json
+          def users_setPhoto(options = {})
+            throw ArgumentError.new('Required arguments :image missing') if options[:image].nil?
+            post('users.setPhoto', options)
           end
 
           #
