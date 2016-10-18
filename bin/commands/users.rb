@@ -2,6 +2,14 @@
 
 desc 'Get info on members of your Slack team.'
 command 'users' do |g|
+  g.desc 'This method allows the user to delete their profile image. It will clear whatever image is currently set.'
+  g.long_desc %( This method allows the user to delete their profile image. It will clear whatever image is currently set. )
+  g.command 'deletePhoto' do |c|
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_deletePhoto(options))
+    end
+  end
+
   g.desc "This method lets you find out information about a user's presence."
   g.long_desc %( This method lets you find out information about a user's presence. Consult the presence documentation for more details. )
   g.command 'getPresence' do |c|
@@ -42,6 +50,18 @@ command 'users' do |g|
   g.command 'setActive' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setActive(options))
+    end
+  end
+
+  g.desc 'This method allows the user to set their profile image. The caller can pass image data via image.'
+  g.long_desc %( This method allows the user to set their profile image. The caller can pass image data via image. )
+  g.command 'setPhoto' do |c|
+    c.flag 'image', desc: 'File contents via multipart/form-data.'
+    c.flag 'crop_x', desc: 'X coordinate of top-left corner of crop box.'
+    c.flag 'crop_y', desc: 'Y coordinate of top-left corner of crop box.'
+    c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_setPhoto(options))
     end
   end
 

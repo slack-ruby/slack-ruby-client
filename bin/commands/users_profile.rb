@@ -15,7 +15,7 @@ command 'users_profile' do |g|
   g.desc 'This method is used to set the profile information for a user.'
   g.long_desc %( This method is used to set the profile information for a user. )
   g.command 'set' do |c|
-    c.flag 'user', desc: 'ID of user to change. This argument may only be specified by team admins.'
+    c.flag 'user', desc: 'ID of user to change. This argument may only be specified by team admins on paid teams.'
     c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash.'
     c.flag 'name', desc: 'Name of a single key to set. Usable only if profile is not passed.'
     c.flag 'value', desc: 'Value to set a single key to. Usable only if profile is not passed.'

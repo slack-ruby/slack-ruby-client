@@ -23,7 +23,7 @@ module Slack
           # This method is used to set the profile information for a user.
           #
           # @option options [user] :user
-          #   ID of user to change. This argument may only be specified by team admins.
+          #   ID of user to change. This argument may only be specified by team admins on paid teams.
           # @option options [Object] :profile
           #   Collection of key:value pairs presented as a URL-encoded JSON hash.
           # @option options [Object] :name
