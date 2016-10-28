@@ -4,6 +4,7 @@
 * [#116](https://github.com/slack-ruby/slack-ruby-client/pull/116): Use [slack-ruby/slack-api-ref](https://github.com/slack-ruby/slack-api-ref) as machine API reference - [@dblock](https://github.com/dblock).
 * [#116](https://github.com/slack-ruby/slack-ruby-client/pull/116): Added `users_setPhoto` and `users_deletePhoto` to Web API - [@dblock](https://github.com/dblock).
 * [#81](https://github.com/slack-ruby/slack-ruby-client/pull/81): Require faraday 0.9.0 or newer - [@leppert](https://github.com/leppert).
+* [#119](https://github.com/slack-ruby/slack-ruby-client/pull/119): fixed typo rest -> reset - [@naofumi-fujii](https://github.com/naofumi-fujii).
 * Your contribution here.
 
 ### 0.7.7 (8/29/2016)
