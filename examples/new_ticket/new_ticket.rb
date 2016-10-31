@@ -14,7 +14,7 @@ client.chat_postMessage(
   as_user: true,
   attachments: [
     {
-      fallback: "Ticket #1943: Can't rest my password - https://groove.hq/path/to/ticket/1943",
+      fallback: "Ticket #1943: Can't reset my password - https://groove.hq/path/to/ticket/1943",
       pretext: 'New ticket from Andrea Lee',
       title: "Ticket #1943: Can't reset my password",
       title_link: 'https://groove.hq/path/to/ticket/1943',
