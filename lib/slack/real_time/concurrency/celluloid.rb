@@ -15,8 +15,7 @@ module Slack
           BLOCK_SIZE = 4096
 
           extend ::Forwardable
-          def_delegator :socket, :write
-          def_delegators :driver, :text, :binary, :close
+          def_delegators :driver, :text, :binary
 
           attr_reader :socket
 
