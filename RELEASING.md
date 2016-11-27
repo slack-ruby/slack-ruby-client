@@ -1,6 +1,6 @@
 # Releasing Slack-Ruby-Client
 
-There're no hard rules about when to release slack-ruby-client. Release bug fixes frequenty, features not so frequently and breaking API changes rarely.
+There're no hard rules about when to release slack-ruby-client. Release bug fixes frequently, features not so frequently and breaking API changes rarely.
 
 ### Release
 
@@ -60,7 +60,7 @@ Next Release
 
 Increment the third version number in [lib/slack/version.rb](lib/slack/version.rb).
 
-Comit your changes.
+Commit your changes.
 
 ```
 git add CHANGELOG.md lib/slack/version.rb
