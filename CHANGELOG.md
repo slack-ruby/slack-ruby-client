@@ -1,4 +1,4 @@
-### 0.7.8 (Next)
+### 0.7.8 (1/23/2017)
 
 * [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `thread_ts` and `reply_broadcast` options to `chat_postMessage` in Web API - [@dblock](https://github.com/dblock).
 * [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `channels_replies`, `groups_replies` and `im_replies` to Web API - [@dblock](https://github.com/dblock).
@@ -9,7 +9,6 @@
 * [#116](https://github.com/slack-ruby/slack-ruby-client/pull/116): Added `users_setPhoto` and `users_deletePhoto` to Web API - [@dblock](https://github.com/dblock).
 * [#81](https://github.com/slack-ruby/slack-ruby-client/pull/81): Require faraday 0.9.0 or newer - [@leppert](https://github.com/leppert).
 * [#123](https://github.com/slack-ruby/slack-ruby-client/pull/123): Fix a warning about duplicate definitions - [@michaelherold](https://github.com/michaelherold).
-* Your contribution here.
 
 ### 0.7.7 (8/29/2016)
 
