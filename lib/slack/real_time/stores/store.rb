@@ -54,6 +54,11 @@ module Slack
 
         ### RealTime Events
 
+        # The server intends to close the connection soon..
+        # @see https://api.slack.com/events/goodbye
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/goodbye.json
+        # on :goodbye do |data|
+
         # Verifies ownership of an Events API Request URL.
         # @see https://api.slack.com/events/url_verification
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/url_verification.json

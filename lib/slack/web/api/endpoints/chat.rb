@@ -62,7 +62,11 @@ module Slack
           # @option options [Object] :icon_url
           #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [Object] :icon_emoji
-          #   emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          # @option options [Object] :thread_ts
+          #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
+          # @option options [Object] :reply_broadcast
+          #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})

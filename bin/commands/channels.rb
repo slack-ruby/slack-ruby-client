@@ -109,6 +109,16 @@ command 'channels' do |g|
     end
   end
 
+  g.desc 'This method returns an entire thread (a message plus all the messages in reply to it).'
+  g.long_desc %( This method returns an entire thread (a message plus all the messages in reply to it). )
+  g.command 'replies' do |c|
+    c.flag 'channel', desc: 'Channel to fetch thread from.'
+    c.flag 'thread_ts', desc: "Unique identifier of a thread's parent message."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.channels_replies(options))
+    end
+  end
+
   g.desc 'This method is used to change the purpose of a channel. The calling user must be a member of the channel.'
   g.long_desc %( This method is used to change the purpose of a channel. The calling user must be a member of the channel. )
   g.command 'setPurpose' do |c|

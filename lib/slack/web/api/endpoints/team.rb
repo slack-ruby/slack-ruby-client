@@ -8,6 +8,8 @@ module Slack
           #
           # This method is used to get the access logs for users on a team.
           #
+          # @option options [Object] :before
+          #   End of time range of logs to include in results (inclusive).
           # @see https://api.slack.com/methods/team.accessLogs
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team/team.accessLogs.json
           def team_accessLogs(options = {})
