@@ -1,3 +1,7 @@
+### 0.7.9 (Next)
+
+* Your contribution here.
+
 ### 0.7.8 (1/23/2017)
 
 * [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `thread_ts` and `reply_broadcast` options to `chat_postMessage` in Web API - [@dblock](https://github.com/dblock).
