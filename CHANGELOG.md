@@ -1,5 +1,9 @@
 ### 0.7.8 (Next)
 
+* [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `thread_ts` and `reply_broadcast` options to `chat_postMessage` in Web API - [@dblock](https://github.com/dblock).
+* [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `channels_replies`, `groups_replies` and `im_replies` to Web API - [@dblock](https://github.com/dblock).
+* [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `goodbye` event to the RTM API - [@dblock](https://github.com/dblock).
+* [#127](https://github.com/slack-ruby/slack-ruby-client/pull/127): Added `before` to `team_accessLogs` - [@dblock](https://github.com/dblock).
 * [#108](https://github.com/slack-ruby/slack-ruby-client/pull/108): Use slack-ruby-danger gem - [@dblock](https://github.com/dblock).
 * [#116](https://github.com/slack-ruby/slack-ruby-client/pull/116): Use [slack-ruby/slack-api-ref](https://github.com/slack-ruby/slack-api-ref) as machine API reference - [@dblock](https://github.com/dblock).
 * [#116](https://github.com/slack-ruby/slack-ruby-client/pull/116): Added `users_setPhoto` and `users_deletePhoto` to Web API - [@dblock](https://github.com/dblock).
@@ -28,7 +32,7 @@
 
 ### 0.7.4 (5/28/2016)
 
-* [#93](https://github.com/slack-ruby/slack-ruby-client/pull/93): Fix: When using Celluloid concurrency, handle input from the TCP socket asynchronously from reading more. - [@benzrf](https://github.com/benzrf).
+* [#93](https://github.com/slack-ruby/slack-ruby-client/pull/93): Fix: When using Celluloid concurrency, handle input from the TCP socket asynchronously from reading more - [@benzrf](https://github.com/benzrf).
 * Added `auth_revoke` and `users_identity` to Web API - [@dblock](https://github.com/dblock).
 * Added `channel` parameter to `files_comments_add` Web API - [@dblock](https://github.com/dblock).
 
@@ -68,7 +72,7 @@
 
 * [#45](https://github.com/slack-ruby/slack-ruby-client/issues/45): Added `channels_id`, `groups_id` and `users_id` - [@dblock](https://github.com/dblock).
 * [#45](https://github.com/slack-ruby/slack-ruby-client/issues/45): Automatically lookup channel, group and user ID in Web API methods when Slack API doesn't accept #channel or @user names - [@dblock](https://github.com/dblock).
-* [#49](https://github.com/slack-ruby/slack-ruby-client/pull/49): Fix: Celluloid `#connected?` method. - [@mikz](https://github.com/mikz), [@kandadaboggu](https://github.com/kandadaboggu).
+* [#49](https://github.com/slack-ruby/slack-ruby-client/pull/49): Fix: Celluloid `#connected?` method - [@mikz](https://github.com/mikz), [@kandadaboggu](https://github.com/kandadaboggu).
 
 ### 0.5.3 (1/11/2016)
 

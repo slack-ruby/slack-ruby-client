@@ -50,4 +50,14 @@ command 'mpim' do |g|
       puts JSON.dump($client.mpim_open(options))
     end
   end
+
+  g.desc 'This method returns an entire thread (a message plus all the messages in reply to it).'
+  g.long_desc %( This method returns an entire thread (a message plus all the messages in reply to it). )
+  g.command 'replies' do |c|
+    c.flag 'channel', desc: 'Multiparty direct message channel to fetch thread from.'
+    c.flag 'thread_ts', desc: "Unique identifier of a thread's parent message."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.mpim_replies(options))
+    end
+  end
 end

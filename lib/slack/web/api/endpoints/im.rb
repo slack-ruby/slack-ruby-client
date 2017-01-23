@@ -80,6 +80,22 @@ module Slack
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('im.open', options)
           end
+
+          #
+          # This method returns an entire thread (a message plus all the messages in reply to it).
+          #
+          # @option options [im] :channel
+          #   Direct message channel to fetch thread from.
+          # @option options [Object] :thread_ts
+          #   Unique identifier of a thread's parent message.
+          # @see https://api.slack.com/methods/im.replies
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.replies.json
+          def im_replies(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('im.replies', options)
+          end
         end
       end
     end

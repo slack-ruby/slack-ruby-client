@@ -5,6 +5,7 @@ command 'team' do |g|
   g.desc 'This method is used to get the access logs for users on a team.'
   g.long_desc %( This method is used to get the access logs for users on a team. )
   g.command 'accessLogs' do |c|
+    c.flag 'before', desc: 'End of time range of logs to include in results (inclusive).'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.team_accessLogs(options))
     end
