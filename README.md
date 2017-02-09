@@ -18,7 +18,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ## Stable Release
 
-You're reading the documentation for the **stable** release of slack-ruby-client, 0.7.9. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v0.7.9](https://github.com/slack-ruby/slack-ruby-client/blob/v0.7.9/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ## Installation
 

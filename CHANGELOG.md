@@ -1,3 +1,7 @@
+### 0.8.0 (Next)
+
+* Your contribution here.
+
 ### 0.7.9 (2/9/2017)
 
 * [#132](https://github.com/slack-ruby/slack-ruby-client/issues/132): Fix: you are setting a key that conflicts with a built-in method Slack::Messages::Message#presence - [@dblock](https://github.com/dblock).
