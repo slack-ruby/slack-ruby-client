@@ -10,7 +10,9 @@ module Slack
         :ca_file,
         :logger,
         :endpoint,
-        :token
+        :token,
+        :timeout,
+        :open_timeout
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
@@ -23,6 +25,8 @@ module Slack
         self.token = nil
         self.proxy = nil
         self.logger = nil
+        self.timeout = nil
+        self.open_timeout = nil
       end
     end
 

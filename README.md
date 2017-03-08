@@ -173,6 +173,8 @@ ca_path      | Optional SSL certificates path.
 ca_file      | Optional SSL certificates file.
 endpoint     | Slack endpoint, default is _https://slack.com/api_.
 logger       | Optional `Logger` instance that logs HTTP requests.
+timeout      | Optional open/read timeout in seconds.
+open_timeout | Optional connection open timeout in seconds.
 
 ### RealTime Client
 
@@ -292,9 +294,22 @@ end
 client.start!
 ```
 
-See a fullly working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb).
+See a fully working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb).
 
 ![](examples/hi_real_time_and_web/hi.gif)
+
+### Large Team Considerations
+
+For large teams of thousands of members you may also want to increase the default web client timeout, since `rtm.start` downloads a large amount of data.
+
+```ruby
+Slack::Web::Client.config do |config|
+  config.timeout = 5
+  config.open_timeout = 5
+end
+```
+
+See [#134](https://github.com/slack-ruby/slack-ruby-client/issues/134) for a discussion on this topic.
 
 #### Concurrency
 
