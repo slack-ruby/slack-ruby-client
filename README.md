@@ -176,6 +176,12 @@ logger       | Optional `Logger` instance that logs HTTP requests.
 timeout      | Optional open/read timeout in seconds.
 open_timeout | Optional connection open timeout in seconds.
 
+You can also pass request options, including `timeout` and `open_timeout` into individual calls.
+
+```ruby
+client.channels_list(request: { timeout: 180 })
+```
+
 ### RealTime Client
 
 The Real Time Messaging API is a WebSocket-based API that allows you to receive events from Slack in real time and send messages as user.
@@ -266,7 +272,7 @@ token           | Slack API token.
 websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 store_class     | Local store class name, default is an in-memory `Slack::RealTime::Stores::Store`.
-start_options   | Options to pass into `rtm.start`, default is `{}`.
+start_options   | Options to pass into `rtm.start`, default is `{ request: { timeout: 180 } }`.
 logger          | Optional `Logger` instance that logs RealTime requests and socket data.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
@@ -300,12 +306,16 @@ See a fully working example in [examples/hi_real_time_and_web](examples/hi_real_
 
 ### Large Team Considerations
 
-For large teams of thousands of members you may also want to increase the default web client timeout, since `rtm.start` downloads a large amount of data.
+The `rtm.start` call downloads a large amount of data. For large teams, consider reducing the amount of unnecessary data downloaded with `start_options`. You may also want to increase the default timeout of 180 seconds.
 
 ```ruby
-Slack::Web::Client.config do |config|
-  config.timeout = 5
-  config.open_timeout = 5
+Slack::RealTime::Client.config do |config|
+  # Return timestamp only for latest message object of each channel.
+  config.start_options[:simple_latest] = true
+  # Skip unread counts for each channel.
+  config.start_options[:no_unreads] = true
+  # Increase request timeout to 6 minutes.
+  config.start_options[:request][:timeout] = 360
 end
 ```
 

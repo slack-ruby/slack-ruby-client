@@ -206,7 +206,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           client.start!
         end
         it 'sets start_options' do
-          expect(client.start_options).to eq({})
+          expect(client.start_options).to eq(request: { timeout: 180 })
         end
       end
     end
