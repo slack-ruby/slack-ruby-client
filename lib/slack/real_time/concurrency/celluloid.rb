@@ -38,7 +38,7 @@ module Slack
             logger.debug("#{self.class}##{__method__}") { e }
             driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
           ensure
-            current_actor.terminate if current_actor.alive?
+            current_actor.terminate if current_actor.alive? && current_actor.running?
           end
 
           def close
