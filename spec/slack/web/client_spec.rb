@@ -149,5 +149,26 @@ RSpec.describe Slack::Web::Client do
         end
       end
     end
+    context 'per-request options' do
+      it 'applies timeout', vcr: { cassette_name: 'web/rtm_start', allow_playback_repeats: true } do
+        # reuse the same connection for the test, otherwise it creates a new one every time
+        conn = client.send(:connection)
+        expect(client).to receive(:connection).and_return(conn)
+
+        # get the yielded request to reuse in the next call to rtm_start so that we can examine request.options later
+        request = nil
+        response = conn.post do |r|
+          r.path = 'rtm.start'
+          r.body = { token: 'token' }
+          request = r
+        end
+
+        expect(conn).to receive(:post).and_yield(request).and_return(response)
+
+        client.rtm_start(request: { timeout: 3 })
+
+        expect(request.options.timeout).to eq 3
+      end
+    end
   end
 end

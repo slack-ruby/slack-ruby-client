@@ -1,6 +1,28 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.8.0
+
+The default timeout for `rtm.start` has been increased from 60 to 180 seconds via `Slack::RealTime::Client.config.start_options[:request][:timeout]`. If you're explicitly setting `start_options` in your application, preserve the value by merging settings instead of replacing the entire `start_options` value.
+
+Before:
+
+```ruby
+Slack::RealTime::Client.config do |config|
+  config.start_options = { no_unreads: true }
+end
+```
+
+After:
+
+```ruby
+Slack::RealTime::Client.config do |config|
+  config.start_options[:no_unreads] = true # keeps config.start_options[:request] intact
+end
+```
+
+See [#136](https://github.com/slack-ruby/slack-ruby-client/pull/136) for more details.
+
 ### Upgrading to >= 0.6.0
 
 #### Changes to API Response Data
