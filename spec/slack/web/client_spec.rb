@@ -130,5 +130,24 @@ RSpec.describe Slack::Web::Client do
         end
       end
     end
+    context 'timeout options' do
+      before do
+        Slack::Web::Client.configure do |config|
+          config.timeout = 10
+          config.open_timeout = 15
+        end
+      end
+      describe '#initialize' do
+        it 'sets timeout and open_timeout' do
+          expect(client.timeout).to eq 10
+          expect(client.open_timeout).to eq 15
+        end
+        it 'creates a connection with timeout options' do
+          conn = client.send(:connection)
+          expect(conn.options.timeout).to eq 10
+          expect(conn.options.open_timeout).to eq 15
+        end
+      end
+    end
   end
 end
