@@ -36,6 +36,8 @@ module Slack
           #
           # @option options [Object] :name
           #   Name of private channel to create.
+          # @option options [Object] :validate
+          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
           # @see https://api.slack.com/methods/groups.create
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups/groups.create.json
           def groups_create(options = {})
@@ -187,6 +189,8 @@ module Slack
           #   Private channel to rename.
           # @option options [Object] :name
           #   New name for private channel.
+          # @option options [Object] :validate
+          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
           # @see https://api.slack.com/methods/groups.rename
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups/groups.rename.json
           def groups_rename(options = {})

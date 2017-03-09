@@ -15,6 +15,7 @@ command 'channels' do |g|
   g.long_desc %( This method is used to create a channel. )
   g.command 'create' do |c|
     c.flag 'name', desc: 'Name of channel to create.'
+    c.flag 'validate', desc: 'Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.channels_create(options))
     end
@@ -56,6 +57,7 @@ command 'channels' do |g|
   g.long_desc %( This method is used to join a channel. If the channel does not exist, it is created. )
   g.command 'join' do |c|
     c.flag 'name', desc: 'Name of channel to join.'
+    c.flag 'validate', desc: 'Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.channels_join(options))
     end
@@ -104,6 +106,7 @@ command 'channels' do |g|
   g.command 'rename' do |c|
     c.flag 'channel', desc: 'Channel to rename.'
     c.flag 'name', desc: 'New name for channel.'
+    c.flag 'validate', desc: 'Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.channels_rename(options))
     end

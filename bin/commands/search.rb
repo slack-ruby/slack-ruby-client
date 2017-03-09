@@ -8,7 +8,7 @@ command 'search' do |g|
     c.flag 'query', desc: 'Search query. May contains booleans, etc.'
     c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
     c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
-    c.flag 'highlight', desc: 'Pass a value of 1 to enable query highlight markers (see below).'
+    c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.search_all(options))
     end
@@ -20,7 +20,7 @@ command 'search' do |g|
     c.flag 'query', desc: 'Search query. May contain booleans, etc.'
     c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
     c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
-    c.flag 'highlight', desc: 'Pass a value of 1 to enable query highlight markers (see below).'
+    c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.search_files(options))
     end
@@ -32,7 +32,7 @@ command 'search' do |g|
     c.flag 'query', desc: 'Search query. May contains booleans, etc.'
     c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
     c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
-    c.flag 'highlight', desc: 'Pass a value of 1 to enable query highlight markers (see below).'
+    c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.search_messages(options))
     end
