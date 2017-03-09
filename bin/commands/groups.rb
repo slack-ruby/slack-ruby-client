@@ -24,6 +24,7 @@ command 'groups' do |g|
   g.long_desc %( This method creates a private channel. )
   g.command 'create' do |c|
     c.flag 'name', desc: 'Name of private channel to create.'
+    c.flag 'validate', desc: 'Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_create(options))
     end
@@ -122,6 +123,7 @@ command 'groups' do |g|
   g.command 'rename' do |c|
     c.flag 'channel', desc: 'Private channel to rename.'
     c.flag 'name', desc: 'New name for private channel.'
+    c.flag 'validate', desc: 'Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_rename(options))
     end

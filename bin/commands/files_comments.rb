@@ -7,7 +7,6 @@ command 'files_comments' do |g|
   g.command 'add' do |c|
     c.flag 'file', desc: 'File to add a comment to.'
     c.flag 'comment', desc: 'Text of the comment to add.'
-    c.flag 'channel', desc: 'Channel id (encoded) of which location to associate with the new comment.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_comments_add(options))
     end
