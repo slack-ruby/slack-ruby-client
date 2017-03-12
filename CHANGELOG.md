@@ -1,3 +1,7 @@
+### 0.8.1 (Next)
+
+* Your contribution here.
+
 ### 0.8.0 (3/12/2017)
 
 * [#135](https://github.com/slack-ruby/slack-ruby-client/issues/135): Added `timeout` and `open_timeout` options to Web API - [@dblock](https://github.com/dblock).
