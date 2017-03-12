@@ -1,4 +1,4 @@
-### 0.8.0 (Next)
+### 0.8.0 (3/12/2017)
 
 * [#135](https://github.com/slack-ruby/slack-ruby-client/issues/135): Added `timeout` and `open_timeout` options to Web API - [@dblock](https://github.com/dblock).
 * [#134](https://github.com/slack-ruby/slack-ruby-client/issues/134): Set `start_options[:request][:timeout]`, used with `rtm.start` in `Slack::RealTime::Client`, to 180 seconds - [@dblock](https://github.com/dblock).
@@ -6,7 +6,6 @@
 * [#121](https://github.com/slack-ruby/slack-ruby-client/pull/121): Fix: check that the current Celluloid actor is running before calling `terminate` - [@newdark](https://github.com/newdark).
 * [#138](https://github.com/slack-ruby/slack-ruby-client/pull/138): Added `validate` option to `channels_create`, `channels_join`, `channels_rename`, `groups_create` and `groups_rename` Web APIs - [@dblock](https://github.com/dblock).
 * [#138](https://github.com/slack-ruby/slack-ruby-client/pull/138): Removed `channel` option from `files_comments_add` Web API - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.7.9 (2/9/2017)
 
