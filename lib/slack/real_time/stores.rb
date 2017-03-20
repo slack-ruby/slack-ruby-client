@@ -1,6 +1,6 @@
-require 'slack/real_time/stores/base'
-require 'slack/real_time/stores/starter'
-require 'slack/real_time/stores/store'
+require_relative 'stores/base'
+require_relative 'stores/starter'
+require_relative 'stores/store'
 
 module Slack
   module RealTime
