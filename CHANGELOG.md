@@ -1,3 +1,7 @@
+### 0.8.2 (Next)
+
+* Your contribution here.
+
 ### 0.8.1 (4/28/2017)
 
 * Added `exclude_members` option to `channels_list` Web API - [@dblock](https://github.com/dblock).
