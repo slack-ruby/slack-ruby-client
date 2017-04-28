@@ -2,12 +2,21 @@
 
 desc 'Rtm methods.'
 command 'rtm' do |g|
-  g.desc 'This method starts a Real Time Messaging API session. Refer to the'
-  g.long_desc %( This method starts a Real Time Messaging API session. Refer to the RTM API documentation for full details on how to use the RTM API. )
+  g.desc 'This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.'
+  g.long_desc %( This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket. )
+  g.command 'connect' do |c|
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.rtm_connect(options))
+    end
+  end
+
+  g.desc 'This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.'
+  g.long_desc %( This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket. )
   g.command 'start' do |c|
     c.flag 'simple_latest', desc: 'Return timestamp only for latest message object of each channel (improves performance).'
     c.flag 'no_unreads', desc: 'Skip unread counts for each channel (improves performance).'
     c.flag 'mpim_aware', desc: 'Returns MPIMs to the client in the API response.'
+    c.flag 'no_latest', desc: 'Exclude latest timestamps for channels, groups, mpims, and ims. Automatically sets no_unreads to 1.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.rtm_start(options))
     end

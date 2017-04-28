@@ -1,5 +1,9 @@
 ### 0.8.1 (Next)
 
+* Added `exclude_members` option to `channels_list` Web API - [@dblock](https://github.com/dblock).
+* Added `chat_unfurl` to Web API - [@dblock](https://github.com/dblock).
+* Added `rtm_connect` to RTM API - [@dblock](https://github.com/dblock).
+* Added `no_latest` support to `rm_start` RTM API - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.8.0 (3/12/2017)

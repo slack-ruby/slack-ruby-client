@@ -6,8 +6,16 @@ module Slack
       module Endpoints
         module Rtm
           #
-          # This method starts a Real Time Messaging API session. Refer to the
-          # RTM API documentation for full details on how to use the RTM API.
+          # This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.
+          #
+          # @see https://api.slack.com/methods/rtm.connect
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm/rtm.connect.json
+          def rtm_connect(options = {})
+            post('rtm.connect', options)
+          end
+
+          #
+          # This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.
           #
           # @option options [Object] :simple_latest
           #   Return timestamp only for latest message object of each channel (improves performance).
@@ -15,6 +23,8 @@ module Slack
           #   Skip unread counts for each channel (improves performance).
           # @option options [Object] :mpim_aware
           #   Returns MPIMs to the client in the API response.
+          # @option options [Object] :no_latest
+          #   Exclude latest timestamps for channels, groups, mpims, and ims. Automatically sets no_unreads to 1.
           # @see https://api.slack.com/methods/rtm.start
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm/rtm.start.json
           def rtm_start(options = {})

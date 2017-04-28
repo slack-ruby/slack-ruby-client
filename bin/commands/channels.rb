@@ -85,7 +85,8 @@ command 'channels' do |g|
   g.desc 'This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels but does not include private channels. The number of (non-deactivated) members in each channel is also returned.'
   g.long_desc %( This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels but does not include private channels. The number of (non-deactivated) members in each channel is also returned. )
   g.command 'list' do |c|
-    c.flag 'exclude_archived', desc: "Don't return archived channels."
+    c.flag 'exclude_archived', desc: 'Exclude archived channels from the list.'
+    c.flag 'exclude_members', desc: 'Exclude the members collection from each channel.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.channels_list(options))
     end

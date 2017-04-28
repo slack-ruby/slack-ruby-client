@@ -2,8 +2,8 @@
 
 desc 'UsersProfile methods.'
 command 'users_profile' do |g|
-  g.desc 'This method is used to get the profile information for a user.'
-  g.long_desc %( This method is used to get the profile information for a user. )
+  g.desc "Use this method to retrieve a user's profile information."
+  g.long_desc %( Use this method to retrieve a user's profile information. )
   g.command 'get' do |c|
     c.flag 'user', desc: 'User to retrieve profile info for.'
     c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields.'
@@ -12,8 +12,8 @@ command 'users_profile' do |g|
     end
   end
 
-  g.desc 'This method is used to set the profile information for a user.'
-  g.long_desc %( This method is used to set the profile information for a user. )
+  g.desc "Use this method to set a user's profile information, including name, email, current status, and other attributes."
+  g.long_desc %( Use this method to set a user's profile information, including name, email, current status, and other attributes. )
   g.command 'set' do |c|
     c.flag 'user', desc: 'ID of user to change. This argument may only be specified by team admins on paid teams.'
     c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash.'

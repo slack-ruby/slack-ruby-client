@@ -132,7 +132,9 @@ module Slack
           # This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels but does not include private channels. The number of (non-deactivated) members in each channel is also returned.
           #
           # @option options [Object] :exclude_archived
-          #   Don't return archived channels.
+          #   Exclude archived channels from the list.
+          # @option options [Object] :exclude_members
+          #   Exclude the members collection from each channel.
           # @see https://api.slack.com/methods/channels.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels/channels.list.json
           def channels_list(options = {})

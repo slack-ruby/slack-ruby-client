@@ -82,6 +82,27 @@ module Slack
           end
 
           #
+          # This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens.
+          #
+          # @option options [channel] :channel
+          #   Channel ID of the message.
+          # @option options [timestamp] :ts
+          #   Timestamp of the message to add unfurl behavior to.
+          # @option options [Object] :unfurls
+          #   JSON mapping a set of URLs from the message to their unfurl attachments.
+          # @option options [Object] :user_auth_required
+          #   Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain.
+          # @see https://api.slack.com/methods/chat.unfurl
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.unfurl.json
+          def chat_unfurl(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+            throw ArgumentError.new('Required arguments :unfurls missing') if options[:unfurls].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('chat.unfurl', options)
+          end
+
+          #
           # This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.
           #
           # @option options [timestamp] :ts

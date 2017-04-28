@@ -44,6 +44,18 @@ command 'chat' do |g|
     end
   end
 
+  g.desc 'This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens.'
+  g.long_desc %( This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens. )
+  g.command 'unfurl' do |c|
+    c.flag 'channel', desc: 'Channel ID of the message.'
+    c.flag 'ts', desc: 'Timestamp of the message to add unfurl behavior to.'
+    c.flag 'unfurls', desc: 'JSON mapping a set of URLs from the message to their unfurl attachments.'
+    c.flag 'user_auth_required', desc: 'Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.chat_unfurl(options))
+    end
+  end
+
   g.desc 'This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.'
   g.long_desc %( This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently. )
   g.command 'update' do |c|

@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module UsersProfile
           #
-          # This method is used to get the profile information for a user.
+          # Use this method to retrieve a user's profile information.
           #
           # @option options [user] :user
           #   User to retrieve profile info for.
@@ -20,7 +20,7 @@ module Slack
           end
 
           #
-          # This method is used to set the profile information for a user.
+          # Use this method to set a user's profile information, including name, email, current status, and other attributes.
           #
           # @option options [user] :user
           #   ID of user to change. This argument may only be specified by team admins on paid teams.
