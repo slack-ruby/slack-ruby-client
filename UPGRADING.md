@@ -1,6 +1,22 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.9.0
+
+#### Changes in How the RTM Client Connects
+
+The RealTime client now automatically chooses either [rtm.start](https://api.slack.com/methods/rtm.start) or [rtm.connect](https://api.slack.com/methods/rtm.connect) to open a connection. The former retrieves a lot of team information while the latter only serves connection purposes and is newer and preferred, while the latter is required to use the full `Slack::RealTime::Stores::Store` storage class.
+
+Prior versions always used `rtm.start`, to restore this behavior, configure `start_method`.
+
+```ruby
+Slack::RealTime::Client.config do |config|
+  config.start_method = :rtm_start
+end
+```
+
+See [#145](https://github.com/slack-ruby/slack-ruby-client/pull/145) for more information.
+
 ### Upgrading to >= 0.8.0
 
 The default timeout for `rtm.start` has been increased from 60 to 180 seconds via `Slack::RealTime::Client.config.start_options[:request][:timeout]`. If you're explicitly setting `start_options` in your application, preserve the value by merging settings instead of replacing the entire `start_options` value.

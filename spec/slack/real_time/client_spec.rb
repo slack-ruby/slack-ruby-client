@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
+RSpec.describe Slack::RealTime::Client do
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
-  let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
   before do
     @token = ENV.delete('SLACK_API_TOKEN')
     Slack::Config.reset
@@ -43,110 +42,182 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       end
     end
   end
-  context 'client' do
-    context 'started' do
-      let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Store) }
-      describe '#start!' do
-        let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
-        before do
-          allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
-          allow(socket).to receive(:connect!)
-          allow(socket).to receive(:start_sync)
+  context 'client with a full store', vcr: { cassette_name: 'web/rtm_start' } do
+    let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Store) }
+    let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
+    describe '#start!' do
+      let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+      before do
+        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        allow(socket).to receive(:connect!)
+        allow(socket).to receive(:start_sync)
+        client.start!
+      end
+      context 'properties provided upon connection' do
+        it 'sets url' do
+          expect(client.url).to eq url
+        end
+        it 'sets team' do
+          expect(client.team.domain).to eq 'dblockdotorg'
+        end
+        it 'sets teams' do
+          expect(client.teams.count).to eq 1
+          expect(client.teams.values.first).to eq client.team
+        end
+        it 'sets self' do
+          expect(client.self.id).to eq 'U07518DTL'
+        end
+        it 'sets users' do
+          expect(client.users.count).to eq 18
+          expect(client.users.values.first['id']).to eq 'U07518DTL'
+        end
+        it 'sets channels' do
+          expect(client.channels.count).to eq 37
+          expect(client.channels.values.first['name']).to eq 'a1'
+        end
+        it 'sets ims' do
+          expect(client.ims.count).to eq 2
+          expect(client.ims.values.first['user']).to eq 'USLACKBOT'
+        end
+        it 'sets bots' do
+          expect(client.bots.count).to eq 16
+          expect(client.bots.values.first['name']).to eq 'bot'
+        end
+        it 'sets groups' do
+          expect(client.groups.count).to eq 1
+        end
+      end
+      it 'uses web client to fetch url' do
+        expect(client.web_client).to be_a Slack::Web::Client
+      end
+      it 'remembers socket' do
+        expect(client.instance_variable_get('@socket')).to eq socket
+      end
+      it 'cannot be invoked twice' do
+        expect do
           client.start!
-        end
-        context 'properties provided upon connection' do
-          it 'sets url' do
-            expect(client.url).to eq url
-          end
-          it 'sets team' do
-            expect(client.team.domain).to eq 'dblockdotorg'
-          end
-          it 'sets teams' do
-            expect(client.teams.count).to eq 1
-            expect(client.teams.values.first).to eq client.team
-          end
-          it 'sets self' do
-            expect(client.self.id).to eq 'U07518DTL'
-          end
-          it 'sets users' do
-            expect(client.users.count).to eq 18
-            expect(client.users.values.first['id']).to eq 'U07518DTL'
-          end
-          it 'sets channels' do
-            expect(client.channels.count).to eq 37
-            expect(client.channels.values.first['name']).to eq 'a1'
-          end
-          it 'sets ims' do
-            expect(client.ims.count).to eq 2
-            expect(client.ims.values.first['user']).to eq 'USLACKBOT'
-          end
-          it 'sets bots' do
-            expect(client.bots.count).to eq 16
-            expect(client.bots.values.first['name']).to eq 'bot'
-          end
-          it 'sets groups' do
-            expect(client.groups.count).to eq 1
-          end
-        end
-        it 'uses web client to fetch url' do
-          expect(client.web_client).to be_a Slack::Web::Client
-        end
-        it 'remembers socket' do
-          expect(client.instance_variable_get('@socket')).to eq socket
+        end.to raise_error Slack::RealTime::Client::ClientAlreadyStartedError
+      end
+      describe '#stop!' do
+        before do
+          expect(socket).to receive(:disconnect!)
+          client.stop!
         end
         it 'cannot be invoked twice' do
+          client.instance_variable_set('@socket', nil) # caused by a :close callback
           expect do
-            client.start!
-          end.to raise_error Slack::RealTime::Client::ClientAlreadyStartedError
-        end
-        describe '#stop!' do
-          before do
-            expect(socket).to receive(:disconnect!)
             client.stop!
-          end
-          it 'cannot be invoked twice' do
-            client.instance_variable_set('@socket', nil) # caused by a :close callback
-            expect do
-              client.stop!
-            end.to raise_error Slack::RealTime::Client::ClientNotStartedError
-          end
+          end.to raise_error Slack::RealTime::Client::ClientNotStartedError
         end
-        describe '#next_id' do
-          it 'increments' do
-            previous_id = client.send(:next_id)
-            expect(client.send(:next_id)).to eq previous_id + 1
-          end
+      end
+      describe '#next_id' do
+        it 'increments' do
+          previous_id = client.send(:next_id)
+          expect(client.send(:next_id)).to eq previous_id + 1
         end
-        context 'store_class: nil' do
-          let(:client) { Slack::RealTime::Client.new(store_class: nil) }
-          it 'sets store to nil' do
-            expect(client.store).to be nil
-          end
-          it "doesn't handle events" do
-            event = Slack::RealTime::Event.new(
-              'type' => 'team_rename',
-              'name' => 'New Team Name Inc.'
-            )
-            expect(client).to_not receive(:run_handlers)
-            client.send(:dispatch, event)
-          end
-          it 'self' do
-            expect(client.self).to be nil
-          end
-          it 'team' do
-            expect(client.team).to be nil
-          end
+      end
+      context 'subclassed' do
+        let(:client) { Class.new(Slack::RealTime::Client).new(store_class: Slack::RealTime::Stores::Store) }
+        it 'runs event handlers' do
+          event = Slack::RealTime::Event.new(
+            'type' => 'team_rename',
+            'name' => 'New Team Name Inc.'
+          )
+          client.send(:dispatch, event)
+          expect(client.store.team.name).to eq 'New Team Name Inc.'
         end
-        context 'subclassed' do
-          let(:client) { Class.new(Slack::RealTime::Client).new(store_class: Slack::RealTime::Stores::Store) }
-          it 'runs event handlers' do
-            event = Slack::RealTime::Event.new(
-              'type' => 'team_rename',
-              'name' => 'New Team Name Inc.'
-            )
-            client.send(:dispatch, event)
-            expect(client.store.team.name).to eq 'New Team Name Inc.'
-          end
+      end
+    end
+  end
+  context 'client with a default store', vcr: { cassette_name: 'web/rtm_connect' } do
+    let(:client) { Slack::RealTime::Client.new }
+    let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
+    describe '#start!' do
+      let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+      before do
+        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        allow(socket).to receive(:connect!)
+        allow(socket).to receive(:start_sync)
+        client.start!
+      end
+      context 'properties provided upon connection' do
+        it 'sets url' do
+          expect(client.url).to eq url
+        end
+        it 'sets team' do
+          expect(client.team.domain).to eq 'dblockdotorg'
+        end
+        it 'sets teams' do
+          expect(client.teams.count).to eq 1
+          expect(client.teams.values.first).to eq client.team
+        end
+        it 'sets self' do
+          expect(client.self.id).to eq 'U07518DTL'
+        end
+        it 'sets user' do
+          expect(client.users.count).to eq 1
+          expect(client.users.values.first['id']).to eq 'U07518DTL'
+        end
+        it 'no channels' do
+          expect(client.channels.count).to eq 0
+        end
+        it 'no ims' do
+          expect(client.ims.count).to eq 0
+        end
+        it 'no bots' do
+          expect(client.bots.count).to eq 0
+        end
+        it 'no groups' do
+          expect(client.groups.count).to eq 0
+        end
+      end
+      it 'uses web client to fetch url' do
+        expect(client.web_client).to be_a Slack::Web::Client
+      end
+      it 'remembers socket' do
+        expect(client.instance_variable_get('@socket')).to eq socket
+      end
+      it 'cannot be invoked twice' do
+        expect do
+          client.start!
+        end.to raise_error Slack::RealTime::Client::ClientAlreadyStartedError
+      end
+      describe '#stop!' do
+        before do
+          expect(socket).to receive(:disconnect!)
+          client.stop!
+        end
+        it 'cannot be invoked twice' do
+          client.instance_variable_set('@socket', nil) # caused by a :close callback
+          expect do
+            client.stop!
+          end.to raise_error Slack::RealTime::Client::ClientNotStartedError
+        end
+      end
+      describe '#next_id' do
+        it 'increments' do
+          previous_id = client.send(:next_id)
+          expect(client.send(:next_id)).to eq previous_id + 1
+        end
+      end
+      context 'store_class: nil' do
+        let(:client) { Slack::RealTime::Client.new(store_class: nil) }
+        it 'sets store to nil' do
+          expect(client.store).to be nil
+        end
+        it "doesn't handle events" do
+          event = Slack::RealTime::Event.new(
+            'type' => 'team_rename',
+            'name' => 'New Team Name Inc.'
+          )
+          expect(client).to_not receive(:run_handlers)
+          client.send(:dispatch, event)
+        end
+        it 'self' do
+          expect(client.self).to be nil
+        end
+        it 'team' do
+          expect(client.team).to be nil
         end
       end
     end
@@ -190,6 +261,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
     after do
       Slack::RealTime::Client.config.reset
     end
+    let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
     let(:client) { Slack::RealTime::Client.new }
     context 'ping' do
       before do
@@ -201,7 +273,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         it 'sets ping' do
           expect(client.websocket_ping).to eq 15
         end
-        it 'creates a connection with custom ping' do
+        it 'creates a connection with custom ping', vcr: { cassette_name: 'web/rtm_connect' } do
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(url, nil, ping: 15).and_return(ws)
           client.start!
         end
@@ -226,7 +298,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             headers: { 'User-Agent' => 'ruby' }
           )
         end
-        it 'creates a connection with custom proxy' do
+        it 'creates a connection with custom proxy', vcr: { cassette_name: 'web/rtm_connect' } do
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(
             url,
             nil,
@@ -256,26 +328,85 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             allow(socket).to receive(:connect!)
             allow(socket).to receive(:start_sync)
           end
-          it 'calls rtm_start with start options' do
-            expect(client.web_client).to receive(:rtm_start).with(simple_latest: true).and_call_original
+          it 'calls rtm_start with start options', vcr: { cassette_name: 'web/rtm_connect' } do
+            expect(client.web_client).to receive(:rtm_connect).with(simple_latest: true).and_call_original
             client.start!
           end
         end
       end
     end
     context 'store_class' do
-      before do
-        Slack::RealTime::Client.configure do |config|
-          config.store_class = Slack::RealTime::Stores::Starter
+      context 'starter' do
+        before do
+          Slack::RealTime::Client.configure do |config|
+            config.store_class = Slack::RealTime::Stores::Starter
+          end
+        end
+        describe '#initialize' do
+          it 'can be overriden explicitly' do
+            client = Slack::RealTime::Client.new(store_class: Slack::RealTime::Store)
+            expect(client.send(:store_class)).to eq Slack::RealTime::Store
+          end
+          it 'sets store_class' do
+            expect(client.send(:store_class)).to eq(Slack::RealTime::Stores::Starter)
+          end
+          context 'start!' do
+            let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+            before do
+              allow(Slack::RealTime::Socket).to receive(:new).and_return(socket)
+              allow(socket).to receive(:connect!)
+              allow(socket).to receive(:start_sync)
+            end
+            it 'instantiates the correct store class', vcr: { cassette_name: 'web/rtm_connect' } do
+              client.start!
+              expect(client.store).to be_a Slack::RealTime::Stores::Starter
+            end
+          end
         end
       end
+      context 'store' do
+        before do
+          Slack::RealTime::Client.configure do |config|
+            config.store_class = Slack::RealTime::Stores::Store
+          end
+        end
+        describe '#initialize' do
+          context 'start!' do
+            let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+            before do
+              allow(Slack::RealTime::Socket).to receive(:new).and_return(socket)
+              allow(socket).to receive(:connect!)
+              allow(socket).to receive(:start_sync)
+            end
+            it 'calls rtm_start and not rtm_connect', vcr: { cassette_name: 'web/rtm_start' } do
+              expect(client.web_client).to receive(:rtm_start).and_call_original
+              client.start!
+            end
+          end
+        end
+      end
+    end
+    context 'start_method' do
       describe '#initialize' do
         it 'can be overriden explicitly' do
-          client = Slack::RealTime::Client.new(store_class: Slack::RealTime::Store)
-          expect(client.send(:store_class)).to eq Slack::RealTime::Store
+          client = Slack::RealTime::Client.new(start_method: :overriden)
+          expect(client.send(:start_method)).to eq :overriden
         end
-        it 'sets store_class' do
-          expect(client.send(:store_class)).to eq(Slack::RealTime::Stores::Starter)
+        context 'with start_method' do
+          before do
+            Slack::RealTime::Client.configure do |config|
+              config.start_method = :overriden
+            end
+          end
+          it 'sets start_method' do
+            expect(client.send(:start_method)).to eq :overriden
+          end
+          it 'calls the overriden method' do
+            expect(client.web_client).to receive(:overriden).and_raise('overriden')
+            expect do
+              client.start!
+            end.to raise_error RuntimeError, 'overriden'
+          end
         end
         context 'start!' do
           let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
@@ -284,9 +415,9 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             allow(socket).to receive(:connect!)
             allow(socket).to receive(:start_sync)
           end
-          it 'instantiates the correct store class' do
+          it 'defaults to :rtm_connect', vcr: { cassette_name: 'web/rtm_connect' } do
+            expect(client.web_client).to receive(:rtm_connect).and_call_original
             client.start!
-            expect(client.store).to be_a Slack::RealTime::Stores::Starter
           end
         end
       end

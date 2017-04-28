@@ -1,5 +1,6 @@
-### 0.8.2 (Next)
+### 0.9.0 (Next)
 
+* [#145](https://github.com/slack-ruby/slack-ruby-client/pull/145): Automatically select `rtm_connect` vs. `rtm_start` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.8.1 (4/28/2017)

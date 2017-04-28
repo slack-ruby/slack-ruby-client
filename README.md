@@ -244,11 +244,11 @@ Tracking with a local store can be disabled with `Slack::RealTime::Client.new(st
 
 #### Slack::RealTime::Stores::Store
 
-The default store that tracks all changes.
+The default store that tracks all changes. By default the client will be connected using `rtm_start`.
 
 #### Slack::RealTime::Stores::Starter
 
-A smaller store that only stores and tracks information about the bot user, but not channels, users, groups, ims or bots.
+A smaller store that only stores and tracks information about the bot user, but not channels, users, groups, ims or bots. By default the client will be connected using `rtm_connect`.
 
 ### Configuring Slack::RealTime::Client
 
@@ -272,14 +272,25 @@ token           | Slack API token.
 websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 store_class     | Local store class name, default is an in-memory `Slack::RealTime::Stores::Store`.
-start_options   | Options to pass into `rtm.start`, default is `{ request: { timeout: 180 } }`.
+start_method    | Optional start method, either `:rtm_start` or `:rtm_connect`.
+start_options   | Options to pass into `rtm.start` or `rtm.connect`, default is `{ request: { timeout: 180 } }`.
 logger          | Optional `Logger` instance that logs RealTime requests and socket data.
 
-Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
+Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.start](https://api.slack.com/methods/rtm.start) or [rtm.connect](https://api.slack.com/methods/rtm.connect). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
 
 See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
 
 ![](examples/hi_real_time/hi.gif)
+
+### Connection Methods
+
+The RealTime client uses either [rtm.start](https://api.slack.com/methods/rtm.start) or [rtm.connect](https://api.slack.com/methods/rtm.connect) to open a connection. The former retrieves a lot of team information while the latter only serves connection purposes and is preferred. You should let the library choose the right method for you based on the `store_class` used and override this behavior with `start_method` when necessary.
+
+```ruby
+Slack::RealTime::Client.config do |config|
+  config.start_method = :rtm_start
+end
+```
 
 ### Combining RealTime and Web Clients
 

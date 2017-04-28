@@ -10,6 +10,7 @@ module Slack
         :websocket_ping,
         :websocket_proxy,
         :concurrency,
+        :start_method,
         :start_options,
         :store_class,
         :logger
@@ -22,6 +23,7 @@ module Slack
         self.websocket_proxy = nil
         self.token = nil
         self.concurrency = method(:detect_concurrency)
+        self.start_method = nil
         self.start_options = { request: { timeout: 180 } }
         self.store_class = Slack::RealTime::Store
         self.logger = nil

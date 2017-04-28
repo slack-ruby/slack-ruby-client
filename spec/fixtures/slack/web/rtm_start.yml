@@ -101,4 +101,4 @@ http_interactions:
         Explorer","icons":{"image_36":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2016-01-21\/19073538231_edf8d896148b6bfef790_36.png","image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2016-01-21\/19073538231_edf8d896148b6bfef790_48.png","image_72":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2016-01-21\/19073538231_edf8d896148b6bfef790_72.png"}}],"url":"wss:\/\/ms173.slack-msgs.com\/websocket\/lqcUiAvrKTP-uuid="}'
     http_version:
   recorded_at: Sun, 31 Jan 2016 22:42:57 GMT
-recorded_with: VCR 3.0.0
+recorded_with: VCR 3.0.3
