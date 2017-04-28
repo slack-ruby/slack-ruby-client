@@ -1,16 +1,18 @@
 require 'spec_helper'
 
 [Slack::RealTime::Stores::Store, Slack::RealTime::Stores::Starter].each do |store_class|
-  RSpec.describe store_class, vcr: { cassette_name: 'web/rtm_start' } do
+  RSpec.describe store_class, vcr: { cassette_name: store_class == Slack::RealTime::Stores::Store ? 'web/rtm_start' : 'web/rtm_connect' } do
     include_context 'connected client', store_class: store_class
 
     context 'team' do
       it 'sets team data on rtm.start' do
         expect(client.team.name).to eq 'dblock'
         expect(client.team.domain).to eq 'dblockdotorg'
-        expect(client.team.email_domain).to eq 'dblock.org'
-        expect(client.team.prefs.invites_only_admins).to be true
-        expect(client.team.plan).to eq ''
+        if store_class == Slack::RealTime::Stores::Store
+          expect(client.team.email_domain).to eq 'dblock.org'
+          expect(client.team.prefs.invites_only_admins).to be true
+          expect(client.team.plan).to eq ''
+        end
       end
       it 'team_domain_change' do
         event = Slack::RealTime::Event.new(

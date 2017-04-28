@@ -107,11 +107,21 @@ module Slack
       # @return [Slack::RealTime::Socket]
       def build_socket
         fail ClientAlreadyStartedError if started?
-        start = web_client.rtm_start(start_options)
+        start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
         @store = @store_class.new(data) if @store_class
         socket_class.new(@url, socket_options)
+      end
+
+      def rtm_start_method
+        if start_method
+          start_method
+        elsif @store_class == Slack::RealTime::Stores::Store
+          :rtm_start
+        else
+          :rtm_connect
+        end
       end
 
       def socket_options

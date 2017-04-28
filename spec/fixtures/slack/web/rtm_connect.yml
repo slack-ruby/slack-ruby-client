@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/rtm.connect
+    body:
+      encoding: UTF-8
+      string: token=token
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.8.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '303'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Date:
+      - Fri, 28 Apr 2017 21:28:13 GMT
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - no-referrer
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - rtm:stream,client
+      X-Content-Type-Options:
+      - nosniff
+      X-Oauth-Scopes:
+      - identify,read,post,client,apps
+      X-Slack-Backend:
+      - h
+      X-Slack-Req-Id:
+      - 5126a5af-f201-4e61-8615-85ed74719049
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 bcaa616eaffeeb31e6c9015320755821.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Hogs0uicEVP-FBGmgEZfEJz0EJHJwCny92KhIHz2j6YNYAJL0oVTJw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"url":"wss:\/\/mpmulti-w5tz.slack-msgs.com\/websocket\/uid","team":{"id":"T04KB5WQH","name":"dblock","domain":"dblockdotorg"},"self":{"id":"U07518DTL","name":"testbot"}}'
+    http_version:
+  recorded_at: Fri, 28 Apr 2017 21:28:14 GMT
+recorded_with: VCR 3.0.3
