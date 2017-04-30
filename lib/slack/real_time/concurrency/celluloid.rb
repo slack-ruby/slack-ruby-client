@@ -38,7 +38,7 @@ module Slack
             logger.debug("#{self.class}##{__method__}") { e }
             driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
           ensure
-            current_actor.terminate if current_actor.alive? && current_actor.running?
+            current_actor.terminate if current_actor.alive? rescue nil
           end
 
           def close
@@ -90,8 +90,8 @@ module Slack
           end
 
           def build_socket
-            socket = TCPSocket.new(addr, port)
-            socket = SSLSocket.new(socket, build_ssl_context) if secure?
+            socket = ::Celluloid::IO::TCPSocket.new(addr, port)
+            socket = ::Celluloid::IO::SSLSocket.new(socket, build_ssl_context) if secure?
             socket
           end
 
