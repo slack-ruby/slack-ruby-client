@@ -28,6 +28,10 @@ module Slack
             run_loop
           end
 
+          def connected?
+            !@connected.nil?
+          end
+
           def run_loop
             @closing = false
             @socket = build_socket
