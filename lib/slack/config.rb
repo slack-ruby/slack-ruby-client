@@ -4,10 +4,14 @@ module Slack
 
     attr_accessor :token
     attr_accessor :logger
+    attr_accessor :timeout
+    attr_accessor :open_timeout
 
     def reset
       self.token = nil
       self.logger = nil
+      self.timeout = nil
+      self.open_timeout = nil
     end
 
     reset

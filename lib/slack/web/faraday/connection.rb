@@ -12,6 +12,10 @@ module Slack
           options[:headers]['User-Agent'] = user_agent if user_agent
           options[:proxy] = proxy if proxy
           options[:ssl] = { ca_path: ca_path, ca_file: ca_file }
+          request_options = {}
+          request_options[:timeout] = Slack::Config.timeout if Slack::Config.timeout
+          request_options[:open_timeout] = Slack::Config.open_timeout if Slack::Config.open_timeout
+          options[:request] = request_options
 
           request_options = {}
           request_options[:timeout] = timeout if timeout
