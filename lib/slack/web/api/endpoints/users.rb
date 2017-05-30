@@ -102,6 +102,18 @@ module Slack
             throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
             post('users.setPresence', options)
           end
+
+          # This method lets you invite users to slack automatically.
+          #
+          # @ options requires email.
+          # This method is undocumented, but appears in tutorials for how to do this.
+          # @see https://levels.io/slack-typeform-auto-invite-sign-ups/
+
+          def users_invite(options = {})
+            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            post('users.admin.invite', options)
+
+          end
         end
       end
     end
