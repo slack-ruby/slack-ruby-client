@@ -22,6 +22,8 @@ http_interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
+      Retry-After:
+      - 3600
       Date:
       - Sat, 25 Jul 2015 14:42:07 GMT
       Server:

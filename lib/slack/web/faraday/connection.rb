@@ -21,10 +21,10 @@ module Slack
           ::Faraday::Connection.new(endpoint, options) do |connection|
             connection.use ::Faraday::Request::Multipart
             connection.use ::Faraday::Request::UrlEncoded
+            connection.use ::Faraday::Response::RaiseError
             connection.use ::Slack::Web::Faraday::Response::RaiseError
             connection.use ::FaradayMiddleware::Mashify, mash_class: Slack::Messages::Message
             connection.use ::FaradayMiddleware::ParseJson
-            connection.use ::Faraday::Response::RaiseError
             connection.response :logger, logger if logger
             connection.adapter ::Faraday.default_adapter
           end

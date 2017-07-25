@@ -19,6 +19,7 @@ rescue LoadError
 end
 require_relative 'slack/web/config'
 require_relative 'slack/web/api/error'
+require_relative 'slack/web/api/too_many_requests_error'
 require_relative 'slack/web/faraday/response/raise_error'
 require_relative 'slack/web/faraday/connection'
 require_relative 'slack/web/faraday/request'

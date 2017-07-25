@@ -13,8 +13,13 @@ RSpec.describe Slack::Web::Api::Endpoints::Auth do
     end
   end
   context '429 error', vcr: { cassette_name: 'web/429_error' } do
-    it 'fails with an exception' do
-      expect { client.auth_test }.to raise_error Faraday::ClientError
+    it 'fails with an specific exception' do
+      begin
+        client.auth_test
+      rescue Slack::Web::Api::TooManyRequestsError => e
+        expect(e.message).to eq('Retry after 3600 seconds')
+        expect(e.retry_after).to eq(3600)
+      end
     end
   end
 end

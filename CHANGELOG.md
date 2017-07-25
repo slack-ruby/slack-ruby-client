@@ -2,6 +2,7 @@
 
 * [#146](https://github.com/slack-ruby/slack-ruby-client/issues/146): Fix: `undefined method running?` and `ThreadError: Target thread must not be current thread` with `Celluloid::IO` - [@dblock](https://github.com/dblock).
 * [#145](https://github.com/slack-ruby/slack-ruby-client/pull/145): Automatically select `rtm_connect` vs. `rtm_start` - [@dblock](https://github.com/dblock).
+* [#154](https://github.com/slack-ruby/slack-ruby-client/pull/154): Raise a dedicated error class with 429 responses - [@greggroth](https://github.com/greggroth).
 * Your contribution here.
 
 ### 0.8.1 (4/28/2017)
