@@ -14,7 +14,7 @@ module Slack
               end
             end
 
-            fail Slack::Web::Api::Error, not_found_error
+            fail Slack::Web::Api::Errors::SlackError, not_found_error
           end
         end
       end
