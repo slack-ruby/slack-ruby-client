@@ -25,7 +25,7 @@ RSpec.describe Slack::Web::Api::Mixins::Groups do
       expect(subject.groups_id(channel: '#general')).to eq('ok' => true, 'group' => { 'id' => 'CDEADBEEF' })
     end
     it 'fails with an exception' do
-      expect { subject.groups_id(channel: '#invalid') }.to raise_error Slack::Web::Api::Error, 'channel_not_found'
+      expect { subject.groups_id(channel: '#invalid') }.to raise_error Slack::Web::Api::Errors::SlackError, 'channel_not_found'
     end
   end
 end
