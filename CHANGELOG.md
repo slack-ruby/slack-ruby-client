@@ -1,3 +1,7 @@
+### 0.9.1 (Next)
+
+* Your contribution here.
+
 ### 0.9.0 (8/6/2017)
 
 * [#146](https://github.com/slack-ruby/slack-ruby-client/issues/146): Fix: `undefined method running?` and `ThreadError: Target thread must not be current thread` with `Celluloid::IO` - [@dblock](https://github.com/dblock).
