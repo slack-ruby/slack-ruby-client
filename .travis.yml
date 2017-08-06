@@ -6,8 +6,6 @@ rvm:
   - 2.2
   - 2.1
   - 2.0
-  - rbx-2
-  - jruby-19mode
   - ruby-head
   - jruby-head
 
@@ -20,15 +18,9 @@ matrix:
       env: CONCURRENCY=celluloid-io
     - rvm: 2.4.1
       env: CONCURRENCY=faye-websocket
-    - rvm: 2.3.4
-      env: CONCURRENCY=celluloid-io
-    - rvm: 2.3.4
-      env: CONCURRENCY=faye-websocket
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
-    - rvm: jruby-19mode
-    - rvm: rbx-2
 
 git:
   submodules: false
