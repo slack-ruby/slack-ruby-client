@@ -2,8 +2,8 @@
 
 desc 'Bots methods.'
 command 'bots' do |g|
-  g.desc 'This method returns information about a bot user.'
-  g.long_desc %( This method returns information about a bot user. )
+  g.desc 'Gets information about a bot user.'
+  g.long_desc %( Gets information about a bot user. )
   g.command 'info' do |c|
     c.flag 'bot', desc: 'Bot user to get info on.'
     c.action do |_global_options, options, _args|

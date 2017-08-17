@@ -2,22 +2,22 @@
 
 desc 'UsersProfile methods.'
 command 'users_profile' do |g|
-  g.desc "Use this method to retrieve a user's profile information."
-  g.long_desc %( Use this method to retrieve a user's profile information. )
+  g.desc "Retrieves a user's profile information."
+  g.long_desc %( Retrieves a user's profile information. )
   g.command 'get' do |c|
-    c.flag 'user', desc: 'User to retrieve profile info for.'
     c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields.'
+    c.flag 'user', desc: 'User to retrieve profile info for.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_profile_get(options))
     end
   end
 
-  g.desc "Use this method to set a user's profile information, including name, email, current status, and other attributes."
-  g.long_desc %( Use this method to set a user's profile information, including name, email, current status, and other attributes. )
+  g.desc 'Set the profile information for a user.'
+  g.long_desc %( Set the profile information for a user. )
   g.command 'set' do |c|
-    c.flag 'user', desc: 'ID of user to change. This argument may only be specified by team admins on paid teams.'
-    c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash.'
     c.flag 'name', desc: 'Name of a single key to set. Usable only if profile is not passed.'
+    c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash.'
+    c.flag 'user', desc: 'ID of user to change. This argument may only be specified by team admins on paid teams.'
     c.flag 'value', desc: 'Value to set a single key to. Usable only if profile is not passed.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_profile_set(options))

@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Files
           #
-          # This method deletes a file from your team.
+          # Deletes a file.
           #
           # @option options [file] :file
           #   ID of file to delete.
@@ -18,7 +18,7 @@ module Slack
           end
 
           #
-          # This method returns information about a file in your team.
+          # Gets information about a team file.
           #
           # @option options [file] :file
           #   Specify a file by providing its ID.
@@ -30,10 +30,8 @@ module Slack
           end
 
           #
-          # This method returns a list of files within the team. It can be filtered and sliced in various ways.
+          # Lists & filters team files.
           #
-          # @option options [user] :user
-          #   Filter files created by a single user.
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
           # @option options [Object] :ts_from
@@ -54,6 +52,8 @@ module Slack
           #
           #   You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
           #   .
+          # @option options [user] :user
+          #   Filter files created by a single user.
           # @see https://api.slack.com/methods/files.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.list.json
           def files_list(options = {})
@@ -63,7 +63,7 @@ module Slack
           end
 
           #
-          # This method disables public/external sharing for a file.
+          # Revokes public/external sharing access for a file
           #
           # @option options [file] :file
           #   File to revoke.
@@ -75,7 +75,7 @@ module Slack
           end
 
           #
-          # This method enables public/external sharing for a file.
+          # Enables a file for public/external sharing.
           #
           # @option options [file] :file
           #   File to share.
@@ -87,26 +87,25 @@ module Slack
           end
 
           #
-          # This method allows you to create or upload an existing file.
+          # Uploads or creates a file.
           #
-          # @option options [file] :file
-          #   File contents via multipart/form-data. If omitting this parameter, you must submit content.
-          # @option options [Object] :content
-          #   File contents via a POST variable. If omitting this parameter, you must provide a file.
-          # @option options [Object] :filetype
-          #   A file type identifier.
-          # @option options [Object] :filename
-          #   Filename of file.
-          # @option options [Object] :title
-          #   Title of file.
-          # @option options [Object] :initial_comment
-          #   Initial comment to add to file.
           # @option options [Object] :channels
           #   Comma-separated list of channel names or IDs where the file will be shared.
+          # @option options [Object] :content
+          #   File contents via a POST variable. If omitting this parameter, you must provide a file.
+          # @option options [file] :file
+          #   File contents via multipart/form-data. If omitting this parameter, you must submit content.
+          # @option options [Object] :filename
+          #   Filename of file.
+          # @option options [Object] :filetype
+          #   A file type identifier.
+          # @option options [Object] :initial_comment
+          #   Initial comment to add to file.
+          # @option options [Object] :title
+          #   Title of file.
           # @see https://api.slack.com/methods/files.upload
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.upload.json
           def files_upload(options = {})
-            throw ArgumentError.new('Required arguments :filename missing') if options[:filename].nil?
             post('files.upload', options)
           end
         end

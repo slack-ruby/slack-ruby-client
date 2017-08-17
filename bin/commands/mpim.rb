@@ -2,8 +2,8 @@
 
 desc 'Get info on your multiparty direct messages.'
 command 'mpim' do |g|
-  g.desc 'This method closes a multiparty direct message channel.'
-  g.long_desc %( This method closes a multiparty direct message channel. )
+  g.desc 'Closes a multiparty direct message channel.'
+  g.long_desc %( Closes a multiparty direct message channel. )
   g.command 'close' do |c|
     c.flag 'channel', desc: 'MPIM to close.'
     c.action do |_global_options, options, _args|
@@ -11,29 +11,29 @@ command 'mpim' do |g|
     end
   end
 
-  g.desc 'This method returns a portion of messages/events from the specified multiparty direct message channel.'
-  g.long_desc %( This method returns a portion of messages/events from the specified multiparty direct message channel. To read the entire history for a multiparty direct message, call the method with no latest or oldest arguments, and then continue paging using the instructions below. )
+  g.desc 'Fetches history of messages and events from a multiparty direct message.'
+  g.long_desc %( Fetches history of messages and events from a multiparty direct message. )
   g.command 'history' do |c|
     c.flag 'channel', desc: 'Multiparty direct message to fetch history for.'
+    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results.'
     c.flag 'latest', desc: 'End of time range of messages to include in results.'
     c.flag 'oldest', desc: 'Start of time range of messages to include in results.'
-    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results.'
     c.flag 'unreads', desc: 'Include unread_count_display in the output?.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.mpim_history(options))
     end
   end
 
-  g.desc 'This method returns a list of all multiparty direct message channels that the user has.'
-  g.long_desc %( This method returns a list of all multiparty direct message channels that the user has. )
+  g.desc 'Lists multiparty direct message channels for the calling user.'
+  g.long_desc %( Lists multiparty direct message channels for the calling user. )
   g.command 'list' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.mpim_list(options))
     end
   end
 
-  g.desc 'This method moves the read cursor in a multiparty direct message channel.'
-  g.long_desc %( This method moves the read cursor in a multiparty direct message channel. )
+  g.desc 'Sets the read cursor in a multiparty direct message channel.'
+  g.long_desc %( Sets the read cursor in a multiparty direct message channel. )
   g.command 'mark' do |c|
     c.flag 'channel', desc: 'multiparty direct message channel to set reading cursor in.'
     c.flag 'ts', desc: 'Timestamp of the most recently seen message.'
@@ -51,8 +51,8 @@ command 'mpim' do |g|
     end
   end
 
-  g.desc 'This method returns an entire thread (a message plus all the messages in reply to it).'
-  g.long_desc %( This method returns an entire thread (a message plus all the messages in reply to it). )
+  g.desc 'Retrieve a thread of messages posted to a direct message conversation from a multiparty direct message.'
+  g.long_desc %( Retrieve a thread of messages posted to a direct message conversation from a multiparty direct message. )
   g.command 'replies' do |c|
     c.flag 'channel', desc: 'Multiparty direct message channel to fetch thread from.'
     c.flag 'thread_ts', desc: "Unique identifier of a thread's parent message."

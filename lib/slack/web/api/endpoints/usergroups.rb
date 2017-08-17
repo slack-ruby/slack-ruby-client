@@ -6,16 +6,16 @@ module Slack
       module Endpoints
         module Usergroups
           #
-          # This method is used to create a User Group.
+          # Create a User Group
           #
           # @option options [Object] :name
           #   A name for the User Group. Must be unique among User Groups.
-          # @option options [Object] :handle
-          #   A mention handle. Must be unique among channels, users and User Groups.
-          # @option options [Object] :description
-          #   A short description of the User Group.
           # @option options [Object] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
+          # @option options [Object] :description
+          #   A short description of the User Group.
+          # @option options [Object] :handle
+          #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [Object] :include_count
           #   Include the number of users in each User Group.
           # @see https://api.slack.com/methods/usergroups.create
@@ -26,7 +26,7 @@ module Slack
           end
 
           #
-          # This method disables an existing User Group.
+          # Disable an existing User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to disable.
@@ -40,7 +40,7 @@ module Slack
           end
 
           #
-          # This method enables a User Group which was previously disabled.
+          # Enable a User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to enable.
@@ -54,12 +54,12 @@ module Slack
           end
 
           #
-          # This method returns a list of all User Groups in the team. This can optionally include disabled User Groups.
+          # List all User Groups for a team
           #
-          # @option options [Object] :include_disabled
-          #   Include disabled User Groups.
           # @option options [Object] :include_count
           #   Include the number of users in each User Group.
+          # @option options [Object] :include_disabled
+          #   Include disabled User Groups.
           # @option options [Object] :include_users
           #   Include the list of users for each User Group.
           # @see https://api.slack.com/methods/usergroups.list
@@ -69,20 +69,20 @@ module Slack
           end
 
           #
-          # This method updates the properties of an existing User Group.
+          # Update an existing User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to update.
-          # @option options [Object] :name
-          #   A name for the User Group. Must be unique among User Groups.
-          # @option options [Object] :handle
-          #   A mention handle. Must be unique among channels, users and User Groups.
-          # @option options [Object] :description
-          #   A short description of the User Group.
           # @option options [Object] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
+          # @option options [Object] :description
+          #   A short description of the User Group.
+          # @option options [Object] :handle
+          #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [Object] :include_count
           #   Include the number of users in the User Group.
+          # @option options [Object] :name
+          #   A name for the User Group. Must be unique among User Groups.
           # @see https://api.slack.com/methods/usergroups.update
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/usergroups/usergroups.update.json
           def usergroups_update(options = {})

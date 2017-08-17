@@ -2,16 +2,16 @@
 
 desc 'Get info on members of your Slack team.'
 command 'users' do |g|
-  g.desc 'This method allows the user to delete their profile image. It will clear whatever image is currently set.'
-  g.long_desc %( This method allows the user to delete their profile image. It will clear whatever image is currently set. )
+  g.desc 'Delete the user profile photo'
+  g.long_desc %( Delete the user profile photo )
   g.command 'deletePhoto' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_deletePhoto(options))
     end
   end
 
-  g.desc "This method lets you find out information about a user's presence."
-  g.long_desc %( This method lets you find out information about a user's presence. Consult the presence documentation for more details. )
+  g.desc 'Gets user presence information.'
+  g.long_desc %( Gets user presence information. )
   g.command 'getPresence' do |c|
     c.flag 'user', desc: 'User to get presence info on. Defaults to the authed user.'
     c.action do |_global_options, options, _args|
@@ -19,16 +19,16 @@ command 'users' do |g|
     end
   end
 
-  g.desc "After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity."
-  g.long_desc %( After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity. )
+  g.desc "Get a user's identity."
+  g.long_desc %( Get a user's identity. )
   g.command 'identity' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_identity(options))
     end
   end
 
-  g.desc 'This method returns information about a team member.'
-  g.long_desc %( This method returns information about a team member. )
+  g.desc 'Gets information about a user.'
+  g.long_desc %( Gets information about a user. )
   g.command 'info' do |c|
     c.flag 'user', desc: 'User to get info on.'
     c.action do |_global_options, options, _args|
@@ -36,37 +36,39 @@ command 'users' do |g|
     end
   end
 
-  g.desc 'This method returns a list of all users in the team. This includes deleted/deactivated users.'
-  g.long_desc %( This method returns a list of all users in the team. This includes deleted/deactivated users. )
+  g.desc 'Lists all users in a Slack team.'
+  g.long_desc %( Lists all users in a Slack team. )
   g.command 'list' do |c|
-    c.flag 'presence', desc: 'Whether to include presence data in the output.'
+    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first \"page\" of the collection. See pagination for more detail."
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
+    c.flag 'presence', desc: 'Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_list(options))
     end
   end
 
-  g.desc 'This method lets the slack messaging server know that the authenticated user'
-  g.long_desc %( This method lets the slack messaging server know that the authenticated user is currently active. Consult the presence documentation for more details. )
+  g.desc 'Marks a user as active.'
+  g.long_desc %( Marks a user as active. )
   g.command 'setActive' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setActive(options))
     end
   end
 
-  g.desc 'This method allows the user to set their profile image. The caller can pass image data via image.'
-  g.long_desc %( This method allows the user to set their profile image. The caller can pass image data via image. )
+  g.desc 'Set the user profile photo'
+  g.long_desc %( Set the user profile photo )
   g.command 'setPhoto' do |c|
     c.flag 'image', desc: 'File contents via multipart/form-data.'
+    c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
     c.flag 'crop_x', desc: 'X coordinate of top-left corner of crop box.'
     c.flag 'crop_y', desc: 'Y coordinate of top-left corner of crop box.'
-    c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setPhoto(options))
     end
   end
 
-  g.desc "This method lets you set the calling user's manual presence."
-  g.long_desc %( This method lets you set the calling user's manual presence. Consult the presence documentation for more details. )
+  g.desc 'Manually sets user presence.'
+  g.long_desc %( Manually sets user presence. )
   g.command 'setPresence' do |c|
     c.flag 'presence', desc: 'Either auto or away.'
     c.action do |_global_options, options, _args|

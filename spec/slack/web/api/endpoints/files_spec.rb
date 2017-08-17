@@ -24,9 +24,4 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
       expect { client.files_sharedPublicURL }.to raise_error ArgumentError, /Required arguments :file missing/
     end
   end
-  context 'files_upload' do
-    it 'requires filename' do
-      expect { client.files_upload }.to raise_error ArgumentError, /Required arguments :filename missing/
-    end
-  end
 end
