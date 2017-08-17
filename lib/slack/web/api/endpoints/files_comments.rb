@@ -8,20 +8,20 @@ module Slack
           #
           # Add a comment to an existing file.
           #
-          # @option options [file] :file
-          #   File to add a comment to.
           # @option options [Object] :comment
           #   Text of the comment to add.
+          # @option options [file] :file
+          #   File to add a comment to.
           # @see https://api.slack.com/methods/files.comments.add
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.comments/files.comments.add.json
           def files_comments_add(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.comments.add', options)
           end
 
           #
-          # Delete an existing comment on a file. Only the original author of the comment or a Team Administrator may delete a file comment.
+          # Deletes an existing comment on a file.
           #
           # @option options [file] :file
           #   File to delete a comment from.
@@ -36,20 +36,20 @@ module Slack
           end
 
           #
-          # Edit an existing comment on a file. Only the user who created a comment may make edits. Teams may configure a limited time window during which file comment edits are allowed.
+          # Edit an existing file comment.
           #
+          # @option options [Object] :comment
+          #   Text of the comment to edit.
           # @option options [file] :file
           #   File containing the comment to edit.
           # @option options [Object] :id
           #   The comment to edit.
-          # @option options [Object] :comment
-          #   Text of the comment to edit.
           # @see https://api.slack.com/methods/files.comments.edit
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.comments/files.comments.edit.json
           def files_comments_edit(options = {})
+            throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
-            throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
             post('files.comments.edit', options)
           end
         end

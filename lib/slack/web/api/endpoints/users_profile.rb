@@ -6,12 +6,12 @@ module Slack
       module Endpoints
         module UsersProfile
           #
-          # Use this method to retrieve a user's profile information.
+          # Retrieves a user's profile information.
           #
-          # @option options [user] :user
-          #   User to retrieve profile info for.
           # @option options [Object] :include_labels
           #   Include labels for each ID in custom profile fields.
+          # @option options [user] :user
+          #   User to retrieve profile info for.
           # @see https://api.slack.com/methods/users.profile.get
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.profile/users.profile.get.json
           def users_profile_get(options = {})
@@ -20,14 +20,14 @@ module Slack
           end
 
           #
-          # Use this method to set a user's profile information, including name, email, current status, and other attributes.
+          # Set the profile information for a user.
           #
-          # @option options [user] :user
-          #   ID of user to change. This argument may only be specified by team admins on paid teams.
-          # @option options [Object] :profile
-          #   Collection of key:value pairs presented as a URL-encoded JSON hash.
           # @option options [Object] :name
           #   Name of a single key to set. Usable only if profile is not passed.
+          # @option options [Object] :profile
+          #   Collection of key:value pairs presented as a URL-encoded JSON hash.
+          # @option options [user] :user
+          #   ID of user to change. This argument may only be specified by team admins on paid teams.
           # @option options [Object] :value
           #   Value to set a single key to. Usable only if profile is not passed.
           # @see https://api.slack.com/methods/users.profile.set

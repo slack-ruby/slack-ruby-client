@@ -6,17 +6,16 @@ module Slack
       module Endpoints
         module Reactions
           #
-          # This method adds a reaction (emoji) to an item (file, file comment, channel message, group message, or direct message).
-          # One of file, file_comment, or the combination of channel and timestamp must be specified.
+          # Adds a reaction to an item.
           #
           # @option options [Object] :name
           #   Reaction (emoji) name.
+          # @option options [channel] :channel
+          #   Channel where the message to add reaction to was posted.
           # @option options [file] :file
           #   File to add reaction to.
           # @option options [Object] :file_comment
           #   File comment to add reaction to.
-          # @option options [channel] :channel
-          #   Channel where the message to add reaction to was posted.
           # @option options [Object] :timestamp
           #   Timestamp of the message to add reaction to.
           # @see https://api.slack.com/methods/reactions.add
@@ -28,18 +27,18 @@ module Slack
           end
 
           #
-          # This method returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message).
+          # Gets reactions for an item.
           #
+          # @option options [channel] :channel
+          #   Channel where the message to get reactions for was posted.
           # @option options [file] :file
           #   File to get reactions for.
           # @option options [Object] :file_comment
           #   File comment to get reactions for.
-          # @option options [channel] :channel
-          #   Channel where the message to get reactions for was posted.
-          # @option options [Object] :timestamp
-          #   Timestamp of the message to get reactions for.
           # @option options [Object] :full
           #   If true always return the complete reaction list.
+          # @option options [Object] :timestamp
+          #   Timestamp of the message to get reactions for.
           # @see https://api.slack.com/methods/reactions.get
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions/reactions.get.json
           def reactions_get(options = {})
@@ -48,12 +47,12 @@ module Slack
           end
 
           #
-          # This method returns a list of all items (file, file comment, channel message, group message, or direct message) reacted to by a user.
+          # Lists reactions made by a user.
           #
-          # @option options [user] :user
-          #   Show reactions made by this user. Defaults to the authed user.
           # @option options [Object] :full
           #   If true always return the complete reaction list.
+          # @option options [user] :user
+          #   Show reactions made by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/reactions.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/reactions/reactions.list.json
           def reactions_list(options = {})
@@ -62,17 +61,16 @@ module Slack
           end
 
           #
-          # This method removes a reaction (emoji) from an item (file, file comment, channel message, group message, or direct message).
-          # One of file, file_comment, or the combination of channel and timestamp must be specified.
+          # Removes a reaction from an item.
           #
           # @option options [Object] :name
           #   Reaction (emoji) name.
+          # @option options [channel] :channel
+          #   Channel where the message to remove reaction from was posted.
           # @option options [file] :file
           #   File to remove reaction from.
           # @option options [Object] :file_comment
           #   File comment to remove reaction from.
-          # @option options [channel] :channel
-          #   Channel where the message to remove reaction from was posted.
           # @option options [Object] :timestamp
           #   Timestamp of the message to remove reaction from.
           # @see https://api.slack.com/methods/reactions.remove

@@ -5,15 +5,15 @@ command 'files_comments' do |g|
   g.desc 'Add a comment to an existing file.'
   g.long_desc %( Add a comment to an existing file. )
   g.command 'add' do |c|
-    c.flag 'file', desc: 'File to add a comment to.'
     c.flag 'comment', desc: 'Text of the comment to add.'
+    c.flag 'file', desc: 'File to add a comment to.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_comments_add(options))
     end
   end
 
-  g.desc 'Delete an existing comment on a file. Only the original author of the comment or a Team Administrator may delete a file comment.'
-  g.long_desc %( Delete an existing comment on a file. Only the original author of the comment or a Team Administrator may delete a file comment. )
+  g.desc 'Deletes an existing comment on a file.'
+  g.long_desc %( Deletes an existing comment on a file. )
   g.command 'delete' do |c|
     c.flag 'file', desc: 'File to delete a comment from.'
     c.flag 'id', desc: 'The comment to delete.'
@@ -22,12 +22,12 @@ command 'files_comments' do |g|
     end
   end
 
-  g.desc 'Edit an existing comment on a file. Only the user who created a comment may make edits. Teams may configure a limited time window during which file comment edits are allowed.'
-  g.long_desc %( Edit an existing comment on a file. Only the user who created a comment may make edits. Teams may configure a limited time window during which file comment edits are allowed. )
+  g.desc 'Edit an existing file comment.'
+  g.long_desc %( Edit an existing file comment. )
   g.command 'edit' do |c|
+    c.flag 'comment', desc: 'Text of the comment to edit.'
     c.flag 'file', desc: 'File containing the comment to edit.'
     c.flag 'id', desc: 'The comment to edit.'
-    c.flag 'comment', desc: 'Text of the comment to edit.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_comments_edit(options))
     end

@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Mpim
           #
-          # This method closes a multiparty direct message channel.
+          # Closes a multiparty direct message channel.
           #
           # @option options [channel] :channel
           #   MPIM to close.
@@ -19,18 +19,16 @@ module Slack
           end
 
           #
-          # This method returns a portion of messages/events from the specified multiparty direct message channel.
-          # To read the entire history for a multiparty direct message, call the method with no latest or
-          # oldest arguments, and then continue paging using the instructions below.
+          # Fetches history of messages and events from a multiparty direct message.
           #
           # @option options [channel] :channel
           #   Multiparty direct message to fetch history for.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
           # @option options [timestamp] :latest
           #   End of time range of messages to include in results.
           # @option options [timestamp] :oldest
           #   Start of time range of messages to include in results.
-          # @option options [Object] :inclusive
-          #   Include messages with latest or oldest timestamp in results.
           # @option options [Object] :unreads
           #   Include unread_count_display in the output?.
           # @see https://api.slack.com/methods/mpim.history
@@ -42,7 +40,7 @@ module Slack
           end
 
           #
-          # This method returns a list of all multiparty direct message channels that the user has.
+          # Lists multiparty direct message channels for the calling user.
           #
           # @see https://api.slack.com/methods/mpim.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.list.json
@@ -51,7 +49,7 @@ module Slack
           end
 
           #
-          # This method moves the read cursor in a multiparty direct message channel.
+          # Sets the read cursor in a multiparty direct message channel.
           #
           # @option options [channel] :channel
           #   multiparty direct message channel to set reading cursor in.
@@ -79,7 +77,7 @@ module Slack
           end
 
           #
-          # This method returns an entire thread (a message plus all the messages in reply to it).
+          # Retrieve a thread of messages posted to a direct message conversation from a multiparty direct message.
           #
           # @option options [channel] :channel
           #   Multiparty direct message channel to fetch thread from.

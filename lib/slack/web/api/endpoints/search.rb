@@ -6,16 +6,16 @@ module Slack
       module Endpoints
         module Search
           #
-          # This method allows users and applications to search both messages and files in a single call.
+          # Searches for messages and files matching a query.
           #
           # @option options [Object] :query
           #   Search query. May contains booleans, etc.
+          # @option options [Object] :highlight
+          #   Pass a value of true to enable query highlight markers (see below).
           # @option options [Object] :sort
           #   Return matches sorted by either score or timestamp.
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
-          # @option options [Object] :highlight
-          #   Pass a value of true to enable query highlight markers (see below).
           # @see https://api.slack.com/methods/search.all
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/search/search.all.json
           def search_all(options = {})
@@ -24,16 +24,16 @@ module Slack
           end
 
           #
-          # This method returns files matching a search query.
+          # Searches for files matching a query.
           #
           # @option options [Object] :query
           #   Search query. May contain booleans, etc.
+          # @option options [Object] :highlight
+          #   Pass a value of true to enable query highlight markers (see below).
           # @option options [Object] :sort
           #   Return matches sorted by either score or timestamp.
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
-          # @option options [Object] :highlight
-          #   Pass a value of true to enable query highlight markers (see below).
           # @see https://api.slack.com/methods/search.files
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/search/search.files.json
           def search_files(options = {})
@@ -42,16 +42,16 @@ module Slack
           end
 
           #
-          # This method returns messages matching a search query.
+          # Searches for messages matching a query.
           #
           # @option options [Object] :query
           #   Search query. May contains booleans, etc.
+          # @option options [Object] :highlight
+          #   Pass a value of true to enable query highlight markers (see below).
           # @option options [Object] :sort
           #   Return matches sorted by either score or timestamp.
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
-          # @option options [Object] :highlight
-          #   Pass a value of true to enable query highlight markers (see below).
           # @see https://api.slack.com/methods/search.messages
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/search/search.messages.json
           def search_messages(options = {})

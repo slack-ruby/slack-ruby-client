@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Bots
           #
-          # This method returns information about a bot user.
+          # Gets information about a bot user.
           #
           # @option options [Object] :bot
           #   Bot user to get info on.

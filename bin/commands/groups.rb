@@ -2,8 +2,8 @@
 
 desc "Get info on your team's private channels."
 command 'groups' do |g|
-  g.desc 'This method archives a private channel.'
-  g.long_desc %( This method archives a private channel. )
+  g.desc 'Archives a private channel.'
+  g.long_desc %( Archives a private channel. )
   g.command 'archive' do |c|
     c.flag 'channel', desc: 'Private channel to archive.'
     c.action do |_global_options, options, _args|
@@ -11,8 +11,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method closes a private channel.'
-  g.long_desc %( This method closes a private channel. )
+  g.desc 'Closes a private channel.'
+  g.long_desc %( Closes a private channel. )
   g.command 'close' do |c|
     c.flag 'channel', desc: 'Private channel to close.'
     c.action do |_global_options, options, _args|
@@ -20,8 +20,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method creates a private channel.'
-  g.long_desc %( This method creates a private channel. )
+  g.desc 'Creates a private channel.'
+  g.long_desc %( Creates a private channel. )
   g.command 'create' do |c|
     c.flag 'name', desc: 'Name of private channel to create.'
     c.flag 'validate', desc: 'Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.'
@@ -30,8 +30,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method takes an existing private channel and performs the following steps:'
-  g.long_desc %( This method takes an existing private channel and performs the following steps: )
+  g.desc 'Clones and archives a private channel.'
+  g.long_desc %( Clones and archives a private channel. )
   g.command 'createChild' do |c|
     c.flag 'channel', desc: 'Private channel to clone and archive.'
     c.action do |_global_options, options, _args|
@@ -39,21 +39,21 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method returns a portion of messages/events from the specified private channel.'
-  g.long_desc %( This method returns a portion of messages/events from the specified private channel. To read the entire history for a private channel, call the method with no latest or oldest arguments, and then continue paging using the instructions below. )
+  g.desc 'Fetches history of messages and events from a private channel.'
+  g.long_desc %( Fetches history of messages and events from a private channel. )
   g.command 'history' do |c|
     c.flag 'channel', desc: 'Private channel to fetch history for.'
+    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results.'
     c.flag 'latest', desc: 'End of time range of messages to include in results.'
     c.flag 'oldest', desc: 'Start of time range of messages to include in results.'
-    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results.'
     c.flag 'unreads', desc: 'Include unread_count_display in the output?.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_history(options))
     end
   end
 
-  g.desc 'This method returns information about a private channel.'
-  g.long_desc %( This method returns information about a private channel. )
+  g.desc 'Gets information about a private channel.'
+  g.long_desc %( Gets information about a private channel. )
   g.command 'info' do |c|
     c.flag 'channel', desc: 'Private channel to get info on.'
     c.action do |_global_options, options, _args|
@@ -61,8 +61,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method is used to invite a user to a private channel. The calling user must be a member of the private channel.'
-  g.long_desc %( This method is used to invite a user to a private channel. The calling user must be a member of the private channel. )
+  g.desc 'Invites a user to a private channel.'
+  g.long_desc %( Invites a user to a private channel. )
   g.command 'invite' do |c|
     c.flag 'channel', desc: 'Private channel to invite user to.'
     c.flag 'user', desc: 'User to invite.'
@@ -71,8 +71,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method allows a user to remove another member from a private channel.'
-  g.long_desc %( This method allows a user to remove another member from a private channel. )
+  g.desc 'Removes a user from a private channel.'
+  g.long_desc %( Removes a user from a private channel. )
   g.command 'kick' do |c|
     c.flag 'channel', desc: 'Private channel to remove user from.'
     c.flag 'user', desc: 'User to remove from private channel.'
@@ -81,8 +81,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method is used to leave a private channel.'
-  g.long_desc %( This method is used to leave a private channel. )
+  g.desc 'Leaves a private channel.'
+  g.long_desc %( Leaves a private channel. )
   g.command 'leave' do |c|
     c.flag 'channel', desc: 'Private channel to leave.'
     c.action do |_global_options, options, _args|
@@ -90,17 +90,18 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method returns a list of private channels in the team that the caller is in and archived groups that the caller was in.'
-  g.long_desc %( This method returns a list of private channels in the team that the caller is in and archived groups that the caller was in. The list of (non-deactivated) members in each private channel is also returned. )
+  g.desc 'Lists private channels that the calling user has access to.'
+  g.long_desc %( Lists private channels that the calling user has access to. )
   g.command 'list' do |c|
     c.flag 'exclude_archived', desc: "Don't return archived private channels."
+    c.flag 'exclude_members', desc: 'Exlude the members from each group.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_list(options))
     end
   end
 
-  g.desc 'This method moves the read cursor in a private channel.'
-  g.long_desc %( This method moves the read cursor in a private channel. )
+  g.desc 'Sets the read cursor in a private channel.'
+  g.long_desc %( Sets the read cursor in a private channel. )
   g.command 'mark' do |c|
     c.flag 'channel', desc: 'Private channel to set reading cursor in.'
     c.flag 'ts', desc: 'Timestamp of the most recently seen message.'
@@ -109,8 +110,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method opens a private channel.'
-  g.long_desc %( This method opens a private channel. )
+  g.desc 'Opens a private channel.'
+  g.long_desc %( Opens a private channel. )
   g.command 'open' do |c|
     c.flag 'channel', desc: 'Private channel to open.'
     c.action do |_global_options, options, _args|
@@ -118,8 +119,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method renames a private channel.'
-  g.long_desc %( This method renames a private channel. )
+  g.desc 'Renames a private channel.'
+  g.long_desc %( Renames a private channel. )
   g.command 'rename' do |c|
     c.flag 'channel', desc: 'Private channel to rename.'
     c.flag 'name', desc: 'New name for private channel.'
@@ -129,8 +130,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method returns an entire thread (a message plus all the messages in reply to it).'
-  g.long_desc %( This method returns an entire thread (a message plus all the messages in reply to it). )
+  g.desc 'Retrieve a thread of messages posted to a private channel'
+  g.long_desc %( Retrieve a thread of messages posted to a private channel )
   g.command 'replies' do |c|
     c.flag 'channel', desc: 'Private channel to fetch thread from.'
     c.flag 'thread_ts', desc: "Unique identifier of a thread's parent message."
@@ -139,8 +140,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method is used to change the purpose of a private channel. The calling user must be a member of the private channel.'
-  g.long_desc %( This method is used to change the purpose of a private channel. The calling user must be a member of the private channel. )
+  g.desc 'Sets the purpose for a private channel.'
+  g.long_desc %( Sets the purpose for a private channel. )
   g.command 'setPurpose' do |c|
     c.flag 'channel', desc: 'Private channel to set the purpose of.'
     c.flag 'purpose', desc: 'The new purpose.'
@@ -149,8 +150,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method is used to change the topic of a private channel. The calling user must be a member of the private channel.'
-  g.long_desc %( This method is used to change the topic of a private channel. The calling user must be a member of the private channel. )
+  g.desc 'Sets the topic for a private channel.'
+  g.long_desc %( Sets the topic for a private channel. )
   g.command 'setTopic' do |c|
     c.flag 'channel', desc: 'Private channel to set the topic of.'
     c.flag 'topic', desc: 'The new topic.'
@@ -159,8 +160,8 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'This method unarchives a private channel.'
-  g.long_desc %( This method unarchives a private channel. )
+  g.desc 'Unarchives a private channel.'
+  g.long_desc %( Unarchives a private channel. )
   g.command 'unarchive' do |c|
     c.flag 'channel', desc: 'Private channel to unarchive.'
     c.action do |_global_options, options, _args|

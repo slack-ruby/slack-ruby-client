@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Users
           #
-          # This method allows the user to delete their profile image. It will clear whatever image is currently set.
+          # Delete the user profile photo
           #
           # @see https://api.slack.com/methods/users.deletePhoto
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.deletePhoto.json
@@ -15,8 +15,7 @@ module Slack
           end
 
           #
-          # This method lets you find out information about a user's presence.
-          # Consult the presence documentation for more details.
+          # Gets user presence information.
           #
           # @option options [user] :user
           #   User to get presence info on. Defaults to the authed user.
@@ -29,7 +28,7 @@ module Slack
           end
 
           #
-          # After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity.
+          # Get a user's identity.
           #
           # @see https://api.slack.com/methods/users.identity
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.identity.json
@@ -38,7 +37,7 @@ module Slack
           end
 
           #
-          # This method returns information about a team member.
+          # Gets information about a user.
           #
           # @option options [user] :user
           #   User to get info on.
@@ -51,10 +50,14 @@ module Slack
           end
 
           #
-          # This method returns a list of all users in the team. This includes deleted/deactivated users.
+          # Lists all users in a Slack team.
           #
+          # @option options [Object] :cursor
+          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @option options [Object] :presence
-          #   Whether to include presence data in the output.
+          #   Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.list.json
           def users_list(options = {})
@@ -62,9 +65,7 @@ module Slack
           end
 
           #
-          # This method lets the slack messaging server know that the authenticated user
-          # is currently active. Consult the presence documentation for
-          # more details.
+          # Marks a user as active.
           #
           # @see https://api.slack.com/methods/users.setActive
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setActive.json
@@ -73,16 +74,16 @@ module Slack
           end
 
           #
-          # This method allows the user to set their profile image. The caller can pass image data via image.
+          # Set the user profile photo
           #
           # @option options [Object] :image
           #   File contents via multipart/form-data.
+          # @option options [Object] :crop_w
+          #   Width/height of crop box (always square).
           # @option options [Object] :crop_x
           #   X coordinate of top-left corner of crop box.
           # @option options [Object] :crop_y
           #   Y coordinate of top-left corner of crop box.
-          # @option options [Object] :crop_w
-          #   Width/height of crop box (always square).
           # @see https://api.slack.com/methods/users.setPhoto
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setPhoto.json
           def users_setPhoto(options = {})
@@ -91,8 +92,7 @@ module Slack
           end
 
           #
-          # This method lets you set the calling user's manual presence.
-          # Consult the presence documentation for more details.
+          # Manually sets user presence.
           #
           # @option options [Object] :presence
           #   Either auto or away.

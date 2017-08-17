@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Auth
           #
-          # This method revokes an access token. Use it when you no longer need a token. For example, with a Sign In With Slack app, call this to log a user out.
+          # Revokes a token.
           #
           # @option options [Object] :test
           #   Setting this parameter to 1 triggers a testing mode where the specified token will not actually be revoked.
@@ -17,7 +17,7 @@ module Slack
           end
 
           #
-          # This method checks authentication and tells you who you are.
+          # Checks authentication & identity.
           #
           # @see https://api.slack.com/methods/auth.test
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/auth/auth.test.json

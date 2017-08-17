@@ -14,6 +14,26 @@ module Slack
 
         ### RealTime Events
 
+        # The membership of an existing User Group has changed.
+        # @see https://api.slack.com/events/subteam_members_changed
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/subteam_members_changed.json
+        # on :subteam_members_changed do |data|
+
+        # Subscribe to presence events for the specified users.
+        # @see https://api.slack.com/events/presence_sub
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/presence_sub.json
+        # on :presence_sub do |data|
+
+        # A user left a public or private channel.
+        # @see https://api.slack.com/events/member_left_channel
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/member_left_channel.json
+        # on :member_left_channel do |data|
+
+        # A user joined a public or private channel.
+        # @see https://api.slack.com/events/member_joined_channel
+        # @see https://github.com/dblock/slack-api-ref/blob/master/events/member_joined_channel.json
+        # on :member_joined_channel do |data|
+
         # The server intends to close the connection soon..
         # @see https://api.slack.com/events/goodbye
         # @see https://github.com/dblock/slack-api-ref/blob/master/events/goodbye.json

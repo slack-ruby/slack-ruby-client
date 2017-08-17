@@ -6,8 +6,12 @@ module Slack
       module Endpoints
         module Rtm
           #
-          # This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.
+          # Starts a Real Time Messaging session.
           #
+          # @option options [Object] :batch_presence_aware
+          #   Group presence change notices as presence_change_batch events when possible. See batching.
+          # @option options [Object] :presence_sub
+          #   Only deliver presence events when requested by subscription. See presence subscriptions.
           # @see https://api.slack.com/methods/rtm.connect
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm/rtm.connect.json
           def rtm_connect(options = {})
@@ -15,16 +19,20 @@ module Slack
           end
 
           #
-          # This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.
+          # Starts a Real Time Messaging session.
           #
-          # @option options [Object] :simple_latest
-          #   Return timestamp only for latest message object of each channel (improves performance).
-          # @option options [Object] :no_unreads
-          #   Skip unread counts for each channel (improves performance).
+          # @option options [Object] :batch_presence_aware
+          #   Group presence change notices as presence_change_batch events when possible. See batching.
           # @option options [Object] :mpim_aware
           #   Returns MPIMs to the client in the API response.
           # @option options [Object] :no_latest
           #   Exclude latest timestamps for channels, groups, mpims, and ims. Automatically sets no_unreads to 1.
+          # @option options [Object] :no_unreads
+          #   Skip unread counts for each channel (improves performance).
+          # @option options [Object] :presence_sub
+          #   Only deliver presence events when requested by subscription. See presence subscriptions.
+          # @option options [Object] :simple_latest
+          #   Return timestamp only for latest message object of each channel (improves performance).
           # @see https://api.slack.com/methods/rtm.start
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm/rtm.start.json
           def rtm_start(options = {})
