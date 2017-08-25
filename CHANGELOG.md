@@ -1,6 +1,5 @@
-### 0.9.1 (Next)
+### 0.9.1 (8/24/2017)
 
-* Your contribution here.
 * [#158](https://github.com/slack-ruby/slack-ruby-client/issues/158): Updated to latest slack-api-ref; Updated chat.3.update patch to reflect argument reordering; Added chat.4.postEphemeral patch to apply the attachments JSON fix (whitespace last line of diff matters! ;-) - [@alexagranov](https://github.com/alexagranov).
 
 ### 0.9.0 (8/6/2017)
