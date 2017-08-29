@@ -12,7 +12,8 @@ module Slack
         :endpoint,
         :token,
         :timeout,
-        :open_timeout
+        :open_timeout,
+        :default_page_size
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
@@ -27,6 +28,7 @@ module Slack
         self.logger = nil
         self.timeout = nil
         self.open_timeout = nil
+        self.default_page_size = 100
       end
     end
 

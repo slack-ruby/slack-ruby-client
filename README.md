@@ -164,22 +164,35 @@ client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
 
 The following settings are supported.
 
-setting      | description
--------------|-------------------------------------------------------------------------------------------------
-token        | Slack API token.
-user_agent   | User-agent, defaults to _Slack Ruby Client/version_.
-proxy        | Optional HTTP proxy.
-ca_path      | Optional SSL certificates path.
-ca_file      | Optional SSL certificates file.
-endpoint     | Slack endpoint, default is _https://slack.com/api_.
-logger       | Optional `Logger` instance that logs HTTP requests.
-timeout      | Optional open/read timeout in seconds.
-open_timeout | Optional connection open timeout in seconds.
+setting           | description
+------------------|-------------------------------------------------------------------------------------------------
+token             | Slack API token.
+user_agent        | User-agent, defaults to _Slack Ruby Client/version_.
+proxy             | Optional HTTP proxy.
+ca_path           | Optional SSL certificates path.
+ca_file           | Optional SSL certificates file.
+endpoint          | Slack endpoint, default is _https://slack.com/api_.
+logger            | Optional `Logger` instance that logs HTTP requests.
+timeout           | Optional open/read timeout in seconds.
+open_timeout      | Optional connection open timeout in seconds.
+default_page_size | Optional page size for paginated requests, default is _100_.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
 ```ruby
 client.channels_list(request: { timeout: 180 })
+```
+
+#### Pagination Support
+
+The Web client natively supports [cursor pagination](https://api.slack.com/docs/pagination#cursors) for methods that allow it, such as `users_list`. Supply a block and the client will make repeated requests adjusting the value of `cursor` with every response. The default limit is set to 100 and can be adjusted via `Slack::Web::Client.config.default_page_size` or by passing it directly into the API call.
+
+```ruby
+all_members = []
+client.users_list(presence: true, limit: 10) do |response|
+  all_members.concat(response.members)
+end
+all_members # many thousands of team members retrieved 10 at a time
 ```
 
 ### RealTime Client

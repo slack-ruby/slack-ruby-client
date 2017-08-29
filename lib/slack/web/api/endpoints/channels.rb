@@ -130,14 +130,24 @@ module Slack
           #
           # Lists all channels in a Slack team.
           #
+          # @option options [Object] :cursor
+          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
           # @option options [Object] :exclude_archived
           #   Exclude archived channels from the list.
           # @option options [Object] :exclude_members
           #   Exclude the members collection from each channel.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @see https://api.slack.com/methods/channels.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels/channels.list.json
           def channels_list(options = {})
-            post('channels.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :channels_list, options).each do |page|
+                yield page
+              end
+            else
+              post('channels.list', options)
+            end
           end
 
           #

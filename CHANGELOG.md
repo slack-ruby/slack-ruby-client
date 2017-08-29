@@ -1,5 +1,6 @@
 ### 0.9.2 (Next)
 
+* [#161](https://github.com/slack-ruby/slack-ruby-client/pull/161): Added support for cursor pagination - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.9.1 (8/24/2017)

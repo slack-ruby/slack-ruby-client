@@ -42,10 +42,20 @@ module Slack
           #
           # Lists direct message channels for the calling user.
           #
+          # @option options [Object] :cursor
+          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @see https://api.slack.com/methods/im.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.list.json
           def im_list(options = {})
-            post('im.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :im_list, options).each do |page|
+                yield page
+              end
+            else
+              post('im.list', options)
+            end
           end
 
           #
