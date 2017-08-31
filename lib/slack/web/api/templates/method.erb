@@ -39,7 +39,17 @@ module Slack
 <% if data['args']['user'] %>
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
 <% end %>
+<% if data['args'].keys.include?('cursor') %>
+            if block_given?
+              Pagination::Cursor.new(self, :<%= group.gsub(".", "_") %>_<%= name %>, options).each do |page|
+                yield page
+              end
+            else
+              post('<%= group %>.<%= name %>', options)
+            end
+<% else %>
             post('<%= group %>.<%= name %>', options)
+<% end %>
           end
 <% end %>
         end

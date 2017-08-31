@@ -26,6 +26,7 @@ require_relative 'slack/web/faraday/connection'
 require_relative 'slack/web/faraday/request'
 require_relative 'slack/web/api/mixins'
 require_relative 'slack/web/api/endpoints'
+require_relative 'slack/web/pagination/cursor'
 require_relative 'slack/web/client'
 
 # RealTime API

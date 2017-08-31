@@ -20,8 +20,8 @@ command '<%= group['name'].gsub(".", "_") %>' do |g|
   g.long_desc %( <%= data["desc"].split("\n").join(" ") %> )
   g.command '<%= name %>' do |c|
   <% data["args"].each do |arg_name, arg_v| %>
-    <% if arg_v["desc"].include?("'")  %>
-    c.flag '<%= arg_name %>', desc: "<%= arg_v["desc"] %>"
+    <% if arg_v["desc"].include?("'") %>
+    c.flag '<%= arg_name %>', desc: "<%= arg_v["desc"].gsub('"', '\'') %>"
     <% else %>
     c.flag '<%= arg_name %>', desc: '<%= arg_v["desc"] %>'
     <% end %>

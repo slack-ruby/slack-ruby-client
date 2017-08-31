@@ -61,7 +61,13 @@ module Slack
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.list.json
           def users_list(options = {})
-            post('users.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :users_list, options).each do |page|
+                yield page
+              end
+            else
+              post('users.list', options)
+            end
           end
 
           #

@@ -39,7 +39,7 @@ command 'users' do |g|
   g.desc 'Lists all users in a Slack team.'
   g.long_desc %( Lists all users in a Slack team. )
   g.command 'list' do |c|
-    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first \"page\" of the collection. See pagination for more detail."
+    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
     c.flag 'presence', desc: 'Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.'
     c.action do |_global_options, options, _args|
