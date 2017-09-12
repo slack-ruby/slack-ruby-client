@@ -1,3 +1,4 @@
+require 'openssl'
 module Slack
   module Web
     module Config
@@ -21,20 +22,14 @@ module Slack
       def reset
         self.endpoint = 'https://slack.com/api/'
         self.user_agent = "Slack Ruby Client/#{Slack::VERSION}"
-        self.ca_path = openssl_ca_path if ca_path.nil?
-        self.ca_file = File.join(openssl_ca_path, 'ca-certificates.crt') if ca_file.nil?
+        self.ca_path = OpenSSL::X509::DEFAULT_CERT_DIR
+        self.ca_file = OpenSSL::X509::DEFAULT_CERT_FILE
         self.token = nil
         self.proxy = nil
         self.logger = nil
         self.timeout = nil
         self.open_timeout = nil
         self.default_page_size = 100
-      end
-
-      def openssl_ca_path
-        ca_path = `openssl version -a`
-        ca_path = ca_path.split("\n").find { |dir| dir.include?('OPENSSLDIR') }
-        ca_path.gsub!('OPENSSLDIR: ', '').delete!('"')
       end
     end
 
