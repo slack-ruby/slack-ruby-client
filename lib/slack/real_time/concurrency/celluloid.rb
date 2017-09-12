@@ -53,12 +53,12 @@ module Slack
           end
 
           def handle_read(buffer)
-            logger.debug("#{self.class}##{__method__}") { buffer }
+            logger.debug("#{self.class}##{__method__}") { buffer.force_encoding('UTF-8') }
             driver.parse buffer
           end
 
           def write(data)
-            logger.debug("#{self.class}##{__method__}") { data }
+            logger.debug("#{self.class}##{__method__}") { data.force_encoding('UTF-8') }
             socket.write(data)
           end
 
