@@ -21,14 +21,20 @@ module Slack
       def reset
         self.endpoint = 'https://slack.com/api/'
         self.user_agent = "Slack Ruby Client/#{Slack::VERSION}"
-        self.ca_path = `openssl version -a | grep OPENSSLDIR | awk '{print $2}'|sed -e 's/\"//g'`
-        self.ca_file = "#{ca_path}/ca-certificates.crt"
+        self.ca_path = openssl_ca_path if ca_path.nil?
+        self.ca_file = File.join(openssl_ca_path, 'ca-certificates.crt') if ca_file.nil?
         self.token = nil
         self.proxy = nil
         self.logger = nil
         self.timeout = nil
         self.open_timeout = nil
         self.default_page_size = 100
+      end
+
+      def openssl_ca_path
+        ca_path = `openssl version -a`
+        ca_path = ca_path.split("\n").find { |dir| dir.include?('OPENSSLDIR') }
+        ca_path.gsub!('OPENSSLDIR: ', '').delete!('"')
       end
     end
 
