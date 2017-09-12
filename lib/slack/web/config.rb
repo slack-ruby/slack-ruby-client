@@ -1,8 +1,3 @@
-begin
-  require 'openssl'
-rescue LoadError # rubocop:disable Lint/HandleExceptions
-end
-
 module Slack
   module Web
     module Config

@@ -17,6 +17,11 @@ begin
 rescue LoadError
   # ignore, only used in users_search
 end
+begin
+  require 'openssl'
+rescue LoadError # rubocop:disable Lint/HandleExceptions
+  # Used in slack/web/config
+end
 require_relative 'slack/web/config'
 require_relative 'slack/web/api/errors/slack_error'
 require_relative 'slack/web/api/errors/too_many_requests_error'
