@@ -11,7 +11,7 @@ module Slack
 
           options[:headers]['User-Agent'] = user_agent if user_agent
           options[:proxy] = proxy if proxy
-          options[:ssl] = { ca_path: ca_path, ca_file: ca_file }
+          options[:ssl] = { ca_path: ca_path, ca_file: ca_file } unless ca_path.nil? || ca_file.nil?
 
           request_options = {}
           request_options[:timeout] = timeout if timeout

@@ -1,4 +1,8 @@
-require 'openssl'
+begin
+  require 'openssl'
+rescue LoadError # rubocop:disable Lint/HandleExceptions
+end
+
 module Slack
   module Web
     module Config
@@ -22,8 +26,8 @@ module Slack
       def reset
         self.endpoint = 'https://slack.com/api/'
         self.user_agent = "Slack Ruby Client/#{Slack::VERSION}"
-        self.ca_path = OpenSSL::X509::DEFAULT_CERT_DIR
-        self.ca_file = OpenSSL::X509::DEFAULT_CERT_FILE
+        self.ca_path = defined?(OpenSSL) ? OpenSSL::X509::DEFAULT_CERT_DIR : nil
+        self.ca_file = defined?(OpenSSL) ? OpenSSL::X509::DEFAULT_CERT_FILE : nil
         self.token = nil
         self.proxy = nil
         self.logger = nil
