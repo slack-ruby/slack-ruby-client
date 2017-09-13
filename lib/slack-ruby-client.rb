@@ -19,7 +19,7 @@ rescue LoadError
 end
 begin
   require 'openssl'
-rescue LoadError # rubocop:disable Lint/HandleExceptions
+rescue LoadError
   # Used in slack/web/config
 end
 require_relative 'slack/web/config'
