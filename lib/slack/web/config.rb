@@ -21,8 +21,8 @@ module Slack
       def reset
         self.endpoint = 'https://slack.com/api/'
         self.user_agent = "Slack Ruby Client/#{Slack::VERSION}"
-        self.ca_path = `openssl version -a | grep OPENSSLDIR | awk '{print $2}'|sed -e 's/\"//g'`
-        self.ca_file = "#{ca_path}/ca-certificates.crt"
+        self.ca_path = defined?(OpenSSL) ? OpenSSL::X509::DEFAULT_CERT_DIR : nil
+        self.ca_file = defined?(OpenSSL) ? OpenSSL::X509::DEFAULT_CERT_FILE : nil
         self.token = nil
         self.proxy = nil
         self.logger = nil

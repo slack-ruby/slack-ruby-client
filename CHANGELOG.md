@@ -1,5 +1,6 @@
 ### 0.9.2 (Next)
 
+* [#163](https://github.com/slack-ruby/slack-ruby-client/pull/164): Use `OpenSSL::X509::DEFAULT_CERT_DIR` and `OpenSSL::X509::DEFAULT_CERT_FILE` for default ca_cert and ca_file - [@leifcr](https://github.com/leifcr).
 * [#161](https://github.com/slack-ruby/slack-ruby-client/pull/161): Added support for cursor pagination - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
