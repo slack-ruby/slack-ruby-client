@@ -43,6 +43,22 @@ begin
             socket.run_loop
           end
         end
+
+        describe '#run_loop with epipe' do
+          let(:test_socket) do
+            Class.new(described_class) do
+              def read
+                fail Errno::EPIPE
+              end
+            end
+          end
+
+          it 'runs' do
+            expect(ws).to receive(:emit)
+            expect(ws).to receive(:start)
+            socket.run_loop
+          end
+        end
       end
 
       pending 'send_data'
