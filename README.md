@@ -164,18 +164,19 @@ client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
 
 The following settings are supported.
 
-setting           | description
-------------------|-------------------------------------------------------------------------------------------------
-token             | Slack API token.
-user_agent        | User-agent, defaults to _Slack Ruby Client/version_.
-proxy             | Optional HTTP proxy.
-ca_path           | Optional SSL certificates path.
-ca_file           | Optional SSL certificates file.
-endpoint          | Slack endpoint, default is _https://slack.com/api_.
-logger            | Optional `Logger` instance that logs HTTP requests.
-timeout           | Optional open/read timeout in seconds.
-open_timeout      | Optional connection open timeout in seconds.
-default_page_size | Optional page size for paginated requests, default is _100_.
+setting             | description
+--------------------|-------------------------------------------------------------------------------------------------
+token               | Slack API token.
+user_agent          | User-agent, defaults to _Slack Ruby Client/version_.
+proxy               | Optional HTTP proxy.
+ca_path             | Optional SSL certificates path.
+ca_file             | Optional SSL certificates file.
+endpoint            | Slack endpoint, default is _https://slack.com/api_.
+logger              | Optional `Logger` instance that logs HTTP requests.
+timeout             | Optional open/read timeout in seconds.
+open_timeout        | Optional connection open timeout in seconds.
+default_page_size   | Optional page size for paginated requests, default is _100_.
+default_max_retries | Optional number of retries for paginated requests, default is _100_.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
@@ -190,6 +191,20 @@ The Web client natively supports [cursor pagination](https://api.slack.com/docs/
 ```ruby
 all_members = []
 client.users_list(presence: true, limit: 10) do |response|
+  all_members.concat(response.members)
+end
+all_members # many thousands of team members retrieved 10 at a time
+```
+
+When using cursor pagination the client will automatically pause and then retry the request if it runs into Slack rate limiting. (It will pause according to the `Retry-After` header in the 429 response before retrying the request.) If it receives too many rate-limited responses in a row it will give up and raise an error. The default number of retries is 100 and can be adjusted via `Slack::Web::Client.config.default_max_retries` or by passing it directly into the method as `max_retries`.
+
+You can also proactively avoid rate limiting by adding a pause between every paginated request with the `sleep_interval` parameter, which is given in seconds.
+
+```ruby
+all_members = []
+client.users_list(presence: true, limit: 10, sleep_interval: 5, max_retries: 20) do |response|
+  # pauses for 5 seconds between each request
+  # gives up after 20 consecutive rate-limited responses
   all_members.concat(response.members)
 end
 all_members # many thousands of team members retrieved 10 at a time
