@@ -7,11 +7,13 @@ module Slack
 
           attr_reader :client
           attr_reader :verb
+          attr_reader :pause
           attr_reader :params
 
           def initialize(client, verb, params = {})
             @client = client
             @verb = verb
+            @pause = params.delete(:pause)
             @params = params
           end
 
@@ -29,6 +31,7 @@ module Slack
               break unless response.response_metadata
               next_cursor = response.response_metadata.next_cursor
               break if next_cursor.blank?
+              sleep(pause) if pause
             end
           end
         end
