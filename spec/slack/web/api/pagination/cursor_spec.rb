@@ -43,8 +43,8 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
       cursor.first
     end
   end
-  context 'with a custom pause' do
-    let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', pause: 3) }
+  context 'with a custom sleep_interval' do
+    let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', sleep_interval: 3) }
     it 'sleeps between requests' do
       expect(client).to receive(:users_list).exactly(3).times.and_return(
         Slack::Messages::Message.new(response_metadata: { next_cursor: 'next_a' }),
