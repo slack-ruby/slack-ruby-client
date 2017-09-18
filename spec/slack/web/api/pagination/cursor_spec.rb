@@ -26,13 +26,25 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
     end
     context 'with rate limiting' do
       let(:error) { Slack::Web::Api::Errors::TooManyRequestsError.new(nil) }
-      it 'sleeps after a TooManyRequestsError' do
-        expect(client).to receive(:users_list).with(limit: 100, cursor: nil).ordered.and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
-        expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_raise(error)
-        expect(error).to receive(:retry_after).once.ordered.and_return(9)
-        expect(cursor).to receive(:sleep).once.ordered.with(9)
-        expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_return(Slack::Messages::Message.new)
-        cursor.to_a
+      context 'with default max retries' do
+        it 'sleeps after a TooManyRequestsError' do
+          expect(client).to receive(:users_list).with(limit: 100, cursor: nil).ordered.and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
+          expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_raise(error)
+          expect(error).to receive(:retry_after).once.ordered.and_return(9)
+          expect(cursor).to receive(:sleep).once.ordered.with(9)
+          expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_return(Slack::Messages::Message.new)
+          cursor.to_a
+        end
+      end
+      context 'with a custom max_retries' do
+        let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', max_retries: 4) }
+        it 'raises the error after hitting the max retries' do
+          expect(client).to receive(:users_list).with(limit: 100, cursor: nil).and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
+          expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').exactly(5).times.and_raise(error)
+          expect(error).to receive(:retry_after).exactly(4).times.and_return(9)
+          expect(cursor).to receive(:sleep).exactly(4).times.with(9)
+          expect { cursor.to_a }.to raise_error(error)
+        end
       end
     end
   end
