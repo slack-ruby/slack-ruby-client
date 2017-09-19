@@ -1,4 +1,4 @@
-### 0.9.2 (Next)
+### 0.10.0 (9/19/2017)
 
 * [#169](https://github.com/slack-ruby/slack-ruby-client/pull/169): Added [Conversations API](https://api.slack.com/docs/conversations-api) - [@jmanian](https://github.com/jmanian).
 * [#169](https://github.com/slack-ruby/slack-ruby-client/pull/169): Added `include_locale` parameter to several methods (`channels_info`, `groups_info`, `im_open`, `rtm_start`, `users_info`, `users_list`) - [@jmanian](https://github.com/jmanian).
@@ -8,7 +8,6 @@
 * [#161](https://github.com/slack-ruby/slack-ruby-client/pull/161): Added support for cursor pagination - [@dblock](https://github.com/dblock).
 * [#162](https://github.com/slack-ruby/slack-ruby-client/pull/162): Gracefully close websocket on `Errno::EPIPE` - [@johanoskarsson](https://github.com/johanoskarsson).
 * [#172](https://github.com/slack-ruby/slack-ruby-client/pull/172): Use `rtm.start` when store is a subclass of `Slack::RealTime::Stores::Store` (default) - [@kstole](https://github.com/kstole).
-* Your contribution here.
 
 ### 0.9.1 (8/24/2017)
 
