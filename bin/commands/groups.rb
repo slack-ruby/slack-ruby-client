@@ -11,15 +11,6 @@ command 'groups' do |g|
     end
   end
 
-  g.desc 'Closes a private channel.'
-  g.long_desc %( Closes a private channel. )
-  g.command 'close' do |c|
-    c.flag 'channel', desc: 'Private channel to close.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.groups_close(options))
-    end
-  end
-
   g.desc 'Creates a private channel.'
   g.long_desc %( Creates a private channel. )
   g.command 'create' do |c|
@@ -56,6 +47,7 @@ command 'groups' do |g|
   g.long_desc %( Gets information about a private channel. )
   g.command 'info' do |c|
     c.flag 'channel', desc: 'Private channel to get info on.'
+    c.flag 'include_locale', desc: 'Set this to true to receive the locale for this group. Defaults to false.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_info(options))
     end

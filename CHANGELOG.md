@@ -1,5 +1,8 @@
 ### 0.9.2 (Next)
 
+* [#169](https://github.com/slack-ruby/slack-ruby-client/pull/169): Added [Conversations API](https://api.slack.com/docs/conversations-api) - [@jmanian](https://github.com/jmanian).
+* [#169](https://github.com/slack-ruby/slack-ruby-client/pull/169): Added `include_locale` parameter to several methods (`channels_info`, `groups_info`, `im_open`, `rtm_start`, `users_info`, `users_list`) - [@jmanian](https://github.com/jmanian).
+* [#169](https://github.com/slack-ruby/slack-ruby-client/pull/169): Removed `groups_close` - [@jmanian](https://github.com/jmanian).
 * [#167](https://github.com/slack-ruby/slack-ruby-client/pull/167): Added support for pausing between paginated requests that can cause Slack rate limiting - [@jmanian](https://github.com/jmanian).
 * [#163](https://github.com/slack-ruby/slack-ruby-client/pull/164): Use `OpenSSL::X509::DEFAULT_CERT_DIR` and `OpenSSL::X509::DEFAULT_CERT_FILE` for default ca_cert and ca_file - [@leifcr](https://github.com/leifcr).
 * [#161](https://github.com/slack-ruby/slack-ruby-client/pull/161): Added support for cursor pagination - [@dblock](https://github.com/dblock).

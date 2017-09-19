@@ -19,19 +19,6 @@ module Slack
           end
 
           #
-          # Closes a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to close.
-          # @see https://api.slack.com/methods/groups.close
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups/groups.close.json
-          def groups_close(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.close', options)
-          end
-
-          #
           # Creates a private channel.
           #
           # @option options [Object] :name
@@ -84,6 +71,8 @@ module Slack
           #
           # @option options [group] :channel
           #   Private channel to get info on.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for this group. Defaults to false.
           # @see https://api.slack.com/methods/groups.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/groups/groups.info.json
           def groups_info(options = {})

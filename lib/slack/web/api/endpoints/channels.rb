@@ -58,6 +58,8 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel to get info on.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for this channel. Defaults to false.
           # @see https://api.slack.com/methods/channels.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/channels/channels.info.json
           def channels_info(options = {})
