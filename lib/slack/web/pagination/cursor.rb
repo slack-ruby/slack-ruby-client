@@ -14,9 +14,9 @@ module Slack
           def initialize(client, verb, params = {})
             @client = client
             @verb = verb
-            @sleep_interval = params[:sleep_interval]
-            @max_retries = params[:max_retries] || client.default_max_retries
-            @params = params.reject { |k, _| [:sleep_interval, :max_retries].include?(k) }
+            @params = params.dup
+            @sleep_interval = @params.delete(:sleep_interval)
+            @max_retries = @params.delete(:max_retries) || client.default_max_retries
           end
 
           def each
