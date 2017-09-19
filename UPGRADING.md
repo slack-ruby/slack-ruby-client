@@ -5,7 +5,7 @@ Upgrading Slack-Ruby-Client
 
 #### Changes in How the RTM Client Connects
 
-The RealTime client now automatically chooses either [rtm.start](https://api.slack.com/methods/rtm.start) or [rtm.connect](https://api.slack.com/methods/rtm.connect) to open a connection. The former retrieves a lot of team information while the latter only serves connection purposes and is newer and preferred, while the latter is required to use the full `Slack::RealTime::Stores::Store` storage class.
+The RealTime client now automatically chooses either [rtm.start](https://api.slack.com/methods/rtm.start) or [rtm.connect](https://api.slack.com/methods/rtm.connect) to open a connection. The `rtm.connect` method is a newer, preferred method, which serves connection purposes and returns some basic team info. The `rtm.start` method additionally returns a lot of data about the team, its channels, and members, and is required to use the full `Slack::RealTime::Stores::Store` storage class.
 
 Prior versions always used `rtm.start`, to restore this behavior, configure `start_method`.
 
