@@ -38,6 +38,7 @@ command 'channels' do |g|
   g.long_desc %( Gets information about a channel. )
   g.command 'info' do |c|
     c.flag 'channel', desc: 'Channel to get info on.'
+    c.flag 'include_locale', desc: 'Set this to true to receive the locale for this channel. Defaults to false.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.channels_info(options))
     end

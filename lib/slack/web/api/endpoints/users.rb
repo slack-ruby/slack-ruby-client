@@ -41,6 +41,8 @@ module Slack
           #
           # @option options [user] :user
           #   User to get info on.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for this user. Defaults to false.
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.info.json
           def users_info(options = {})
@@ -54,6 +56,8 @@ module Slack
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for users. Defaults to false.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @option options [Object] :presence

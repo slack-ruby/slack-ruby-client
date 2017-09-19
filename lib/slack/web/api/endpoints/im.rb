@@ -79,6 +79,8 @@ module Slack
           #
           # @option options [user] :user
           #   User to open a direct message channel with.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for this im. Defaults to false.
           # @option options [Object] :return_im
           #   Boolean, indicates you want the full IM channel definition in the response.
           # @see https://api.slack.com/methods/im.open

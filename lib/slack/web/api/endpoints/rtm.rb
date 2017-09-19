@@ -23,6 +23,8 @@ module Slack
           #
           # @option options [Object] :batch_presence_aware
           #   Group presence change notices as presence_change_batch events when possible. See batching.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for users and channels. Defaults to false.
           # @option options [Object] :mpim_aware
           #   Returns MPIMs to the client in the API response.
           # @option options [Object] :no_latest

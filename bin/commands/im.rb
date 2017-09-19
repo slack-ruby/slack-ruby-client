@@ -48,6 +48,7 @@ command 'im' do |g|
   g.long_desc %( Opens a direct message channel. )
   g.command 'open' do |c|
     c.flag 'user', desc: 'User to open a direct message channel with.'
+    c.flag 'include_locale', desc: 'Set this to true to receive the locale for this im. Defaults to false.'
     c.flag 'return_im', desc: 'Boolean, indicates you want the full IM channel definition in the response.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.im_open(options))
