@@ -1,3 +1,7 @@
+### 0.10.1 (next)
+
+* Your contribution here.
+
 ### 0.10.0 (9/19/2017)
 
 * [#169](https://github.com/slack-ruby/slack-ruby-client/pull/169): Added [Conversations API](https://api.slack.com/docs/conversations-api) - [@jmanian](https://github.com/jmanian).
