@@ -117,7 +117,7 @@ module Slack
       def rtm_start_method
         if start_method
           start_method
-        elsif @store_class == Slack::RealTime::Stores::Store
+        elsif @store_class && @store_class <= Slack::RealTime::Stores::Store
           :rtm_start
         else
           :rtm_connect

@@ -7,6 +7,7 @@
 * [#163](https://github.com/slack-ruby/slack-ruby-client/pull/164): Use `OpenSSL::X509::DEFAULT_CERT_DIR` and `OpenSSL::X509::DEFAULT_CERT_FILE` for default ca_cert and ca_file - [@leifcr](https://github.com/leifcr).
 * [#161](https://github.com/slack-ruby/slack-ruby-client/pull/161): Added support for cursor pagination - [@dblock](https://github.com/dblock).
 * [#162](https://github.com/slack-ruby/slack-ruby-client/pull/162): Gracefully close websocket on `Errno::EPIPE` - [@johanoskarsson](https://github.com/johanoskarsson).
+* [#172](https://github.com/slack-ruby/slack-ruby-client/pull/172): Use `rtm.start` when store is a subclass of `Slack::RealTime::Stores::Store` (default) - [@kstole](https://github.com/kstole).
 * Your contribution here.
 
 ### 0.9.1 (8/24/2017)

@@ -53,7 +53,7 @@ RSpec.describe Slack::RealTime::Client do
         allow(socket).to receive(:start_sync)
         client.start!
       end
-      context 'properties provided upon connection' do
+      describe 'properties provided upon connection' do
         it 'sets url' do
           expect(client.url).to eq url
         end
@@ -117,7 +117,6 @@ RSpec.describe Slack::RealTime::Client do
         end
       end
       context 'subclassed' do
-        let(:client) { Class.new(Slack::RealTime::Client).new(store_class: Slack::RealTime::Stores::Store) }
         it 'runs event handlers' do
           event = Slack::RealTime::Event.new(
             'type' => 'team_rename',
@@ -129,8 +128,8 @@ RSpec.describe Slack::RealTime::Client do
       end
     end
   end
-  context 'client with a default store', vcr: { cassette_name: 'web/rtm_connect' } do
-    let(:client) { Slack::RealTime::Client.new }
+  context 'client with starter store', vcr: { cassette_name: 'web/rtm_connect' } do
+    let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Starter) }
     let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
     describe '#start!' do
       let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
@@ -140,35 +139,33 @@ RSpec.describe Slack::RealTime::Client do
         allow(socket).to receive(:start_sync)
         client.start!
       end
-      context 'properties provided upon connection' do
+      describe 'properties provided upon connection' do
         it 'sets url' do
           expect(client.url).to eq url
         end
         it 'sets team' do
           expect(client.team.domain).to eq 'dblockdotorg'
         end
-        it 'sets teams' do
-          expect(client.teams.count).to eq 1
-          expect(client.teams.values.first).to eq client.team
-        end
         it 'sets self' do
           expect(client.self.id).to eq 'U07518DTL'
         end
-        it 'sets user' do
-          expect(client.users.count).to eq 1
-          expect(client.users.values.first['id']).to eq 'U07518DTL'
+        it 'no users' do
+          expect(client.users).to be_nil
+        end
+        it 'no teams' do
+          expect(client.teams).to be_nil
         end
         it 'no channels' do
-          expect(client.channels.count).to eq 0
+          expect(client.channels).to be_nil
         end
         it 'no ims' do
-          expect(client.ims.count).to eq 0
+          expect(client.ims).to be_nil
         end
         it 'no bots' do
-          expect(client.bots.count).to eq 0
+          expect(client.bots).to be_nil
         end
         it 'no groups' do
-          expect(client.groups.count).to eq 0
+          expect(client.groups).to be_nil
         end
       end
       it 'uses web client to fetch url' do
@@ -200,46 +197,47 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.send(:next_id)).to eq previous_id + 1
         end
       end
-      context 'store_class: nil' do
-        let(:client) { Slack::RealTime::Client.new(store_class: nil) }
-        it 'sets store to nil' do
-          expect(client.store).to be nil
-        end
-        it "doesn't handle events" do
-          event = Slack::RealTime::Event.new(
-            'type' => 'team_rename',
-            'name' => 'New Team Name Inc.'
-          )
-          expect(client).to_not receive(:run_handlers)
-          client.send(:dispatch, event)
-        end
-        it 'self' do
-          expect(client.self).to be nil
-        end
-        it 'team' do
-          expect(client.team).to be nil
-        end
-      end
     end
-    context 'with defaults' do
-      let(:client) { Slack::RealTime::Client.new }
-      describe '#initialize' do
-        it 'sets ping' do
-          expect(client.websocket_ping).to eq 30
-        end
-        it "doesn't set proxy" do
-          expect(client.websocket_proxy).to be nil
-        end
-        it 'defaults logger' do
-          expect(client.send(:logger)).to be_a ::Logger
-        end
-        it 'sets default store_class' do
-          expect(client.send(:store_class)).to eq Slack::RealTime::Store
-        end
-        (Slack::RealTime::Config::ATTRIBUTES - [:logger, :store_class]).each do |key|
-          it "sets #{key}" do
-            expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
-          end
+  end
+  context 'client with nil store', vcr: { cassette_name: 'web/rtm_connect' } do
+    let(:client) { Slack::RealTime::Client.new(store_class: nil) }
+    let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
+    it 'sets store to nil' do
+      expect(client.store).to be nil
+    end
+    it "doesn't handle events" do
+      event = Slack::RealTime::Event.new(
+        'type' => 'team_rename',
+        'name' => 'New Team Name Inc.'
+      )
+      expect(client).to_not receive(:run_handlers)
+      client.send(:dispatch, event)
+    end
+    it 'self' do
+      expect(client.self).to be nil
+    end
+    it 'team' do
+      expect(client.team).to be nil
+    end
+  end
+  context 'client with defaults' do
+    let(:client) { Slack::RealTime::Client.new }
+    describe '#initialize' do
+      it 'sets ping' do
+        expect(client.websocket_ping).to eq 30
+      end
+      it "doesn't set proxy" do
+        expect(client.websocket_proxy).to be nil
+      end
+      it 'defaults logger' do
+        expect(client.send(:logger)).to be_a ::Logger
+      end
+      it 'sets default store_class' do
+        expect(client.send(:store_class)).to eq Slack::RealTime::Store
+      end
+      (Slack::RealTime::Config::ATTRIBUTES - [:logger, :store_class]).each do |key|
+        it "sets #{key}" do
+          expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
         end
       end
     end
@@ -261,7 +259,7 @@ RSpec.describe Slack::RealTime::Client do
     after do
       Slack::RealTime::Client.config.reset
     end
-    let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
+    let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
     let(:client) { Slack::RealTime::Client.new }
     context 'ping' do
       before do
@@ -273,7 +271,7 @@ RSpec.describe Slack::RealTime::Client do
         it 'sets ping' do
           expect(client.websocket_ping).to eq 15
         end
-        it 'creates a connection with custom ping', vcr: { cassette_name: 'web/rtm_connect' } do
+        it 'creates a connection with custom ping', vcr: { cassette_name: 'web/rtm_start' } do
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(url, nil, ping: 15).and_return(ws)
           client.start!
         end
@@ -298,7 +296,7 @@ RSpec.describe Slack::RealTime::Client do
             headers: { 'User-Agent' => 'ruby' }
           )
         end
-        it 'creates a connection with custom proxy', vcr: { cassette_name: 'web/rtm_connect' } do
+        it 'creates a connection with custom proxy', vcr: { cassette_name: 'web/rtm_start' } do
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(
             url,
             nil,
@@ -328,8 +326,8 @@ RSpec.describe Slack::RealTime::Client do
             allow(socket).to receive(:connect!)
             allow(socket).to receive(:start_sync)
           end
-          it 'calls rtm_start with start options', vcr: { cassette_name: 'web/rtm_connect' } do
-            expect(client.web_client).to receive(:rtm_connect).with(simple_latest: true).and_call_original
+          it 'calls rtm_start with start options', vcr: { cassette_name: 'web/rtm_start' } do
+            expect(client.web_client).to receive(:rtm_start).with(simple_latest: true).and_call_original
             client.start!
           end
         end
@@ -415,8 +413,8 @@ RSpec.describe Slack::RealTime::Client do
             allow(socket).to receive(:connect!)
             allow(socket).to receive(:start_sync)
           end
-          it 'defaults to :rtm_connect', vcr: { cassette_name: 'web/rtm_connect' } do
-            expect(client.web_client).to receive(:rtm_connect).and_call_original
+          it 'defaults to :rtm_start when using full store', vcr: { cassette_name: 'web/rtm_start' } do
+            expect(client.web_client).to receive(:rtm_start).and_call_original
             client.start!
           end
         end
