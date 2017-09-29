@@ -1,0 +1,17 @@
+diff --git a/lib/slack/web/api/endpoints/dialog.rb b/lib/slack/web/api/endpoints/dialog.rb
+index 01f9dfd..d017adf 100644
+--- a/lib/slack/web/api/endpoints/dialog.rb
++++ b/lib/slack/web/api/endpoints/dialog.rb
+@@ -17,6 +17,12 @@ module Slack
+           def dialog_open(options = {})
+             throw ArgumentError.new('Required arguments :dialog missing') if options[:dialog].nil?
+             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
++            # dialog must be passed as an encoded JSON string
++            if options.key?(:dialog)
++              dialog = options[:dialog]
++              dialog = JSON.dump(dialog) unless dialog.is_a?(String)
++              options = options.merge(dialog: dialog)
++            end
+             post('dialog.open', options)
+           end
+         end

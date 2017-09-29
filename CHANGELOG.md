@@ -1,6 +1,7 @@
 ### 0.10.1 (next)
 
 * Your contribution here.
+* [#173](https://github.com/slack-ruby/slack-ruby-client/issues/173): Updated to latest slack-api-ref => we have Dialogs!; Added dialog.1.open-json-support patch to apply the JSON fix to :dialog param - [@alexagranov](https://github.com/alexagranov).
 
 ### 0.10.0 (9/19/2017)
 

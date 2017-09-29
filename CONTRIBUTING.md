@@ -78,7 +78,7 @@ Sometimes it's necessary to patch auto-generated Slack Web API methods. For exam
 Make a change to a generated file, for example `lib/slack/web/api/endpoints/chat.rb` and generate a patch.
 
 ```
-git diff HEAD lib/slack/web/api/endpoints/chat.rb > lib/slack/web/api/patches/chat.1.patch
+git diff --no-color HEAD lib/slack/web/api/endpoints/chat.rb > lib/slack/web/api/patches/chat.1.patch
 ```
 
 Run `rake slack:api:update` to ensure that the patch is cleanly applied. Implement a test for the added or modified functionality and commit the patch file.
