@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'activesupport'
   s.add_dependency 'faraday', '>= 0.9'
   s.add_dependency 'faraday_middleware'
-  s.add_dependency 'json'
   s.add_dependency 'websocket-driver'
   s.add_dependency 'gli'
   s.add_dependency 'hashie'
