@@ -11,7 +11,7 @@ module Slack
           # @option options [Object] :test
           #   Setting this parameter to 1 triggers a testing mode where the specified token will not actually be revoked.
           # @see https://api.slack.com/methods/auth.revoke
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/auth/auth.revoke.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/auth/auth.revoke.json
           def auth_revoke(options = {})
             post('auth.revoke', options)
           end
@@ -20,7 +20,7 @@ module Slack
           # Checks authentication & identity.
           #
           # @see https://api.slack.com/methods/auth.test
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/auth/auth.test.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/auth/auth.test.json
           def auth_test(options = {})
             post('auth.test', options)
           end

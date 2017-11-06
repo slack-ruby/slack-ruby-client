@@ -17,7 +17,7 @@ module Slack
           # @option options [Object] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).
           # @see https://api.slack.com/methods/oauth.access
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/oauth/oauth.access.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth/oauth.access.json
           def oauth_access(options = {})
             throw ArgumentError.new('Required arguments :client_id missing') if options[:client_id].nil?
             throw ArgumentError.new('Required arguments :client_secret missing') if options[:client_secret].nil?
@@ -39,7 +39,7 @@ module Slack
           # @option options [Object] :single_channel
           #   Request the user to add your app only to a single channel.
           # @see https://api.slack.com/methods/oauth.token
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/oauth/oauth.token.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth/oauth.token.json
           def oauth_token(options = {})
             throw ArgumentError.new('Required arguments :client_id missing') if options[:client_id].nil?
             throw ArgumentError.new('Required arguments :client_secret missing') if options[:client_secret].nil?

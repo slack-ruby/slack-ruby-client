@@ -9,7 +9,7 @@ module Slack
           # Returns list of permissions this app has on a team.
           #
           # @see https://api.slack.com/methods/apps.permissions.info
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/apps.permissions/apps.permissions.info.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.permissions/apps.permissions.info.json
           def apps_permissions_info(options = {})
             post('apps.permissions.info', options)
           end
@@ -22,7 +22,7 @@ module Slack
           # @option options [Object] :trigger_id
           #   Token used to trigger the permissions API.
           # @see https://api.slack.com/methods/apps.permissions.request
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/apps.permissions/apps.permissions.request.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.permissions/apps.permissions.request.json
           def apps_permissions_request(options = {})
             throw ArgumentError.new('Required arguments :scopes missing') if options[:scopes].nil?
             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?

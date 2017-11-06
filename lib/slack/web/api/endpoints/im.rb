@@ -11,7 +11,7 @@ module Slack
           # @option options [im] :channel
           #   Direct message channel to close.
           # @see https://api.slack.com/methods/im.close
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.close.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.close.json
           def im_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -32,7 +32,7 @@ module Slack
           # @option options [Object] :unreads
           #   Include unread_count_display in the output?.
           # @see https://api.slack.com/methods/im.history
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.history.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.history.json
           def im_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -47,7 +47,7 @@ module Slack
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @see https://api.slack.com/methods/im.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.list.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.list.json
           def im_list(options = {})
             if block_given?
               Pagination::Cursor.new(self, :im_list, options).each do |page|
@@ -66,7 +66,7 @@ module Slack
           # @option options [timestamp] :ts
           #   Timestamp of the most recently seen message.
           # @see https://api.slack.com/methods/im.mark
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.mark.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.mark.json
           def im_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
@@ -84,7 +84,7 @@ module Slack
           # @option options [Object] :return_im
           #   Boolean, indicates you want the full IM channel definition in the response.
           # @see https://api.slack.com/methods/im.open
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.open.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.open.json
           def im_open(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
@@ -99,7 +99,7 @@ module Slack
           # @option options [Object] :thread_ts
           #   Unique identifier of a thread's parent message.
           # @see https://api.slack.com/methods/im.replies
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/im/im.replies.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.replies.json
           def im_replies(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?

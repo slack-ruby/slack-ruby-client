@@ -11,7 +11,7 @@ module Slack
           # @option options [channel] :channel
           #   MPIM to close.
           # @see https://api.slack.com/methods/mpim.close
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.close.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.close.json
           def mpim_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -32,7 +32,7 @@ module Slack
           # @option options [Object] :unreads
           #   Include unread_count_display in the output?.
           # @see https://api.slack.com/methods/mpim.history
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.history.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.history.json
           def mpim_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -43,7 +43,7 @@ module Slack
           # Lists multiparty direct message channels for the calling user.
           #
           # @see https://api.slack.com/methods/mpim.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.list.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.list.json
           def mpim_list(options = {})
             post('mpim.list', options)
           end
@@ -56,7 +56,7 @@ module Slack
           # @option options [timestamp] :ts
           #   Timestamp of the most recently seen message.
           # @see https://api.slack.com/methods/mpim.mark
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.mark.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.mark.json
           def mpim_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
@@ -70,7 +70,7 @@ module Slack
           # @option options [Object] :users
           #   Comma separated lists of users.  The ordering of the users is preserved whenever a MPIM group is returned.
           # @see https://api.slack.com/methods/mpim.open
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.open.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.open.json
           def mpim_open(options = {})
             throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
             post('mpim.open', options)
@@ -84,7 +84,7 @@ module Slack
           # @option options [Object] :thread_ts
           #   Unique identifier of a thread's parent message.
           # @see https://api.slack.com/methods/mpim.replies
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/mpim/mpim.replies.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.replies.json
           def mpim_replies(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?

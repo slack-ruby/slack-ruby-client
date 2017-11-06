@@ -1,6 +1,7 @@
 ### 0.10.1 (next)
 
 * Your contribution here.
+* [#177](https://github.com/slack-ruby/slack-ruby-client/pull/177): Fix api ref repo - [@manuelmeurer](https://github.com/manuelmeurer).
 * [#176](https://github.com/slack-ruby/slack-ruby-client/issues/176): Drop dependency on json gem - [@seuros](https://github.com/seuros).
 * [#173](https://github.com/slack-ruby/slack-ruby-client/issues/173): Updated to latest slack-api-ref => we have Dialogs!; Added dialog.1.open-json-support patch to apply the JSON fix to :dialog param - [@alexagranov](https://github.com/alexagranov).
 

@@ -17,7 +17,7 @@ module Slack
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
           # @see https://api.slack.com/methods/search.all
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/search/search.all.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.all.json
           def search_all(options = {})
             throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
             post('search.all', options)
@@ -35,7 +35,7 @@ module Slack
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
           # @see https://api.slack.com/methods/search.files
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/search/search.files.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.files.json
           def search_files(options = {})
             throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
             post('search.files', options)
@@ -53,7 +53,7 @@ module Slack
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
           # @see https://api.slack.com/methods/search.messages
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/search/search.messages.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.messages.json
           def search_messages(options = {})
             throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
             post('search.messages', options)

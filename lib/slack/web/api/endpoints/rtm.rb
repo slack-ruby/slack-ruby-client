@@ -13,7 +13,7 @@ module Slack
           # @option options [Object] :presence_sub
           #   Only deliver presence events when requested by subscription. See presence subscriptions.
           # @see https://api.slack.com/methods/rtm.connect
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm/rtm.connect.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/rtm/rtm.connect.json
           def rtm_connect(options = {})
             post('rtm.connect', options)
           end
@@ -36,7 +36,7 @@ module Slack
           # @option options [Object] :simple_latest
           #   Return timestamp only for latest message object of each channel (improves performance).
           # @see https://api.slack.com/methods/rtm.start
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/rtm/rtm.start.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/rtm/rtm.start.json
           def rtm_start(options = {})
             post('rtm.start', options)
           end

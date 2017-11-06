@@ -17,7 +17,7 @@ module Slack
           # @option options [Object] :timestamp
           #   Timestamp of the message to add star to.
           # @see https://api.slack.com/methods/stars.add
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.add.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.add.json
           def stars_add(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('stars.add', options)
@@ -27,7 +27,7 @@ module Slack
           # Lists stars for a user.
           #
           # @see https://api.slack.com/methods/stars.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.list.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.list.json
           def stars_list(options = {})
             post('stars.list', options)
           end
@@ -44,7 +44,7 @@ module Slack
           # @option options [Object] :timestamp
           #   Timestamp of the message to remove star from.
           # @see https://api.slack.com/methods/stars.remove
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/stars/stars.remove.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.remove.json
           def stars_remove(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('stars.remove', options)
