@@ -13,7 +13,7 @@ module Slack
           # @option options [file] :file
           #   File to add a comment to.
           # @see https://api.slack.com/methods/files.comments.add
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.comments/files.comments.add.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.add.json
           def files_comments_add(options = {})
             throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
@@ -28,7 +28,7 @@ module Slack
           # @option options [Object] :id
           #   The comment to delete.
           # @see https://api.slack.com/methods/files.comments.delete
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.comments/files.comments.delete.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.delete.json
           def files_comments_delete(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
@@ -45,7 +45,7 @@ module Slack
           # @option options [Object] :id
           #   The comment to edit.
           # @see https://api.slack.com/methods/files.comments.edit
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files.comments/files.comments.edit.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.edit.json
           def files_comments_edit(options = {})
             throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?

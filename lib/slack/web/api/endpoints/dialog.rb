@@ -13,7 +13,7 @@ module Slack
           # @option options [Object] :trigger_id
           #   Exchange a trigger to post to the user.
           # @see https://api.slack.com/methods/dialog.open
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/dialog/dialog.open.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dialog/dialog.open.json
           def dialog_open(options = {})
             throw ArgumentError.new('Required arguments :dialog missing') if options[:dialog].nil?
             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?

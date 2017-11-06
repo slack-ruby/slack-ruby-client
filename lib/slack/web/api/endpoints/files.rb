@@ -11,7 +11,7 @@ module Slack
           # @option options [file] :file
           #   ID of file to delete.
           # @see https://api.slack.com/methods/files.delete
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.delete.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.delete.json
           def files_delete(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.delete', options)
@@ -23,7 +23,7 @@ module Slack
           # @option options [file] :file
           #   Specify a file by providing its ID.
           # @see https://api.slack.com/methods/files.info
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.info.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.info.json
           def files_info(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.info', options)
@@ -55,7 +55,7 @@ module Slack
           # @option options [user] :user
           #   Filter files created by a single user.
           # @see https://api.slack.com/methods/files.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.list.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.list.json
           def files_list(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
@@ -68,7 +68,7 @@ module Slack
           # @option options [file] :file
           #   File to revoke.
           # @see https://api.slack.com/methods/files.revokePublicURL
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.revokePublicURL.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.revokePublicURL.json
           def files_revokePublicURL(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.revokePublicURL', options)
@@ -80,7 +80,7 @@ module Slack
           # @option options [file] :file
           #   File to share.
           # @see https://api.slack.com/methods/files.sharedPublicURL
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.sharedPublicURL.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.sharedPublicURL.json
           def files_sharedPublicURL(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.sharedPublicURL', options)
@@ -104,7 +104,7 @@ module Slack
           # @option options [Object] :title
           #   Title of file.
           # @see https://api.slack.com/methods/files.upload
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.upload.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.upload.json
           def files_upload(options = {})
             post('files.upload', options)
           end

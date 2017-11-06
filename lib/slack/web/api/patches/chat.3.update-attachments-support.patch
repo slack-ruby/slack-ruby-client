@@ -3,7 +3,7 @@ index 5186416..490bc91 100644
 --- a/lib/slack/web/api/endpoints/chat.rb
 +++ b/lib/slack/web/api/endpoints/chat.rb
 @@ -154,9 +154,15 @@ module Slack
-           # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.update.json
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
            def chat_update(options = {})
              throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
 -            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?

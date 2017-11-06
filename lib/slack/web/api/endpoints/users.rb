@@ -9,7 +9,7 @@ module Slack
           # Delete the user profile photo
           #
           # @see https://api.slack.com/methods/users.deletePhoto
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.deletePhoto.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.deletePhoto.json
           def users_deletePhoto(options = {})
             post('users.deletePhoto', options)
           end
@@ -20,7 +20,7 @@ module Slack
           # @option options [user] :user
           #   User to get presence info on. Defaults to the authed user.
           # @see https://api.slack.com/methods/users.getPresence
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.getPresence.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.getPresence.json
           def users_getPresence(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
@@ -31,7 +31,7 @@ module Slack
           # Get a user's identity.
           #
           # @see https://api.slack.com/methods/users.identity
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.identity.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.identity.json
           def users_identity(options = {})
             post('users.identity', options)
           end
@@ -44,7 +44,7 @@ module Slack
           # @option options [Object] :include_locale
           #   Set this to true to receive the locale for this user. Defaults to false.
           # @see https://api.slack.com/methods/users.info
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.info.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.info.json
           def users_info(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
@@ -63,7 +63,7 @@ module Slack
           # @option options [Object] :presence
           #   Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.
           # @see https://api.slack.com/methods/users.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.list.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.list.json
           def users_list(options = {})
             if block_given?
               Pagination::Cursor.new(self, :users_list, options).each do |page|
@@ -78,7 +78,7 @@ module Slack
           # Marks a user as active.
           #
           # @see https://api.slack.com/methods/users.setActive
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setActive.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setActive.json
           def users_setActive(options = {})
             post('users.setActive', options)
           end
@@ -95,7 +95,7 @@ module Slack
           # @option options [Object] :crop_y
           #   Y coordinate of top-left corner of crop box.
           # @see https://api.slack.com/methods/users.setPhoto
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setPhoto.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPhoto.json
           def users_setPhoto(options = {})
             throw ArgumentError.new('Required arguments :image missing') if options[:image].nil?
             post('users.setPhoto', options)
@@ -107,7 +107,7 @@ module Slack
           # @option options [Object] :presence
           #   Either auto or away.
           # @see https://api.slack.com/methods/users.setPresence
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users/users.setPresence.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPresence.json
           def users_setPresence(options = {})
             throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
             post('users.setPresence', options)

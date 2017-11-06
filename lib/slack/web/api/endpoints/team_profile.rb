@@ -11,7 +11,7 @@ module Slack
           # @option options [Object] :visibility
           #   Filter by visibility.
           # @see https://api.slack.com/methods/team.profile.get
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/team.profile/team.profile.get.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team.profile/team.profile.get.json
           def team_profile_get(options = {})
             post('team.profile.get', options)
           end

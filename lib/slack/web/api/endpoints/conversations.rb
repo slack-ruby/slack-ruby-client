@@ -11,7 +11,7 @@ module Slack
           # @option options [channel] :channel
           #   ID of conversation to archive.
           # @see https://api.slack.com/methods/conversations.archive
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.archive.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.archive.json
           def conversations_archive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -24,7 +24,7 @@ module Slack
           # @option options [channel] :channel
           #   Conversation to close.
           # @see https://api.slack.com/methods/conversations.close
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.close.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.close.json
           def conversations_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -39,7 +39,7 @@ module Slack
           # @option options [Object] :is_private
           #   Create a private channel instead of a public one.
           # @see https://api.slack.com/methods/conversations.create
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.create.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.create.json
           def conversations_create(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             post('conversations.create', options)
@@ -59,7 +59,7 @@ module Slack
           # @option options [timestamp] :oldest
           #   Start of time range of messages to include in results.
           # @see https://api.slack.com/methods/conversations.history
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.history.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.history.json
           def conversations_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -80,7 +80,7 @@ module Slack
           # @option options [Object] :include_locale
           #   Set this to true to receive the locale for this conversation. Defaults to false.
           # @see https://api.slack.com/methods/conversations.info
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.info.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.info.json
           def conversations_info(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -95,7 +95,7 @@ module Slack
           # @option options [Object] :users
           #   A comma separated list of user IDs. Up to 30 users may be listed.
           # @see https://api.slack.com/methods/conversations.invite
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.invite.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.invite.json
           def conversations_invite(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
@@ -109,7 +109,7 @@ module Slack
           # @option options [channel] :channel
           #   ID of conversation to join.
           # @see https://api.slack.com/methods/conversations.join
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.join.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.join.json
           def conversations_join(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -124,7 +124,7 @@ module Slack
           # @option options [user] :user
           #   User ID to be removed.
           # @see https://api.slack.com/methods/conversations.kick
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.kick.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.kick.json
           def conversations_kick(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
@@ -139,7 +139,7 @@ module Slack
           # @option options [channel] :channel
           #   Conversation to leave.
           # @see https://api.slack.com/methods/conversations.leave
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.leave.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.leave.json
           def conversations_leave(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -158,7 +158,7 @@ module Slack
           # @option options [Object] :types
           #   Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.
           # @see https://api.slack.com/methods/conversations.list
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.list.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.list.json
           def conversations_list(options = {})
             if block_given?
               Pagination::Cursor.new(self, :conversations_list, options).each do |page|
@@ -179,7 +179,7 @@ module Slack
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @see https://api.slack.com/methods/conversations.members
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.members.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.members.json
           def conversations_members(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
@@ -202,7 +202,7 @@ module Slack
           # @option options [Object] :users
           #   Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a channel when not supplying users.
           # @see https://api.slack.com/methods/conversations.open
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.open.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.open.json
           def conversations_open(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('conversations.open', options)
@@ -216,7 +216,7 @@ module Slack
           # @option options [Object] :name
           #   New name for conversation.
           # @see https://api.slack.com/methods/conversations.rename
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.rename.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.rename.json
           def conversations_rename(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
@@ -236,7 +236,7 @@ module Slack
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @see https://api.slack.com/methods/conversations.replies
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.replies.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.replies.json
           def conversations_replies(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
@@ -258,7 +258,7 @@ module Slack
           # @option options [Object] :purpose
           #   A new, specialer purpose.
           # @see https://api.slack.com/methods/conversations.setPurpose
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.setPurpose.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.setPurpose.json
           def conversations_setPurpose(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
@@ -274,7 +274,7 @@ module Slack
           # @option options [Object] :topic
           #   The new topic string. Does not support formatting or linkification.
           # @see https://api.slack.com/methods/conversations.setTopic
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.setTopic.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.setTopic.json
           def conversations_setTopic(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
@@ -288,7 +288,7 @@ module Slack
           # @option options [channel] :channel
           #   ID of conversation to unarchive.
           # @see https://api.slack.com/methods/conversations.unarchive
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/conversations/conversations.unarchive.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.unarchive.json
           def conversations_unarchive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]

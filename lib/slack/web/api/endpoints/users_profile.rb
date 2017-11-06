@@ -13,7 +13,7 @@ module Slack
           # @option options [user] :user
           #   User to retrieve profile info for.
           # @see https://api.slack.com/methods/users.profile.get
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.profile/users.profile.get.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.profile/users.profile.get.json
           def users_profile_get(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.profile.get', options)
@@ -31,7 +31,7 @@ module Slack
           # @option options [Object] :value
           #   Value to set a single key to. Usable only if profile is not passed.
           # @see https://api.slack.com/methods/users.profile.set
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/users.profile/users.profile.set.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.profile/users.profile.set.json
           def users_profile_set(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.profile.set', options)

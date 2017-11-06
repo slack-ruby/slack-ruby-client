@@ -15,7 +15,7 @@ module Slack
           # @option options [Object] :as_user
           #   Pass true to delete the message as the authed user. Bot users in this context are considered authed users.
           # @see https://api.slack.com/methods/chat.delete
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.delete.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.delete.json
           def chat_delete(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
@@ -31,7 +31,7 @@ module Slack
           # @option options [Object] :text
           #   Text of the message to send.
           # @see https://api.slack.com/methods/chat.meMessage
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.meMessage.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.meMessage.json
           def chat_meMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
@@ -56,7 +56,7 @@ module Slack
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @see https://api.slack.com/methods/chat.postEphemeral
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
@@ -101,7 +101,7 @@ module Slack
           # @option options [Object] :username
           #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @see https://api.slack.com/methods/chat.postMessage
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
@@ -130,7 +130,7 @@ module Slack
           # @option options [Object] :user_auth_url
           #   Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
           # @see https://api.slack.com/methods/chat.unfurl
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.unfurl.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.unfurl.json
           def chat_unfurl(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
@@ -157,7 +157,7 @@ module Slack
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
           # @see https://api.slack.com/methods/chat.update
-          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/chat/chat.update.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
