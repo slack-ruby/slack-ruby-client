@@ -2,14 +2,18 @@
 
 desc 'Post chat messages to Slack.'
 command 'chat' do |g|
-  g.desc 'Deletes a message.'
-  g.long_desc %( Deletes a message. )
-  g.command 'delete' do |c|
-    c.flag 'channel', desc: 'Channel containing the message to be deleted.'
-    c.flag 'ts', desc: 'Timestamp of the message to be deleted.'
-    c.flag 'as_user', desc: 'Pass true to delete the message as the authed user. Bot users in this context are considered authed users.'
+  g.desc 'Updates a message.'
+  g.long_desc %( Updates a message. )
+  g.command 'update' do |c|
+    c.flag 'channel', desc: 'Channel containing the message to be updated.'
+    c.flag 'text', desc: "New text for the message, using the default formatting rules. It's not required when presenting attachments."
+    c.flag 'ts', desc: 'Timestamp of the message to be updated.'
+    c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
+    c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.'
+    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.'
+    c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.chat_delete(options))
+      puts JSON.dump($client.chat_update(options))
     end
   end
 
@@ -73,18 +77,14 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'Updates a message.'
-  g.long_desc %( Updates a message. )
-  g.command 'update' do |c|
-    c.flag 'channel', desc: 'Channel containing the message to be updated.'
-    c.flag 'text', desc: 'New text for the message, using the default formatting rules.'
-    c.flag 'ts', desc: 'Timestamp of the message to be updated.'
-    c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
-    c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
-    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.'
-    c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.'
+  g.desc 'Deletes a message.'
+  g.long_desc %( Deletes a message. )
+  g.command 'delete' do |c|
+    c.flag 'channel', desc: 'Channel containing the message to be deleted.'
+    c.flag 'ts', desc: 'Timestamp of the message to be deleted.'
+    c.flag 'as_user', desc: 'Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.chat_update(options))
+      puts JSON.dump($client.chat_delete(options))
     end
   end
 end

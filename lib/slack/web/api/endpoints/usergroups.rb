@@ -6,23 +6,17 @@ module Slack
       module Endpoints
         module Usergroups
           #
-          # Create a User Group
+          # Enable a User Group
           #
-          # @option options [Object] :name
-          #   A name for the User Group. Must be unique among User Groups.
-          # @option options [Object] :channels
-          #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
-          # @option options [Object] :description
-          #   A short description of the User Group.
-          # @option options [Object] :handle
-          #   A mention handle. Must be unique among channels, users and User Groups.
+          # @option options [Object] :usergroup
+          #   The encoded ID of the User Group to enable.
           # @option options [Object] :include_count
-          #   Include the number of users in each User Group.
-          # @see https://api.slack.com/methods/usergroups.create
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
-          def usergroups_create(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            post('usergroups.create', options)
+          #   Include the number of users in the User Group.
+          # @see https://api.slack.com/methods/usergroups.enable
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
+          def usergroups_enable(options = {})
+            throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
+            post('usergroups.enable', options)
           end
 
           #
@@ -40,17 +34,23 @@ module Slack
           end
 
           #
-          # Enable a User Group
+          # Create a User Group
           #
-          # @option options [Object] :usergroup
-          #   The encoded ID of the User Group to enable.
+          # @option options [Object] :name
+          #   A name for the User Group. Must be unique among User Groups.
+          # @option options [Object] :channels
+          #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
+          # @option options [Object] :description
+          #   A short description of the User Group.
+          # @option options [Object] :handle
+          #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [Object] :include_count
-          #   Include the number of users in the User Group.
-          # @see https://api.slack.com/methods/usergroups.enable
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
-          def usergroups_enable(options = {})
-            throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
-            post('usergroups.enable', options)
+          #   Include the number of users in each User Group.
+          # @see https://api.slack.com/methods/usergroups.create
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
+          def usergroups_create(options = {})
+            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            post('usergroups.create', options)
           end
 
           #

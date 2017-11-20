@@ -6,33 +6,6 @@ module Slack
       module Endpoints
         module Stars
           #
-          # Adds a star to an item.
-          #
-          # @option options [channel] :channel
-          #   Channel to add star to, or channel where the message to add star to was posted (used with timestamp).
-          # @option options [file] :file
-          #   File to add star to.
-          # @option options [Object] :file_comment
-          #   File comment to add star to.
-          # @option options [Object] :timestamp
-          #   Timestamp of the message to add star to.
-          # @see https://api.slack.com/methods/stars.add
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.add.json
-          def stars_add(options = {})
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('stars.add', options)
-          end
-
-          #
-          # Lists stars for a user.
-          #
-          # @see https://api.slack.com/methods/stars.list
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.list.json
-          def stars_list(options = {})
-            post('stars.list', options)
-          end
-
-          #
           # Removes a star from an item.
           #
           # @option options [channel] :channel
@@ -48,6 +21,33 @@ module Slack
           def stars_remove(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('stars.remove', options)
+          end
+
+          #
+          # Lists stars for a user.
+          #
+          # @see https://api.slack.com/methods/stars.list
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.list.json
+          def stars_list(options = {})
+            post('stars.list', options)
+          end
+
+          #
+          # Adds a star to an item.
+          #
+          # @option options [channel] :channel
+          #   Channel to add star to, or channel where the message to add star to was posted (used with timestamp).
+          # @option options [file] :file
+          #   File to add star to.
+          # @option options [Object] :file_comment
+          #   File comment to add star to.
+          # @option options [Object] :timestamp
+          #   Timestamp of the message to add star to.
+          # @see https://api.slack.com/methods/stars.add
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.add.json
+          def stars_add(options = {})
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('stars.add', options)
           end
         end
       end

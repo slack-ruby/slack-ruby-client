@@ -6,96 +6,19 @@ module Slack
       module Endpoints
         module Groups
           #
-          # Archives a private channel.
+          # Sets the read cursor in a private channel.
           #
           # @option options [group] :channel
-          #   Private channel to archive.
-          # @see https://api.slack.com/methods/groups.archive
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.archive.json
-          def groups_archive(options = {})
+          #   Private channel to set reading cursor in.
+          # @option options [timestamp] :ts
+          #   Timestamp of the most recently seen message.
+          # @see https://api.slack.com/methods/groups.mark
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.mark.json
+          def groups_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.archive', options)
-          end
-
-          #
-          # Creates a private channel.
-          #
-          # @option options [Object] :name
-          #   Name of private channel to create.
-          # @option options [Object] :validate
-          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
-          # @see https://api.slack.com/methods/groups.create
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.create.json
-          def groups_create(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            post('groups.create', options)
-          end
-
-          #
-          # Clones and archives a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to clone and archive.
-          # @see https://api.slack.com/methods/groups.createChild
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.createChild.json
-          def groups_createChild(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.createChild', options)
-          end
-
-          #
-          # Fetches history of messages and events from a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to fetch history for.
-          # @option options [Object] :inclusive
-          #   Include messages with latest or oldest timestamp in results.
-          # @option options [timestamp] :latest
-          #   End of time range of messages to include in results.
-          # @option options [timestamp] :oldest
-          #   Start of time range of messages to include in results.
-          # @option options [Object] :unreads
-          #   Include unread_count_display in the output?.
-          # @see https://api.slack.com/methods/groups.history
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.history.json
-          def groups_history(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.history', options)
-          end
-
-          #
-          # Gets information about a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to get info on.
-          # @option options [Object] :include_locale
-          #   Set this to true to receive the locale for this group. Defaults to false.
-          # @see https://api.slack.com/methods/groups.info
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.info.json
-          def groups_info(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.info', options)
-          end
-
-          #
-          # Invites a user to a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to invite user to.
-          # @option options [user] :user
-          #   User to invite.
-          # @see https://api.slack.com/methods/groups.invite
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.invite.json
-          def groups_invite(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('groups.invite', options)
+            post('groups.mark', options)
           end
 
           #
@@ -129,66 +52,6 @@ module Slack
           end
 
           #
-          # Lists private channels that the calling user has access to.
-          #
-          # @option options [Object] :exclude_archived
-          #   Don't return archived private channels.
-          # @option options [Object] :exclude_members
-          #   Exlude the members from each group.
-          # @see https://api.slack.com/methods/groups.list
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
-          def groups_list(options = {})
-            post('groups.list', options)
-          end
-
-          #
-          # Sets the read cursor in a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to set reading cursor in.
-          # @option options [timestamp] :ts
-          #   Timestamp of the most recently seen message.
-          # @see https://api.slack.com/methods/groups.mark
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.mark.json
-          def groups_mark(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.mark', options)
-          end
-
-          #
-          # Opens a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to open.
-          # @see https://api.slack.com/methods/groups.open
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.open.json
-          def groups_open(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.open', options)
-          end
-
-          #
-          # Renames a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to rename.
-          # @option options [Object] :name
-          #   New name for private channel.
-          # @option options [Object] :validate
-          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
-          # @see https://api.slack.com/methods/groups.rename
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.rename.json
-          def groups_rename(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.rename', options)
-          end
-
-          #
           # Retrieve a thread of messages posted to a private channel
           #
           # @option options [group] :channel
@@ -202,22 +65,6 @@ module Slack
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
             post('groups.replies', options)
-          end
-
-          #
-          # Sets the purpose for a private channel.
-          #
-          # @option options [group] :channel
-          #   Private channel to set the purpose of.
-          # @option options [Object] :purpose
-          #   The new purpose.
-          # @see https://api.slack.com/methods/groups.setPurpose
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.setPurpose.json
-          def groups_setPurpose(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
-            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            post('groups.setPurpose', options)
           end
 
           #
@@ -237,6 +84,125 @@ module Slack
           end
 
           #
+          # Archives a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to archive.
+          # @see https://api.slack.com/methods/groups.archive
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.archive.json
+          def groups_archive(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.archive', options)
+          end
+
+          #
+          # Gets information about a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to get info on.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for this group. Defaults to false.
+          # @see https://api.slack.com/methods/groups.info
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.info.json
+          def groups_info(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.info', options)
+          end
+
+          #
+          # Lists private channels that the calling user has access to.
+          #
+          # @option options [Object] :exclude_archived
+          #   Don't return archived private channels.
+          # @option options [Object] :exclude_members
+          #   Exclude the members from each group.
+          # @see https://api.slack.com/methods/groups.list
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
+          def groups_list(options = {})
+            post('groups.list', options)
+          end
+
+          #
+          # Fetches history of messages and events from a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to fetch history for.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
+          # @option options [timestamp] :latest
+          #   End of time range of messages to include in results.
+          # @option options [timestamp] :oldest
+          #   Start of time range of messages to include in results.
+          # @option options [Object] :unreads
+          #   Include unread_count_display in the output?.
+          # @see https://api.slack.com/methods/groups.history
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.history.json
+          def groups_history(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.history', options)
+          end
+
+          #
+          # Clones and archives a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to clone and archive.
+          # @see https://api.slack.com/methods/groups.createChild
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.createChild.json
+          def groups_createChild(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.createChild', options)
+          end
+
+          #
+          # Invites a user to a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to invite user to.
+          # @option options [user] :user
+          #   User to invite.
+          # @see https://api.slack.com/methods/groups.invite
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.invite.json
+          def groups_invite(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            post('groups.invite', options)
+          end
+
+          #
+          # Creates a private channel.
+          #
+          # @option options [Object] :name
+          #   Name of private channel to create.
+          # @option options [Object] :validate
+          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
+          # @see https://api.slack.com/methods/groups.create
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.create.json
+          def groups_create(options = {})
+            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            post('groups.create', options)
+          end
+
+          #
+          # Opens a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to open.
+          # @see https://api.slack.com/methods/groups.open
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.open.json
+          def groups_open(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.open', options)
+          end
+
+          #
           # Unarchives a private channel.
           #
           # @option options [group] :channel
@@ -247,6 +213,40 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
             post('groups.unarchive', options)
+          end
+
+          #
+          # Sets the purpose for a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to set the purpose of.
+          # @option options [Object] :purpose
+          #   The new purpose.
+          # @see https://api.slack.com/methods/groups.setPurpose
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.setPurpose.json
+          def groups_setPurpose(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.setPurpose', options)
+          end
+
+          #
+          # Renames a private channel.
+          #
+          # @option options [group] :channel
+          #   Private channel to rename.
+          # @option options [Object] :name
+          #   New name for private channel.
+          # @option options [Object] :validate
+          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
+          # @see https://api.slack.com/methods/groups.rename
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.rename.json
+          def groups_rename(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            post('groups.rename', options)
           end
         end
       end

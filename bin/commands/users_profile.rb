@@ -2,16 +2,6 @@
 
 desc 'UsersProfile methods.'
 command 'users_profile' do |g|
-  g.desc "Retrieves a user's profile information."
-  g.long_desc %( Retrieves a user's profile information. )
-  g.command 'get' do |c|
-    c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields.'
-    c.flag 'user', desc: 'User to retrieve profile info for.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_profile_get(options))
-    end
-  end
-
   g.desc 'Set the profile information for a user.'
   g.long_desc %( Set the profile information for a user. )
   g.command 'set' do |c|
@@ -21,6 +11,16 @@ command 'users_profile' do |g|
     c.flag 'value', desc: 'Value to set a single key to. Usable only if profile is not passed.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_profile_set(options))
+    end
+  end
+
+  g.desc "Retrieves a user's profile information."
+  g.long_desc %( Retrieves a user's profile information. )
+  g.command 'get' do |c|
+    c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields.'
+    c.flag 'user', desc: 'User to retrieve profile info for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_profile_get(options))
     end
   end
 end

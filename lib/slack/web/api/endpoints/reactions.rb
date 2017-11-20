@@ -27,26 +27,6 @@ module Slack
           end
 
           #
-          # Gets reactions for an item.
-          #
-          # @option options [channel] :channel
-          #   Channel where the message to get reactions for was posted.
-          # @option options [file] :file
-          #   File to get reactions for.
-          # @option options [Object] :file_comment
-          #   File comment to get reactions for.
-          # @option options [Object] :full
-          #   If true always return the complete reaction list.
-          # @option options [Object] :timestamp
-          #   Timestamp of the message to get reactions for.
-          # @see https://api.slack.com/methods/reactions.get
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.get.json
-          def reactions_get(options = {})
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('reactions.get', options)
-          end
-
-          #
           # Lists reactions made by a user.
           #
           # @option options [Object] :full
@@ -79,6 +59,26 @@ module Slack
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('reactions.remove', options)
+          end
+
+          #
+          # Gets reactions for an item.
+          #
+          # @option options [channel] :channel
+          #   Channel where the message to get reactions for was posted.
+          # @option options [file] :file
+          #   File to get reactions for.
+          # @option options [Object] :file_comment
+          #   File comment to get reactions for.
+          # @option options [Object] :full
+          #   If true always return the complete reaction list.
+          # @option options [Object] :timestamp
+          #   Timestamp of the message to get reactions for.
+          # @see https://api.slack.com/methods/reactions.get
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.get.json
+          def reactions_get(options = {})
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('reactions.get', options)
           end
         end
       end

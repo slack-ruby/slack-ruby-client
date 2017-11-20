@@ -9,17 +9,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Mpim do
       expect { client.mpim_close }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
-  context 'mpim_history' do
-    it 'requires channel' do
-      expect { client.mpim_history }.to raise_error ArgumentError, /Required arguments :channel missing/
-    end
-  end
   context 'mpim_mark' do
     it 'requires channel' do
       expect { client.mpim_mark(ts: '1234567890.123456') }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
       expect { client.mpim_mark(channel: 'G1234567890') }.to raise_error ArgumentError, /Required arguments :ts missing/
+    end
+  end
+  context 'mpim_history' do
+    it 'requires channel' do
+      expect { client.mpim_history }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
   context 'mpim_open' do

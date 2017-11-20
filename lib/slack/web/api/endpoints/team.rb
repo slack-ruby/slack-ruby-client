@@ -6,17 +6,6 @@ module Slack
       module Endpoints
         module Team
           #
-          # Gets the access logs for the current team.
-          #
-          # @option options [Object] :before
-          #   End of time range of logs to include in results (inclusive).
-          # @see https://api.slack.com/methods/team.accessLogs
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.accessLogs.json
-          def team_accessLogs(options = {})
-            post('team.accessLogs', options)
-          end
-
-          #
           # Gets billable users information for the current team.
           #
           # @option options [user] :user
@@ -35,6 +24,17 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.info.json
           def team_info(options = {})
             post('team.info', options)
+          end
+
+          #
+          # Gets the access logs for the current team.
+          #
+          # @option options [Object] :before
+          #   End of time range of logs to include in results (inclusive).
+          # @see https://api.slack.com/methods/team.accessLogs
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.accessLogs.json
+          def team_accessLogs(options = {})
+            post('team.accessLogs', options)
           end
 
           #

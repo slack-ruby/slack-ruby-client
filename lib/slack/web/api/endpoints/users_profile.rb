@@ -6,20 +6,6 @@ module Slack
       module Endpoints
         module UsersProfile
           #
-          # Retrieves a user's profile information.
-          #
-          # @option options [Object] :include_labels
-          #   Include labels for each ID in custom profile fields.
-          # @option options [user] :user
-          #   User to retrieve profile info for.
-          # @see https://api.slack.com/methods/users.profile.get
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.profile/users.profile.get.json
-          def users_profile_get(options = {})
-            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('users.profile.get', options)
-          end
-
-          #
           # Set the profile information for a user.
           #
           # @option options [Object] :name
@@ -35,6 +21,20 @@ module Slack
           def users_profile_set(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.profile.set', options)
+          end
+
+          #
+          # Retrieves a user's profile information.
+          #
+          # @option options [Object] :include_labels
+          #   Include labels for each ID in custom profile fields.
+          # @option options [user] :user
+          #   User to retrieve profile info for.
+          # @see https://api.slack.com/methods/users.profile.get
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.profile/users.profile.get.json
+          def users_profile_get(options = {})
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            post('users.profile.get', options)
           end
         end
       end

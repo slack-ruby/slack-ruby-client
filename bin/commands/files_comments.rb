@@ -2,16 +2,6 @@
 
 desc 'FilesComments methods.'
 command 'files_comments' do |g|
-  g.desc 'Add a comment to an existing file.'
-  g.long_desc %( Add a comment to an existing file. )
-  g.command 'add' do |c|
-    c.flag 'comment', desc: 'Text of the comment to add.'
-    c.flag 'file', desc: 'File to add a comment to.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_comments_add(options))
-    end
-  end
-
   g.desc 'Deletes an existing comment on a file.'
   g.long_desc %( Deletes an existing comment on a file. )
   g.command 'delete' do |c|
@@ -19,6 +9,16 @@ command 'files_comments' do |g|
     c.flag 'id', desc: 'The comment to delete.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_comments_delete(options))
+    end
+  end
+
+  g.desc 'Add a comment to an existing file.'
+  g.long_desc %( Add a comment to an existing file. )
+  g.command 'add' do |c|
+    c.flag 'comment', desc: 'Text of the comment to add.'
+    c.flag 'file', desc: 'File to add a comment to.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_comments_add(options))
     end
   end
 

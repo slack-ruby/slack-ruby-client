@@ -2,12 +2,21 @@
 
 desc 'Get info on files uploaded to Slack, upload new files to Slack.'
 command 'files' do |g|
-  g.desc 'Deletes a file.'
-  g.long_desc %( Deletes a file. )
-  g.command 'delete' do |c|
-    c.flag 'file', desc: 'ID of file to delete.'
+  g.desc 'Enables a file for public/external sharing.'
+  g.long_desc %( Enables a file for public/external sharing. )
+  g.command 'sharedPublicURL' do |c|
+    c.flag 'file', desc: 'File to share.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_delete(options))
+      puts JSON.dump($client.files_sharedPublicURL(options))
+    end
+  end
+
+  g.desc 'Revokes public/external sharing access for a file'
+  g.long_desc %( Revokes public/external sharing access for a file )
+  g.command 'revokePublicURL' do |c|
+    c.flag 'file', desc: 'File to revoke.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_revokePublicURL(options))
     end
   end
 
@@ -45,21 +54,12 @@ You can pass multiple values in the types argument, like types=spaces,snippets.T
     end
   end
 
-  g.desc 'Revokes public/external sharing access for a file'
-  g.long_desc %( Revokes public/external sharing access for a file )
-  g.command 'revokePublicURL' do |c|
-    c.flag 'file', desc: 'File to revoke.'
+  g.desc 'Deletes a file.'
+  g.long_desc %( Deletes a file. )
+  g.command 'delete' do |c|
+    c.flag 'file', desc: 'ID of file to delete.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_revokePublicURL(options))
-    end
-  end
-
-  g.desc 'Enables a file for public/external sharing.'
-  g.long_desc %( Enables a file for public/external sharing. )
-  g.command 'sharedPublicURL' do |c|
-    c.flag 'file', desc: 'File to share.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_sharedPublicURL(options))
+      puts JSON.dump($client.files_delete(options))
     end
   end
 

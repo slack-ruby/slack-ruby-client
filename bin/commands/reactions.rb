@@ -15,19 +15,6 @@ command 'reactions' do |g|
     end
   end
 
-  g.desc 'Gets reactions for an item.'
-  g.long_desc %( Gets reactions for an item. )
-  g.command 'get' do |c|
-    c.flag 'channel', desc: 'Channel where the message to get reactions for was posted.'
-    c.flag 'file', desc: 'File to get reactions for.'
-    c.flag 'file_comment', desc: 'File comment to get reactions for.'
-    c.flag 'full', desc: 'If true always return the complete reaction list.'
-    c.flag 'timestamp', desc: 'Timestamp of the message to get reactions for.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.reactions_get(options))
-    end
-  end
-
   g.desc 'Lists reactions made by a user.'
   g.long_desc %( Lists reactions made by a user. )
   g.command 'list' do |c|
@@ -48,6 +35,19 @@ command 'reactions' do |g|
     c.flag 'timestamp', desc: 'Timestamp of the message to remove reaction from.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.reactions_remove(options))
+    end
+  end
+
+  g.desc 'Gets reactions for an item.'
+  g.long_desc %( Gets reactions for an item. )
+  g.command 'get' do |c|
+    c.flag 'channel', desc: 'Channel where the message to get reactions for was posted.'
+    c.flag 'file', desc: 'File to get reactions for.'
+    c.flag 'file_comment', desc: 'File comment to get reactions for.'
+    c.flag 'full', desc: 'If true always return the complete reaction list.'
+    c.flag 'timestamp', desc: 'Timestamp of the message to get reactions for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.reactions_get(options))
     end
   end
 end

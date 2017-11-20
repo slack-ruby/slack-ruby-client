@@ -10,20 +10,49 @@ command 'users' do |g|
     end
   end
 
+  g.desc "Get a user's identity."
+  g.long_desc %( Get a user's identity. )
+  g.command 'identity' do |c|
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_identity(options))
+    end
+  end
+
+  g.desc 'Marks a user as active.'
+  g.long_desc %( Marks a user as active. )
+  g.command 'setActive' do |c|
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_setActive(options))
+    end
+  end
+
+  g.desc 'Manually sets user presence.'
+  g.long_desc %( Manually sets user presence. )
+  g.command 'setPresence' do |c|
+    c.flag 'presence', desc: 'Either auto or away.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_setPresence(options))
+    end
+  end
+
+  g.desc 'Set the user profile photo'
+  g.long_desc %( Set the user profile photo )
+  g.command 'setPhoto' do |c|
+    c.flag 'image', desc: 'File contents via multipart/form-data.'
+    c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
+    c.flag 'crop_x', desc: 'X coordinate of top-left corner of crop box.'
+    c.flag 'crop_y', desc: 'Y coordinate of top-left corner of crop box.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_setPhoto(options))
+    end
+  end
+
   g.desc 'Gets user presence information.'
   g.long_desc %( Gets user presence information. )
   g.command 'getPresence' do |c|
     c.flag 'user', desc: 'User to get presence info on. Defaults to the authed user.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_getPresence(options))
-    end
-  end
-
-  g.desc "Get a user's identity."
-  g.long_desc %( Get a user's identity. )
-  g.command 'identity' do |c|
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_identity(options))
     end
   end
 
@@ -46,35 +75,6 @@ command 'users' do |g|
     c.flag 'presence', desc: 'Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_list(options))
-    end
-  end
-
-  g.desc 'Marks a user as active.'
-  g.long_desc %( Marks a user as active. )
-  g.command 'setActive' do |c|
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_setActive(options))
-    end
-  end
-
-  g.desc 'Set the user profile photo'
-  g.long_desc %( Set the user profile photo )
-  g.command 'setPhoto' do |c|
-    c.flag 'image', desc: 'File contents via multipart/form-data.'
-    c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
-    c.flag 'crop_x', desc: 'X coordinate of top-left corner of crop box.'
-    c.flag 'crop_y', desc: 'Y coordinate of top-left corner of crop box.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_setPhoto(options))
-    end
-  end
-
-  g.desc 'Manually sets user presence.'
-  g.long_desc %( Manually sets user presence. )
-  g.command 'setPresence' do |c|
-    c.flag 'presence', desc: 'Either auto or away.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_setPresence(options))
     end
   end
 

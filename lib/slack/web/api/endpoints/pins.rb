@@ -6,6 +6,25 @@ module Slack
       module Endpoints
         module Pins
           #
+          # Un-pins an item from a channel.
+          #
+          # @option options [channel] :channel
+          #   Channel where the item is pinned to.
+          # @option options [file] :file
+          #   File to un-pin.
+          # @option options [Object] :file_comment
+          #   File comment to un-pin.
+          # @option options [Object] :timestamp
+          #   Timestamp of the message to un-pin.
+          # @see https://api.slack.com/methods/pins.remove
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.remove.json
+          def pins_remove(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('pins.remove', options)
+          end
+
+          #
           # Pins an item to a channel.
           #
           # @option options [channel] :channel
@@ -35,25 +54,6 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('pins.list', options)
-          end
-
-          #
-          # Un-pins an item from a channel.
-          #
-          # @option options [channel] :channel
-          #   Channel where the item is pinned to.
-          # @option options [file] :file
-          #   File to un-pin.
-          # @option options [Object] :file_comment
-          #   File comment to un-pin.
-          # @option options [Object] :timestamp
-          #   Timestamp of the message to un-pin.
-          # @see https://api.slack.com/methods/pins.remove
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.remove.json
-          def pins_remove(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('pins.remove', options)
           end
         end
       end

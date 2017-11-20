@@ -2,6 +2,32 @@
 
 desc 'Reminders methods.'
 command 'reminders' do |g|
+  g.desc 'Gets information about a reminder.'
+  g.long_desc %( Gets information about a reminder. )
+  g.command 'info' do |c|
+    c.flag 'reminder', desc: 'The ID of the reminder.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.reminders_info(options))
+    end
+  end
+
+  g.desc 'Lists all reminders created by or for a given user.'
+  g.long_desc %( Lists all reminders created by or for a given user. )
+  g.command 'list' do |c|
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.reminders_list(options))
+    end
+  end
+
+  g.desc 'Deletes a reminder.'
+  g.long_desc %( Deletes a reminder. )
+  g.command 'delete' do |c|
+    c.flag 'reminder', desc: 'The ID of the reminder.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.reminders_delete(options))
+    end
+  end
+
   g.desc 'Creates a reminder.'
   g.long_desc %( Creates a reminder. )
   g.command 'add' do |c|
@@ -19,32 +45,6 @@ command 'reminders' do |g|
     c.flag 'reminder', desc: 'The ID of the reminder to be marked as complete.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.reminders_complete(options))
-    end
-  end
-
-  g.desc 'Deletes a reminder.'
-  g.long_desc %( Deletes a reminder. )
-  g.command 'delete' do |c|
-    c.flag 'reminder', desc: 'The ID of the reminder.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.reminders_delete(options))
-    end
-  end
-
-  g.desc 'Gets information about a reminder.'
-  g.long_desc %( Gets information about a reminder. )
-  g.command 'info' do |c|
-    c.flag 'reminder', desc: 'The ID of the reminder.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.reminders_info(options))
-    end
-  end
-
-  g.desc 'Lists all reminders created by or for a given user.'
-  g.long_desc %( Lists all reminders created by or for a given user. )
-  g.command 'list' do |c|
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.reminders_list(options))
     end
   end
 end
