@@ -2,15 +2,15 @@
 
 desc 'Stars methods.'
 command 'stars' do |g|
-  g.desc 'Adds a star to an item.'
-  g.long_desc %( Adds a star to an item. )
-  g.command 'add' do |c|
-    c.flag 'channel', desc: 'Channel to add star to, or channel where the message to add star to was posted (used with timestamp).'
-    c.flag 'file', desc: 'File to add star to.'
-    c.flag 'file_comment', desc: 'File comment to add star to.'
-    c.flag 'timestamp', desc: 'Timestamp of the message to add star to.'
+  g.desc 'Removes a star from an item.'
+  g.long_desc %( Removes a star from an item. )
+  g.command 'remove' do |c|
+    c.flag 'channel', desc: 'Channel to remove star from, or channel where the message to remove star from was posted (used with timestamp).'
+    c.flag 'file', desc: 'File to remove star from.'
+    c.flag 'file_comment', desc: 'File comment to remove star from.'
+    c.flag 'timestamp', desc: 'Timestamp of the message to remove star from.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.stars_add(options))
+      puts JSON.dump($client.stars_remove(options))
     end
   end
 
@@ -22,15 +22,15 @@ command 'stars' do |g|
     end
   end
 
-  g.desc 'Removes a star from an item.'
-  g.long_desc %( Removes a star from an item. )
-  g.command 'remove' do |c|
-    c.flag 'channel', desc: 'Channel to remove star from, or channel where the message to remove star from was posted (used with timestamp).'
-    c.flag 'file', desc: 'File to remove star from.'
-    c.flag 'file_comment', desc: 'File comment to remove star from.'
-    c.flag 'timestamp', desc: 'Timestamp of the message to remove star from.'
+  g.desc 'Adds a star to an item.'
+  g.long_desc %( Adds a star to an item. )
+  g.command 'add' do |c|
+    c.flag 'channel', desc: 'Channel to add star to, or channel where the message to add star to was posted (used with timestamp).'
+    c.flag 'file', desc: 'File to add star to.'
+    c.flag 'file_comment', desc: 'File comment to add star to.'
+    c.flag 'timestamp', desc: 'Timestamp of the message to add star to.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.stars_remove(options))
+      puts JSON.dump($client.stars_add(options))
     end
   end
 end

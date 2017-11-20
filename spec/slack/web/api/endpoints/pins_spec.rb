@@ -4,6 +4,11 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Pins do
   let(:client) { Slack::Web::Client.new }
+  context 'pins_remove' do
+    it 'requires channel' do
+      expect { client.pins_remove }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+  end
   context 'pins_add' do
     it 'requires channel' do
       expect { client.pins_add }.to raise_error ArgumentError, /Required arguments :channel missing/
@@ -12,11 +17,6 @@ RSpec.describe Slack::Web::Api::Endpoints::Pins do
   context 'pins_list' do
     it 'requires channel' do
       expect { client.pins_list }.to raise_error ArgumentError, /Required arguments :channel missing/
-    end
-  end
-  context 'pins_remove' do
-    it 'requires channel' do
-      expect { client.pins_remove }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
 end

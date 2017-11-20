@@ -2,15 +2,6 @@
 
 desc 'Team methods.'
 command 'team' do |g|
-  g.desc 'Gets the access logs for the current team.'
-  g.long_desc %( Gets the access logs for the current team. )
-  g.command 'accessLogs' do |c|
-    c.flag 'before', desc: 'End of time range of logs to include in results (inclusive).'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.team_accessLogs(options))
-    end
-  end
-
   g.desc 'Gets billable users information for the current team.'
   g.long_desc %( Gets billable users information for the current team. )
   g.command 'billableInfo' do |c|
@@ -25,6 +16,15 @@ command 'team' do |g|
   g.command 'info' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.team_info(options))
+    end
+  end
+
+  g.desc 'Gets the access logs for the current team.'
+  g.long_desc %( Gets the access logs for the current team. )
+  g.command 'accessLogs' do |c|
+    c.flag 'before', desc: 'End of time range of logs to include in results (inclusive).'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.team_accessLogs(options))
     end
   end
 

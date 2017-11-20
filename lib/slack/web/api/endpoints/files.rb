@@ -6,15 +6,27 @@ module Slack
       module Endpoints
         module Files
           #
-          # Deletes a file.
+          # Enables a file for public/external sharing.
           #
           # @option options [file] :file
-          #   ID of file to delete.
-          # @see https://api.slack.com/methods/files.delete
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.delete.json
-          def files_delete(options = {})
+          #   File to share.
+          # @see https://api.slack.com/methods/files.sharedPublicURL
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.sharedPublicURL.json
+          def files_sharedPublicURL(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            post('files.delete', options)
+            post('files.sharedPublicURL', options)
+          end
+
+          #
+          # Revokes public/external sharing access for a file
+          #
+          # @option options [file] :file
+          #   File to revoke.
+          # @see https://api.slack.com/methods/files.revokePublicURL
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.revokePublicURL.json
+          def files_revokePublicURL(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            post('files.revokePublicURL', options)
           end
 
           #
@@ -63,27 +75,15 @@ module Slack
           end
 
           #
-          # Revokes public/external sharing access for a file
+          # Deletes a file.
           #
           # @option options [file] :file
-          #   File to revoke.
-          # @see https://api.slack.com/methods/files.revokePublicURL
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.revokePublicURL.json
-          def files_revokePublicURL(options = {})
+          #   ID of file to delete.
+          # @see https://api.slack.com/methods/files.delete
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.delete.json
+          def files_delete(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            post('files.revokePublicURL', options)
-          end
-
-          #
-          # Enables a file for public/external sharing.
-          #
-          # @option options [file] :file
-          #   File to share.
-          # @see https://api.slack.com/methods/files.sharedPublicURL
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.sharedPublicURL.json
-          def files_sharedPublicURL(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            post('files.sharedPublicURL', options)
+            post('files.delete', options)
           end
 
           #

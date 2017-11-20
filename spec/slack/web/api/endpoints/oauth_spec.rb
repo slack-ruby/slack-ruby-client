@@ -4,17 +4,6 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Oauth do
   let(:client) { Slack::Web::Client.new }
-  context 'oauth_access' do
-    it 'requires client_id' do
-      expect { client.oauth_access(client_secret: '33fea0113f5b1', code: 'ccdaa72ad') }.to raise_error ArgumentError, /Required arguments :client_id missing/
-    end
-    it 'requires client_secret' do
-      expect { client.oauth_access(client_id: '4b39e9-752c4', code: 'ccdaa72ad') }.to raise_error ArgumentError, /Required arguments :client_secret missing/
-    end
-    it 'requires code' do
-      expect { client.oauth_access(client_id: '4b39e9-752c4', client_secret: '33fea0113f5b1') }.to raise_error ArgumentError, /Required arguments :code missing/
-    end
-  end
   context 'oauth_token' do
     it 'requires client_id' do
       expect { client.oauth_token(client_secret: '33fea0113f5b1', code: 'ccdaa72ad') }.to raise_error ArgumentError, /Required arguments :client_id missing/
@@ -24,6 +13,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Oauth do
     end
     it 'requires code' do
       expect { client.oauth_token(client_id: '4b39e9-752c4', client_secret: '33fea0113f5b1') }.to raise_error ArgumentError, /Required arguments :code missing/
+    end
+  end
+  context 'oauth_access' do
+    it 'requires client_id' do
+      expect { client.oauth_access(client_secret: '33fea0113f5b1', code: 'ccdaa72ad') }.to raise_error ArgumentError, /Required arguments :client_id missing/
+    end
+    it 'requires client_secret' do
+      expect { client.oauth_access(client_id: '4b39e9-752c4', code: 'ccdaa72ad') }.to raise_error ArgumentError, /Required arguments :client_secret missing/
+    end
+    it 'requires code' do
+      expect { client.oauth_access(client_id: '4b39e9-752c4', client_secret: '33fea0113f5b1') }.to raise_error ArgumentError, /Required arguments :code missing/
     end
   end
 end

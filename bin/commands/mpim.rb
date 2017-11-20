@@ -11,19 +11,6 @@ command 'mpim' do |g|
     end
   end
 
-  g.desc 'Fetches history of messages and events from a multiparty direct message.'
-  g.long_desc %( Fetches history of messages and events from a multiparty direct message. )
-  g.command 'history' do |c|
-    c.flag 'channel', desc: 'Multiparty direct message to fetch history for.'
-    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results.'
-    c.flag 'latest', desc: 'End of time range of messages to include in results.'
-    c.flag 'oldest', desc: 'Start of time range of messages to include in results.'
-    c.flag 'unreads', desc: 'Include unread_count_display in the output?.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.mpim_history(options))
-    end
-  end
-
   g.desc 'Lists multiparty direct message channels for the calling user.'
   g.long_desc %( Lists multiparty direct message channels for the calling user. )
   g.command 'list' do |c|
@@ -39,6 +26,19 @@ command 'mpim' do |g|
     c.flag 'ts', desc: 'Timestamp of the most recently seen message.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.mpim_mark(options))
+    end
+  end
+
+  g.desc 'Fetches history of messages and events from a multiparty direct message.'
+  g.long_desc %( Fetches history of messages and events from a multiparty direct message. )
+  g.command 'history' do |c|
+    c.flag 'channel', desc: 'Multiparty direct message to fetch history for.'
+    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results.'
+    c.flag 'latest', desc: 'End of time range of messages to include in results.'
+    c.flag 'oldest', desc: 'Start of time range of messages to include in results.'
+    c.flag 'unreads', desc: 'Include unread_count_display in the output?.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.mpim_history(options))
     end
   end
 

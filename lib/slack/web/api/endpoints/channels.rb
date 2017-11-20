@@ -6,6 +6,98 @@ module Slack
       module Endpoints
         module Channels
           #
+          # Sets the purpose for a channel.
+          #
+          # @option options [channel] :channel
+          #   Channel to set the purpose of.
+          # @option options [Object] :purpose
+          #   The new purpose.
+          # @see https://api.slack.com/methods/channels.setPurpose
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.setPurpose.json
+          def channels_setPurpose(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('channels.setPurpose', options)
+          end
+
+          #
+          # Retrieve a thread of messages posted to a channel
+          #
+          # @option options [channel] :channel
+          #   Channel to fetch thread from.
+          # @option options [Object] :thread_ts
+          #   Unique identifier of a thread's parent message.
+          # @see https://api.slack.com/methods/channels.replies
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.replies.json
+          def channels_replies(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('channels.replies', options)
+          end
+
+          #
+          # Leaves a channel.
+          #
+          # @option options [channel] :channel
+          #   Channel to leave.
+          # @see https://api.slack.com/methods/channels.leave
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.leave.json
+          def channels_leave(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('channels.leave', options)
+          end
+
+          #
+          # Removes a user from a channel.
+          #
+          # @option options [channel] :channel
+          #   Channel to remove user from.
+          # @option options [user] :user
+          #   User to remove from channel.
+          # @see https://api.slack.com/methods/channels.kick
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.kick.json
+          def channels_kick(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            post('channels.kick', options)
+          end
+
+          #
+          # Sets the read cursor in a channel.
+          #
+          # @option options [channel] :channel
+          #   Channel to set reading cursor in.
+          # @option options [timestamp] :ts
+          #   Timestamp of the most recently seen message.
+          # @see https://api.slack.com/methods/channels.mark
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.mark.json
+          def channels_mark(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('channels.mark', options)
+          end
+
+          #
+          # Joins a channel, creating it if needed.
+          #
+          # @option options [Object] :name
+          #   Name of channel to join.
+          # @option options [Object] :validate
+          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
+          # @see https://api.slack.com/methods/channels.join
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.join.json
+          def channels_join(options = {})
+            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            post('channels.join', options)
+          end
+
+          #
           # Archives a channel.
           #
           # @option options [channel] :channel
@@ -16,20 +108,6 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('channels.archive', options)
-          end
-
-          #
-          # Creates a channel.
-          #
-          # @option options [Object] :name
-          #   Name of channel to create.
-          # @option options [Object] :validate
-          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
-          # @see https://api.slack.com/methods/channels.create
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.create.json
-          def channels_create(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            post('channels.create', options)
           end
 
           #
@@ -54,79 +132,19 @@ module Slack
           end
 
           #
-          # Gets information about a channel.
+          # Sets the topic for a channel.
           #
           # @option options [channel] :channel
-          #   Channel to get info on.
-          # @option options [Object] :include_locale
-          #   Set this to true to receive the locale for this channel. Defaults to false.
-          # @see https://api.slack.com/methods/channels.info
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.info.json
-          def channels_info(options = {})
+          #   Channel to set the topic of.
+          # @option options [Object] :topic
+          #   The new topic.
+          # @see https://api.slack.com/methods/channels.setTopic
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.setTopic.json
+          def channels_setTopic(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('channels.info', options)
-          end
-
-          #
-          # Invites a user to a channel.
-          #
-          # @option options [channel] :channel
-          #   Channel to invite user to.
-          # @option options [user] :user
-          #   User to invite to channel.
-          # @see https://api.slack.com/methods/channels.invite
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.invite.json
-          def channels_invite(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('channels.invite', options)
-          end
-
-          #
-          # Joins a channel, creating it if needed.
-          #
-          # @option options [Object] :name
-          #   Name of channel to join.
-          # @option options [Object] :validate
-          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
-          # @see https://api.slack.com/methods/channels.join
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.join.json
-          def channels_join(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            post('channels.join', options)
-          end
-
-          #
-          # Removes a user from a channel.
-          #
-          # @option options [channel] :channel
-          #   Channel to remove user from.
-          # @option options [user] :user
-          #   User to remove from channel.
-          # @see https://api.slack.com/methods/channels.kick
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.kick.json
-          def channels_kick(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('channels.kick', options)
-          end
-
-          #
-          # Leaves a channel.
-          #
-          # @option options [channel] :channel
-          #   Channel to leave.
-          # @see https://api.slack.com/methods/channels.leave
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.leave.json
-          def channels_leave(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('channels.leave', options)
+            post('channels.setTopic', options)
           end
 
           #
@@ -153,19 +171,18 @@ module Slack
           end
 
           #
-          # Sets the read cursor in a channel.
+          # Gets information about a channel.
           #
           # @option options [channel] :channel
-          #   Channel to set reading cursor in.
-          # @option options [timestamp] :ts
-          #   Timestamp of the most recently seen message.
-          # @see https://api.slack.com/methods/channels.mark
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.mark.json
-          def channels_mark(options = {})
+          #   Channel to get info on.
+          # @option options [Object] :include_locale
+          #   Set this to true to receive the locale for this channel. Defaults to false.
+          # @see https://api.slack.com/methods/channels.info
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.info.json
+          def channels_info(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('channels.mark', options)
+            post('channels.info', options)
           end
 
           #
@@ -187,51 +204,20 @@ module Slack
           end
 
           #
-          # Retrieve a thread of messages posted to a channel
+          # Invites a user to a channel.
           #
           # @option options [channel] :channel
-          #   Channel to fetch thread from.
-          # @option options [Object] :thread_ts
-          #   Unique identifier of a thread's parent message.
-          # @see https://api.slack.com/methods/channels.replies
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.replies.json
-          def channels_replies(options = {})
+          #   Channel to invite user to.
+          # @option options [user] :user
+          #   User to invite to channel.
+          # @see https://api.slack.com/methods/channels.invite
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.invite.json
+          def channels_invite(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
+            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('channels.replies', options)
-          end
-
-          #
-          # Sets the purpose for a channel.
-          #
-          # @option options [channel] :channel
-          #   Channel to set the purpose of.
-          # @option options [Object] :purpose
-          #   The new purpose.
-          # @see https://api.slack.com/methods/channels.setPurpose
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.setPurpose.json
-          def channels_setPurpose(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('channels.setPurpose', options)
-          end
-
-          #
-          # Sets the topic for a channel.
-          #
-          # @option options [channel] :channel
-          #   Channel to set the topic of.
-          # @option options [Object] :topic
-          #   The new topic.
-          # @see https://api.slack.com/methods/channels.setTopic
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.setTopic.json
-          def channels_setTopic(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('channels.setTopic', options)
+            options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            post('channels.invite', options)
           end
 
           #
@@ -245,6 +231,20 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('channels.unarchive', options)
+          end
+
+          #
+          # Creates a channel.
+          #
+          # @option options [Object] :name
+          #   Name of channel to create.
+          # @option options [Object] :validate
+          #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
+          # @see https://api.slack.com/methods/channels.create
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.create.json
+          def channels_create(options = {})
+            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            post('channels.create', options)
           end
         end
       end

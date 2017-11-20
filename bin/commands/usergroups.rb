@@ -2,16 +2,13 @@
 
 desc "Get info on your team's User Groups."
 command 'usergroups' do |g|
-  g.desc 'Create a User Group'
-  g.long_desc %( Create a User Group )
-  g.command 'create' do |c|
-    c.flag 'name', desc: 'A name for the User Group. Must be unique among User Groups.'
-    c.flag 'channels', desc: 'A comma separated string of encoded channel IDs for which the User Group uses as a default.'
-    c.flag 'description', desc: 'A short description of the User Group.'
-    c.flag 'handle', desc: 'A mention handle. Must be unique among channels, users and User Groups.'
-    c.flag 'include_count', desc: 'Include the number of users in each User Group.'
+  g.desc 'Enable a User Group'
+  g.long_desc %( Enable a User Group )
+  g.command 'enable' do |c|
+    c.flag 'usergroup', desc: 'The encoded ID of the User Group to enable.'
+    c.flag 'include_count', desc: 'Include the number of users in the User Group.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.usergroups_create(options))
+      puts JSON.dump($client.usergroups_enable(options))
     end
   end
 
@@ -25,13 +22,16 @@ command 'usergroups' do |g|
     end
   end
 
-  g.desc 'Enable a User Group'
-  g.long_desc %( Enable a User Group )
-  g.command 'enable' do |c|
-    c.flag 'usergroup', desc: 'The encoded ID of the User Group to enable.'
-    c.flag 'include_count', desc: 'Include the number of users in the User Group.'
+  g.desc 'Create a User Group'
+  g.long_desc %( Create a User Group )
+  g.command 'create' do |c|
+    c.flag 'name', desc: 'A name for the User Group. Must be unique among User Groups.'
+    c.flag 'channels', desc: 'A comma separated string of encoded channel IDs for which the User Group uses as a default.'
+    c.flag 'description', desc: 'A short description of the User Group.'
+    c.flag 'handle', desc: 'A mention handle. Must be unique among channels, users and User Groups.'
+    c.flag 'include_count', desc: 'Include the number of users in each User Group.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.usergroups_enable(options))
+      puts JSON.dump($client.usergroups_create(options))
     end
   end
 

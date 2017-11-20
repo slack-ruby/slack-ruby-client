@@ -2,12 +2,84 @@
 
 desc "Interface with all kinds of conversations the same way, whether they're public or private channels, direct messages, or otherwise."
 command 'conversations' do |g|
-  g.desc 'Archives a conversation.'
-  g.long_desc %( Archives a conversation. )
-  g.command 'archive' do |c|
-    c.flag 'channel', desc: 'ID of conversation to archive.'
+  g.desc 'Joins an existing conversation.'
+  g.long_desc %( Joins an existing conversation. )
+  g.command 'join' do |c|
+    c.flag 'channel', desc: 'ID of conversation to join.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_archive(options))
+      puts JSON.dump($client.conversations_join(options))
+    end
+  end
+
+  g.desc 'Renames a conversation.'
+  g.long_desc %( Renames a conversation. )
+  g.command 'rename' do |c|
+    c.flag 'channel', desc: 'ID of conversation to rename.'
+    c.flag 'name', desc: 'New name for conversation.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_rename(options))
+    end
+  end
+
+  g.desc 'Removes a user from a conversation.'
+  g.long_desc %( Removes a user from a conversation. )
+  g.command 'kick' do |c|
+    c.flag 'channel', desc: 'ID of conversation to remove user from.'
+    c.flag 'user', desc: 'User ID to be removed.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_kick(options))
+    end
+  end
+
+  g.desc 'Sets the purpose for a conversation.'
+  g.long_desc %( Sets the purpose for a conversation. )
+  g.command 'setPurpose' do |c|
+    c.flag 'channel', desc: 'Conversation to set the purpose of.'
+    c.flag 'purpose', desc: 'A new, specialer purpose.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_setPurpose(options))
+    end
+  end
+
+  g.desc 'Invites users to a channel.'
+  g.long_desc %( Invites users to a channel. )
+  g.command 'invite' do |c|
+    c.flag 'channel', desc: 'The ID of the public or private channel to invite user(s) to.'
+    c.flag 'users', desc: 'A comma separated list of user IDs. Up to 30 users may be listed.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_invite(options))
+    end
+  end
+
+  g.desc 'Initiates a public or private channel-based conversation'
+  g.long_desc %( Initiates a public or private channel-based conversation )
+  g.command 'create' do |c|
+    c.flag 'name', desc: 'Name of the public or private channel to create.'
+    c.flag 'is_private', desc: 'Create a private channel instead of a public one.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_create(options))
+    end
+  end
+
+  g.desc 'Lists all channels in a Slack team.'
+  g.long_desc %( Lists all channels in a Slack team. )
+  g.command 'list' do |c|
+    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
+    c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
+    c.flag 'types', desc: 'Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_list(options))
+    end
+  end
+
+  g.desc 'Retrieve information about a conversation.'
+  g.long_desc %( Retrieve information about a conversation. )
+  g.command 'info' do |c|
+    c.flag 'channel', desc: 'Conversation ID to learn more about.'
+    c.flag 'include_locale', desc: 'Set this to true to receive the locale for this conversation. Defaults to false.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.conversations_info(options))
     end
   end
 
@@ -20,13 +92,14 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'Initiates a public or private channel-based conversation'
-  g.long_desc %( Initiates a public or private channel-based conversation )
-  g.command 'create' do |c|
-    c.flag 'name', desc: 'Name of the public or private channel to create.'
-    c.flag 'is_private', desc: 'Create a private channel instead of a public one.'
+  g.desc 'Retrieve members of a conversation.'
+  g.long_desc %( Retrieve members of a conversation. )
+  g.command 'members' do |c|
+    c.flag 'channel', desc: 'ID of the conversation to retrieve members for.'
+    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_create(options))
+      puts JSON.dump($client.conversations_members(options))
     end
   end
 
@@ -43,74 +116,21 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'Retrieve information about a conversation.'
-  g.long_desc %( Retrieve information about a conversation. )
-  g.command 'info' do |c|
-    c.flag 'channel', desc: 'Conversation ID to learn more about.'
-    c.flag 'include_locale', desc: 'Set this to true to receive the locale for this conversation. Defaults to false.'
+  g.desc 'Reverses conversation archival.'
+  g.long_desc %( Reverses conversation archival. )
+  g.command 'unarchive' do |c|
+    c.flag 'channel', desc: 'ID of conversation to unarchive.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_info(options))
+      puts JSON.dump($client.conversations_unarchive(options))
     end
   end
 
-  g.desc 'Invites users to a channel.'
-  g.long_desc %( Invites users to a channel. )
-  g.command 'invite' do |c|
-    c.flag 'channel', desc: 'The ID of the public or private channel to invite user(s) to.'
-    c.flag 'users', desc: 'A comma separated list of user IDs. Up to 30 users may be listed.'
+  g.desc 'Archives a conversation.'
+  g.long_desc %( Archives a conversation. )
+  g.command 'archive' do |c|
+    c.flag 'channel', desc: 'ID of conversation to archive.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_invite(options))
-    end
-  end
-
-  g.desc 'Joins an existing conversation.'
-  g.long_desc %( Joins an existing conversation. )
-  g.command 'join' do |c|
-    c.flag 'channel', desc: 'ID of conversation to join.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_join(options))
-    end
-  end
-
-  g.desc 'Removes a user from a conversation.'
-  g.long_desc %( Removes a user from a conversation. )
-  g.command 'kick' do |c|
-    c.flag 'channel', desc: 'ID of conversation to remove user from.'
-    c.flag 'user', desc: 'User ID to be removed.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_kick(options))
-    end
-  end
-
-  g.desc 'Leaves a conversation.'
-  g.long_desc %( Leaves a conversation. )
-  g.command 'leave' do |c|
-    c.flag 'channel', desc: 'Conversation to leave.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_leave(options))
-    end
-  end
-
-  g.desc 'Lists all channels in a Slack team.'
-  g.long_desc %( Lists all channels in a Slack team. )
-  g.command 'list' do |c|
-    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
-    c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
-    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
-    c.flag 'types', desc: 'Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_list(options))
-    end
-  end
-
-  g.desc 'Retrieve members of a conversation.'
-  g.long_desc %( Retrieve members of a conversation. )
-  g.command 'members' do |c|
-    c.flag 'channel', desc: 'ID of the conversation to retrieve members for.'
-    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
-    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_members(options))
+      puts JSON.dump($client.conversations_archive(options))
     end
   end
 
@@ -125,13 +145,13 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'Renames a conversation.'
-  g.long_desc %( Renames a conversation. )
-  g.command 'rename' do |c|
-    c.flag 'channel', desc: 'ID of conversation to rename.'
-    c.flag 'name', desc: 'New name for conversation.'
+  g.desc 'Sets the topic for a conversation.'
+  g.long_desc %( Sets the topic for a conversation. )
+  g.command 'setTopic' do |c|
+    c.flag 'channel', desc: 'Conversation to set the topic of.'
+    c.flag 'topic', desc: 'The new topic string. Does not support formatting or linkification.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_rename(options))
+      puts JSON.dump($client.conversations_setTopic(options))
     end
   end
 
@@ -147,32 +167,12 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'Sets the purpose for a conversation.'
-  g.long_desc %( Sets the purpose for a conversation. )
-  g.command 'setPurpose' do |c|
-    c.flag 'channel', desc: 'Conversation to set the purpose of.'
-    c.flag 'purpose', desc: 'A new, specialer purpose.'
+  g.desc 'Leaves a conversation.'
+  g.long_desc %( Leaves a conversation. )
+  g.command 'leave' do |c|
+    c.flag 'channel', desc: 'Conversation to leave.'
     c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_setPurpose(options))
-    end
-  end
-
-  g.desc 'Sets the topic for a conversation.'
-  g.long_desc %( Sets the topic for a conversation. )
-  g.command 'setTopic' do |c|
-    c.flag 'channel', desc: 'Conversation to set the topic of.'
-    c.flag 'topic', desc: 'The new topic string. Does not support formatting or linkification.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_setTopic(options))
-    end
-  end
-
-  g.desc 'Reverses conversation archival.'
-  g.long_desc %( Reverses conversation archival. )
-  g.command 'unarchive' do |c|
-    c.flag 'channel', desc: 'ID of conversation to unarchive.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.conversations_unarchive(options))
+      puts JSON.dump($client.conversations_leave(options))
     end
   end
 end

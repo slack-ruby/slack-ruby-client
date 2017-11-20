@@ -6,6 +6,39 @@ module Slack
       module Endpoints
         module Reminders
           #
+          # Gets information about a reminder.
+          #
+          # @option options [Object] :reminder
+          #   The ID of the reminder.
+          # @see https://api.slack.com/methods/reminders.info
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.info.json
+          def reminders_info(options = {})
+            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
+            post('reminders.info', options)
+          end
+
+          #
+          # Lists all reminders created by or for a given user.
+          #
+          # @see https://api.slack.com/methods/reminders.list
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.list.json
+          def reminders_list(options = {})
+            post('reminders.list', options)
+          end
+
+          #
+          # Deletes a reminder.
+          #
+          # @option options [Object] :reminder
+          #   The ID of the reminder.
+          # @see https://api.slack.com/methods/reminders.delete
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.delete.json
+          def reminders_delete(options = {})
+            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
+            post('reminders.delete', options)
+          end
+
+          #
           # Creates a reminder.
           #
           # @option options [Object] :text
@@ -33,39 +66,6 @@ module Slack
           def reminders_complete(options = {})
             throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
             post('reminders.complete', options)
-          end
-
-          #
-          # Deletes a reminder.
-          #
-          # @option options [Object] :reminder
-          #   The ID of the reminder.
-          # @see https://api.slack.com/methods/reminders.delete
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.delete.json
-          def reminders_delete(options = {})
-            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
-            post('reminders.delete', options)
-          end
-
-          #
-          # Gets information about a reminder.
-          #
-          # @option options [Object] :reminder
-          #   The ID of the reminder.
-          # @see https://api.slack.com/methods/reminders.info
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.info.json
-          def reminders_info(options = {})
-            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
-            post('reminders.info', options)
-          end
-
-          #
-          # Lists all reminders created by or for a given user.
-          #
-          # @see https://api.slack.com/methods/reminders.list
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.list.json
-          def reminders_list(options = {})
-            post('reminders.list', options)
           end
         end
       end

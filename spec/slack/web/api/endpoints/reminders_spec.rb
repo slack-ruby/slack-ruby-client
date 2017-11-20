@@ -4,6 +4,16 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Reminders do
   let(:client) { Slack::Web::Client.new }
+  context 'reminders_info' do
+    it 'requires reminder' do
+      expect { client.reminders_info }.to raise_error ArgumentError, /Required arguments :reminder missing/
+    end
+  end
+  context 'reminders_delete' do
+    it 'requires reminder' do
+      expect { client.reminders_delete }.to raise_error ArgumentError, /Required arguments :reminder missing/
+    end
+  end
   context 'reminders_add' do
     it 'requires text' do
       expect { client.reminders_add(time: '1602288000') }.to raise_error ArgumentError, /Required arguments :text missing/
@@ -15,16 +25,6 @@ RSpec.describe Slack::Web::Api::Endpoints::Reminders do
   context 'reminders_complete' do
     it 'requires reminder' do
       expect { client.reminders_complete }.to raise_error ArgumentError, /Required arguments :reminder missing/
-    end
-  end
-  context 'reminders_delete' do
-    it 'requires reminder' do
-      expect { client.reminders_delete }.to raise_error ArgumentError, /Required arguments :reminder missing/
-    end
-  end
-  context 'reminders_info' do
-    it 'requires reminder' do
-      expect { client.reminders_info }.to raise_error ArgumentError, /Required arguments :reminder missing/
     end
   end
 end

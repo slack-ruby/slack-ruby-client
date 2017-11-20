@@ -19,27 +19,6 @@ module Slack
           end
 
           #
-          # Fetches history of messages and events from a multiparty direct message.
-          #
-          # @option options [channel] :channel
-          #   Multiparty direct message to fetch history for.
-          # @option options [Object] :inclusive
-          #   Include messages with latest or oldest timestamp in results.
-          # @option options [timestamp] :latest
-          #   End of time range of messages to include in results.
-          # @option options [timestamp] :oldest
-          #   Start of time range of messages to include in results.
-          # @option options [Object] :unreads
-          #   Include unread_count_display in the output?.
-          # @see https://api.slack.com/methods/mpim.history
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.history.json
-          def mpim_history(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('mpim.history', options)
-          end
-
-          #
           # Lists multiparty direct message channels for the calling user.
           #
           # @see https://api.slack.com/methods/mpim.list
@@ -62,6 +41,27 @@ module Slack
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('mpim.mark', options)
+          end
+
+          #
+          # Fetches history of messages and events from a multiparty direct message.
+          #
+          # @option options [channel] :channel
+          #   Multiparty direct message to fetch history for.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
+          # @option options [timestamp] :latest
+          #   End of time range of messages to include in results.
+          # @option options [timestamp] :oldest
+          #   Start of time range of messages to include in results.
+          # @option options [Object] :unreads
+          #   Include unread_count_display in the output?.
+          # @see https://api.slack.com/methods/mpim.history
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.history.json
+          def mpim_history(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('mpim.history', options)
           end
 
           #

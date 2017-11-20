@@ -15,6 +15,54 @@ module Slack
           end
 
           #
+          # Get a user's identity.
+          #
+          # @see https://api.slack.com/methods/users.identity
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.identity.json
+          def users_identity(options = {})
+            post('users.identity', options)
+          end
+
+          #
+          # Marks a user as active.
+          #
+          # @see https://api.slack.com/methods/users.setActive
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setActive.json
+          def users_setActive(options = {})
+            post('users.setActive', options)
+          end
+
+          #
+          # Manually sets user presence.
+          #
+          # @option options [Object] :presence
+          #   Either auto or away.
+          # @see https://api.slack.com/methods/users.setPresence
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPresence.json
+          def users_setPresence(options = {})
+            throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
+            post('users.setPresence', options)
+          end
+
+          #
+          # Set the user profile photo
+          #
+          # @option options [Object] :image
+          #   File contents via multipart/form-data.
+          # @option options [Object] :crop_w
+          #   Width/height of crop box (always square).
+          # @option options [Object] :crop_x
+          #   X coordinate of top-left corner of crop box.
+          # @option options [Object] :crop_y
+          #   Y coordinate of top-left corner of crop box.
+          # @see https://api.slack.com/methods/users.setPhoto
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPhoto.json
+          def users_setPhoto(options = {})
+            throw ArgumentError.new('Required arguments :image missing') if options[:image].nil?
+            post('users.setPhoto', options)
+          end
+
+          #
           # Gets user presence information.
           #
           # @option options [user] :user
@@ -25,15 +73,6 @@ module Slack
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.getPresence', options)
-          end
-
-          #
-          # Get a user's identity.
-          #
-          # @see https://api.slack.com/methods/users.identity
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.identity.json
-          def users_identity(options = {})
-            post('users.identity', options)
           end
 
           #
@@ -72,45 +111,6 @@ module Slack
             else
               post('users.list', options)
             end
-          end
-
-          #
-          # Marks a user as active.
-          #
-          # @see https://api.slack.com/methods/users.setActive
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setActive.json
-          def users_setActive(options = {})
-            post('users.setActive', options)
-          end
-
-          #
-          # Set the user profile photo
-          #
-          # @option options [Object] :image
-          #   File contents via multipart/form-data.
-          # @option options [Object] :crop_w
-          #   Width/height of crop box (always square).
-          # @option options [Object] :crop_x
-          #   X coordinate of top-left corner of crop box.
-          # @option options [Object] :crop_y
-          #   Y coordinate of top-left corner of crop box.
-          # @see https://api.slack.com/methods/users.setPhoto
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPhoto.json
-          def users_setPhoto(options = {})
-            throw ArgumentError.new('Required arguments :image missing') if options[:image].nil?
-            post('users.setPhoto', options)
-          end
-
-          #
-          # Manually sets user presence.
-          #
-          # @option options [Object] :presence
-          #   Either auto or away.
-          # @see https://api.slack.com/methods/users.setPresence
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPresence.json
-          def users_setPresence(options = {})
-            throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
-            post('users.setPresence', options)
           end
         end
       end

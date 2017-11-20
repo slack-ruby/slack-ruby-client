@@ -1,8 +1,8 @@
 diff --git a/lib/slack/web/api/endpoints/chat.rb b/lib/slack/web/api/endpoints/chat.rb
-index 5186416..490bc91 100644
+index 451e425..d9f7b59 100644
 --- a/lib/slack/web/api/endpoints/chat.rb
 +++ b/lib/slack/web/api/endpoints/chat.rb
-@@ -154,9 +154,15 @@ module Slack
+@@ -26,9 +26,15 @@ module Slack
            # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
            def chat_update(options = {})
              throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
@@ -18,4 +18,4 @@ index 5186416..490bc91 100644
 +            end
              post('chat.update', options)
            end
-         end
+ 

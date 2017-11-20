@@ -6,40 +6,6 @@ module Slack
       module Endpoints
         module Im
           #
-          # Close a direct message channel.
-          #
-          # @option options [im] :channel
-          #   Direct message channel to close.
-          # @see https://api.slack.com/methods/im.close
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.close.json
-          def im_close(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('im.close', options)
-          end
-
-          #
-          # Fetches history of messages and events from direct message channel.
-          #
-          # @option options [im] :channel
-          #   Direct message channel to fetch history for.
-          # @option options [Object] :inclusive
-          #   Include messages with latest or oldest timestamp in results.
-          # @option options [timestamp] :latest
-          #   End of time range of messages to include in results.
-          # @option options [timestamp] :oldest
-          #   Start of time range of messages to include in results.
-          # @option options [Object] :unreads
-          #   Include unread_count_display in the output?.
-          # @see https://api.slack.com/methods/im.history
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.history.json
-          def im_history(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('im.history', options)
-          end
-
-          #
           # Lists direct message channels for the calling user.
           #
           # @option options [Object] :cursor
@@ -75,6 +41,35 @@ module Slack
           end
 
           #
+          # Close a direct message channel.
+          #
+          # @option options [im] :channel
+          #   Direct message channel to close.
+          # @see https://api.slack.com/methods/im.close
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.close.json
+          def im_close(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('im.close', options)
+          end
+
+          #
+          # Retrieve a thread of messages posted to a direct message conversation
+          #
+          # @option options [im] :channel
+          #   Direct message channel to fetch thread from.
+          # @option options [Object] :thread_ts
+          #   Unique identifier of a thread's parent message.
+          # @see https://api.slack.com/methods/im.replies
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.replies.json
+          def im_replies(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('im.replies', options)
+          end
+
+          #
           # Opens a direct message channel.
           #
           # @option options [user] :user
@@ -92,19 +87,24 @@ module Slack
           end
 
           #
-          # Retrieve a thread of messages posted to a direct message conversation
+          # Fetches history of messages and events from direct message channel.
           #
           # @option options [im] :channel
-          #   Direct message channel to fetch thread from.
-          # @option options [Object] :thread_ts
-          #   Unique identifier of a thread's parent message.
-          # @see https://api.slack.com/methods/im.replies
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.replies.json
-          def im_replies(options = {})
+          #   Direct message channel to fetch history for.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results.
+          # @option options [timestamp] :latest
+          #   End of time range of messages to include in results.
+          # @option options [timestamp] :oldest
+          #   Start of time range of messages to include in results.
+          # @option options [Object] :unreads
+          #   Include unread_count_display in the output?.
+          # @see https://api.slack.com/methods/im.history
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.history.json
+          def im_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('im.replies', options)
+            post('im.history', options)
           end
         end
       end

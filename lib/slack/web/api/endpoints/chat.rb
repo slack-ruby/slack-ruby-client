@@ -6,21 +6,36 @@ module Slack
       module Endpoints
         module Chat
           #
-          # Deletes a message.
+          # Updates a message.
           #
           # @option options [channel] :channel
-          #   Channel containing the message to be deleted.
+          #   Channel containing the message to be updated.
+          # @option options [Object] :text
+          #   New text for the message, using the default formatting rules. It's not required when presenting attachments.
           # @option options [timestamp] :ts
-          #   Timestamp of the message to be deleted.
+          #   Timestamp of the message to be updated.
           # @option options [Object] :as_user
-          #   Pass true to delete the message as the authed user. Bot users in this context are considered authed users.
-          # @see https://api.slack.com/methods/chat.delete
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.delete.json
-          def chat_delete(options = {})
+          #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
+          # @option options [Object] :attachments
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
+          # @option options [Object] :link_names
+          #   Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.
+          # @option options [Object] :parse
+          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
+          # @see https://api.slack.com/methods/chat.update
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
+          def chat_update(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            post('chat.delete', options)
+            # attachments must be passed as an encoded JSON string
+            if options.key?(:attachments)
+              attachments = options[:attachments]
+              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+              options = options.merge(attachments: attachments)
+            end
+            post('chat.update', options)
           end
 
           #
@@ -140,36 +155,21 @@ module Slack
           end
 
           #
-          # Updates a message.
+          # Deletes a message.
           #
           # @option options [channel] :channel
-          #   Channel containing the message to be updated.
-          # @option options [Object] :text
-          #   New text for the message, using the default formatting rules.
+          #   Channel containing the message to be deleted.
           # @option options [timestamp] :ts
-          #   Timestamp of the message to be updated.
+          #   Timestamp of the message to be deleted.
           # @option options [Object] :as_user
-          #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
-          # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
-          # @option options [Object] :link_names
-          #   Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.
-          # @option options [Object] :parse
-          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
-          # @see https://api.slack.com/methods/chat.update
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
-          def chat_update(options = {})
+          #   Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
+          # @see https://api.slack.com/methods/chat.delete
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.delete.json
+          def chat_delete(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            # attachments must be passed as an encoded JSON string
-            if options.key?(:attachments)
-              attachments = options[:attachments]
-              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
-              options = options.merge(attachments: attachments)
-            end
-            post('chat.update', options)
+            post('chat.delete', options)
           end
         end
       end

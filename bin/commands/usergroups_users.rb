@@ -2,16 +2,6 @@
 
 desc 'UsergroupsUsers methods.'
 command 'usergroups_users' do |g|
-  g.desc 'List all users in a User Group'
-  g.long_desc %( List all users in a User Group )
-  g.command 'list' do |c|
-    c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
-    c.flag 'include_disabled', desc: 'Allow results that involve disabled User Groups.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.usergroups_users_list(options))
-    end
-  end
-
   g.desc 'Update the list of users for a User Group'
   g.long_desc %( Update the list of users for a User Group )
   g.command 'update' do |c|
@@ -20,6 +10,16 @@ command 'usergroups_users' do |g|
     c.flag 'include_count', desc: 'Include the number of users in the User Group.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.usergroups_users_update(options))
+    end
+  end
+
+  g.desc 'List all users in a User Group'
+  g.long_desc %( List all users in a User Group )
+  g.command 'list' do |c|
+    c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
+    c.flag 'include_disabled', desc: 'Allow results that involve disabled User Groups.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.usergroups_users_list(options))
     end
   end
 end

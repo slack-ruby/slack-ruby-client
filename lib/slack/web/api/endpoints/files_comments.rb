@@ -6,21 +6,6 @@ module Slack
       module Endpoints
         module FilesComments
           #
-          # Add a comment to an existing file.
-          #
-          # @option options [Object] :comment
-          #   Text of the comment to add.
-          # @option options [file] :file
-          #   File to add a comment to.
-          # @see https://api.slack.com/methods/files.comments.add
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.add.json
-          def files_comments_add(options = {})
-            throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            post('files.comments.add', options)
-          end
-
-          #
           # Deletes an existing comment on a file.
           #
           # @option options [file] :file
@@ -33,6 +18,21 @@ module Slack
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
             post('files.comments.delete', options)
+          end
+
+          #
+          # Add a comment to an existing file.
+          #
+          # @option options [Object] :comment
+          #   Text of the comment to add.
+          # @option options [file] :file
+          #   File to add a comment to.
+          # @see https://api.slack.com/methods/files.comments.add
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.add.json
+          def files_comments_add(options = {})
+            throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            post('files.comments.add', options)
           end
 
           #
