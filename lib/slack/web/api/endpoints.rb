@@ -10,10 +10,11 @@ require_relative 'endpoints/conversations'
 require_relative 'endpoints/dialog'
 require_relative 'endpoints/dnd'
 require_relative 'endpoints/emoji'
-require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files'
+require_relative 'endpoints/files_comments'
 require_relative 'endpoints/groups'
 require_relative 'endpoints/im'
+require_relative 'endpoints/migration'
 require_relative 'endpoints/mpim'
 require_relative 'endpoints/oauth'
 require_relative 'endpoints/pins'
@@ -47,10 +48,11 @@ module Slack
         include Dialog
         include Dnd
         include Emoji
-        include FilesComments
         include Files
+        include FilesComments
         include Groups
         include Im
+        include Migration
         include Mpim
         include Oauth
         include Pins

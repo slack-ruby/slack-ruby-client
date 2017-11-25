@@ -7,7 +7,7 @@ desc "<%= desc %>"
 desc '<%= desc %>'
 <% end %>
 command '<%= group['name'].gsub(".", "_") %>' do |g|
-<% names.each_with_index do |(name, data), index| %>
+<% names.sort.each_with_index do |(name, data), index| %>
 <% if index > 0 %>
 
 <% end %>

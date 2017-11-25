@@ -43,6 +43,15 @@ command 'groups' do |g|
     end
   end
 
+  g.desc 'This method returns the ID of a group.'
+  g.long_desc %( This method returns the ID of a group. )
+  g.command 'id' do |c|
+    c.flag 'channel', desc: 'Group channel to get ID for, prefixed with #.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.groups_id(options))
+    end
+  end
+
   g.desc 'Gets information about a private channel.'
   g.long_desc %( Gets information about a private channel. )
   g.command 'info' do |c|
@@ -86,7 +95,7 @@ command 'groups' do |g|
   g.long_desc %( Lists private channels that the calling user has access to. )
   g.command 'list' do |c|
     c.flag 'exclude_archived', desc: "Don't return archived private channels."
-    c.flag 'exclude_members', desc: 'Exlude the members from each group.'
+    c.flag 'exclude_members', desc: 'Exclude the members from each group.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_list(options))
     end
@@ -158,15 +167,6 @@ command 'groups' do |g|
     c.flag 'channel', desc: 'Private channel to unarchive.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.groups_unarchive(options))
-    end
-  end
-
-  g.desc 'This method returns the ID of a group.'
-  g.long_desc %( This method returns the ID of a group. )
-  g.command 'id' do |c|
-    c.flag 'channel', desc: 'Group channel to get ID for, prefixed with #.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.groups_id(options))
     end
   end
 end

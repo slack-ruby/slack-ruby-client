@@ -9,8 +9,6 @@ module Slack
           # Starts a Real Time Messaging session.
           #
           # @option options [Object] :batch_presence_aware
-          #   Group presence change notices as presence_change_batch events when possible. See batching.
-          # @option options [Object] :presence_sub
           #   Only deliver presence events when requested by subscription. See presence subscriptions.
           # @see https://api.slack.com/methods/rtm.connect
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/rtm/rtm.connect.json
@@ -22,7 +20,7 @@ module Slack
           # Starts a Real Time Messaging session.
           #
           # @option options [Object] :batch_presence_aware
-          #   Group presence change notices as presence_change_batch events when possible. See batching.
+          #   Only deliver presence events when requested by subscription. See presence subscriptions.
           # @option options [Object] :include_locale
           #   Set this to true to receive the locale for users and channels. Defaults to false.
           # @option options [Object] :mpim_aware
@@ -31,8 +29,6 @@ module Slack
           #   Exclude latest timestamps for channels, groups, mpims, and ims. Automatically sets no_unreads to 1.
           # @option options [Object] :no_unreads
           #   Skip unread counts for each channel (improves performance).
-          # @option options [Object] :presence_sub
-          #   Only deliver presence events when requested by subscription. See presence subscriptions.
           # @option options [Object] :simple_latest
           #   Return timestamp only for latest message object of each channel (improves performance).
           # @see https://api.slack.com/methods/rtm.start

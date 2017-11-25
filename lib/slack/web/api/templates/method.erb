@@ -5,7 +5,7 @@ module Slack
     module Api
       module Endpoints
         module <%= group.gsub(".", "_").camelize %>
-<% names.each_with_index do |(name, data), index| %>
+<% names.sort.each_with_index do |(name, data), index| %>
 <% next if data['mixin'] %>
 <% if index > 0 %>
 
