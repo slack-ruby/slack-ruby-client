@@ -6,10 +6,9 @@ module Slack
       module Endpoints
         module UsersPrefs
           #
-          # Returns the user's preferences
+          # Returns the user's preferences (undocumented)
           #
-          # @see https://api.slack.com/methods/users.prefs.get
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.prefs/users.prefs.get.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/users.prefs/users.prefs.get.json
           def users_prefs_get(options = {})
             post('users.prefs.get', options)
           end

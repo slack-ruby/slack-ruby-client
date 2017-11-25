@@ -11,6 +11,17 @@ command 'files' do |g|
     end
   end
 
+  g.desc 'Change the properties of a file (undocumented)'
+  g.long_desc %( Change the properties of a file )
+  g.command 'edit' do |c|
+    c.flag 'file', desc: 'ID of the file to be edited'
+    c.flag 'title', desc: 'New title of the file'
+    c.flag 'filetype', desc: 'New filetype of the file. See https://api.slack.com/types/file#file_types for a list of all supported types.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_edit(options))
+    end
+  end
+
   g.desc 'Gets information about a team file.'
   g.long_desc %( Gets information about a team file. )
   g.command 'info' do |c|
@@ -51,6 +62,16 @@ You can pass multiple values in the types argument, like types=spaces,snippets.T
     c.flag 'file', desc: 'File to revoke.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_revokePublicURL(options))
+    end
+  end
+
+  g.desc 'Share an existing file in a channel (undocumented)'
+  g.long_desc %( Share an existing file in a channel )
+  g.command 'share' do |c|
+    c.flag 'file', desc: 'ID of the file to be shared'
+    c.flag 'channel', desc: 'Channel to share the file in. Works with both public (channel ID) and private channels (group ID).'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_share(options))
     end
   end
 

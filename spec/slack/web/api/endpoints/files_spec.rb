@@ -9,6 +9,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
       expect { client.files_delete }.to raise_error ArgumentError, /Required arguments :file missing/
     end
   end
+  context 'files_edit' do
+    it 'requires file' do
+      expect { client.files_edit(title: 'Brand new title') }.to raise_error ArgumentError, /Required arguments :file missing/
+    end
+    it 'requires title' do
+      expect { client.files_edit(file: 'F2147483862') }.to raise_error ArgumentError, /Required arguments :title missing/
+    end
+  end
   context 'files_info' do
     it 'requires file' do
       expect { client.files_info }.to raise_error ArgumentError, /Required arguments :file missing/
@@ -17,6 +25,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
   context 'files_revokePublicURL' do
     it 'requires file' do
       expect { client.files_revokePublicURL }.to raise_error ArgumentError, /Required arguments :file missing/
+    end
+  end
+  context 'files_share' do
+    it 'requires file' do
+      expect { client.files_share(channel: 'C1234567890') }.to raise_error ArgumentError, /Required arguments :file missing/
+    end
+    it 'requires channel' do
+      expect { client.files_share(file: 'F2147483862') }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
   context 'files_sharedPublicURL' do

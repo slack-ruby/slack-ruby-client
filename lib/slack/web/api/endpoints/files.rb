@@ -18,6 +18,22 @@ module Slack
           end
 
           #
+          # Change the properties of a file (undocumented)
+          #
+          # @option options [Object] :file
+          #   ID of the file to be edited
+          # @option options [Object] :title
+          #   New title of the file
+          # @option options [Object] :filetype
+          #   New filetype of the file. See https://api.slack.com/types/file#file_types for a list of all supported types.
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/files/files.edit.json
+          def files_edit(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            throw ArgumentError.new('Required arguments :title missing') if options[:title].nil?
+            post('files.edit', options)
+          end
+
+          #
           # Gets information about a team file.
           #
           # @option options [file] :file
@@ -72,6 +88,21 @@ module Slack
           def files_revokePublicURL(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             post('files.revokePublicURL', options)
+          end
+
+          #
+          # Share an existing file in a channel (undocumented)
+          #
+          # @option options [Object] :file
+          #   ID of the file to be shared
+          # @option options [channel] :channel
+          #   Channel to share the file in. Works with both public (channel ID) and private channels (group ID).
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/files/files.share.json
+          def files_share(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('files.share', options)
           end
 
           #

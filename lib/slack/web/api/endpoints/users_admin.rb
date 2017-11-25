@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module UsersAdmin
           #
-          # Send an invitation to a new user by email
+          # Send an invitation to a new user by email (undocumented)
           #
           # @option options [Object] :email
           #   Email address of the new user
@@ -22,20 +22,18 @@ module Slack
           #   Invite a guest that can use multiple channels
           # @option options [Object] :ultra_restricted
           #   Invite a guest that can use one channel only
-          # @see https://api.slack.com/methods/users.admin.invite
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.admin/users.admin.invite.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/users.admin/users.admin.invite.json
           def users_admin_invite(options = {})
             throw ArgumentError.new('Required arguments :email missing') if options[:email].nil?
             post('users.admin.invite', options)
           end
 
           #
-          # Disable a user
+          # Disable a user (undocumented)
           #
           # @option options [user] :user
           #   User to disable
-          # @see https://api.slack.com/methods/users.admin.setInactive
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.admin/users.admin.setInactive.json
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/users.admin/users.admin.setInactive.json
           def users_admin_setInactive(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]

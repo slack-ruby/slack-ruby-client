@@ -11,9 +11,9 @@ namespace :slack do
       task update: [:git_update] do
         group_schema = JSON.parse(File.read('lib/slack/web/api/schema/group.json'))
         groups = Dir.glob('lib/slack/web/api/slack-api-ref/groups/**/*.json').each_with_object({}) do |path, result|
-          next if path =~ /undocumented/ # TODO
           name = File.basename(path, '.json')
           parsed = JSON.parse(File.read(path))
+          parsed['undocumented'] = true if path =~ /undocumented/
           JSON::Validator.validate(group_schema, parsed, insert_defaults: true)
           result[name] = parsed
         end
@@ -23,12 +23,12 @@ namespace :slack do
           Dir.glob('lib/slack/web/api/slack-api-ref/methods/**/*.json'),
           Dir.glob('lib/slack/web/api/mixins/**/*.json')
         ].flatten.each_with_object({}) do |path, result|
-          next if path =~ /undocumented/ # TODO
           file_name = File.basename(path, '.json')
           prefix = file_name.split('.')[0..-2].join('.')
           name = file_name.split('.')[-1]
           result[prefix] ||= {}
           parsed = JSON.parse(File.read(path))
+          parsed['undocumented'] = true if path =~ /undocumented/
           JSON::Validator.validate(method_schema, parsed, insert_defaults: true)
           result[prefix][name] = parsed
         end
@@ -52,6 +52,7 @@ namespace :slack do
             system("git apply #{patch}") || raise('failed to apply patch')
           end
           # command
+          raise "Missing group #{group}" unless groups.key?(group)
           rendered_command = command_template.result(group: groups[group], names: names)
           File.write "bin/commands/#{snaked_group}.rb", rendered_command
         end

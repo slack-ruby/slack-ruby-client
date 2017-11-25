@@ -6,6 +6,23 @@ module Slack
       module Endpoints
         module Chat
           #
+          # Execute a slash command in a public channel (undocumented)
+          #
+          # @option options [channel] :channel
+          #   Channel to execute the command in.
+          # @option options [Object] :command
+          #   Slash command to be executed. Leading backslash is required.
+          # @option options [Object] :text
+          #   Additional parameters provided to the slash command.
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/chat/chat.command.json
+          def chat_command(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :command missing') if options[:command].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('chat.command', options)
+          end
+
+          #
           # Deletes a message.
           #
           # @option options [channel] :channel

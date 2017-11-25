@@ -28,6 +28,8 @@ require_relative 'endpoints/team_profile'
 require_relative 'endpoints/usergroups'
 require_relative 'endpoints/usergroups_users'
 require_relative 'endpoints/users'
+require_relative 'endpoints/users_admin'
+require_relative 'endpoints/users_prefs'
 require_relative 'endpoints/users_profile'
 
 module Slack
@@ -66,6 +68,8 @@ module Slack
         include Usergroups
         include UsergroupsUsers
         include Users
+        include UsersAdmin
+        include UsersPrefs
         include UsersProfile
       end
     end
