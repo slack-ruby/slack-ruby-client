@@ -1,4 +1,4 @@
-### 0.10.1 (next)
+### 0.11.0 (11/25/2017)
 
 * [#173](https://github.com/slack-ruby/slack-ruby-client/issues/173): Added dialog support - [@alexagranov](https://github.com/alexagranov).
 * [#176](https://github.com/slack-ruby/slack-ruby-client/issues/176): Drop dependency on `json` gem - [@seuros](https://github.com/seuros).
@@ -6,7 +6,6 @@
 * [#180](https://github.com/slack-ruby/slack-ruby-client/pull/180): Upgraded RuboCop 0.51.0 - [@dblock](https://github.com/dblock).
 * [#181](https://github.com/slack-ruby/slack-ruby-client/pull/181): Added `chat_getPermalink`, `migration_exchange` - [@dblock](https://github.com/dblock).
 * [#182](https://github.com/slack-ruby/slack-ruby-client/pull/182): Added undocumented methods support with `channels_delete`, `chat_command`, `files_edit`, `files_share`, `users_admin_invite`, `users_admin_setInactive` and `users_prefs_get` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.10.0 (9/19/2017)
 
