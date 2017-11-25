@@ -33,6 +33,18 @@ module Slack
           end
 
           #
+          # Delete a channel (undocumented)
+          #
+          # @option options [channel] :channel
+          #   Channel to delete.
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/channels/channels.delete.json
+          def channels_delete(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('channels.delete', options)
+          end
+
+          #
           # Fetches history of messages and events from a channel.
           #
           # @option options [channel] :channel

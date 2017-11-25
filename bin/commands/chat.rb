@@ -2,6 +2,17 @@
 
 desc 'Post chat messages to Slack.'
 command 'chat' do |g|
+  g.desc 'Execute a slash command in a public channel (undocumented)'
+  g.long_desc %( Execute a slash command in a public channel )
+  g.command 'command' do |c|
+    c.flag 'channel', desc: 'Channel to execute the command in.'
+    c.flag 'command', desc: 'Slash command to be executed. Leading backslash is required.'
+    c.flag 'text', desc: 'Additional parameters provided to the slash command.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.chat_command(options))
+    end
+  end
+
   g.desc 'Deletes a message.'
   g.long_desc %( Deletes a message. )
   g.command 'delete' do |c|

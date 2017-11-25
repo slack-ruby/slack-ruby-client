@@ -12,6 +12,7 @@ command '<%= group['name'].gsub(".", "_") %>' do |g|
 
 <% end %>
   <% short_desc = data["desc"].split("\n").first %>
+  <% short_desc += ' (undocumented)' if data['undocumented'] %>
   <% if short_desc.include?("'")  %>
   g.desc "<%= short_desc %>"
   <% else %>

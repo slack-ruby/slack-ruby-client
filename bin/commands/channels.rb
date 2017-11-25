@@ -21,6 +21,15 @@ command 'channels' do |g|
     end
   end
 
+  g.desc 'Delete a channel (undocumented)'
+  g.long_desc %( Delete a channel )
+  g.command 'delete' do |c|
+    c.flag 'channel', desc: 'Channel to delete.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.channels_delete(options))
+    end
+  end
+
   g.desc 'Fetches history of messages and events from a channel.'
   g.long_desc %( Fetches history of messages and events from a channel. )
   g.command 'history' do |c|

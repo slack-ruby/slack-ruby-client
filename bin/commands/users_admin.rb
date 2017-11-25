@@ -2,7 +2,7 @@
 
 desc 'UsersAdmin methods.'
 command 'users_admin' do |g|
-  g.desc 'Send an invitation to a new user by email'
+  g.desc 'Send an invitation to a new user by email (undocumented)'
   g.long_desc %( Send an invitation to a new user by email )
   g.command 'invite' do |c|
     c.flag 'email', desc: 'Email address of the new user'
@@ -17,7 +17,7 @@ command 'users_admin' do |g|
     end
   end
 
-  g.desc 'Disable a user'
+  g.desc 'Disable a user (undocumented)'
   g.long_desc %( Disable a user )
   g.command 'setInactive' do |c|
     c.flag 'user', desc: 'User to disable'

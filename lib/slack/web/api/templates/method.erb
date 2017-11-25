@@ -11,7 +11,8 @@ module Slack
 
 <% end %>
           #
-<% data['desc'].split("\n").each do |line| %>
+<% data['desc'].split("\n").each_with_index do |line, index| %>
+  <% line += ' (undocumented)' if data['undocumented'] && index == 0 %>
           # <%= line %>
 <% end %>
           #
@@ -25,8 +26,12 @@ module Slack
 <% end %>
 <% end %>
 <% end %>
+<% if data['undocumented'] %>
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/<%= group %>/<%= group %>.<%= name %>.json
+<% else %>
           # @see https://api.slack.com/methods/<%= group %>.<%= name %>
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/<%= group %>/<%= group %>.<%= name %>.json
+<% end %>
           def <%= group.gsub(".", "_") %>_<%= name %>(options = {})
 <% data['args'].select{ |k, v| v['required'] }.each do |arg_name, arg_v| %>
             throw ArgumentError.new('Required arguments :<%= arg_name %> missing') if options[:<%= arg_name %>].nil?
