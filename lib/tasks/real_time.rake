@@ -14,7 +14,7 @@ namespace :slack do
           name = File.basename(path, '.json')
           parsed = JSON.parse(File.read(path))
           JSON::Validator.validate(event_schema, parsed, insert_defaults: true)
-          next if %w(message hello).include?(name)
+          next if %w[message hello].include?(name)
           result[name] = parsed
         end
 

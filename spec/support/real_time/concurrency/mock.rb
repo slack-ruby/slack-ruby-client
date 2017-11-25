@@ -6,8 +6,7 @@ module Slack
         end
 
         class Socket < ::Slack::RealTime::Socket
-          def self.close
-          end
+          def self.close; end
 
           def start_async(client)
             reactor = Thread.new {}

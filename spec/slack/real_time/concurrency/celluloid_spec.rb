@@ -13,7 +13,7 @@ begin
           let(:test_socket) do
             Class.new(described_class) do
               def read
-                fail options[:err]
+                raise options[:err]
               end
             end
           end

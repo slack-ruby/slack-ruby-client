@@ -1,9 +1,10 @@
 ### 0.10.1 (next)
 
-* Your contribution here.
+* [#173](https://github.com/slack-ruby/slack-ruby-client/issues/173): Added dialog support - [@alexagranov](https://github.com/alexagranov).
+* [#176](https://github.com/slack-ruby/slack-ruby-client/issues/176): Drop dependency on `json` gem - [@seuros](https://github.com/seuros).
 * [#177](https://github.com/slack-ruby/slack-ruby-client/pull/177): Fix api ref repo - [@manuelmeurer](https://github.com/manuelmeurer).
-* [#176](https://github.com/slack-ruby/slack-ruby-client/issues/176): Drop dependency on json gem - [@seuros](https://github.com/seuros).
-* [#173](https://github.com/slack-ruby/slack-ruby-client/issues/173): Updated to latest slack-api-ref => we have Dialogs!; Added dialog.1.open-json-support patch to apply the JSON fix to :dialog param - [@alexagranov](https://github.com/alexagranov).
+* [#180](https://github.com/slack-ruby/slack-ruby-client/pull/180): Upgraded RuboCop 0.51.0 - [@dblock](https://github.com/dblock).
+* Your contribution here.
 
 ### 0.10.0 (9/19/2017)
 

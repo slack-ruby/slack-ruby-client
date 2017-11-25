@@ -14,7 +14,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         'type' => 'user_change',
         'user' => {
           'id' => 'U07KECJ77', 'name' => 'renamed'
-        })
+        }
+      )
       client.send(:dispatch, event)
       expect(client.users['U07KECJ77'].name).to eq 'renamed'
     end
@@ -24,7 +25,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           'type' => 'team_join',
           'user' => {
             'id' => 'DEADBEEF', 'name' => 'added'
-          })
+          }
+        )
         client.send(:dispatch, event)
       end.to change(client.users, :count).by(1)
       expect(client.users['DEADBEEF'].name).to eq 'added'

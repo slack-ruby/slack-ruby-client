@@ -1,4 +1,4 @@
-# encoding: utf-8
+
 module Slack
   module Messages
     module Formatting
@@ -10,9 +10,9 @@ module Slack
         def unescape(message)
           CGI.unescapeHTML(message.gsub(/[“”]/, '"')
             .gsub(/[‘’]/, "'")
-            .gsub(/<(?<sign>[?@#!]?)(?<dt>.*?)>/) do |match|
-              sign = $~[:sign]
-              dt = $~[:dt]
+            .gsub(/<(?<sign>[?@#!]?)(?<dt>.*?)>/) do
+              sign = Regexp.last_match[:sign]
+              dt = Regexp.last_match[:dt]
               rhs = dt.split('|', 2).last
               case sign
               when '@', '!'

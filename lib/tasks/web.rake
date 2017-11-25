@@ -47,7 +47,7 @@ namespace :slack do
           end
           Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
             puts "- patching #{patch}"
-            system("git apply #{patch}") || fail('failed to apply patch')
+            system("git apply #{patch}") || raise('failed to apply patch')
           end
           # command
           rendered_command = command_template.result(group: groups[group], names: names)

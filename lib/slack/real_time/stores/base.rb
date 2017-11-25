@@ -20,8 +20,7 @@ module Slack
           nil
         end
 
-        def initialize(_attrs)
-        end
+        def initialize(_attrs); end
 
         def self.on(event, &block)
           self.events ||= {}

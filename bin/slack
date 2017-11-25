@@ -9,7 +9,7 @@ program_desc 'Slack client.'
 
 default_command :help
 
-switch [:d, :debug], desc: 'Enable debug-level logging.', default_value: false
+switch %i[d debug], desc: 'Enable debug-level logging.', default_value: false
 flag [:t, 'slack-api-token'], desc: 'Slack API token.', default_value: ENV['SLACK_API_TOKEN']
 flag ['vcr-cassette-name'], desc: 'Offline VCR cassette.'
 
