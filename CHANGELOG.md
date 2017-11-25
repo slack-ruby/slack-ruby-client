@@ -3,6 +3,7 @@
 * [#187](https://github.com/slack-ruby/slack-ruby-client/pull/187): Concatenate error message when multiple errors present - [@chrislopresto](https://github.com/chrislopresto).
 * [#188](https://github.com/slack-ruby/slack-ruby-client/pull/188): Fixed `NoMethodError` when Slack is unavailable - [@sonicdoe](https://github.com/sonicdoe).
 * [#196](https://github.com/slack-ruby/slack-ruby-client/pull/196): Added `users_lookupByEmail` - [@manuelmeurer](https://github.com/manuelmeurer).
+* [#185](https://github.com/slack-ruby/slack-ruby-client/pull/185): Calling undocumented endpoints will now produce a warning - [@aviflombaum](https://github.com/aviflombaum).
 * Your contribution here.
 
 ### 0.11.0 (11/25/2017)

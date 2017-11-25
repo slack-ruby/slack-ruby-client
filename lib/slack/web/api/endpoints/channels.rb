@@ -41,6 +41,7 @@ module Slack
           def channels_delete(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.delete method is undocumented.')
             post('channels.delete', options)
           end
 

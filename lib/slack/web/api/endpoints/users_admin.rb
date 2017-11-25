@@ -25,6 +25,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/users.admin/users.admin.invite.json
           def users_admin_invite(options = {})
             throw ArgumentError.new('Required arguments :email missing') if options[:email].nil?
+            logger.warn('The users.admin.invite method is undocumented.')
             post('users.admin.invite', options)
           end
 
@@ -37,6 +38,7 @@ module Slack
           def users_admin_setInactive(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            logger.warn('The users.admin.setInactive method is undocumented.')
             post('users.admin.setInactive', options)
           end
         end
