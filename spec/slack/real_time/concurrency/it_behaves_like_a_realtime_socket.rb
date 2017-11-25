@@ -10,7 +10,7 @@ RSpec.shared_examples_for 'a realtime socket' do
     end
   end
   describe 'api' do
-    [:start_sync, :start_sync, :disconnect!, :connect!, :connected?, :send_data, :close].each do |m|
+    %i[start_sync start_sync disconnect! connect! connected? send_data close].each do |m|
       it m do
         expect(socket).to respond_to(m)
       end

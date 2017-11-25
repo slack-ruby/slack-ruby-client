@@ -3,18 +3,18 @@ module Slack
     module Config
       extend self
 
-      ATTRIBUTES = [
-        :proxy,
-        :user_agent,
-        :ca_path,
-        :ca_file,
-        :logger,
-        :endpoint,
-        :token,
-        :timeout,
-        :open_timeout,
-        :default_page_size,
-        :default_max_retries
+      ATTRIBUTES = %i[
+        proxy
+        user_agent
+        ca_path
+        ca_file
+        logger
+        endpoint
+        token
+        timeout
+        open_timeout
+        default_page_size
+        default_max_retries
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)

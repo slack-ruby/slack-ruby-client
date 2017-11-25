@@ -235,7 +235,7 @@ RSpec.describe Slack::RealTime::Client do
       it 'sets default store_class' do
         expect(client.send(:store_class)).to eq Slack::RealTime::Store
       end
-      (Slack::RealTime::Config::ATTRIBUTES - [:logger, :store_class]).each do |key|
+      (Slack::RealTime::Config::ATTRIBUTES - %i[logger store_class]).each do |key|
         it "sets #{key}" do
           expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
         end
@@ -304,7 +304,8 @@ RSpec.describe Slack::RealTime::Client do
             proxy: {
               origin: 'http://username:password@proxy.example.com',
               headers: { 'User-Agent' => 'ruby' }
-            }).and_return(ws)
+            }
+          ).and_return(ws)
           client.start!
         end
       end

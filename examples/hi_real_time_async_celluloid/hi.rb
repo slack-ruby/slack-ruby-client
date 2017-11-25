@@ -1,6 +1,6 @@
 require 'slack-ruby-client'
 
-fail 'Missing ENV[SLACK_API_TOKENS]!' unless ENV.key?('SLACK_API_TOKENS')
+raise 'Missing ENV[SLACK_API_TOKENS]!' unless ENV.key?('SLACK_API_TOKENS')
 
 $stdout.sync = true
 logger = Logger.new($stdout)

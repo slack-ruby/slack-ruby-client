@@ -14,8 +14,7 @@ module Slack
       private
 
       # see https://github.com/intridea/hashie/issues/394
-      def log_built_in_message(*)
-      end
+      def log_built_in_message(*); end
     end
   end
 end

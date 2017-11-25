@@ -33,7 +33,7 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token, logger: logger)
       end
 
-      [:users, :self, :channels, :team, :teams, :groups, :ims, :bots].each do |store_method|
+      %i[users self channels team teams groups ims bots].each do |store_method|
         define_method store_method do
           store.send(store_method) if store
         end
@@ -60,7 +60,7 @@ module Slack
       end
 
       def stop!
-        fail ClientNotStartedError unless started?
+        raise ClientNotStartedError unless started?
         @socket.disconnect! if @socket
       end
 
@@ -106,7 +106,7 @@ module Slack
 
       # @return [Slack::RealTime::Socket]
       def build_socket
-        fail ClientAlreadyStartedError if started?
+        raise ClientAlreadyStartedError if started?
         start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
@@ -138,13 +138,12 @@ module Slack
       end
 
       def send_json(data)
-        fail ClientNotStartedError unless started?
+        raise ClientNotStartedError unless started?
         logger.debug("#{self.class}##{__method__}") { data }
         @socket.send_data(data.to_json)
       end
 
-      def open(_event)
-      end
+      def open(_event); end
 
       def close(_event)
         socket = @socket
@@ -183,9 +182,11 @@ module Slack
 
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
-        handlers.each do |handler|
-          store.instance_exec(data, &handler)
-        end if handlers
+        if handlers
+          handlers.each do |handler|
+            store.instance_exec(data, &handler)
+          end
+        end
       rescue StandardError => e
         logger.error e
         false

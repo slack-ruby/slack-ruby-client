@@ -17,7 +17,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
             'icons' => {
               'image_48' => 'https:\/\/slack.com\/path\/to\/hugbot_48.png'
             }
-          })
+          }
+        )
         client.send(:dispatch, event)
       end.to change(client.bots, :count).by(1)
       bot = client.bots['B024BE7LH']
@@ -32,7 +33,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           'bot' => {
             'id' => 'B0751JU2H',
             'name' => 'hugbot'
-          })
+          }
+        )
         client.send(:dispatch, event)
       end.to_not change(client.bots, :count)
       bot = client.bots['B0751JU2H']

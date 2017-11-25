@@ -26,30 +26,40 @@ module Slack
             @users = {}
           end
 
-          attrs.users.each do |data|
-            user = Models::User.new(data)
-            @users[data.id] = @users.key?(data.id) ? @users[data.id].merge(user) : user
-          end if attrs.users
+          if attrs.users
+            attrs.users.each do |data|
+              user = Models::User.new(data)
+              @users[data.id] = @users.key?(data.id) ? @users[data.id].merge(user) : user
+            end
+          end
 
           @channels = {}
-          attrs.channels.each do |data|
-            @channels[data.id] = Models::Channel.new(data)
-          end if attrs.channels
+          if attrs.channels
+            attrs.channels.each do |data|
+              @channels[data.id] = Models::Channel.new(data)
+            end
+          end
 
           @bots = {}
-          attrs.bots.each do |data|
-            @bots[data.id] = Models::Bot.new(data)
-          end if attrs.bots
+          if attrs.bots
+            attrs.bots.each do |data|
+              @bots[data.id] = Models::Bot.new(data)
+            end
+          end
 
           @groups = {}
-          attrs.groups.each do |data|
-            @groups[data.id] = Models::Group.new(data)
-          end if attrs.groups
+          if attrs.groups
+            attrs.groups.each do |data|
+              @groups[data.id] = Models::Group.new(data)
+            end
+          end
 
           @ims = {}
-          attrs.ims.each do |data|
-            @ims[data.id] = Models::Im.new(data)
-          end if attrs.ims
+          if attrs.ims
+            attrs.ims.each do |data|
+              @ims[data.id] = Models::Im.new(data)
+            end
+          end
         end
 
         ### RealTime Events

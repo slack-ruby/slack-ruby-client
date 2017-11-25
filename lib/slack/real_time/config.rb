@@ -5,15 +5,15 @@ module Slack
 
       extend self
 
-      ATTRIBUTES = [
-        :token,
-        :websocket_ping,
-        :websocket_proxy,
-        :concurrency,
-        :start_method,
-        :start_options,
-        :store_class,
-        :logger
+      ATTRIBUTES = %i[
+        token
+        websocket_ping
+        websocket_proxy
+        concurrency
+        start_method
+        start_options
+        store_class
+        logger
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
@@ -36,7 +36,7 @@ module Slack
       private
 
       def detect_concurrency
-        [:Eventmachine, :Celluloid].each do |concurrency|
+        %i[Eventmachine Celluloid].each do |concurrency|
           begin
             return Slack::RealTime::Concurrency.const_get(concurrency)
           rescue LoadError, NameError
@@ -44,7 +44,7 @@ module Slack
           end
         end
 
-        fail NoConcurrencyError, 'Missing concurrency. Add faye-websocket or celluloid-io to your Gemfile.'
+        raise NoConcurrencyError, 'Missing concurrency. Add faye-websocket or celluloid-io to your Gemfile.'
       end
     end
 

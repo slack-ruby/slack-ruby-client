@@ -9,7 +9,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       'name' => 'push_sound',
       'value' => 'updated.mp3'
     )
-    expect(client.self).to receive(:prefs) { fail ArgumentError }
+    expect(client.self).to receive(:prefs) { raise ArgumentError }
     expect { client.send(:dispatch, event) }.to_not raise_error
   end
 end
