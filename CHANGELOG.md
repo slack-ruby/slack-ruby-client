@@ -1,3 +1,7 @@
+### 0.11.1 (Next)
+
+* Your contribution here.
+
 ### 0.11.0 (11/25/2017)
 
 * [#173](https://github.com/slack-ruby/slack-ruby-client/issues/173): Added dialog support - [@alexagranov](https://github.com/alexagranov).
