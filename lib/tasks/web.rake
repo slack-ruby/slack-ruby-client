@@ -11,6 +11,7 @@ namespace :slack do
       task update: [:git_update] do
         group_schema = JSON.parse(File.read('lib/slack/web/api/schema/group.json'))
         groups = Dir.glob('lib/slack/web/api/slack-api-ref/groups/**/*.json').each_with_object({}) do |path, result|
+          next if path =~ /undocumented/ # TODO
           name = File.basename(path, '.json')
           parsed = JSON.parse(File.read(path))
           JSON::Validator.validate(group_schema, parsed, insert_defaults: true)
@@ -22,6 +23,7 @@ namespace :slack do
           Dir.glob('lib/slack/web/api/slack-api-ref/methods/**/*.json'),
           Dir.glob('lib/slack/web/api/mixins/**/*.json')
         ].flatten.each_with_object({}) do |path, result|
+          next if path =~ /undocumented/ # TODO
           file_name = File.basename(path, '.json')
           prefix = file_name.split('.')[0..-2].join('.')
           name = file_name.split('.')[-1]

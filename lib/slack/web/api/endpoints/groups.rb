@@ -134,7 +134,7 @@ module Slack
           # @option options [Object] :exclude_archived
           #   Don't return archived private channels.
           # @option options [Object] :exclude_members
-          #   Exlude the members from each group.
+          #   Exclude the members from each group.
           # @see https://api.slack.com/methods/groups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
           def groups_list(options = {})

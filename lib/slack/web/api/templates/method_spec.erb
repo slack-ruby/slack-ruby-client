@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> do
   let(:client) { Slack::Web::Client.new }
-<% names.each_with_index do |(name, data), index| %>
+<% names.sort.each_with_index do |(name, data), index| %>
 <% next if data['mixin'] %>
 <% required_params = data['args'].select{ |k, v| v['required'] } %>
 <% next if required_params.none? %>

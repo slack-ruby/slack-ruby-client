@@ -13,7 +13,7 @@ module Slack
           # @option options [timestamp] :ts
           #   Timestamp of the message to be deleted.
           # @option options [Object] :as_user
-          #   Pass true to delete the message as the authed user. Bot users in this context are considered authed users.
+          #   Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
           # @see https://api.slack.com/methods/chat.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.delete.json
           def chat_delete(options = {})
@@ -21,6 +21,22 @@ module Slack
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('chat.delete', options)
+          end
+
+          #
+          # Retrieve a permalink URL for a specific extant message
+          #
+          # @option options [channel] :channel
+          #   The ID of the conversation or channel containing the message.
+          # @option options [Object] :message_ts
+          #   A message's ts value, uniquely identifying it within a channel.
+          # @see https://api.slack.com/methods/chat.getPermalink
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.getPermalink.json
+          def chat_getPermalink(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :message_ts missing') if options[:message_ts].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('chat.getPermalink', options)
           end
 
           #
@@ -145,13 +161,13 @@ module Slack
           # @option options [channel] :channel
           #   Channel containing the message to be updated.
           # @option options [Object] :text
-          #   New text for the message, using the default formatting rules.
+          #   New text for the message, using the default formatting rules. It's not required when presenting attachments.
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
           # @option options [Object] :as_user
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
           # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.
           # @option options [Object] :parse

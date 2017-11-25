@@ -34,6 +34,15 @@ command 'channels' do |g|
     end
   end
 
+  g.desc 'This method returns the ID of a team channel.'
+  g.long_desc %( This method returns the ID of a team channel. )
+  g.command 'id' do |c|
+    c.flag 'channel', desc: 'Channel to get ID for, prefixed with #.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.channels_id(options))
+    end
+  end
+
   g.desc 'Gets information about a channel.'
   g.long_desc %( Gets information about a channel. )
   g.command 'info' do |c|
@@ -152,15 +161,6 @@ command 'channels' do |g|
     c.flag 'channel', desc: 'Channel to unarchive.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.channels_unarchive(options))
-    end
-  end
-
-  g.desc 'This method returns the ID of a team channel.'
-  g.long_desc %( This method returns the ID of a team channel. )
-  g.command 'id' do |c|
-    c.flag 'channel', desc: 'Channel to get ID for, prefixed with #.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.channels_id(options))
     end
   end
 end

@@ -19,6 +19,15 @@ command 'users' do |g|
     end
   end
 
+  g.desc 'This method returns the ID of a team user.'
+  g.long_desc %( This method returns the ID of a team user. )
+  g.command 'id' do |c|
+    c.flag 'user', desc: 'User to get ID for, prefixed with @.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_id(options))
+    end
+  end
+
   g.desc "Get a user's identity."
   g.long_desc %( Get a user's identity. )
   g.command 'identity' do |c|
@@ -49,6 +58,15 @@ command 'users' do |g|
     end
   end
 
+  g.desc 'This method searches for users.'
+  g.long_desc %( This method searches for users. )
+  g.command 'search' do |c|
+    c.flag 'user', desc: 'User to search for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_search(options))
+    end
+  end
+
   g.desc 'Marks a user as active.'
   g.long_desc %( Marks a user as active. )
   g.command 'setActive' do |c|
@@ -75,24 +93,6 @@ command 'users' do |g|
     c.flag 'presence', desc: 'Either auto or away.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setPresence(options))
-    end
-  end
-
-  g.desc 'This method returns the ID of a team user.'
-  g.long_desc %( This method returns the ID of a team user. )
-  g.command 'id' do |c|
-    c.flag 'user', desc: 'User to get ID for, prefixed with @.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_id(options))
-    end
-  end
-
-  g.desc 'This method searches for users.'
-  g.long_desc %( This method searches for users. )
-  g.command 'search' do |c|
-    c.flag 'user', desc: 'User to search for.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.users_search(options))
     end
   end
 end
