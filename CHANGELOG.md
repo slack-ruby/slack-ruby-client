@@ -1,6 +1,6 @@
 ### 0.11.1 (Next)
 
-* Your contribution here.
+* [#185](https://github.com/slack-ruby/slack-ruby-client/pull/185): Updated method template to include a warning for undocumented endpoints - [@aviflombaum](https://github.com/aviflombaum).
 
 ### 0.11.0 (11/25/2017)
 
