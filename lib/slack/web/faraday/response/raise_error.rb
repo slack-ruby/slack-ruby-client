@@ -9,7 +9,8 @@ module Slack
             elsif (body = env.body) && body['ok']
               nil
             else
-              raise Slack::Web::Api::Errors::SlackError.new(body['error'], env.response)
+              error_message = body['error'] || body['errors'].map { |message| message['error'] }.join(',')
+              raise Slack::Web::Api::Errors::SlackError.new(error_message, env.response)
             end
           end
         end
