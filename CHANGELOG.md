@@ -1,6 +1,7 @@
 ### 0.11.1 (Next)
 
 * [#187](https://github.com/slack-ruby/slack-ruby-client/pull/187): Concatenate error message when multiple errors present - [@chrislopresto](https://github.com/chrislopresto).
+* [#188](https://github.com/slack-ruby/slack-ruby-client/pull/188): Fixed `NoMethodError` when Slack is unavailable - [@sonicdoe](https://github.com/sonicdoe).
 * Your contribution here.
 
 ### 0.11.0 (11/25/2017)

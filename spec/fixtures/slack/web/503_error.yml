@@ -1,0 +1,14 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/auth.test
+  response:
+    status:
+      code: 503
+      message: Service Unavailable
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version:
+  recorded_at: Thu, 30 Nov 2017 14:36:26 GMT
