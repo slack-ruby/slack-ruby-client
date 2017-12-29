@@ -210,6 +210,14 @@ end
 all_members # many thousands of team members retrieved 10 at a time
 ```
 
+#### Error Handling
+
+If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. The error message contains the error code. In case of multiple errors, the error codes are separated by commas. The original response is also accessible using the `response` attribute.
+
+If you exceed [Slack’s rate limits](https://api.slack.com/docs/rate-limits), a `Slack::Web::Api::Errors::TooManyRequestsError` will be raised instead.
+
+In any other case, a `Faraday::ClientError` will be raised. This may be the case if Slack is temporarily unavailable, for example.
+
 ### RealTime Client
 
 The Real Time Messaging API is a WebSocket-based API that allows you to receive events from Slack in real time and send messages as user.
