@@ -30,6 +30,7 @@ module Slack
           def files_edit(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :title missing') if options[:title].nil?
+            logger.warn('The files.edit method is undocumented.')
             post('files.edit', options)
           end
 
@@ -102,6 +103,7 @@ module Slack
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The files.share method is undocumented.')
             post('files.share', options)
           end
 

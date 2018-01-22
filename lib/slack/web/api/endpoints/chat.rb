@@ -19,6 +19,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :command missing') if options[:command].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The chat.command method is undocumented.')
             post('chat.command', options)
           end
 

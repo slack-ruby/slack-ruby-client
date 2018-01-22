@@ -10,6 +10,7 @@ module Slack
           #
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/users.prefs/users.prefs.get.json
           def users_prefs_get(options = {})
+            logger.warn('The users.prefs.get method is undocumented.')
             post('users.prefs.get', options)
           end
         end

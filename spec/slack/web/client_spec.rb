@@ -170,5 +170,13 @@ RSpec.describe Slack::Web::Client do
         expect(request.options.timeout).to eq 3
       end
     end
+    context 'calling undocumented methods' do
+      let(:client) { Slack::Web::Client.new }
+      it 'produces a warning' do
+        expect(client.logger).to receive(:warn).with('The users.admin.setInactive method is undocumented.')
+        expect(client).to receive(:post)
+        client.users_admin_setInactive(user: 'U092BDCLV')
+      end
+    end
   end
 end
