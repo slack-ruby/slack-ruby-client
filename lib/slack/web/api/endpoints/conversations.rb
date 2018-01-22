@@ -52,6 +52,8 @@ module Slack
           #   Conversation ID to fetch history for.
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results only when either timestamp is specified.
           # @option options [timestamp] :latest
           #   End of time range of messages to include in results.
           # @option options [Object] :limit
@@ -233,8 +235,14 @@ module Slack
           #   Unique identifier of a thread's parent message.
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
+          # @option options [Object] :inclusive
+          #   Include messages with latest or oldest timestamp in results only when either timestamp is specified.
+          # @option options [timestamp] :latest
+          #   End of time range of messages to include in results.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+          # @option options [timestamp] :oldest
+          #   Start of time range of messages to include in results.
           # @see https://api.slack.com/methods/conversations.replies
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.replies.json
           def conversations_replies(options = {})

@@ -52,9 +52,18 @@ command 'users' do |g|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for users. Defaults to false.'
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
-    c.flag 'presence', desc: 'Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.'
+    c.flag 'presence', desc: 'Whether to include presence data in the output. Defaults to false. Setting this to true reduces performance, especially with large teams.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_list(options))
+    end
+  end
+
+  g.desc 'Find a user with an email address.'
+  g.long_desc %( Find a user with an email address. )
+  g.command 'lookupByEmail' do |c|
+    c.flag 'email', desc: 'An email address belonging to a user in the workspace.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_lookupByEmail(options))
     end
   end
 

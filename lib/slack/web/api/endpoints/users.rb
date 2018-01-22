@@ -61,7 +61,7 @@ module Slack
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @option options [Object] :presence
-          #   Whether to include presence data in the output. Setting this to false improves performance, especially with large teams.
+          #   Whether to include presence data in the output. Defaults to false. Setting this to true reduces performance, especially with large teams.
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.list.json
           def users_list(options = {})
@@ -72,6 +72,18 @@ module Slack
             else
               post('users.list', options)
             end
+          end
+
+          #
+          # Find a user with an email address.
+          #
+          # @option options [Object] :email
+          #   An email address belonging to a user in the workspace.
+          # @see https://api.slack.com/methods/users.lookupByEmail
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.lookupByEmail.json
+          def users_lookupByEmail(options = {})
+            throw ArgumentError.new('Required arguments :email missing') if options[:email].nil?
+            post('users.lookupByEmail', options)
           end
 
           #
