@@ -21,7 +21,7 @@ Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
 
 Remove the line with "Your contribution here.", since there will be no more contributions to this release.
 
-Change `**next**` in the "Stable Release" section in README that warns users that they are reading the documentation for an unreleased version with `**stable**`.
+In the "Stable Release" section of the README, change `**next**` to `**stable**` so users know that they are reading the documentation for a released version.
 
 ```
 ## Stable Release
