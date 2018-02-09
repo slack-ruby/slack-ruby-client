@@ -153,7 +153,7 @@ Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for
 You can configure the Web client either globally or via the initializer.
 
 ```ruby
-Slack::Web::Client.config do |config|
+Slack::Web::Client.configure do |config|
   config.user_agent = 'Slack Ruby Client/1.0'
 end
 ```
@@ -295,7 +295,7 @@ A smaller store that only stores and tracks information about the bot user, but 
 You can configure the RealTime client either globally or via the initializer.
 
 ```ruby
-Slack::RealTime::Client.config do |config|
+Slack::RealTime::Client.configure do |config|
   config.websocket_ping = 42
 end
 ```
@@ -327,7 +327,7 @@ See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.
 The RealTime client uses either [rtm.start](https://api.slack.com/methods/rtm.start) or [rtm.connect](https://api.slack.com/methods/rtm.connect) to open a connection. The former retrieves a lot of team information while the latter only serves connection purposes and is preferred. You should let the library choose the right method for you based on the `store_class` used and override this behavior with `start_method` when necessary.
 
 ```ruby
-Slack::RealTime::Client.config do |config|
+Slack::RealTime::Client.configure do |config|
   config.start_method = :rtm_start
 end
 ```
@@ -360,7 +360,7 @@ See a fully working example in [examples/hi_real_time_and_web](examples/hi_real_
 The `rtm.start` call downloads a large amount of data. For large teams, consider reducing the amount of unnecessary data downloaded with `start_options`. You may also want to increase the default timeout of 180 seconds.
 
 ```ruby
-Slack::RealTime::Client.config do |config|
+Slack::RealTime::Client.configure do |config|
   # Return timestamp only for latest message object of each channel.
   config.start_options[:simple_latest] = true
   # Skip unread counts for each channel.
