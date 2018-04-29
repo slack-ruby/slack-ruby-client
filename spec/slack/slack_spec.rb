@@ -17,8 +17,8 @@ describe Slack do
   context 'globals' do
     it 'enables request and response logging with -d' do
       output = `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token -d auth test 2>&1`
-      expect(output).to include 'post https://slack.com/api/auth.test'
-      expect(output).to include 'Status: 200'
+      expect(output).to include 'POST https://slack.com/api/auth.test'
+      expect(output).to include 'Status 200'
     end
     it 'requires --slack-api-token' do
       err = `"#{slack}" auth test 2>&1`
