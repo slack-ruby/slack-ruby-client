@@ -1,6 +1,7 @@
 ### 0.11.2 (Next)
 
 * Your contribution here.
+* [#206](https://github.com/slack-ruby/slack-ruby-client/pull/206): Fix 100% cpu usage in async examples - [@felixbuenemann](https://github.com/felixbuenemann).
 
 ### 0.11.1 (1/23/2017)
 

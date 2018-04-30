@@ -5,6 +5,7 @@ raise 'Missing ENV[SLACK_API_TOKENS]!' unless ENV.key?('SLACK_API_TOKENS')
 $stdout.sync = true
 logger = Logger.new($stdout)
 logger.level = Logger::DEBUG
+threads = []
 
 ENV['SLACK_API_TOKENS'].split.each do |token|
   logger.info "Starting #{token[0..12]} ..."
@@ -28,9 +29,7 @@ ENV['SLACK_API_TOKENS'].split.each do |token|
     end
   end
 
-  client.start_async
+  threads << client.start_async
 end
 
-loop do
-  Thread.pass
-end
+threads.each(&:join)
