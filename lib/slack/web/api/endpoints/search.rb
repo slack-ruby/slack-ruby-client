@@ -27,7 +27,7 @@ module Slack
           # Searches for files matching a query.
           #
           # @option options [Object] :query
-          #   Search query. May contain booleans, etc.
+          #   Search query.
           # @option options [Object] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
           # @option options [Object] :sort
@@ -45,7 +45,7 @@ module Slack
           # Searches for messages matching a query.
           #
           # @option options [Object] :query
-          #   Search query. May contains booleans, etc.
+          #   Search query.
           # @option options [Object] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
           # @option options [Object] :sort

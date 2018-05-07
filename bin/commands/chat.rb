@@ -63,12 +63,13 @@ command 'chat' do |g|
   g.long_desc %( Sends a message to a channel. )
   g.command 'postMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
-    c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead."
+    c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation."
     c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
+    c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
     c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
     c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
@@ -102,7 +103,7 @@ command 'chat' do |g|
     c.flag 'ts', desc: 'Timestamp of the message to be updated.'
     c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.'
-    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.'
+    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. See below.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_update(options))

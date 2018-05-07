@@ -2,6 +2,8 @@
 
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps_permissions'
+require_relative 'endpoints/apps_permissions_resources'
+require_relative 'endpoints/apps_permissions_scopes'
 require_relative 'endpoints/auth'
 require_relative 'endpoints/bots'
 require_relative 'endpoints/channels'
@@ -42,6 +44,8 @@ module Slack
 
         include Api
         include AppsPermissions
+        include AppsPermissionsResources
+        include AppsPermissionsScopes
         include Auth
         include Bots
         include Channels

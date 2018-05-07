@@ -1,6 +1,8 @@
 ### 0.11.2 (Next)
 
 * Your contribution here.
+* [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `apps_permissions_resources_list` and `apps_permissions_scopes_list` - [@jmanian](https://github.com/jmanian).
+* [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `users_conversations` - [@jmanian](https://github.com/jmanian).
 * [#206](https://github.com/slack-ruby/slack-ruby-client/pull/206): Fix 100% cpu usage in async examples - [@felixbuenemann](https://github.com/felixbuenemann).
 
 ### 0.11.1 (1/23/2017)

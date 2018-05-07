@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Oauth
           #
-          # Exchanges a temporary OAuth code for an API token.
+          # Exchanges a temporary OAuth verifier code for an access token.
           #
           # @option options [Object] :client_id
           #   Issued when you created your application.
@@ -16,6 +16,8 @@ module Slack
           #   The code param returned via the OAuth callback.
           # @option options [Object] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).
+          # @option options [Object] :single_channel
+          #   Request the user to add your app only to a single channel.
           # @see https://api.slack.com/methods/oauth.access
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth/oauth.access.json
           def oauth_access(options = {})

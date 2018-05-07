@@ -14,6 +14,11 @@ module Slack
 
         ### RealTime Events
 
+        # Determine the current presence status for a list of users.
+        # @see https://api.slack.com/events/presence_query
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_query.json
+        # on :presence_query do |data|
+
         # The membership of an existing User Group has changed.
         # @see https://api.slack.com/events/subteam_members_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_members_changed.json
