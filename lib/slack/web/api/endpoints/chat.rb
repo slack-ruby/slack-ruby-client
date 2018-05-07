@@ -111,7 +111,7 @@ module Slack
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [Object] :text
-          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead.
+          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation.
           # @option options [Object] :as_user
           #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
           # @option options [Object] :attachments
@@ -122,6 +122,8 @@ module Slack
           #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
+          # @option options [Object] :mrkdwn
+          #   Disable Slack markup parsing by setting to false. Enabled by default.
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @option options [Object] :reply_broadcast
@@ -187,7 +189,7 @@ module Slack
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
           # @option options [Object] :link_names
-          #   Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to 1, specify a parse mode of full.
+          #   Find and link channel names and usernames. Defaults to none. See below.
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
           # @see https://api.slack.com/methods/chat.update

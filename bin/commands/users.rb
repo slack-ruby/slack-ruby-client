@@ -2,6 +2,19 @@
 
 desc 'Get info on members of your Slack team.'
 command 'users' do |g|
+  g.desc 'List conversations the calling user may access.'
+  g.long_desc %( List conversations the calling user may access. )
+  g.command 'conversations' do |c|
+    c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
+    c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
+    c.flag 'types', desc: 'Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.'
+    c.flag 'user', desc: "Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.users_conversations(options))
+    end
+  end
+
   g.desc 'Delete the user profile photo'
   g.long_desc %( Delete the user profile photo )
   g.command 'deletePhoto' do |c|
@@ -52,7 +65,7 @@ command 'users' do |g|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for users. Defaults to false.'
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
-    c.flag 'presence', desc: 'Whether to include presence data in the output. Defaults to false. Setting this to true reduces performance, especially with large teams.'
+    c.flag 'presence', desc: 'Deprecated. Whether to include presence data in the output. Defaults to false. Setting this to true reduces performance, especially with large teams.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_list(options))
     end
@@ -76,8 +89,8 @@ command 'users' do |g|
     end
   end
 
-  g.desc 'Marks a user as active.'
-  g.long_desc %( Marks a user as active. )
+  g.desc 'Marked a user as active. Deprecated and non-functional.'
+  g.long_desc %( Marked a user as active. Deprecated and non-functional. )
   g.command 'setActive' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setActive(options))

@@ -17,7 +17,7 @@ command 'search' do |g|
   g.desc 'Searches for files matching a query.'
   g.long_desc %( Searches for files matching a query. )
   g.command 'files' do |c|
-    c.flag 'query', desc: 'Search query. May contain booleans, etc.'
+    c.flag 'query', desc: 'Search query.'
     c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
     c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
     c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
@@ -29,7 +29,7 @@ command 'search' do |g|
   g.desc 'Searches for messages matching a query.'
   g.long_desc %( Searches for messages matching a query. )
   g.command 'messages' do |c|
-    c.flag 'query', desc: 'Search query. May contains booleans, etc.'
+    c.flag 'query', desc: 'Search query.'
     c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
     c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
     c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'

@@ -2,6 +2,8 @@
 
 require 'commands/api'
 require 'commands/apps_permissions'
+require 'commands/apps_permissions_resources'
+require 'commands/apps_permissions_scopes'
 require 'commands/auth'
 require 'commands/bots'
 require 'commands/channels'
