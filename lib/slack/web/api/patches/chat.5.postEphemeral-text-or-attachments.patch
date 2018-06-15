@@ -1,0 +1,13 @@
+diff --git a/slack-ruby-client/lib/slack/web/api/endpoints/chat.rb b/slack-ruby-client-original/lib/slack/web/api/endpoints/chat.rb
+index 194419e..2ef5c65 100644
+--- a/lib/slack/web/api/endpoints/chat.rb
++++ b/lib/slack/web/api/endpoints/chat.rb
+@@ -93,7 +93,7 @@ module Slack
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
+           def chat_postEphemeral(options = {})
+             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+-            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
++            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
+             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+             # attachments must be passed as an encoded JSON string
