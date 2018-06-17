@@ -19,8 +19,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       client.chat_postEphemeral(channel: 'channel', text: 'text', user: '123', attachments: [])
     end
     context 'text and user arguments' do
-      it 'requires text' do
-        expect { client.chat_postEphemeral(channel: 'channel') }.to raise_error ArgumentError, /Required arguments :text missing/
+      it 'requires text or attachments' do
+        expect { client.chat_postEphemeral(channel: 'channel') }.to raise_error ArgumentError, /Required arguments :text or :attachments missing/
       end
       it 'requires user' do
         expect { client.chat_postEphemeral(channel: 'channel', text: 'text') }.to raise_error ArgumentError, /Required arguments :user missing/
@@ -34,6 +34,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       it 'optional attachments' do
         expect(client).to receive(:post).with('chat.postEphemeral', hash_including(attachments: '[]'))
         expect { client.chat_postEphemeral(channel: 'channel', text: 'text', user: '123', attachments: []) }.to_not raise_error
+      end
+      it 'attachments without text' do
+        expect(client).to receive(:post).with('chat.postEphemeral', hash_including(attachments: '[]'))
+        expect { client.chat_postEphemeral(channel: 'channel', attachments: [], user: '123') }.to_not raise_error
       end
     end
   end

@@ -1,11 +1,12 @@
 ### 0.11.2 (Next)
 
 * Your contribution here.
+* [#209](https://github.com/slack-ruby/slack-ruby-client/pull/209): Changed `chat_postEphemeral`to check for existence of either `text` or `attachments` - [@peterzhu2118](https://github.com/peterzhu2118).
 * [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `apps_permissions_resources_list` and `apps_permissions_scopes_list` - [@jmanian](https://github.com/jmanian).
 * [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `users_conversations` - [@jmanian](https://github.com/jmanian).
 * [#206](https://github.com/slack-ruby/slack-ruby-client/pull/206): Fix 100% cpu usage in async examples - [@felixbuenemann](https://github.com/felixbuenemann).
 
-### 0.11.1 (1/23/2017)
+### 0.11.1 (1/23/2018)
 
 * [#187](https://github.com/slack-ruby/slack-ruby-client/pull/187): Concatenate error message when multiple errors present - [@chrislopresto](https://github.com/chrislopresto).
 * [#188](https://github.com/slack-ruby/slack-ruby-client/pull/188): Fixed `NoMethodError` when Slack is unavailable - [@sonicdoe](https://github.com/sonicdoe).
