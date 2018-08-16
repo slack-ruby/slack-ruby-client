@@ -49,8 +49,12 @@ module Slack
           #
           # Lists reactions made by a user.
           #
+          # @option options [Object] :cursor
+          #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
           # @option options [Object] :full
           #   If true always return the complete reaction list.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @option options [user] :user
           #   Show reactions made by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/reactions.list

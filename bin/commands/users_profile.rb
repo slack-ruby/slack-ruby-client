@@ -16,7 +16,7 @@ command 'users_profile' do |g|
   g.long_desc %( Set the profile information for a user. )
   g.command 'set' do |c|
     c.flag 'name', desc: 'Name of a single key to set. Usable only if profile is not passed.'
-    c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash.'
+    c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.'
     c.flag 'user', desc: 'ID of user to change. This argument may only be specified by team admins on paid teams.'
     c.flag 'value', desc: 'Value to set a single key to. Usable only if profile is not passed.'
     c.action do |_global_options, options, _args|

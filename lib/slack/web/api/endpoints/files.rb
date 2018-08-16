@@ -39,6 +39,10 @@ module Slack
           #
           # @option options [file] :file
           #   Specify a file by providing its ID.
+          # @option options [Object] :cursor
+          #   Parameter for pagination. File comments are paginated for a single file. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See pagination for more details.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.info.json
           def files_info(options = {})
@@ -133,7 +137,9 @@ module Slack
           # @option options [Object] :filetype
           #   A file type identifier.
           # @option options [Object] :initial_comment
-          #   Initial comment to add to file.
+          #   The message text introducing the file in specified channels.
+          # @option options [Object] :thread_ts
+          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead.
           # @option options [Object] :title
           #   Title of file.
           # @see https://api.slack.com/methods/files.upload

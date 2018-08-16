@@ -14,6 +14,11 @@ module Slack
 
         ### RealTime Events
 
+        # A private channel was deleted.
+        # @see https://api.slack.com/events/group_deleted
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_deleted.json
+        # on :group_deleted do |data|
+
         # Determine the current presence status for a list of users.
         # @see https://api.slack.com/events/presence_query
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_query.json

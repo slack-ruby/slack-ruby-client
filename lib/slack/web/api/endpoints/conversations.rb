@@ -38,6 +38,8 @@ module Slack
           #   Name of the public or private channel to create.
           # @option options [Object] :is_private
           #   Create a private channel instead of a public one.
+          # @option options [Object] :user_ids
+          #   Required for workspace apps. A list of between 1 and 30 human users that will be added to the newly-created conversation. This argument has no effect when used by classic Slack apps.
           # @see https://api.slack.com/methods/conversations.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.create.json
           def conversations_create(options = {})

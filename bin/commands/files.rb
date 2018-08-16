@@ -26,6 +26,8 @@ command 'files' do |g|
   g.long_desc %( Gets information about a team file. )
   g.command 'info' do |c|
     c.flag 'file', desc: 'Specify a file by providing its ID.'
+    c.flag 'cursor', desc: "Parameter for pagination. File comments are paginated for a single file. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection of comments. See pagination for more details."
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_info(options))
     end
@@ -92,7 +94,8 @@ You can pass multiple values in the types argument, like types=spaces,snippets.T
     c.flag 'file', desc: 'File contents via multipart/form-data. If omitting this parameter, you must submit content.'
     c.flag 'filename', desc: 'Filename of file.'
     c.flag 'filetype', desc: 'A file type identifier.'
-    c.flag 'initial_comment', desc: 'Initial comment to add to file.'
+    c.flag 'initial_comment', desc: 'The message text introducing the file in specified channels.'
+    c.flag 'thread_ts', desc: "Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead."
     c.flag 'title', desc: 'Title of file.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_upload(options))
