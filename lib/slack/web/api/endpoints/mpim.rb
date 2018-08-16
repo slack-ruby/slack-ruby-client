@@ -49,7 +49,13 @@ module Slack
           # @see https://api.slack.com/methods/mpim.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.list.json
           def mpim_list(options = {})
-            post('mpim.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :mpim_list, options).each do |page|
+                yield page
+              end
+            else
+              post('mpim.list', options)
+            end
           end
 
           #

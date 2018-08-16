@@ -33,7 +33,13 @@ module Slack
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.list.json
           def stars_list(options = {})
-            post('stars.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :stars_list, options).each do |page|
+                yield page
+              end
+            else
+              post('stars.list', options)
+            end
           end
 
           #

@@ -47,7 +47,13 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.info.json
           def files_info(options = {})
             throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            post('files.info', options)
+            if block_given?
+              Pagination::Cursor.new(self, :files_info, options).each do |page|
+                yield page
+              end
+            else
+              post('files.info', options)
+            end
           end
 
           #

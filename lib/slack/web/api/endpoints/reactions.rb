@@ -61,7 +61,13 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.list.json
           def reactions_list(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('reactions.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :reactions_list, options).each do |page|
+                yield page
+              end
+            else
+              post('reactions.list', options)
+            end
           end
 
           #

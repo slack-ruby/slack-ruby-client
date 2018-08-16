@@ -142,7 +142,13 @@ module Slack
           # @see https://api.slack.com/methods/groups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
           def groups_list(options = {})
-            post('groups.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :groups_list, options).each do |page|
+                yield page
+              end
+            else
+              post('groups.list', options)
+            end
           end
 
           #
