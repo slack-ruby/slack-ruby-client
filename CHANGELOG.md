@@ -1,6 +1,7 @@
 ### 0.11.2 (Next)
 
 * Your contribution here.
+* [#215](https://github.com/slack-ruby/slack-ruby-client/pull/215): Added `apps_permissions_users_list` and `apps_permissions_users_request` to Web API; `groups_list`, `files_info`, `mpim_list`, `reactions_list`, `stars_list` now support cursor pagination - [@hotwatermorning](https://github.com/hotwatermorning).
 * [#209](https://github.com/slack-ruby/slack-ruby-client/pull/209): Changed `chat_postEphemeral`to check for existence of either `text` or `attachments` - [@peterzhu2118](https://github.com/peterzhu2118).
 * [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `apps_permissions_resources_list` and `apps_permissions_scopes_list` - [@jmanian](https://github.com/jmanian).
 * [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `users_conversations` - [@jmanian](https://github.com/jmanian).

@@ -27,6 +27,8 @@ command 'mpim' do |g|
   g.desc 'Lists multiparty direct message channels for the calling user.'
   g.long_desc %( Lists multiparty direct message channels for the calling user. )
   g.command 'list' do |c|
+    c.flag 'cursor', desc: "Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection. See pagination for more details."
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.mpim_list(options))
     end

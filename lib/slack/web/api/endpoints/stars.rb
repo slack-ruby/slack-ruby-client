@@ -26,10 +26,20 @@ module Slack
           #
           # Lists stars for a user.
           #
+          # @option options [Object] :cursor
+          #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.list.json
           def stars_list(options = {})
-            post('stars.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :stars_list, options).each do |page|
+                yield page
+              end
+            else
+              post('stars.list', options)
+            end
           end
 
           #

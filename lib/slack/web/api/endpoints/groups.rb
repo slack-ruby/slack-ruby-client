@@ -131,14 +131,24 @@ module Slack
           #
           # Lists private channels that the calling user has access to.
           #
+          # @option options [Object] :cursor
+          #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
           # @option options [Object] :exclude_archived
           #   Don't return archived private channels.
           # @option options [Object] :exclude_members
           #   Exclude the members from each group.
+          # @option options [Object] :limit
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @see https://api.slack.com/methods/groups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
           def groups_list(options = {})
-            post('groups.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :groups_list, options).each do |page|
+                yield page
+              end
+            else
+              post('groups.list', options)
+            end
           end
 
           #
