@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gemspec
 
 gem ENV['CONCURRENCY'], require: false if ENV.key?('CONCURRENCY')
-# rubocop:enable Bundler/OrderedGems
 
 gem 'activesupport', '~> 4.0'
 gem 'picky' unless RUBY_PLATFORM == 'java'

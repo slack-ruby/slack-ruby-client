@@ -3,6 +3,15 @@ AllCops:
     - vendor/**/*
     - lib/slack/web/api/slack-api-ref/**/*
 
+Metrics:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 512
+
+Style/Documentation:
+  Enabled: false
+
 Naming/MethodName:
   Enabled: false
 
