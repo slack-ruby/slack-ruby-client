@@ -34,7 +34,7 @@ module Slack
             @connected = @socket.connect
             driver.start
             loop { read } if socket
-          rescue EOFError, Errno::EPIPE => e
+          rescue EOFError, Errno::ECONNRESET, Errno::EPIPE => e
             logger.debug("#{self.class}##{__method__}") { e }
             driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
           ensure
@@ -53,6 +53,7 @@ module Slack
 
           def read
             buffer = socket.readpartial(BLOCK_SIZE)
+            raise EOFError unless buffer && !buffer.empty?
             async.handle_read(buffer)
           end
 
