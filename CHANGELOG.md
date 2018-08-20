@@ -8,6 +8,7 @@
 * [#207](https://github.com/slack-ruby/slack-ruby-client/pull/207): Added `users_conversations` - [@jmanian](https://github.com/jmanian).
 * [#206](https://github.com/slack-ruby/slack-ruby-client/pull/206): Fix 100% cpu usage in async examples - [@felixbuenemann](https://github.com/felixbuenemann).
 * [#217](https://github.com/slack-ruby/slack-ruby-client/pull/217): Upgraded RuboCop to 0.58.2 - [@dblock](https://github.com/dblock).
+* [#217](https://github.com/slack-ruby/slack-ruby-client/pull/217): No longer tested with Ruby 2.1, added 2.5 - [@dblock](https://github.com/dblock).
 
 ### 0.11.1 (1/23/2018)
 
