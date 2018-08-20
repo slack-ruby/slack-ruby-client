@@ -10,12 +10,14 @@ RSpec.describe Slack::Web::Api::Mixins::Channels do
     klass.new
   end
   before do
-    allow(subject).to receive(:channels_list).and_return(Slack::Messages::Message.new(
-                                                           'channels' => [{
-                                                             'id' => 'CDEADBEEF',
-                                                             'name' => 'general'
-                                                           }]
-    ))
+    allow(subject).to receive(:channels_list).and_return(
+      Slack::Messages::Message.new(
+        'channels' => [{
+          'id' => 'CDEADBEEF',
+          'name' => 'general'
+        }]
+      )
+    )
   end
   context '#channels_id' do
     it 'leaves channels specified by ID alone' do

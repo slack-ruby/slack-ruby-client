@@ -1,4 +1,3 @@
-
 module Slack
   module Messages
     module Formatting

@@ -40,7 +40,7 @@ module Slack
           ensure
             begin
               current_actor.terminate if current_actor.alive?
-            rescue
+            rescue StandardError
               nil
             end
           end
