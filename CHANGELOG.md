@@ -1,3 +1,7 @@
+### 0.12.1 (Next)
+
+* Your contribution here.
+
 ### 0.12.0 (8/20/2018)
 
 * [#216](https://github.com/slack-ruby/slack-ruby-client/pull/216): Handle `Errno::ECONNRESET` and empty buffer reads with celluloid-io - [@dblock](https://github.com/dblock).
