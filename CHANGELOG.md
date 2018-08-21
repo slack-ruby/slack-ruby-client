@@ -1,4 +1,4 @@
-### 0.11.2 (Next)
+### 0.12.0 (8/20/2018)
 
 * [#216](https://github.com/slack-ruby/slack-ruby-client/pull/216): Handle `Errno::ECONNRESET` and empty buffer reads with celluloid-io - [@dblock](https://github.com/dblock).
 * [#215](https://github.com/slack-ruby/slack-ruby-client/pull/215): Web API `groups_list`, `files_info`, `mpim_list`, `reactions_list` and `stars_list` now support cursor pagination - [@hotwatermorning](https://github.com/hotwatermorning).
@@ -9,7 +9,6 @@
 * [#206](https://github.com/slack-ruby/slack-ruby-client/pull/206): Fix 100% cpu usage in async examples - [@felixbuenemann](https://github.com/felixbuenemann).
 * [#217](https://github.com/slack-ruby/slack-ruby-client/pull/217): Upgraded RuboCop to 0.58.2 - [@dblock](https://github.com/dblock).
 * [#217](https://github.com/slack-ruby/slack-ruby-client/pull/217): No longer tested with Ruby 2.1, added 2.5 - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.11.1 (1/23/2018)
 
