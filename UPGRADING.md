@@ -1,6 +1,12 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.12.2
+
+#### Recommended Async Library
+
+The RealTime client now supports [async-websocket](https://github.com/socketry/async-websocket), which is now the recommended library following numerous disconnect issues in [#208](https://github.com/slack-ruby/slack-ruby-client/issues/208).
+
 ### Upgrading to >= 0.9.0
 
 #### Changes in How the RTM Client Connects

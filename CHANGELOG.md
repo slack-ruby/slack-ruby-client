@@ -1,5 +1,6 @@
 ### 0.12.1 (Next)
 
+* [#219](https://github.com/slack-ruby/slack-ruby-client/pull/219): Added support for `async-websocket`.  - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.12.0 (8/20/2018)

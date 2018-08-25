@@ -76,6 +76,15 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     wait_for_server
   end
 
+  if ENV['CONCURRENCY'] == 'async-websocket'
+    around do |example|
+      require 'async/reactor'
+      ::Async::Reactor.run do
+        example.run
+      end
+    end
+  end
+
   context 'client connected' do
     before do
       start_server

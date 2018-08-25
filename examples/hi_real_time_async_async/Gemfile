@@ -1,0 +1,6 @@
+source 'http://rubygems.org'
+
+gem 'slack-ruby-client', path: '../..'
+
+gem 'async-websocket'
+gem 'foreman'
