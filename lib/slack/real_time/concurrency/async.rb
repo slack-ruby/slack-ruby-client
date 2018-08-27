@@ -52,14 +52,8 @@ module Slack
             end
           end
 
-          def build_tcp_options
-            {
-              reuse_port: false
-            }
-          end
-
           def build_endpoint
-            endpoint = ::Async::IO::Endpoint.tcp(addr, port, build_tcp_options)
+            endpoint = ::Async::IO::Endpoint.tcp(addr, port)
             endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
             endpoint
           end
