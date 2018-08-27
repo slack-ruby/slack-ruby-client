@@ -6,14 +6,14 @@ module Slack
       module Async
         class Client < ::Async::WebSocket::Client
           extend ::Forwardable
-          def_delegators :driver, :on
+          def_delegators :@driver, :on
 
           def text(message)
-            driver.text(message)
+            @driver.text(message)
           end
 
           def binary(data)
-            socket.write(data)
+            @driver.binary(data)
           end
         end
 
@@ -21,25 +21,30 @@ module Slack
           attr_reader :client
 
           def start_async(client)
-            @client = client
-            client.run_loop
+            Thread.new do
+              $stderr.puts "start_async: @driver = #{@driver}"
+              ::Async::Reactor.run do
+                client.run_loop
+              end
+            end
           end
 
           def connect!
-            super
-            run_loop
+            ::Async::Reactor.run do
+              super
+              
+              run_loop
+            end
           end
 
           def close
-            driver.close
+            @driver.close
             super
           end
 
           def run_loop
-            @socket = build_socket
-            @connected = @socket.connect
-            while event = driver.next_event
-
+            while @driver and event = @driver.next_event
+              # $stderr.puts event.inspect
             end
           end
 
@@ -56,18 +61,15 @@ module Slack
             }
           end
 
-          def build_socket
-            socket = ::Async::IO::Endpoint.tcp(addr, port, build_tcp_options)
-            socket = ::Async::IO::SSLEndpoint.new(socket, build_ssl_context) if secure?
-            socket
+          def build_endpoint
+            endpoint = ::Async::IO::Endpoint.tcp(addr, port, build_tcp_options)
+            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, build_ssl_context) if secure?
+            
+            return endpoint
           end
-
-          def build_driver
-            Client.new(build_socket.connect, url)
-          end
-
+          
           def connect
-            @driver = build_driver
+            @driver = Client.new(build_endpoint.connect, url)
           end
         end
       end
