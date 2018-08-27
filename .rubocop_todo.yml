@@ -14,11 +14,6 @@ Lint/HandleExceptions:
     - 'spec/slack/real_time/concurrency/eventmachine_spec.rb'
 
 # Offense count: 1
-Lint/UselessAssignment:
-  Exclude:
-    - 'lib/slack/real_time/config.rb'
-
-# Offense count: 1
 # Configuration parameters: EnforcedStyleForLeadingUnderscores.
 # SupportedStylesForLeadingUnderscores: disallowed, required, optional
 Naming/MemoizedInstanceVariableName:
