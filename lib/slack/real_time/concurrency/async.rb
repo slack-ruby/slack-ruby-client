@@ -6,15 +6,7 @@ module Slack
       module Async
         class Client < ::Async::WebSocket::Client
           extend ::Forwardable
-          def_delegators :@driver, :on
-
-          def text(message)
-            @driver.text(message)
-          end
-
-          def binary(data)
-            @driver.binary(data)
-          end
+          def_delegators :@driver, :on, :text, :binary
         end
 
         class Socket < Slack::RealTime::Socket
