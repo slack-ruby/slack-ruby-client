@@ -22,7 +22,6 @@ module Slack
 
           def start_async(client)
             Thread.new do
-              $stderr.puts "start_async: @driver = #{@driver}"
               ::Async::Reactor.run do
                 client.run_loop
               end
@@ -30,11 +29,8 @@ module Slack
           end
 
           def connect!
-            ::Async::Reactor.run do
-              super
-              
-              run_loop
-            end
+            super
+            run_loop
           end
 
           def close
@@ -43,7 +39,7 @@ module Slack
           end
 
           def run_loop
-            while @driver and event = @driver.next_event
+            while @driver && @driver.next_event
               # $stderr.puts event.inspect
             end
           end
@@ -64,10 +60,9 @@ module Slack
           def build_endpoint
             endpoint = ::Async::IO::Endpoint.tcp(addr, port, build_tcp_options)
             endpoint = ::Async::IO::SSLEndpoint.new(endpoint, build_ssl_context) if secure?
-            
-            return endpoint
+            endpoint
           end
-          
+
           def connect
             @driver = Client.new(build_endpoint.connect, url)
           end
