@@ -47,8 +47,9 @@ module Slack
           protected
 
           def build_ssl_context
-            # TODO: context.set_params verify_mode: OpenSSL::SSL::VERIFY_PEER
-            { ssl_context: OpenSSL::SSL::SSLContext.new(:TLSv1_2_client) }
+            OpenSSL::SSL::SSLContext.new(:TLSv1_2_client).tap do |ctx|
+              ctx.set_params(verify_mode: OpenSSL::SSL::VERIFY_PEER)
+            end
           end
 
           def build_tcp_options
@@ -59,7 +60,7 @@ module Slack
 
           def build_endpoint
             endpoint = ::Async::IO::Endpoint.tcp(addr, port, build_tcp_options)
-            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, build_ssl_context) if secure?
+            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
             endpoint
           end
 
