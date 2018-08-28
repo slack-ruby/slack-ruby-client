@@ -74,6 +74,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   after do
     wait_for_server
+    connection.join
   end
 
   context 'client connected' do
