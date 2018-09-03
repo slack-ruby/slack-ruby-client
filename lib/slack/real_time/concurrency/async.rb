@@ -6,7 +6,7 @@ module Slack
       module Async
         class Client < ::Async::WebSocket::Client
           extend ::Forwardable
-          def_delegators :@driver, :on, :text, :binary
+          def_delegators :@driver, :on, :text, :binary, :emit
         end
 
         class Socket < Slack::RealTime::Socket
@@ -26,11 +26,13 @@ module Slack
           end
 
           def close
-            @driver.close
+            @closing = true
+            @driver.close if @driver
             super
           end
 
           def run_loop
+            @closing = false
             while @driver && @driver.next_event
               # $stderr.puts event.inspect
             end
@@ -50,8 +52,13 @@ module Slack
             endpoint
           end
 
+          def connect_socket
+            build_endpoint.connect
+          end
+
           def connect
-            @driver = Client.new(build_endpoint.connect, url)
+            @socket = connect_socket
+            @driver = Client.new(@socket, url)
           end
         end
       end
