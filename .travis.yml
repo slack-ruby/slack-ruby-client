@@ -18,6 +18,8 @@ matrix:
       env: CONCURRENCY=celluloid-io
     - rvm: 2.4.1
       env: CONCURRENCY=faye-websocket
+    - rvm: 2.5
+      env: CONCURRENCY=async-websocket
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head

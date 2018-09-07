@@ -28,11 +28,10 @@ Add to Gemfile.
 gem 'slack-ruby-client'
 ```
 
-If you're going to be using the RealTime client, add either `eventmachine` and `faye-websocket` or `celluloid-io`. See below for more information about concurrency.
+If you're going to be using the RealTime client, add either `async-websocket`, `eventmachine` and `faye-websocket` or `celluloid-io`. See below for more information about concurrency. We recommend you use `async-websocket`.
 
 ```
-gem 'eventmachine'
-gem 'faye-websocket'
+gem 'async-websocket'
 ```
 
 Run `bundle install`.
@@ -374,11 +373,11 @@ See [#134](https://github.com/slack-ruby/slack-ruby-client/issues/134) for a dis
 
 #### Concurrency
 
-`Slack::RealTime::Client` needs help from a concurrency library and supports [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine) and [Celluloid](https://github.com/celluloid/celluloid). It will auto-detect one or the other depending on the gems in your Gemfile, but you can also set concurrency explicitly.
+`Slack::RealTime::Client` needs help from a concurrency library and supports [Async](https://github.com/socketry/async), [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine) and [Celluloid](https://github.com/celluloid/celluloid). It will auto-detect one or the other depending on the gems in your Gemfile, but you can also set concurrency explicitly.
 
 ```ruby
 Slack::RealTime.configure do |config|
-  config.concurrency = Slack::RealTime::Concurrency::Eventmachine
+  config.concurrency = Slack::RealTime::Concurrency::Async
 end
 ```
 
@@ -389,6 +388,16 @@ client = Slack::RealTime::Client.new
 
 client.start_async
 ```
+
+##### Async
+
+This is the recommended library. Add `async-websocket` to your Gemfile.
+
+```
+gem 'async-websocket'
+```
+
+See a fully working example in [examples/hi_real_time_async_async](examples/hi_real_time_async_async/hi.rb).
 
 ##### Faye::Websocket with Eventmachine
 
