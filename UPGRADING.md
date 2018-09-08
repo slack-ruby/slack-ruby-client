@@ -7,6 +7,14 @@ Upgrading Slack-Ruby-Client
 
 The RealTime client now supports [async-websocket](https://github.com/socketry/async-websocket), which is now the recommended library following numerous disconnect issues in [#208](https://github.com/slack-ruby/slack-ruby-client/issues/208).
 
+See [#219](https://github.com/slack-ruby/slack-ruby-client/pull/219) for details.
+
+#### Async Library Threading and Reactor Changes
+
+The RealTime celluloid-io implementation now uses a `Thread` per client. Previous versions used an `Actor`.
+
+The faye-websocket implementation with EventMachine will attempt to shutdown EventMachine via `EventMachine.stop` upon shutdown if a reactor wasn't already running. See [#224](https://github.com/slack-ruby/slack-ruby-client/pull/224) for details.
+
 ### Upgrading to >= 0.9.0
 
 #### Changes in How the RTM Client Connects
