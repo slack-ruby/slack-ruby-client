@@ -68,12 +68,9 @@ module Slack
           end
 
           def start_async(client)
-            @client = client
-            Actor.new(future.run_client_loop)
-          end
-
-          def run_client_loop
-            @client.run_loop
+            Thread.new do
+              client.run_loop
+            end
           end
 
           def connected?
@@ -81,18 +78,6 @@ module Slack
           end
 
           protected
-
-          class Actor
-            attr_reader :future
-
-            def initialize(future)
-              @future = future
-            end
-
-            def join
-              @future.value
-            end
-          end
 
           def build_socket
             socket = ::Celluloid::IO::TCPSocket.new(addr, port)
