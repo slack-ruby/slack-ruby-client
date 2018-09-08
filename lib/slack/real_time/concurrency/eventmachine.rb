@@ -27,11 +27,17 @@ module Slack
 
         class Socket < Slack::RealTime::Socket
           def start_async(client)
-            thread = ensure_reactor_running
+            @thread = ensure_reactor_running
 
             client.run_loop
 
-            thread
+            @thread
+          end
+
+          def close
+            super
+            EventMachine.stop if @thread
+            @thread = nil
           end
 
           def send_data(message)
