@@ -41,6 +41,7 @@ module Slack
           end
 
           def send_data(message)
+            raise SocketNotConnectedError unless connected?
             logger.debug("#{self.class}##{__method__}") { message }
             driver.send(message)
           end
