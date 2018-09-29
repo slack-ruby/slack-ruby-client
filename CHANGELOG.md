@@ -1,11 +1,12 @@
 ### 0.13.1 (Next)
 
+* [#228](https://github.com/slack-ruby/slack-ruby-client/pull/228): Replace `Thread` with `Actor` in Celluloid async support - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.13.0 (2018/9/8)
 
 * [#219](https://github.com/slack-ruby/slack-ruby-client/pull/219): Added support for `async-websocket` - [@dblock](https://github.com/dblock), [@ioquatix](https://github.com/ioquatix).
-* [#224](https://github.com/slack-ruby/slack-ruby-client/pull/224): Celluloid async support now uses  a thread per client - [@dblock](https://github.com/dblock).
+* [#224](https://github.com/slack-ruby/slack-ruby-client/pull/224): Celluloid async support now uses a thread per client - [@dblock](https://github.com/dblock).
 * [#224](https://github.com/slack-ruby/slack-ruby-client/pull/224): Attempt to shutdown EventMachine if a reactor wasn't already running on start - [@dblock](https://github.com/dblock).
 
 ### 0.12.0 (2018/8/20)

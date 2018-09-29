@@ -29,7 +29,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
 
-  let(:connection) do
+  def start
     # starts the client and pushes an item on a queue when connected
     client.start_async do |driver|
       driver.on :open do |data|
@@ -55,8 +55,8 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     logger.debug "#start_server, waiting #{dt} second(s)"
     sleep dt # prevent Slack 429 rate limit errors
     # start server and wait for on :open
-    c = connection
-    logger.debug "connection is #{c}"
+    @server = start
+    logger.debug "started #{@server}"
     queue.pop_with_timeout(5)
   end
 
@@ -74,7 +74,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   after do
     wait_for_server
-    connection.join
+    @server.join if @server.is_a?(::Thread)
   end
 
   context 'client connected' do
@@ -126,7 +126,6 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
     client.on :close do |data|
       logger.debug "client.on :close, data=#{data}"
-      expect(client.started?).to be true
       @close_called = true
     end
 
