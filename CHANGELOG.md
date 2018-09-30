@@ -1,3 +1,7 @@
+### 0.13.2 (Next)
+
+* Your contribution here.
+
 ### 0.13.1 (2018/9/30)
 
 * [#228](https://github.com/slack-ruby/slack-ruby-client/pull/228): Replace `Thread` with `Actor` in Celluloid async support - [@dblock](https://github.com/dblock).
