@@ -1,6 +1,8 @@
 ### 0.13.2 (Next)
 
 * Your contribution here.
+* [#226](https://github.com/slack-ruby/slack-ruby-client/pull/226): Adding slack socket level ping/pong - [@RodneyU215](https://github.com/RodneyU215).
+
 
 ### 0.13.1 (2018/9/30)
 
