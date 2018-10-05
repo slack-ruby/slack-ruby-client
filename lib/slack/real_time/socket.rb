@@ -1,8 +1,6 @@
 module Slack
   module RealTime
     class Socket
-      class SocketNotConnectedError < StandardError; end
-
       attr_accessor :url
       attr_accessor :options
       attr_reader :driver
@@ -15,11 +13,9 @@ module Slack
         @driver = nil
         @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
         @alive = false
-        @pending_pings = Hash.new { |_hash, ping_id| raise(KeyError, "Ping id: #{ping_id} is not valid") }
       end
 
       def send_data(message)
-        raise SocketNotConnectedError unless connected?
         logger.debug("#{self.class}##{__method__}") { message }
         case message
         when Numeric then driver.text(message.to_s)
@@ -35,44 +31,14 @@ module Slack
         connect
         logger.debug("#{self.class}##{__method__}") { driver.class }
 
-        heartbeat 30
-        yield driver if block_given?
-      end
-
-      def heartbeat(delay)
         @alive = true
 
         driver.on :message do |event|
           event_data = JSON.parse(event.data)
-          pong(event_data['reply_to']) if event_data['type'] == 'pong'
+          @alive = true if event_data['type'] == 'pong'
         end
 
-        Thread.new do
-          ping_int = 0
-          loop do
-            sleep delay
-            ping_data = { type: 'ping', time: Time.now, id: "p#{ping_int += 1}" }
-            ping(ping_data)
-          end
-        end
-      end
-
-      def ping(data)
-        unless @alive
-          disconnect! if connected?
-          close
-        end
-        send_data(data.to_json)
-        @pending_pings[data[:id]] = data
-        @alive = false
-      end
-
-      def pong(ping_id)
-        ping_data = @pending_pings[ping_id]
-        diff = Time.now - ping_data[:time]
-        logger.debug("Ping #{ping_id} returned a response in #{diff} seconds.")
-        @pending_pings.delete(ping_id)
-        @alive = true
+        yield driver if block_given?
       end
 
       def disconnect!
@@ -122,6 +88,27 @@ module Slack
 
       def connect
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+      end
+
+      private
+
+      def ping(delay = 30, ping_id = 0, &block)
+        unless @alive
+          disconnect! if connected?
+          return close
+        end
+
+        ping_data = { type: 'ping', id: ping_id }
+        send_data(ping_data.to_json)
+        @alive = false
+
+        if block_given?
+          yield delay
+        else
+          sleep delay
+        end
+
+        ping(delay, ping_id + 1, &block)
       end
     end
   end

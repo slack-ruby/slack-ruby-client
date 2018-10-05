@@ -12,7 +12,6 @@ begin
       describe '#connect!' do
         before do
           allow(ws).to receive(:on).with(:close)
-          allow(ws).to receive(:on).with(:message)
         end
         it 'connects' do
           allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)

@@ -15,7 +15,14 @@ module Slack
           def start_async(client)
             Thread.new do
               ::Async::Reactor.run do
-                client.run_loop
+                ::Async::Reactor.run do
+                  client.run_loop
+                end
+                ::Async::Reactor.run do |task|
+                  ping do |delay|
+                    task.sleep delay
+                  end
+                end
               end
             end
           end
