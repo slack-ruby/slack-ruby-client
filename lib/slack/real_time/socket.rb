@@ -1,6 +1,8 @@
 module Slack
   module RealTime
     class Socket
+      class SocketNotConnectedError < StandardError; end
+
       attr_accessor :url
       attr_accessor :options
       attr_reader :driver
@@ -16,6 +18,7 @@ module Slack
       end
 
       def send_data(message)
+        raise SocketNotConnectedError unless connected?
         logger.debug("#{self.class}##{__method__}") { message }
         case message
         when Numeric then driver.text(message.to_s)
@@ -65,6 +68,17 @@ module Slack
         @driver = nil
       end
 
+      def ping(ping_id)
+        unless @alive
+          disconnect! if connected?
+          close
+        end
+
+        ping_data = { type: 'ping', id: ping_id }
+        send_data(ping_data.to_json)
+        @alive = false
+      end
+
       protected
 
       def addr
@@ -88,27 +102,6 @@ module Slack
 
       def connect
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
-      end
-
-      private
-
-      def ping(delay = 30, ping_id = 0, &block)
-        unless @alive
-          disconnect! if connected?
-          return close
-        end
-
-        ping_data = { type: 'ping', id: ping_id }
-        send_data(ping_data.to_json)
-        @alive = false
-
-        if block_given?
-          yield delay
-        else
-          sleep delay
-        end
-
-        ping(delay, ping_id + 1, &block)
       end
     end
   end

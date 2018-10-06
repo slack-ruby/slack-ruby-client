@@ -23,12 +23,12 @@ RSpec.describe Slack::RealTime::Socket do
     end
     describe '#ping' do
       it 'sends a text message over the socket.' do
-        expect(ws).to receive(:text).with(/\"type\":\"ping\",\"id\":0/)
-        socket.send(:ping, 0.01)
+        expect(ws).to receive(:text).with(/\"type\":\"ping\",\"id\":1/)
+        socket.ping 1
       end
-      it 'disconnects subsequent unanswered pings' do
-        expect(socket.connected?).to be true
-        socket.send(:ping, 0.01)
+      it 'disconnects and raises an exception on subsequent unanswered pings' do
+        socket.ping 1
+        expect { socket.ping 2 }.to raise_error Slack::RealTime::Socket::SocketNotConnectedError
         expect(socket.connected?).to be false
       end
     end

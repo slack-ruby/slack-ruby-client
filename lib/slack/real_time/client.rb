@@ -102,6 +102,14 @@ module Slack
         end
       end
 
+      def run_ping(delay = 30, ping_id = 0)
+        while started?
+          ping_id += 1
+          @socket.ping(ping_id)
+          yield delay if block_given?
+        end
+      end
+
       protected
 
       # @return [Slack::RealTime::Socket]

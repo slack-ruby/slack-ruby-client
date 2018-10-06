@@ -19,7 +19,7 @@ module Slack
                   client.run_loop
                 end
                 ::Async::Reactor.run do |task|
-                  ping do |delay|
+                  client.run_ping do |delay|
                     task.sleep delay
                   end
                 end
