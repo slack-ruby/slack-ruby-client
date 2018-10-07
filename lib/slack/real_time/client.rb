@@ -102,11 +102,11 @@ module Slack
         end
       end
 
-      def run_ping(delay = 30, ping_id = 0)
-        while started?
-          ping_id += 1
-          @socket.ping(ping_id)
-          yield delay if block_given?
+      def run_ping
+        return if websocket_ping.nil? || websocket_ping < 1
+        loop do
+          @socket.ping(next_id)
+          yield websocket_ping if block_given?
         end
       end
 
