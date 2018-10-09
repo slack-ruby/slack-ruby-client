@@ -47,7 +47,7 @@ module Slack
       # Start RealTime client and block until it disconnects.
       def start!(&block)
         @callback = block if block_given?
-        @socket = build_socket
+        build_socket
         @socket.start_sync(self)
       end
 
@@ -55,7 +55,7 @@ module Slack
       # The RealTime::Client will run in the background.
       def start_async(&block)
         @callback = block if block_given?
-        @socket = build_socket
+        build_socket
         @socket.start_async(self)
       end
 
@@ -105,8 +105,16 @@ module Slack
       def run_ping
         return if websocket_ping.nil? || websocket_ping < 1
         loop do
-          @socket.ping(next_id)
           yield websocket_ping if block_given?
+          raise ClientNotStartedError unless started?
+
+          unless @socket.alive
+            @socket.disconnect! if @socket.connected?
+            @socket.close
+          end
+
+          ping
+          @socket.alive = false
         end
       end
 
@@ -119,7 +127,7 @@ module Slack
         data = Slack::Messages::Message.new(start)
         @url = data.url
         @store = @store_class.new(data) if @store_class
-        socket_class.new(@url, socket_options)
+        @socket = socket_class.new(@url, socket_options)
       end
 
       def rtm_start_method

@@ -5,6 +5,7 @@ module Slack
 
       attr_accessor :url
       attr_accessor :options
+      attr_accessor :alive
       attr_reader :driver
       attr_reader :logger
       protected :logger
@@ -18,7 +19,6 @@ module Slack
       end
 
       def send_data(message)
-        raise SocketNotConnectedError unless connected?
         logger.debug("#{self.class}##{__method__}") { message }
         case message
         when Numeric then driver.text(message.to_s)
@@ -66,17 +66,6 @@ module Slack
 
       def close
         @driver = nil
-      end
-
-      def ping(ping_id)
-        unless @alive
-          disconnect! if connected?
-          close
-        end
-
-        ping_data = { type: 'ping', id: ping_id }
-        send_data(ping_data.to_json)
-        @alive = false
       end
 
       protected
