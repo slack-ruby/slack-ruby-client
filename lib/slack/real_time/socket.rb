@@ -1,8 +1,6 @@
 module Slack
   module RealTime
     class Socket
-      class SocketNotConnectedError < StandardError; end
-
       attr_accessor :url
       attr_accessor :options
       attr_accessor :alive
