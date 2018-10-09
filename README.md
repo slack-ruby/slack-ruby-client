@@ -308,7 +308,7 @@ The following settings are supported.
 setting         | description
 ----------------|-----------------------------------------------------------------------------------------------------
 token           | Slack API token.
-websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping frames, default is 30.
+websocket_ping  | The number of seconds that indicates how often the WebSocket should send ping messages to confirm it's still connected to the message server, default is 30. To disable this feature set to 0.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 store_class     | Local store class name, default is an in-memory `Slack::RealTime::Stores::Store`.
 start_method    | Optional start method, either `:rtm_start` or `:rtm_connect`.
