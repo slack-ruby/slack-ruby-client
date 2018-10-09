@@ -109,7 +109,7 @@ module Slack
           raise ClientNotStartedError unless started?
 
           unless @socket.alive
-            @socket.disconnect! if @socket.connected?
+            @socket.disconnect!
             @socket.close
           end
 
