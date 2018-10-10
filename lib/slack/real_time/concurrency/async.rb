@@ -19,19 +19,18 @@ module Slack
                   client.run_loop
                 end
                 ::Async::Reactor.run do |task|
-                  begin
-                    client.run_ping do |delay|
-                      task.sleep delay
-                    end
-                  rescue Slack::RealTime::Client::ClientNotStartedError
-                    ::Async::Reactor.run do
-                      client.build_socket
-                      client.run_loop
-                    end
-                    retry
+                  client.run_ping do |delay|
+                    task.sleep delay
                   end
                 end
               end
+            end
+          end
+
+          def restart_async(client)
+            ::Async::Reactor.run do
+              client.build_socket
+              client.run_loop
             end
           end
 

@@ -3,7 +3,7 @@ module Slack
     class Socket
       attr_accessor :url
       attr_accessor :options
-      attr_accessor :alive
+      attr_accessor :pong_received
       attr_reader :driver
       attr_reader :logger
       protected :logger
@@ -13,7 +13,7 @@ module Slack
         @options = options
         @driver = nil
         @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
-        @alive = false
+        @pong_received = false
       end
 
       def send_data(message)
@@ -31,13 +31,6 @@ module Slack
 
         connect
         logger.debug("#{self.class}##{__method__}") { driver.class }
-
-        @alive = true
-
-        driver.on :message do |event|
-          event_data = JSON.parse(event.data)
-          @alive = true if event_data['type'] == 'pong'
-        end
 
         yield driver if block_given?
       end
@@ -59,6 +52,10 @@ module Slack
 
       # @return [#join]
       def start_async(_client)
+        raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+      end
+
+      def restart_async(_client)
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 

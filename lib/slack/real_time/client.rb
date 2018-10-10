@@ -103,19 +103,28 @@ module Slack
       end
 
       def run_ping
-        return if websocket_ping.nil? || websocket_ping < 1
-        loop do
-          yield websocket_ping if block_given?
-          raise ClientNotStartedError unless started?
+        return unless run_ping?
+        on(:pong) { @socket.pong_received = true }
+        begin
+          loop do
+            @socket.pong_received = false
+            ping
 
-          unless @socket.alive
-            @socket.disconnect!
-            @socket.close
+            yield websocket_ping if block_given?
+
+            unless @socket.pong_received
+              @socket.disconnect!
+              @socket.close
+            end
           end
-
-          ping
-          @socket.alive = false
+        rescue Slack::RealTime::Client::ClientNotStartedError
+          @socket.restart_async(self)
+          retry
         end
+      end
+
+      def run_ping?
+        !websocket_ping.nil? && websocket_ping > 1
       end
 
       protected
