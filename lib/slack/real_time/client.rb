@@ -107,8 +107,10 @@ module Slack
         on(:pong) { @socket.pong_received = true }
         begin
           loop do
-            @socket.pong_received = false
-            ping
+            if @socket.time_since_last_message > websocket_ping
+              @socket.pong_received = false
+              ping
+            end
 
             yield websocket_ping if block_given?
 
