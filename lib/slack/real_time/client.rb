@@ -104,20 +104,20 @@ module Slack
 
       def run_ping
         return unless run_ping?
-        on(:pong) { @socket.pong_received = true }
         begin
+          ping_sent = false
           loop do
             if @socket.time_since_last_message > websocket_ping
-              @socket.pong_received = false
+              if ping_sent
+                @socket.disconnect!
+                @socket.close
+                ping_sent = false
+              end
+
               ping
+              ping_sent = true
             end
-
             yield websocket_ping if block_given?
-
-            unless @socket.pong_received
-              @socket.disconnect!
-              @socket.close
-            end
           end
         rescue Slack::RealTime::Client::ClientNotStartedError
           @socket.restart_async(self)

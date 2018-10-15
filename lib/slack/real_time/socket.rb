@@ -3,7 +3,6 @@ module Slack
     class Socket
       attr_accessor :url
       attr_accessor :options
-      attr_accessor :pong_received
       attr_reader :driver
       attr_reader :logger
       protected :logger
@@ -13,7 +12,6 @@ module Slack
         @options = options
         @driver = nil
         @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
-        @pong_received = false
         @last_message_at = nil
       end
 
@@ -69,7 +67,7 @@ module Slack
       end
 
       def current_time
-        Time.now
+        Process.clock_gettime(Process::CLOCK_MONOTONIC)
       end
 
       def close
