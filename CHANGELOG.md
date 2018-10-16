@@ -1,4 +1,4 @@
-### 0.13.3 (Next)
+### 0.13.2 (Next)
 
 * Your contribution here.
 * [#226](https://github.com/slack-ruby/slack-ruby-client/pull/226): Added periodic ping that reconnects on failure for `async-websocket` - [@RodneyU215](https://github.com/RodneyU215), [@dblock](https://github.com/dblock), [@ioquatix](https://github.com/ioquatix).
