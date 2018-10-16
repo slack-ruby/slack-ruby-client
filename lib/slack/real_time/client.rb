@@ -111,7 +111,7 @@ module Slack
           end
         rescue Slack::RealTime::Client::ClientNotStartedError
           @socket.restart_async(self)
-          retry
+          retry if started?
         end
       end
 

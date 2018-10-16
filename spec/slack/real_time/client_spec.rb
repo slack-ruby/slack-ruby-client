@@ -127,6 +127,46 @@ RSpec.describe Slack::RealTime::Client do
         end
       end
     end
+    describe '#start_async' do
+      let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
+      before do
+        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        allow(socket).to receive(:connect!)
+        allow(socket).to receive(:start_async)
+        client.start_async
+      end
+      describe '#run_ping' do
+        it 'sends ping messages when the connection is idle' do
+          allow(socket).to receive(:time_since_last_message).and_return(30)
+          expect(socket).to receive(:send_data).with('{"type":"ping","id":1}')
+          client.run_ping
+        end
+        it 'disconnects the websocket when the connection is idle for too long' do
+          allow(socket).to receive(:time_since_last_message).and_return(75)
+          allow(socket).to receive(:connected?).and_return(false)
+
+          expect(socket).to receive(:disconnect!)
+          expect(socket).to receive(:close)
+          expect { client.run_ping }.to raise_error Slack::RealTime::Client::ClientNotStartedError
+        end
+      end
+      describe '#run_ping!' do
+        it 'returns if websocket_ping is less than 1' do
+          client.websocket_ping = 0
+          expect(client).to_not receive(:run_ping)
+          client.run_ping!
+        end
+        it 'reconnects the websocket if an exception is thrown' do
+          allow(socket).to receive(:time_since_last_message).and_return(75)
+          allow(socket).to receive(:disconnect!)
+          allow(socket).to receive(:close)
+          allow(socket).to receive(:connected?).and_return(false)
+
+          expect(socket).to receive(:restart_async)
+          client.run_ping!
+        end
+      end
+    end
   end
   context 'client with starter store', vcr: { cassette_name: 'web/rtm_connect' } do
     let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Starter) }
