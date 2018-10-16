@@ -102,20 +102,12 @@ module Slack
         end
       end
 
-      def run_ping
-        return unless run_ping?
+      def run_ping!
+        return if websocket_ping.nil? || websocket_ping < 1
         begin
           loop do
             yield websocket_ping if block_given?
-
-            next unless @socket.time_since_last_message > websocket_ping
-
-            if @socket.time_since_last_message > (websocket_ping * 2)
-              @socket.disconnect!
-              @socket.close
-            end
-
-            ping
+            run_ping
           end
         rescue Slack::RealTime::Client::ClientNotStartedError
           @socket.restart_async(self)
@@ -123,8 +115,15 @@ module Slack
         end
       end
 
-      def run_ping?
-        !websocket_ping.nil? && websocket_ping > 1
+      def run_ping
+        return if @socket.time_since_last_message < websocket_ping
+
+        if @socket.time_since_last_message > (websocket_ping * 2)
+          @socket.disconnect!
+          @socket.close
+        end
+
+        ping
       end
 
       protected

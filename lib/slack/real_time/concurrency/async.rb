@@ -19,7 +19,7 @@ module Slack
                   client.run_loop
                 end
                 task.async do |subtask|
-                  client.run_ping do |delay|
+                  client.run_ping! do |delay|
                     subtask.sleep delay
                   end
                 end
