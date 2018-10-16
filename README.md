@@ -324,7 +324,7 @@ See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.
 #### Caveats
 
 ##### `websocket_ping`
-This setting determines how long the socket can be idle bfore sending a ping message to confirm it's still connected.
+This setting determines how long the socket can be idle before sending a ping message to confirm it's still connected.
 
 To disable this feature; set `websocket_ping` to 0.
 
