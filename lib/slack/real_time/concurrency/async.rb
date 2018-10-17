@@ -14,10 +14,28 @@ module Slack
 
           def start_async(client)
             Thread.new do
-              ::Async::Reactor.run do
-                client.run_loop
+              ::Async::Reactor.run do |task|
+                task.async do
+                  client.run_loop
+                end
+                task.async do |subtask|
+                  client.run_ping! do |delay|
+                    subtask.sleep delay
+                  end
+                end
               end
             end
+          end
+
+          def restart_async(client)
+            ::Async::Reactor.run do
+              client.build_socket
+              client.run_loop
+            end
+          end
+
+          def current_time
+            Async::Clock.now
           end
 
           def connect!

@@ -12,6 +12,7 @@ module Slack
         @options = options
         @driver = nil
         @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
+        @last_message_at = nil
       end
 
       def send_data(message)
@@ -29,6 +30,10 @@ module Slack
 
         connect
         logger.debug("#{self.class}##{__method__}") { driver.class }
+
+        driver.on :message do
+          @last_message_at = current_time
+        end
 
         yield driver if block_given?
       end
@@ -51,6 +56,18 @@ module Slack
       # @return [#join]
       def start_async(_client)
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+      end
+
+      def restart_async(_client)
+        raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+      end
+
+      def time_since_last_message
+        current_time - @last_message_at
+      end
+
+      def current_time
+        Process.clock_gettime(Process::CLOCK_MONOTONIC)
       end
 
       def close
