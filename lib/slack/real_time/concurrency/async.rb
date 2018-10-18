@@ -1,4 +1,5 @@
 require 'async/websocket'
+require 'async/clock'
 
 module Slack
   module RealTime
@@ -13,8 +14,9 @@ module Slack
           attr_reader :client
 
           def start_async(client)
+            @reactor = ::Async::Reactor.new
             Thread.new do
-              ::Async::Reactor.run do |task|
+              @reactor.run do |task|
                 task.async do
                   client.run_loop
                 end
@@ -27,20 +29,28 @@ module Slack
             end
           end
 
-          def restart_async(client)
-            ::Async::Reactor.run do
-              client.build_socket
+          def restart_async(client, new_url)
+            @url = new_url
+            return unless @reactor
+            @reactor.run do
               client.run_loop
             end
           end
 
           def current_time
-            Async::Clock.now
+            ::Async::Clock.now
           end
 
           def connect!
             super
             run_loop
+          end
+
+          def disconnect!
+            super
+            if @reactor
+              @reactor.close
+            end
           end
 
           def close

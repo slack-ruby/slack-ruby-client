@@ -110,7 +110,7 @@ module Slack
             run_ping
           end
         rescue Slack::RealTime::Client::ClientNotStartedError
-          @socket.restart_async(self)
+          restart_async
           retry if started?
         end
       end
@@ -119,11 +119,18 @@ module Slack
         return if @socket.time_since_last_message < websocket_ping
 
         if @socket.time_since_last_message > (websocket_ping * 2)
-          @socket.disconnect!
-          @socket.close
+          raise Slack::RealTime::Client::ClientNotStartedError
         end
 
         ping
+      end
+
+      def restart_async
+        start = web_client.send(rtm_start_method, start_options)
+        data = Slack::Messages::Message.new(start)
+        @url = data.url
+        @store = @store_class.new(data) if @store_class
+        @socket.restart_async(self, @url)
       end
 
       protected

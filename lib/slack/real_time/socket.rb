@@ -63,6 +63,7 @@ module Slack
       end
 
       def time_since_last_message
+        return 0 unless @last_message_at
         current_time - @last_message_at
       end
 
