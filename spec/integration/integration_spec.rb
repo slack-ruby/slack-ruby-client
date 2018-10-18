@@ -118,6 +118,18 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     start_server
   end
 
+  # We currently only send regular pings when using 'async-websocket'. See Issue #223.
+  if ENV['CONCURRENCY'] == 'async-websocket'
+    it 'sends pings' do
+      client.websocket_ping = 2
+      client.on :pong do |data|
+        expect(data.reply_to).to be 1
+        client.stop!
+      end
+      start_server
+    end
+  end
+
   it 'gets close, followed by closed' do
     client.on :hello do
       expect(client.started?).to be true

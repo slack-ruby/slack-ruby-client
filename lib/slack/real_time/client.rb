@@ -117,8 +117,9 @@ module Slack
         !websocket_ping.nil? && websocket_ping > 0
       end
 
+      protected
+
       def restart_async
-        return unless @socket
         @socket.close
         start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)
@@ -126,8 +127,6 @@ module Slack
         @store = @store_class.new(data) if @store_class
         @socket.restart_async(self, @url)
       end
-
-      protected
 
       # @return [Slack::RealTime::Socket]
       def build_socket
