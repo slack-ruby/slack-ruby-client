@@ -103,29 +103,23 @@ module Slack
       end
 
       def run_ping!
-        return if websocket_ping.nil? || websocket_ping < 1
-        begin
-          loop do
-            yield websocket_ping if block_given?
-            run_ping
-          end
-        rescue Slack::RealTime::Client::ClientNotStartedError
-          restart_async
-          retry if started?
-        end
+        time_since_last_message = @socket.time_since_last_message
+        return if time_since_last_message < websocket_ping
+        raise Slack::RealTime::Client::ClientNotStartedError if time_since_last_message > (websocket_ping * 2)
+        ping
+      rescue Slack::RealTime::Client::ClientNotStartedError
+        restart_async
+        retry if started?
+        raise
       end
 
-      def run_ping
-        return if @socket.time_since_last_message < websocket_ping
-
-        if @socket.time_since_last_message > (websocket_ping * 2)
-          raise Slack::RealTime::Client::ClientNotStartedError
-        end
-
-        ping
+      def run_ping?
+        !websocket_ping.nil? && websocket_ping > 0
       end
 
       def restart_async
+        return unless @socket
+        @socket.close
         start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
@@ -177,10 +171,7 @@ module Slack
       def open(_event); end
 
       def close(_event)
-        socket = @socket
-        @socket = nil
-
-        [socket, socket_class].each do |s|
+        [@socket, socket_class].each do |s|
           s.close if s.respond_to?(:close)
         end
       end

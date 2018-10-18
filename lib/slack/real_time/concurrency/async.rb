@@ -5,6 +5,10 @@ module Slack
   module RealTime
     module Concurrency
       module Async
+        class Reactor < ::Async::Reactor
+          def_delegators :@timers, :cancel
+        end
+
         class Client < ::Async::WebSocket::Client
           extend ::Forwardable
           def_delegators :@driver, :on, :text, :binary, :emit
@@ -14,16 +18,12 @@ module Slack
           attr_reader :client
 
           def start_async(client)
-            @reactor = ::Async::Reactor.new
+            @reactor = Reactor.new
             Thread.new do
+              @reactor.every(client.websocket_ping) { client.run_ping! } if client.run_ping?
               @reactor.run do |task|
                 task.async do
                   client.run_loop
-                end
-                task.async do |subtask|
-                  client.run_ping! do |delay|
-                    subtask.sleep delay
-                  end
                 end
               end
             end
@@ -32,9 +32,14 @@ module Slack
           def restart_async(client, new_url)
             @url = new_url
             return unless @reactor
-            @reactor.run do
+            @reactor.async do
               client.run_loop
             end
+          end
+
+          def disconnect!
+            super
+            @reactor.cancel
           end
 
           def current_time
@@ -44,13 +49,6 @@ module Slack
           def connect!
             super
             run_loop
-          end
-
-          def disconnect!
-            super
-            if @reactor
-              @reactor.close
-            end
           end
 
           def close
