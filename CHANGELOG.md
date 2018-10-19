@@ -1,6 +1,7 @@
 ### 0.13.2 (Next)
 
 * Your contribution here.
+* [#232](https://github.com/slack-ruby/slack-ruby-client/pull/232): Addressing a few issues with #run_ping! (fixes #231) - [@RodneyU215](https://github.com/RodneyU215).
 * [#226](https://github.com/slack-ruby/slack-ruby-client/pull/226): Added periodic ping that reconnects on failure for `async-websocket` - [@RodneyU215](https://github.com/RodneyU215), [@dblock](https://github.com/dblock), [@ioquatix](https://github.com/ioquatix).
 
 ### 0.13.1 (2018/9/30)

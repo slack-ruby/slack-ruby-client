@@ -1,9 +1,14 @@
 require 'async/websocket'
+require 'async/clock'
 
 module Slack
   module RealTime
     module Concurrency
       module Async
+        class Reactor < ::Async::Reactor
+          def_delegators :@timers, :cancel
+        end
+
         class Client < ::Async::WebSocket::Client
           extend ::Forwardable
           def_delegators :@driver, :on, :text, :binary, :emit
@@ -13,29 +18,32 @@ module Slack
           attr_reader :client
 
           def start_async(client)
+            @reactor = Reactor.new
             Thread.new do
-              ::Async::Reactor.run do |task|
+              @reactor.every(client.websocket_ping) { client.run_ping! } if client.run_ping?
+              @reactor.run do |task|
                 task.async do
                   client.run_loop
-                end
-                task.async do |subtask|
-                  client.run_ping! do |delay|
-                    subtask.sleep delay
-                  end
                 end
               end
             end
           end
 
-          def restart_async(client)
-            ::Async::Reactor.run do
-              client.build_socket
+          def restart_async(client, new_url)
+            @url = new_url
+            return unless @reactor
+            @reactor.async do
               client.run_loop
             end
           end
 
+          def disconnect!
+            super
+            @reactor.cancel
+          end
+
           def current_time
-            Async::Clock.now
+            ::Async::Clock.now
           end
 
           def connect!
