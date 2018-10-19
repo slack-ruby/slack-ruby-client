@@ -136,7 +136,7 @@ RSpec.describe Slack::RealTime::Client do
         client.start_async
       end
       describe '#run_ping!' do
-        it 'sends ping messages when the connection is idle' do
+        it 'sends ping messages when the websocket connection is idle' do
           allow(socket).to receive(:time_since_last_message).and_return(30)
           expect(socket).to receive(:send_data).with('{"type":"ping","id":1}')
           client.run_ping!
@@ -148,6 +148,13 @@ RSpec.describe Slack::RealTime::Client do
           expect(socket).to receive(:restart_async)
           expect(socket).to receive(:send_data).with('{"type":"ping","id":1}')
           client.run_ping!
+        end
+        it 'raises an exception if reconnect attempts fail' do
+          allow(socket).to receive(:time_since_last_message).and_return(75)
+          allow(socket).to receive(:close)
+          allow(socket).to receive(:restart_async)
+          allow(socket).to receive(:connected?).and_return(false)
+          expect { client.run_ping! }.to raise_error Slack::RealTime::Client::ClientNotStartedError
         end
       end
     end
@@ -263,6 +270,18 @@ RSpec.describe Slack::RealTime::Client do
         it "sets #{key}" do
           expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
         end
+      end
+    end
+    describe '#run_ping?' do
+      it 'returns true when websocket_ping is greater than 0' do
+        client.websocket_ping = 30
+        expect(client.run_ping?).to be true
+      end
+      it 'returns false when websocket_ping is less than 1' do
+        client.websocket_ping = 0
+        expect(client.run_ping?).to be false
+        client.websocket_ping = nil
+        expect(client.run_ping?).to be false
       end
     end
   end
