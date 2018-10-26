@@ -109,8 +109,6 @@ module Slack
         ping
       rescue Slack::RealTime::Client::ClientNotStartedError
         restart_async
-        retry if started?
-        raise
       end
 
       def run_ping?
@@ -120,6 +118,7 @@ module Slack
       protected
 
       def restart_async
+        logger.debug("#{self.class}##{__method__}")
         @socket.close
         start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)

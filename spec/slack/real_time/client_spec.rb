@@ -142,19 +142,11 @@ RSpec.describe Slack::RealTime::Client do
           client.run_ping!
         end
         it 'reconnects the websocket if it has been idle for too long' do
-          allow(socket).to receive(:time_since_last_message).and_return(75, 31)
+          allow(socket).to receive(:time_since_last_message).and_return(75)
           allow(socket).to receive(:connected?).and_return(true)
           expect(socket).to receive(:close)
           expect(socket).to receive(:restart_async)
-          expect(socket).to receive(:send_data).with('{"type":"ping","id":1}')
           client.run_ping!
-        end
-        it 'raises an exception if reconnect attempts fail' do
-          allow(socket).to receive(:time_since_last_message).and_return(75)
-          allow(socket).to receive(:close)
-          allow(socket).to receive(:restart_async)
-          allow(socket).to receive(:connected?).and_return(false)
-          expect { client.run_ping! }.to raise_error Slack::RealTime::Client::ClientNotStartedError
         end
       end
     end
