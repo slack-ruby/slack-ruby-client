@@ -31,6 +31,7 @@ module Slack
 
           def restart_async(client, new_url)
             @url = new_url
+            @last_message_at = current_time
             return unless @reactor
             @reactor.async do
               client.run_loop
