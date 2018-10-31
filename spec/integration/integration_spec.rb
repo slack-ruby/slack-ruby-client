@@ -45,6 +45,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     end
 
     client.on :close do
+      logger.info 'Disconnecting ...'
       # pushes another item to the queue when disconnected
       queue.push nil
     end
@@ -82,7 +83,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
       start_server
     end
 
-    let(:channel) { "@#{client.self.name}" }
+    let(:channel) { "@#{client.self.id}" }
 
     it 'responds to message' do
       message = SecureRandom.hex
