@@ -34,6 +34,11 @@ module Slack
             @thread
           end
 
+          def disconnect!
+            super
+            close
+          end
+
           def close
             super
             EventMachine.stop if @thread
