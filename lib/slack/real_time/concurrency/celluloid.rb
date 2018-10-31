@@ -47,7 +47,7 @@ module Slack
 
           def close
             @closing = true
-            driver.close
+            driver.close if driver
             super
           end
 
@@ -73,7 +73,14 @@ module Slack
           end
 
           def run_client_loop
+            current_actor.every @client.websocket_ping do
+              @client.run_ping!
+            end
+
             @client.run_loop
+          rescue StandardError => e
+            logger.debug("#{self.class}##{__method__}") { e }
+            raise e
           end
 
           def connected?
