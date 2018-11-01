@@ -73,8 +73,10 @@ module Slack
           end
 
           def run_client_loop
-            current_actor.every @client.websocket_ping do
-              @client.run_ping!
+            if @client.run_ping?
+              current_actor.every @client.websocket_ping do
+                @client.run_ping!
+              end
             end
 
             @client.run_loop

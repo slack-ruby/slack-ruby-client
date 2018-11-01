@@ -49,7 +49,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     client.on :close do
       logger.info 'Disconnecting ...'
       # pushes another item to the queue when disconnected
-      queue.push nil
+      queue.push nil if @queue
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
   end
 
   def wait_for_server
-    return unless queue
+    return unless @queue
     logger.debug '#wait_for_server'
     queue.pop_with_timeout(5)
     logger.debug '#wait_for_server, joined'
@@ -123,16 +123,38 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     start_server
   end
 
-  it 'sends pings' do
-    @reply_to = nil
-    client.websocket_ping = 2
-    client.on :pong do |data|
-      @reply_to = data.reply_to
-      client.stop!
+  context 'with websocket_ping set' do
+    before do
+      client.websocket_ping = 2
     end
-    start_server
-    wait_for_server
-    expect(@reply_to).to be 1
+    it 'sends pings' do
+      @reply_to = nil
+      client.on :pong do |data|
+        @reply_to = data.reply_to
+        client.stop!
+      end
+      start_server
+      wait_for_server
+      expect(@reply_to).to be 1
+    end
+  end
+
+  context 'with websocket_ping not set' do
+    before do
+      client.websocket_ping = 0
+    end
+    it 'does not send pings' do
+      @reply_to = nil
+      client.on :pong do |data|
+        @reply_to = data.reply_to
+      end
+      client.on :hello do
+        client.stop!
+      end
+      start_server
+      wait_for_server
+      expect(@reply_to).to be nil
+    end
   end
 
   it 'gets close, followed by closed' do
