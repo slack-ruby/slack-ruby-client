@@ -19,15 +19,17 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     Slack.configure do |slack|
       slack.logger = logger
     end
+
+    @queue = QueueWithTimeout.new
   end
 
   after do
     Slack.config.reset
   end
 
-  let(:queue) { QueueWithTimeout.new }
-
   let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
+
+  let(:queue) { @queue }
 
   def start
     # starts the client and pushes an item on a queue when connected
@@ -62,9 +64,11 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
   end
 
   def wait_for_server
+    return unless queue
     logger.debug '#wait_for_server'
     queue.pop_with_timeout(5)
     logger.debug '#wait_for_server, joined'
+    @queue = nil
   end
 
   def stop_server
@@ -120,12 +124,15 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
   end
 
   it 'sends pings' do
+    @reply_to = nil
     client.websocket_ping = 2
     client.on :pong do |data|
-      expect(data.reply_to).to be 1
+      @reply_to = data.reply_to
       client.stop!
     end
     start_server
+    wait_for_server
+    expect(@reply_to).to be 1
   end
 
   it 'gets close, followed by closed' do
