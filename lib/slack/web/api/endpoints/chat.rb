@@ -98,9 +98,15 @@ module Slack
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             # attachments must be passed as an encoded JSON string
             if options.key?(:attachments)
-              attachments = options[:attachments]
-              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
-              options = options.merge(attachments: attachments)
+              if options[:attachments].nil?
+                # sometimes sending "null" for "attachments" leads to an error
+                # when it works it has the same effect as sending no attachments at all
+                options.delete(:attachments)
+              else
+                attachments = options[:attachments]
+                attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+                options = options.merge(attachments: attachments)
+              end
             end
             post('chat.postEphemeral', options)
           end
@@ -143,9 +149,15 @@ module Slack
             throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
             # attachments must be passed as an encoded JSON string
             if options.key?(:attachments)
-              attachments = options[:attachments]
-              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
-              options = options.merge(attachments: attachments)
+              if options[:attachments].nil?
+                # sometimes sending "null" for "attachments" leads to an error
+                # when it works it has the same effect as sending no attachments at all
+                options.delete(:attachments)
+              else
+                attachments = options[:attachments]
+                attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+                options = options.merge(attachments: attachments)
+              end
             end
             post('chat.postMessage', options)
           end

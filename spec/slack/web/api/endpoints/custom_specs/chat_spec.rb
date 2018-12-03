@@ -8,6 +8,15 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       allow(described_class).to receive(:users_id).and_return(user)
     end
 
+    it 'removes attachments if it is nil' do
+      expect(client).to receive(:post).with(
+        'chat.postEphemeral',
+        channel: 'channel',
+        text: 'text',
+        user: '123'
+      )
+      client.chat_postEphemeral(channel: 'channel', text: 'text', user: '123', attachments: nil)
+    end
     it 'automatically converts attachments into JSON' do
       expect(client).to receive(:post).with(
         'chat.postEphemeral',
@@ -43,6 +52,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
   end
 
   context 'chat_postMessage' do
+    it 'removes attachments if it is nil' do
+      expect(client).to receive(:post).with(
+        'chat.postMessage',
+        channel: 'channel',
+        text: 'text'
+      )
+      client.chat_postMessage(channel: 'channel', text: 'text', attachments: nil)
+    end
     it 'automatically converts attachments into JSON' do
       expect(client).to receive(:post).with(
         'chat.postMessage',
