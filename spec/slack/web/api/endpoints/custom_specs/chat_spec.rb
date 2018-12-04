@@ -90,7 +90,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
 
   context 'chat_update' do
     let(:ts) { '1405894322.002768' }
-    it 'automatically converts attachments into JSON' do
+    it 'replaces nil attachments with an empty array' do
       expect(client).to receive(:post).with(
         'chat.update',
         attachments: '[]',
@@ -98,7 +98,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         text: 'text',
         ts: ts
       )
-      client.chat_update(attachments: [], channel: 'channel', text: 'text', ts: ts)
+      client.chat_update(attachments: nil, channel: 'channel', text: 'text', ts: ts)
+    end
+    it 'automatically converts attachments into JSON' do
+      expect(client).to receive(:post).with(
+        'chat.update',
+        attachments: '[{"text":"foo"},{"text":"bar"}]',
+        channel: 'channel',
+        text: 'text',
+        ts: ts
+      )
+      client.chat_update(attachments: [{text: 'foo'},{text: 'bar'}], channel: 'channel', text: 'text', ts: ts)
     end
     context 'ts arguments' do
       it 'requires ts' do
