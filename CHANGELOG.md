@@ -1,6 +1,7 @@
 ### 0.13.2 (Next)
 
 * Your contribution here.
+* [#239](https://github.com/slack-ruby/slack-ruby-client/pull/239): Automatically replace `nil` attachments with safer equivalents - [@jmanian](https://github.com/jmanian).
 * [#234](https://github.com/slack-ruby/slack-ruby-client/pull/234): Removing the immediate retry to give the client time to reconnect - [@RodneyU215](https://github.com/RodneyU215).
 * [#232](https://github.com/slack-ruby/slack-ruby-client/pull/232): Addressing a few issues with #run_ping! (fixes #231) - [@RodneyU215](https://github.com/RodneyU215).
 * [#226](https://github.com/slack-ruby/slack-ruby-client/pull/226): Added periodic ping that reconnects on failure for `async-websocket` - [@RodneyU215](https://github.com/RodneyU215), [@dblock](https://github.com/dblock), [@ioquatix](https://github.com/ioquatix).
