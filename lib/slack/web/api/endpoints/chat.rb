@@ -213,13 +213,10 @@ module Slack
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             # attachments must be passed as an encoded JSON string
             if options.key?(:attachments)
-              if options[:attachments].nil?
-                # sometimes sending "null" for attachments leads to an error
-                # when it works it has the same effect as sending an empty JSON array
-                attachments = []
-              else
-                attachments = options[:attachments]
-              end
+              attachments = options[:attachments]
+              # sometimes sending "null" for attachments leads to an error
+              # when it works it has the same effect as sending an empty JSON array
+              attachments = [] if attachments.nil?
               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
               options = options.merge(attachments: attachments)
             end

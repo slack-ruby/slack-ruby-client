@@ -108,7 +108,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         text: 'text',
         ts: ts
       )
-      client.chat_update(attachments: [{text: 'foo'},{text: 'bar'}], channel: 'channel', text: 'text', ts: ts)
+      client.chat_update(attachments: [{ text: 'foo' }, { text: 'bar' }], channel: 'channel', text: 'text', ts: ts)
     end
     context 'ts arguments' do
       it 'requires ts' do
