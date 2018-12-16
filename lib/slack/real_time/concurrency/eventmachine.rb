@@ -40,15 +40,25 @@ module Slack
             @thread
           end
 
-          def disconnect!
-            super
-            close
+          def restart_async(client, new_url)
+            @url = new_url
+            @last_message_at = current_time
+            @thread = ensure_reactor_running
+
+            client.run_loop
+
+            @thread
           end
 
-          def close
+          def disconnect!
             super
             EventMachine.stop if @thread
             @thread = nil
+          end
+
+          def close
+            driver.close if driver
+            super
           end
 
           def send_data(message)
