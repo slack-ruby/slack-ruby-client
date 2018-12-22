@@ -29,6 +29,22 @@ module Slack
           def start_async(client)
             @thread = ensure_reactor_running
 
+            if client.run_ping?
+              EventMachine.add_periodic_timer(client.websocket_ping) do
+                client.run_ping!
+              end
+            end
+
+            client.run_loop
+
+            @thread
+          end
+
+          def restart_async(client, new_url)
+            @url = new_url
+            @last_message_at = current_time
+            @thread = ensure_reactor_running
+
             client.run_loop
 
             @thread
@@ -36,13 +52,13 @@ module Slack
 
           def disconnect!
             super
-            close
+            EventMachine.stop if @thread
+            @thread = nil
           end
 
           def close
+            driver.close if driver
             super
-            EventMachine.stop if @thread
-            @thread = nil
           end
 
           def send_data(message)

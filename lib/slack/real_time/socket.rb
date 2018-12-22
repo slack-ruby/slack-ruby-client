@@ -58,7 +58,7 @@ module Slack
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
-      def restart_async(_client)
+      def restart_async(_client, _url)
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 

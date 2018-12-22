@@ -20,7 +20,11 @@ module Slack
           def start_async(client)
             @reactor = Reactor.new
             Thread.new do
-              @reactor.every(client.websocket_ping) { client.run_ping! } if client.run_ping?
+              if client.run_ping?
+                @reactor.every(client.websocket_ping) do
+                  client.run_ping!
+                end
+              end
               @reactor.run do |task|
                 task.async do
                   client.run_loop
