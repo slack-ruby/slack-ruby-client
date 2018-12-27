@@ -15,12 +15,14 @@ namespace :slack do
           parsed = JSON.parse(File.read(path))
           JSON::Validator.validate(event_schema, parsed, insert_defaults: true)
           next if %w[message hello].include?(name)
+
           result[name] = parsed
         end
 
         event_handler_template = Erubis::Eruby.new(File.read('lib/slack/real_time/api/templates/event_handler.erb'))
         Dir.glob('lib/slack/real_time/stores/**/*.rb').each do |store_file|
           next if File.basename(store_file) == 'base.rb'
+
           STDOUT.write "#{File.basename(store_file)}:"
 
           store_file_contents = File.read(store_file)

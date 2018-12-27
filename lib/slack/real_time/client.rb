@@ -61,6 +61,7 @@ module Slack
 
       def stop!
         raise ClientNotStartedError unless started?
+
         @socket.disconnect! if @socket
       end
 
@@ -106,6 +107,7 @@ module Slack
         time_since_last_message = @socket.time_since_last_message
         return if time_since_last_message < websocket_ping
         raise Slack::RealTime::Client::ClientNotStartedError if time_since_last_message > (websocket_ping * 2)
+
         ping
       rescue Slack::RealTime::Client::ClientNotStartedError
         restart_async
@@ -130,6 +132,7 @@ module Slack
       # @return [Slack::RealTime::Socket]
       def build_socket
         raise ClientAlreadyStartedError if started?
+
         start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
@@ -162,6 +165,7 @@ module Slack
 
       def send_json(data)
         raise ClientNotStartedError unless started?
+
         logger.debug("#{self.class}##{__method__}") { data }
         @socket.send_data(data.to_json)
       end
@@ -177,6 +181,7 @@ module Slack
       def callback(event, type)
         callbacks = self.callbacks[type.to_s]
         return false unless callbacks
+
         callbacks.each do |c|
           c.call(event)
         end
@@ -188,9 +193,11 @@ module Slack
 
       def dispatch(event)
         return false unless event.data
+
         data = Slack::Messages::Message.new(JSON.parse(event.data))
         type = data.type
         return false unless type
+
         type = type.to_s
         logger.debug("#{self.class}##{__method__}") { data.to_s }
         run_handlers(type, data) if @store
@@ -215,6 +222,7 @@ module Slack
       def run_callbacks(type, data)
         callbacks = self.callbacks[type]
         return false unless callbacks
+
         callbacks.each do |c|
           c.call(data)
         end

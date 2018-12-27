@@ -369,6 +369,7 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_close.json
         on :im_close do |data|
           return unless ims && ims.key?(data.channel)
+
           ims[data.channel].is_open = false
         end
 
@@ -394,6 +395,7 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_open.json
         on :im_open do |data|
           return unless ims && ims.key?(data.channel)
+
           ims[data.channel].is_open = true
         end
 

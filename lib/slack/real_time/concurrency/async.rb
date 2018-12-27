@@ -37,6 +37,7 @@ module Slack
             @url = new_url
             @last_message_at = current_time
             return unless @reactor
+
             @reactor.async do
               client.run_loop
             end
