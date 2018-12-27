@@ -10,8 +10,8 @@ module Slack
           protected :logger
 
           def initialize(url, protocols = nil, options = {})
-            @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
-            super
+            @logger = options.fetch(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
+            super url, protocols, options.except(:logger)
           end
 
           def parse(data)

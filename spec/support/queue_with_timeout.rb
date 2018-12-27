@@ -6,15 +6,15 @@ class QueueWithTimeout
     @recieved = ConditionVariable.new
   end
 
-  def push(x)
+  def push(item)
     @mutex.synchronize do
-      @queue << x
+      @queue << item
       @recieved.signal
     end
   end
 
-  def <<(x)
-    push(x)
+  def <<(item)
+    push(item)
   end
 
   def pop(non_block = false)

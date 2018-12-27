@@ -65,6 +65,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   def wait_for_server
     return unless @queue
+
     logger.debug '#wait_for_server'
     queue.pop_with_timeout(5)
     logger.debug '#wait_for_server, joined'
@@ -96,6 +97,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
         logger.debug data
         # concurrent execution of tests causes messages to arrive in any order
         next unless data.text == message
+
         expect(data.text).to eq message
         expect(data.subtype).to eq 'bot_message'
         logger.debug 'client.stop!'

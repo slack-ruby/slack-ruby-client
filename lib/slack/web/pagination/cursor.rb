@@ -28,6 +28,7 @@ module Slack
                 response = client.send(verb, query)
               rescue Slack::Web::Api::Errors::TooManyRequestsError => e
                 raise e if retry_count >= max_retries
+
                 client.logger.debug("#{self.class}##{__method__}") { e.to_s }
                 retry_count += 1
                 sleep(e.retry_after.seconds)
@@ -35,8 +36,10 @@ module Slack
               end
               yield response
               break unless response.response_metadata
+
               next_cursor = response.response_metadata.next_cursor
               break if next_cursor.blank?
+
               retry_count = 0
               sleep(sleep_interval) if sleep_interval
             end

@@ -53,6 +53,7 @@ namespace :slack do
           end
           # command
           raise "Missing group #{group}" unless groups.key?(group)
+
           rendered_command = command_template.result(group: groups[group], names: names)
           File.write "bin/commands/#{snaked_group}.rb", rendered_command
         end

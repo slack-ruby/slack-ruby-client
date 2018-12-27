@@ -54,6 +54,7 @@ module Slack
           def read
             buffer = socket.readpartial(BLOCK_SIZE)
             raise EOFError unless buffer && !buffer.empty?
+
             async.handle_read(buffer)
           end
 
