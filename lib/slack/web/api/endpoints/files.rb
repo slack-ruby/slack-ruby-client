@@ -67,17 +67,16 @@ module Slack
           #   Filter files created before this timestamp (inclusive).
           # @option options [Object] :types
           #   Filter files by type:
+          #   * `all` - All files
+          #   * `spaces` - Posts
+          #   * `snippets` - Snippets
+          #   * `images` - Image files
+          #   * `gdocs` - Google docs
+          #   * `zips` - Zip files
+          #   * `pdfs` - PDF files
           #
-          #   all - All files
-          #   spaces - Posts
-          #   snippets - Snippets
-          #   images - Image files
-          #   gdocs - Google docs
-          #   zips - Zip files
-          #   pdfs - PDF files
+          #   You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
           #
-          #
-          #   You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
           #   .
           # @option options [user] :user
           #   Filter files created by a single user.

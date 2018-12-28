@@ -82,13 +82,15 @@ module Slack
           # @option options [user] :user
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
           # @option options [Object] :as_user
-          #   Pass true to post the message as the authed bot. Defaults to false.
+          #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to none. See below.
+          # @option options [Object] :thread_ts
+          #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
           # @see https://api.slack.com/methods/chat.postEphemeral
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
