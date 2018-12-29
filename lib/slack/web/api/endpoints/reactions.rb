@@ -13,9 +13,9 @@ module Slack
           # @option options [channel] :channel
           #   Channel where the message to add reaction to was posted.
           # @option options [file] :file
-          #   File to add reaction to.
+          #   File to add reaction to. Now that file threads work the way you'd expect, this argument is deprecated. Specify the timestamp and channel of the message associated with a file instead.
           # @option options [Object] :file_comment
-          #   File comment to add reaction to.
+          #   File comment to add reaction to. Now that file threads work the way you'd expect, this argument is deprecated. Specify the timestamp and channel of the message associated with a file instead.
           # @option options [Object] :timestamp
           #   Timestamp of the message to add reaction to.
           # @see https://api.slack.com/methods/reactions.add

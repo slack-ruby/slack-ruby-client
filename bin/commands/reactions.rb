@@ -7,8 +7,8 @@ command 'reactions' do |g|
   g.command 'add' do |c|
     c.flag 'name', desc: 'Reaction (emoji) name.'
     c.flag 'channel', desc: 'Channel where the message to add reaction to was posted.'
-    c.flag 'file', desc: 'File to add reaction to.'
-    c.flag 'file_comment', desc: 'File comment to add reaction to.'
+    c.flag 'file', desc: "File to add reaction to. Now that file threads work the way you'd expect, this argument is deprecated. Specify the timestamp and channel of the message associated with a file instead."
+    c.flag 'file_comment', desc: "File comment to add reaction to. Now that file threads work the way you'd expect, this argument is deprecated. Specify the timestamp and channel of the message associated with a file instead."
     c.flag 'timestamp', desc: 'Timestamp of the message to add reaction to.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.reactions_add(options))

@@ -40,17 +40,16 @@ command 'files' do |g|
     c.flag 'ts_from', desc: 'Filter files created after this timestamp (inclusive).'
     c.flag 'ts_to', desc: 'Filter files created before this timestamp (inclusive).'
     c.flag 'types', desc: 'Filter files by type:
+* `all` - All files
+* `spaces` - Posts
+* `snippets` - Snippets
+* `images` - Image files
+* `gdocs` - Google docs
+* `zips` - Zip files
+* `pdfs` - PDF files
 
-all - All files
-spaces - Posts
-snippets - Snippets
-images - Image files
-gdocs - Google docs
-zips - Zip files
-pdfs - PDF files
+You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
 
-
-You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
 .'
     c.flag 'user', desc: 'Filter files created by a single user.'
     c.action do |_global_options, options, _args|
