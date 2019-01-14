@@ -37,12 +37,11 @@ module Slack
           rescue EOFError, Errno::ECONNRESET, Errno::EPIPE => e
             logger.debug("#{self.class}##{__method__}") { e }
             driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
-          ensure
-            begin
-              current_actor.terminate if current_actor.alive?
-            rescue StandardError
-              nil
-            end
+          end
+
+          def disconnect!
+            super
+            current_actor.terminate if current_actor.alive?
           end
 
           def close
@@ -84,6 +83,13 @@ module Slack
           rescue StandardError => e
             logger.debug("#{self.class}##{__method__}") { e }
             raise e
+          end
+
+          def restart_async(client, new_url)
+            @url = new_url
+            @client = client
+
+            @client.run_loop
           end
 
           def connected?
