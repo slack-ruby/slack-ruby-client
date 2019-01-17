@@ -41,7 +41,7 @@ module Slack
 
           def disconnect!
             super
-            current_actor.terminate if current_actor.alive?
+            @ping_timer.cancel
           end
 
           def close
@@ -74,7 +74,7 @@ module Slack
 
           def run_client_loop
             if @client.run_ping?
-              current_actor.every @client.websocket_ping do
+              @ping_timer = every @client.websocket_ping do
                 @client.run_ping!
               end
             end
