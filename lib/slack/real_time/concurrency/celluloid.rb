@@ -37,12 +37,11 @@ module Slack
           rescue EOFError, Errno::ECONNRESET, Errno::EPIPE => e
             logger.debug("#{self.class}##{__method__}") { e }
             driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
-          ensure
-            begin
-              current_actor.terminate if current_actor.alive?
-            rescue StandardError
-              nil
-            end
+          end
+
+          def disconnect!
+            super
+            @ping_timer.cancel if @ping_timer
           end
 
           def close
@@ -60,7 +59,7 @@ module Slack
 
           def handle_read(buffer)
             logger.debug("#{self.class}##{__method__}") { buffer }
-            driver.parse buffer
+            driver.parse buffer if driver
           end
 
           def write(data)
@@ -71,23 +70,33 @@ module Slack
           def start_async(client)
             @client = client
             Actor.new(future.run_client_loop)
+            Actor.new(future.run_ping_loop)
           end
 
           def run_client_loop
-            if @client.run_ping?
-              current_actor.every @client.websocket_ping do
-                @client.run_ping!
-              end
-            end
-
             @client.run_loop
           rescue StandardError => e
             logger.debug("#{self.class}##{__method__}") { e }
             raise e
           end
 
+          def run_ping_loop
+            return unless @client.run_ping?
+
+            @ping_timer = every @client.websocket_ping do
+              @client.run_ping!
+            end
+          end
+
+          def restart_async(client, new_url)
+            @last_message_at = current_time
+            @url = new_url
+            @client = client
+            Actor.new(future.run_client_loop)
+          end
+
           def connected?
-            !@connected.nil?
+            !@connected.nil? && !@driver.nil?
           end
 
           protected
