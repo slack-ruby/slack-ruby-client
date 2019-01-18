@@ -9,7 +9,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   let(:logger) do
     logger = Logger.new(STDOUT)
-    logger.level = Logger::DEBUG
+    logger.level = Logger::INFO
     logger
   end
 
