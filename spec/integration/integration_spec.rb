@@ -133,6 +133,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
       @reply_to = nil
       client.on :pong do |data|
         @reply_to = data.reply_to
+        queue.push nil
         client.stop!
       end
       start_server
@@ -146,14 +147,13 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
         if @reply_to == 1
           client.instance_variable_get(:@socket).close
         else
-          expect(@reply_to).to be 3
-          # Note: next_id auto increments the id during the 2nd ping attempt.
-          # Since we've forced this request to fail by closing the @socket above,
-          # The next successful pong response should be the 3rd attempt.
+          expect(@reply_to).to be 2
+          queue.push nil
           client.stop!
         end
       end
       start_server
+      queue.pop_with_timeout(10)
       queue.pop_with_timeout(10)
     end
   end

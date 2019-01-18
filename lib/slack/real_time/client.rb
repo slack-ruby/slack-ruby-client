@@ -106,7 +106,7 @@ module Slack
       def run_ping!
         time_since_last_message = @socket.time_since_last_message
         return if time_since_last_message < websocket_ping
-        raise Slack::RealTime::Client::ClientNotStartedError if time_since_last_message > (websocket_ping * 2)
+        raise Slack::RealTime::Client::ClientNotStartedError if !@socket.connected? || time_since_last_message > (websocket_ping * 2)
 
         ping
       rescue Slack::RealTime::Client::ClientNotStartedError

@@ -59,7 +59,7 @@ module Slack
 
           def handle_read(buffer)
             logger.debug("#{self.class}##{__method__}") { buffer }
-            driver.parse buffer
+            driver.parse buffer if driver
           end
 
           def write(data)
@@ -70,30 +70,33 @@ module Slack
           def start_async(client)
             @client = client
             Actor.new(future.run_client_loop)
+            Actor.new(future.run_ping_loop)
           end
 
           def run_client_loop
-            if @client.run_ping?
-              @ping_timer = every @client.websocket_ping do
-                @client.run_ping!
-              end
-            end
-
             @client.run_loop
           rescue StandardError => e
             logger.debug("#{self.class}##{__method__}") { e }
             raise e
           end
 
+          def run_ping_loop
+            return unless @client.run_ping?
+
+            @ping_timer = every @client.websocket_ping do
+              @client.run_ping!
+            end
+          end
+
           def restart_async(client, new_url)
+            @last_message_at = current_time
             @url = new_url
             @client = client
-
-            @client.run_loop
+            Actor.new(future.run_client_loop)
           end
 
           def connected?
-            !@connected.nil?
+            !@connected.nil? && !@driver.nil?
           end
 
           protected
