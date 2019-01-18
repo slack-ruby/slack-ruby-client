@@ -41,7 +41,7 @@ module Slack
 
           def disconnect!
             super
-            @ping_timer.cancel
+            @ping_timer.cancel if @ping_timer
           end
 
           def close
