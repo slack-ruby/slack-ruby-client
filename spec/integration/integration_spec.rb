@@ -139,6 +139,23 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
       queue.pop_with_timeout(5)
       expect(@reply_to).to be 1
     end
+    it 'rebuilds the websocket connection when dropped' do
+      @reply_to = nil
+      client.on :pong do |data|
+        @reply_to = data.reply_to
+        if @reply_to == 1
+          client.instance_variable_get(:@socket).close
+        else
+          expect(@reply_to).to be 3
+          # Note: next_id auto increments the id during the 2nd ping attempt.
+          # Since we've forced this request to fail by closing the @socket above,
+          # The next successful pong response should be the 3rd attempt.
+          client.stop!
+        end
+      end
+      start_server
+      queue.pop_with_timeout(10)
+    end
   end
 
   context 'with websocket_ping not set' do
