@@ -52,7 +52,7 @@ module Slack
 
           def disconnect!
             super
-            EventMachine.stop if @thread
+            EventMachine.stop_event_loop if EventMachine.reactor_running?
             @thread = nil
           end
 
