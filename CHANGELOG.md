@@ -1,5 +1,6 @@
 ### 0.13.2 (Next)
 
+* [#238](https://github.com/slack-ruby/slack-ruby-client/issues/238): Added `Slack::Events::Request#verify!` to check whether an event request is coming from Slack - [@dblock](https://github.com/dblock).
 * [#226](https://github.com/slack-ruby/slack-ruby-client/pull/226), [#232](https://github.com/slack-ruby/slack-ruby-client/pull/232), [#236](https://github.com/slack-ruby/slack-ruby-client/pull/236), [#234](https://github.com/slack-ruby/slack-ruby-client/pull/234): Added periodic ping that reconnects on failure - [@RodneyU215](https://github.com/RodneyU215), [@dblock](https://github.com/dblock), [@ioquatix](https://github.com/ioquatix).
 * [#242](https://github.com/slack-ruby/slack-ruby-client/pull/242): Added `thread_ts` option to `chat_postEphemeral` - [@dblock](https://github.com/dblock).
 * [#242](https://github.com/slack-ruby/slack-ruby-client/pull/242): Added `apps_uninstall` to Web API - [@dblock](https://github.com/dblock).
