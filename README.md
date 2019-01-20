@@ -374,11 +374,9 @@ See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.
 ##### `websocket_ping`
 This setting determines how long the socket can be idle before sending a ping message to confirm it's still connected.
 
-To disable this feature; set `websocket_ping` to 0.
-
 It's important to note that if a ping message was sent and no response was received within the amount of time specified in `websocket_ping`; the client will attempt to reestablish it's connection to the message server.
 
-`websocket_ping` is currently only implemented for `async-websocket`. We hope to [implement this for EventMachine and Celluloid in the future.](https://github.com/slack-ruby/slack-ruby-client/issues/223)
+To disable this feature; set `websocket_ping` to 0.
 
 ### Connection Methods
 
