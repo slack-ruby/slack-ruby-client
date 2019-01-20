@@ -59,10 +59,10 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
 
 ## Useful to Me?
 
-* This piece of the puzzle will help you send messages to Slack via the Web API and send and receive messages via the Real Time API.
-* If you're trying to respond to slash commands, just write a basic web application and use this library to call the Slack Web API.
-* If you're trying to build a Real Time bot, use [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot), which uses this library.
-* If you're trying to roll out a full service with Slack button integration to multiple teams, check out [slack-ruby-bot-server](https://github.com/dblock/slack-ruby-bot-server), which is built on top of slack-ruby-bot, which uses this library.
+* This library will let you send messages to Slack via the Web API, send and receive messages via the Real Time Messaging API and facilitate integration with the Events API.
+* To respond to slash commands, interactive components or events, implement a web application using your favorite web framework and use this library to call the Slack Web API and to verify that events are coming from Slack.
+* To build a bot using the Real Time Messaging API, use [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot), which uses this library.
+* To roll out a complete service using the Real Time Messaging API with Slack button integration to multiple teams, check out [slack-ruby-bot-server](https://github.com/dblock/slack-ruby-bot-server), which is built on top of slack-ruby-bot, which uses this library.
 
 ## Stable Release
 
@@ -283,9 +283,9 @@ end
 client.on :message do |data|
   case data.text
   when 'bot hi' then
-    client.message channel: data.channel, text: "Hi <@#{data.user}>!"
+    client.message(channel: data.channel, text: "Hi <@#{data.user}>!")
   when /^bot/ then
-    client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
+    client.message(channel: data.channel, text: "Sorry <@#{data.user}>, what?")
   end
 end
 
@@ -400,9 +400,9 @@ client = Slack::RealTime::Client.new
 client.on :message do |data|
   case data.text
   when 'bot hi' then
-    client.web_client.chat_postMessage channel: data.channel, text: "Hi <@#{data.user}>!"
+    client.web_client.chat_postMessage(channel: data.channel, text: "Hi <@#{data.user}>!")
   when /^bot/ then
-    client.web_client.chat_postMessage channel: data.channel, text: "Sorry <@#{data.user}>, what?"
+    client.web_client.chat_postMessage(channel: data.channel, text: "Sorry <@#{data.user}>, what?")
   end
 end
 
