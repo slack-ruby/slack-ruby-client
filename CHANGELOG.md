@@ -4,6 +4,7 @@
 * [#242](https://github.com/slack-ruby/slack-ruby-client/pull/242): Added `thread_ts` option to `chat_postEphemeral` - [@dblock](https://github.com/dblock).
 * [#242](https://github.com/slack-ruby/slack-ruby-client/pull/242): Added `apps_uninstall` to Web API - [@dblock](https://github.com/dblock).
 * [#244](https://github.com/slack-ruby/slack-ruby-client/pull/244): Implementing #restart for the celluloid socket class - [@RodneyU215](https://github.com/RodneyU215).
+* [#246](https://github.com/slack-ruby/slack-ruby-client/pull/246): Added TOC to README and danger-toc - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.13.1 (2018/9/30)
