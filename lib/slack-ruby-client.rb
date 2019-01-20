@@ -47,3 +47,7 @@ require_relative 'slack/real_time/models'
 require_relative 'slack/real_time/stores'
 require_relative 'slack/real_time/config'
 require_relative 'slack/real_time/client'
+
+# Events API
+require_relative 'slack/events/config'
+require_relative 'slack/events/request'

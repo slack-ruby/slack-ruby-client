@@ -46,7 +46,7 @@ pre do |global_options, _command, options, _args|
   true
 end
 
-$LOAD_PATH.push File.expand_path('..', __FILE__)
+$LOAD_PATH.push File.expand_path(__dir__)
 require 'commands'
 
 exit run(ARGV)

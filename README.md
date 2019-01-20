@@ -5,7 +5,7 @@ Slack Ruby Client
 [![Build Status](https://travis-ci.org/slack-ruby/slack-ruby-client.svg?branch=master)](https://travis-ci.org/slack-ruby/slack-ruby-client)
 [![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-client)
 
-A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messaging](https://api.slack.com/rtm) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
+A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messaging](https://api.slack.com/rtm) and [Events](https://api.slack.com/events-api) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 
 ![](slack.png)
 
@@ -43,6 +43,9 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
       - [Async](#async)
       - [Faye::Websocket with Eventmachine](#fayewebsocket-with-eventmachine)
       - [Celluloid](#celluloid)
+  - [Events API](#events-api)
+    - [Configuring Slack::Events](#configuring-slackevents)
+    - [Verifying the Request Signature](#verifying-the-request-signature)
   - [Message Parsing](#message-parsing)
   - [Command-Line Client](#command-line-client)
     - [Authenticate with Slack](#authenticate-with-slack)
@@ -56,10 +59,10 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [RealTime Messa
 
 ## Useful to Me?
 
-* This piece of the puzzle will help you send messages to Slack via the Web API and send and receive messages via the Real Time API.
-* If you're trying to respond to slash commands, just write a basic web application and use this library to call the Slack Web API.
-* If you're trying to build a Real Time bot, use [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot), which uses this library.
-* If you're trying to roll out a full service with Slack button integration to multiple teams, check out [slack-ruby-bot-server](https://github.com/dblock/slack-ruby-bot-server), which is built on top of slack-ruby-bot, which uses this library.
+* This library will let you send messages to Slack via the Web API, send and receive messages via the Real Time Messaging API and facilitate integration with the Events API.
+* To respond to slash commands, interactive components or events, implement a web application using your favorite web framework and use this library to call the Slack Web API and to verify that events are coming from Slack.
+* To build a bot using the Real Time Messaging API, use [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot), which uses this library.
+* To roll out a complete service using the Real Time Messaging API with Slack button integration to multiple teams, check out [slack-ruby-bot-server](https://github.com/dblock/slack-ruby-bot-server), which is built on top of slack-ruby-bot, which uses this library.
 
 ## Stable Release
 
@@ -280,9 +283,9 @@ end
 client.on :message do |data|
   case data.text
   when 'bot hi' then
-    client.message channel: data.channel, text: "Hi <@#{data.user}>!"
+    client.message(channel: data.channel, text: "Hi <@#{data.user}>!")
   when /^bot/ then
-    client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
+    client.message(channel: data.channel, text: "Sorry <@#{data.user}>, what?")
   end
 end
 
@@ -397,9 +400,9 @@ client = Slack::RealTime::Client.new
 client.on :message do |data|
   case data.text
   when 'bot hi' then
-    client.web_client.chat_postMessage channel: data.channel, text: "Hi <@#{data.user}>!"
+    client.web_client.chat_postMessage(channel: data.channel, text: "Hi <@#{data.user}>!")
   when /^bot/ then
-    client.web_client.chat_postMessage channel: data.channel, text: "Sorry <@#{data.user}>, what?"
+    client.web_client.chat_postMessage(channel: data.channel, text: "Sorry <@#{data.user}>, what?")
   end
 end
 
@@ -475,7 +478,37 @@ gem 'celluloid-io', require: ['celluloid/current', 'celluloid/io']
 
 See a fully working example in [examples/hi_real_time_async_celluloid](examples/hi_real_time_async_celluloid/hi.rb).
 
-Require
+### Events API
+
+This library provides limited support for the [Slack Events API](https://api.slack.com/events-api).
+
+#### Configuring Slack::Events
+
+You can configure Events support globally.
+
+```ruby
+Slack::Events.configure do |config|
+  config.signing_secret = 'secret'
+end
+```
+
+The following settings are supported.
+
+setting               | description
+----------------------|---------------------------------------------------------------------------------------------------
+signing_secret        | Slack signing secret, defaults is `ENV['SLACK_SIGNING_SECRET']`.
+signature_expires_in  | Signature expiration window in seconds, default is `300`.
+
+#### Verifying the Request Signature
+
+Slack signs its requests using a secret that's unique to your app. Verify incoming HTTP requests as follows.
+
+```ruby
+slack_request = Slack::Events::Request.new(http_request)
+slack_request.verify!
+```
+
+The `verify!` call may raise `Slack::Events::MissingSigningSecret`, `Slack::Events::InvalidSignature` or `Slack::Events::TimestampExpired` errors.
 
 ### Message Parsing
 
@@ -565,6 +598,6 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
-Copyright (c) 2015-2016, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
+Copyright (c) 2015-2019, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
 
 This project is licensed under the [MIT License](LICENSE.md).
