@@ -85,6 +85,8 @@ module Slack
           #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :parse
@@ -118,6 +120,8 @@ module Slack
           #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [Object] :icon_url
@@ -190,6 +194,8 @@ module Slack
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames. Defaults to none. See below.
           # @option options [Object] :parse
