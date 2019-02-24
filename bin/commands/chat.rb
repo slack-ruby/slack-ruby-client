@@ -52,6 +52,7 @@ command 'chat' do |g|
     c.flag 'user', desc: 'id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.'
     c.flag 'as_user', desc: 'Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
+    c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
     c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
@@ -67,6 +68,7 @@ command 'chat' do |g|
     c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation."
     c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
+    c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
     c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
@@ -104,6 +106,7 @@ command 'chat' do |g|
     c.flag 'ts', desc: 'Timestamp of the message to be updated.'
     c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.'
+    c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. See below.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.'
     c.action do |_global_options, options, _args|

@@ -85,6 +85,8 @@ module Slack
           #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :parse
@@ -95,7 +97,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
+            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             # attachments must be passed as an encoded JSON string
@@ -103,6 +105,12 @@ module Slack
               attachments = options[:attachments]
               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
               options = options.merge(attachments: attachments)
+            end
+            # blocks must be passed as an encoded JSON string
+            if options.key?(:blocks)
+              blocks = options[:blocks]
+              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
+              options = options.merge(blocks: blocks)
             end
             post('chat.postEphemeral', options)
           end
@@ -118,6 +126,8 @@ module Slack
           #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [Object] :icon_url
@@ -142,12 +152,18 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
+            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
             # attachments must be passed as an encoded JSON string
             if options.key?(:attachments)
               attachments = options[:attachments]
               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
               options = options.merge(attachments: attachments)
+            end
+            # blocks must be passed as an encoded JSON string
+            if options.key?(:blocks)
+              blocks = options[:blocks]
+              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
+              options = options.merge(blocks: blocks)
             end
             post('chat.postMessage', options)
           end
@@ -190,6 +206,8 @@ module Slack
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames. Defaults to none. See below.
           # @option options [Object] :parse
@@ -198,7 +216,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
+            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             # attachments must be passed as an encoded JSON string
@@ -206,6 +224,12 @@ module Slack
               attachments = options[:attachments]
               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
               options = options.merge(attachments: attachments)
+            end
+            # blocks must be passed as an encoded JSON string
+            if options.key?(:blocks)
+              blocks = options[:blocks]
+              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
+              options = options.merge(blocks: blocks)
             end
             post('chat.update', options)
           end

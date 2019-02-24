@@ -1,0 +1,69 @@
+diff --git a/lib/slack/web/api/endpoints/chat.rb b/lib/slack/web/api/endpoints/chat.rb
+index 54a7db1..c535bb5 100644
+--- a/lib/slack/web/api/endpoints/chat.rb
++++ b/lib/slack/web/api/endpoints/chat.rb
+@@ -97,7 +97,7 @@ module Slack
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
+           def chat_postEphemeral(options = {})
+             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
++            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
+             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+             # attachments must be passed as an encoded JSON string
+@@ -106,6 +106,12 @@ module Slack
+               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+               options = options.merge(attachments: attachments)
+             end
++            # blocks must be passed as an encoded JSON string
++            if options.key?(:blocks)
++              blocks = options[:blocks]
++              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
++              options = options.merge(blocks: blocks)
++            end
+             post('chat.postEphemeral', options)
+           end
+ 
+@@ -146,13 +152,19 @@ module Slack
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
+           def chat_postMessage(options = {})
+             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
++            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
+             # attachments must be passed as an encoded JSON string
+             if options.key?(:attachments)
+               attachments = options[:attachments]
+               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+               options = options.merge(attachments: attachments)
+             end
++            # blocks must be passed as an encoded JSON string
++            if options.key?(:blocks)
++              blocks = options[:blocks]
++              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
++              options = options.merge(blocks: blocks)
++            end
+             post('chat.postMessage', options)
+           end
+ 
+@@ -204,7 +216,7 @@ module Slack
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
+           def chat_update(options = {})
+             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+-            throw ArgumentError.new('Required arguments :text or :attachments missing') if options[:text].nil? && options[:attachments].nil?
++            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
+             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+             # attachments must be passed as an encoded JSON string
+@@ -213,6 +225,12 @@ module Slack
+               attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+               options = options.merge(attachments: attachments)
+             end
++            # blocks must be passed as an encoded JSON string
++            if options.key?(:blocks)
++              blocks = options[:blocks]
++              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
++              options = options.merge(blocks: blocks)
++            end
+             post('chat.update', options)
+           end
+         end
