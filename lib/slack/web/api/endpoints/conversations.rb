@@ -83,6 +83,8 @@ module Slack
           #   Conversation ID to learn more about.
           # @option options [Object] :include_locale
           #   Set this to true to receive the locale for this conversation. Defaults to false.
+          # @option options [Object] :include_num_members
+          #   Set to true to include the member count for the specified conversation. Defaults to false.
           # @see https://api.slack.com/methods/conversations.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.info.json
           def conversations_info(options = {})

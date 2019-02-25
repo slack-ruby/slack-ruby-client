@@ -50,6 +50,7 @@ command 'conversations' do |g|
   g.command 'info' do |c|
     c.flag 'channel', desc: 'Conversation ID to learn more about.'
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for this conversation. Defaults to false.'
+    c.flag 'include_num_members', desc: 'Set to true to include the member count for the specified conversation. Defaults to false.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.conversations_info(options))
     end
