@@ -1,3 +1,7 @@
+### 0.14.1 (Next)
+
+* Your contribution here.
+
 ### 0.14.0 (2019/2/25)
 
 * [#238](https://github.com/slack-ruby/slack-ruby-client/issues/238): Added `Slack::Events::Request#verify!` to check whether an event request is coming from Slack - [@dblock](https://github.com/dblock).
