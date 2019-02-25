@@ -1,3 +1,3 @@
 module Slack
-  VERSION = '0.13.2'.freeze
+  VERSION = '0.14.0'.freeze
 end

@@ -1,4 +1,4 @@
-### 0.13.2 (Next)
+### 0.14.0 (2019/2/25)
 
 * [#238](https://github.com/slack-ruby/slack-ruby-client/issues/238): Added `Slack::Events::Request#verify!` to check whether an event request is coming from Slack - [@dblock](https://github.com/dblock).
 * [#226](https://github.com/slack-ruby/slack-ruby-client/pull/226), [#232](https://github.com/slack-ruby/slack-ruby-client/pull/232), [#236](https://github.com/slack-ruby/slack-ruby-client/pull/236), [#234](https://github.com/slack-ruby/slack-ruby-client/pull/234): Added periodic ping that reconnects on failure - [@RodneyU215](https://github.com/RodneyU215), [@dblock](https://github.com/dblock), [@ioquatix](https://github.com/ioquatix).
@@ -7,7 +7,6 @@
 * [#244](https://github.com/slack-ruby/slack-ruby-client/pull/244): Implementing #restart for the celluloid socket class - [@RodneyU215](https://github.com/RodneyU215).
 * [#246](https://github.com/slack-ruby/slack-ruby-client/pull/246): Added TOC to README and danger-toc - [@dblock](https://github.com/dblock).
 * [#253](https://github.com/slack-ruby/slack-ruby-client/pull/253): Support for Block Kit - [@JrmKrb](https://github.com/JrmKrb).
-* Your contribution here.
 
 ### 0.13.1 (2018/9/30)
 
