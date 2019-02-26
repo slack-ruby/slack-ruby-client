@@ -1,7 +1,6 @@
-### 0.14.1 (Next)
+### 0.14.1 (2019/2/26)
 
 * [#254](https://github.com/slack-ruby/slack-ruby-client/issues/254): Fix: celluloid infinite reconnect loop - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.14.0 (2019/2/25)
 
