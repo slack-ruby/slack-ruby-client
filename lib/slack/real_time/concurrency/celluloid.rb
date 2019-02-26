@@ -69,8 +69,8 @@ module Slack
 
           def start_async(client)
             @client = client
-            Actor.new(future.run_client_loop)
             Actor.new(future.run_ping_loop)
+            Actor.new(future.run_client_loop)
           end
 
           def run_client_loop
