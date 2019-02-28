@@ -3,10 +3,11 @@ require 'spec_helper'
 RSpec.describe Slack::Events::Request do
   before do
     Slack::Events.configure do |config|
-      config.signing_secret = 'ade6ca762ade4db0e7d31484cd616b9c'
+      config.signing_secret = signing_secret
       config.signature_expires_in = 30
     end
   end
+  let(:signing_secret) { 'ade6ca762ade4db0e7d31484cd616b9c' }
   let(:signature) { 'v0=91177eea054d65de0fc0f9b4ec57714307bc0ce2c5f3bf0d28b1b720c8f92ba2' }
   let(:timestamp) { '1547933148' }
   let(:body) { '{"token":"X34FAqCu8tmGEkEEpoDncnja","challenge":"P7sFXA4o3HV2hTx4zb4zcQ9yrvuQs8pDh6EacOxmMRj0tJaXfQFF","type":"url_verification"}' }
@@ -112,6 +113,33 @@ RSpec.describe Slack::Events::Request do
       end
       it 'raises an error on verify!' do
         expect { subject.verify! }.to raise_error Slack::Events::Request::TimestampExpired
+      end
+    end
+  end
+  context 'without global config' do
+    before do
+      Slack::Events.config.reset
+    end
+    context 'without a signing secret parameter' do
+      subject do
+        Slack::Events::Request.new(http_request)
+      end
+      it 'raises MissingSigningSecret' do
+        expect { subject.valid? }.to raise_error Slack::Events::Request::MissingSigningSecret
+      end
+    end
+    context 'with a signing secret parameter' do
+      subject do
+        Slack::Events::Request.new(http_request,
+                                   signing_secret: signing_secret,
+                                   signature_expires_in: 30)
+      end
+      before do
+        Timecop.freeze(Time.at(timestamp.to_i))
+      end
+      it 'is valid and not expired' do
+        expect(subject).to be_valid
+        expect(subject).to_not be_expired
       end
     end
   end
