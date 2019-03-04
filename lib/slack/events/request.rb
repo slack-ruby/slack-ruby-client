@@ -9,12 +9,10 @@ module Slack
                   :signing_secret,
                   :signature_expires_in
 
-      def initialize(http_request,
-                     signing_secret: Slack::Events.config.signing_secret,
-                     signature_expires_in: Slack::Events.config.signature_expires_in)
+      def initialize(http_request, options = {})
         @http_request = http_request
-        @signing_secret = signing_secret
-        @signature_expires_in = signature_expires_in
+        @signing_secret = options[:signing_secret] || Slack::Events.config.signing_secret
+        @signature_expires_in = options[:signature_expires_in] || Slack::Events.config.signature_expires_in
       end
 
       # Request timestamp.
