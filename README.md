@@ -506,6 +506,13 @@ slack_request = Slack::Events::Request.new(http_request)
 slack_request.verify!
 ```
 
+To specify secrets on a per-request basis:
+```ruby
+Slack::Events::Request.new(http_request,
+                           signing_secret: signing_secret,
+                           signature_expires_in: signature_expires_in)
+```
+
 The `verify!` call may raise `Slack::Events::MissingSigningSecret`, `Slack::Events::InvalidSignature` or `Slack::Events::TimestampExpired` errors.
 
 ### Message Parsing
