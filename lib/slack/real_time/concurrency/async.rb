@@ -59,7 +59,7 @@ module Slack
 
           def close
             @closing = true
-            @driver.close if @driver
+            close_driver
             super
           end
 
@@ -71,6 +71,12 @@ module Slack
           end
 
           protected
+
+          def close_driver
+            @driver.close if @driver
+          rescue Errno::EPIPE => e
+            logger.debug("#{self.class}##{__method__}") { e }
+          end
 
           def build_ssl_context
             OpenSSL::SSL::SSLContext.new(:TLSv1_2_client).tap do |ctx|
