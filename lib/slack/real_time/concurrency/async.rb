@@ -43,11 +43,6 @@ module Slack
             end
           end
 
-          def disconnect!
-            super
-            @reactor.cancel
-          end
-
           def current_time
             ::Async::Clock.now
           end
@@ -57,14 +52,20 @@ module Slack
             run_loop
           end
 
+          # Send a close event and stop the reactor.
+          def disconnect!
+            @reactor.cancel
+            super
+            close
+          end
+
+          # Close the socket.
           def close
-            @closing = true
-            @driver.close if @driver
+            @socket.close if @socket
             super
           end
 
           def run_loop
-            @closing = false
             while @driver && @driver.next_event
               # $stderr.puts event.inspect
             end
