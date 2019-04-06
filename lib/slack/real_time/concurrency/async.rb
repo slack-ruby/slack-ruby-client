@@ -5,10 +5,6 @@ module Slack
   module RealTime
     module Concurrency
       module Async
-        class Reactor < ::Async::Reactor
-          def_delegators :@timers, :cancel
-        end
-
         class Client < ::Async::WebSocket::Client
           extend ::Forwardable
           def_delegators :@driver, :on, :text, :binary, :emit
@@ -18,15 +14,23 @@ module Slack
           attr_reader :client
 
           def start_async(client)
-            @reactor = Reactor.new
+            @reactor = ::Async::Reactor.new
+            
             Thread.new do
-              if client.run_ping?
-                @reactor.every(client.websocket_ping) do
-                  client.run_ping!
-                end
-              end
               @reactor.run do |task|
-                task.async do
+                if client.run_ping?
+                  task.async do |subtask|
+                    subtask.annotate "client keep-alive"
+                    
+                    while true
+                      subtask.sleep client.websocket_ping
+                      client.run_ping!
+                    end
+                  end
+                end
+                
+                task.async do |subtask|
+                  subtask.annotate "client run-loop"
                   client.run_loop
                 end
               end
@@ -50,13 +54,6 @@ module Slack
           def connect!
             super
             run_loop
-          end
-
-          # Send a close event and stop the reactor.
-          def disconnect!
-            @reactor.cancel
-            super
-            close
           end
 
           # Close the socket.
