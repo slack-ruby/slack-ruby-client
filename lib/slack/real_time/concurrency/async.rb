@@ -13,25 +13,28 @@ module Slack
         class Socket < Slack::RealTime::Socket
           attr_reader :client
 
+          def start_sync(client)
+            start_reactor(client).wait
+          end
+
           def start_async(client)
-            @reactor = ::Async::Reactor.new
-
             Thread.new do
-              @reactor.run do |task|
-                if client.run_ping?
-                  task.async do |subtask|
-                    subtask.annotate 'client keep-alive'
+              start_reactor(client)
+            end
+          end
 
-                    loop do
-                      subtask.sleep client.websocket_ping
-                      client.run_ping!
-                    end
-                  end
-                end
+          def start_reactor(client)
+            Async do |task|
+              self.restart_async(client, @url)
 
+              if client.run_ping?
                 task.async do |subtask|
-                  subtask.annotate 'client run-loop'
-                  client.run_loop
+                  subtask.annotate 'client keep-alive'
+
+                  while true
+                    subtask.sleep client.websocket_ping
+                    run_ping!
+                  end
                 end
               end
             end
@@ -40,9 +43,13 @@ module Slack
           def restart_async(client, new_url)
             @url = new_url
             @last_message_at = current_time
-            return unless @reactor
 
-            @reactor.async do
+            if @client_task
+              @client_task.stop
+            end
+
+            @client_task = task.async do |subtask|
+              subtask.annotate 'client run-loop'
               client.run_loop
             end
           end
