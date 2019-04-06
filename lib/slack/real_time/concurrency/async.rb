@@ -15,22 +15,22 @@ module Slack
 
           def start_async(client)
             @reactor = ::Async::Reactor.new
-            
+
             Thread.new do
               @reactor.run do |task|
                 if client.run_ping?
                   task.async do |subtask|
-                    subtask.annotate "client keep-alive"
-                    
-                    while true
+                    subtask.annotate 'client keep-alive'
+
+                    loop do
                       subtask.sleep client.websocket_ping
                       client.run_ping!
                     end
                   end
                 end
-                
+
                 task.async do |subtask|
-                  subtask.annotate "client run-loop"
+                  subtask.annotate 'client run-loop'
                   client.run_loop
                 end
               end

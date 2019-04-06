@@ -40,7 +40,7 @@ module Slack
 
       def disconnect!
         @driver.close
-        self.close
+        close
       end
 
       def connected?
