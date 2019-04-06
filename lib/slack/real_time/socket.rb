@@ -18,9 +18,9 @@ module Slack
       def send_data(message)
         logger.debug("#{self.class}##{__method__}") { message }
         case message
-        when Numeric then driver.text(message.to_s)
-        when String  then driver.text(message)
-        when Array   then driver.binary(message)
+        when Numeric then @driver.text(message.to_s)
+        when String  then @driver.text(message)
+        when Array   then @driver.binary(message)
         else false
         end
       end
@@ -29,21 +29,21 @@ module Slack
         return if connected?
 
         connect
-        logger.debug("#{self.class}##{__method__}") { driver.class }
+        logger.debug("#{self.class}##{__method__}") { @driver.class }
 
-        driver.on :message do
+        @driver.on :message do
           @last_message_at = current_time
         end
 
-        yield driver if block_given?
+        yield @driver if block_given?
       end
 
       def disconnect!
-        driver.close
+        @driver.close
       end
 
       def connected?
-        !driver.nil?
+        !@driver.nil?
       end
 
       def start_sync(client)
