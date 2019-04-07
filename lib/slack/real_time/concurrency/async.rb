@@ -1,4 +1,5 @@
 require 'async/websocket'
+require 'async/notification'
 require 'async/clock'
 
 module Slack
@@ -25,18 +26,34 @@ module Slack
 
           def start_reactor(client)
             Async do |task|
-              self.restart_async(client, @url)
+              @restart = ::Async::Notification.new
 
               if client.run_ping?
-                task.async do |subtask|
+                @ping_task = task.async do |subtask|
                   subtask.annotate 'client keep-alive'
 
-                  while true
+                  # The timer task will naturally exit after the driver is set to nil.
+                  while @restart
                     subtask.sleep client.websocket_ping
-                    run_ping!
+                    client.run_ping! if @restart
                   end
                 end
               end
+
+              while @restart
+                if @client_task
+                  @client_task.stop
+                end
+
+                @client_task = task.async do |subtask|
+                  subtask.annotate 'client run-loop'
+                  client.run_loop
+                end
+
+                @restart.wait
+              end
+
+              @ping_task.stop if @ping_task
             end
           end
 
@@ -44,14 +61,7 @@ module Slack
             @url = new_url
             @last_message_at = current_time
 
-            if @client_task
-              @client_task.stop
-            end
-
-            @client_task = task.async do |subtask|
-              subtask.annotate 'client run-loop'
-              client.run_loop
-            end
+            @restart.signal if @restart
           end
 
           def current_time
@@ -61,6 +71,16 @@ module Slack
           def connect!
             super
             run_loop
+          end
+
+          # Kill the restart/ping loop.
+          def disconnect!
+            super
+          ensure
+            if restart = @restart
+              @restart = nil
+              restart.signal
+            end
           end
 
           # Close the socket.
