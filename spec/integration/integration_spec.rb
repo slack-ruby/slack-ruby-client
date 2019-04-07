@@ -36,7 +36,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
         logger.debug "connection.on :open, data=#{data}"
         queue.push :opened
       end
-      
+
       yield driver if block_given?
     end
   end

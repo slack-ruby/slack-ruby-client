@@ -41,9 +41,7 @@ module Slack
               end
 
               while @restart
-                if @client_task
-                  @client_task.stop
-                end
+                @client_task.stop if @client_task
 
                 @client_task = task.async do |subtask|
                   subtask.annotate 'client run-loop'
@@ -57,7 +55,7 @@ module Slack
             end
           end
 
-          def restart_async(client, new_url)
+          def restart_async(_client, new_url)
             @url = new_url
             @last_message_at = current_time
 

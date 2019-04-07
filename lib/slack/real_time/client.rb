@@ -105,9 +105,9 @@ module Slack
       end
 
       # Ensure the server is running, and ping the remote server if no other messages were sent.
-      def keep_alive
+      def keep_alive?
         # We can't ping the remote server if we aren't connected.
-        return false if @socket.nil? or !@socket.connected?
+        return false if @socket.nil? || !@socket.connected?
 
         time_since_last_message = @socket.time_since_last_message
 
@@ -115,21 +115,19 @@ module Slack
         return true if time_since_last_message < websocket_ping
 
         # If the server has not responded for a while:
-        if time_since_last_message > (websocket_ping * 2)
-          return false
-        end
+        return false if time_since_last_message > (websocket_ping * 2)
 
         # Kick off the next ping message:
-        self.ping
+        ping
 
-        return true
+        true
       end
 
       # Check if the remote server is responsive, and if not, restart the connection.
       def run_ping!
-        unless self.keep_alive
-          restart_async
-        end
+        return if keep_alive?
+
+        restart_async
       end
 
       def run_ping?
