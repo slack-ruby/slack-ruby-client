@@ -38,8 +38,10 @@ module Slack
         yield @driver if block_given?
       end
 
+      # Gracefully shut down the connection.
       def disconnect!
         @driver.close
+      ensure
         close
       end
 
@@ -74,7 +76,11 @@ module Slack
       end
 
       def close
-        @driver = nil
+        # When you call `driver.emit(:close)`, it will typically end up calling `client.close` which will call `@socket.close` and end up back here. In order to break this infinite recursion, we check and set `@driver = nil` before invoking `client.close`.
+        if driver = @driver
+          @driver = nil
+          driver.emit(:close)
+        end
       end
 
       protected

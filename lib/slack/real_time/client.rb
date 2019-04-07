@@ -81,8 +81,6 @@ module Slack
 
       def run_loop
         @socket.connect! do |driver|
-          @callback.call(driver) if @callback
-
           driver.on :open do |event|
             logger.debug("#{self.class}##{__method__}") { event.class.name }
             open(event)
@@ -100,6 +98,9 @@ module Slack
             close(event)
             callback(event, :closed)
           end
+
+          # This must be called last to ensure any events are registered before invoking user code.
+          @callback.call(driver) if @callback
         end
       end
 

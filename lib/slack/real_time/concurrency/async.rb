@@ -65,8 +65,12 @@ module Slack
 
           # Close the socket.
           def close
-            @socket.close if @socket
             super
+          ensure
+            if @socket
+              @socket.close
+              @socket = nil
+            end
           end
 
           def run_loop

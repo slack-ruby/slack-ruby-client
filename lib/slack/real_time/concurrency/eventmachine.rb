@@ -56,11 +56,6 @@ module Slack
             @thread = nil
           end
 
-          def close
-            driver.close if driver
-            super
-          end
-
           def send_data(message)
             logger.debug("#{self.class}##{__method__}") { message }
             driver.send(message)
