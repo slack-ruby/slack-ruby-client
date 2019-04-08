@@ -78,12 +78,17 @@ begin
 
           describe '#disconnect!' do
             it 'closes and nils the websocket' do
+              expect(ws).to receive(:emit)
               expect(ws).to receive(:close)
               socket.disconnect!
             end
           end
 
           context 'consumes data' do
+            let(:tcp_socket) { double(::Celluloid::IO::SSLSocket, connect: true) }
+            before do
+              allow_any_instance_of(described_class).to receive(:build_socket).and_return(tcp_socket)
+            end
             it 'runs' do
               expect(ws).to receive(:emit)
               expect(ws).to receive(:start)
