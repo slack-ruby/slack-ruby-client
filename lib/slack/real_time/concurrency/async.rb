@@ -44,8 +44,13 @@ module Slack
                 @client_task.stop if @client_task
 
                 @client_task = task.async do |subtask|
-                  subtask.annotate 'client run-loop'
-                  client.run_loop
+                  begin
+                    subtask.annotate 'client run-loop'
+                    client.run_loop
+                  rescue ::Async::Wrapper::Cancelled => e
+                    # Will get restarted by ping worker.
+                    client.logger.warn(subtask.to_s) { e.message }
+                  end
                 end
 
                 @restart.wait
