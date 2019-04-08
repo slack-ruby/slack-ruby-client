@@ -18,9 +18,9 @@ module Slack
       def send_data(message)
         logger.debug("#{self.class}##{__method__}") { message }
         case message
-        when Numeric then driver.text(message.to_s)
-        when String  then driver.text(message)
-        when Array   then driver.binary(message)
+        when Numeric then @driver.text(message.to_s)
+        when String  then @driver.text(message)
+        when Array   then @driver.binary(message)
         else false
         end
       end
@@ -29,21 +29,24 @@ module Slack
         return if connected?
 
         connect
-        logger.debug("#{self.class}##{__method__}") { driver.class }
+        logger.debug("#{self.class}##{__method__}") { @driver.class }
 
-        driver.on :message do
+        @driver.on :message do
           @last_message_at = current_time
         end
 
-        yield driver if block_given?
+        yield @driver if block_given?
       end
 
+      # Gracefully shut down the connection.
       def disconnect!
-        driver.close
+        @driver.close
+      ensure
+        close
       end
 
       def connected?
-        !driver.nil?
+        !@driver.nil?
       end
 
       def start_sync(client)
@@ -73,7 +76,11 @@ module Slack
       end
 
       def close
-        @driver = nil
+        # When you call `driver.emit(:close)`, it will typically end up calling `client.close` which will call `@socket.close` and end up back here. In order to break this infinite recursion, we check and set `@driver = nil` before invoking `client.close`.
+        if driver = @driver
+          @driver = nil
+          driver.emit(:close)
+        end
       end
 
       protected

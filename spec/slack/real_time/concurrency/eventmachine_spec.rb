@@ -27,6 +27,7 @@ begin
       describe '#disconnect!' do
         it 'closes and nils the websocket' do
           socket.instance_variable_set('@driver', ws)
+          expect(ws).to receive(:emit).with(:close)
           expect(ws).to receive(:close)
           socket.disconnect!
         end

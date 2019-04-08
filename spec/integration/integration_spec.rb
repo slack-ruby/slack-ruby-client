@@ -19,8 +19,6 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     Slack.configure do |slack|
       slack.logger = logger
     end
-
-    @queue = QueueWithTimeout.new
   end
 
   after do
@@ -29,15 +27,17 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
 
-  let(:queue) { @queue }
+  let!(:queue) { @queue = QueueWithTimeout.new }
 
   def start
     # starts the client and pushes an item on a queue when connected
     client.start_async do |driver|
       driver.on :open do |data|
         logger.debug "connection.on :open, data=#{data}"
-        queue.push nil
+        queue.push :opened
       end
+
+      yield driver if block_given?
     end
   end
 
@@ -49,16 +49,16 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     client.on :close do
       logger.info 'Disconnecting ...'
       # pushes another item to the queue when disconnected
-      queue.push nil if @queue
+      queue.push :closed
     end
   end
 
-  def start_server
-    dt = rand(2..6)
+  def start_server(&block)
+    dt = rand(10..20)
     logger.debug "#start_server, waiting #{dt} second(s)"
     sleep dt # prevent Slack 429 rate limit errors
     # start server and wait for on :open
-    @server = start
+    @server = start(&block)
     logger.debug "started #{@server}"
     queue.pop_with_timeout(5)
   end
@@ -72,22 +72,12 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     @queue = nil
   end
 
-  def stop_server
-    logger.debug '#stop_server'
-    client.stop!
-    logger.debug '#stop_server, stopped'
-  end
-
   after do
-    wait_for_server
+    wait_for_server # wait for :closed to be pushed on queue
     @server.join if @server.is_a?(::Thread)
   end
 
   context 'client connected' do
-    before do
-      start_server
-    end
-
     let(:channel) { "@#{client.self.id}" }
 
     it 'responds to message' do
@@ -105,13 +95,17 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
         client.stop!
       end
 
+      start_server
+
       logger.debug "chat_postMessage, channel=#{channel}, message=#{message}"
       client.web_client.chat_postMessage channel: channel, text: message
     end
 
     it 'sends message' do
-      client.message(channel: channel, text: 'Hello world!')
-      client.stop!
+      start_server do
+        client.message(channel: channel, text: 'Hello world!')
+        client.stop!
+      end
     end
   end
 
@@ -127,19 +121,23 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   context 'with websocket_ping set' do
     before do
-      client.websocket_ping = 2
+      client.websocket_ping = 1
     end
+
     it 'sends pings' do
       @reply_to = nil
       client.on :pong do |data|
         @reply_to = data.reply_to
-        queue.push nil
+        queue.push :pong
         client.stop!
       end
+
       start_server
+
       queue.pop_with_timeout(5)
       expect(@reply_to).to be 1
     end
+
     it 'rebuilds the websocket connection when dropped' do
       @reply_to = nil
       client.on :pong do |data|
@@ -148,11 +146,13 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
           client.instance_variable_get(:@socket).close
         else
           expect(@reply_to).to be 2
-          queue.push nil
+          queue.push :pong
           client.stop!
         end
       end
+
       start_server
+
       queue.pop_with_timeout(10)
       queue.pop_with_timeout(10)
     end
@@ -162,16 +162,21 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     before do
       client.websocket_ping = 0
     end
+
     it 'does not send pings' do
       @reply_to = nil
+
       client.on :pong do |data|
         @reply_to = data.reply_to
       end
+
       client.on :hello do
         client.stop!
       end
+
       start_server
       wait_for_server
+
       expect(@reply_to).to be nil
     end
   end

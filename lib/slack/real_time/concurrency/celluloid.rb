@@ -46,7 +46,6 @@ module Slack
 
           def close
             @closing = true
-            driver.close if driver
             super
           end
 

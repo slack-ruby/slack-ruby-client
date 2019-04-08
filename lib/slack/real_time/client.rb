@@ -81,8 +81,6 @@ module Slack
 
       def run_loop
         @socket.connect! do |driver|
-          @callback.call(driver) if @callback
-
           driver.on :open do |event|
             logger.debug("#{self.class}##{__method__}") { event.class.name }
             open(event)
@@ -100,16 +98,35 @@ module Slack
             close(event)
             callback(event, :closed)
           end
+
+          # This must be called last to ensure any events are registered before invoking user code.
+          @callback.call(driver) if @callback
         end
       end
 
-      def run_ping!
-        time_since_last_message = @socket.time_since_last_message
-        return if time_since_last_message < websocket_ping
-        raise Slack::RealTime::Client::ClientNotStartedError if !@socket.connected? || time_since_last_message > (websocket_ping * 2)
+      # Ensure the server is running, and ping the remote server if no other messages were sent.
+      def keep_alive?
+        # We can't ping the remote server if we aren't connected.
+        return false if @socket.nil? || !@socket.connected?
 
+        time_since_last_message = @socket.time_since_last_message
+
+        # If the server responded within the specified time, we are okay:
+        return true if time_since_last_message < websocket_ping
+
+        # If the server has not responded for a while:
+        return false if time_since_last_message > (websocket_ping * 2)
+
+        # Kick off the next ping message:
         ping
-      rescue Slack::RealTime::Client::ClientNotStartedError
+
+        true
+      end
+
+      # Check if the remote server is responsive, and if not, restart the connection.
+      def run_ping!
+        return if keep_alive?
+
         restart_async
       end
 

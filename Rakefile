@@ -14,7 +14,7 @@ end
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
 
-task default: %i[rubocop spec]
+task default: %i[spec rubocop]
 
 load 'tasks/git.rake'
 load 'tasks/web.rake'
