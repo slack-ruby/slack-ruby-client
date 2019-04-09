@@ -29,21 +29,13 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   let!(:queue) { @queue = QueueWithTimeout.new }
 
-  def start
-    # starts the client and pushes an item on a queue when connected
-    client.start_async do |driver|
-      driver.on :open do |data|
-        logger.debug "connection.on :open, data=#{data}"
-        queue.push :opened
-      end
-
-      yield driver if block_given?
-    end
-  end
-
   before do
     client.on :hello do
       logger.info "Successfully connected, welcome '#{client.self.name}' to the '#{client.team.name}' team at https://#{client.team.domain}.slack.com."
+    end
+
+    client.on :message do |event|
+      logger.info " #{event.class}"
     end
 
     client.on :close do
@@ -53,14 +45,23 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     end
   end
 
-  def start_server(&block)
+  def start_server
     dt = rand(10..20)
     logger.debug "#start_server, waiting #{dt} second(s)"
     sleep dt # prevent Slack 429 rate limit errors
-    # start server and wait for on :open
-    @server = start(&block)
+    # starts the client and pushes an item on a queue when connected
+    @server = client.start_async do |driver|
+      driver.on :open do |data|
+        logger.debug "connection.on :open, data=#{data}"
+        queue.push :opened
+      end
+
+      driver.on :hello do |data|
+        logger.debug "connection.on :hello, data=#{data}"
+      end
+    end
     logger.debug "started #{@server}"
-    queue.pop_with_timeout(5)
+    expect(queue.pop_with_timeout(5)).to eq :opened
   end
 
   def wait_for_server
@@ -79,10 +80,9 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   context 'client connected' do
     let(:channel) { "@#{client.self.id}" }
+    let(:message) { SecureRandom.hex }
 
     it 'responds to message' do
-      message = SecureRandom.hex
-
       client.on :message do |data|
         logger.debug data
         # concurrent execution of tests causes messages to arrive in any order
@@ -102,10 +102,12 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
     end
 
     it 'sends message' do
-      start_server do
-        client.message(channel: channel, text: 'Hello world!')
+      client.on :hello do
+        expect(client.message(channel: channel, text: message)).to be true
         client.stop!
       end
+
+      start_server
     end
   end
 
