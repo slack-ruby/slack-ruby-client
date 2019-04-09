@@ -61,6 +61,13 @@ module Slack
             driver.send(message)
           end
 
+          def close
+            if driver = @driver
+              @driver = nil
+              driver.close
+            end
+          end
+
           protected
 
           # @return [Thread]
