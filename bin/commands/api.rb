@@ -2,8 +2,8 @@
 
 desc 'Api methods.'
 command 'api' do |g|
-  g.desc 'Checks API calling code.'
-  g.long_desc %( Checks API calling code. )
+  g.desc 'This method helps you test your calling code.'
+  g.long_desc %( This method helps you test your calling code. )
   g.command 'test' do |c|
     c.flag 'error', desc: 'Error response to return.'
     c.flag 'foo', desc: 'example property to return.'

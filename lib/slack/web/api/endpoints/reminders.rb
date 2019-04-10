@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Reminders
           #
-          # Creates a reminder.
+          # This method creates a reminder.
           #
           # @option options [Object] :text
           #   The content of the reminder.
@@ -24,7 +24,7 @@ module Slack
           end
 
           #
-          # Marks a reminder as complete.
+          # This method completes a reminder.
           #
           # @option options [Object] :reminder
           #   The ID of the reminder to be marked as complete.
@@ -36,7 +36,7 @@ module Slack
           end
 
           #
-          # Deletes a reminder.
+          # This method deletes a reminder.
           #
           # @option options [Object] :reminder
           #   The ID of the reminder.
@@ -48,7 +48,7 @@ module Slack
           end
 
           #
-          # Gets information about a reminder.
+          # This method returns information about a reminder.
           #
           # @option options [Object] :reminder
           #   The ID of the reminder.
@@ -60,7 +60,7 @@ module Slack
           end
 
           #
-          # Lists all reminders created by or for a given user.
+          # This method lists all reminders created by or for a given user.
           #
           # @see https://api.slack.com/methods/reminders.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.list.json

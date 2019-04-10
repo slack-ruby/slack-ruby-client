@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Im
           #
-          # Close a direct message channel.
+          # This method closes a direct message channel.
           #
           # @option options [im] :channel
           #   Direct message channel to close.
@@ -19,7 +19,9 @@ module Slack
           end
 
           #
-          # Fetches history of messages and events from direct message channel.
+          # This method returns a portion of messages/events from the specified direct message channel.
+          # To read the entire history for a direct message channel, call the method with no latest or
+          # oldest arguments, and then continue paging using the instructions below.
           #
           # @option options [im] :channel
           #   Direct message channel to fetch history for.
@@ -40,7 +42,7 @@ module Slack
           end
 
           #
-          # Lists direct message channels for the calling user.
+          # Don't use this method. Use conversations.list instead.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -59,7 +61,7 @@ module Slack
           end
 
           #
-          # Sets the read cursor in a direct message channel.
+          # This method moves the read cursor in a direct message channel.
           #
           # @option options [im] :channel
           #   Direct message channel to set reading cursor in.
@@ -75,7 +77,7 @@ module Slack
           end
 
           #
-          # Opens a direct message channel.
+          # This method opens a direct message channel with another member of your Slack team.
           #
           # @option options [user] :user
           #   User to open a direct message channel with.
@@ -92,7 +94,7 @@ module Slack
           end
 
           #
-          # Retrieve a thread of messages posted to a direct message conversation
+          # This method returns an entire thread (a message plus all the messages in reply to it).
           #
           # @option options [im] :channel
           #   Direct message channel to fetch thread from.

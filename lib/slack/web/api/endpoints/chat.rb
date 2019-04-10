@@ -24,7 +24,7 @@ module Slack
           end
 
           #
-          # Deletes a message.
+          # This method deletes a message from a channel.
           #
           # @option options [channel] :channel
           #   Channel containing the message to be deleted.
@@ -42,7 +42,25 @@ module Slack
           end
 
           #
-          # Retrieve a permalink URL for a specific extant message
+          # This method deletes a pending scheduled message before it is sent.
+          #
+          # @option options [channel] :channel
+          #   The channel the scheduled_message is posting to.
+          # @option options [Object] :scheduled_message_id
+          #   scheduled_message_id returned from call to chat.scheduleMessage.
+          # @option options [Object] :as_user
+          #   Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
+          # @see https://api.slack.com/methods/chat.deleteScheduledMessage
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.deleteScheduledMessage.json
+          def chat_deleteScheduledMessage(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :scheduled_message_id missing') if options[:scheduled_message_id].nil?
+            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            post('chat.deleteScheduledMessage', options)
+          end
+
+          #
+          # Easily exchange a message timestamp and a channel ID for a friendly HTTP-based permalink to that message. Handles message threads and all conversation types.
           #
           # @option options [channel] :channel
           #   The ID of the conversation or channel containing the message.
@@ -58,7 +76,7 @@ module Slack
           end
 
           #
-          # Share a me message into a channel.
+          # This method sends a me message to a channel from the calling user.
           #
           # @option options [channel] :channel
           #   Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
@@ -73,7 +91,7 @@ module Slack
           end
 
           #
-          # Sends an ephemeral message to a user in a channel.
+          # This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation.
           #
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
@@ -92,7 +110,7 @@ module Slack
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @option options [Object] :thread_ts
-          #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
+          #   Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
           # @see https://api.slack.com/methods/chat.postEphemeral
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
@@ -116,7 +134,7 @@ module Slack
           end
 
           #
-          # Sends a message to a channel.
+          # This method posts a message to a public channel, private channel, or direct message/IM channel.
           #
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
@@ -169,14 +187,50 @@ module Slack
           end
 
           #
-          # Provide custom unfurl behavior for user-posted URLs
+          # This method schedules a message for delivery to a public channel, private channel, or direct message/IM channel at a specified time in the future.
+          #
+          # @option options [channel] :channel
+          #   Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.
+          # @option options [Object] :post_at
+          #   Unix EPOCH timestamp of time in future to send the message.
+          # @option options [Object] :text
+          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation.
+          # @option options [Object] :as_user
+          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
+          # @option options [Object] :attachments
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [Object] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          # @option options [Object] :link_names
+          #   Find and link channel names and usernames.
+          # @option options [Object] :parse
+          #   Change how messages are treated. Defaults to none. See below.
+          # @option options [Object] :reply_broadcast
+          #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
+          # @option options [Object] :thread_ts
+          #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
+          # @option options [Object] :unfurl_links
+          #   Pass true to enable unfurling of primarily text-based content.
+          # @option options [Object] :unfurl_media
+          #   Pass false to disable unfurling of media content.
+          # @see https://api.slack.com/methods/chat.scheduleMessage
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.scheduleMessage.json
+          def chat_scheduleMessage(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :post_at missing') if options[:post_at].nil?
+            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
+            post('chat.scheduleMessage', options)
+          end
+
+          #
+          # This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens.
           #
           # @option options [channel] :channel
           #   Channel ID of the message.
           # @option options [timestamp] :ts
           #   Timestamp of the message to add unfurl behavior to.
           # @option options [Object] :unfurls
-          #   URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl message attachments.
+          #   URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.
           # @option options [Object] :user_auth_message
           #   Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior.
           # @option options [Object] :user_auth_required
@@ -194,7 +248,7 @@ module Slack
           end
 
           #
-          # Updates a message.
+          # This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.
           #
           # @option options [channel] :channel
           #   Channel containing the message to be updated.

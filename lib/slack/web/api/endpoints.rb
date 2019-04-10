@@ -10,6 +10,7 @@ require_relative 'endpoints/auth'
 require_relative 'endpoints/bots'
 require_relative 'endpoints/channels'
 require_relative 'endpoints/chat'
+require_relative 'endpoints/chat_scheduledMessages'
 require_relative 'endpoints/conversations'
 require_relative 'endpoints/dialog'
 require_relative 'endpoints/dnd'
@@ -54,6 +55,7 @@ module Slack
         include Bots
         include Channels
         include Chat
+        include ChatScheduledmessages
         include Conversations
         include Dialog
         include Dnd

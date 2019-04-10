@@ -2,8 +2,8 @@
 
 desc 'Pins methods.'
 command 'pins' do |g|
-  g.desc 'Pins an item to a channel.'
-  g.long_desc %( Pins an item to a channel. )
+  g.desc 'This method pins an item (file, file comment, channel message, or group message) to a particular channel.'
+  g.long_desc %( This method pins an item (file, file comment, channel message, or group message) to a particular channel. The channel argument is required and one of file, file_comment, or timestamp must also be specified. )
   g.command 'add' do |c|
     c.flag 'channel', desc: 'Channel to pin the item in.'
     c.flag 'file', desc: 'File to pin.'
@@ -14,8 +14,8 @@ command 'pins' do |g|
     end
   end
 
-  g.desc 'Lists items pinned to a channel.'
-  g.long_desc %( Lists items pinned to a channel. )
+  g.desc 'This method lists the items pinned to a channel.'
+  g.long_desc %( This method lists the items pinned to a channel. )
   g.command 'list' do |c|
     c.flag 'channel', desc: 'Channel to get pinned items for.'
     c.action do |_global_options, options, _args|
@@ -23,8 +23,8 @@ command 'pins' do |g|
     end
   end
 
-  g.desc 'Un-pins an item from a channel.'
-  g.long_desc %( Un-pins an item from a channel. )
+  g.desc 'This method un-pins an item (file, file comment, channel message, or group message) from a channel.'
+  g.long_desc %( This method un-pins an item (file, file comment, channel message, or group message) from a channel. The channel argument is required and one of file, file_comment, or timestamp must also be specified. )
   g.command 'remove' do |c|
     c.flag 'channel', desc: 'Channel where the item is pinned to.'
     c.flag 'file', desc: 'File to un-pin.'

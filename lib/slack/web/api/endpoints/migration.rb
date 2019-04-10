@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Migration
           #
-          # For Enterprise Grid workspaces, map local user IDs to global user IDs
+          # Easily convert your vintage user IDs to Enterprise Grid-friendly global user IDs.
           #
           # @option options [Object] :users
           #   A comma-separated list of user ids, up to 400 per request.

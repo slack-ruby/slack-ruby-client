@@ -2,8 +2,8 @@
 
 desc 'Oauth methods.'
 command 'oauth' do |g|
-  g.desc 'Exchanges a temporary OAuth verifier code for an access token.'
-  g.long_desc %( Exchanges a temporary OAuth verifier code for an access token. )
+  g.desc 'This method allows you to exchange a temporary OAuth code for an API access token.'
+  g.long_desc %( This method allows you to exchange a temporary OAuth code for an API access token. )
   g.command 'access' do |c|
     c.flag 'client_id', desc: 'Issued when you created your application.'
     c.flag 'client_secret', desc: 'Issued when you created your application.'
@@ -15,8 +15,8 @@ command 'oauth' do |g|
     end
   end
 
-  g.desc 'Exchanges a temporary OAuth verifier code for a workspace token.'
-  g.long_desc %( Exchanges a temporary OAuth verifier code for a workspace token. )
+  g.desc 'This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.'
+  g.long_desc %( This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months. )
   g.command 'token' do |c|
     c.flag 'client_id', desc: 'Issued when you created your application.'
     c.flag 'client_secret', desc: 'Issued when you created your application.'

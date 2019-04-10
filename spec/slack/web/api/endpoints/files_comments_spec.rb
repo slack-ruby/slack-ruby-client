@@ -4,31 +4,12 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::FilesComments do
   let(:client) { Slack::Web::Client.new }
-  context 'files.comments_add' do
-    it 'requires comment' do
-      expect { client.files_comments_add(file: 'F1234467890') }.to raise_error ArgumentError, /Required arguments :comment missing/
-    end
-    it 'requires file' do
-      expect { client.files_comments_add(comment: 'Everyone should take a moment to read this file.') }.to raise_error ArgumentError, /Required arguments :file missing/
-    end
-  end
   context 'files.comments_delete' do
     it 'requires file' do
       expect { client.files_comments_delete(id: 'Fc1234567890') }.to raise_error ArgumentError, /Required arguments :file missing/
     end
     it 'requires id' do
       expect { client.files_comments_delete(file: 'F1234567890') }.to raise_error ArgumentError, /Required arguments :id missing/
-    end
-  end
-  context 'files.comments_edit' do
-    it 'requires comment' do
-      expect { client.files_comments_edit(file: 'F1234567890', id: 'Fc1234567890') }.to raise_error ArgumentError, /Required arguments :comment missing/
-    end
-    it 'requires file' do
-      expect { client.files_comments_edit(comment: 'Everyone should take a moment to read this file, seriously.', id: 'Fc1234567890') }.to raise_error ArgumentError, /Required arguments :file missing/
-    end
-    it 'requires id' do
-      expect { client.files_comments_edit(comment: 'Everyone should take a moment to read this file, seriously.', file: 'F1234567890') }.to raise_error ArgumentError, /Required arguments :id missing/
     end
   end
 end

@@ -2,34 +2,13 @@
 
 desc 'FilesComments methods.'
 command 'files_comments' do |g|
-  g.desc 'Add a comment to an existing file.'
-  g.long_desc %( Add a comment to an existing file. )
-  g.command 'add' do |c|
-    c.flag 'comment', desc: 'Text of the comment to add.'
-    c.flag 'file', desc: 'File to add a comment to.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_comments_add(options))
-    end
-  end
-
-  g.desc 'Deletes an existing comment on a file.'
-  g.long_desc %( Deletes an existing comment on a file. )
+  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
+  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
   g.command 'delete' do |c|
     c.flag 'file', desc: 'File to delete a comment from.'
     c.flag 'id', desc: 'The comment to delete.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_comments_delete(options))
-    end
-  end
-
-  g.desc 'Edit an existing file comment.'
-  g.long_desc %( Edit an existing file comment. )
-  g.command 'edit' do |c|
-    c.flag 'comment', desc: 'Text of the comment to edit.'
-    c.flag 'file', desc: 'File containing the comment to edit.'
-    c.flag 'id', desc: 'The comment to edit.'
-    c.action do |_global_options, options, _args|
-      puts JSON.dump($client.files_comments_edit(options))
     end
   end
 end
