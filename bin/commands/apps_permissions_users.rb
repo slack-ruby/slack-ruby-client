@@ -2,8 +2,8 @@
 
 desc 'AppsPermissionsUsers methods.'
 command 'apps_permissions_users' do |g|
-  g.desc 'Returns list of user grants and corresponding scopes this app has on a team.'
-  g.long_desc %( Returns list of user grants and corresponding scopes this app has on a team. )
+  g.desc 'This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.'
+  g.long_desc %( This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months. )
   g.command 'list' do |c|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'limit', desc: 'The maximum number of items to return.'
@@ -12,8 +12,8 @@ command 'apps_permissions_users' do |g|
     end
   end
 
-  g.desc 'Enables an app to trigger a permissions modal to grant an app access to a user access scope.'
-  g.long_desc %( Enables an app to trigger a permissions modal to grant an app access to a user access scope. )
+  g.desc 'This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.'
+  g.long_desc %( This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months. )
   g.command 'request' do |c|
     c.flag 'scopes', desc: 'A comma separated list of user scopes to request for.'
     c.flag 'trigger_id', desc: 'Token used to trigger the request.'

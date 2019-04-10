@@ -2,8 +2,8 @@
 
 desc 'Reactions methods.'
 command 'reactions' do |g|
-  g.desc 'Adds a reaction to an item.'
-  g.long_desc %( Adds a reaction to an item. )
+  g.desc 'This method adds a reaction (emoji) to a message.'
+  g.long_desc %( This method adds a reaction (emoji) to a message. Now that file threads work the way you'd expect, the file and file_comment arguments are deprecated. Specify channel and timestamp instead. )
   g.command 'add' do |c|
     c.flag 'name', desc: 'Reaction (emoji) name.'
     c.flag 'channel', desc: 'Channel where the message to add reaction to was posted.'
@@ -15,8 +15,8 @@ command 'reactions' do |g|
     end
   end
 
-  g.desc 'Gets reactions for an item.'
-  g.long_desc %( Gets reactions for an item. )
+  g.desc 'This method returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message).'
+  g.long_desc %( This method returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message). )
   g.command 'get' do |c|
     c.flag 'channel', desc: 'Channel where the message to get reactions for was posted.'
     c.flag 'file', desc: 'File to get reactions for.'
@@ -28,8 +28,8 @@ command 'reactions' do |g|
     end
   end
 
-  g.desc 'Lists reactions made by a user.'
-  g.long_desc %( Lists reactions made by a user. )
+  g.desc 'This method returns a list of all items (file, file comment, channel message, group message, or direct message) reacted to by a user.'
+  g.long_desc %( This method returns a list of all items (file, file comment, channel message, group message, or direct message) reacted to by a user. )
   g.command 'list' do |c|
     c.flag 'cursor', desc: "Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection. See pagination for more details."
     c.flag 'full', desc: 'If true always return the complete reaction list.'
@@ -40,8 +40,8 @@ command 'reactions' do |g|
     end
   end
 
-  g.desc 'Removes a reaction from an item.'
-  g.long_desc %( Removes a reaction from an item. )
+  g.desc 'This method removes a reaction (emoji) from an item (file, file comment, channel message, group message, or direct message).'
+  g.long_desc %( This method removes a reaction (emoji) from an item (file, file comment, channel message, group message, or direct message). One of file, file_comment, or the combination of channel and timestamp must be specified. )
   g.command 'remove' do |c|
     c.flag 'name', desc: 'Reaction (emoji) name.'
     c.flag 'channel', desc: 'Channel where the message to remove reaction from was posted.'

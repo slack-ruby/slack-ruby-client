@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module AppsPermissions
           #
-          # Returns list of permissions this app has on a team.
+          # This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.
           #
           # @see https://api.slack.com/methods/apps.permissions.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.permissions/apps.permissions.info.json
@@ -15,7 +15,7 @@ module Slack
           end
 
           #
-          # Allows an app to request additional scopes
+          # This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.
           #
           # @option options [Object] :scopes
           #   A comma separated list of scopes to request for.

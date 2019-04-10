@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Rtm
           #
-          # Starts a Real Time Messaging session.
+          # This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.
           #
           # @option options [Object] :batch_presence_aware
           #   Batch presence deliveries via subscription. Enabling changes the shape of presence_change events. See batch presence.
@@ -19,7 +19,7 @@ module Slack
           end
 
           #
-          # Starts a Real Time Messaging session.
+          # This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.
           #
           # @option options [Object] :batch_presence_aware
           #   Batch presence deliveries via subscription. Enabling changes the shape of presence_change events. See batch presence.

@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Conversations
           #
-          # Archives a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   ID of conversation to archive.
@@ -19,7 +19,7 @@ module Slack
           end
 
           #
-          # Closes a direct message or multi-person direct message.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation to close.
@@ -32,7 +32,7 @@ module Slack
           end
 
           #
-          # Initiates a public or private channel-based conversation
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [Object] :name
           #   Name of the public or private channel to create.
@@ -48,7 +48,7 @@ module Slack
           end
 
           #
-          # Fetches a conversation's history of messages and events.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation ID to fetch history for.
@@ -77,7 +77,7 @@ module Slack
           end
 
           #
-          # Retrieve information about a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation ID to learn more about.
@@ -94,7 +94,7 @@ module Slack
           end
 
           #
-          # Invites users to a channel.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   The ID of the public or private channel to invite user(s) to.
@@ -110,7 +110,7 @@ module Slack
           end
 
           #
-          # Joins an existing conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   ID of conversation to join.
@@ -123,7 +123,7 @@ module Slack
           end
 
           #
-          # Removes a user from a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   ID of conversation to remove user from.
@@ -140,7 +140,7 @@ module Slack
           end
 
           #
-          # Leaves a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation to leave.
@@ -153,7 +153,7 @@ module Slack
           end
 
           #
-          # Lists all channels in a Slack team.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -176,7 +176,7 @@ module Slack
           end
 
           #
-          # Retrieve members of a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   ID of the conversation to retrieve members for.
@@ -199,7 +199,7 @@ module Slack
           end
 
           #
-          # Opens or resumes a direct message or multi-person direct message.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Resume a conversation by supplying an im or mpim's ID. Or provide the users field instead.
@@ -215,7 +215,7 @@ module Slack
           end
 
           #
-          # Renames a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   ID of conversation to rename.
@@ -231,7 +231,7 @@ module Slack
           end
 
           #
-          # Retrieve a thread of messages posted to a conversation
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation ID to fetch thread from.
@@ -263,7 +263,7 @@ module Slack
           end
 
           #
-          # Sets the purpose for a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation to set the purpose of.
@@ -279,7 +279,7 @@ module Slack
           end
 
           #
-          # Sets the topic for a conversation.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   Conversation to set the topic of.
@@ -295,7 +295,7 @@ module Slack
           end
 
           #
-          # Reverses conversation archival.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [channel] :channel
           #   ID of conversation to unarchive.

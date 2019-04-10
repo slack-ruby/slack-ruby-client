@@ -6,7 +6,8 @@ module Slack
       module Endpoints
         module Reactions
           #
-          # Adds a reaction to an item.
+          # This method adds a reaction (emoji) to a message.
+          # Now that file threads work the way you'd expect, the file and file_comment arguments are deprecated. Specify channel and timestamp instead.
           #
           # @option options [Object] :name
           #   Reaction (emoji) name.
@@ -27,7 +28,7 @@ module Slack
           end
 
           #
-          # Gets reactions for an item.
+          # This method returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message).
           #
           # @option options [channel] :channel
           #   Channel where the message to get reactions for was posted.
@@ -47,7 +48,7 @@ module Slack
           end
 
           #
-          # Lists reactions made by a user.
+          # This method returns a list of all items (file, file comment, channel message, group message, or direct message) reacted to by a user.
           #
           # @option options [Object] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
@@ -71,7 +72,8 @@ module Slack
           end
 
           #
-          # Removes a reaction from an item.
+          # This method removes a reaction (emoji) from an item (file, file comment, channel message, group message, or direct message).
+          # One of file, file_comment, or the combination of channel and timestamp must be specified.
           #
           # @option options [Object] :name
           #   Reaction (emoji) name.

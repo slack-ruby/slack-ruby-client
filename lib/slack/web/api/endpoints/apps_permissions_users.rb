@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module AppsPermissionsUsers
           #
-          # Returns list of user grants and corresponding scopes this app has on a team.
+          # This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -25,7 +25,7 @@ module Slack
           end
 
           #
-          # Enables an app to trigger a permissions modal to grant an app access to a user access scope.
+          # This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.
           #
           # @option options [Object] :scopes
           #   A comma separated list of user scopes to request for.

@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module UsersProfile
           #
-          # Retrieves a user's profile information.
+          # Use this method to retrieve a user's profile information.
           #
           # @option options [Object] :include_labels
           #   Include labels for each ID in custom profile fields.
@@ -20,7 +20,7 @@ module Slack
           end
 
           #
-          # Set the profile information for a user.
+          # Use this method to set a user's profile information, including name, email, current status, and other attributes.
           #
           # @option options [Object] :name
           #   Name of a single key to set. Usable only if profile is not passed.

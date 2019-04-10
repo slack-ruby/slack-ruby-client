@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Users
           #
-          # List conversations the calling user may access.
+          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -32,7 +32,7 @@ module Slack
           end
 
           #
-          # Delete the user profile photo
+          # This method allows the user to delete their profile image. It will clear whatever image is currently set.
           #
           # @see https://api.slack.com/methods/users.deletePhoto
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.deletePhoto.json
@@ -41,7 +41,8 @@ module Slack
           end
 
           #
-          # Gets user presence information.
+          # This method lets you find out information about a user's presence.
+          # Consult the presence documentation for more details.
           #
           # @option options [user] :user
           #   User to get presence info on. Defaults to the authed user.
@@ -54,7 +55,7 @@ module Slack
           end
 
           #
-          # Get a user's identity.
+          # After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity.
           #
           # @see https://api.slack.com/methods/users.identity
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.identity.json
@@ -63,7 +64,7 @@ module Slack
           end
 
           #
-          # Gets information about a user.
+          # This method returns information about a member of a workspace.
           #
           # @option options [user] :user
           #   User to get info on.
@@ -78,7 +79,7 @@ module Slack
           end
 
           #
-          # Lists all users in a Slack team.
+          # This method returns a list of all users in the workspace. This includes deleted/deactivated users.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -86,8 +87,6 @@ module Slack
           #   Set this to true to receive the locale for users. Defaults to false.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-          # @option options [Object] :presence
-          #   Deprecated. Whether to include presence data in the output. Defaults to false. Setting this to true reduces performance, especially with large teams.
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.list.json
           def users_list(options = {})
@@ -101,7 +100,7 @@ module Slack
           end
 
           #
-          # Find a user with an email address.
+          # Retrieve a single user by looking them up by their registered email address. Requires users:read.email.
           #
           # @option options [Object] :email
           #   An email address belonging to a user in the workspace.
@@ -113,7 +112,7 @@ module Slack
           end
 
           #
-          # Marked a user as active. Deprecated and non-functional.
+          # This method is no longer functional and the behavior it controlled is no longer offered. The method will no longer exist beginning May 8, 2018.
           #
           # @see https://api.slack.com/methods/users.setActive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setActive.json
@@ -122,7 +121,7 @@ module Slack
           end
 
           #
-          # Set the user profile photo
+          # This method allows the user to set their profile image. The caller can pass image data via image.
           #
           # @option options [Object] :image
           #   File contents via multipart/form-data.
@@ -140,7 +139,8 @@ module Slack
           end
 
           #
-          # Manually sets user presence.
+          # This method lets you set the calling user's manual presence.
+          # Consult the presence documentation for more details.
           #
           # @option options [Object] :presence
           #   Either auto or away.

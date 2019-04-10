@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Groups
           #
-          # Archives a private channel.
+          # This method archives a private channel.
           #
           # @option options [group] :channel
           #   Private channel to archive.
@@ -19,7 +19,7 @@ module Slack
           end
 
           #
-          # Creates a private channel.
+          # This method creates a private channel.
           #
           # @option options [Object] :name
           #   Name of private channel to create.
@@ -33,7 +33,7 @@ module Slack
           end
 
           #
-          # Clones and archives a private channel.
+          # This method takes an existing private channel and performs the following steps:
           #
           # @option options [group] :channel
           #   Private channel to clone and archive.
@@ -46,7 +46,9 @@ module Slack
           end
 
           #
-          # Fetches history of messages and events from a private channel.
+          # This method returns a portion of messages/events from the specified private channel.
+          # To read the entire history for a private channel, call the method with no latest or
+          # oldest arguments, and then continue paging using the instructions below.
           #
           # @option options [group] :channel
           #   Private channel to fetch history for.
@@ -67,7 +69,7 @@ module Slack
           end
 
           #
-          # Gets information about a private channel.
+          # Don't use this method. Use conversations.info instead.
           #
           # @option options [group] :channel
           #   Private channel to get info on.
@@ -82,7 +84,7 @@ module Slack
           end
 
           #
-          # Invites a user to a private channel.
+          # This method is used to invite a user to a private channel. The calling user must be a member of the private channel.
           #
           # @option options [group] :channel
           #   Private channel to invite user to.
@@ -99,7 +101,7 @@ module Slack
           end
 
           #
-          # Removes a user from a private channel.
+          # This method allows a user to remove another member from a private channel.
           #
           # @option options [group] :channel
           #   Private channel to remove user from.
@@ -116,7 +118,7 @@ module Slack
           end
 
           #
-          # Leaves a private channel.
+          # This method is used to leave a private channel.
           #
           # @option options [group] :channel
           #   Private channel to leave.
@@ -129,7 +131,7 @@ module Slack
           end
 
           #
-          # Lists private channels that the calling user has access to.
+          # Don't use this method. Use conversations.list instead.
           #
           # @option options [Object] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
@@ -152,7 +154,7 @@ module Slack
           end
 
           #
-          # Sets the read cursor in a private channel.
+          # This method moves the read cursor in a private channel.
           #
           # @option options [group] :channel
           #   Private channel to set reading cursor in.
@@ -168,7 +170,7 @@ module Slack
           end
 
           #
-          # Opens a private channel.
+          # This method opens a private channel.
           #
           # @option options [group] :channel
           #   Private channel to open.
@@ -181,7 +183,7 @@ module Slack
           end
 
           #
-          # Renames a private channel.
+          # This method renames a private channel.
           #
           # @option options [group] :channel
           #   Private channel to rename.
@@ -199,7 +201,7 @@ module Slack
           end
 
           #
-          # Retrieve a thread of messages posted to a private channel
+          # This method returns an entire thread (a message plus all the messages in reply to it).
           #
           # @option options [group] :channel
           #   Private channel to fetch thread from.
@@ -215,7 +217,7 @@ module Slack
           end
 
           #
-          # Sets the purpose for a private channel.
+          # This method is used to change the purpose of a private channel. The calling user must be a member of the private channel.
           #
           # @option options [group] :channel
           #   Private channel to set the purpose of.
@@ -231,7 +233,7 @@ module Slack
           end
 
           #
-          # Sets the topic for a private channel.
+          # This method is used to change the topic of a private channel. The calling user must be a member of the private channel.
           #
           # @option options [group] :channel
           #   Private channel to set the topic of.
@@ -247,7 +249,7 @@ module Slack
           end
 
           #
-          # Unarchives a private channel.
+          # This method unarchives a private channel.
           #
           # @option options [group] :channel
           #   Private channel to unarchive.

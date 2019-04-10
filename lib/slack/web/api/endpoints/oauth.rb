@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Oauth
           #
-          # Exchanges a temporary OAuth verifier code for an access token.
+          # This method allows you to exchange a temporary OAuth code for an API access token.
           #
           # @option options [Object] :client_id
           #   Issued when you created your application.
@@ -28,7 +28,7 @@ module Slack
           end
 
           #
-          # Exchanges a temporary OAuth verifier code for a workspace token.
+          # This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.
           #
           # @option options [Object] :client_id
           #   Issued when you created your application.

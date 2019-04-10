@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Files
           #
-          # Deletes a file.
+          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
           #
           # @option options [file] :file
           #   ID of file to delete.
@@ -35,7 +35,7 @@ module Slack
           end
 
           #
-          # Gets information about a team file.
+          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
           #
           # @option options [file] :file
           #   Specify a file by providing its ID.
@@ -57,7 +57,7 @@ module Slack
           end
 
           #
-          # Lists & filters team files.
+          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
@@ -66,18 +66,7 @@ module Slack
           # @option options [Object] :ts_to
           #   Filter files created before this timestamp (inclusive).
           # @option options [Object] :types
-          #   Filter files by type:
-          #   * `all` - All files
-          #   * `spaces` - Posts
-          #   * `snippets` - Snippets
-          #   * `images` - Image files
-          #   * `gdocs` - Google docs
-          #   * `zips` - Zip files
-          #   * `pdfs` - PDF files
-          #
-          #   You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
-          #
-          #   .
+          #   Filter files by type (see below). You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
           # @option options [user] :user
           #   Filter files created by a single user.
           # @see https://api.slack.com/methods/files.list
@@ -89,7 +78,7 @@ module Slack
           end
 
           #
-          # Revokes public/external sharing access for a file
+          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
           #
           # @option options [file] :file
           #   File to revoke.
@@ -117,7 +106,7 @@ module Slack
           end
 
           #
-          # Enables a file for public/external sharing.
+          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
           #
           # @option options [file] :file
           #   File to share.
@@ -129,7 +118,7 @@ module Slack
           end
 
           #
-          # Uploads or creates a file.
+          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
           #
           # @option options [Object] :channels
           #   Comma-separated list of channel names or IDs where the file will be shared.

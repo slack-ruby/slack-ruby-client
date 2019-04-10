@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Team
           #
-          # Gets the access logs for the current team.
+          # This method is used to retrieve the "access logs" for users on a workspace.
           #
           # @option options [Object] :before
           #   End of time range of logs to include in results (inclusive).
@@ -17,7 +17,8 @@ module Slack
           end
 
           #
-          # Gets billable users information for the current team.
+          # This method lists billable information for each user on the team. Currently this consists solely of whether the user is
+          # subject to billing per Slack's Fair Billing policy.
           #
           # @option options [user] :user
           #   A user to retrieve the billable information for. Defaults to all users.
@@ -29,7 +30,7 @@ module Slack
           end
 
           #
-          # Gets information about the current team.
+          # This method provides information about your team.
           #
           # @see https://api.slack.com/methods/team.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.info.json
@@ -38,7 +39,7 @@ module Slack
           end
 
           #
-          # Gets the integration logs for the current team.
+          # This method lists the integration activity logs for a team, including when integrations are added, modified and removed. This method can only be called by Admins.
           #
           # @option options [Object] :app_id
           #   Filter logs to this Slack app. Defaults to all logs.
