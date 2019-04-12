@@ -1,3 +1,7 @@
+### 0.14.3 (Next)
+
+* Your contribution here.
+
 ### 0.14.2 (2019/4/12)
 
 * [#256](https://github.com/slack-ruby/slack-ruby-client/pull/256): Added support for specifying signing secrets on a per-request basis via optional parameters to the `Slack::Events::Request` constructor - [@gabrielmdeal](https://github.com/gabrielmdeal).
