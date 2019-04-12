@@ -1,10 +1,9 @@
-### 0.14.2 (Next)
+### 0.14.2 (2019/4/12)
 
 * [#256](https://github.com/slack-ruby/slack-ruby-client/pull/256): Added support for specifying signing secrets on a per-request basis via optional parameters to the `Slack::Events::Request` constructor - [@gabrielmdeal](https://github.com/gabrielmdeal).
 * [#257](https://github.com/slack-ruby/slack-ruby-client/pull/257), [#262](https://github.com/slack-ruby/slack-ruby-client/pull/262): Fixed occasional failures to reconnect - [@ioquatix](https://github.com/ioquatix), [@dblock](https://github.com/dblock).
 * [#264](https://github.com/slack-ruby/slack-ruby-client/pull/264): Added `chat_scheduleMessage`, `chat_deleteScheduledMessage` and `chat_scheduledMessages_list` - [@dblock](https://github.com/dblock).
 * [#264](https://github.com/slack-ruby/slack-ruby-client/pull/264): Removed `files_comments_add` and `files_comments_edit` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.14.1 (2019/2/26)
 
