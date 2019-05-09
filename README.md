@@ -79,7 +79,7 @@ gem 'slack-ruby-client'
 If you're going to be using the RealTime client, add either `async-websocket`, `eventmachine` and `faye-websocket` or `celluloid-io`. See below for more information about concurrency. We recommend you use `async-websocket`.
 
 ```
-gem 'async-websocket'
+gem 'async-websocket', '~> 0.8.0'
 ```
 
 Run `bundle install`.
