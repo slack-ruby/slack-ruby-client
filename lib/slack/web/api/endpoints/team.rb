@@ -32,6 +32,8 @@ module Slack
           #
           # This method provides information about your team.
           #
+          # @option options [Object] :team
+          #   Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels.
           # @see https://api.slack.com/methods/team.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.info.json
           def team_info(options = {})

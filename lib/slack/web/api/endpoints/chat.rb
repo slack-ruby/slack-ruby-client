@@ -93,6 +93,8 @@ module Slack
           #
           # This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation.
           #
+          # @option options [Object] :attachments
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
           # @option options [Object] :text
@@ -101,8 +103,6 @@ module Slack
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
           # @option options [Object] :as_user
           #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
-          # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [Object] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :link_names
