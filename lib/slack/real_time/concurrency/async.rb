@@ -129,3 +129,5 @@ module Slack
     end
   end
 end
+
+raise "Incompatible version of async-websocket, #{Async::WebSocket::VERSION}, use \"gem 'async-websocket', '~> 0.8.0'\"." if Gem::Version.new(Async::WebSocket::VERSION) >= Gem::Version.new('0.9.0')
