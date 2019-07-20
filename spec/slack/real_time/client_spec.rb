@@ -148,6 +148,15 @@ RSpec.describe Slack::RealTime::Client do
           expect(socket).to receive(:restart_async)
           client.run_ping!
         end
+        [EOFError, Errno::ECONNRESET, Errno::EPIPE, Faraday::ClientError].each do |err|
+          context "raising #{err}" do
+            it 'does not terminate the ping worker' do
+              allow(socket).to receive(:time_since_last_message) { raise err }
+              expect(socket).to_not receive(:send_data)
+              client.run_ping!
+            end
+          end
+        end
       end
     end
   end

@@ -128,6 +128,9 @@ module Slack
         return if keep_alive?
 
         restart_async
+      rescue StandardError => e
+        # disregard all ping worker failures, keep pinging
+        logger.debug("#{self.class}##{__method__}") { e }
       end
 
       def run_ping?
