@@ -14,6 +14,16 @@ module Slack
 
         ### RealTime Events
 
+        # An enterprise grid migration has started on an external workspace..
+        # @see https://api.slack.com/events/external_org_migration_started
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_started.json
+        # on :external_org_migration_started do |data|
+
+        # An enterprise grid migration has finished on an external workspace..
+        # @see https://api.slack.com/events/external_org_migration_finished
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_finished.json
+        # on :external_org_migration_finished do |data|
+
         # A private channel was deleted.
         # @see https://api.slack.com/events/group_deleted
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_deleted.json

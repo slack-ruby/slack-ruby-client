@@ -6,7 +6,7 @@ module Slack
       module Endpoints
         module Apps
           #
-          # This method uninstalls a workspace app. Unlike auth.revoke, which revokes a single token, this method revokes all tokens associated with a single installation of a workspace app.
+          # This method uninstalls an app. Unlike auth.revoke, which revokes a single token, this method revokes all tokens associated with a single installation of an app.
           #
           # @option options [Object] :client_id
           #   Issued when you created your application.

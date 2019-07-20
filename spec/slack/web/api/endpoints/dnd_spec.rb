@@ -9,4 +9,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Dnd do
       expect { client.dnd_setSnooze }.to raise_error ArgumentError, /Required arguments :num_minutes missing/
     end
   end
+  context 'dnd_teamInfo' do
+    it 'requires users' do
+      expect { client.dnd_teamInfo }.to raise_error ArgumentError, /Required arguments :users missing/
+    end
+  end
 end

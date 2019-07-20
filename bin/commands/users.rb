@@ -2,8 +2,8 @@
 
 desc 'Users methods.'
 command 'users' do |g|
-  g.desc "As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed."
-  g.long_desc %( As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed. )
+  g.desc 'This method helps answer questions like:'
+  g.long_desc %( This method helps answer questions like: - Which conversations am I a member of? - Which public channels is my bot user in? - Do I have any direct messages open with my friend Suzy? - Is my bot a member of any private channels? )
   g.command 'conversations' do |c|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'

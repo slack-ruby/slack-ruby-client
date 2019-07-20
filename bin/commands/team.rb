@@ -23,6 +23,7 @@ command 'team' do |g|
   g.desc 'This method provides information about your team.'
   g.long_desc %( This method provides information about your team. )
   g.command 'info' do |c|
+    c.flag 'team', desc: 'Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.team_info(options))
     end

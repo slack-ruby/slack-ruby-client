@@ -58,15 +58,18 @@ command 'chat' do |g|
   g.desc 'This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation.'
   g.long_desc %( This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation. )
   g.command 'postEphemeral' do |c|
+    c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.'
     c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead."
     c.flag 'user', desc: 'id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.'
     c.flag 'as_user', desc: 'Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.'
-    c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
+    c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
+    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
     c.flag 'thread_ts', desc: "Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread."
+    c.flag 'username', desc: "Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below."
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_postEphemeral(options))
     end
