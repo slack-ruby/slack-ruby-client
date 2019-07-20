@@ -6,8 +6,8 @@ module Slack
       module Endpoints
         module Pins
           #
-          # This method pins an item (file, file comment, channel message, or group message) to a particular channel.
-          # The channel argument is required and one of file, file_comment, or timestamp must also be specified.
+          # This method pins a channel message or group message to a particular channel.
+          # The channel argument is required and timestamp must also be specified.
           #
           # @option options [channel] :channel
           #   Channel to pin the item in.

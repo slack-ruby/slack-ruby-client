@@ -6,7 +6,11 @@ module Slack
       module Endpoints
         module Users
           #
-          # As part of the Conversations API, this method's required scopes depend on the type of channel-like object you're working with. For classic Slack apps, a corresponding channels: scope is required when working with public channels, groups: for private channels, also the same rules are applied for im: and mpim:. For workspace apps, a conversations: scope is all that's needed.
+          # This method helps answer questions like:
+          # - Which conversations am I a member of?
+          # - Which public channels is my bot user in?
+          # - Do I have any direct messages open with my friend Suzy?
+          # - Is my bot a member of any private channels?
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.

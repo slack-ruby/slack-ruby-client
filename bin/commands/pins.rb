@@ -2,8 +2,8 @@
 
 desc 'Pins methods.'
 command 'pins' do |g|
-  g.desc 'This method pins an item (file, file comment, channel message, or group message) to a particular channel.'
-  g.long_desc %( This method pins an item (file, file comment, channel message, or group message) to a particular channel. The channel argument is required and one of file, file_comment, or timestamp must also be specified. )
+  g.desc 'This method pins a channel message or group message to a particular channel.'
+  g.long_desc %( This method pins a channel message or group message to a particular channel. The channel argument is required and timestamp must also be specified. )
   g.command 'add' do |c|
     c.flag 'channel', desc: 'Channel to pin the item in.'
     c.flag 'file', desc: 'File to pin.'

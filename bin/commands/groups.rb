@@ -22,7 +22,7 @@ command 'groups' do |g|
   end
 
   g.desc 'This method takes an existing private channel and performs the following steps:'
-  g.long_desc %( This method takes an existing private channel and performs the following steps: )
+  g.long_desc %( This method takes an existing private channel and performs the following steps: - Renames the existing private channel (from "example" to "example-archived"). - Archives the existing private channel. - Creates a new private channel with the name of the existing private channel. - Adds all members of the existing private channel to the new private channel. )
   g.command 'createChild' do |c|
     c.flag 'channel', desc: 'Private channel to clone and archive.'
     c.action do |_global_options, options, _args|

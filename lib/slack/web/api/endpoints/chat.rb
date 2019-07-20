@@ -93,6 +93,8 @@ module Slack
           #
           # This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation.
           #
+          # @option options [Object] :attachments
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
           # @option options [Object] :text
@@ -101,16 +103,20 @@ module Slack
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
           # @option options [Object] :as_user
           #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
-          # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [Object] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          # @option options [Object] :icon_emoji
+          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          # @option options [Object] :icon_url
+          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @option options [Object] :thread_ts
           #   Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
+          # @option options [Object] :username
+          #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @see https://api.slack.com/methods/chat.postEphemeral
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
