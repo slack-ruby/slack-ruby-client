@@ -82,18 +82,18 @@ module Slack
       def run_loop
         @socket.connect! do |driver|
           driver.on :open do |event|
-            logger.debug("#{self.class}##{__method__}") { event.class.name }
+            logger.debug("#{self}##{__method__}") { event.class.name }
             open(event)
             callback(event, :open)
           end
 
           driver.on :message do |event|
-            logger.debug("#{self.class}##{__method__}") { "#{event.class}, #{event.data}" }
+            logger.debug("#{self}##{__method__}") { "#{event.class}, #{event.data}" }
             dispatch(event)
           end
 
           driver.on :close do |event|
-            logger.debug("#{self.class}##{__method__}") { event.class.name }
+            logger.debug("#{self}##{__method__}") { event.class.name }
             callback(event, :close)
             close(event)
             callback(event, :closed)
@@ -127,20 +127,30 @@ module Slack
       def run_ping!
         return if keep_alive?
 
+        logger.warn(to_s) { 'is offline' }
+
         restart_async
       rescue StandardError => e
         # disregard all ping worker failures, keep pinging
-        logger.debug("#{self.class}##{__method__}") { e }
+        logger.debug("#{self}##{__method__}") { e }
       end
 
       def run_ping?
         !websocket_ping.nil? && websocket_ping > 0
       end
 
+      def to_s
+        if store && store.team
+          "id=#{store.team.id}, name=#{store.team.name}, domain=#{store.team.domain}"
+        else
+          super
+        end
+      end
+
       protected
 
       def restart_async
-        logger.debug("#{self.class}##{__method__}")
+        logger.debug("#{self}##{__method__}")
         @socket.close
         start = web_client.send(rtm_start_method, start_options)
         data = Slack::Messages::Message.new(start)
@@ -186,7 +196,7 @@ module Slack
       def send_json(data)
         raise ClientNotStartedError unless started?
 
-        logger.debug("#{self.class}##{__method__}") { data }
+        logger.debug("#{self}##{__method__}") { data }
         @socket.send_data(data.to_json)
       end
 
@@ -207,7 +217,7 @@ module Slack
         end
         true
       rescue StandardError => e
-        logger.error e
+        logger.error("#{self}##{__method__}") { e }
         false
       end
 
@@ -219,11 +229,11 @@ module Slack
         return false unless type
 
         type = type.to_s
-        logger.debug("#{self.class}##{__method__}") { data.to_s }
+        logger.debug("#{self}##{__method__}") { data.to_s }
         run_handlers(type, data) if @store
         run_callbacks(type, data)
       rescue StandardError => e
-        logger.error e
+        logger.error("#{self}##{__method__}") { e }
         false
       end
 
@@ -235,7 +245,7 @@ module Slack
           end
         end
       rescue StandardError => e
-        logger.error e
+        logger.error("#{self}##{__method__}") { e }
         false
       end
 
@@ -248,7 +258,7 @@ module Slack
         end
         true
       rescue StandardError => e
-        logger.error e
+        logger.error("#{self}##{__method__}") { e }
         false
       end
     end
