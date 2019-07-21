@@ -49,7 +49,8 @@ module Slack
                     client.run_loop
                   rescue ::Async::Wrapper::Cancelled => e
                     # Will get restarted by ping worker.
-                    client.logger.warn(subtask.to_s) { e.message }
+                  rescue StandardError => e
+                    client.logger.error(subtask.to_s) { e.message }
                   end
                 end
 
