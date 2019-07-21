@@ -30,7 +30,7 @@ module Slack
 
               if client.run_ping?
                 @ping_task = task.async do |subtask|
-                  subtask.annotate 'client keep-alive'
+                  subtask.annotate "#{client} keep-alive"
 
                   # The timer task will naturally exit after the driver is set to nil.
                   while @restart
@@ -45,7 +45,7 @@ module Slack
 
                 @client_task = task.async do |subtask|
                   begin
-                    subtask.annotate 'client run-loop'
+                    subtask.annotate "#{client} run-loop"
                     client.run_loop
                   rescue ::Async::Wrapper::Cancelled => e
                     # Will get restarted by ping worker.

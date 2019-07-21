@@ -86,6 +86,9 @@ RSpec.describe Slack::RealTime::Client do
         it 'sets groups' do
           expect(client.groups.count).to eq 1
         end
+        it 'includes team name in to_s' do
+          expect(client.to_s).to eq "id=#{client.team.id}, name=#{client.team.name}, domain=#{client.team.domain}"
+        end
       end
       it 'uses web client to fetch url' do
         expect(client.web_client).to be_a Slack::Web::Client
@@ -159,6 +162,11 @@ RSpec.describe Slack::RealTime::Client do
         end
       end
     end
+    describe 'to_s' do
+      it 'defaults to class instance' do
+        expect(client.to_s).to match(/^#<Slack::RealTime::Client:0x\h+>$/)
+      end
+    end
   end
   context 'client with starter store', vcr: { cassette_name: 'web/rtm_connect' } do
     let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Starter) }
@@ -198,6 +206,9 @@ RSpec.describe Slack::RealTime::Client do
         end
         it 'no groups' do
           expect(client.groups).to be_nil
+        end
+        it 'includes team name in to_s' do
+          expect(client.to_s).to eq "id=#{client.team.id}, name=#{client.team.name}, domain=#{client.team.domain}"
         end
       end
       it 'uses web client to fetch url' do
@@ -250,6 +261,11 @@ RSpec.describe Slack::RealTime::Client do
     end
     it 'team' do
       expect(client.team).to be nil
+    end
+    describe 'to_s' do
+      it 'defaults to class instance' do
+        expect(client.to_s).to match(/^#<Slack::RealTime::Client:0x\h+>$/)
+      end
     end
   end
   context 'client with defaults' do
