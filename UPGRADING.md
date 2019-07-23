@@ -1,6 +1,16 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.14.0
+
+If you are using async-websocket, lock down its version to 0.8.0 as newer versions are currently incompatible.
+
+```
+gem 'async-websocket', '~> 0.8.0'
+```
+
+See [#282](https://github.com/slack-ruby/slack-ruby-client/issues/282) for more information.
+
 ### Upgrading to >= 0.13.0
 
 #### Recommended Async Library
