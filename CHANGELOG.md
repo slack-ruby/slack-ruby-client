@@ -1,3 +1,7 @@
+### 0.14.4 (Next)
+
+* Your contribution here.
+
 ### 0.14.3 (2019/7/23)
 
 * [#279](https://github.com/slack-ruby/slack-ruby-client/pull/279): Prevent ping worker from dying on unexpected errors - [@dblock](https://github.com/dblock).
