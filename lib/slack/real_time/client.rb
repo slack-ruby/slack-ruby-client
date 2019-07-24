@@ -127,7 +127,7 @@ module Slack
       def run_ping!
         return if keep_alive?
 
-        logger.warn(to_s) { 'is offline' }
+        logger.debug(to_s) { 'is offline' }
 
         restart_async
       rescue StandardError => e
