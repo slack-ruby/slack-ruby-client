@@ -376,6 +376,8 @@ This setting determines how long the socket can be idle before sending a ping me
 
 It's important to note that if a ping message was sent and no response was received within the amount of time specified in `websocket_ping`; the client will attempt to reestablish it's connection to the message server.
 
+Note that the ping may take between `websocket_ping` and `websocket_ping * 3/2` seconds to actually trigger when there is no activity on the socket. This is because the timer that checks whether to ping is triggered at every `websocket_ping / 2` interval (see [#289](https://github.com/slack-ruby/slack-ruby-client/pull/289) for further explanation).
+
 To disable this feature; set `websocket_ping` to 0.
 
 ### Connection Methods

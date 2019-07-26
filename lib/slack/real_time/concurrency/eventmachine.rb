@@ -30,7 +30,7 @@ module Slack
             @thread = ensure_reactor_running
 
             if client.run_ping?
-              EventMachine.add_periodic_timer(client.websocket_ping) do
+              EventMachine.add_periodic_timer client.websocket_ping_timer do
                 client.run_ping!
               end
             end

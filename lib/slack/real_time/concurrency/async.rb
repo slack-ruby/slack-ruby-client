@@ -34,7 +34,7 @@ module Slack
 
                   # The timer task will naturally exit after the driver is set to nil.
                   while @restart
-                    subtask.sleep client.websocket_ping
+                    subtask.sleep client.websocket_ping_timer
                     client.run_ping! if @restart
                   end
                 end

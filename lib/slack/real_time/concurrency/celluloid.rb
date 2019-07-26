@@ -82,7 +82,7 @@ module Slack
           def run_ping_loop
             return unless @client.run_ping?
 
-            @ping_timer = every @client.websocket_ping do
+            @ping_timer = every @client.websocket_ping_timer do
               @client.run_ping!
             end
           end
