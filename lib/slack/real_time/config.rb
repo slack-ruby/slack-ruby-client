@@ -33,10 +33,6 @@ module Slack
         (val = @concurrency).respond_to?(:call) ? val.call : val
       end
 
-      def websocket_ping_timer
-        websocket_ping / 2
-      end
-
       private
 
       def detect_concurrency

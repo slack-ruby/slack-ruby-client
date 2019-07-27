@@ -123,7 +123,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   context 'with websocket_ping set' do
     before do
-      client.websocket_ping = 1
+      client.websocket_ping = 5
     end
 
     it 'sends pings' do
@@ -136,7 +136,7 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
       start_server
 
-      queue.pop_with_timeout(5)
+      queue.pop_with_timeout(10)
       expect(@reply_to).to be 1
     end
 

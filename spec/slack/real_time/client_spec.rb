@@ -42,6 +42,20 @@ RSpec.describe Slack::RealTime::Client do
       end
     end
   end
+  context 'websocket_ping_timer' do
+    context 'with defaults' do
+      let(:client) { Slack::RealTime::Client.new }
+      it 'defaults to websocket_ping / 2' do
+        expect(client.websocket_ping_timer).to eq 15
+      end
+    end
+    context 'with websocket_ping value changed' do
+      let(:client) { Slack::RealTime::Client.new(websocket_ping: 22) }
+      it 'defaults to websocket_ping / 2' do
+        expect(client.websocket_ping_timer).to eq 11
+      end
+    end
+  end
   context 'client with a full store', vcr: { cassette_name: 'web/rtm_start', allow_playback_repeats: true } do
     let(:client) { Slack::RealTime::Client.new(store_class: Slack::RealTime::Stores::Store) }
     let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }

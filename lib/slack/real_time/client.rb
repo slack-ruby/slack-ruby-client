@@ -139,6 +139,10 @@ module Slack
         !websocket_ping.nil? && websocket_ping > 0
       end
 
+      def websocket_ping_timer
+        websocket_ping / 2
+      end
+
       def to_s
         if store && store.team
           "id=#{store.team.id}, name=#{store.team.name}, domain=#{store.team.domain}"
