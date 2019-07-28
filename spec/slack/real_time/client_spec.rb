@@ -328,6 +328,15 @@ RSpec.describe Slack::RealTime::Client do
         end
       end
     end
+    describe 'logger accessor' do
+      let(:client) { Slack::RealTime::Client.new }
+      it 'exposes public logger' do
+        expect(client.logger).to be_a(::Logger)
+      end
+      it 'exposes public logger=' do
+        expect { client.logger = nil }.not_to raise_error(NoMethodError)
+      end
+    end
   end
   context 'global config' do
     after do
