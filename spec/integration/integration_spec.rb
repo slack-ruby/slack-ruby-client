@@ -137,17 +137,19 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
       start_server
 
       queue.pop_with_timeout(10)
-      expect(@reply_to).to be 1
+      expect(@reply_to).to eq 1
     end
 
     it 'rebuilds the websocket connection when dropped' do
       @reply_to = nil
       client.on :pong do |data|
+        logger.info data
         @reply_to = data.reply_to
         if @reply_to == 1
           client.instance_variable_get(:@socket).close
+          queue.push :close
         else
-          expect(@reply_to).to be 2
+          expect(@reply_to).to eq 2
           queue.push :pong
           client.stop!
         end
@@ -155,8 +157,10 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
       start_server
 
-      queue.pop_with_timeout(10)
-      queue.pop_with_timeout(10)
+      4.times do |i|
+        queue.pop_with_timeout(10)
+        client.logger.info "Pop #{i}"
+      end
     end
   end
 
