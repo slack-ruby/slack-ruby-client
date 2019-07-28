@@ -19,8 +19,8 @@ module Slack
       attr_accessor :store
       attr_accessor :url
       attr_accessor(*Config::ATTRIBUTES)
+      attr_accessor :logger
 
-      protected :logger, :logger=
       protected :store_class, :store_class=
 
       def initialize(options = {})
