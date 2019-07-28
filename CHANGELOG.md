@@ -1,6 +1,7 @@
 ### 0.14.4 (Next)
 
 * [#289](https://github.com/slack-ruby/slack-ruby-client/pull/289): Fix reconnects when ping timers under/overshoot - [@georgyangelov](https://github.com/georgyangelov).
+* [#290](https://github.com/slack-ruby/slack-ruby-client/pull/290): Expose Slack::RealTime::Client.logger accessor publicly - [@jcraigk](https://github.com/jcraigk).
 * Your contribution here.
 
 ### 0.14.3 (2019/7/23)
