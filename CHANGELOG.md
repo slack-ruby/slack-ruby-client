@@ -1,3 +1,7 @@
+### 0.14.5 (Next)
+
+* Your contribution here.
+
 ### 0.14.4 (2019/7/28)
 
 * [#289](https://github.com/slack-ruby/slack-ruby-client/pull/289): Fix reconnects when ping timers under/overshoot - [@georgyangelov](https://github.com/georgyangelov).
