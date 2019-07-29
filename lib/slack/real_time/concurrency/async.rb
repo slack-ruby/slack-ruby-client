@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'async/websocket'
 require 'async/notification'
 require 'async/clock'
@@ -41,7 +42,7 @@ module Slack
               end
 
               while @restart
-                @client_task.stop if @client_task
+                @client_task&.stop
 
                 @client_task = task.async do |subtask|
                   begin
@@ -57,7 +58,7 @@ module Slack
                 @restart.wait
               end
 
-              @ping_task.stop if @ping_task
+              @ping_task&.stop
             end
           end
 
@@ -65,7 +66,7 @@ module Slack
             @url = new_url
             @last_message_at = current_time
 
-            @restart.signal if @restart
+            @restart&.signal
           end
 
           def current_time
@@ -98,7 +99,7 @@ module Slack
           end
 
           def run_loop
-            while @driver && @driver.next_event
+            while @driver&.next_event
               # $stderr.puts event.inspect
             end
           end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Slack
   module RealTime
     class Client
@@ -35,7 +36,7 @@ module Slack
 
       %i[users self channels team teams groups ims bots].each do |store_method|
         define_method store_method do
-          store.send(store_method) if store
+          store&.send(store_method)
         end
       end
 
@@ -62,11 +63,11 @@ module Slack
       def stop!
         raise ClientNotStartedError unless started?
 
-        @socket.disconnect! if @socket
+        @socket&.disconnect!
       end
 
       def started?
-        @socket && @socket.connected?
+        @socket&.connected?
       end
 
       class << self
@@ -100,7 +101,7 @@ module Slack
           end
 
           # This must be called last to ensure any events are registered before invoking user code.
-          @callback.call(driver) if @callback
+          @callback&.call(driver)
         end
       end
 
@@ -144,7 +145,7 @@ module Slack
       end
 
       def to_s
-        if store && store.team
+        if store&.team
           "id=#{store.team.id}, name=#{store.team.name}, domain=#{store.team.domain}"
         else
           super
@@ -243,10 +244,8 @@ module Slack
 
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
-        if handlers
-          handlers.each do |handler|
-            store.instance_exec(data, &handler)
-          end
+        handlers&.each do |handler|
+          store.instance_exec(data, &handler)
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }

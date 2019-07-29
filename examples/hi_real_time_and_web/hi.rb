@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'slack-ruby-client'
 
 Slack.configure do |config|
@@ -14,9 +15,9 @@ end
 client.on :message do |data|
   puts data
   case data.text
-  when 'bot hi' then
+  when 'bot hi'
     client.web_client.chat_postMessage channel: data.channel, text: "Hi <@#{data.user}>!"
-  when /^bot/ then
+  when /^bot/
     client.web_client.chat_postMessage channel: data.channel, text: "Sorry <@#{data.user}>, what?"
   end
 end

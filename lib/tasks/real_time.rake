@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # largely from https://github.com/aki017/slack-ruby-gem
 require 'json-schema'
 require 'erubis'
@@ -5,7 +6,7 @@ require 'erubis'
 namespace :slack do
   namespace :real_time do
     namespace :api do
-      REAL_TIME_EVENTS_MARKER = '### RealTime Events'.freeze
+      REAL_TIME_EVENTS_MARKER = '### RealTime Events'
 
       desc 'Update API.'
       task update: [:git_update] do

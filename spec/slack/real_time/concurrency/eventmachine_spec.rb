@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 require_relative './it_behaves_like_a_realtime_socket'
 
@@ -9,11 +10,13 @@ begin
       let(:logger) { ::Logger.new($stdout) }
       let(:socket) { described_class.new(url, ping: 42, logger: logger) }
       let(:ws) { double(Faye::WebSocket::Client) }
+
       describe '#connect!' do
         before do
           allow(ws).to receive(:on).with(:close)
           allow(ws).to receive(:on).with(:message)
         end
+
         it 'connects' do
           allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)
           socket.connect!
@@ -24,6 +27,7 @@ begin
           socket.connect!
         end
       end
+
       describe '#disconnect!' do
         it 'closes and nils the websocket' do
           socket.instance_variable_set('@driver', ws)
@@ -32,12 +36,14 @@ begin
           socket.disconnect!
         end
       end
+
       describe 'send_data' do
         before do
           allow(Faye::WebSocket::Client).to receive(:new).and_return(ws)
           allow(ws).to receive(:on)
           socket.connect!
         end
+
         it 'sends data' do
           expect(ws).to receive(:send).with('data')
           socket.send_data('data')

@@ -1,10 +1,16 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::Events::Config do
   before do
     ENV['SLACK_SIGNING_SECRET'] = 'secret'
-    Slack::Events::Config.reset
+    described_class.reset
   end
+
+  after do
+    ENV.delete 'SLACK_SIGNING_SECRET'
+  end
+
   it 'defaults signing secret to ENV[SLACK_SIGNING_SECRET]' do
     expect(Slack::Events.config.signing_secret).to eq 'secret'
   end
@@ -18,12 +24,10 @@ RSpec.describe Slack::Events::Config do
         config.signature_expires_in = 45
       end
     end
+
     it 'uses the configured values' do
       expect(Slack::Events.config.signing_secret).to eq 'custom'
       expect(Slack::Events.config.signature_expires_in).to eq 45
     end
-  end
-  after do
-    ENV.delete 'SLACK_SIGNING_SECRET'
   end
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Slack::Messages::Formatting do
   subject do
-    Slack::Messages::Formatting
+    described_class
   end
+
   context '#unescape' do
     it 'plain text' do
       expect(subject.unescape('plain text')).to eq 'plain text'

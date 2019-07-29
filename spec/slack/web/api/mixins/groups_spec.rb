@@ -1,14 +1,17 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Mixins::Groups do
+  subject do
+    klass.new
+  end
+
   let(:klass) do
     Class.new do
       include Slack::Web::Api::Mixins::Groups
     end
   end
-  subject do
-    klass.new
-  end
+
   before do
     allow(subject).to receive(:groups_list).and_return(
       Slack::Messages::Message.new(
@@ -19,6 +22,7 @@ RSpec.describe Slack::Web::Api::Mixins::Groups do
       )
     )
   end
+
   context '#groups_id' do
     it 'leaves groups specified by ID alone' do
       expect(subject.groups_id(channel: 'C123456')).to eq('ok' => true, 'group' => { 'id' => 'C123456' })

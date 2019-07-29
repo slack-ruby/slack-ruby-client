@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'slack-ruby-client'
 require 'async'
 
@@ -24,7 +25,7 @@ ENV['SLACK_API_TOKENS'].split.each do |token|
     client.typing channel: data.channel
 
     case data.text
-    when /hi/ then
+    when /hi/
       client.message channel: data.channel, text: "Hi <@#{data.user}>!"
     else
       client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"

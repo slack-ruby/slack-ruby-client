@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Slack
   module RealTime
     module Stores
@@ -26,39 +27,29 @@ module Slack
             @users = {}
           end
 
-          if attrs.users
-            attrs.users.each do |data|
-              user = Models::User.new(data)
-              @users[data.id] = @users.key?(data.id) ? @users[data.id].merge(user) : user
-            end
+          attrs.users&.each do |data|
+            user = Models::User.new(data)
+            @users[data.id] = @users.key?(data.id) ? @users[data.id].merge(user) : user
           end
 
           @channels = {}
-          if attrs.channels
-            attrs.channels.each do |data|
-              @channels[data.id] = Models::Channel.new(data)
-            end
+          attrs.channels&.each do |data|
+            @channels[data.id] = Models::Channel.new(data)
           end
 
           @bots = {}
-          if attrs.bots
-            attrs.bots.each do |data|
-              @bots[data.id] = Models::Bot.new(data)
-            end
+          attrs.bots&.each do |data|
+            @bots[data.id] = Models::Bot.new(data)
           end
 
           @groups = {}
-          if attrs.groups
-            attrs.groups.each do |data|
-              @groups[data.id] = Models::Group.new(data)
-            end
+          attrs.groups&.each do |data|
+            @groups[data.id] = Models::Group.new(data)
           end
 
           @ims = {}
-          if attrs.ims
-            attrs.ims.each do |data|
-              @ims[data.id] = Models::Im.new(data)
-            end
+          attrs.ims&.each do |data|
+            @ims[data.id] = Models::Im.new(data)
           end
         end
 
@@ -161,7 +152,7 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/bot_changed.json
         on :bot_changed do |data|
           bot = bots[data.bot.id]
-          bot.merge!(data.bot) if bot
+          bot&.merge!(data.bot)
         end
 
         # A team channel was archived.
@@ -343,7 +334,7 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_left.json
         on :group_left do |data|
           channel = groups[data.channel]
-          channel.members.delete(self.self.id) if channel && channel.key?(:members)
+          channel.members.delete(self.self.id) if channel&.key?(:members)
         end
 
         # A private group read marker was updated.
@@ -378,7 +369,7 @@ module Slack
         # @see https://api.slack.com/events/im_close
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_close.json
         on :im_close do |data|
-          return unless ims && ims.key?(data.channel)
+          return unless ims&.key?(data.channel)
 
           ims[data.channel].is_open = false
         end
@@ -404,7 +395,7 @@ module Slack
         # @see https://api.slack.com/events/im_open
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_open.json
         on :im_open do |data|
-          return unless ims && ims.key?(data.channel)
+          return unless ims&.key?(data.channel)
 
           ims[data.channel].is_open = true
         end

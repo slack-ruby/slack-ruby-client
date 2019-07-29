@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require 'gli'
 require 'slack-ruby-client'
 

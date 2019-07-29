@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.shared_context 'connected client' do |opts|
   let(:client) { Slack::RealTime::Client.new(opts || {}) }
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket) }

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # largely from https://github.com/aki017/slack-ruby-gem
 require 'json-schema'
 require 'erubis'

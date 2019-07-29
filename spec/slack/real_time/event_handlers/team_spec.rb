@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 [Slack::RealTime::Stores::Store, Slack::RealTime::Stores::Starter].each do |store_class|

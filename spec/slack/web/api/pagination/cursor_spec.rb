@@ -1,9 +1,12 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Pagination::Cursor do
   let(:client) { Slack::Web::Client.new }
+
   context 'default cursor' do
-    let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', {}) }
+    let(:cursor) { described_class.new(client, 'users_list', {}) }
+
     it 'provides a default limit' do
       expect(client).to receive(:users_list).with(limit: 100, cursor: nil)
       cursor.first
@@ -26,6 +29,7 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
     end
     context 'with rate limiting' do
       let(:error) { Slack::Web::Api::Errors::TooManyRequestsError.new(nil) }
+
       context 'with default max retries' do
         it 'sleeps after a TooManyRequestsError' do
           expect(client).to receive(:users_list).with(limit: 100, cursor: nil).ordered.and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
@@ -36,8 +40,10 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
           cursor.to_a
         end
       end
+
       context 'with a custom max_retries' do
-        let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', max_retries: 4) }
+        let(:cursor) { described_class.new(client, 'users_list', max_retries: 4) }
+
         it 'raises the error after hitting the max retries' do
           expect(client).to receive(:users_list).with(limit: 100, cursor: nil).and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
           expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').exactly(5).times.and_raise(error)
@@ -48,15 +54,19 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
       end
     end
   end
+
   context 'with a custom limit' do
-    let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', limit: 42) }
+    let(:cursor) { described_class.new(client, 'users_list', limit: 42) }
+
     it 'overrides default limit' do
       expect(client).to receive(:users_list).with(limit: 42, cursor: nil)
       cursor.first
     end
   end
+
   context 'with a custom sleep_interval' do
-    let(:cursor) { Slack::Web::Api::Pagination::Cursor.new(client, 'users_list', sleep_interval: 3) }
+    let(:cursor) { described_class.new(client, 'users_list', sleep_interval: 3) }
+
     it 'sleeps between requests' do
       expect(client).to receive(:users_list).exactly(3).times.and_return(
         Slack::Messages::Message.new(response_metadata: { next_cursor: 'next_a' }),

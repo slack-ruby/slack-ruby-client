@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
@@ -10,6 +11,6 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       'value' => 'updated.mp3'
     )
     expect(client.self).to receive(:prefs) { raise ArgumentError }
-    expect { client.send(:dispatch, event) }.to_not raise_error
+    expect { client.send(:dispatch, event) }.not_to raise_error
   end
 end

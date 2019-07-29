@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Slack
   module RealTime
     class Socket
@@ -51,9 +52,9 @@ module Slack
 
       def start_sync(client)
         thread = start_async(client)
-        thread.join if thread
+        thread&.join
       rescue Interrupt
-        thread.exit if thread
+        thread&.exit
       end
 
       # @return [#join]
@@ -95,9 +96,9 @@ module Slack
 
       def port
         case (uri = URI(url)).scheme
-        when 'wss'.freeze, 'https'.freeze
+        when 'wss', 'https'
           URI::HTTPS::DEFAULT_PORT
-        when 'ws', 'http'.freeze
+        when 'ws', 'http'
           URI::HTTP::DEFAULT_PORT
         else
           uri.port

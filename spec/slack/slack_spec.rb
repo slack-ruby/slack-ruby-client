@@ -1,19 +1,24 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Slack do
   let(:slack) { File.expand_path(File.join(__FILE__, '../../../bin/slack')) }
+
   before do
     @token = ENV.delete('SLACK_API_TOKEN')
   end
+
   after do
     ENV['SLACK_API_TOKEN'] = @token if @token
   end
+
   describe '#help' do
     it 'displays help' do
       help = `"#{slack}" help`
       expect(help).to include 'slack - Slack client.'
     end
   end
+
   context 'globals' do
     it 'enables request and response logging with -d' do
       output = `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token -d auth test 2>&1`
@@ -25,6 +30,7 @@ describe Slack do
       expect(err).to start_with 'error: parse error: Set Slack API token via --slack-api-token or SLACK_API_TOKEN.'
     end
   end
+
   describe '#auth' do
     context 'bad auth' do
       it 'fails with an exception' do
@@ -32,6 +38,7 @@ describe Slack do
         expect(err).to eq "error: not_authed\n"
       end
     end
+
     context 'good auth' do
       it 'succeeds' do
         json = Slack::Messages::Message.new(JSON.parse(`"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token auth test 2>&1`))
@@ -47,6 +54,7 @@ describe Slack do
       end
     end
   end
+
   describe '#users' do
     it 'list' do
       json = Slack::Messages::Message.new(JSON.parse(`"#{slack}" --vcr-cassette-name=web/users_list --slack-api-token=token users list --presence=true 2>&1`))

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'slack-ruby-client'
 
 raise 'Missing ENV[SLACK_API_TOKENS]!' unless ENV.key?('SLACK_API_TOKENS')
@@ -22,9 +23,9 @@ ENV['SLACK_API_TOKENS'].split.each do |token|
     client.typing channel: data.channel
 
     case data.text
-    when 'bot hi' then
+    when 'bot hi'
       client.message channel: data.channel, text: "Hi <@#{data.user}>!"
-    when /^bot/ then
+    when /^bot/
       client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
     end
   end
