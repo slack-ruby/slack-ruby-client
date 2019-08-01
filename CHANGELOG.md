@@ -1,5 +1,6 @@
 ### 0.14.5 (Next)
 
+* [#293](https://github.com/slack-ruby/slack-ruby-client/pull/293): Rubocop auto-correct and comprehensive todo - [@jcraigk](https://github.com/jcraigk).
 * Your contribution here.
 
 ### 0.14.4 (2019/7/28)
