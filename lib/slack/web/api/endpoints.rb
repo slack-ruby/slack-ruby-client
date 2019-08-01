@@ -19,6 +19,7 @@ require_relative 'endpoints/dnd'
 require_relative 'endpoints/emoji'
 require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
+require_relative 'endpoints/files_remote'
 require_relative 'endpoints/groups'
 require_relative 'endpoints/im'
 require_relative 'endpoints/migration'
@@ -65,6 +66,7 @@ module Slack
         include Emoji
         include Files
         include FilesComments
+        include FilesRemote
         include Groups
         include Im
         include Migration
