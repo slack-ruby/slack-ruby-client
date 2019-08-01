@@ -89,7 +89,9 @@ begin
             let(:tcp_socket) { double(::Celluloid::IO::SSLSocket, connect: true) }
 
             before do
-              allow_any_instance_of(described_class).to receive(:build_socket).and_return(tcp_socket)
+              allow_any_instance_of(described_class).to(
+                receive(:build_socket).and_return(tcp_socket)
+              )
             end
 
             it 'runs' do

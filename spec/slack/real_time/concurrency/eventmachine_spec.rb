@@ -23,7 +23,9 @@ begin
           expect(socket.instance_variable_get('@driver')).to eq ws
         end
         it 'pings every 30s' do
-          expect(Faye::WebSocket::Client).to receive(:new).with(url, nil, ping: 42, logger: logger).and_return(ws)
+          expect(Faye::WebSocket::Client).to(
+            receive(:new).with(url, nil, ping: 42, logger: logger).and_return(ws)
+          )
           socket.connect!
         end
       end

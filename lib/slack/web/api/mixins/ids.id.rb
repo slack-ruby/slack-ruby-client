@@ -11,7 +11,9 @@ module Slack
 
             yield.tap do |list|
               list.public_send(list_method).each do |li|
-                return Slack::Messages::Message.new('ok' => true, key.to_s => { 'id' => li.id }) if li.name == name[1..-1]
+                if li.name == name[1..-1]
+                  return Slack::Messages::Message.new('ok' => true, key.to_s => { 'id' => li.id })
+                end
               end
             end
 

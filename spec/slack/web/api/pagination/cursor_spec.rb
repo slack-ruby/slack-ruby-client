@@ -16,7 +16,9 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
       cursor.to_a
     end
     it 'handles nil response metadata' do
-      expect(client).to receive(:users_list).once.and_return(Slack::Messages::Message.new(response_metadata: nil))
+      expect(client).to(
+        receive(:users_list).once.and_return(Slack::Messages::Message.new(response_metadata: nil))
+      )
       cursor.to_a
     end
     it 'paginates with a cursor inside response metadata' do
@@ -32,11 +34,23 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
 
       context 'with default max retries' do
         it 'sleeps after a TooManyRequestsError' do
-          expect(client).to receive(:users_list).with(limit: 100, cursor: nil).ordered.and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
-          expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_raise(error)
+          expect(client).to(
+            receive(:users_list)
+              .with(limit: 100, cursor: nil)
+              .ordered
+              .and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
+          )
+          expect(client).to(
+            receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_raise(error)
+          )
           expect(error).to receive(:retry_after).once.ordered.and_return(9)
           expect(cursor).to receive(:sleep).once.ordered.with(9)
-          expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_return(Slack::Messages::Message.new)
+          expect(client).to(
+            receive(:users_list)
+              .with(limit: 100, cursor: 'next')
+              .ordered
+              .and_return(Slack::Messages::Message.new)
+          )
           cursor.to_a
         end
       end
@@ -45,8 +59,14 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
         let(:cursor) { described_class.new(client, 'users_list', max_retries: 4) }
 
         it 'raises the error after hitting the max retries' do
-          expect(client).to receive(:users_list).with(limit: 100, cursor: nil).and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
-          expect(client).to receive(:users_list).with(limit: 100, cursor: 'next').exactly(5).times.and_raise(error)
+          expect(client).to(
+            receive(:users_list)
+              .with(limit: 100, cursor: nil)
+              .and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
+          )
+          expect(client).to(
+            receive(:users_list).with(limit: 100, cursor: 'next').exactly(5).times.and_raise(error)
+          )
           expect(error).to receive(:retry_after).exactly(4).times.and_return(9)
           expect(cursor).to receive(:sleep).exactly(4).times.with(9)
           expect { cursor.to_a }.to raise_error(error)

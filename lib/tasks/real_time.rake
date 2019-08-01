@@ -11,7 +11,8 @@ namespace :slack do
       desc 'Update API.'
       task update: [:git_update] do
         event_schema = JSON.parse(File.read('lib/slack/real_time/api/schema/event.json'))
-        events = Dir.glob('lib/slack/web/api/slack-api-ref/events/**/*.json').each_with_object({}) do |path, result|
+        dirglob = 'lib/slack/web/api/slack-api-ref/events/**/*.json'
+        events = Dir.glob(dirglob).each_with_object({}) do |path, result|
           name = File.basename(path, '.json')
           parsed = JSON.parse(File.read(path))
           JSON::Validator.validate(event_schema, parsed, insert_defaults: true)
@@ -20,7 +21,8 @@ namespace :slack do
           result[name] = parsed
         end
 
-        event_handler_template = Erubis::Eruby.new(File.read('lib/slack/real_time/api/templates/event_handler.erb'))
+        event_handler_template =
+          Erubis::Eruby.new(File.read('lib/slack/real_time/api/templates/event_handler.erb'))
         Dir.glob('lib/slack/real_time/stores/**/*.rb').each do |store_file|
           next if File.basename(store_file) == 'base.rb'
 
@@ -38,7 +40,12 @@ namespace :slack do
                 desc: event_data['desc']
               )
 
-              store_file_contents.gsub! REAL_TIME_EVENTS_MARKER, REAL_TIME_EVENTS_MARKER + "\n\n" + rendered_event_handler.rstrip
+              store_file_contents.gsub!(
+                REAL_TIME_EVENTS_MARKER,
+                REAL_TIME_EVENTS_MARKER +
+                  "\n\n" +
+                  rendered_event_handler.rstrip
+              )
             end
           end
 

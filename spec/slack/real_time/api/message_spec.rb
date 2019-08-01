@@ -10,7 +10,10 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
     end
 
     it 'sends message' do
-      expect(socket).to receive(:send_data).with({ type: 'message', id: 42, text: 'hello world', channel: 'channel' }.to_json)
+      expect(socket).to(
+        receive(:send_data)
+          .with({ type: 'message', id: 42, text: 'hello world', channel: 'channel' }.to_json)
+      )
       client.message(text: 'hello world', channel: 'channel')
     end
   end

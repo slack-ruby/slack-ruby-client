@@ -45,7 +45,11 @@ module Slack
           end
         end
 
-        raise NoConcurrencyError, 'Missing concurrency. Add async-websocket, faye-websocket or celluloid-io to your Gemfile.'
+        raise(
+          NoConcurrencyError,
+          'Missing concurrency. Add async-websocket, faye-websocket ' \
+          'or celluloid-io to your Gemfile.'
+        )
       end
     end
 

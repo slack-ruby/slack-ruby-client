@@ -10,7 +10,9 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
     end
 
     it 'sends a typing indicator' do
-      expect(socket).to receive(:send_data).with({ type: 'typing', id: 42, channel: 'channel' }.to_json)
+      expect(socket).to(
+        receive(:send_data).with({ type: 'typing', id: 42, channel: 'channel' }.to_json)
+      )
       client.typing(channel: 'channel')
     end
   end

@@ -15,7 +15,7 @@ AllCops:
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 Metrics/BlockLength:
-  Max: 150
+  Max: 250
 Metrics/ClassLength:
   Max: 250
 Metrics/LineLength:

@@ -63,7 +63,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       end
       it 'updates channel' do
         expect(client.channels['CDEADBEEF']).to be nil
-        client.channels['CDEADBEEF'] = Slack::RealTime::Models::Channel.new('id' => 'CDEADBEEF', name: 'beef')
+        client.channels['CDEADBEEF'] =
+          Slack::RealTime::Models::Channel.new('id' => 'CDEADBEEF', name: 'beef')
         event = Slack::RealTime::Event.new(
           'type' => 'channel_joined',
           'channel' => {

@@ -2,7 +2,8 @@
 require 'spec_helper'
 
 [Slack::RealTime::Stores::Store, Slack::RealTime::Stores::Starter].each do |store_class|
-  RSpec.describe store_class, vcr: { cassette_name: store_class == Slack::RealTime::Stores::Store ? 'web/rtm_start' : 'web/rtm_connect' } do
+  cassette = store_class == Slack::RealTime::Stores::Store ? 'web/rtm_start' : 'web/rtm_connect'
+  RSpec.describe store_class, vcr: { cassette_name: cassette } do
     include_context 'connected client', store_class: store_class
 
     context 'team' do

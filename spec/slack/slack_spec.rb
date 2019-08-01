@@ -20,28 +20,47 @@ describe Slack do
   end
 
   context 'globals' do
+    let(:command) do
+      "\"#{slack}\" --vcr-cassette-name=web/auth_test_success " \
+      '--slack-api-token=token -d auth test 2>&1'
+    end
+
     it 'enables request and response logging with -d' do
-      output = `"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token -d auth test 2>&1`
+      output = `#{command}`
       expect(output).to include 'POST https://slack.com/api/auth.test'
       expect(output).to include 'Status 200'
     end
     it 'requires --slack-api-token' do
       err = `"#{slack}" auth test 2>&1`
-      expect(err).to start_with 'error: parse error: Set Slack API token via --slack-api-token or SLACK_API_TOKEN.'
+      expect(err).to(
+        start_with(
+          'error: parse error: Set Slack API token via --slack-api-token or SLACK_API_TOKEN.'
+        )
+      )
     end
   end
 
   describe '#auth' do
     context 'bad auth' do
+      let(:command) do
+        "\"#{slack}\" --vcr-cassette-name=web/auth_test_error " \
+        '--slack-api-token=token auth test 2>&1'
+      end
+
       it 'fails with an exception' do
-        err = `"#{slack}" --vcr-cassette-name=web/auth_test_error --slack-api-token=token auth test 2>&1`
+        err = `#{command}`
         expect(err).to eq "error: not_authed\n"
       end
     end
 
     context 'good auth' do
+      let(:command) do
+        "\"#{slack}\" --vcr-cassette-name=web/auth_test_success " \
+        '--slack-api-token=token auth test 2>&1'
+      end
+
       it 'succeeds' do
-        json = Slack::Messages::Message.new(JSON.parse(`"#{slack}" --vcr-cassette-name=web/auth_test_success --slack-api-token=token auth test 2>&1`))
+        json = Slack::Messages::Message.new(JSON[`#{command}`])
         expect(json).to eq(
           'ok' => true,
           'url' => 'https://rubybot.slack.com/',
@@ -56,8 +75,13 @@ describe Slack do
   end
 
   describe '#users' do
+    let(:command) do
+      "\"#{slack}\" --vcr-cassette-name=web/users_list " \
+      '--slack-api-token=token users list --presence=true 2>&1'
+    end
+
     it 'list' do
-      json = Slack::Messages::Message.new(JSON.parse(`"#{slack}" --vcr-cassette-name=web/users_list --slack-api-token=token users list --presence=true 2>&1`))
+      json = Slack::Messages::Message.new(JSON[`#{command}`])
       expect(json.ok).to be true
       expect(json.members.size).to eq 9
       expect(json.members.first['presence']).to eq 'away'

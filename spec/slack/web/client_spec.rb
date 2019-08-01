@@ -177,7 +177,8 @@ RSpec.describe Slack::Web::Client do
         conn = client.send(:connection)
         expect(client).to receive(:connection).and_return(conn)
 
-        # get the yielded request to reuse in the next call to rtm_start so that we can examine request.options later
+        # get the yielded request to reuse in the next call to
+        # rtm_start so that we can examine request.options later
         request = nil
         response = conn.post do |r|
           r.path = 'rtm.start'
@@ -197,7 +198,9 @@ RSpec.describe Slack::Web::Client do
       let(:client) { described_class.new }
 
       it 'produces a warning' do
-        expect(client.logger).to receive(:warn).with('The users.admin.setInactive method is undocumented.')
+        expect(client.logger).to(
+          receive(:warn).with('The users.admin.setInactive method is undocumented.')
+        )
         expect(client).to receive(:post)
         client.users_admin_setInactive(user: 'U092BDCLV')
       end

@@ -16,7 +16,10 @@ RSpec.describe Slack::Events::Request do
   let(:signing_secret) { 'ade6ca762ade4db0e7d31484cd616b9c' }
   let(:signature) { 'v0=91177eea054d65de0fc0f9b4ec57714307bc0ce2c5f3bf0d28b1b720c8f92ba2' }
   let(:timestamp) { '1547933148' }
-  let(:body) { '{"token":"X34FAqCu8tmGEkEEpoDncnja","challenge":"P7sFXA4o3HV2hTx4zb4zcQ9yrvuQs8pDh6EacOxmMRj0tJaXfQFF","type":"url_verification"}' }
+  let(:body) do
+    '{"token":"X34FAqCu8tmGEkEEpoDncnja","challenge":' \
+    '"P7sFXA4o3HV2hTx4zb4zcQ9yrvuQs8pDh6EacOxmMRj0tJaXfQFF","type":"url_verification"}'
+  end
   let(:http_request) do
     double(
       headers: {

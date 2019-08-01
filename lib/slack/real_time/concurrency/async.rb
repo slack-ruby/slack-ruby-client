@@ -114,7 +114,9 @@ module Slack
 
           def build_endpoint
             endpoint = ::Async::IO::Endpoint.tcp(addr, port)
-            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
+            if secure?
+              endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context)
+            end
             endpoint
           end
 
@@ -132,4 +134,9 @@ module Slack
   end
 end
 
-raise "Incompatible version of async-websocket, #{Async::WebSocket::VERSION}, use \"gem 'async-websocket', '~> 0.8.0'\"." if Gem::Version.new(Async::WebSocket::VERSION) >= Gem::Version.new('0.9.0')
+if Gem::Version.new(Async::WebSocket::VERSION) >= Gem::Version.new('0.9.0')
+  raise(
+    "Incompatible version of async-websocket, #{Async::WebSocket::VERSION}, " \
+    "use \"gem 'async-websocket', '~> 0.8.0'\"."
+  )
+end

@@ -32,14 +32,18 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
       expect(subject.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
     end
     it 'fails with an exception' do
-      expect { subject.users_id(user: '@foo') }.to raise_error Slack::Web::Api::Errors::SlackError, 'user_not_found'
+      expect { subject.users_id(user: '@foo') }.to(
+        raise_error(Slack::Web::Api::Errors::SlackError, 'user_not_found')
+      )
     end
   end
 
   if defined?(Picky)
     context '#users_search' do
       it 'finds a user' do
-        expect(subject.users_search(user: 'aws')).to eq('ok' => true, 'members' => [{ 'id' => 'UDEADBEEF', 'name' => 'aws', 'profile' => {} }])
+        expect(subject.users_search(user: 'aws')).to(
+          eq('ok' => true, 'members' => [{ 'id' => 'UDEADBEEF', 'name' => 'aws', 'profile' => {} }])
+        )
       end
     end
   end

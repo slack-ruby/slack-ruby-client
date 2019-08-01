@@ -4,7 +4,8 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Client do
   let(:client) { described_class.new }
 
-  it 'raises a Faraday::ClientError when Slack is unavailable', vcr: { cassette_name: 'web/503_error' } do
+  it 'raises a Faraday::ClientError when Slack is unavailable',
+     vcr: { cassette_name: 'web/503_error' } do
     begin
       client.auth_test
       raise 'Expected to receive Faraday::ClientError.'

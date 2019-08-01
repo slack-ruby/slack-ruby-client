@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client do
+RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
 
   before do
@@ -67,7 +67,8 @@ RSpec.describe Slack::RealTime::Client do
     end
   end
 
-  context 'client with a full store', vcr: { cassette_name: 'web/rtm_start', allow_playback_repeats: true } do
+  context 'client with a full store',
+          vcr: { cassette_name: 'web/rtm_start', allow_playback_repeats: true } do
     let(:client) { described_class.new(store_class: Slack::RealTime::Stores::Store) }
     let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
 
@@ -75,7 +76,9 @@ RSpec.describe Slack::RealTime::Client do
       let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
 
       before do
-        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        allow(Slack::RealTime::Socket).to(
+          receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        )
         allow(socket).to receive(:connect!)
         allow(socket).to receive(:start_sync)
         client.start!
@@ -115,7 +118,9 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.groups.count).to eq 1
         end
         it 'includes team name in to_s' do
-          expect(client.to_s).to eq "id=#{client.team.id}, name=#{client.team.name}, domain=#{client.team.domain}"
+          expect(client.to_s).to eq(
+            "id=#{client.team.id}, name=#{client.team.name}, domain=#{client.team.domain}"
+          )
         end
       end
 
@@ -167,7 +172,9 @@ RSpec.describe Slack::RealTime::Client do
       let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
 
       before do
-        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        allow(Slack::RealTime::Socket).to(
+          receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        )
         allow(socket).to receive(:connect!)
         allow(socket).to receive(:start_async)
         client.start_async
@@ -213,7 +220,9 @@ RSpec.describe Slack::RealTime::Client do
       let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
 
       before do
-        allow(Slack::RealTime::Socket).to receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        allow(Slack::RealTime::Socket).to(
+          receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+        )
         allow(socket).to receive(:connect!)
         allow(socket).to receive(:start_sync)
         client.start!
@@ -248,7 +257,9 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.groups).to be_nil
         end
         it 'includes team name in to_s' do
-          expect(client.to_s).to eq "id=#{client.team.id}, name=#{client.team.name}, domain=#{client.team.domain}"
+          expect(client.to_s).to eq(
+            "id=#{client.team.id}, name=#{client.team.name}, domain=#{client.team.domain}"
+          )
         end
       end
 
@@ -397,7 +408,9 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.websocket_ping).to eq 15
         end
         it 'creates a connection with custom ping', vcr: { cassette_name: 'web/rtm_start' } do
-          expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(url, nil, ping: 15).and_return(ws)
+          expect(Slack::RealTime::Concurrency::Mock::WebSocket).to(
+            receive(:new).with(url, nil, ping: 15).and_return(ws)
+          )
           client.start!
         end
         it 'sets start_options' do
@@ -459,7 +472,9 @@ RSpec.describe Slack::RealTime::Client do
           end
 
           it 'calls rtm_start with start options', vcr: { cassette_name: 'web/rtm_start' } do
-            expect(client.web_client).to receive(:rtm_start).with(simple_latest: true).and_call_original
+            expect(client.web_client).to(
+              receive(:rtm_start).with(simple_latest: true).and_call_original
+            )
             client.start!
           end
         end
@@ -558,7 +573,8 @@ RSpec.describe Slack::RealTime::Client do
             allow(socket).to receive(:start_sync)
           end
 
-          it 'defaults to :rtm_start when using full store', vcr: { cassette_name: 'web/rtm_start' } do
+          it 'defaults to :rtm_start when using full store',
+             vcr: { cassette_name: 'web/rtm_start' } do
             expect(client.web_client).to receive(:rtm_start).and_call_original
             client.start!
           end
