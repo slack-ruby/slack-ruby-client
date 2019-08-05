@@ -522,7 +522,7 @@ Slack::Events::Request.new(http_request,
                            signature_expires_in: signature_expires_in)
 ```
 
-The `verify!` call may raise `Slack::Events::MissingSigningSecret`, `Slack::Events::InvalidSignature` or `Slack::Events::TimestampExpired` errors.
+The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Slack::Events::Request::InvalidSignature` or `Slack::Events::Request::TimestampExpired` errors.
 
 ### Message Parsing
 
