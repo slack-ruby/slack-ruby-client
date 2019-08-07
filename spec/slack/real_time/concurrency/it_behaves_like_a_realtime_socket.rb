@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.shared_examples_for 'a realtime socket' do
@@ -9,6 +10,7 @@ RSpec.shared_examples_for 'a realtime socket' do
       expect(socket.url).to eq url
     end
   end
+
   describe 'api' do
     %i[start_sync start_sync disconnect! connect! connected? send_data close].each do |m|
       it m do

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'websocket/driver'
 require 'socket'
 require 'forwardable'
@@ -36,12 +37,17 @@ module Slack
             loop { read } if socket
           rescue EOFError, Errno::ECONNRESET, Errno::EPIPE => e
             logger.debug("#{self.class}##{__method__}") { e }
-            driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')) unless @closing
+            unless @closing
+              driver.emit(
+                :close,
+                WebSocket::Driver::CloseEvent.new(1001, 'server closed connection')
+              )
+            end
           end
 
           def disconnect!
             super
-            @ping_timer.cancel if @ping_timer
+            @ping_timer&.cancel
           end
 
           def close
@@ -58,7 +64,7 @@ module Slack
 
           def handle_read(buffer)
             logger.debug("#{self.class}##{__method__}") { buffer }
-            driver.parse buffer if driver
+            driver&.parse buffer
           end
 
           def write(data)

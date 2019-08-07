@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
@@ -36,7 +37,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
           }
         )
         client.send(:dispatch, event)
-      end.to_not change(client.bots, :count)
+      end.not_to change(client.bots, :count)
       bot = client.bots['B0751JU2H']
       expect(bot['name']).to eq 'hugbot'
     end

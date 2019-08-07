@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Slack::Config do
@@ -7,6 +8,7 @@ describe Slack::Config do
         config.token = 'a token'
       end
     end
+
     it 'sets token' do
       expect(Slack.config.token).to eq 'a token'
     end

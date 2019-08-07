@@ -1,16 +1,17 @@
+# frozen_string_literal: true
 require 'spec_helper'
 require_relative './it_behaves_like_a_realtime_socket'
 
 begin
   RSpec.describe Slack::RealTime::Concurrency::Celluloid::Socket do
-    it_behaves_like 'a realtime socket'
-
-    let(:url) { 'wss://echo.websocket.org/websocket/xyz' }
-    let(:logger) { ::Logger.new(STDOUT) }
+    subject { socket }
 
     let(:driver) { WebSocket::Driver::Client }
+    let(:logger) { ::Logger.new(STDOUT) }
     let(:ws) { double(driver) }
-    subject { socket }
+    let(:url) { 'wss://echo.websocket.org/websocket/xyz' }
+
+    it_behaves_like 'a realtime socket'
 
     ['', nil].each do |data|
       context "finishing run_loop with #{data ? 'empty' : 'nil'} read" do
@@ -86,9 +87,13 @@ begin
 
           context 'consumes data' do
             let(:tcp_socket) { double(::Celluloid::IO::SSLSocket, connect: true) }
+
             before do
-              allow_any_instance_of(described_class).to receive(:build_socket).and_return(tcp_socket)
+              allow_any_instance_of(described_class).to(
+                receive(:build_socket).and_return(tcp_socket)
+              )
             end
+
             it 'runs' do
               expect(ws).to receive(:emit)
               expect(ws).to receive(:start)

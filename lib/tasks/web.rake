@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # largely from https://github.com/aki017/slack-ruby-gem
 require 'json-schema'
 require 'erubis'
@@ -10,7 +11,8 @@ namespace :slack do
       desc 'Update API.'
       task update: [:git_update] do
         group_schema = JSON.parse(File.read('lib/slack/web/api/schema/group.json'))
-        groups = Dir.glob('lib/slack/web/api/slack-api-ref/groups/**/*.json').each_with_object({}) do |path, result|
+        dirglob = 'lib/slack/web/api/slack-api-ref/groups/**/*.json'
+        groups = Dir.glob(dirglob).each_with_object({}) do |path, result|
           name = File.basename(path, '.json')
           parsed = JSON.parse(File.read(path))
           parsed['undocumented'] = true if path =~ /undocumented/
@@ -34,7 +36,8 @@ namespace :slack do
         end
 
         method_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method.erb'))
-        method_spec_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method_spec.erb'))
+        method_spec_template =
+          Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method_spec.erb'))
         command_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/command.erb'))
         data.each_with_index do |(group, names), index|
           printf "%2d/%2d %10s %s\n", index, data.size, group, names.keys
@@ -42,7 +45,8 @@ namespace :slack do
           snaked_group = group.tr('.', '_')
           rendered_method = method_template.result(group: group, names: names)
           File.write "lib/slack/web/api/endpoints/#{snaked_group}.rb", rendered_method
-          custom_spec_exists = File.exist?("spec/slack/web/api/endpoints/custom_specs/#{group}_spec.rb")
+          custom_spec_exists =
+            File.exist?("spec/slack/web/api/endpoints/custom_specs/#{group}_spec.rb")
           unless custom_spec_exists
             rendered_method_spec = method_spec_template.result(group: group, names: names)
             File.write "spec/slack/web/api/endpoints/#{snaked_group}_spec.rb", rendered_method_spec
@@ -58,11 +62,18 @@ namespace :slack do
           File.write "bin/commands/#{snaked_group}.rb", rendered_command
         end
 
-        endpoints_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/endpoints.erb'))
-        File.write 'lib/slack/web/api/endpoints.rb', endpoints_template.result(files: data.keys.map { |key| key.tr('.', '_') })
+        endpoints_template =
+          Erubis::Eruby.new(File.read('lib/slack/web/api/templates/endpoints.erb'))
+        File.write(
+          'lib/slack/web/api/endpoints.rb',
+          endpoints_template.result(files: data.keys.map { |key| key.tr('.', '_') })
+        )
 
         commands_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/commands.erb'))
-        File.write 'bin/commands.rb', commands_template.result(files: data.keys.map { |key| key.tr('.', '_') })
+        File.write(
+          'bin/commands.rb',
+          commands_template.result(files: data.keys.map { |key| key.tr('.', '_') })
+        )
       end
     end
   end

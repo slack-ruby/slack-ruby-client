@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 $LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'slack/version'
 
@@ -26,7 +27,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'json-schema'
   s.add_development_dependency 'rake', '~> 10'
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rubocop', '0.61.1'
+  s.add_development_dependency 'rubocop', '~> 0.73.0'
+  s.add_development_dependency 'rubocop-performance', '~> 1.4.1'
+  s.add_development_dependency 'rubocop-rspec', '~> 1.34.0'
   s.add_development_dependency 'timecop'
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'

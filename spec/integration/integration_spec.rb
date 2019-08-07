@@ -1,6 +1,9 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCURRENCY']) && 'missing SLACK_API_TOKEN and/or CONCURRENCY' do
+RSpec.describe 'integration test', skip: (
+  (!ENV['SLACK_API_TOKEN'] || !ENV['CONCURRENCY']) && 'missing SLACK_API_TOKEN and/or CONCURRENCY'
+) do
   around do |ex|
     WebMock.allow_net_connect!
     VCR.turned_off { ex.run }
@@ -31,7 +34,10 @@ RSpec.describe 'integration test', skip: (!ENV['SLACK_API_TOKEN'] || !ENV['CONCU
 
   before do
     client.on :hello do
-      logger.info "Successfully connected, welcome '#{client.self.name}' to the '#{client.team.name}' team at https://#{client.team.domain}.slack.com."
+      logger.info(
+        "Successfully connected, welcome '#{client.self.name}' to " \
+        "the '#{client.team.name}' team at https://#{client.team.domain}.slack.com."
+      )
     end
 
     client.on :message do |event|

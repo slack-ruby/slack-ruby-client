@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 if defined?(Picky)
   module Slack
     module Web

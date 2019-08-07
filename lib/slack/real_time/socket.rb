@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Slack
   module RealTime
     class Socket
@@ -51,9 +52,9 @@ module Slack
 
       def start_sync(client)
         thread = start_async(client)
-        thread.join if thread
+        thread&.join
       rescue Interrupt
-        thread.exit if thread
+        thread&.exit
       end
 
       # @return [#join]
@@ -76,7 +77,9 @@ module Slack
       end
 
       def close
-        # When you call `driver.emit(:close)`, it will typically end up calling `client.close` which will call `@socket.close` and end up back here. In order to break this infinite recursion, we check and set `@driver = nil` before invoking `client.close`.
+        # When you call `driver.emit(:close)`, it will typically end up calling `client.close`
+        # which will call `@socket.close` and end up back here. In order to break this infinite
+        # recursion, we check and set `@driver = nil` before invoking `client.close`.
         if driver = @driver
           @driver = nil
           driver.emit(:close)
@@ -95,9 +98,9 @@ module Slack
 
       def port
         case (uri = URI(url)).scheme
-        when 'wss'.freeze, 'https'.freeze
+        when 'wss', 'https'
           URI::HTTPS::DEFAULT_PORT
-        when 'ws', 'http'.freeze
+        when 'ws', 'http'
           URI::HTTP::DEFAULT_PORT
         else
           uri.port

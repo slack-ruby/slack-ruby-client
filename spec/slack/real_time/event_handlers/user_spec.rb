@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do

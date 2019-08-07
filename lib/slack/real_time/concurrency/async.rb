@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'async/websocket'
 require 'async/notification'
 require 'async/clock'
@@ -41,7 +42,7 @@ module Slack
               end
 
               while @restart
-                @client_task.stop if @client_task
+                @client_task&.stop
 
                 @client_task = task.async do |subtask|
                   begin
@@ -57,7 +58,7 @@ module Slack
                 @restart.wait
               end
 
-              @ping_task.stop if @ping_task
+              @ping_task&.stop
             end
           end
 
@@ -65,7 +66,7 @@ module Slack
             @url = new_url
             @last_message_at = current_time
 
-            @restart.signal if @restart
+            @restart&.signal
           end
 
           def current_time
@@ -98,7 +99,7 @@ module Slack
           end
 
           def run_loop
-            while @driver && @driver.next_event
+            while @driver&.next_event
               # $stderr.puts event.inspect
             end
           end
@@ -113,7 +114,9 @@ module Slack
 
           def build_endpoint
             endpoint = ::Async::IO::Endpoint.tcp(addr, port)
-            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
+            if secure?
+              endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context)
+            end
             endpoint
           end
 
@@ -131,4 +134,9 @@ module Slack
   end
 end
 
-raise "Incompatible version of async-websocket, #{Async::WebSocket::VERSION}, use \"gem 'async-websocket', '~> 0.8.0'\"." if Gem::Version.new(Async::WebSocket::VERSION) >= Gem::Version.new('0.9.0')
+if Gem::Version.new(Async::WebSocket::VERSION) >= Gem::Version.new('0.9.0')
+  raise(
+    "Incompatible version of async-websocket, #{Async::WebSocket::VERSION}, " \
+    "use \"gem 'async-websocket', '~> 0.8.0'\"."
+  )
+end
