@@ -1,7 +1,9 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Dialog do
   let(:client) { Slack::Web::Client.new }
+
   context 'dialog_open' do
     it 'automatically converts dialog into JSON' do
       expect(client).to receive(:post).with(
@@ -27,7 +29,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Dialog do
         expect(client).to(
           receive(:post).with('dialog.open', hash_including(trigger_id: '123', dialog: '[]'))
         )
-        expect { client.dialog_open(dialog: [], trigger_id: '123') }.to_not raise_error
+        expect { client.dialog_open(dialog: [], trigger_id: '123') }.not_to raise_error
       end
     end
   end

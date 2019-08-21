@@ -2,7 +2,7 @@
 module Slack
   module Web
     module Config
-      extend self
+      extend self # rubocop:disable Style/ModuleFunction
 
       ATTRIBUTES = %i[
         proxy

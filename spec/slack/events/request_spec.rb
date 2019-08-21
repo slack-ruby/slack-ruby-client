@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 RSpec.describe Slack::Events::Request do
-  subject do
+  subject(:request) do
     described_class.new(http_request)
   end
 
@@ -37,10 +37,10 @@ RSpec.describe Slack::Events::Request do
   end
 
   it 'reads http request' do
-    expect(subject.signature).to eq signature
-    expect(subject.body).to eq body
-    expect(subject.timestamp).to eq timestamp
-    expect(subject.version).to eq 'v0'
+    expect(request.signature).to eq signature
+    expect(request.body).to eq body
+    expect(request.timestamp).to eq timestamp
+    expect(request.version).to eq 'v0'
   end
   context 'time' do
     after do
@@ -55,8 +55,8 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is invalid but not expired' do
-        expect(subject).not_to be_valid
-        expect(subject).not_to be_expired
+        expect(request).not_to be_valid
+        expect(request).not_to be_expired
       end
     end
 
@@ -68,8 +68,8 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is invalid but not expired' do
-        expect(subject).not_to be_valid
-        expect(subject).not_to be_expired
+        expect(request).not_to be_valid
+        expect(request).not_to be_expired
       end
     end
 
@@ -82,8 +82,8 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is invalid but not expired' do
-        expect(subject).not_to be_valid
-        expect(subject).not_to be_expired
+        expect(request).not_to be_valid
+        expect(request).not_to be_expired
       end
     end
 
@@ -93,11 +93,11 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is valid' do
-        expect(subject).to be_valid
-        expect(subject).not_to be_expired
+        expect(request).to be_valid
+        expect(request).not_to be_expired
       end
       it 'does not raise an error and returns true' do
-        expect(subject.verify!).to be true
+        expect(request.verify!).to be true
       end
     end
 
@@ -107,11 +107,11 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is valid but expired' do
-        expect(subject).to be_valid
-        expect(subject).to be_expired
+        expect(request).to be_valid
+        expect(request).to be_expired
       end
       it 'raises an error on verify!' do
-        expect { subject.verify! }.to raise_error Slack::Events::Request::TimestampExpired
+        expect { request.verify! }.to raise_error Slack::Events::Request::TimestampExpired
       end
     end
 
@@ -121,11 +121,11 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is valid and not expired' do
-        expect(subject).to be_valid
-        expect(subject).not_to be_expired
+        expect(request).to be_valid
+        expect(request).not_to be_expired
       end
       it 'does not raise an error on verify!' do
-        expect(subject.verify!).to be true
+        expect(request.verify!).to be true
       end
     end
 
@@ -135,11 +135,11 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is valid but expired' do
-        expect(subject).to be_valid
-        expect(subject).to be_expired
+        expect(request).to be_valid
+        expect(request).to be_expired
       end
       it 'raises an error on verify!' do
-        expect { subject.verify! }.to raise_error Slack::Events::Request::TimestampExpired
+        expect { request.verify! }.to raise_error Slack::Events::Request::TimestampExpired
       end
     end
   end
@@ -150,17 +150,17 @@ RSpec.describe Slack::Events::Request do
     end
 
     context 'without a signing secret parameter' do
-      subject do
+      subject(:request) do
         described_class.new(http_request)
       end
 
       it 'raises MissingSigningSecret' do
-        expect { subject.valid? }.to raise_error Slack::Events::Request::MissingSigningSecret
+        expect { request.valid? }.to raise_error Slack::Events::Request::MissingSigningSecret
       end
     end
 
     context 'with a signing secret parameter' do
-      subject do
+      subject(:request) do
         described_class.new(http_request,
                             signing_secret: signing_secret,
                             signature_expires_in: 30)
@@ -171,8 +171,8 @@ RSpec.describe Slack::Events::Request do
       end
 
       it 'is valid and not expired' do
-        expect(subject).to be_valid
-        expect(subject).not_to be_expired
+        expect(request).to be_valid
+        expect(request).not_to be_expired
       end
     end
   end

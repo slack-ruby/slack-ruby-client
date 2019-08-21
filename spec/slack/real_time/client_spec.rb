@@ -137,7 +137,7 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
       end
       describe '#stop!' do
         before do
-          expect(socket).to receive(:disconnect!)
+          allow(socket).to receive(:disconnect!)
           client.stop!
         end
 
@@ -276,7 +276,7 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
       end
       describe '#stop!' do
         before do
-          expect(socket).to receive(:disconnect!)
+          allow(socket).to receive(:disconnect!)
           client.stop!
         end
 

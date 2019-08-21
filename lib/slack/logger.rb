@@ -4,11 +4,11 @@ require 'logger'
 module Slack
   class Logger < ::Logger
     def self.default
-      @logger ||= begin
-        logger = new STDOUT
-        logger.level = Logger::WARN
-        logger
-      end
+      return @default if @default
+
+      logger = new STDOUT
+      logger.level = Logger::WARN
+      @default = logger
     end
   end
 end

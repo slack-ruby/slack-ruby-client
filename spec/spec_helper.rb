@@ -5,7 +5,7 @@ require 'rubygems'
 require 'rspec'
 require 'timecop'
 
-require 'slack-ruby-client'
+require 'slack_ruby_client'
 
 Dir[File.join(File.dirname(__FILE__), 'support', '**/*.rb')].each do |file|
   require file

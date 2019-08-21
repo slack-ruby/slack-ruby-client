@@ -2,7 +2,7 @@
 module Slack
   module Events
     module Config
-      extend self
+      extend self # rubocop:disable Style/ModuleFunction
 
       ATTRIBUTES = %i[
         signing_secret

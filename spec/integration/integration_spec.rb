@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe 'integration test', skip: (
+RSpec.describe 'integration test', skip: ( # rubocop:disable RSpec/DescribeClass
   (!ENV['SLACK_API_TOKEN'] || !ENV['CONCURRENCY']) && 'missing SLACK_API_TOKEN and/or CONCURRENCY'
 ) do
   around do |ex|
@@ -10,11 +10,13 @@ RSpec.describe 'integration test', skip: (
     WebMock.disable_net_connect!
   end
 
+  let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
   let(:logger) do
     logger = Logger.new(STDOUT)
     logger.level = Logger::INFO
     logger
   end
+  let!(:queue) { @queue = QueueWithTimeout.new }
 
   before do
     Thread.abort_on_exception = true
@@ -22,17 +24,7 @@ RSpec.describe 'integration test', skip: (
     Slack.configure do |slack|
       slack.logger = logger
     end
-  end
 
-  after do
-    Slack.config.reset
-  end
-
-  let(:client) { Slack::RealTime::Client.new(token: ENV['SLACK_API_TOKEN']) }
-
-  let!(:queue) { @queue = QueueWithTimeout.new }
-
-  before do
     client.on :hello do
       logger.info(
         "Successfully connected, welcome '#{client.self.name}' to " \
@@ -49,6 +41,12 @@ RSpec.describe 'integration test', skip: (
       # pushes another item to the queue when disconnected
       queue.push :closed
     end
+  end
+
+  after do
+    Slack.config.reset
+    wait_for_server # wait for :closed to be pushed on queue
+    @server.join if @server.is_a?(::Thread)
   end
 
   def start_server
@@ -77,11 +75,6 @@ RSpec.describe 'integration test', skip: (
     queue.pop_with_timeout(5)
     logger.debug '#wait_for_server, joined'
     @queue = nil
-  end
-
-  after do
-    wait_for_server # wait for :closed to be pushed on queue
-    @server.join if @server.is_a?(::Thread)
   end
 
   context 'client connected' do

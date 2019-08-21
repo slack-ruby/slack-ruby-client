@@ -1,10 +1,13 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Chat do
   let(:client) { Slack::Web::Client.new }
+
   context 'chat_postEphemeral' do
     let(:user) { OpenStruct.new(user: { id: '123' }) }
-    before(:each) do
+
+    before do
       allow(described_class).to receive(:users_id).and_return(user)
     end
 
@@ -42,9 +45,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         )
         expect do
           client.chat_postEphemeral(channel: 'channel', text: 'text', user: '123')
-        end.to_not raise_error
+        end.not_to raise_error
       end
     end
+
     context 'attachments argument' do
       it 'optional attachments' do
         expect(client).to(
@@ -52,7 +56,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         )
         expect do
           client.chat_postEphemeral(channel: 'channel', text: 'text', user: '123', attachments: [])
-        end.to_not raise_error
+        end.not_to raise_error
       end
       it 'attachments without text' do
         expect(client).to(
@@ -60,21 +64,22 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         )
         expect do
           client.chat_postEphemeral(channel: 'channel', attachments: [], user: '123')
-        end.to_not raise_error
+        end.not_to raise_error
       end
     end
+
     context 'blocks argument' do
       it 'optional blocks' do
         expect(client).to receive(:post).with('chat.postEphemeral', hash_including(blocks: '[]'))
         expect do
           client.chat_postEphemeral(channel: 'channel', text: 'text', user: '123', blocks: [])
-        end.to_not raise_error
+        end.not_to raise_error
       end
       it 'blocks without text' do
         expect(client).to receive(:post).with('chat.postEphemeral', hash_including(blocks: '[]'))
         expect do
           client.chat_postEphemeral(channel: 'channel', blocks: [], user: '123')
-        end.to_not raise_error
+        end.not_to raise_error
       end
     end
   end
@@ -98,15 +103,15 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       end
       it 'only text' do
         expect(client).to receive(:post).with('chat.postMessage', hash_including(text: 'text'))
-        expect { client.chat_postMessage(channel: 'channel', text: 'text') }.to_not raise_error
+        expect { client.chat_postMessage(channel: 'channel', text: 'text') }.not_to raise_error
       end
       it 'only attachments' do
         expect(client).to receive(:post).with('chat.postMessage', hash_including(attachments: '[]'))
-        expect { client.chat_postMessage(channel: 'channel', attachments: []) }.to_not raise_error
+        expect { client.chat_postMessage(channel: 'channel', attachments: []) }.not_to raise_error
       end
       it 'only blocks' do
         expect(client).to receive(:post).with('chat.postMessage', hash_including(blocks: '[]'))
-        expect { client.chat_postMessage(channel: 'channel', blocks: []) }.to_not raise_error
+        expect { client.chat_postMessage(channel: 'channel', blocks: []) }.not_to raise_error
       end
       it 'all text, attachments and blocks' do
         expect(client).to(
@@ -115,13 +120,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         )
         expect do
           client.chat_postMessage(channel: 'channel', text: 'text', attachments: [], blocks: [])
-        end.to_not raise_error
+        end.not_to raise_error
       end
     end
   end
 
   context 'chat_update' do
     let(:ts) { '1405894322.002768' }
+
     it 'automatically converts attachments and blocks into JSON' do
       expect(client).to receive(:post).with(
         'chat.update',
@@ -140,6 +146,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         end.to raise_error(ArgumentError, /Required arguments :ts missing>/)
       end
     end
+
     context 'text, attachment and blocks arguments' do
       it 'requires text, attachments or blocks' do
         expect { client.chat_update(channel: 'channel', ts: ts) }.to(
@@ -150,19 +157,19 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         expect(client).to receive(:post).with('chat.update', hash_including(text: 'text'))
         expect do
           client.chat_update(channel: 'channel', text: 'text', ts: ts)
-        end.to_not raise_error
+        end.not_to raise_error
       end
       it 'only attachments' do
         expect(client).to receive(:post).with('chat.update', hash_including(attachments: '[]'))
         expect do
           client.chat_update(channel: 'channel', ts: ts, attachments: [])
-        end.to_not raise_error
+        end.not_to raise_error
       end
       it 'only blocks' do
         expect(client).to receive(:post).with('chat.update', hash_including(blocks: '[]'))
         expect do
           client.chat_update(channel: 'channel', ts: ts, blocks: [])
-        end.to_not raise_error
+        end.not_to raise_error
       end
       it 'all text, attachments and blocks' do
         expect(client).to(
@@ -171,7 +178,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         )
         expect do
           client.chat_update(channel: 'channel', text: 'text', ts: ts, attachments: [], blocks: [])
-        end.to_not raise_error
+        end.not_to raise_error
       end
     end
   end

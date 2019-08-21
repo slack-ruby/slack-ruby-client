@@ -82,7 +82,7 @@ module Slack
           def disconnect!
             super
           ensure
-            if restart = @restart
+            if (restart = @restart)
               @restart = nil
               restart.signal
             end

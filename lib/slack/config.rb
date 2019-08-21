@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Slack
   module Config
-    extend self
+    extend self # rubocop:disable Style/ModuleFunction
 
     attr_accessor :token
     attr_accessor :logger
