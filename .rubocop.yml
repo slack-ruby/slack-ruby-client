@@ -24,3 +24,6 @@ Style/Documentation:
   Enabled: false
 Style/ModuleFunction:
   Enabled: false
+Naming/FileName:
+  Exclude:
+    - lib/slack-ruby-client.rb # Required to match gemspec name
