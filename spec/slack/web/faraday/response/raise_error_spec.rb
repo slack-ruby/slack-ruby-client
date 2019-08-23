@@ -2,8 +2,9 @@
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Faraday::Response::RaiseError do
+  subject(:raise_error_obj) { described_class.new }
+
   describe '#on_complete' do
-    let(:subject) { described_class.new }
     let(:status) { 200 }
     let(:response) { nil }
     let(:body) { {} }
@@ -13,7 +14,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
       let(:status) { 429 }
 
       it 'raises a TooManyRequestsError' do
-        expect { subject.on_complete(env) }.to(
+        expect { raise_error_obj.on_complete(env) }.to(
           raise_error(Slack::Web::Api::Errors::TooManyRequestsError)
         )
       end
@@ -23,7 +24,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
       let(:body) { { 'ok' => 'true' } }
 
       it 'is nil' do
-        expect(subject.on_complete(env)).to eq nil
+        expect(raise_error_obj.on_complete(env)).to eq nil
       end
     end
 
@@ -31,7 +32,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
       let(:body) { { 'error' => 'already_in_channel' } }
 
       it 'raises a SlackError with the error message' do
-        expect { subject.on_complete(env) }.to(
+        expect { raise_error_obj.on_complete(env) }.to(
           raise_error(Slack::Web::Api::Errors::SlackError, 'already_in_channel')
         )
       end
@@ -48,7 +49,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
       end
 
       it 'raises a SlackError with the concatenated error messages' do
-        expect { subject.on_complete(env) }.to(
+        expect { raise_error_obj.on_complete(env) }.to(
           raise_error(
             Slack::Web::Api::Errors::SlackError,
             'already_in_channel,something_else_terrible'

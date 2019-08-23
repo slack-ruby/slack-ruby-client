@@ -7,9 +7,6 @@ module Slack
     module Concurrency
       module Eventmachine
         class Client < Faye::WebSocket::Client
-          attr_reader :logger
-          protected :logger
-
           def initialize(url, protocols = nil, options = {})
             @logger =
               options.fetch(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
@@ -25,6 +22,10 @@ module Slack
             logger.debug("#{self.class}##{__method__}") { data }
             super data
           end
+
+          protected
+
+          attr_reader :logger
         end
 
         class Socket < Slack::RealTime::Socket

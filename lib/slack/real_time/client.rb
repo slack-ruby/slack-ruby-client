@@ -84,7 +84,7 @@ module Slack
         @socket.connect! do |driver|
           driver.on :open do |event|
             logger.debug("#{self}##{__method__}") { event.class.name }
-            open(event)
+            open_event(event)
             callback(event, :open)
           end
 
@@ -137,7 +137,7 @@ module Slack
       end
 
       def run_ping?
-        !websocket_ping.nil? && websocket_ping > 0
+        !websocket_ping.nil? && websocket_ping.positive?
       end
 
       def websocket_ping_timer
@@ -205,7 +205,7 @@ module Slack
         @socket.send_data(data.to_json)
       end
 
-      def open(_event); end
+      def open_event(_event); end
 
       def close(_event)
         [@socket, socket_class].each do |s|
