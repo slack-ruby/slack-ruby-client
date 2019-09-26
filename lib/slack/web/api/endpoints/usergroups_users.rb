@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module UsergroupsUsers
           #
-          # This method returns a list of all users within a User Group.
+          # List all users in a User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to update.
@@ -21,7 +21,7 @@ module Slack
           end
 
           #
-          # This method updates the list of users that belong to a User Group. This method replaces all users in a User Group with the list of users provided in the users parameter.
+          # Update the list of users for a User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to update.

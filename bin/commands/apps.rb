@@ -3,8 +3,8 @@
 
 desc 'Apps methods.'
 command 'apps' do |g|
-  g.desc 'This method uninstalls an app. Unlike auth.revoke, which revokes a single token, this method revokes all tokens associated with a single installation of an app.'
-  g.long_desc %( This method uninstalls an app. Unlike auth.revoke, which revokes a single token, this method revokes all tokens associated with a single installation of an app. )
+  g.desc 'Uninstalls your app from a workspace.'
+  g.long_desc %( Uninstalls your app from a workspace. )
   g.command 'uninstall' do |c|
     c.flag 'client_id', desc: 'Issued when you created your application.'
     c.flag 'client_secret', desc: 'Issued when you created your application.'

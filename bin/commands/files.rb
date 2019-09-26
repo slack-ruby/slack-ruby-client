@@ -3,8 +3,8 @@
 
 desc 'Files methods.'
 command 'files' do |g|
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Deletes a file.'
+  g.long_desc %( Deletes a file. )
   g.command 'delete' do |c|
     c.flag 'file', desc: 'ID of file to delete.'
     c.action do |_global_options, options, _args|
@@ -23,8 +23,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Gets information about a team file.'
+  g.long_desc %( Gets information about a team file. )
   g.command 'info' do |c|
     c.flag 'file', desc: 'Specify a file by providing its ID.'
     c.flag 'cursor', desc: "Parameter for pagination. File comments are paginated for a single file. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection of comments. See pagination for more details."
@@ -34,8 +34,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Lists & filters team files.'
+  g.long_desc %( Lists & filters team files. )
   g.command 'list' do |c|
     c.flag 'channel', desc: 'Filter files appearing in a specific channel, indicated by its ID.'
     c.flag 'ts_from', desc: 'Filter files created after this timestamp (inclusive).'
@@ -47,8 +47,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Revokes public/external sharing access for a file'
+  g.long_desc %( Revokes public/external sharing access for a file )
   g.command 'revokePublicURL' do |c|
     c.flag 'file', desc: 'File to revoke.'
     c.action do |_global_options, options, _args|
@@ -66,8 +66,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Enables a file for public/external sharing.'
+  g.long_desc %( Enables a file for public/external sharing. )
   g.command 'sharedPublicURL' do |c|
     c.flag 'file', desc: 'File to share.'
     c.action do |_global_options, options, _args|
@@ -75,8 +75,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Uploads or creates a file.'
+  g.long_desc %( Uploads or creates a file. )
   g.command 'upload' do |c|
     c.flag 'channels', desc: 'Comma-separated list of channel names or IDs where the file will be shared.'
     c.flag 'content', desc: 'File contents via a POST variable. If omitting this parameter, you must provide a file.'

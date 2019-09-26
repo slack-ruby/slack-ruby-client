@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Dnd
           #
-          # Ends the user's currently scheduled Do Not Disturb session immediately.
+          # Ends the current user's Do Not Disturb session immediately.
           #
           # @see https://api.slack.com/methods/dnd.endDnd
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.endDnd.json
@@ -25,7 +25,7 @@ module Slack
           end
 
           #
-          # Provides information about a user's current Do Not Disturb settings.
+          # Retrieves a user's current Do Not Disturb status.
           #
           # @option options [user] :user
           #   User to fetch status for (defaults to current user).
@@ -37,7 +37,7 @@ module Slack
           end
 
           #
-          # Adjusts the snooze duration for a user's Do Not Disturb settings. If a snooze session is not already active for the user, invoking this method will begin one for the specified duration.
+          # Turns on Do Not Disturb mode for the current user, or changes its duration.
           #
           # @option options [Object] :num_minutes
           #   Number of minutes, from now, to snooze until.
@@ -49,7 +49,7 @@ module Slack
           end
 
           #
-          # Provides information about the current Do Not Disturb settings for a list of users in a Slack team.
+          # Retrieves the Do Not Disturb status for up to 50 users on a team.
           #
           # @option options [Object] :users
           #   Comma-separated list of users to fetch Do Not Disturb status for.

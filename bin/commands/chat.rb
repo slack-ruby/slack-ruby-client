@@ -14,8 +14,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method deletes a message from a channel.'
-  g.long_desc %( This method deletes a message from a channel. )
+  g.desc 'Deletes a message.'
+  g.long_desc %( Deletes a message. )
   g.command 'delete' do |c|
     c.flag 'channel', desc: 'Channel containing the message to be deleted.'
     c.flag 'ts', desc: 'Timestamp of the message to be deleted.'
@@ -25,8 +25,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method deletes a pending scheduled message before it is sent.'
-  g.long_desc %( This method deletes a pending scheduled message before it is sent. )
+  g.desc 'Deletes a pending scheduled message from the queue.'
+  g.long_desc %( Deletes a pending scheduled message from the queue. )
   g.command 'deleteScheduledMessage' do |c|
     c.flag 'channel', desc: 'The channel the scheduled_message is posting to.'
     c.flag 'scheduled_message_id', desc: 'scheduled_message_id returned from call to chat.scheduleMessage.'
@@ -36,8 +36,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'Easily exchange a message timestamp and a channel ID for a friendly HTTP-based permalink to that message. Handles message threads and all conversation types.'
-  g.long_desc %( Easily exchange a message timestamp and a channel ID for a friendly HTTP-based permalink to that message. Handles message threads and all conversation types. )
+  g.desc 'Retrieve a permalink URL for a specific extant message'
+  g.long_desc %( Retrieve a permalink URL for a specific extant message )
   g.command 'getPermalink' do |c|
     c.flag 'channel', desc: 'The ID of the conversation or channel containing the message.'
     c.flag 'message_ts', desc: "A message's ts value, uniquely identifying it within a channel."
@@ -46,8 +46,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method sends a me message to a channel from the calling user.'
-  g.long_desc %( This method sends a me message to a channel from the calling user. )
+  g.desc 'Share a me message into a channel.'
+  g.long_desc %( Share a me message into a channel. )
   g.command 'meMessage' do |c|
     c.flag 'channel', desc: 'Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.'
     c.flag 'text', desc: 'Text of the message to send.'
@@ -56,8 +56,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation.'
-  g.long_desc %( This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation. )
+  g.desc 'Sends an ephemeral message to a user in a channel.'
+  g.long_desc %( Sends an ephemeral message to a user in a channel. )
   g.command 'postEphemeral' do |c|
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.'
@@ -76,8 +76,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method posts a message to a public channel, private channel, or direct message/IM channel.'
-  g.long_desc %( This method posts a message to a public channel, private channel, or direct message/IM channel. )
+  g.desc 'Sends a message to a channel.'
+  g.long_desc %( Sends a message to a channel. )
   g.command 'postMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
     c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation."
@@ -99,8 +99,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method schedules a message for delivery to a public channel, private channel, or direct message/IM channel at a specified time in the future.'
-  g.long_desc %( This method schedules a message for delivery to a public channel, private channel, or direct message/IM channel at a specified time in the future. )
+  g.desc 'Schedules a message to be sent to a channel.'
+  g.long_desc %( Schedules a message to be sent to a channel. )
   g.command 'scheduleMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
     c.flag 'post_at', desc: 'Unix EPOCH timestamp of time in future to send the message.'
@@ -119,8 +119,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens.'
-  g.long_desc %( This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens. )
+  g.desc 'Provide custom unfurl behavior for user-posted URLs'
+  g.long_desc %( Provide custom unfurl behavior for user-posted URLs )
   g.command 'unfurl' do |c|
     c.flag 'channel', desc: 'Channel ID of the message.'
     c.flag 'ts', desc: 'Timestamp of the message to add unfurl behavior to.'
@@ -133,8 +133,8 @@ command 'chat' do |g|
     end
   end
 
-  g.desc 'This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.'
-  g.long_desc %( This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently. )
+  g.desc 'Updates a message.'
+  g.long_desc %( Updates a message. )
   g.command 'update' do |c|
     c.flag 'channel', desc: 'Channel containing the message to be updated.'
     c.flag 'text', desc: "New text for the message, using the default formatting rules. It's not required when presenting attachments."

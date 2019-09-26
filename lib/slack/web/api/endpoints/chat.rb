@@ -25,7 +25,7 @@ module Slack
           end
 
           #
-          # This method deletes a message from a channel.
+          # Deletes a message.
           #
           # @option options [channel] :channel
           #   Channel containing the message to be deleted.
@@ -43,7 +43,7 @@ module Slack
           end
 
           #
-          # This method deletes a pending scheduled message before it is sent.
+          # Deletes a pending scheduled message from the queue.
           #
           # @option options [channel] :channel
           #   The channel the scheduled_message is posting to.
@@ -61,7 +61,7 @@ module Slack
           end
 
           #
-          # Easily exchange a message timestamp and a channel ID for a friendly HTTP-based permalink to that message. Handles message threads and all conversation types.
+          # Retrieve a permalink URL for a specific extant message
           #
           # @option options [channel] :channel
           #   The ID of the conversation or channel containing the message.
@@ -77,7 +77,7 @@ module Slack
           end
 
           #
-          # This method sends a me message to a channel from the calling user.
+          # Share a me message into a channel.
           #
           # @option options [channel] :channel
           #   Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
@@ -92,7 +92,7 @@ module Slack
           end
 
           #
-          # This method posts an ephemeral message, which is visible only to the assigned user in a specific public channel, private channel, or private conversation.
+          # Sends an ephemeral message to a user in a channel.
           #
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
@@ -141,7 +141,7 @@ module Slack
           end
 
           #
-          # This method posts a message to a public channel, private channel, or direct message/IM channel.
+          # Sends a message to a channel.
           #
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
@@ -194,7 +194,7 @@ module Slack
           end
 
           #
-          # This method schedules a message for delivery to a public channel, private channel, or direct message/IM channel at a specified time in the future.
+          # Schedules a message to be sent to a channel.
           #
           # @option options [channel] :channel
           #   Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.
@@ -230,7 +230,7 @@ module Slack
           end
 
           #
-          # This method attaches Slack app unfurl behavior to a specified and relevant message. A user token is required as this method does not support bot user tokens.
+          # Provide custom unfurl behavior for user-posted URLs
           #
           # @option options [channel] :channel
           #   Channel ID of the message.
@@ -255,7 +255,7 @@ module Slack
           end
 
           #
-          # This method updates a message in a channel. Though related to chat.postMessage, some parameters of chat.update are handled differently.
+          # Updates a message.
           #
           # @option options [channel] :channel
           #   Channel containing the message to be updated.

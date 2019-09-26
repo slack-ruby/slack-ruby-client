@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Dialog
           #
-          # Open a dialog with a user by exchanging a trigger_id received from another interaction. See the dialogs documentation to learn how to obtain triggers define form elements.
+          # Open a dialog with a user
           #
           # @option options [Object] :dialog
           #   The dialog definition. This must be a JSON-encoded string.

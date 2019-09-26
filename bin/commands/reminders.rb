@@ -3,8 +3,8 @@
 
 desc 'Reminders methods.'
 command 'reminders' do |g|
-  g.desc 'This method creates a reminder.'
-  g.long_desc %( This method creates a reminder. )
+  g.desc 'Creates a reminder.'
+  g.long_desc %( Creates a reminder. )
   g.command 'add' do |c|
     c.flag 'text', desc: 'The content of the reminder.'
     c.flag 'time', desc: 'When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday").'
@@ -14,8 +14,8 @@ command 'reminders' do |g|
     end
   end
 
-  g.desc 'This method completes a reminder.'
-  g.long_desc %( This method completes a reminder. )
+  g.desc 'Marks a reminder as complete.'
+  g.long_desc %( Marks a reminder as complete. )
   g.command 'complete' do |c|
     c.flag 'reminder', desc: 'The ID of the reminder to be marked as complete.'
     c.action do |_global_options, options, _args|
@@ -23,8 +23,8 @@ command 'reminders' do |g|
     end
   end
 
-  g.desc 'This method deletes a reminder.'
-  g.long_desc %( This method deletes a reminder. )
+  g.desc 'Deletes a reminder.'
+  g.long_desc %( Deletes a reminder. )
   g.command 'delete' do |c|
     c.flag 'reminder', desc: 'The ID of the reminder.'
     c.action do |_global_options, options, _args|
@@ -32,8 +32,8 @@ command 'reminders' do |g|
     end
   end
 
-  g.desc 'This method returns information about a reminder.'
-  g.long_desc %( This method returns information about a reminder. )
+  g.desc 'Gets information about a reminder.'
+  g.long_desc %( Gets information about a reminder. )
   g.command 'info' do |c|
     c.flag 'reminder', desc: 'The ID of the reminder.'
     c.action do |_global_options, options, _args|
@@ -41,8 +41,8 @@ command 'reminders' do |g|
     end
   end
 
-  g.desc 'This method lists all reminders created by or for a given user.'
-  g.long_desc %( This method lists all reminders created by or for a given user. )
+  g.desc 'Lists all reminders created by or for a given user.'
+  g.long_desc %( Lists all reminders created by or for a given user. )
   g.command 'list' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.reminders_list(options))

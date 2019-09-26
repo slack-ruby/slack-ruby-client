@@ -3,8 +3,8 @@
 
 desc 'AppsPermissionsScopes methods.'
 command 'apps_permissions_scopes' do |g|
-  g.desc 'This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months.'
-  g.long_desc %( This feature was exclusive to our workspace apps developer preview. The preview has now ended, but fan-favorite features such as token rotation and the Conversations API will become available to classic Slack apps over the coming months. )
+  g.desc 'Returns list of scopes this app has on a team.'
+  g.long_desc %( Returns list of scopes this app has on a team. )
   g.command 'list' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.apps_permissions_scopes_list(options))

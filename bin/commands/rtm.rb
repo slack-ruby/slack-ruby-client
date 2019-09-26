@@ -3,8 +3,8 @@
 
 desc 'Rtm methods.'
 command 'rtm' do |g|
-  g.desc 'This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.'
-  g.long_desc %( This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket. )
+  g.desc 'Starts a Real Time Messaging session.'
+  g.long_desc %( Starts a Real Time Messaging session. )
   g.command 'connect' do |c|
     c.flag 'batch_presence_aware', desc: 'Batch presence deliveries via subscription. Enabling changes the shape of presence_change events. See batch presence.'
     c.flag 'presence_sub', desc: 'Only deliver presence events when requested by subscription. See presence subscriptions.'
@@ -13,8 +13,8 @@ command 'rtm' do |g|
     end
   end
 
-  g.desc 'This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket.'
-  g.long_desc %( This method begins a Real Time Messaging API session and reserves your application a specific URL with which to connect via websocket. )
+  g.desc 'Starts a Real Time Messaging session.'
+  g.long_desc %( Starts a Real Time Messaging session. )
   g.command 'start' do |c|
     c.flag 'batch_presence_aware', desc: 'Batch presence deliveries via subscription. Enabling changes the shape of presence_change events. See batch presence.'
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for users and channels. Defaults to false.'

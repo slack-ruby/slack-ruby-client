@@ -3,8 +3,8 @@
 
 desc 'Team methods.'
 command 'team' do |g|
-  g.desc 'This method is used to retrieve the "access logs" for users on a workspace.'
-  g.long_desc %( This method is used to retrieve the "access logs" for users on a workspace. )
+  g.desc 'Gets the access logs for the current team.'
+  g.long_desc %( Gets the access logs for the current team. )
   g.command 'accessLogs' do |c|
     c.flag 'before', desc: 'End of time range of logs to include in results (inclusive).'
     c.action do |_global_options, options, _args|
@@ -12,8 +12,8 @@ command 'team' do |g|
     end
   end
 
-  g.desc 'This method lists billable information for each user on the team. Currently this consists solely of whether the user is'
-  g.long_desc %( This method lists billable information for each user on the team. Currently this consists solely of whether the user is subject to billing per Slack's Fair Billing policy. )
+  g.desc 'Gets billable users information for the current team.'
+  g.long_desc %( Gets billable users information for the current team. )
   g.command 'billableInfo' do |c|
     c.flag 'user', desc: 'A user to retrieve the billable information for. Defaults to all users.'
     c.action do |_global_options, options, _args|
@@ -21,8 +21,8 @@ command 'team' do |g|
     end
   end
 
-  g.desc 'This method provides information about your team.'
-  g.long_desc %( This method provides information about your team. )
+  g.desc 'Gets information about the current team.'
+  g.long_desc %( Gets information about the current team. )
   g.command 'info' do |c|
     c.flag 'team', desc: 'Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels.'
     c.action do |_global_options, options, _args|
@@ -30,8 +30,8 @@ command 'team' do |g|
     end
   end
 
-  g.desc 'This method lists the integration activity logs for a team, including when integrations are added, modified and removed. This method can only be called by Admins.'
-  g.long_desc %( This method lists the integration activity logs for a team, including when integrations are added, modified and removed. This method can only be called by Admins. )
+  g.desc 'Gets the integration logs for the current team.'
+  g.long_desc %( Gets the integration logs for the current team. )
   g.command 'integrationLogs' do |c|
     c.flag 'app_id', desc: 'Filter logs to this Slack app. Defaults to all logs.'
     c.flag 'change_type', desc: 'Filter logs with this change type. Defaults to all logs.'

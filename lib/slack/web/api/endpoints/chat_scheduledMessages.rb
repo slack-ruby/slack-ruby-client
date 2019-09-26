@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module ChatScheduledmessages
           #
-          # This method returns a list of pending scheduled messages.
+          # Returns a list of scheduled messages.
           #
           # @option options [channel] :channel
           #   The channel of the scheduled messages.

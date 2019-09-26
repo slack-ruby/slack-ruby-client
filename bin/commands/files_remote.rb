@@ -3,8 +3,8 @@
 
 desc 'FilesRemote methods.'
 command 'files_remote' do |g|
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Adds a file from a remote service'
+  g.long_desc %( Adds a file from a remote service )
   g.command 'add' do |c|
     c.flag 'external_id', desc: 'Creator defined GUID for the file.'
     c.flag 'external_url', desc: 'URL of the remote file.'
@@ -17,8 +17,8 @@ command 'files_remote' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Retrieve information about a remote file added to Slack'
+  g.long_desc %( Retrieve information about a remote file added to Slack )
   g.command 'info' do |c|
     c.flag 'external_id', desc: 'Creator defined GUID for the file.'
     c.flag 'file', desc: 'Specify a file by providing its ID.'
@@ -27,8 +27,8 @@ command 'files_remote' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Retrieve information about a remote file added to Slack'
+  g.long_desc %( Retrieve information about a remote file added to Slack )
   g.command 'list' do |c|
     c.flag 'channel', desc: 'Filter files appearing in a specific channel, indicated by its ID.'
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
@@ -40,8 +40,8 @@ command 'files_remote' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Remove a remote file.'
+  g.long_desc %( Remove a remote file. )
   g.command 'remove' do |c|
     c.flag 'external_id', desc: 'Creator defined GUID for the file.'
     c.flag 'file', desc: 'Specify a file by providing its ID.'
@@ -50,8 +50,8 @@ command 'files_remote' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Share a remote file into a channel.'
+  g.long_desc %( Share a remote file into a channel. )
   g.command 'share' do |c|
     c.flag 'channels', desc: 'Comma-separated list of channel IDs where the file will be shared.'
     c.flag 'external_id', desc: 'Creator defined GUID for the file.'
@@ -61,8 +61,8 @@ command 'files_remote' do |g|
     end
   end
 
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Updates an existing remote file.'
+  g.long_desc %( Updates an existing remote file. )
   g.command 'update' do |c|
     c.flag 'external_id', desc: 'Creator defined GUID for the file.'
     c.flag 'external_url', desc: 'URL of the remote file.'

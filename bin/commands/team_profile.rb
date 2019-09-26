@@ -3,8 +3,8 @@
 
 desc 'TeamProfile methods.'
 command 'team_profile' do |g|
-  g.desc 'This method is used to get the profile field definitions for this team.'
-  g.long_desc %( This method is used to get the profile field definitions for this team. )
+  g.desc "Retrieve a team's profile."
+  g.long_desc %( Retrieve a team's profile. )
   g.command 'get' do |c|
     c.flag 'visibility', desc: 'Filter by visibility.'
     c.action do |_global_options, options, _args|

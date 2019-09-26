@@ -7,8 +7,7 @@ module Slack
       module Endpoints
         module Stars
           #
-          # This method adds a star to an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user.
-          # One of file, file_comment, channel, or the combination of channel and timestamp must be specified.
+          # Adds a star to an item.
           #
           # @option options [channel] :channel
           #   Channel to add star to, or channel where the message to add star to was posted (used with timestamp).
@@ -26,7 +25,7 @@ module Slack
           end
 
           #
-          # This method lists the items starred by the authed user.
+          # Lists stars for a user.
           #
           # @option options [Object] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
@@ -45,8 +44,7 @@ module Slack
           end
 
           #
-          # This method removes a star from an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user.
-          # One of file, file_comment, channel, or the combination of channel and timestamp must be specified.
+          # Removes a star from an item.
           #
           # @option options [channel] :channel
           #   Channel to remove star from, or channel where the message to remove star from was posted (used with timestamp).

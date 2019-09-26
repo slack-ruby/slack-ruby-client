@@ -3,8 +3,8 @@
 
 desc 'FilesComments methods.'
 command 'files_comments' do |g|
-  g.desc "A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments."
-  g.long_desc %( A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments. )
+  g.desc 'Deletes an existing comment on a file.'
+  g.long_desc %( Deletes an existing comment on a file. )
   g.command 'delete' do |c|
     c.flag 'file', desc: 'File to delete a comment from.'
     c.flag 'id', desc: 'The comment to delete.'

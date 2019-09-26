@@ -3,8 +3,8 @@
 
 desc 'AdminUsersSession methods.'
 command 'admin_users_session' do |g|
-  g.desc "This method wipes a user session, leaving the user unauthenticated. The user's Slack client will reset its local cache."
-  g.long_desc %( This method wipes a user session, leaving the user unauthenticated. The user's Slack client will reset its local cache. )
+  g.desc 'Wipes all valid sessions on all devices for a given user'
+  g.long_desc %( Wipes all valid sessions on all devices for a given user )
   g.command 'reset' do |c|
     c.flag 'user_id', desc: 'The ID of the user to wipe sessions for.'
     c.flag 'mobile_only', desc: 'Only expire mobile sessions (default: false).'
