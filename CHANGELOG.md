@@ -2,7 +2,7 @@
 
 * [#293](https://github.com/slack-ruby/slack-ruby-client/pull/293): Rubocop auto-correct and comprehensive todo - [@jcraigk](https://github.com/jcraigk).
 * [#297](https://github.com/slack-ruby/slack-ruby-client/pull/297): Various Rubocop fixes - [@jcraigk](https://github.com/jcraigk).
-
+* [#298](https://github.com/slack-ruby/slack-ruby-client/pull/298): Add `admin.apps`, `admin.app.requests` and `views` endpoints - [@jmanian](https://github.com/jmanian).
 * Your contribution here.
 
 ### 0.14.4 (2019/7/28)
