@@ -1,0 +1,40 @@
+diff --git a/lib/slack/web/api/endpoints/views.rb b/lib/slack/web/api/endpoints/views.rb
+index 3d7ac8e..10de15c 100644
+--- a/lib/slack/web/api/endpoints/views.rb
++++ b/lib/slack/web/api/endpoints/views.rb
+@@ -18,6 +18,11 @@ module Slack
+           def views_open(options = {})
+             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
+             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
++            if options.key?(:view)
++              view = options[:view]
++              view = JSON.dump(view) unless view.is_a?(String)
++              options = options.merge(view: view)
++            end
+             post('views.open', options)
+           end
+ 
+@@ -33,6 +38,11 @@ module Slack
+           def views_push(options = {})
+             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
+             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
++            if options.key?(:view)
++              view = options[:view]
++              view = JSON.dump(view) unless view.is_a?(String)
++              options = options.merge(view: view)
++            end
+             post('views.push', options)
+           end
+ 
+@@ -51,6 +61,11 @@ module Slack
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.update.json
+           def views_update(options = {})
+             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
++            if options.key?(:view)
++              view = options[:view]
++              view = JSON.dump(view) unless view.is_a?(String)
++              options = options.merge(view: view)
++            end
+             post('views.update', options)
+           end
+         end

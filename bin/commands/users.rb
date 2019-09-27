@@ -3,8 +3,8 @@
 
 desc 'Users methods.'
 command 'users' do |g|
-  g.desc 'This method helps answer questions like:'
-  g.long_desc %( This method helps answer questions like: - Which conversations am I a member of? - Which public channels is my bot user in? - Do I have any direct messages open with my friend Suzy? - Is my bot a member of any private channels? )
+  g.desc 'List conversations the calling user may access.'
+  g.long_desc %( List conversations the calling user may access. )
   g.command 'conversations' do |c|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
@@ -16,16 +16,16 @@ command 'users' do |g|
     end
   end
 
-  g.desc 'This method allows the user to delete their profile image. It will clear whatever image is currently set.'
-  g.long_desc %( This method allows the user to delete their profile image. It will clear whatever image is currently set. )
+  g.desc 'Delete the user profile photo'
+  g.long_desc %( Delete the user profile photo )
   g.command 'deletePhoto' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_deletePhoto(options))
     end
   end
 
-  g.desc "This method lets you find out information about a user's presence."
-  g.long_desc %( This method lets you find out information about a user's presence. Consult the presence documentation for more details. )
+  g.desc 'Gets user presence information.'
+  g.long_desc %( Gets user presence information. )
   g.command 'getPresence' do |c|
     c.flag 'user', desc: 'User to get presence info on. Defaults to the authed user.'
     c.action do |_global_options, options, _args|
@@ -42,16 +42,16 @@ command 'users' do |g|
     end
   end
 
-  g.desc "After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity."
-  g.long_desc %( After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity. )
+  g.desc "Get a user's identity."
+  g.long_desc %( Get a user's identity. )
   g.command 'identity' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_identity(options))
     end
   end
 
-  g.desc 'This method returns information about a member of a workspace.'
-  g.long_desc %( This method returns information about a member of a workspace. )
+  g.desc 'Gets information about a user.'
+  g.long_desc %( Gets information about a user. )
   g.command 'info' do |c|
     c.flag 'user', desc: 'User to get info on.'
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for this user. Defaults to false.'
@@ -60,8 +60,8 @@ command 'users' do |g|
     end
   end
 
-  g.desc 'This method returns a list of all users in the workspace. This includes deleted/deactivated users.'
-  g.long_desc %( This method returns a list of all users in the workspace. This includes deleted/deactivated users. )
+  g.desc 'Lists all users in a Slack team.'
+  g.long_desc %( Lists all users in a Slack team. )
   g.command 'list' do |c|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for users. Defaults to false.'
@@ -71,8 +71,8 @@ command 'users' do |g|
     end
   end
 
-  g.desc 'Retrieve a single user by looking them up by their registered email address. Requires users:read.email.'
-  g.long_desc %( Retrieve a single user by looking them up by their registered email address. Requires users:read.email. )
+  g.desc 'Find a user with an email address.'
+  g.long_desc %( Find a user with an email address. )
   g.command 'lookupByEmail' do |c|
     c.flag 'email', desc: 'An email address belonging to a user in the workspace.'
     c.action do |_global_options, options, _args|
@@ -89,16 +89,16 @@ command 'users' do |g|
     end
   end
 
-  g.desc 'This method is no longer functional and the behavior it controlled is no longer offered. The method will no longer exist beginning May 8, 2018.'
-  g.long_desc %( This method is no longer functional and the behavior it controlled is no longer offered. The method will no longer exist beginning May 8, 2018. )
+  g.desc 'Marked a user as active. Deprecated and non-functional.'
+  g.long_desc %( Marked a user as active. Deprecated and non-functional. )
   g.command 'setActive' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setActive(options))
     end
   end
 
-  g.desc 'This method allows the user to set their profile image. The caller can pass image data via image.'
-  g.long_desc %( This method allows the user to set their profile image. The caller can pass image data via image. )
+  g.desc 'Set the user profile photo'
+  g.long_desc %( Set the user profile photo )
   g.command 'setPhoto' do |c|
     c.flag 'image', desc: 'File contents via multipart/form-data.'
     c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
@@ -109,8 +109,8 @@ command 'users' do |g|
     end
   end
 
-  g.desc "This method lets you set the calling user's manual presence."
-  g.long_desc %( This method lets you set the calling user's manual presence. Consult the presence documentation for more details. )
+  g.desc 'Manually sets user presence.'
+  g.long_desc %( Manually sets user presence. )
   g.command 'setPresence' do |c|
     c.flag 'presence', desc: 'Either auto or away.'
     c.action do |_global_options, options, _args|

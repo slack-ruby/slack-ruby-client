@@ -136,6 +136,7 @@ RSpec/FilePath:
     - 'spec/slack/web/api/endpoints/custom_specs/dialog_spec.rb'
     - 'spec/slack/web/api/endpoints/custom_specs/groups_spec.rb'
     - 'spec/slack/web/api/endpoints/custom_specs/users_spec.rb'
+    - 'spec/slack/web/api/endpoints/custom_specs/views_spec.rb'
     - 'spec/slack/web/api/errors/service_unavailable_spec.rb'
 
 # Offense count: 13

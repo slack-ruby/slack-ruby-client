@@ -3,8 +3,8 @@
 
 desc 'Conversations methods.'
 command 'conversations' do |g|
-  g.desc 'This method archives a conversation. Not all types of conversations can be archived.'
-  g.long_desc %( This method archives a conversation. Not all types of conversations can be archived. )
+  g.desc 'Archives a conversation.'
+  g.long_desc %( Archives a conversation. )
   g.command 'archive' do |c|
     c.flag 'channel', desc: 'ID of conversation to archive.'
     c.action do |_global_options, options, _args|
@@ -12,8 +12,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method closes direct messages, multi-person or 1:1 or otherwise.'
-  g.long_desc %( This Conversations API method closes direct messages, multi-person or 1:1 or otherwise. )
+  g.desc 'Closes a direct message or multi-person direct message.'
+  g.long_desc %( Closes a direct message or multi-person direct message. )
   g.command 'close' do |c|
     c.flag 'channel', desc: 'Conversation to close.'
     c.action do |_global_options, options, _args|
@@ -21,8 +21,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'Create a public or private channel using this Conversations API method.'
-  g.long_desc %( Create a public or private channel using this Conversations API method. )
+  g.desc 'Initiates a public or private channel-based conversation'
+  g.long_desc %( Initiates a public or private channel-based conversation )
   g.command 'create' do |c|
     c.flag 'name', desc: 'Name of the public or private channel to create.'
     c.flag 'is_private', desc: 'Create a private channel instead of a public one.'
@@ -32,8 +32,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This method returns a portion of message events from the specified conversation.'
-  g.long_desc %( This method returns a portion of message events from the specified conversation. )
+  g.desc "Fetches a conversation's history of messages and events."
+  g.long_desc %( Fetches a conversation's history of messages and events. )
   g.command 'history' do |c|
     c.flag 'channel', desc: 'Conversation ID to fetch history for.'
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
@@ -46,8 +46,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method returns information about a workspace conversation.'
-  g.long_desc %( This Conversations API method returns information about a workspace conversation. )
+  g.desc 'Retrieve information about a conversation.'
+  g.long_desc %( Retrieve information about a conversation. )
   g.command 'info' do |c|
     c.flag 'channel', desc: 'Conversation ID to learn more about.'
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for this conversation. Defaults to false.'
@@ -57,8 +57,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method invites 1-30 users to a public or private channel. The calling user must be a member of the channel.'
-  g.long_desc %( This Conversations API method invites 1-30 users to a public or private channel. The calling user must be a member of the channel. )
+  g.desc 'Invites users to a channel.'
+  g.long_desc %( Invites users to a channel. )
   g.command 'invite' do |c|
     c.flag 'channel', desc: 'The ID of the public or private channel to invite user(s) to.'
     c.flag 'users', desc: 'A comma separated list of user IDs. Up to 30 users may be listed.'
@@ -67,8 +67,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method joins a user to an existing conversation.'
-  g.long_desc %( This Conversations API method joins a user to an existing conversation. )
+  g.desc 'Joins an existing conversation.'
+  g.long_desc %( Joins an existing conversation. )
   g.command 'join' do |c|
     c.flag 'channel', desc: 'ID of conversation to join.'
     c.action do |_global_options, options, _args|
@@ -76,8 +76,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method allows a user to remove another member from a channel.'
-  g.long_desc %( This Conversations API method allows a user to remove another member from a channel. )
+  g.desc 'Removes a user from a conversation.'
+  g.long_desc %( Removes a user from a conversation. )
   g.command 'kick' do |c|
     c.flag 'channel', desc: 'ID of conversation to remove user from.'
     c.flag 'user', desc: 'User ID to be removed.'
@@ -86,8 +86,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method makes like a tree and leaves a conversation.'
-  g.long_desc %( This Conversations API method makes like a tree and leaves a conversation. )
+  g.desc 'Leaves a conversation.'
+  g.long_desc %( Leaves a conversation. )
   g.command 'leave' do |c|
     c.flag 'channel', desc: 'Conversation to leave.'
     c.action do |_global_options, options, _args|
@@ -95,8 +95,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method returns a list of all channel-like conversations in a workspace. The "channels" returned depend on what the calling token has access to and the directives placed in the types parameter.'
-  g.long_desc %( This Conversations API method returns a list of all channel-like conversations in a workspace. The "channels" returned depend on what the calling token has access to and the directives placed in the types parameter. )
+  g.desc 'Lists all channels in a Slack team.'
+  g.long_desc %( Lists all channels in a Slack team. )
   g.command 'list' do |c|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
@@ -107,8 +107,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method returns a paginated list of members party to a conversation.'
-  g.long_desc %( This Conversations API method returns a paginated list of members party to a conversation. )
+  g.desc 'Retrieve members of a conversation.'
+  g.long_desc %( Retrieve members of a conversation. )
   g.command 'members' do |c|
     c.flag 'channel', desc: 'ID of the conversation to retrieve members for.'
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
@@ -118,8 +118,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method opens a multi-person direct message or just a 1:1 direct message.'
-  g.long_desc %( This Conversations API method opens a multi-person direct message or just a 1:1 direct message. )
+  g.desc 'Opens or resumes a direct message or multi-person direct message.'
+  g.long_desc %( Opens or resumes a direct message or multi-person direct message. )
   g.command 'open' do |c|
     c.flag 'channel', desc: "Resume a conversation by supplying an im or mpim's ID. Or provide the users field instead."
     c.flag 'return_im', desc: 'Boolean, indicates you want the full IM channel definition in the response.'
@@ -129,8 +129,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This method renames a conversation. Some types of conversations cannot be renamed.'
-  g.long_desc %( This method renames a conversation. Some types of conversations cannot be renamed. )
+  g.desc 'Renames a conversation.'
+  g.long_desc %( Renames a conversation. )
   g.command 'rename' do |c|
     c.flag 'channel', desc: 'ID of conversation to rename.'
     c.flag 'name', desc: 'New name for conversation.'
@@ -139,8 +139,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This Conversations API method returns an entire thread (a message plus all the messages in reply to it), while conversations.history method returns only parent messages.'
-  g.long_desc %( This Conversations API method returns an entire thread (a message plus all the messages in reply to it), while conversations.history method returns only parent messages. )
+  g.desc 'Retrieve a thread of messages posted to a conversation'
+  g.long_desc %( Retrieve a thread of messages posted to a conversation )
   g.command 'replies' do |c|
     c.flag 'channel', desc: 'Conversation ID to fetch thread from.'
     c.flag 'ts', desc: "Unique identifier of a thread's parent message."
@@ -154,8 +154,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This method is used to change the purpose of a conversation. The calling user must be a member of the conversation. Not all conversation types may have a purpose set.'
-  g.long_desc %( This method is used to change the purpose of a conversation. The calling user must be a member of the conversation. Not all conversation types may have a purpose set. )
+  g.desc 'Sets the purpose for a conversation.'
+  g.long_desc %( Sets the purpose for a conversation. )
   g.command 'setPurpose' do |c|
     c.flag 'channel', desc: 'Conversation to set the purpose of.'
     c.flag 'purpose', desc: 'A new, specialer purpose.'
@@ -164,8 +164,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This method is used to change the topic of a conversation. The calling user must be a member of the conversation. Not all conversation types support a new topic.'
-  g.long_desc %( This method is used to change the topic of a conversation. The calling user must be a member of the conversation. Not all conversation types support a new topic. )
+  g.desc 'Sets the topic for a conversation.'
+  g.long_desc %( Sets the topic for a conversation. )
   g.command 'setTopic' do |c|
     c.flag 'channel', desc: 'Conversation to set the topic of.'
     c.flag 'topic', desc: 'The new topic string. Does not support formatting or linkification.'
@@ -174,8 +174,8 @@ command 'conversations' do |g|
     end
   end
 
-  g.desc 'This method unarchives a conversation. The calling user is added to the conversation.'
-  g.long_desc %( This method unarchives a conversation. The calling user is added to the conversation. )
+  g.desc 'Reverses conversation archival.'
+  g.long_desc %( Reverses conversation archival. )
   g.command 'unarchive' do |c|
     c.flag 'channel', desc: 'ID of conversation to unarchive.'
     c.action do |_global_options, options, _args|

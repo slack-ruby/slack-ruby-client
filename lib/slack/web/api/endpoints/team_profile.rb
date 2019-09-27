@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module TeamProfile
           #
-          # This method is used to get the profile field definitions for this team.
+          # Retrieve a team's profile.
           #
           # @option options [Object] :visibility
           #   Filter by visibility.

@@ -3,8 +3,8 @@
 
 desc 'Dnd methods.'
 command 'dnd' do |g|
-  g.desc "Ends the user's currently scheduled Do Not Disturb session immediately."
-  g.long_desc %( Ends the user's currently scheduled Do Not Disturb session immediately. )
+  g.desc "Ends the current user's Do Not Disturb session immediately."
+  g.long_desc %( Ends the current user's Do Not Disturb session immediately. )
   g.command 'endDnd' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.dnd_endDnd(options))
@@ -19,8 +19,8 @@ command 'dnd' do |g|
     end
   end
 
-  g.desc "Provides information about a user's current Do Not Disturb settings."
-  g.long_desc %( Provides information about a user's current Do Not Disturb settings. )
+  g.desc "Retrieves a user's current Do Not Disturb status."
+  g.long_desc %( Retrieves a user's current Do Not Disturb status. )
   g.command 'info' do |c|
     c.flag 'user', desc: 'User to fetch status for (defaults to current user).'
     c.action do |_global_options, options, _args|
@@ -28,8 +28,8 @@ command 'dnd' do |g|
     end
   end
 
-  g.desc "Adjusts the snooze duration for a user's Do Not Disturb settings. If a snooze session is not already active for the user, invoking this method will begin one for the specified duration."
-  g.long_desc %( Adjusts the snooze duration for a user's Do Not Disturb settings. If a snooze session is not already active for the user, invoking this method will begin one for the specified duration. )
+  g.desc 'Turns on Do Not Disturb mode for the current user, or changes its duration.'
+  g.long_desc %( Turns on Do Not Disturb mode for the current user, or changes its duration. )
   g.command 'setSnooze' do |c|
     c.flag 'num_minutes', desc: 'Number of minutes, from now, to snooze until.'
     c.action do |_global_options, options, _args|
@@ -37,8 +37,8 @@ command 'dnd' do |g|
     end
   end
 
-  g.desc 'Provides information about the current Do Not Disturb settings for a list of users in a Slack team.'
-  g.long_desc %( Provides information about the current Do Not Disturb settings for a list of users in a Slack team. )
+  g.desc 'Retrieves the Do Not Disturb status for up to 50 users on a team.'
+  g.long_desc %( Retrieves the Do Not Disturb status for up to 50 users on a team. )
   g.command 'teamInfo' do |c|
     c.flag 'users', desc: 'Comma-separated list of users to fetch Do Not Disturb status for.'
     c.action do |_global_options, options, _args|

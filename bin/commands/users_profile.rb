@@ -3,8 +3,8 @@
 
 desc 'UsersProfile methods.'
 command 'users_profile' do |g|
-  g.desc "Use this method to retrieve a user's profile information."
-  g.long_desc %( Use this method to retrieve a user's profile information. )
+  g.desc "Retrieves a user's profile information."
+  g.long_desc %( Retrieves a user's profile information. )
   g.command 'get' do |c|
     c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields.'
     c.flag 'user', desc: 'User to retrieve profile info for.'
@@ -13,8 +13,8 @@ command 'users_profile' do |g|
     end
   end
 
-  g.desc "Use this method to set a user's profile information, including name, email, current status, and other attributes."
-  g.long_desc %( Use this method to set a user's profile information, including name, email, current status, and other attributes. )
+  g.desc 'Set the profile information for a user.'
+  g.long_desc %( Set the profile information for a user. )
   g.command 'set' do |c|
     c.flag 'name', desc: 'Name of a single key to set. Usable only if profile is not passed.'
     c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.'

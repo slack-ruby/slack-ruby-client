@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module FilesComments
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Deletes an existing comment on a file.
           #
           # @option options [file] :file
           #   File to delete a comment from.

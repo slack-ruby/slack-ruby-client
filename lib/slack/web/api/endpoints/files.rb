@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Files
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Deletes a file.
           #
           # @option options [file] :file
           #   ID of file to delete.
@@ -36,7 +36,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Gets information about a team file.
           #
           # @option options [file] :file
           #   Specify a file by providing its ID.
@@ -58,7 +58,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Lists & filters team files.
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
@@ -79,7 +79,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Revokes public/external sharing access for a file
           #
           # @option options [file] :file
           #   File to revoke.
@@ -107,7 +107,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Enables a file for public/external sharing.
           #
           # @option options [file] :file
           #   File to share.
@@ -119,7 +119,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Uploads or creates a file.
           #
           # @option options [Object] :channels
           #   Comma-separated list of channel names or IDs where the file will be shared.

@@ -3,8 +3,8 @@
 
 desc 'Stars methods.'
 command 'stars' do |g|
-  g.desc 'This method adds a star to an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user.'
-  g.long_desc %( This method adds a star to an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user. One of file, file_comment, channel, or the combination of channel and timestamp must be specified. )
+  g.desc 'Adds a star to an item.'
+  g.long_desc %( Adds a star to an item. )
   g.command 'add' do |c|
     c.flag 'channel', desc: 'Channel to add star to, or channel where the message to add star to was posted (used with timestamp).'
     c.flag 'file', desc: 'File to add star to.'
@@ -15,8 +15,8 @@ command 'stars' do |g|
     end
   end
 
-  g.desc 'This method lists the items starred by the authed user.'
-  g.long_desc %( This method lists the items starred by the authed user. )
+  g.desc 'Lists stars for a user.'
+  g.long_desc %( Lists stars for a user. )
   g.command 'list' do |c|
     c.flag 'cursor', desc: "Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection. See pagination for more details."
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
@@ -25,8 +25,8 @@ command 'stars' do |g|
     end
   end
 
-  g.desc 'This method removes a star from an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user.'
-  g.long_desc %( This method removes a star from an item (message, file, file comment, channel, private group, or DM) on behalf of the authenticated user. One of file, file_comment, channel, or the combination of channel and timestamp must be specified. )
+  g.desc 'Removes a star from an item.'
+  g.long_desc %( Removes a star from an item. )
   g.command 'remove' do |c|
     c.flag 'channel', desc: 'Channel to remove star from, or channel where the message to remove star from was posted (used with timestamp).'
     c.flag 'file', desc: 'File to remove star from.'

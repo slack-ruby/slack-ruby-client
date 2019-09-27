@@ -7,11 +7,7 @@ module Slack
       module Endpoints
         module Users
           #
-          # This method helps answer questions like:
-          # - Which conversations am I a member of?
-          # - Which public channels is my bot user in?
-          # - Do I have any direct messages open with my friend Suzy?
-          # - Is my bot a member of any private channels?
+          # List conversations the calling user may access.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -37,7 +33,7 @@ module Slack
           end
 
           #
-          # This method allows the user to delete their profile image. It will clear whatever image is currently set.
+          # Delete the user profile photo
           #
           # @see https://api.slack.com/methods/users.deletePhoto
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.deletePhoto.json
@@ -46,8 +42,7 @@ module Slack
           end
 
           #
-          # This method lets you find out information about a user's presence.
-          # Consult the presence documentation for more details.
+          # Gets user presence information.
           #
           # @option options [user] :user
           #   User to get presence info on. Defaults to the authed user.
@@ -60,7 +55,7 @@ module Slack
           end
 
           #
-          # After your Slack app is awarded an identity token through Sign in with Slack, use this method to retrieve a user's identity.
+          # Get a user's identity.
           #
           # @see https://api.slack.com/methods/users.identity
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.identity.json
@@ -69,7 +64,7 @@ module Slack
           end
 
           #
-          # This method returns information about a member of a workspace.
+          # Gets information about a user.
           #
           # @option options [user] :user
           #   User to get info on.
@@ -84,7 +79,7 @@ module Slack
           end
 
           #
-          # This method returns a list of all users in the workspace. This includes deleted/deactivated users.
+          # Lists all users in a Slack team.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -105,7 +100,7 @@ module Slack
           end
 
           #
-          # Retrieve a single user by looking them up by their registered email address. Requires users:read.email.
+          # Find a user with an email address.
           #
           # @option options [Object] :email
           #   An email address belonging to a user in the workspace.
@@ -117,7 +112,7 @@ module Slack
           end
 
           #
-          # This method is no longer functional and the behavior it controlled is no longer offered. The method will no longer exist beginning May 8, 2018.
+          # Marked a user as active. Deprecated and non-functional.
           #
           # @see https://api.slack.com/methods/users.setActive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setActive.json
@@ -126,7 +121,7 @@ module Slack
           end
 
           #
-          # This method allows the user to set their profile image. The caller can pass image data via image.
+          # Set the user profile photo
           #
           # @option options [Object] :image
           #   File contents via multipart/form-data.
@@ -144,8 +139,7 @@ module Slack
           end
 
           #
-          # This method lets you set the calling user's manual presence.
-          # Consult the presence documentation for more details.
+          # Manually sets user presence.
           #
           # @option options [Object] :presence
           #   Either auto or away.

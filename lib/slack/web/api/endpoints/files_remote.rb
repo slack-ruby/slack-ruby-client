@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module FilesRemote
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Adds a file from a remote service
           #
           # @option options [Object] :external_id
           #   Creator defined GUID for the file.
@@ -31,7 +31,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Retrieve information about a remote file added to Slack
           #
           # @option options [Object] :external_id
           #   Creator defined GUID for the file.
@@ -44,7 +44,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Retrieve information about a remote file added to Slack
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
@@ -70,7 +70,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Remove a remote file.
           #
           # @option options [Object] :external_id
           #   Creator defined GUID for the file.
@@ -83,7 +83,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Share a remote file into a channel.
           #
           # @option options [Object] :channels
           #   Comma-separated list of channel IDs where the file will be shared.
@@ -99,7 +99,7 @@ module Slack
           end
 
           #
-          # A new file commenting experience arrived on July 23, 2018. Learn more about what's new and the migration path for apps already working with files and file comments.
+          # Updates an existing remote file.
           #
           # @option options [Object] :external_id
           #   Creator defined GUID for the file.

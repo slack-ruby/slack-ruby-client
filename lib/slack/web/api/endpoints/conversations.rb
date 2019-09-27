@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Conversations
           #
-          # This method archives a conversation. Not all types of conversations can be archived.
+          # Archives a conversation.
           #
           # @option options [channel] :channel
           #   ID of conversation to archive.
@@ -20,7 +20,7 @@ module Slack
           end
 
           #
-          # This Conversations API method closes direct messages, multi-person or 1:1 or otherwise.
+          # Closes a direct message or multi-person direct message.
           #
           # @option options [channel] :channel
           #   Conversation to close.
@@ -33,7 +33,7 @@ module Slack
           end
 
           #
-          # Create a public or private channel using this Conversations API method.
+          # Initiates a public or private channel-based conversation
           #
           # @option options [Object] :name
           #   Name of the public or private channel to create.
@@ -49,7 +49,7 @@ module Slack
           end
 
           #
-          # This method returns a portion of message events from the specified conversation.
+          # Fetches a conversation's history of messages and events.
           #
           # @option options [channel] :channel
           #   Conversation ID to fetch history for.
@@ -78,7 +78,7 @@ module Slack
           end
 
           #
-          # This Conversations API method returns information about a workspace conversation.
+          # Retrieve information about a conversation.
           #
           # @option options [channel] :channel
           #   Conversation ID to learn more about.
@@ -95,7 +95,7 @@ module Slack
           end
 
           #
-          # This Conversations API method invites 1-30 users to a public or private channel. The calling user must be a member of the channel.
+          # Invites users to a channel.
           #
           # @option options [channel] :channel
           #   The ID of the public or private channel to invite user(s) to.
@@ -111,7 +111,7 @@ module Slack
           end
 
           #
-          # This Conversations API method joins a user to an existing conversation.
+          # Joins an existing conversation.
           #
           # @option options [channel] :channel
           #   ID of conversation to join.
@@ -124,7 +124,7 @@ module Slack
           end
 
           #
-          # This Conversations API method allows a user to remove another member from a channel.
+          # Removes a user from a conversation.
           #
           # @option options [channel] :channel
           #   ID of conversation to remove user from.
@@ -141,7 +141,7 @@ module Slack
           end
 
           #
-          # This Conversations API method makes like a tree and leaves a conversation.
+          # Leaves a conversation.
           #
           # @option options [channel] :channel
           #   Conversation to leave.
@@ -154,7 +154,7 @@ module Slack
           end
 
           #
-          # This Conversations API method returns a list of all channel-like conversations in a workspace. The "channels" returned depend on what the calling token has access to and the directives placed in the types parameter.
+          # Lists all channels in a Slack team.
           #
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
@@ -177,7 +177,7 @@ module Slack
           end
 
           #
-          # This Conversations API method returns a paginated list of members party to a conversation.
+          # Retrieve members of a conversation.
           #
           # @option options [channel] :channel
           #   ID of the conversation to retrieve members for.
@@ -200,7 +200,7 @@ module Slack
           end
 
           #
-          # This Conversations API method opens a multi-person direct message or just a 1:1 direct message.
+          # Opens or resumes a direct message or multi-person direct message.
           #
           # @option options [channel] :channel
           #   Resume a conversation by supplying an im or mpim's ID. Or provide the users field instead.
@@ -216,7 +216,7 @@ module Slack
           end
 
           #
-          # This method renames a conversation. Some types of conversations cannot be renamed.
+          # Renames a conversation.
           #
           # @option options [channel] :channel
           #   ID of conversation to rename.
@@ -232,7 +232,7 @@ module Slack
           end
 
           #
-          # This Conversations API method returns an entire thread (a message plus all the messages in reply to it), while conversations.history method returns only parent messages.
+          # Retrieve a thread of messages posted to a conversation
           #
           # @option options [channel] :channel
           #   Conversation ID to fetch thread from.
@@ -264,7 +264,7 @@ module Slack
           end
 
           #
-          # This method is used to change the purpose of a conversation. The calling user must be a member of the conversation. Not all conversation types may have a purpose set.
+          # Sets the purpose for a conversation.
           #
           # @option options [channel] :channel
           #   Conversation to set the purpose of.
@@ -280,7 +280,7 @@ module Slack
           end
 
           #
-          # This method is used to change the topic of a conversation. The calling user must be a member of the conversation. Not all conversation types support a new topic.
+          # Sets the topic for a conversation.
           #
           # @option options [channel] :channel
           #   Conversation to set the topic of.
@@ -296,7 +296,7 @@ module Slack
           end
 
           #
-          # This method unarchives a conversation. The calling user is added to the conversation.
+          # Reverses conversation archival.
           #
           # @option options [channel] :channel
           #   ID of conversation to unarchive.

@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Usergroups
           #
-          # This method is used to create a User Group.
+          # Create a User Group
           #
           # @option options [Object] :name
           #   A name for the User Group. Must be unique among User Groups.
@@ -27,7 +27,7 @@ module Slack
           end
 
           #
-          # This method disables an existing User Group.
+          # Disable an existing User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to disable.
@@ -41,7 +41,7 @@ module Slack
           end
 
           #
-          # This method enables a User Group which was previously disabled.
+          # Enable a User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to enable.
@@ -55,7 +55,7 @@ module Slack
           end
 
           #
-          # This method returns a list of all User Groups in the team. This can optionally include disabled User Groups.
+          # List all User Groups for a team
           #
           # @option options [Object] :include_count
           #   Include the number of users in each User Group.
@@ -70,7 +70,7 @@ module Slack
           end
 
           #
-          # This method updates the properties of an existing User Group.
+          # Update an existing User Group
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to update.

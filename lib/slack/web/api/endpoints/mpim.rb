@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Mpim
           #
-          # This method closes a multiparty direct message channel.
+          # Closes a multiparty direct message channel.
           #
           # @option options [channel] :channel
           #   MPIM to close.
@@ -20,9 +20,7 @@ module Slack
           end
 
           #
-          # This method returns a portion of messages/events from the specified multiparty direct message channel.
-          # To read the entire history for a multiparty direct message, call the method with no latest or
-          # oldest arguments, and then continue paging using the instructions below.
+          # Fetches history of messages and events from a multiparty direct message.
           #
           # @option options [channel] :channel
           #   Multiparty direct message to fetch history for.
@@ -43,7 +41,7 @@ module Slack
           end
 
           #
-          # Don't use this method. Use conversations.list instead.
+          # Lists multiparty direct message channels for the calling user.
           #
           # @option options [Object] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
@@ -62,7 +60,7 @@ module Slack
           end
 
           #
-          # This method moves the read cursor in a multiparty direct message channel.
+          # Sets the read cursor in a multiparty direct message channel.
           #
           # @option options [channel] :channel
           #   multiparty direct message channel to set reading cursor in.
@@ -90,7 +88,7 @@ module Slack
           end
 
           #
-          # This method returns an entire thread (a message plus all the messages in reply to it).
+          # Retrieve a thread of messages posted to a direct message conversation from a multiparty direct message.
           #
           # @option options [channel] :channel
           #   Multiparty direct message channel to fetch thread from.

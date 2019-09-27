@@ -3,8 +3,8 @@
 
 desc 'Usergroups methods.'
 command 'usergroups' do |g|
-  g.desc 'This method is used to create a User Group.'
-  g.long_desc %( This method is used to create a User Group. )
+  g.desc 'Create a User Group'
+  g.long_desc %( Create a User Group )
   g.command 'create' do |c|
     c.flag 'name', desc: 'A name for the User Group. Must be unique among User Groups.'
     c.flag 'channels', desc: 'A comma separated string of encoded channel IDs for which the User Group uses as a default.'
@@ -16,8 +16,8 @@ command 'usergroups' do |g|
     end
   end
 
-  g.desc 'This method disables an existing User Group.'
-  g.long_desc %( This method disables an existing User Group. )
+  g.desc 'Disable an existing User Group'
+  g.long_desc %( Disable an existing User Group )
   g.command 'disable' do |c|
     c.flag 'usergroup', desc: 'The encoded ID of the User Group to disable.'
     c.flag 'include_count', desc: 'Include the number of users in the User Group.'
@@ -26,8 +26,8 @@ command 'usergroups' do |g|
     end
   end
 
-  g.desc 'This method enables a User Group which was previously disabled.'
-  g.long_desc %( This method enables a User Group which was previously disabled. )
+  g.desc 'Enable a User Group'
+  g.long_desc %( Enable a User Group )
   g.command 'enable' do |c|
     c.flag 'usergroup', desc: 'The encoded ID of the User Group to enable.'
     c.flag 'include_count', desc: 'Include the number of users in the User Group.'
@@ -36,8 +36,8 @@ command 'usergroups' do |g|
     end
   end
 
-  g.desc 'This method returns a list of all User Groups in the team. This can optionally include disabled User Groups.'
-  g.long_desc %( This method returns a list of all User Groups in the team. This can optionally include disabled User Groups. )
+  g.desc 'List all User Groups for a team'
+  g.long_desc %( List all User Groups for a team )
   g.command 'list' do |c|
     c.flag 'include_count', desc: 'Include the number of users in each User Group.'
     c.flag 'include_disabled', desc: 'Include disabled User Groups.'
@@ -47,8 +47,8 @@ command 'usergroups' do |g|
     end
   end
 
-  g.desc 'This method updates the properties of an existing User Group.'
-  g.long_desc %( This method updates the properties of an existing User Group. )
+  g.desc 'Update an existing User Group'
+  g.long_desc %( Update an existing User Group )
   g.command 'update' do |c|
     c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
     c.flag 'channels', desc: 'A comma separated string of encoded channel IDs for which the User Group uses as a default.'

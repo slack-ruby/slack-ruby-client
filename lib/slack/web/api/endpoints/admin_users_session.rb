@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminUsersSession
           #
-          # This method wipes a user session, leaving the user unauthenticated. The user's Slack client will reset its local cache.
+          # Wipes all valid sessions on all devices for a given user
           #
           # @option options [Object] :user_id
           #   The ID of the user to wipe sessions for.
