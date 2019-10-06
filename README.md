@@ -62,8 +62,8 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
 
 * This library will let you send messages to Slack via the Web API, send and receive messages via the Real Time Messaging API and facilitate integration with the Events API.
 * To respond to slash commands, interactive components or events, implement a web application using your favorite web framework and use this library to call the Slack Web API and to verify that events are coming from Slack.
-* To build a bot using the Real Time Messaging API, use [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot), which uses this library.
-* To roll out a complete service using the Real Time Messaging API with Slack button integration to multiple teams, check out [slack-ruby-bot-server](https://github.com/dblock/slack-ruby-bot-server), which is built on top of slack-ruby-bot, which uses this library.
+* To build a bot using the Real Time Messaging API, use [slack-ruby-bot](https://github.com/slack-ruby/slack-ruby-bot), which uses this library.
+* To roll out a complete service using the Real Time Messaging API with Slack button integration to multiple teams, check out [slack-ruby-bot-server](https://github.com/slack-ruby/slack-ruby-bot-server), which is built on top of slack-ruby-bot, which uses this library.
 
 ## Stable Release
 
@@ -447,7 +447,7 @@ Slack::RealTime.configure do |config|
 end
 ```
 
-Use `client.start_async` instead of `client.start!`. A good example of such application is [slack-bot-server](https://github.com/dblock/slack-bot-server).
+Use `client.start_async` instead of `client.start!`. A good example of such application is [slack-ruby-bot-server](https://github.com/slack-ruby/slack-ruby-bot-server).
 
 ```ruby
 client = Slack::RealTime::Client.new
