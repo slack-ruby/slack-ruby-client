@@ -75,7 +75,13 @@ module Slack
           def files_list(options = {})
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('files.list', options)
+            if block_given?
+              Pagination::Cursor.new(self, :files_list, options).each do |page|
+                yield page
+              end
+            else
+              post('files.list', options)
+            end
           end
 
           #
