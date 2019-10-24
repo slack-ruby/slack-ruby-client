@@ -7,7 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Pins do
   let(:client) { Slack::Web::Client.new }
   context 'pins_add' do
     it 'requires channel' do
-      expect { client.pins_add }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.pins_add(timestamp: '1234567890.123456') }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires timestamp' do
+      expect { client.pins_add(channel: 'C1234567890') }.to raise_error ArgumentError, /Required arguments :timestamp missing/
     end
   end
   context 'pins_list' do
