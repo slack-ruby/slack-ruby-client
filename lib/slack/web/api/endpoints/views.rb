@@ -40,6 +40,11 @@ module Slack
           def views_publish(options = {})
             throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            if options.key?(:view)
+              view = options[:view]
+              view = JSON.dump(view) unless view.is_a?(String)
+              options = options.merge(view: view)
+            end
             post('views.publish', options)
           end
 
