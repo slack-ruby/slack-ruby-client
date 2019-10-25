@@ -27,6 +27,7 @@ require_relative 'endpoints/im'
 require_relative 'endpoints/migration'
 require_relative 'endpoints/mpim'
 require_relative 'endpoints/oauth'
+require_relative 'endpoints/oauth_v2'
 require_relative 'endpoints/pins'
 require_relative 'endpoints/reactions'
 require_relative 'endpoints/reminders'
@@ -77,6 +78,7 @@ module Slack
         include Migration
         include Mpim
         include Oauth
+        include OauthV2
         include Pins
         include Reactions
         include Reminders

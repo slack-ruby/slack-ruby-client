@@ -9,20 +9,18 @@ module Slack
           #
           # Adds a reaction to an item.
           #
-          # @option options [Object] :name
-          #   Reaction (emoji) name.
           # @option options [channel] :channel
           #   Channel where the message to add reaction to was posted.
-          # @option options [file] :file
-          #   File to add reaction to. Now that file threads work the way you'd expect, this argument is deprecated. Specify the timestamp and channel of the message associated with a file instead.
-          # @option options [Object] :file_comment
-          #   File comment to add reaction to. Now that file threads work the way you'd expect, this argument is deprecated. Specify the timestamp and channel of the message associated with a file instead.
+          # @option options [Object] :name
+          #   Reaction (emoji) name.
           # @option options [Object] :timestamp
           #   Timestamp of the message to add reaction to.
           # @see https://api.slack.com/methods/reactions.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.add.json
           def reactions_add(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            throw ArgumentError.new('Required arguments :timestamp missing') if options[:timestamp].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('reactions.add', options)
           end

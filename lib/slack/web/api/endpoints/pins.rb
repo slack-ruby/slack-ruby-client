@@ -17,6 +17,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.add.json
           def pins_add(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :timestamp missing') if options[:timestamp].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             post('pins.add', options)
           end

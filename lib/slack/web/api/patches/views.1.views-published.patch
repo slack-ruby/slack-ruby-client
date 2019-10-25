@@ -1,0 +1,16 @@
+diff --git a/lib/slack/web/api/endpoints/views.rb b/lib/slack/web/api/endpoints/views.rb
+index 31626b9..8182a9c 100644
+--- a/lib/slack/web/api/endpoints/views.rb
++++ b/lib/slack/web/api/endpoints/views.rb
+@@ -40,6 +40,11 @@ module Slack
+           def views_publish(options = {})
+             throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
++            if options.key?(:view)
++              view = options[:view]
++              view = JSON.dump(view) unless view.is_a?(String)
++              options = options.merge(view: view)
++            end
+             post('views.publish', options)
+           end
+ 

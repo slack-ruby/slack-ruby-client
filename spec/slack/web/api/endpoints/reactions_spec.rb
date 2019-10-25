@@ -6,8 +6,14 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::Reactions do
   let(:client) { Slack::Web::Client.new }
   context 'reactions_add' do
+    it 'requires channel' do
+      expect { client.reactions_add(name: 'thumbsup', timestamp: '1234567890.123456') }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
     it 'requires name' do
-      expect { client.reactions_add }.to raise_error ArgumentError, /Required arguments :name missing/
+      expect { client.reactions_add(channel: 'C1234567890', timestamp: '1234567890.123456') }.to raise_error ArgumentError, /Required arguments :name missing/
+    end
+    it 'requires timestamp' do
+      expect { client.reactions_add(channel: 'C1234567890', name: 'thumbsup') }.to raise_error ArgumentError, /Required arguments :timestamp missing/
     end
   end
   context 'reactions_remove' do
