@@ -1,13 +1,14 @@
 ### 0.14.6 (Next)
 
+* [#305](https://github.com/slack-ruby/slack-ruby-client/pull/305): Added `admin.inviteRequests.approve`, `admin.inviteRequests.deny`, `admin.inviteRequests.list`, `admin.inviteRequests.approved.list`, `admin.inviteRequests.denied.list`, `admin.teams.create`, `admin.teams.list`, `admin.teams.admins.list`, `admin.teams.owners.list`, `admin.teams.settings`, `admin.teams.settings.setIcon`, `admin.teams.settings.setName`, `admin.teams.settings.setDescription`, `admin.users.assign`, `admin.users.invite`, `admin.users.remove`, `admin.users.setAdmin`, `admin.users.setOwner` and `admin.users.setRegular` endpoints - [@manuelmeurer](https://github.com/manuelmeurer).
 * Your contribution here.
 
 ### 0.14.5 (2019/12/23)
 
 * [#293](https://github.com/slack-ruby/slack-ruby-client/pull/293): Rubocop auto-correct and comprehensive todo - [@jcraigk](https://github.com/jcraigk).
 * [#297](https://github.com/slack-ruby/slack-ruby-client/pull/297): Various Rubocop fixes - [@jcraigk](https://github.com/jcraigk).
-* [#298](https://github.com/slack-ruby/slack-ruby-client/pull/298): Add `admin.apps`, `admin.app.requests` and `views` endpoints - [@jmanian](https://github.com/jmanian).
-* [#302](https://github.com/slack-ruby/slack-ruby-client/pull/302): Add `oauth.v2.access` and `views.published` endpoints - [@jwright](https://github.com/jwright).
+* [#298](https://github.com/slack-ruby/slack-ruby-client/pull/298): Added `admin.apps`, `admin.app.requests` and `views` endpoints - [@jmanian](https://github.com/jmanian).
+* [#303](https://github.com/slack-ruby/slack-ruby-client/pull/303): Added `oauth.v2.access` and `views.publish` endpoints - [@jwright](https://github.com/jwright).
 * [#309](https://github.com/slack-ruby/slack-ruby-client/pull/309): Stop ping on `inactive_account` and `invalid_auth` - [@dblock](https://github.com/dblock).
 
 ### 0.14.4 (2019/7/28)
@@ -171,8 +172,8 @@
 ### 0.7.1 (2016/5/2)
 
 * [#82](https://github.com/slack-ruby/slack-ruby-client/pull/82): Fix `usergroups.users.{list,update}` and `files.comments.{add,edit,delete}` APIs - [@masatomo](https://github.com/masatomo).
-* [#73](https://github.com/slack-ruby/slack-ruby-client/issues/73): Add a `closed` event - [@rkadyb](https://github.com/rkadyb).
-* [#69](https://github.com/slack-ruby/slack-ruby-client/issues/69): Add attachments support for `Slack::Web::Api::Endpoints::Chat.chat_update` - [@nicka](https://github.com/nicka).
+* [#73](https://github.com/slack-ruby/slack-ruby-client/issues/73): Added a `closed` event - [@rkadyb](https://github.com/rkadyb).
+* [#69](https://github.com/slack-ruby/slack-ruby-client/issues/69): Added attachments support for `Slack::Web::Api::Endpoints::Chat.chat_update` - [@nicka](https://github.com/nicka).
 * [#85](https://github.com/slack-ruby/slack-ruby-client/issues/85): Compatibility with WebMock 2.0 - [@dblock](https://github.com/dblock).
 * Added `as_user` to `chat_delete` Web API - [@dblock](https://github.com/dblock).
 * Added `reminders_add`, `reminders_complete`, `reminders_delete`, `reminders_info` and `reminders_list` to Web API - [@dblock](https://github.com/dblock).
