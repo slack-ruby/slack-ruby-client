@@ -100,7 +100,7 @@ module Slack
           # @option options [channel] :channel
           #   The ID of the public or private channel to invite user(s) to.
           # @option options [Object] :users
-          #   A comma separated list of user IDs. Up to 30 users may be listed.
+          #   A comma separated list of user IDs. Up to 1000 users may be listed.
           # @see https://api.slack.com/methods/conversations.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.invite.json
           def conversations_invite(options = {})

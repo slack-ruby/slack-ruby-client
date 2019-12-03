@@ -3,6 +3,14 @@
 
 require_relative 'endpoints/admin_apps'
 require_relative 'endpoints/admin_apps_requests'
+require_relative 'endpoints/admin_inviteRequests'
+require_relative 'endpoints/admin_inviteRequests_approved'
+require_relative 'endpoints/admin_inviteRequests_denied'
+require_relative 'endpoints/admin_teams'
+require_relative 'endpoints/admin_teams_admins'
+require_relative 'endpoints/admin_teams_owners'
+require_relative 'endpoints/admin_teams_settings'
+require_relative 'endpoints/admin_users'
 require_relative 'endpoints/admin_users_session'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
@@ -54,6 +62,14 @@ module Slack
 
         include AdminApps
         include AdminAppsRequests
+        include AdminInviterequests
+        include AdminInviterequestsApproved
+        include AdminInviterequestsDenied
+        include AdminTeams
+        include AdminTeamsAdmins
+        include AdminTeamsOwners
+        include AdminTeamsSettings
+        include AdminUsers
         include AdminUsersSession
         include Api
         include Apps
