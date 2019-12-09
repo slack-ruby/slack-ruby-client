@@ -57,5 +57,15 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
         )
       end
     end
+
+    context 'with non-JSON response body' do
+      let(:body) do
+        '<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Server Error | Slack</title> <meta name="author" content="Slack"> etc.'
+      end
+
+      it 'raises a Slack-domain error' do
+        expect { subject.on_complete(env) }.to raise_error(Slack::Web::Api::Errors::SlackError)
+      end
+    end
   end
 end
