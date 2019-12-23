@@ -193,12 +193,33 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
           expect(socket).to receive(:restart_async)
           client.run_ping!
         end
-        [EOFError, Errno::ECONNRESET, Errno::EPIPE, Faraday::ClientError].each do |err|
+        [
+          EOFError,
+          Errno::ECONNRESET,
+          Errno::EPIPE,
+          Faraday::ClientError,
+          Slack::Web::Api::Errors::SlackError
+        ].each do |err|
           context "raising #{err}" do
             it 'does not terminate the ping worker' do
               allow(socket).to receive(:time_since_last_message) { raise err }
               expect(socket).not_to receive(:send_data)
               client.run_ping!
+            end
+          end
+        end
+        context 'raising Slack::Web::Api::Errors::SlackError' do
+          %w[invalid_auth account_inactive].each do |code|
+            context code do
+              it 'does not terminate the ping worker' do
+                allow(socket).to receive(:time_since_last_message) {
+                  raise Slack::Web::Api::Errors::SlackError, code
+                }
+                expect(socket).not_to receive(:send_data)
+                expect do
+                  client.run_ping!
+                end.to raise_error Slack::Web::Api::Errors::SlackError, code
+              end
             end
           end
         end

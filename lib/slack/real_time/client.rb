@@ -131,6 +131,14 @@ module Slack
         logger.warn(to_s) { 'is offline' }
 
         restart_async
+      rescue Slack::Web::Api::Errors::SlackError => e
+        # stop pinging if bot was uninstalled
+        case e.message
+        when 'account_inactive', 'invalid_auth' then
+          logger.warn(to_s) { e.message }
+          raise e
+        end
+        logger.debug("#{self}##{__method__}") { e }
       rescue StandardError => e
         # disregard all ping worker failures, keep pinging
         logger.debug("#{self}##{__method__}") { e }
