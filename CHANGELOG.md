@@ -1,11 +1,10 @@
-### 0.14.5 (Next)
+### 0.14.5 (2019/12/23)
 
 * [#293](https://github.com/slack-ruby/slack-ruby-client/pull/293): Rubocop auto-correct and comprehensive todo - [@jcraigk](https://github.com/jcraigk).
 * [#297](https://github.com/slack-ruby/slack-ruby-client/pull/297): Various Rubocop fixes - [@jcraigk](https://github.com/jcraigk).
 * [#298](https://github.com/slack-ruby/slack-ruby-client/pull/298): Add `admin.apps`, `admin.app.requests` and `views` endpoints - [@jmanian](https://github.com/jmanian).
 * [#302](https://github.com/slack-ruby/slack-ruby-client/pull/302): Add `oauth.v2.access` and `views.published` endpoints - [@jwright](https://github.com/jwright).
 * [#309](https://github.com/slack-ruby/slack-ruby-client/pull/309): Stop ping on `inactive_account` and `invalid_auth` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.14.4 (2019/7/28)
 
