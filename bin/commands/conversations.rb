@@ -61,7 +61,7 @@ command 'conversations' do |g|
   g.long_desc %( Invites users to a channel. )
   g.command 'invite' do |c|
     c.flag 'channel', desc: 'The ID of the public or private channel to invite user(s) to.'
-    c.flag 'users', desc: 'A comma separated list of user IDs. Up to 30 users may be listed.'
+    c.flag 'users', desc: 'A comma separated list of user IDs. Up to 1000 users may be listed.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.conversations_invite(options))
     end
