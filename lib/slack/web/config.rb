@@ -22,7 +22,7 @@ module Slack
       # Attributes that can not be set in client initializer
       GLOBAL_ATTRIBUTES = %i[
         verbose_errors
-      ]
+      ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
       attr_accessor(*Config::GLOBAL_ATTRIBUTES)
