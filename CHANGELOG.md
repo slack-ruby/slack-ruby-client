@@ -1,6 +1,7 @@
 ### 0.14.6 (Next)
 
 * [#305](https://github.com/slack-ruby/slack-ruby-client/pull/305): Added `admin.inviteRequests.approve`, `admin.inviteRequests.deny`, `admin.inviteRequests.list`, `admin.inviteRequests.approved.list`, `admin.inviteRequests.denied.list`, `admin.teams.create`, `admin.teams.list`, `admin.teams.admins.list`, `admin.teams.owners.list`, `admin.teams.settings`, `admin.teams.settings.setIcon`, `admin.teams.settings.setName`, `admin.teams.settings.setDescription`, `admin.users.assign`, `admin.users.invite`, `admin.users.remove`, `admin.users.setAdmin`, `admin.users.setOwner` and `admin.users.setRegular` endpoints - [@manuelmeurer](https://github.com/manuelmeurer).
+* [#311](https://github.com/slack-ruby/slack-ruby-client/pull/311): Added `verbose_errors` option for web client - [@jmanian](https://github.com/jmanian).
 * Your contribution here.
 
 ### 0.14.5 (2019/12/23)
