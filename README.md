@@ -20,14 +20,15 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
   - [Using the Legacy API Token](#using-the-legacy-api-token)
   - [Global Settings](#global-settings)
   - [Web Client](#web-client)
-    - [Test Auth](#test-auth)
-    - [Send Messages](#send-messages)
-    - [List Channels](#list-channels)
-    - [Upload a File](#upload-a-file)
-  - [Get Channel Info](#get-channel-info)
-  - [Get User Info](#get-user-info)
-  - [Search for a User](#search-for-a-user)
-    - [Other](#other)
+    - [Web Client Examples](#web-client-examples)
+      - [Test Auth](#test-auth)
+      - [Send Messages](#send-messages)
+      - [List Channels](#list-channels)
+      - [Upload a File](#upload-a-file)
+      - [Get Channel Info](#get-channel-info)
+      - [Get User Info](#get-user-info)
+      - [Search for a User](#search-for-a-user)
+      - [Other](#other)
     - [Web Client Options](#web-client-options)
     - [Pagination Support](#pagination-support)
     - [Error Handling](#error-handling)
@@ -122,14 +123,18 @@ logger       | An optional logger, defaults to `::Logger.new(STDOUT)` at `Logger
 
 The Slack Web API allows you to build applications that interact with Slack.
 
-#### Test Auth
+#### Web Client Examples
+
+Here are some examples of how to use the web client with the Web API.
+
+##### Test Auth
 
 ```ruby
 client = Slack::Web::Client.new
 client.auth_test
 ```
 
-#### Send Messages
+##### Send Messages
 
 Send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
 
@@ -141,7 +146,7 @@ See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
 ![](examples/hi_web/hi.gif)
 
-#### List Channels
+##### List Channels
 
 List channels with [channels_list](https://api.slack.com/methods/channels.list).
 
@@ -151,7 +156,7 @@ channels = client.channels_list.channels
 general_channel = channels.detect { |c| c.name == 'general' }
 ```
 
-#### Upload a File
+##### Upload a File
 
 Upload a file with [files_upload](https://api.slack.com/methods/files.upload).
 
@@ -166,7 +171,7 @@ client.files_upload(
 )
 ```
 
-### Get Channel Info
+##### Get Channel Info
 
 You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `channels_list` in order to locate the channel ID.
 
@@ -178,7 +183,7 @@ client.channels_info(channel: 'C04KB5X4D') # calls channels_info
 client.channels_info(channel: '#general') # calls channels_list followed by channels_info
 ```
 
-### Get User Info
+##### Get User Info
 
 You can use a user ID or name (prefixed with `@`) in all functions that take a `:user` argument. Lookup by name is not supported by the Slack API and the `users_id` method called invokes `users_list` in order to locate the user ID.
 
@@ -190,7 +195,7 @@ client.users_info(user: 'U092BDCLV') # calls users_info
 client.users_info(user: '@dblock') # calls users_list followed by users_info
 ```
 
-### Search for a User
+##### Search for a User
 
 Constructs an in-memory index of users and searches it. If you want to use this functionality, add the [picky](https://github.com/floere/picky) gem to your project's Gemfile.
 
@@ -198,13 +203,13 @@ Constructs an in-memory index of users and searches it. If you want to use this 
 client.users_search(user: 'dblock')
 ```
 
-#### Other
+##### Other
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
 
 #### Web Client Options
 
-You can configure the Web client either globally or via the initializer.
+You can configure the Web client globally:
 
 ```ruby
 Slack::Web::Client.configure do |config|
@@ -212,25 +217,27 @@ Slack::Web::Client.configure do |config|
 end
 ```
 
+Or you can configure most settings (see table below) when you initialize a client:
 ```ruby
 client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
 ```
 
-The following settings are supported.
+The following settings are supported. Certain options can only be configured globally.
 
-setting             | description
---------------------|-------------------------------------------------------------------------------------------------
-token               | Slack API token.
-user_agent          | User-agent, defaults to _Slack Ruby Client/version_.
-proxy               | Optional HTTP proxy.
-ca_path             | Optional SSL certificates path.
-ca_file             | Optional SSL certificates file.
-endpoint            | Slack endpoint, default is _https://slack.com/api_.
-logger              | Optional `Logger` instance that logs HTTP requests.
-timeout             | Optional open/read timeout in seconds.
-open_timeout        | Optional connection open timeout in seconds.
-default_page_size   | Optional page size for paginated requests, default is _100_.
-default_max_retries | Optional number of retries for paginated requests, default is _100_.
+setting             | global only | description
+--------------------|-------------|-------------------------------------------------------------------------------------------------
+token               |             | Slack API token.
+user_agent          |             | User-agent, defaults to _Slack Ruby Client/version_.
+proxy               |             | Optional HTTP proxy.
+ca_path             |             | Optional SSL certificates path.
+ca_file             |             | Optional SSL certificates file.
+endpoint            |             | Slack endpoint, default is _https://slack.com/api_.
+logger              |             | Optional `Logger` instance that logs HTTP requests.
+verbose_errors      |         yes | Adds `response_metadata` into the [error message](#error-handling); default is false.
+timeout             |             | Optional open/read timeout in seconds.
+open_timeout        |             | Optional connection open timeout in seconds.
+default_page_size   |             | Optional page size for paginated requests, default is _100_.
+default_max_retries |             | Optional number of retries for paginated requests, default is _100_.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
@@ -270,7 +277,9 @@ all_members # many thousands of team members retrieved 10 at a time
 
 #### Error Handling
 
-If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. The error message contains the error code. In case of multiple errors, the error codes are separated by commas. The original response is also accessible using the `response` attribute.
+If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. By default, the error message contains the error code. In case of multiple errors, the error codes are separated by commas. The original response is also accessible using the `response` attribute.
+
+The `response_metadata` is accessible with `slack_error.response_metadata`, and the error code is accessible with `slack_error.error`, as well as via `message`. If you set the [`verbose_errors` setting](#web-client-options) then the `response_metadata` will be included in the error `message` as JSON, but `slack_error.error` will continue to be the error code alone.
 
 If you exceed [Slack’s rate limits](https://api.slack.com/docs/rate-limits), a `Slack::Web::Api::Errors::TooManyRequestsError` will be raised instead.
 
