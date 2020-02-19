@@ -10,6 +10,18 @@ module Slack
             super message
             @response = response
           end
+
+          def error
+            response.body.error
+          end
+
+          def errors
+            response.body.errors
+          end
+
+          def response_metadata
+            response.body.response_metadata
+          end
         end
       end
     end

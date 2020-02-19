@@ -10,6 +10,7 @@ module Slack
         ca_path
         ca_file
         logger
+        verbose_errors
         endpoint
         token
         timeout
@@ -28,6 +29,7 @@ module Slack
         self.token = nil
         self.proxy = nil
         self.logger = nil
+        self.verbose_errors = nil
         self.timeout = nil
         self.open_timeout = nil
         self.default_page_size = 100
