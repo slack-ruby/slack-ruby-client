@@ -233,7 +233,7 @@ ca_path             |             | Optional SSL certificates path.
 ca_file             |             | Optional SSL certificates file.
 endpoint            |             | Slack endpoint, default is _https://slack.com/api_.
 logger              |             | Optional `Logger` instance that logs HTTP requests.
-verbose_errors      |         yes | Adds `response_metadata` into the [error message](#error-handling); default is false.
+verbose_errors      | yes         | Adds `response_metadata` into the [error message](#error-handling); default is false.
 timeout             |             | Optional open/read timeout in seconds.
 open_timeout        |             | Optional connection open timeout in seconds.
 default_page_size   |             | Optional page size for paginated requests, default is _100_.
