@@ -4,7 +4,6 @@ module Slack
     module Config
       extend self
 
-      # Attributes that can be set in client initializer
       ATTRIBUTES = %i[
         proxy
         user_agent
@@ -19,13 +18,7 @@ module Slack
         default_max_retries
       ].freeze
 
-      # Attributes that can not be set in client initializer
-      GLOBAL_ATTRIBUTES = %i[
-        verbose_errors
-      ].freeze
-
       attr_accessor(*Config::ATTRIBUTES)
-      attr_accessor(*Config::GLOBAL_ATTRIBUTES)
 
       def reset
         self.endpoint = 'https://slack.com/api/'
@@ -35,7 +28,6 @@ module Slack
         self.token = nil
         self.proxy = nil
         self.logger = nil
-        self.verbose_errors = nil
         self.timeout = nil
         self.open_timeout = nil
         self.default_page_size = 100

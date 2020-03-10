@@ -64,35 +64,5 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
         )
       end
     end
-
-    context 'with verbose error logging' do
-      before { Slack::Web.config.verbose_errors = true }
-
-      context 'with no metadata in the response' do
-        let(:body) { { 'ok' => false, 'error' => 'already_in_channel' } }
-
-        it 'raises a SlackError with the error message' do
-          expect { raise_error_obj.on_complete(env) }.to(
-            raise_error(Slack::Web::Api::Errors::SlackError, 'already_in_channel')
-          )
-        end
-      end
-
-      context 'with metadata in the response' do
-        let(:body) do
-          {
-            'ok' => false,
-            'error' => 'already_in_channel',
-            'response_metadata' => { 'messages' => [] }
-          }
-        end
-
-        it 'raises a SlackError and includes the metadata in the message' do
-          expect { raise_error_obj.on_complete(env) }.to(
-            raise_error(Slack::Web::Api::Errors::SlackError, 'already_in_channel; {"messages":[]}')
-          )
-        end
-      end
-    end
   end
 end

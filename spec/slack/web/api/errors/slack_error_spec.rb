@@ -11,6 +11,7 @@ RSpec.describe Slack::Web::Api::Errors::SlackError do
     rescue described_class => e
       expect(e.response).not_to be_nil
       expect(e.response.status).to eq 200
+      expect(e.message).to eql 'invalid_arguments'
       expect(e.error).to eql 'invalid_arguments'
       expect(e.response_metadata).to eq(
         'messages' => [
