@@ -17,7 +17,7 @@ RSpec.describe Slack::Web::Api::Errors::SlackError do
     end
   end
 
-  it 'provides access to response_metadata when available', vcr: { cassette_name: 'web/views_open_error' } do
+  it 'provides access to any response_metadata', vcr: { cassette_name: 'web/views_open_error' } do
     begin
       client.views_open(trigger_id: 'trigger_id', view: {})
       raise 'Expected to receive Slack::Web::Api::Errors::SlackError.'
