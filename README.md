@@ -209,7 +209,7 @@ Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for
 
 #### Web Client Options
 
-You can configure the Web client globally:
+You can configure the Web client either globally or via the initializer.
 
 ```ruby
 Slack::Web::Client.configure do |config|
@@ -217,27 +217,25 @@ Slack::Web::Client.configure do |config|
 end
 ```
 
-Or you can configure most settings (see table below) when you initialize a client:
 ```ruby
 client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
 ```
 
-The following settings are supported. Certain options can only be configured globally.
+The following settings are supported.
 
-setting             | global only | description
---------------------|-------------|-------------------------------------------------------------------------------------------------
-token               |             | Slack API token.
-user_agent          |             | User-agent, defaults to _Slack Ruby Client/version_.
-proxy               |             | Optional HTTP proxy.
-ca_path             |             | Optional SSL certificates path.
-ca_file             |             | Optional SSL certificates file.
-endpoint            |             | Slack endpoint, default is _https://slack.com/api_.
-logger              |             | Optional `Logger` instance that logs HTTP requests.
-verbose_errors      | yes         | Adds `response_metadata` into the [error message](#error-handling); default is false.
-timeout             |             | Optional open/read timeout in seconds.
-open_timeout        |             | Optional connection open timeout in seconds.
-default_page_size   |             | Optional page size for paginated requests, default is _100_.
-default_max_retries |             | Optional number of retries for paginated requests, default is _100_.
+setting             | description
+--------------------|-------------------------------------------------------------------------------------------------
+token               | Slack API token.
+user_agent          | User-agent, defaults to _Slack Ruby Client/version_.
+proxy               | Optional HTTP proxy.
+ca_path             | Optional SSL certificates path.
+ca_file             | Optional SSL certificates file.
+endpoint            | Slack endpoint, default is _https://slack.com/api_.
+logger              | Optional `Logger` instance that logs HTTP requests.
+timeout             | Optional open/read timeout in seconds.
+open_timeout        | Optional connection open timeout in seconds.
+default_page_size   | Optional page size for paginated requests, default is _100_.
+default_max_retries | Optional number of retries for paginated requests, default is _100_.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
@@ -277,9 +275,7 @@ all_members # many thousands of team members retrieved 10 at a time
 
 #### Error Handling
 
-If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. By default, the error message contains the error code. In case of multiple errors, the error codes are separated by commas. The original response is also accessible using the `response` attribute.
-
-The `response_metadata` is accessible with `slack_error.response_metadata`, and the error code is accessible with `slack_error.error`, as well as via `message`. If you set the [`verbose_errors` setting](#web-client-options) then the `response_metadata` will be included in the error `message` as JSON, but `slack_error.error` will continue to be the error code alone.
+If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. The error message contains the error code, which is also accessible with `slack_error.error`. In case of multiple errors, the error message contains the error codes separated by commas, or they are accessible as an array with `slack_error.errors`. The original response is also accessible using the `response` attribute. The `response_metadata` is accessible with `slack_error.response_metadata`.
 
 If you exceed [Slack’s rate limits](https://api.slack.com/docs/rate-limits), a `Slack::Web::Api::Errors::TooManyRequestsError` will be raised instead.
 
