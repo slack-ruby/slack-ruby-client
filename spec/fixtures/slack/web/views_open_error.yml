@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/views.open
+    body:
+      encoding: UTF-8
+      string: token=token&trigger_id=trigger_id&view=%7B%7D
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.14.6
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '154'
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 19 Feb 2020 17:52:59 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Xss-Protection:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - h
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-ixj4
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 b6cc1359c0cd55a8339441d8abb6a450.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - JFK51-C1
+      X-Amz-Cf-Id:
+      - fWF96IvY1omctxPC6XwjvZ2TIfpmVLlsT35MsfAWqK7zDChMCpE_oQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"invalid_arguments","response_metadata":{"messages":["[ERROR]
+        missing required field: title [json-pointer:\/view]","[ERROR] missing required
+        field: blocks [json-pointer:\/view]","[ERROR] missing required field: type
+        [json-pointer:\/view]"]}}'
+    http_version: null
+  recorded_at: Wed, 19 Feb 2020 17:52:59 GMT
+recorded_with: VCR 5.1.0

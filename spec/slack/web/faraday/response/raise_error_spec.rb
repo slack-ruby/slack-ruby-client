@@ -29,7 +29,13 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
     end
 
     context 'with a single error in the body' do
-      let(:body) { { 'error' => 'already_in_channel' } }
+      let(:body) do
+        {
+          'ok' => false,
+          'error' => 'already_in_channel',
+          'response_metadata' => { 'messages' => [] }
+        }
+      end
 
       it 'raises a SlackError with the error message' do
         expect { raise_error_obj.on_complete(env) }.to(
@@ -41,6 +47,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
     context 'with multiple errors in the body' do
       let(:body) do
         {
+          'ok' => false,
           'errors' => [
             { 'error' => 'already_in_channel' },
             { 'error' => 'something_else_terrible' }

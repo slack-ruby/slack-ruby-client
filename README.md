@@ -20,14 +20,15 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
   - [Using the Legacy API Token](#using-the-legacy-api-token)
   - [Global Settings](#global-settings)
   - [Web Client](#web-client)
-    - [Test Auth](#test-auth)
-    - [Send Messages](#send-messages)
-    - [List Channels](#list-channels)
-    - [Upload a File](#upload-a-file)
-  - [Get Channel Info](#get-channel-info)
-  - [Get User Info](#get-user-info)
-  - [Search for a User](#search-for-a-user)
-    - [Other](#other)
+    - [Web Client Examples](#web-client-examples)
+      - [Test Auth](#test-auth)
+      - [Send Messages](#send-messages)
+      - [List Channels](#list-channels)
+      - [Upload a File](#upload-a-file)
+      - [Get Channel Info](#get-channel-info)
+      - [Get User Info](#get-user-info)
+      - [Search for a User](#search-for-a-user)
+      - [Other](#other)
     - [Web Client Options](#web-client-options)
     - [Pagination Support](#pagination-support)
     - [Error Handling](#error-handling)
@@ -122,14 +123,18 @@ logger       | An optional logger, defaults to `::Logger.new(STDOUT)` at `Logger
 
 The Slack Web API allows you to build applications that interact with Slack.
 
-#### Test Auth
+#### Web Client Examples
+
+Here are some examples of how to use the web client with the Web API.
+
+##### Test Auth
 
 ```ruby
 client = Slack::Web::Client.new
 client.auth_test
 ```
 
-#### Send Messages
+##### Send Messages
 
 Send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
 
@@ -141,7 +146,7 @@ See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
 ![](examples/hi_web/hi.gif)
 
-#### List Channels
+##### List Channels
 
 List channels with [channels_list](https://api.slack.com/methods/channels.list).
 
@@ -151,7 +156,7 @@ channels = client.channels_list.channels
 general_channel = channels.detect { |c| c.name == 'general' }
 ```
 
-#### Upload a File
+##### Upload a File
 
 Upload a file with [files_upload](https://api.slack.com/methods/files.upload).
 
@@ -166,7 +171,7 @@ client.files_upload(
 )
 ```
 
-### Get Channel Info
+##### Get Channel Info
 
 You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `channels_list` in order to locate the channel ID.
 
@@ -178,7 +183,7 @@ client.channels_info(channel: 'C04KB5X4D') # calls channels_info
 client.channels_info(channel: '#general') # calls channels_list followed by channels_info
 ```
 
-### Get User Info
+##### Get User Info
 
 You can use a user ID or name (prefixed with `@`) in all functions that take a `:user` argument. Lookup by name is not supported by the Slack API and the `users_id` method called invokes `users_list` in order to locate the user ID.
 
@@ -190,7 +195,7 @@ client.users_info(user: 'U092BDCLV') # calls users_info
 client.users_info(user: '@dblock') # calls users_list followed by users_info
 ```
 
-### Search for a User
+##### Search for a User
 
 Constructs an in-memory index of users and searches it. If you want to use this functionality, add the [picky](https://github.com/floere/picky) gem to your project's Gemfile.
 
@@ -198,7 +203,7 @@ Constructs an in-memory index of users and searches it. If you want to use this 
 client.users_search(user: 'dblock')
 ```
 
-#### Other
+##### Other
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
 
@@ -270,7 +275,7 @@ all_members # many thousands of team members retrieved 10 at a time
 
 #### Error Handling
 
-If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. The error message contains the error code. In case of multiple errors, the error codes are separated by commas. The original response is also accessible using the `response` attribute.
+If a request fails, a `Slack::Web::Api::Errors::SlackError` will be raised. The error message contains the error code, which is also accessible with `slack_error.error`. In case of multiple errors, the error message contains the error codes separated by commas, or they are accessible as an array with `slack_error.errors`. The original response is also accessible using the `response` attribute. The `response_metadata` is accessible with `slack_error.response_metadata`.
 
 If you exceed [Slack’s rate limits](https://api.slack.com/docs/rate-limits), a `Slack::Web::Api::Errors::TooManyRequestsError` will be raised instead.
 
