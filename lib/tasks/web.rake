@@ -79,7 +79,7 @@ namespace :slack do
 
         # Use the official spec to pull a list of errors and create classes for each
 
-        spec = JSON.load(open('https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json'))
+        spec = JSON.parse(open('https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json').read)
         known_typos = %w[account_inactiv token_revokedno_permission]
 
         errors = spec['paths'].map do |_, path|
@@ -100,7 +100,7 @@ namespace :slack do
 
         errors_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/errors.erb'))
         rendered_errors = errors_template.result(errors: errors)
-        File.write("lib/slack/web/api/errors.rb", rendered_errors)
+        File.write('lib/slack/web/api/errors.rb', rendered_errors)
       end
     end
   end

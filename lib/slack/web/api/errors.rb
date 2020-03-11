@@ -345,7 +345,7 @@ module Slack
           'users_list_not_supplied' => UsersListNotSupplied,
           'users_not_found' => UsersNotFound,
           'validation_errors' => ValidationErrors,
-        }
+        }.freeze
       end
     end
   end

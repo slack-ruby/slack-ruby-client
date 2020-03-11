@@ -13,7 +13,7 @@ module Slack
           <% errors.each do |e| %>
           '<%= e %>' => <%= e.camelize %>,
           <% end %>
-        }
+        }.freeze
       end
     end
   end
