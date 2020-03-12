@@ -8,7 +8,13 @@ namespace :slack do
       desc 'Update Web API errors from official spec'
       task :update_errors do
         spec = JSON.parse(open('https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json').read)
-        known_typos = %w[account_inactiv token_revokedno_permission]
+        known_typos = %w[
+          account_inactiv
+          invalid_post_typ
+          missing_post_typ
+          request_timeou
+          token_revokedno_permission
+        ]
 
         errors = spec['paths'].map do |_, path|
           path.map do |_, v|
