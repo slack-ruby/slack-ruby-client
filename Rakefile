@@ -19,5 +19,6 @@ task default: %i[spec rubocop]
 
 load 'tasks/git.rake'
 load 'tasks/web.rake'
+load 'tasks/web_errors.rake'
 load 'tasks/real_time.rake'
 load 'tasks/update.rake'

@@ -5,6 +5,7 @@ namespace :slack do
     task :update do
       Rake::Task['slack:real_time:api:update'].invoke
       Rake::Task['slack:web:api:update'].invoke
+      Rake::Task['slack:web:api:update_errors'].invoke
     end
   end
 end
