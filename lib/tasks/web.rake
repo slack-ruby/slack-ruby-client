@@ -8,7 +8,7 @@ require 'active_support/core_ext'
 namespace :slack do
   namespace :web do
     namespace :api do
-      desc 'Update API.'
+      desc 'Update Web API.'
       task update: [:git_update] do
         group_schema = JSON.parse(File.read('lib/slack/web/api/schema/group.json'))
         dirglob = 'lib/slack/web/api/slack-api-ref/groups/**/*.json'
@@ -74,6 +74,15 @@ namespace :slack do
           'bin/commands.rb',
           commands_template.result(files: data.keys.map { |key| key.tr('.', '_') })
         )
+
+        errors_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/errors.erb'))
+        errors = data.values.map do |names|
+          names.values.map do |d|
+            d['errors'].keys
+          end
+        end.flatten.compact.uniq.sort
+        rendered_errors = errors_template.result(errors: errors)
+        File.write('lib/slack/web/api/errors.rb', rendered_errors)
       end
     end
   end

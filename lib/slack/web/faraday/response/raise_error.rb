@@ -10,7 +10,10 @@ module Slack
 
             error_message =
               body['error'] || body['errors'].map { |message| message['error'] }.join(',')
-            raise Slack::Web::Api::Errors::SlackError.new(error_message, env.response)
+
+            error_class = Slack::Web::Api::Errors::ERROR_CLASSES[error_message]
+            error_class ||= Slack::Web::Api::Errors::SlackError
+            raise error_class.new(error_message, env.response)
           end
         end
       end

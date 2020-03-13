@@ -28,7 +28,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
       end
     end
 
-    context 'with a single error in the body' do
+    context 'with a single known error in the body' do
       let(:body) do
         {
           'ok' => false,
@@ -37,9 +37,25 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
         }
       end
 
+      it 'raises an error of the matching type with the error message' do
+        expect { raise_error_obj.on_complete(env) }.to(
+          raise_error(Slack::Web::Api::Errors::AlreadyInChannel, 'already_in_channel')
+        )
+      end
+    end
+
+    context 'with a single unknown error in the body' do
+      let(:body) do
+        {
+          'ok' => false,
+          'error' => 'unknown_error',
+          'response_metadata' => { 'messages' => [] }
+        }
+      end
+
       it 'raises a SlackError with the error message' do
         expect { raise_error_obj.on_complete(env) }.to(
-          raise_error(Slack::Web::Api::Errors::SlackError, 'already_in_channel')
+          raise_error(Slack::Web::Api::Errors::SlackError, 'unknown_error')
         )
       end
     end
