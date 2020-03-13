@@ -8,14 +8,23 @@ module Slack
         class AccountInactive < SlackError; end
         class AlreadyArchived < SlackError; end
         class AlreadyInChannel < SlackError; end
+        class AlreadyInTeam < SlackError; end
+        class AlreadyInTeamInvitedUser < SlackError; end
+        class AlreadyInvited < SlackError; end
         class AlreadyPinned < SlackError; end
+        class AlreadyProcessed < SlackError; end
         class AlreadyReacted < SlackError; end
         class AlreadyStarred < SlackError; end
+        class AppManagementAppNotInstalledOnOrg < SlackError; end
         class AppMissingActionUrl < SlackError; end
+        class AsUserNotSupported < SlackError; end
         class BadClientSecret < SlackError; end
         class BadImage < SlackError; end
+        class BadRedirectUri < SlackError; end
         class BadTimestamp < SlackError; end
+        class BadTitle < SlackError; end
         class BadToken < SlackError; end
+        class BadUrl < SlackError; end
         class BotNotFound < SlackError; end
         class CannotAddBot < SlackError; end
         class CannotAddOthers < SlackError; end
@@ -24,9 +33,14 @@ module Slack
         class CannotCompleteOthers < SlackError; end
         class CannotCompleteRecurring < SlackError; end
         class CannotCreateDialog < SlackError; end
+        class CannotFindChannel < SlackError; end
+        class CannotFindMessage < SlackError; end
         class CannotFindService < SlackError; end
+        class CannotModifyPrimaryOwner < SlackError; end
         class CannotParse < SlackError; end
+        class CannotParseAttachment < SlackError; end
         class CannotPrompt < SlackError; end
+        class CannotResetPrimaryOwner < SlackError; end
         class CannotUnfurlUrl < SlackError; end
         class CannotUpdateAdminUser < SlackError; end
         class CantArchiveGeneral < SlackError; end
@@ -38,152 +52,255 @@ module Slack
         class CantKickFromGeneral < SlackError; end
         class CantKickSelf < SlackError; end
         class CantLeaveGeneral < SlackError; end
-        class CantLeaveMandatorySharedChannel < SlackError; end
         class CantUpdateMessage < SlackError; end
+        class ChannelCannotBeUnshared < SlackError; end
         class ChannelNotFound < SlackError; end
+        class ChannelNotSharedWithTeam < SlackError; end
+        class ChannelTypeNotSupported < SlackError; end
         class ClientIdTokenMismatch < SlackError; end
-        class CommentNotFound < SlackError; end
+        class CodeAlreadyUsed < SlackError; end
         class ComplianceExportsPreventDeletion < SlackError; end
+        class CouldNotCreateWorkspace < SlackError; end
+        class DefaultOrgWideChannel < SlackError; end
+        class DiscoverabilitySettingInvalid < SlackError; end
+        class DomainTaken < SlackError; end
+        class DuplicateExternalId < SlackError; end
         class EditWindowClosed < SlackError; end
         class EkmAccessDenied < SlackError; end
+        class EmojiNotFound < SlackError; end
         class EnterpriseIsRestricted < SlackError; end
+        class ErrorBadFormat < SlackError; end
+        class ErrorBadNameI18n < SlackError; end
+        class ErrorBadUpload < SlackError; end
+        class ErrorBadWide < SlackError; end
+        class ErrorInvalidAlias < SlackError; end
+        class ErrorInvalidEmojiToRename < SlackError; end
+        class ErrorMissingName < SlackError; end
+        class ErrorNameTaken < SlackError; end
+        class ErrorNameTakenI18n < SlackError; end
+        class ErrorNoImage < SlackError; end
+        class ErrorTooBig < SlackError; end
+        class ExternalChannelMigrating < SlackError; end
+        class FailedLookingUpUser < SlackError; end
         class FailedSendingDialog < SlackError; end
+        class FailedToAddEmoji < SlackError; end
+        class FailedToAliasEmoji < SlackError; end
+        class FailedToFetchActiveTeam < SlackError; end
+        class FailedToFetchInfo < SlackError; end
+        class FailedToRemoveUserFromWorkspace < SlackError; end
+        class FailedToRenameEmoji < SlackError; end
+        class FailedToSendInvite < SlackError; end
+        class FailedToSetDefaultChannels < SlackError; end
+        class FailedToSetDescription < SlackError; end
+        class FailedToSetDiscoverability < SlackError; end
+        class FailedToSetIcon < SlackError; end
+        class FailedToSetName < SlackError; end
+        class FailedToSetUserToAdmin < SlackError; end
+        class FailedToSetUserToOwner < SlackError; end
+        class FailedToSetUserToRegular < SlackError; end
+        class FailedToValidateCaller < SlackError; end
+        class FailedToValidateChannels < SlackError; end
+        class FailedToValidateCustomMessage < SlackError; end
+        class FailedToValidateExpiration < SlackError; end
+        class FailedToValidateTeam < SlackError; end
+        class FailureRemovingEmoji < SlackError; end
         class FatalError < SlackError; end
+        class FeatureNotEnabled < SlackError; end
         class FetchMembersFailed < SlackError; end
         class FileCommentNotFound < SlackError; end
         class FileDeleted < SlackError; end
         class FileNotFound < SlackError; end
         class FileNotShared < SlackError; end
-        class FileUploadsDisabled < SlackError; end
-        class FileUploadsExceptImagesDisabled < SlackError; end
+        class FileUnderReview < SlackError; end
         class GroupContainsOthers < SlackError; end
+        class HashConflict < SlackError; end
+        class InvalidAppId < SlackError; end
         class InvalidArgName < SlackError; end
         class InvalidArguments < SlackError; end
-        class InvalidArrayArg < SlackError; end
         class InvalidAuth < SlackError; end
         class InvalidChannel < SlackError; end
+        class InvalidChannelId < SlackError; end
         class InvalidCharset < SlackError; end
         class InvalidClientId < SlackError; end
+        class InvalidCode < SlackError; end
         class InvalidCursor < SlackError; end
-        class InvalidForExternalSharedChannel < SlackError; end
+        class InvalidEmail < SlackError; end
+        class InvalidExternalId < SlackError; end
         class InvalidFormData < SlackError; end
-        class InvalidJson < SlackError; end
+        class InvalidGrantType < SlackError; end
         class InvalidLimit < SlackError; end
         class InvalidName < SlackError; end
         class InvalidNameMaxlength < SlackError; end
         class InvalidNamePunctuation < SlackError; end
         class InvalidNameRequired < SlackError; end
         class InvalidNameSpecials < SlackError; end
+        class InvalidPermissions < SlackError; end
         class InvalidPostType < SlackError; end
         class InvalidPresence < SlackError; end
         class InvalidProfile < SlackError; end
+        class InvalidRequest < SlackError; end
+        class InvalidRequestId < SlackError; end
+        class InvalidRoleForUser < SlackError; end
         class InvalidScheduledMessageId < SlackError; end
         class InvalidScope < SlackError; end
+        class InvalidTargetTeam < SlackError; end
         class InvalidTime < SlackError; end
         class InvalidTimestamp < SlackError; end
         class InvalidTrigger < SlackError; end
         class InvalidTsLatest < SlackError; end
         class InvalidTsOldest < SlackError; end
         class InvalidTypes < SlackError; end
+        class InvalidUrl < SlackError; end
         class InvalidUser < SlackError; end
+        class InvalidUsers < SlackError; end
+        class InvitedUserNotCreated < SlackError; end
+        class InvitedUserNotReactivated < SlackError; end
+        class InviteeCantSeeChannel < SlackError; end
         class IsArchived < SlackError; end
-        class JsonNotObject < SlackError; end
+        class IsBot < SlackError; end
+        class IsInactive < SlackError; end
         class LastMember < SlackError; end
         class LimitRequired < SlackError; end
         class MessageNotFound < SlackError; end
         class MethodNotSupportedForChannelType < SlackError; end
-        class MissingCharset < SlackError; end
+        class MigrationInProgress < SlackError; end
+        class MissingChannel < SlackError; end
         class MissingDialog < SlackError; end
         class MissingDuration < SlackError; end
         class MissingPostType < SlackError; end
         class MissingScope < SlackError; end
         class MissingTrigger < SlackError; end
+        class MissingTs < SlackError; end
         class MissingUnfurls < SlackError; end
+        class MixedScope < SlackError; end
         class MsgTooLong < SlackError; end
+        class MustProvideTeamDomain < SlackError; end
+        class MustProvideTeamName < SlackError; end
         class NameTaken < SlackError; end
+        class NameTakenInOrg < SlackError; end
+        class NoAliasSelected < SlackError; end
+        class NoBotUserForApp < SlackError; end
         class NoChannel < SlackError; end
+        class NoImageUploaded < SlackError; end
         class NoItemSpecified < SlackError; end
         class NoPermission < SlackError; end
         class NoReaction < SlackError; end
+        class NoSuchSubteam < SlackError; end
         class NoText < SlackError; end
         class NoUser < SlackError; end
+        class NoUserProvided < SlackError; end
         class NotAdmin < SlackError; end
         class NotAllowed < SlackError; end
+        class NotAllowedTokenType < SlackError; end
+        class NotAnAdmin < SlackError; end
         class NotAppAdmin < SlackError; end
         class NotArchived < SlackError; end
         class NotAuthed < SlackError; end
         class NotAuthorized < SlackError; end
+        class NotBearerToken < SlackError; end
+        class NotEnabled < SlackError; end
         class NotEnoughUsers < SlackError; end
         class NotEnterpriseTeam < SlackError; end
         class NotFound < SlackError; end
         class NotInChannel < SlackError; end
+        class NotInDnd < SlackError; end
         class NotInGroup < SlackError; end
         class NotPinnable < SlackError; end
         class NotPinned < SlackError; end
+        class NotReactable < SlackError; end
         class NotStarred < SlackError; end
-        class NotSupported < SlackError; end
+        class OauthAuthorizationUrlMismatch < SlackError; end
         class OrgLoginRequired < SlackError; end
         class OverPaginationLimit < SlackError; end
+        class PaginationNotAvailable < SlackError; end
         class PaidOnly < SlackError; end
         class PermissionDenied < SlackError; end
+        class PlanUpgradeRequired < SlackError; end
         class PostingToGeneralChannelDenied < SlackError; end
+        class PreviewFeatureNotAvailable < SlackError; end
         class ProfileSetFailed < SlackError; end
+        class PublicVideoNotAllowed < SlackError; end
+        class PushLimitReached < SlackError; end
         class RateLimited < SlackError; end
+        class Ratelimited < SlackError; end
+        class RequestAlreadyResolved < SlackError; end
+        class RequestIdOrAppIdIsRequired < SlackError; end
+        class RequestIdRequiredForCustomIntegrations < SlackError; end
         class RequestTimeout < SlackError; end
         class ReservedName < SlackError; end
         class RestrictedAction < SlackError; end
         class RestrictedActionNonThreadableChannel < SlackError; end
         class RestrictedActionReadOnlyChannel < SlackError; end
         class RestrictedActionThreadOnlyChannel < SlackError; end
+        class RtmConnectRequired < SlackError; end
+        class SentRecently < SlackError; end
         class SnoozeEndFailed < SlackError; end
         class SnoozeFailed < SlackError; end
         class SnoozeNotActive < SlackError; end
-        class StorageLimitReached < SlackError; end
-        class SuperfluousCharset < SlackError; end
         class TeamAddedToOrg < SlackError; end
+        class TeamNotFound < SlackError; end
         class ThreadNotFound < SlackError; end
         class TimeInPast < SlackError; end
         class TimeTooFar < SlackError; end
-        class TimezoneCountFailed < SlackError; end
         class TokenRevoked < SlackError; end
         class TooLarge < SlackError; end
         class TooLong < SlackError; end
         class TooManyAttachments < SlackError; end
+        class TooManyConvosForAppOnTeam < SlackError; end
+        class TooManyConvosForTeam < SlackError; end
         class TooManyEmoji < SlackError; end
         class TooManyFrames < SlackError; end
+        class TooManyIds < SlackError; end
+        class TooManyIdsProvided < SlackError; end
         class TooManyReactions < SlackError; end
+        class TooManyTargetTeams < SlackError; end
+        class TooManyTeamsProvided < SlackError; end
         class TooManyUsers < SlackError; end
         class TriggerExchanged < SlackError; end
         class TriggerExpired < SlackError; end
-        class UnknownError < SlackError; end
+        class UnableToLeaveLastTeam < SlackError; end
+        class UnknownMethod < SlackError; end
         class UnknownType < SlackError; end
-        class UpgradeRequire < SlackError; end
-        class UpgradeRequired < SlackError; end
+        class UnsupportedArguments < SlackError; end
         class UraMaxChannels < SlackError; end
+        class UserAlreadyDeleted < SlackError; end
+        class UserAlreadyTeamMember < SlackError; end
         class UserDisabled < SlackError; end
         class UserDoesNotOwnChannel < SlackError; end
-        class UserIsBot < SlackError; end
+        class UserIsAlreadyDeleted < SlackError; end
+        class UserIsNotAGuest < SlackError; end
         class UserIsRestricted < SlackError; end
         class UserIsUltraRestricted < SlackError; end
         class UserNotFound < SlackError; end
         class UserNotInChannel < SlackError; end
         class UserNotVisible < SlackError; end
+        class UserSessionResetFailed < SlackError; end
         class UsersListNotSupplied < SlackError; end
         class UsersNotFound < SlackError; end
         class ValidationErrors < SlackError; end
+        class ViewTooLarge < SlackError; end
 
         ERROR_CLASSES = {
           'account_inactive' => AccountInactive,
           'already_archived' => AlreadyArchived,
           'already_in_channel' => AlreadyInChannel,
+          'already_in_team' => AlreadyInTeam,
+          'already_in_team_invited_user' => AlreadyInTeamInvitedUser,
+          'already_invited' => AlreadyInvited,
           'already_pinned' => AlreadyPinned,
+          'already_processed' => AlreadyProcessed,
           'already_reacted' => AlreadyReacted,
           'already_starred' => AlreadyStarred,
+          'app_management_app_not_installed_on_org' => AppManagementAppNotInstalledOnOrg,
           'app_missing_action_url' => AppMissingActionUrl,
+          'as_user_not_supported' => AsUserNotSupported,
           'bad_client_secret' => BadClientSecret,
           'bad_image' => BadImage,
+          'bad_redirect_uri' => BadRedirectUri,
           'bad_timestamp' => BadTimestamp,
+          'bad_title' => BadTitle,
           'bad_token' => BadToken,
+          'bad_url' => BadUrl,
           'bot_not_found' => BotNotFound,
           'cannot_add_bot' => CannotAddBot,
           'cannot_add_others' => CannotAddOthers,
@@ -192,9 +309,14 @@ module Slack
           'cannot_complete_others' => CannotCompleteOthers,
           'cannot_complete_recurring' => CannotCompleteRecurring,
           'cannot_create_dialog' => CannotCreateDialog,
+          'cannot_find_channel' => CannotFindChannel,
+          'cannot_find_message' => CannotFindMessage,
           'cannot_find_service' => CannotFindService,
+          'cannot_modify_primary_owner' => CannotModifyPrimaryOwner,
           'cannot_parse' => CannotParse,
+          'cannot_parse_attachment' => CannotParseAttachment,
           'cannot_prompt' => CannotPrompt,
+          'cannot_reset_primary_owner' => CannotResetPrimaryOwner,
           'cannot_unfurl_url' => CannotUnfurlUrl,
           'cannot_update_admin_user' => CannotUpdateAdminUser,
           'cant_archive_general' => CantArchiveGeneral,
@@ -206,139 +328,233 @@ module Slack
           'cant_kick_from_general' => CantKickFromGeneral,
           'cant_kick_self' => CantKickSelf,
           'cant_leave_general' => CantLeaveGeneral,
-          'cant_leave_mandatory_shared_channel' => CantLeaveMandatorySharedChannel,
           'cant_update_message' => CantUpdateMessage,
+          'channel_cannot_be_unshared' => ChannelCannotBeUnshared,
           'channel_not_found' => ChannelNotFound,
+          'channel_not_shared_with_team' => ChannelNotSharedWithTeam,
+          'channel_type_not_supported' => ChannelTypeNotSupported,
           'client_id_token_mismatch' => ClientIdTokenMismatch,
-          'comment_not_found' => CommentNotFound,
+          'code_already_used' => CodeAlreadyUsed,
           'compliance_exports_prevent_deletion' => ComplianceExportsPreventDeletion,
+          'could_not_create_workspace' => CouldNotCreateWorkspace,
+          'default_org_wide_channel' => DefaultOrgWideChannel,
+          'discoverability_setting_invalid' => DiscoverabilitySettingInvalid,
+          'domain_taken' => DomainTaken,
+          'duplicate_external_id' => DuplicateExternalId,
           'edit_window_closed' => EditWindowClosed,
           'ekm_access_denied' => EkmAccessDenied,
+          'emoji_not_found' => EmojiNotFound,
           'enterprise_is_restricted' => EnterpriseIsRestricted,
+          'error_bad_format' => ErrorBadFormat,
+          'error_bad_name_i18n' => ErrorBadNameI18n,
+          'error_bad_upload' => ErrorBadUpload,
+          'error_bad_wide' => ErrorBadWide,
+          'error_invalid_alias' => ErrorInvalidAlias,
+          'error_invalid_emoji_to_rename' => ErrorInvalidEmojiToRename,
+          'error_missing_name' => ErrorMissingName,
+          'error_name_taken' => ErrorNameTaken,
+          'error_name_taken_i18n' => ErrorNameTakenI18n,
+          'error_no_image' => ErrorNoImage,
+          'error_too_big' => ErrorTooBig,
+          'external_channel_migrating' => ExternalChannelMigrating,
+          'failed_looking_up_user' => FailedLookingUpUser,
           'failed_sending_dialog' => FailedSendingDialog,
+          'failed_to_add_emoji' => FailedToAddEmoji,
+          'failed_to_alias_emoji' => FailedToAliasEmoji,
+          'failed_to_fetch_active_team' => FailedToFetchActiveTeam,
+          'failed_to_fetch_info' => FailedToFetchInfo,
+          'failed_to_remove_user_from_workspace' => FailedToRemoveUserFromWorkspace,
+          'failed_to_rename_emoji' => FailedToRenameEmoji,
+          'failed_to_send_invite' => FailedToSendInvite,
+          'failed_to_set_default_channels' => FailedToSetDefaultChannels,
+          'failed_to_set_description' => FailedToSetDescription,
+          'failed_to_set_discoverability' => FailedToSetDiscoverability,
+          'failed_to_set_icon' => FailedToSetIcon,
+          'failed_to_set_name' => FailedToSetName,
+          'failed_to_set_user_to_admin' => FailedToSetUserToAdmin,
+          'failed_to_set_user_to_owner' => FailedToSetUserToOwner,
+          'failed_to_set_user_to_regular' => FailedToSetUserToRegular,
+          'failed_to_validate_caller' => FailedToValidateCaller,
+          'failed_to_validate_channels' => FailedToValidateChannels,
+          'failed_to_validate_custom_message' => FailedToValidateCustomMessage,
+          'failed_to_validate_expiration' => FailedToValidateExpiration,
+          'failed_to_validate_team' => FailedToValidateTeam,
+          'failure_removing_emoji' => FailureRemovingEmoji,
           'fatal_error' => FatalError,
+          'feature_not_enabled' => FeatureNotEnabled,
           'fetch_members_failed' => FetchMembersFailed,
           'file_comment_not_found' => FileCommentNotFound,
           'file_deleted' => FileDeleted,
           'file_not_found' => FileNotFound,
           'file_not_shared' => FileNotShared,
-          'file_uploads_disabled' => FileUploadsDisabled,
-          'file_uploads_except_images_disabled' => FileUploadsExceptImagesDisabled,
+          'file_under_review' => FileUnderReview,
           'group_contains_others' => GroupContainsOthers,
+          'hash_conflict' => HashConflict,
+          'invalid_app_id' => InvalidAppId,
           'invalid_arg_name' => InvalidArgName,
           'invalid_arguments' => InvalidArguments,
-          'invalid_array_arg' => InvalidArrayArg,
           'invalid_auth' => InvalidAuth,
           'invalid_channel' => InvalidChannel,
+          'invalid_channel_id' => InvalidChannelId,
           'invalid_charset' => InvalidCharset,
           'invalid_client_id' => InvalidClientId,
+          'invalid_code' => InvalidCode,
           'invalid_cursor' => InvalidCursor,
-          'invalid_for_external_shared_channel' => InvalidForExternalSharedChannel,
+          'invalid_email' => InvalidEmail,
+          'invalid_external_id' => InvalidExternalId,
           'invalid_form_data' => InvalidFormData,
-          'invalid_json' => InvalidJson,
+          'invalid_grant_type' => InvalidGrantType,
           'invalid_limit' => InvalidLimit,
           'invalid_name' => InvalidName,
           'invalid_name_maxlength' => InvalidNameMaxlength,
           'invalid_name_punctuation' => InvalidNamePunctuation,
           'invalid_name_required' => InvalidNameRequired,
           'invalid_name_specials' => InvalidNameSpecials,
+          'invalid_permissions' => InvalidPermissions,
           'invalid_post_type' => InvalidPostType,
           'invalid_presence' => InvalidPresence,
           'invalid_profile' => InvalidProfile,
+          'invalid_request' => InvalidRequest,
+          'invalid_request_id' => InvalidRequestId,
+          'invalid_role_for_user' => InvalidRoleForUser,
           'invalid_scheduled_message_id' => InvalidScheduledMessageId,
           'invalid_scope' => InvalidScope,
+          'invalid_target_team' => InvalidTargetTeam,
           'invalid_time' => InvalidTime,
           'invalid_timestamp' => InvalidTimestamp,
           'invalid_trigger' => InvalidTrigger,
           'invalid_ts_latest' => InvalidTsLatest,
           'invalid_ts_oldest' => InvalidTsOldest,
           'invalid_types' => InvalidTypes,
+          'invalid_url' => InvalidUrl,
           'invalid_user' => InvalidUser,
+          'invalid_users' => InvalidUsers,
+          'invited_user_not_created' => InvitedUserNotCreated,
+          'invited_user_not_reactivated' => InvitedUserNotReactivated,
+          'invitee_cant_see_channel' => InviteeCantSeeChannel,
           'is_archived' => IsArchived,
-          'json_not_object' => JsonNotObject,
+          'is_bot' => IsBot,
+          'is_inactive' => IsInactive,
           'last_member' => LastMember,
           'limit_required' => LimitRequired,
           'message_not_found' => MessageNotFound,
           'method_not_supported_for_channel_type' => MethodNotSupportedForChannelType,
-          'missing_charset' => MissingCharset,
+          'migration_in_progress' => MigrationInProgress,
+          'missing_channel' => MissingChannel,
           'missing_dialog' => MissingDialog,
           'missing_duration' => MissingDuration,
           'missing_post_type' => MissingPostType,
           'missing_scope' => MissingScope,
           'missing_trigger' => MissingTrigger,
+          'missing_ts' => MissingTs,
           'missing_unfurls' => MissingUnfurls,
+          'mixed_scope' => MixedScope,
           'msg_too_long' => MsgTooLong,
+          'must_provide_team_domain' => MustProvideTeamDomain,
+          'must_provide_team_name' => MustProvideTeamName,
           'name_taken' => NameTaken,
+          'name_taken_in_org' => NameTakenInOrg,
+          'no_alias_selected' => NoAliasSelected,
+          'no_bot_user_for_app' => NoBotUserForApp,
           'no_channel' => NoChannel,
+          'no_image_uploaded' => NoImageUploaded,
           'no_item_specified' => NoItemSpecified,
           'no_permission' => NoPermission,
           'no_reaction' => NoReaction,
+          'no_such_subteam' => NoSuchSubteam,
           'no_text' => NoText,
           'no_user' => NoUser,
+          'no_user_provided' => NoUserProvided,
           'not_admin' => NotAdmin,
           'not_allowed' => NotAllowed,
+          'not_allowed_token_type' => NotAllowedTokenType,
+          'not_an_admin' => NotAnAdmin,
           'not_app_admin' => NotAppAdmin,
           'not_archived' => NotArchived,
           'not_authed' => NotAuthed,
           'not_authorized' => NotAuthorized,
+          'not_bearer_token' => NotBearerToken,
+          'not_enabled' => NotEnabled,
           'not_enough_users' => NotEnoughUsers,
           'not_enterprise_team' => NotEnterpriseTeam,
           'not_found' => NotFound,
           'not_in_channel' => NotInChannel,
+          'not_in_dnd' => NotInDnd,
           'not_in_group' => NotInGroup,
           'not_pinnable' => NotPinnable,
           'not_pinned' => NotPinned,
+          'not_reactable' => NotReactable,
           'not_starred' => NotStarred,
-          'not_supported' => NotSupported,
+          'oauth_authorization_url_mismatch' => OauthAuthorizationUrlMismatch,
           'org_login_required' => OrgLoginRequired,
           'over_pagination_limit' => OverPaginationLimit,
+          'pagination_not_available' => PaginationNotAvailable,
           'paid_only' => PaidOnly,
           'permission_denied' => PermissionDenied,
+          'plan_upgrade_required' => PlanUpgradeRequired,
           'posting_to_general_channel_denied' => PostingToGeneralChannelDenied,
+          'preview_feature_not_available' => PreviewFeatureNotAvailable,
           'profile_set_failed' => ProfileSetFailed,
+          'public_video_not_allowed' => PublicVideoNotAllowed,
+          'push_limit_reached' => PushLimitReached,
           'rate_limited' => RateLimited,
+          'ratelimited' => Ratelimited,
+          'request_already_resolved' => RequestAlreadyResolved,
+          'request_id_or_app_id_is_required' => RequestIdOrAppIdIsRequired,
+          'request_id_required_for_custom_integrations' => RequestIdRequiredForCustomIntegrations,
           'request_timeout' => RequestTimeout,
           'reserved_name' => ReservedName,
           'restricted_action' => RestrictedAction,
           'restricted_action_non_threadable_channel' => RestrictedActionNonThreadableChannel,
           'restricted_action_read_only_channel' => RestrictedActionReadOnlyChannel,
           'restricted_action_thread_only_channel' => RestrictedActionThreadOnlyChannel,
+          'rtm_connect_required' => RtmConnectRequired,
+          'sent_recently' => SentRecently,
           'snooze_end_failed' => SnoozeEndFailed,
           'snooze_failed' => SnoozeFailed,
           'snooze_not_active' => SnoozeNotActive,
-          'storage_limit_reached' => StorageLimitReached,
-          'superfluous_charset' => SuperfluousCharset,
           'team_added_to_org' => TeamAddedToOrg,
+          'team_not_found' => TeamNotFound,
           'thread_not_found' => ThreadNotFound,
           'time_in_past' => TimeInPast,
           'time_too_far' => TimeTooFar,
-          'timezone_count_failed' => TimezoneCountFailed,
           'token_revoked' => TokenRevoked,
           'too_large' => TooLarge,
           'too_long' => TooLong,
           'too_many_attachments' => TooManyAttachments,
+          'too_many_convos_for_app_on_team' => TooManyConvosForAppOnTeam,
+          'too_many_convos_for_team' => TooManyConvosForTeam,
           'too_many_emoji' => TooManyEmoji,
           'too_many_frames' => TooManyFrames,
+          'too_many_ids' => TooManyIds,
+          'too_many_ids_provided' => TooManyIdsProvided,
           'too_many_reactions' => TooManyReactions,
+          'too_many_target_teams' => TooManyTargetTeams,
+          'too_many_teams_provided' => TooManyTeamsProvided,
           'too_many_users' => TooManyUsers,
           'trigger_exchanged' => TriggerExchanged,
           'trigger_expired' => TriggerExpired,
-          'unknown_error' => UnknownError,
+          'unable_to_leave_last_team' => UnableToLeaveLastTeam,
+          'unknown_method' => UnknownMethod,
           'unknown_type' => UnknownType,
-          'upgrade_require' => UpgradeRequire,
-          'upgrade_required' => UpgradeRequired,
+          'unsupported_arguments' => UnsupportedArguments,
           'ura_max_channels' => UraMaxChannels,
+          'user_already_deleted' => UserAlreadyDeleted,
+          'user_already_team_member' => UserAlreadyTeamMember,
           'user_disabled' => UserDisabled,
           'user_does_not_own_channel' => UserDoesNotOwnChannel,
-          'user_is_bot' => UserIsBot,
+          'user_is_already_deleted' => UserIsAlreadyDeleted,
+          'user_is_not_a_guest' => UserIsNotAGuest,
           'user_is_restricted' => UserIsRestricted,
           'user_is_ultra_restricted' => UserIsUltraRestricted,
           'user_not_found' => UserNotFound,
           'user_not_in_channel' => UserNotInChannel,
           'user_not_visible' => UserNotVisible,
+          'user_session_reset_failed' => UserSessionResetFailed,
           'users_list_not_supplied' => UsersListNotSupplied,
           'users_not_found' => UsersNotFound,
           'validation_errors' => ValidationErrors,
+          'view_too_large' => ViewTooLarge,
         }.freeze
       end
     end
