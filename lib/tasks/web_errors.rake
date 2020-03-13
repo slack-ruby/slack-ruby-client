@@ -7,7 +7,7 @@ namespace :slack do
     namespace :api do
       desc 'Update Web API errors from official spec'
       task :update_errors do
-        spec = JSON.parse(open('https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json').read)
+        spec = JSON.parse(open('https://api.slack.com/specs/openapi/v2/slack_web.json').read)
         known_typos = %w[
           account_inactiv
           invalid_post_typ
