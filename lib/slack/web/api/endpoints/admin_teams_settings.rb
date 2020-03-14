@@ -7,10 +7,37 @@ module Slack
       module Endpoints
         module AdminTeamsSettings
           #
+          # Fetch information about settings in a workspace
+          #
+          # @option options [Object] :team_id
+          #   .
+          # @see https://api.slack.com/methods/admin.teams.settings.info
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.info.json
+          def admin_teams_settings_info(options = {})
+            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            post('admin.teams.settings.info', options)
+          end
+
+          #
+          # Set the default channels of a workspace.
+          #
+          # @option options [Object] :channel_ids
+          #   An array of channel IDs.
+          # @option options [Object] :team_id
+          #   ID for the workspace to set the default channel for.
+          # @see https://api.slack.com/methods/admin.teams.settings.setDefaultChannels
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setDefaultChannels.json
+          def admin_teams_settings_setDefaultChannels(options = {})
+            throw ArgumentError.new('Required arguments :channel_ids missing') if options[:channel_ids].nil?
+            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            post('admin.teams.settings.setDefaultChannels', options)
+          end
+
+          #
           # Set the description of a given workspace.
           #
           # @option options [Object] :description
-          #   .
+          #   The new description for the workspace.
           # @option options [Object] :team_id
           #   ID for the workspace to set the description for.
           # @see https://api.slack.com/methods/admin.teams.settings.setDescription
@@ -22,10 +49,25 @@ module Slack
           end
 
           #
+          # An API method that allows admins to set the discoverability of a given workspace
+          #
+          # @option options [Object] :discoverability
+          #   This workspace's discovery setting. It must be set to one of open, invite_only, closed, or unlisted.
+          # @option options [Object] :team_id
+          #   The ID of the workspace to set discoverability on.
+          # @see https://api.slack.com/methods/admin.teams.settings.setDiscoverability
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setDiscoverability.json
+          def admin_teams_settings_setDiscoverability(options = {})
+            throw ArgumentError.new('Required arguments :discoverability missing') if options[:discoverability].nil?
+            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            post('admin.teams.settings.setDiscoverability', options)
+          end
+
+          #
           # Sets the icon of a workspace.
           #
           # @option options [Object] :image_url
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
+          #   Image URL for the icon.
           # @option options [Object] :team_id
           #   ID for the workspace to set the icon for.
           # @see https://api.slack.com/methods/admin.teams.settings.setIcon
@@ -40,7 +82,7 @@ module Slack
           # Set the name of a given workspace.
           #
           # @option options [Object] :name
-          #   .
+          #   The new name of the workspace.
           # @option options [Object] :team_id
           #   ID for the workspace to set the name for.
           # @see https://api.slack.com/methods/admin.teams.settings.setName

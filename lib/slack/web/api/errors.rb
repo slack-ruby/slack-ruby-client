@@ -64,7 +64,9 @@ module Slack
         class DefaultOrgWideChannel < SlackError; end
         class DiscoverabilitySettingInvalid < SlackError; end
         class DomainTaken < SlackError; end
+        class DuplicateChannelNotFound < SlackError; end
         class DuplicateExternalId < SlackError; end
+        class DuplicateMessageNotFound < SlackError; end
         class EditWindowClosed < SlackError; end
         class EkmAccessDenied < SlackError; end
         class EmojiNotFound < SlackError; end
@@ -340,7 +342,9 @@ module Slack
           'default_org_wide_channel' => DefaultOrgWideChannel,
           'discoverability_setting_invalid' => DiscoverabilitySettingInvalid,
           'domain_taken' => DomainTaken,
+          'duplicate_channel_not_found' => DuplicateChannelNotFound,
           'duplicate_external_id' => DuplicateExternalId,
+          'duplicate_message_not_found' => DuplicateMessageNotFound,
           'edit_window_closed' => EditWindowClosed,
           'ekm_access_denied' => EkmAccessDenied,
           'emoji_not_found' => EmojiNotFound,

@@ -18,7 +18,7 @@ module Slack
           # @option options [Object] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).
           # @option options [Object] :single_channel
-          #   Request the user to add your app only to a single channel.
+          #   Request the user to add your app only to a single channel. Only valid with a legacy workspace app.
           # @see https://api.slack.com/methods/oauth.access
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth/oauth.access.json
           def oauth_access(options = {})

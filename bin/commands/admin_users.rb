@@ -8,6 +8,7 @@ command 'admin_users' do |g|
   g.command 'assign' do |c|
     c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
     c.flag 'user_id', desc: 'The ID of the user to add to the workspace.'
+    c.flag 'channel_ids', desc: 'Comma separated values of channel IDs to add user in the new workspace.'
     c.flag 'is_restricted', desc: 'True if user should be added to the workspace as a guest.'
     c.flag 'is_ultra_restricted', desc: 'True if user should be added to the workspace as a single-channel guest.'
     c.action do |_global_options, options, _args|
@@ -32,6 +33,17 @@ command 'admin_users' do |g|
     end
   end
 
+  g.desc 'List users on a workspace'
+  g.long_desc %( List users on a workspace )
+  g.command 'list' do |c|
+    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
+    c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+    c.flag 'limit', desc: 'Limit for how many users to be retrieved per page.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_list(options))
+    end
+  end
+
   g.desc 'Remove a user from a workspace.'
   g.long_desc %( Remove a user from a workspace. )
   g.command 'remove' do |c|
@@ -49,6 +61,17 @@ command 'admin_users' do |g|
     c.flag 'user_id', desc: 'The ID of the user to designate as an admin.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_users_setAdmin(options))
+    end
+  end
+
+  g.desc 'Set an expiration for a guest user'
+  g.long_desc %( Set an expiration for a guest user )
+  g.command 'setExpiration' do |c|
+    c.flag 'expiration_ts', desc: 'Timestamp when guest account should be disabled.'
+    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
+    c.flag 'user_id', desc: 'The ID of the user to set an expiration for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_setExpiration(options))
     end
   end
 
