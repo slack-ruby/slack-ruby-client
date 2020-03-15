@@ -18,7 +18,7 @@ module Slack
           # @option options [Object] :filetype
           #   type of file.
           # @option options [Object] :indexable_file_contents
-          #   File containing contents that can be used to improve searchability for the remote file.
+          #   A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
           # @option options [Object] :preview_image
           #   Preview of the document via multipart/form-data.
           # @see https://api.slack.com/methods/files.remote.add

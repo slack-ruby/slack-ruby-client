@@ -38,6 +38,7 @@ command 'files' do |g|
   g.long_desc %( Lists & filters team files. )
   g.command 'list' do |c|
     c.flag 'channel', desc: 'Filter files appearing in a specific channel, indicated by its ID.'
+    c.flag 'show_files_hidden_by_limit', desc: 'Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.'
     c.flag 'ts_from', desc: 'Filter files created after this timestamp (inclusive).'
     c.flag 'ts_to', desc: 'Filter files created before this timestamp (inclusive).'
     c.flag 'types', desc: 'Filter files by type (see below). You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.'

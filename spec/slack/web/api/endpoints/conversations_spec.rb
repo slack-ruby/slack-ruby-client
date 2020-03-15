@@ -63,7 +63,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
   end
   context 'conversations_rename' do
     it 'requires channel' do
-      expect { client.conversations_rename(name: ' ') }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.conversations_rename(name: '') }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires name' do
       expect { client.conversations_rename(channel: 'C1234567890') }.to raise_error ArgumentError, /Required arguments :name missing/

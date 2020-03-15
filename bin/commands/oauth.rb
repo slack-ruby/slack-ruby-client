@@ -10,7 +10,7 @@ command 'oauth' do |g|
     c.flag 'client_secret', desc: 'Issued when you created your application.'
     c.flag 'code', desc: 'The code param returned via the OAuth callback.'
     c.flag 'redirect_uri', desc: 'This must match the originally submitted URI (if one was sent).'
-    c.flag 'single_channel', desc: 'Request the user to add your app only to a single channel.'
+    c.flag 'single_channel', desc: 'Request the user to add your app only to a single channel. Only valid with a legacy workspace app.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.oauth_access(options))
     end

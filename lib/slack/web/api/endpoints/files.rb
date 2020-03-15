@@ -62,6 +62,8 @@ module Slack
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
+          # @option options [Object] :show_files_hidden_by_limit
+          #   Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.
           # @option options [Object] :ts_from
           #   Filter files created after this timestamp (inclusive).
           # @option options [Object] :ts_to

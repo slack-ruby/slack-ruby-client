@@ -61,7 +61,7 @@ command 'chat' do |g|
   g.command 'postEphemeral' do |c|
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.'
-    c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead."
+    c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
     c.flag 'user', desc: 'id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.'
     c.flag 'as_user', desc: 'Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.'
     c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
@@ -80,12 +80,12 @@ command 'chat' do |g|
   g.long_desc %( Sends a message to a channel. )
   g.command 'postMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
-    c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation."
-    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.'
+    c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
+    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below. This argument may not be used with newer bot tokens.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
-    c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
-    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
+    c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below. This argument may not be used with newer bot tokens.'
+    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below. This argument may not be used with newer bot tokens.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
     c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
@@ -104,12 +104,12 @@ command 'chat' do |g|
   g.command 'scheduleMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
     c.flag 'post_at', desc: 'Unix EPOCH timestamp of time in future to send the message.'
-    c.flag 'text', desc: "Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation."
-    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.'
+    c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
+    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See chat.postMessage.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
-    c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
+    c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See chat.postMessage.'
     c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
     c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
     c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'

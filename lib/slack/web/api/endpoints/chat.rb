@@ -99,7 +99,7 @@ module Slack
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
           # @option options [Object] :text
-          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead.
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [user] :user
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
           # @option options [Object] :as_user
@@ -146,17 +146,17 @@ module Slack
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [Object] :text
-          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation.
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [Object] :as_user
-          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
+          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below. This argument may not be used with newer bot tokens.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [Object] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :icon_emoji
-          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below. This argument may not be used with newer bot tokens.
           # @option options [Object] :icon_url
-          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below. This argument may not be used with newer bot tokens.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :mrkdwn
@@ -201,9 +201,9 @@ module Slack
           # @option options [Object] :post_at
           #   Unix EPOCH timestamp of time in future to send the message.
           # @option options [Object] :text
-          #   Text of the message to send. See below for an explanation of formatting. This field is usually required, unless you're providing only attachments instead. Provide no more than 40,000 characters or risk truncation.
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [Object] :as_user
-          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
+          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See chat.postMessage.
           # @option options [Object] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [Object] :blocks
@@ -211,7 +211,7 @@ module Slack
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :parse
-          #   Change how messages are treated. Defaults to none. See below.
+          #   Change how messages are treated. Defaults to none. See chat.postMessage.
           # @option options [Object] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
           # @option options [Object] :thread_ts

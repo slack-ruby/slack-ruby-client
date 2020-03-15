@@ -13,6 +13,8 @@ module Slack
           #   The ID (T1234) of the workspace.
           # @option options [Object] :user_id
           #   The ID of the user to add to the workspace.
+          # @option options [Object] :channel_ids
+          #   Comma separated values of channel IDs to add user in the new workspace.
           # @option options [Object] :is_restricted
           #   True if user should be added to the workspace as a guest.
           # @option options [Object] :is_ultra_restricted
@@ -56,6 +58,28 @@ module Slack
           end
 
           #
+          # List users on a workspace
+          #
+          # @option options [Object] :team_id
+          #   The ID (T1234) of the workspace.
+          # @option options [Object] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
+          # @option options [Object] :limit
+          #   Limit for how many users to be retrieved per page.
+          # @see https://api.slack.com/methods/admin.users.list
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.list.json
+          def admin_users_list(options = {})
+            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            if block_given?
+              Pagination::Cursor.new(self, :admin_users_list, options).each do |page|
+                yield page
+              end
+            else
+              post('admin.users.list', options)
+            end
+          end
+
+          #
           # Remove a user from a workspace.
           #
           # @option options [Object] :team_id
@@ -83,6 +107,24 @@ module Slack
             throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
             throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
             post('admin.users.setAdmin', options)
+          end
+
+          #
+          # Set an expiration for a guest user
+          #
+          # @option options [Object] :expiration_ts
+          #   Timestamp when guest account should be disabled.
+          # @option options [Object] :team_id
+          #   The ID (T1234) of the workspace.
+          # @option options [Object] :user_id
+          #   The ID of the user to set an expiration for.
+          # @see https://api.slack.com/methods/admin.users.setExpiration
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setExpiration.json
+          def admin_users_setExpiration(options = {})
+            throw ArgumentError.new('Required arguments :expiration_ts missing') if options[:expiration_ts].nil?
+            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            post('admin.users.setExpiration', options)
           end
 
           #

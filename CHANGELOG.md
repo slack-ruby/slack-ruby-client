@@ -1,16 +1,17 @@
 ### 0.14.6 (Next)
 
-* [#305](https://github.com/slack-ruby/slack-ruby-client/pull/305): Added `admin.inviteRequests.approve`, `admin.inviteRequests.deny`, `admin.inviteRequests.list`, `admin.inviteRequests.approved.list`, `admin.inviteRequests.denied.list`, `admin.teams.create`, `admin.teams.list`, `admin.teams.admins.list`, `admin.teams.owners.list`, `admin.teams.settings`, `admin.teams.settings.setIcon`, `admin.teams.settings.setName`, `admin.teams.settings.setDescription`, `admin.users.assign`, `admin.users.invite`, `admin.users.remove`, `admin.users.setAdmin`, `admin.users.setOwner` and `admin.users.setRegular` endpoints - [@manuelmeurer](https://github.com/manuelmeurer).
+* [#305](https://github.com/slack-ruby/slack-ruby-client/pull/305): Added `admin_inviteRequests_approve`, `admin_inviteRequests_deny`, `admin_inviteRequests_list`, `admin_inviteRequests_approved_list`, `admin_inviteRequests_denied_list`, `admin_teams_create`, `admin_teams_list`, `admin_teams_admins_list`, `admin_teams_owners_list`, `admin_teams_settings`, `admin_teams_settings_setIcon`, `admin_teams_settings_setName`, `admin_teams_settings_setDescription`, `admin_users_assign`, `admin_users_invite`, `admin_users_remove`, `admin_users_setAdmin`, `admin_users_setOwner` and `admin_users_setRegular` endpoints - [@manuelmeurer](https://github.com/manuelmeurer).
 * [#311](https://github.com/slack-ruby/slack-ruby-client/pull/311): Made Web API `response_metadata` more accessible in errors - [@jmanian](https://github.com/jmanian).
 * [#312](https://github.com/slack-ruby/slack-ruby-client/pull/312): Added specific error classes for Web API - [@jmanian](https://github.com/jmanian).
+* [#313](https://github.com/slack-ruby/slack-ruby-client/pull/313): Added `admin_teams_settings_info`, `admin_users_list`, `admin_users_setExpiration`, `admin_apps_approved_list`, `admin_apps_restricted_list`, `admin_conversations_setTeams`, `admin_emoji_add`, `admin_emoji_addAlias`, `admin_emoji_list`, `admin_emoji_remove` and `admin_emoji_rename` endpoints - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.14.5 (2019/12/23)
 
 * [#293](https://github.com/slack-ruby/slack-ruby-client/pull/293): Rubocop auto-correct and comprehensive todo - [@jcraigk](https://github.com/jcraigk).
 * [#297](https://github.com/slack-ruby/slack-ruby-client/pull/297): Various Rubocop fixes - [@jcraigk](https://github.com/jcraigk).
-* [#298](https://github.com/slack-ruby/slack-ruby-client/pull/298): Added `admin.apps`, `admin.app.requests` and `views` endpoints - [@jmanian](https://github.com/jmanian).
-* [#303](https://github.com/slack-ruby/slack-ruby-client/pull/303): Added `oauth.v2.access` and `views.publish` endpoints - [@jwright](https://github.com/jwright).
+* [#298](https://github.com/slack-ruby/slack-ruby-client/pull/298): Added `admin_apps`, `admin_app_requests` and `views` endpoints - [@jmanian](https://github.com/jmanian).
+* [#303](https://github.com/slack-ruby/slack-ruby-client/pull/303): Added `oauth_v2_access` and `views_publish` endpoints - [@jwright](https://github.com/jwright).
 * [#309](https://github.com/slack-ruby/slack-ruby-client/pull/309): Stop ping on `inactive_account` and `invalid_auth` - [@dblock](https://github.com/dblock).
 
 ### 0.14.4 (2019/7/28)

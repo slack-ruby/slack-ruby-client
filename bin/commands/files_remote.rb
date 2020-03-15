@@ -10,7 +10,7 @@ command 'files_remote' do |g|
     c.flag 'external_url', desc: 'URL of the remote file.'
     c.flag 'title', desc: 'Title of the file being shared.'
     c.flag 'filetype', desc: 'type of file.'
-    c.flag 'indexable_file_contents', desc: 'File containing contents that can be used to improve searchability for the remote file.'
+    c.flag 'indexable_file_contents', desc: 'A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.'
     c.flag 'preview_image', desc: 'Preview of the document via multipart/form-data.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_remote_add(options))
