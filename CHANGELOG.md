@@ -1,3 +1,7 @@
+### 0.14.7 (Next)
+
+* Your contribution here.
+
 ### 0.14.6 (2020/3/28)
 
 * [#305](https://github.com/slack-ruby/slack-ruby-client/pull/305): Added `admin_inviteRequests_approve`, `admin_inviteRequests_deny`, `admin_inviteRequests_list`, `admin_inviteRequests_approved_list`, `admin_inviteRequests_denied_list`, `admin_teams_create`, `admin_teams_list`, `admin_teams_admins_list`, `admin_teams_owners_list`, `admin_teams_settings`, `admin_teams_settings_setIcon`, `admin_teams_settings_setName`, `admin_teams_settings_setDescription`, `admin_users_assign`, `admin_users_invite`, `admin_users_remove`, `admin_users_setAdmin`, `admin_users_setOwner` and `admin_users_setRegular` endpoints - [@manuelmeurer](https://github.com/manuelmeurer).
