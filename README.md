@@ -31,6 +31,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
       - [Other](#other)
     - [Web Client Options](#web-client-options)
     - [Pagination Support](#pagination-support)
+    - [Character Encoding](#character-encoding)
     - [Error Handling](#error-handling)
       - [Slack Errors](#slack-errors)
       - [Rate Limiting](#rate-limiting)
@@ -274,6 +275,24 @@ client.users_list(presence: true, limit: 10, sleep_interval: 5, max_retries: 20)
   all_members.concat(response.members)
 end
 all_members # many thousands of team members retrieved 10 at a time
+```
+
+#### Character Encoding
+
+Note that Slack expects `text` to be UTF-8 encoded. If your messages appear with text such as `BAD+11` in Slack, check `text.encoding` and `.encode(Encoding::UTF_8)` your messages before sending them to Slack.
+
+```ruby
+text = 'characters such as "Ñ", "Á", "É"'
+text.encoding
+=> #<Encoding:UTF-8>
+client.chat_postMessage(channel: '#general', text: text, as_user: true)
+# renders 'characters such as "Ñ", "Á", "É"' in Slack
+
+text = text.encode(Encoding::ISO_8859_1)
+text.encoding
+# => #<Encoding:ISO-8859-1>
+client.chat_postMessage(channel: '#general', text: text, as_user: true)
+# renders 'characters such as "BAD+11", "", "BAD+9"' in Slack
 ```
 
 #### Error Handling
