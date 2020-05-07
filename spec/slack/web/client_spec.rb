@@ -205,5 +205,16 @@ RSpec.describe Slack::Web::Client do
         client.users_admin_setInactive(user: 'U092BDCLV')
       end
     end
+
+    context 'persistent capability' do
+      describe '#initialize' do
+        it 'caches the Faraday connection to allow persistent adapters' do
+          first = client.send(:connection)
+          second = client.send(:connection)
+
+          expect(first).to equal second
+        end
+      end
+    end
   end
 end
