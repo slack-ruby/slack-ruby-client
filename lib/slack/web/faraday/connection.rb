@@ -19,7 +19,7 @@ module Slack
           request_options[:open_timeout] = open_timeout if open_timeout
           options[:request] = request_options if request_options.any?
 
-          ::Faraday::Connection.new(endpoint, options) do |connection|
+          @connection ||= ::Faraday::Connection.new(endpoint, options) do |connection|
             connection.use ::Faraday::Request::Multipart
             connection.use ::Faraday::Request::UrlEncoded
             connection.use ::Faraday::Response::RaiseError
