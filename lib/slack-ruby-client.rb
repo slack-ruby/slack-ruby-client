@@ -15,12 +15,12 @@ require 'json'
 require 'logger'
 begin
   require 'picky'
-rescue LoadError # rubocop:disable Lint/HandleExceptions
+rescue LoadError # rubocop:disable Lint/SuppressedException
   # ignore, only used in users_search
 end
 begin
   require 'openssl'
-rescue LoadError # rubocop:disable Lint/HandleExceptions
+rescue LoadError # rubocop:disable Lint/SuppressedException
   # Used in slack/web/config
 end
 require_relative 'slack/web/config'
