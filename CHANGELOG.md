@@ -1,5 +1,7 @@
-### 0.14.7 (Next)
+### 0.15.0 (Next)
 
+* [#323](https://github.com/slack-ruby/slack-ruby-client/pull/322): Require Faraday >= 1.0 - [@dblock](https://github.com/dblock).
+* [#323](https://github.com/slack-ruby/slack-ruby-client/pull/322): Upgrade slack-ruby-danger to 0.2.0 - [@dblock](https://github.com/dblock).
 * [#322](https://github.com/slack-ruby/slack-ruby-client/pull/322): Cache `Faraday::Connection` for persistent adapters - [@drbrain](https://github.com/drbrain).
 * Your contribution here.
 

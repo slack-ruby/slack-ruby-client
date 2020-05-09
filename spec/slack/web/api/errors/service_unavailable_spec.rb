@@ -8,8 +8,8 @@ RSpec.describe Slack::Web::Client do
      vcr: { cassette_name: 'web/503_error' } do
     begin
       client.auth_test
-      raise 'Expected to receive Faraday::ClientError.'
-    rescue Faraday::ClientError => e
+      raise 'Expected to receive Faraday::ServerError.'
+    rescue Faraday::ServerError => e
       expect(e.response).not_to be_nil
       expect(e.response[:status]).to eq 503
     end
