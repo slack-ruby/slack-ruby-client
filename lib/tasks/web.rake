@@ -2,14 +2,15 @@
 # largely from https://github.com/aki017/slack-ruby-gem
 require 'json-schema'
 require 'erubis'
-require 'active_support'
-require 'active_support/core_ext'
 
 namespace :slack do
   namespace :web do
     namespace :api do
       desc 'Update Web API.'
       task update: [:git_update] do
+        require 'active_support'
+        require 'active_support/core_ext'
+
         group_schema = JSON.parse(File.read('lib/slack/web/api/schema/group.json'))
         dirglob = 'lib/slack/web/api/slack-api-ref/groups/**/*.json'
         groups = Dir.glob(dirglob).each_with_object({}) do |path, result|
