@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/slack-ruby/slack-ruby-client'
   s.licenses = ['MIT']
   s.summary = 'Slack Web and RealTime API client.'
-  s.add_dependency 'activesupport'
   s.add_dependency 'faraday', '>= 1.0'
   s.add_dependency 'faraday_middleware'
   s.add_dependency 'gli'

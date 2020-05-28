@@ -37,8 +37,6 @@ require_relative 'slack/web/pagination/cursor'
 require_relative 'slack/web/client'
 
 # RealTime API
-require 'active_support'
-require 'active_support/core_ext'
 require_relative 'slack/real_time/concurrency'
 require_relative 'slack/real_time/socket'
 require_relative 'slack/real_time/api/message_id'
