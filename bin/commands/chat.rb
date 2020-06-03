@@ -137,13 +137,13 @@ command 'chat' do |g|
   g.long_desc %( Updates a message. )
   g.command 'update' do |c|
     c.flag 'channel', desc: 'Channel containing the message to be updated.'
-    c.flag 'text', desc: "New text for the message, using the default formatting rules. It's not required when presenting attachments."
     c.flag 'ts', desc: 'Timestamp of the message to be updated.'
     c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
-    c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.'
-    c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
-    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. See below.'
-    c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.'
+    c.flag 'attachments', desc: "A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field."
+    c.flag 'blocks', desc: "A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field."
+    c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.'
+    c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.'
+    c.flag 'text', desc: "New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments."
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_update(options))
     end
