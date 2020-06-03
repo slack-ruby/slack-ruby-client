@@ -121,22 +121,11 @@ module Slack
           # @see https://api.slack.com/methods/chat.postEphemeral
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
+            throw ArgumentError.new('Required arguments :attachments missing') if options[:attachments].nil?
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
+            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            # attachments must be passed as an encoded JSON string
-            if options.key?(:attachments)
-              attachments = options[:attachments]
-              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
-              options = options.merge(attachments: attachments)
-            end
-            # blocks must be passed as an encoded JSON string
-            if options.key?(:blocks)
-              blocks = options[:blocks]
-              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
-              options = options.merge(blocks: blocks)
-            end
             post('chat.postEphemeral', options)
           end
 
@@ -177,19 +166,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
-            # attachments must be passed as an encoded JSON string
-            if options.key?(:attachments)
-              attachments = options[:attachments]
-              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
-              options = options.merge(attachments: attachments)
-            end
-            # blocks must be passed as an encoded JSON string
-            if options.key?(:blocks)
-              blocks = options[:blocks]
-              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
-              options = options.merge(blocks: blocks)
-            end
+            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
             post('chat.postMessage', options)
           end
 
@@ -259,39 +236,26 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel containing the message to be updated.
-          # @option options [Object] :text
-          #   New text for the message, using the default formatting rules. It's not required when presenting attachments.
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
           # @option options [Object] :as_user
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
           # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field.
           # @option options [Object] :blocks
-          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field.
           # @option options [Object] :link_names
-          #   Find and link channel names and usernames. Defaults to none. See below.
+          #   Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.
           # @option options [Object] :parse
-          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
+          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.
+          # @option options [Object] :text
+          #   New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
-            # attachments must be passed as an encoded JSON string
-            if options.key?(:attachments)
-              attachments = options[:attachments]
-              attachments = JSON.dump(attachments) unless attachments.is_a?(String)
-              options = options.merge(attachments: attachments)
-            end
-            # blocks must be passed as an encoded JSON string
-            if options.key?(:blocks)
-              blocks = options[:blocks]
-              blocks = JSON.dump(blocks) unless blocks.is_a?(String)
-              options = options.merge(blocks: blocks)
-            end
             post('chat.update', options)
           end
         end
