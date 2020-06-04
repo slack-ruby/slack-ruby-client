@@ -75,13 +75,31 @@ rake slack:api:update
 
 Sometimes it's necessary to patch auto-generated Slack Web API methods. For example, we want to help clients with calling `to_json` on the `attachments` parameter sent to `chat_postMessage`. See [#20](https://github.com/slack-ruby/slack-ruby-client/issues/20).
 
-Make a change to a generated file, for example `lib/slack/web/api/endpoints/chat.rb` and generate a patch.
+The broad steps are:
+1. Run `rake slack:api:update` to check that existing patches are still valid.
+    - If you run into a `failed to apply patch` error, the auto-generated methods likely drifted from the last patch. Follow the steps [below](#resolving-patch-errors).
+    - This may add new methods if the API has updated, please split them up into multiple PRs if so.
+2. Make a change to a generated file, for example `lib/slack/web/api/endpoints/chat.rb`.
+3. Generate a patch:
+    ```
+    git diff --no-color HEAD lib/slack/web/api/endpoints/chat.rb > lib/slack/web/api/patches/chat.1.patch
+    ```
+4. Run `rake slack:api:update` to ensure that the patch is cleanly applied. Implement a test for the added or modified functionality and commit the patch file.
 
-```
-git diff --no-color HEAD lib/slack/web/api/endpoints/chat.rb > lib/slack/web/api/patches/chat.1.patch
-```
+##### Resolving Patch Errors
 
-Run `rake slack:api:update` to ensure that the patch is cleanly applied. Implement a test for the added or modified functionality and commit the patch file.
+The auto-generated method files may drift overtime e.g. new arguments may be added or descriptions changed. Since previous patches were based on the older auto-generated files, git may be unable to apply them to the new files. Resolving them requires some good ol' splicing:
+1. Comment out the patching code in `lib/tasks/web.rake`:
+    ```ruby
+    # Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
+    #   puts "- patching #{patch}"
+    #   system("git apply #{patch}") || raise('failed to apply patch')
+    # end
+    ```
+2. Run `rake slack:api:update` to create the raw auto-generated files. Commit the files that you are updating, so we can run `git diff` later.
+3. Go through the old patches for the files (e.g. in `lib/slack/web/api/patches/chat.1.patch`), copying code into the new files.
+4. Continue with Step 2 [above](#patching-slack-web-api).
+
 
 ### Write Documentation
 
