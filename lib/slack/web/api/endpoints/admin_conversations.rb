@@ -14,7 +14,7 @@ module Slack
           # @option options [Object] :org_channel
           #   True if channel has to be converted to an org channel.
           # @option options [Object] :target_team_ids
-          #   A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.
+          #   The list of workspaces to which the channel should be shared. Not required if the channel is being shared orgwide. Example: ['T1234', 'T5678'].
           # @option options [Object] :team_id
           #   The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.
           # @see https://api.slack.com/methods/admin.conversations.setTeams

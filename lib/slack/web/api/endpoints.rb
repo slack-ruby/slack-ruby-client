@@ -14,7 +14,6 @@ require_relative 'endpoints/admin_teams'
 require_relative 'endpoints/admin_teams_admins'
 require_relative 'endpoints/admin_teams_owners'
 require_relative 'endpoints/admin_teams_settings'
-require_relative 'endpoints/admin_usergroups'
 require_relative 'endpoints/admin_users'
 require_relative 'endpoints/admin_users_session'
 require_relative 'endpoints/api'
@@ -25,8 +24,6 @@ require_relative 'endpoints/apps_permissions_scopes'
 require_relative 'endpoints/apps_permissions_users'
 require_relative 'endpoints/auth'
 require_relative 'endpoints/bots'
-require_relative 'endpoints/calls'
-require_relative 'endpoints/calls_participants'
 require_relative 'endpoints/channels'
 require_relative 'endpoints/chat'
 require_relative 'endpoints/chat_scheduledMessages'
@@ -80,7 +77,6 @@ module Slack
         include AdminTeamsAdmins
         include AdminTeamsOwners
         include AdminTeamsSettings
-        include AdminUsergroups
         include AdminUsers
         include AdminUsersSession
         include Api
@@ -91,8 +87,6 @@ module Slack
         include AppsPermissionsUsers
         include Auth
         include Bots
-        include Calls
-        include CallsParticipants
         include Channels
         include Chat
         include ChatScheduledmessages
