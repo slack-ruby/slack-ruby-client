@@ -160,10 +160,6 @@ module Slack
         end
       end
 
-      def reconnected?
-        @reconnected ||= false
-      end
-
       protected
 
       def restart_async
@@ -174,7 +170,6 @@ module Slack
         @url = data.url
         @store = @store_class.new(data) if @store_class
         @socket.restart_async(self, @url)
-        @reconnected = true
       end
 
       # @return [Slack::RealTime::Socket]

@@ -186,25 +186,13 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
           expect(socket).to receive(:send_data).with('{"type":"ping","id":1}')
           client.run_ping!
         end
-        context 'websocket has been idle for too long' do
-          before do
-            allow(socket).to receive(:time_since_last_message).and_return(75)
-            allow(socket).to receive(:connected?).and_return(true)
-            allow(socket).to receive(:close)
-            allow(socket).to receive(:restart_async)
-          end
-
-          it 'reconnects' do
-            expect(socket).to receive(:close)
-            expect(socket).to receive(:restart_async)
-            client.run_ping!
-          end
-          it 'records the reconnect' do
-            client.run_ping!
-            expect(client.reconnected?).to eq(true)
-          end
+        it 'reconnects the websocket if it has been idle for too long' do
+          allow(socket).to receive(:time_since_last_message).and_return(75)
+          allow(socket).to receive(:connected?).and_return(true)
+          expect(socket).to receive(:close)
+          expect(socket).to receive(:restart_async)
+          client.run_ping!
         end
-
         [
           EOFError,
           Errno::ECONNRESET,
@@ -301,9 +289,6 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
       end
       it 'remembers socket' do
         expect(client.instance_variable_get('@socket')).to eq socket
-      end
-      it 'initializes #reconnected? as false' do
-        expect(client.reconnected?).to eq false
       end
       it 'cannot be invoked twice' do
         expect do
