@@ -259,20 +259,20 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel containing the message to be updated.
-          # @option options [Object] :text
-          #   New text for the message, using the default formatting rules. It's not required when presenting attachments.
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
           # @option options [Object] :as_user
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
           # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text.
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field.
           # @option options [Object] :blocks
-          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field.
           # @option options [Object] :link_names
-          #   Find and link channel names and usernames. Defaults to none. See below.
+          #   Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.
           # @option options [Object] :parse
-          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. See below.
+          #   Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.
+          # @option options [Object] :text
+          #   New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
