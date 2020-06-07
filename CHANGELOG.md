@@ -1,6 +1,6 @@
 ### 0.15.0 (Next)
 
-* [#326](https://github.com/slack-ruby/slack-ruby-client/pull/326): Update new methods - [@wasabigeek](https://github.com/wasabigeek).
+* [#327](https://github.com/slack-ruby/slack-ruby-client/pull/327), [#326](https://github.com/slack-ruby/slack-ruby-client/pull/326): Update new methods - [@wasabigeek](https://github.com/wasabigeek).
 * [#324](https://github.com/slack-ruby/slack-ruby-client/pull/324): Require Faraday >= 1.0 - [@dblock](https://github.com/dblock).
 * [#324](https://github.com/slack-ruby/slack-ruby-client/pull/324): Upgrade slack-ruby-danger, rubocop, rubocop-rspec and rubocop-performance - [@dblock](https://github.com/dblock).
 * [#322](https://github.com/slack-ruby/slack-ruby-client/pull/322): Cache `Faraday::Connection` for persistent adapters - [@drbrain](https://github.com/drbrain).
