@@ -14,10 +14,6 @@ gem 'activesupport'
 
 See [#325](https://github.com/slack-ruby/slack-ruby-client/pull/325) for more information.
 
-```
-gem 'async-websocket', '~> 0.8.0'
-```
-
 ### Upgrading to >= 0.14.0
 
 If you are using async-websocket, lock down its version to 0.8.0 as newer versions are currently incompatible.
