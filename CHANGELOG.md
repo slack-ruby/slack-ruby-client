@@ -2,9 +2,10 @@
 
 * [#325](https://github.com/slack-ruby/slack-ruby-client/pull/325): Remove activesupport dependency - [@ianks](https://github.com/ianks).
 * [#326](https://github.com/slack-ruby/slack-ruby-client/pull/326): Update new methods - [@wasabigeek](https://github.com/wasabigeek).
+* [#322](https://github.com/slack-ruby/slack-ruby-client/pull/322): Cache `Faraday::Connection` for persistent adapters - [@drbrain](https://github.com/drbrain).
 * [#324](https://github.com/slack-ruby/slack-ruby-client/pull/324): Require Faraday >= 1.0 - [@dblock](https://github.com/dblock).
 * [#324](https://github.com/slack-ruby/slack-ruby-client/pull/324): Upgrade slack-ruby-danger, rubocop, rubocop-rspec and rubocop-performance - [@dblock](https://github.com/dblock).
-* [#322](https://github.com/slack-ruby/slack-ruby-client/pull/322): Cache `Faraday::Connection` for persistent adapters - [@drbrain](https://github.com/drbrain).
+* [#327](https://github.com/slack-ruby/slack-ruby-client/pull/327), [#326](https://github.com/slack-ruby/slack-ruby-client/pull/326): Added `admin_conversations_whitelist`, `admin_usergroups`, `calls` and `calls_participants` endpoints  - [@wasabigeek](https://github.com/wasabigeek).
 * Your contribution here.
 
 ### 0.14.6 (2020/3/28)
