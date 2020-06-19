@@ -48,6 +48,9 @@ module Slack
 <% if data['undocumented'] %>
             logger.warn('The <%= group %>.<%= name %> method is undocumented.')
 <% end %>
+<% if data['deprecated'] %>
+            logger.warn('The <%= group %>.<%= name %> method is/will be deprecated.')
+<% end %>
 <% if data['args'].keys.include?('cursor') %>
             if block_given?
               Pagination::Cursor.new(self, :<%= group.gsub(".", "_") %>_<%= name %>, options).each do |page|

@@ -16,6 +16,7 @@ module Slack
           def channels_archive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.archive method is/will be deprecated.')
             post('channels.archive', options)
           end
 
@@ -30,6 +31,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.create.json
           def channels_create(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            logger.warn('The channels.create method is/will be deprecated.')
             post('channels.create', options)
           end
 
@@ -64,6 +66,7 @@ module Slack
           def channels_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.history method is/will be deprecated.')
             post('channels.history', options)
           end
 
@@ -79,6 +82,7 @@ module Slack
           def channels_info(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.info method is/will be deprecated.')
             post('channels.info', options)
           end
 
@@ -96,6 +100,7 @@ module Slack
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            logger.warn('The channels.invite method is/will be deprecated.')
             post('channels.invite', options)
           end
 
@@ -110,6 +115,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.join.json
           def channels_join(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            logger.warn('The channels.join method is/will be deprecated.')
             post('channels.join', options)
           end
 
@@ -127,6 +133,7 @@ module Slack
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            logger.warn('The channels.kick method is/will be deprecated.')
             post('channels.kick', options)
           end
 
@@ -140,6 +147,7 @@ module Slack
           def channels_leave(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.leave method is/will be deprecated.')
             post('channels.leave', options)
           end
 
@@ -157,6 +165,7 @@ module Slack
           # @see https://api.slack.com/methods/channels.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.list.json
           def channels_list(options = {})
+            logger.warn('The channels.list method is/will be deprecated.')
             if block_given?
               Pagination::Cursor.new(self, :channels_list, options).each do |page|
                 yield page
@@ -179,6 +188,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.mark method is/will be deprecated.')
             post('channels.mark', options)
           end
 
@@ -197,6 +207,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.rename method is/will be deprecated.')
             post('channels.rename', options)
           end
 
@@ -213,6 +224,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.replies method is/will be deprecated.')
             post('channels.replies', options)
           end
 
@@ -231,6 +243,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.setPurpose method is/will be deprecated.')
             post('channels.setPurpose', options)
           end
 
@@ -247,6 +260,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.setTopic method is/will be deprecated.')
             post('channels.setTopic', options)
           end
 
@@ -260,6 +274,7 @@ module Slack
           def channels_unarchive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('The channels.unarchive method is/will be deprecated.')
             post('channels.unarchive', options)
           end
         end
