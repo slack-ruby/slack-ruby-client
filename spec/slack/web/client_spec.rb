@@ -206,6 +206,17 @@ RSpec.describe Slack::Web::Client do
       end
     end
 
+    context 'calling deprecated methods' do
+      let(:client) { described_class.new }
+
+      it 'produces a warning' do
+        expect(client.logger).to receive(:warn).with(/^channels.archive: This method is deprecated./)
+
+        expect(client).to receive(:post)
+        client.channels_archive(channel: 'test')
+      end
+    end
+
     context 'persistent capability' do
       describe '#initialize' do
         it 'caches the Faraday connection to allow persistent adapters' do
