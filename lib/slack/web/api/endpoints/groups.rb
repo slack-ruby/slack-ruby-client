@@ -16,6 +16,7 @@ module Slack
           def groups_archive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.archive: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.archive.')
             post('groups.archive', options)
           end
 
@@ -30,6 +31,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.create.json
           def groups_create(options = {})
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            logger.warn('groups.create: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.create.')
             post('groups.create', options)
           end
 
@@ -43,6 +45,7 @@ module Slack
           def groups_createChild(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.createChild: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: .')
             post('groups.createChild', options)
           end
 
@@ -64,6 +67,7 @@ module Slack
           def groups_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.history: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.history.')
             post('groups.history', options)
           end
 
@@ -79,6 +83,7 @@ module Slack
           def groups_info(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.info: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.info.')
             post('groups.info', options)
           end
 
@@ -96,6 +101,7 @@ module Slack
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            logger.warn('groups.invite: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.invite.')
             post('groups.invite', options)
           end
 
@@ -113,6 +119,7 @@ module Slack
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            logger.warn('groups.kick: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.kick.')
             post('groups.kick', options)
           end
 
@@ -126,6 +133,7 @@ module Slack
           def groups_leave(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.leave: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.leave.')
             post('groups.leave', options)
           end
 
@@ -143,6 +151,7 @@ module Slack
           # @see https://api.slack.com/methods/groups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
           def groups_list(options = {})
+            logger.warn('groups.list: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.list, users.conversations.')
             if block_given?
               Pagination::Cursor.new(self, :groups_list, options).each do |page|
                 yield page
@@ -165,6 +174,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.mark: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: .')
             post('groups.mark', options)
           end
 
@@ -178,6 +188,7 @@ module Slack
           def groups_open(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.open: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: .')
             post('groups.open', options)
           end
 
@@ -196,6 +207,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.rename: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.rename.')
             post('groups.rename', options)
           end
 
@@ -212,6 +224,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.replies: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.replies.')
             post('groups.replies', options)
           end
 
@@ -228,6 +241,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.setPurpose: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.setPurpose.')
             post('groups.setPurpose', options)
           end
 
@@ -244,6 +258,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.setTopic: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.setTopic.')
             post('groups.setTopic', options)
           end
 
@@ -257,6 +272,7 @@ module Slack
           def groups_unarchive(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
+            logger.warn('groups.unarchive: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.unarchive.')
             post('groups.unarchive', options)
           end
         end

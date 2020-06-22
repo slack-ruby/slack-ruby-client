@@ -16,6 +16,7 @@ module Slack
           def im_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('im.close: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.close.')
             post('im.close', options)
           end
 
@@ -37,6 +38,7 @@ module Slack
           def im_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('im.history: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.history.')
             post('im.history', options)
           end
 
@@ -50,6 +52,7 @@ module Slack
           # @see https://api.slack.com/methods/im.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/im/im.list.json
           def im_list(options = {})
+            logger.warn('im.list: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.list, users.conversations.')
             if block_given?
               Pagination::Cursor.new(self, :im_list, options).each do |page|
                 yield page
@@ -72,6 +75,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('im.mark: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: .')
             post('im.mark', options)
           end
 
@@ -89,6 +93,7 @@ module Slack
           def im_open(options = {})
             throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            logger.warn('im.open: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.open.')
             post('im.open', options)
           end
 
@@ -105,6 +110,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
             options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            logger.warn('im.replies: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.replies.')
             post('im.replies', options)
           end
         end
