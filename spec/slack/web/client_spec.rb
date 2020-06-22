@@ -206,7 +206,7 @@ RSpec.describe Slack::Web::Client do
       end
     end
 
-    context 'calling deprecated methods' do
+    context 'when calling deprecated methods' do
       let(:client) { described_class.new }
 
       it 'produces a warning' do
