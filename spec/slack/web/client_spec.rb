@@ -210,7 +210,11 @@ RSpec.describe Slack::Web::Client do
       let(:client) { described_class.new }
 
       it 'produces a warning' do
-        expect(client.logger).to receive(:warn).with(/^channels.archive: This method is deprecated./)
+        expect(client.logger).to receive(:warn).with(/
+          ^channels\.archive:\ This\ method\ is\ deprecated
+          .+
+          Alternative\ methods:\ conversations\.archive\.
+        /x)
 
         expect(client).to receive(:post)
         client.channels_archive(channel: 'test')
