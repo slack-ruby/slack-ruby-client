@@ -20,7 +20,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Max: 250
 Metrics/LineLength:
-  Max: 100
+  Max: 128
 Style/Documentation:
   Enabled: false
 Style/ModuleFunction:

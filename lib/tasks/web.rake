@@ -2,8 +2,6 @@
 # largely from https://github.com/aki017/slack-ruby-gem
 require 'json-schema'
 require 'erubis'
-require 'active_support'
-require 'active_support/core_ext'
 
 namespace :slack do
   namespace :web do

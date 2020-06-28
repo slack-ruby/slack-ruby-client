@@ -1,6 +1,12 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.15.0
+
+As of 0.15.0, `activesupport` is no longer required. Add `gem 'activesupport'` to your Gemfile if you required ActiveSupport via this library.
+
+See [#325](https://github.com/slack-ruby/slack-ruby-client/pull/325) for more information.
+
 ### Upgrading to >= 0.14.0
 
 If you are using async-websocket, lock down its version to 0.8.0 as newer versions are currently incompatible.

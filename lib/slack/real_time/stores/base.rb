@@ -4,7 +4,9 @@ module Slack
     module Stores
       # Doesn't store anything.
       class Base
-        class_attribute :events
+        class << self
+          attr_accessor :events
+        end
 
         attr_accessor :users
         attr_accessor :bots

@@ -8,9 +8,9 @@ module Slack
       module Eventmachine
         class Client < Faye::WebSocket::Client
           def initialize(url, protocols = nil, options = {})
-            @logger =
-              options.fetch(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
-            super url, protocols, options.except(:logger)
+            options = options.dup
+            @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
+            super url, protocols, options
           end
 
           def parse(data)

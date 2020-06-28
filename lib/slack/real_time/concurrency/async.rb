@@ -114,9 +114,7 @@ module Slack
 
           def build_endpoint
             endpoint = ::Async::IO::Endpoint.tcp(addr, port)
-            if secure?
-              endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context)
-            end
+            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
             endpoint
           end
 

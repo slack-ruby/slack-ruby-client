@@ -8,9 +8,9 @@ module Slack
 
       def initialize(url, options = {})
         @url = url
-        @options = options
+        @options = options.dup
         @driver = nil
-        @logger = options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
+        @logger = @options.delete(:logger) || Slack::RealTime::Config.logger || Slack::Config.logger
         @last_message_at = nil
       end
 

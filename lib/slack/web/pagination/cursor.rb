@@ -32,14 +32,14 @@ module Slack
 
                 client.logger.debug("#{self.class}##{__method__}") { e.to_s }
                 retry_count += 1
-                sleep(e.retry_after.seconds)
+                sleep(e.retry_after)
                 next
               end
               yield response
               break unless response.response_metadata
 
               next_cursor = response.response_metadata.next_cursor
-              break if next_cursor.blank?
+              break if next_cursor.nil? || next_cursor == ''
 
               retry_count = 0
               sleep(sleep_interval) if sleep_interval
