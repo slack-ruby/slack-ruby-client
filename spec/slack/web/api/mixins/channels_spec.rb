@@ -13,7 +13,7 @@ RSpec.describe Slack::Web::Api::Mixins::Channels do
   end
 
   before do
-    allow(channels).to receive(:conversations_list).and_return(
+    allow(channels).to receive(:channels_list).and_return(
       Slack::Messages::Message.new(
         'channels' => [{
           'id' => 'CDEADBEEF',
