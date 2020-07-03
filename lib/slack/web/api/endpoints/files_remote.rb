@@ -59,7 +59,7 @@ module Slack
           # @see https://api.slack.com/methods/files.remote.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.list.json
           def files_remote_list(options = {})
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             if block_given?
               Pagination::Cursor.new(self, :files_remote_list, options).each do |page|
                 yield page

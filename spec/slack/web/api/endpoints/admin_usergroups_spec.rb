@@ -7,13 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsergroups do
   let(:client) { Slack::Web::Client.new }
   context 'admin.usergroups_addChannels' do
     it 'requires channel_ids' do
-      expect { client.admin_usergroups_addChannels(team_id: 'T00000000', usergroup_id: 'S00000000') }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
-    end
-    it 'requires team_id' do
-      expect { client.admin_usergroups_addChannels(channel_ids: 'C00000000,C00000001', usergroup_id: 'S00000000') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_usergroups_addChannels(usergroup_id: 'S00000000') }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
     end
     it 'requires usergroup_id' do
-      expect { client.admin_usergroups_addChannels(channel_ids: 'C00000000,C00000001', team_id: 'T00000000') }.to raise_error ArgumentError, /Required arguments :usergroup_id missing/
+      expect { client.admin_usergroups_addChannels(channel_ids: 'C00000000,C00000001') }.to raise_error ArgumentError, /Required arguments :usergroup_id missing/
     end
   end
   context 'admin.usergroups_addTeams' do

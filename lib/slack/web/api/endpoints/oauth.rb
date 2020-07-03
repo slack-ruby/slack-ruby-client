@@ -22,9 +22,6 @@ module Slack
           # @see https://api.slack.com/methods/oauth.access
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth/oauth.access.json
           def oauth_access(options = {})
-            throw ArgumentError.new('Required arguments :client_id missing') if options[:client_id].nil?
-            throw ArgumentError.new('Required arguments :client_secret missing') if options[:client_secret].nil?
-            throw ArgumentError.new('Required arguments :code missing') if options[:code].nil?
             post('oauth.access', options)
           end
 

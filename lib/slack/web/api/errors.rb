@@ -108,6 +108,7 @@ module Slack
         class FailedToSetDefaultChannels < SlackError; end
         class FailedToSetDescription < SlackError; end
         class FailedToSetDiscoverability < SlackError; end
+        class FailedToSetExpiration < SlackError; end
         class FailedToSetIcon < SlackError; end
         class FailedToSetName < SlackError; end
         class FailedToSetUserToAdmin < SlackError; end
@@ -135,6 +136,7 @@ module Slack
         class HashConflict < SlackError; end
         class InactiveCall < SlackError; end
         class InternalError < SlackError; end
+        class InvalidActor < SlackError; end
         class InvalidAppId < SlackError; end
         class InvalidArgName < SlackError; end
         class InvalidArguments < SlackError; end
@@ -193,6 +195,7 @@ module Slack
         class LimitRequired < SlackError; end
         class LinkNotFound < SlackError; end
         class MessageNotFound < SlackError; end
+        class MethodDeprecated < SlackError; end
         class MethodNotSupportedForChannelType < SlackError; end
         class MigrationInProgress < SlackError; end
         class MissingArgument < SlackError; end
@@ -200,6 +203,7 @@ module Slack
         class MissingDialog < SlackError; end
         class MissingDuration < SlackError; end
         class MissingPostType < SlackError; end
+        class MissingResource < SlackError; end
         class MissingScope < SlackError; end
         class MissingTrigger < SlackError; end
         class MissingTs < SlackError; end
@@ -427,6 +431,7 @@ module Slack
           'failed_to_set_default_channels' => FailedToSetDefaultChannels,
           'failed_to_set_description' => FailedToSetDescription,
           'failed_to_set_discoverability' => FailedToSetDiscoverability,
+          'failed_to_set_expiration' => FailedToSetExpiration,
           'failed_to_set_icon' => FailedToSetIcon,
           'failed_to_set_name' => FailedToSetName,
           'failed_to_set_user_to_admin' => FailedToSetUserToAdmin,
@@ -454,6 +459,7 @@ module Slack
           'hash_conflict' => HashConflict,
           'inactive_call' => InactiveCall,
           'internal_error' => InternalError,
+          'invalid_actor' => InvalidActor,
           'invalid_app_id' => InvalidAppId,
           'invalid_arg_name' => InvalidArgName,
           'invalid_arguments' => InvalidArguments,
@@ -512,6 +518,7 @@ module Slack
           'limit_required' => LimitRequired,
           'link_not_found' => LinkNotFound,
           'message_not_found' => MessageNotFound,
+          'method_deprecated' => MethodDeprecated,
           'method_not_supported_for_channel_type' => MethodNotSupportedForChannelType,
           'migration_in_progress' => MigrationInProgress,
           'missing_argument' => MissingArgument,
@@ -519,6 +526,7 @@ module Slack
           'missing_dialog' => MissingDialog,
           'missing_duration' => MissingDuration,
           'missing_post_type' => MissingPostType,
+          'missing_resource' => MissingResource,
           'missing_scope' => MissingScope,
           'missing_trigger' => MissingTrigger,
           'missing_ts' => MissingTs,

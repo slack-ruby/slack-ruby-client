@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminConversationsWhitelist
           #
-          # Add a whitelist of IDP groups for accessing a channel
+          # Add an allowlist of IDP groups for accessing a channel
           #
           # @option options [Object] :channel_id
           #   The channel to whitelist a group for.
@@ -20,6 +20,7 @@ module Slack
           def admin_conversations_whitelist_add(options = {})
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
             throw ArgumentError.new('Required arguments :group_id missing') if options[:group_id].nil?
+            logger.warn('admin.conversations.whitelist.add:  Alternative methods: .')
             post('admin.conversations.whitelist.add', options)
           end
 
@@ -34,11 +35,12 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.whitelist/admin.conversations.whitelist.listGroupsLinkedToChannel.json
           def admin_conversations_whitelist_listGroupsLinkedToChannel(options = {})
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            logger.warn('admin.conversations.whitelist.listGroupsLinkedToChannel:  Alternative methods: .')
             post('admin.conversations.whitelist.listGroupsLinkedToChannel', options)
           end
 
           #
-          # Remove a whitelisted IDP group linked to a private channel
+          # Remove an allowlisted IDP group linked to a private channel
           #
           # @option options [Object] :channel_id
           #   The channel to remove a whitelisted group for.
@@ -52,6 +54,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
             throw ArgumentError.new('Required arguments :group_id missing') if options[:group_id].nil?
             throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            logger.warn('admin.conversations.whitelist.remove:  Alternative methods: .')
             post('admin.conversations.whitelist.remove', options)
           end
         end

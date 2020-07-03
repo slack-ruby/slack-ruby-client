@@ -26,7 +26,6 @@ command 'conversations' do |g|
   g.command 'create' do |c|
     c.flag 'name', desc: 'Name of the public or private channel to create.'
     c.flag 'is_private', desc: 'Create a private channel instead of a public one.'
-    c.flag 'user_ids', desc: 'Required for workspace apps. A list of between 1 and 30 human users that will be added to the newly-created conversation. This argument has no effect when used by classic Slack apps.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.conversations_create(options))
     end

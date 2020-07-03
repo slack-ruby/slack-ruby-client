@@ -15,7 +15,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.close.json
           def mpim_close(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('mpim.close: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.close.')
             post('mpim.close', options)
           end
@@ -37,7 +37,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.history.json
           def mpim_history(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('mpim.history: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.history.')
             post('mpim.history', options)
           end
@@ -74,7 +74,7 @@ module Slack
           def mpim_mark(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('mpim.mark: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: .')
             post('mpim.mark', options)
           end
@@ -104,7 +104,7 @@ module Slack
           def mpim_replies(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :thread_ts missing') if options[:thread_ts].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('mpim.replies: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.replies.')
             post('mpim.replies', options)
           end

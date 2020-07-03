@@ -11,28 +11,27 @@ module Slack
           #
           # @option options [Object] :channel_ids
           #   Comma separated string of channel IDs.
-          # @option options [Object] :team_id
-          #   The workspace to add default channels in.
           # @option options [Object] :usergroup_id
           #   ID of the IDP group to add default channels for.
+          # @option options [Object] :team_id
+          #   The workspace to add default channels in.
           # @see https://api.slack.com/methods/admin.usergroups.addChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addChannels.json
           def admin_usergroups_addChannels(options = {})
             throw ArgumentError.new('Required arguments :channel_ids missing') if options[:channel_ids].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
             throw ArgumentError.new('Required arguments :usergroup_id missing') if options[:usergroup_id].nil?
             post('admin.usergroups.addChannels', options)
           end
 
           #
-          # Add one or more teams to the list of teams associated with an org-level usergroup.
+          # Associate one or more default workspaces with an organization-wide IDP group.
           #
           # @option options [Object] :team_ids
-          #   A comma separated list of encoded team IDs. Teams MUST belong to the organization.
+          #   A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.
           # @option options [Object] :usergroup_id
-          #   A encoded usergroup ID.
+          #   An encoded usergroup (IDP Group) ID.
           # @option options [Object] :auto_provision
-          #   A boolean to control whether to automatically create new team users for the usergroup memebrs or not.
+          #   When true, this method automatically creates new workspace accounts for the IDP group members.
           # @see https://api.slack.com/methods/admin.usergroups.addTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addTeams.json
           def admin_usergroups_addTeams(options = {})
