@@ -18,6 +18,11 @@ module Slack
           def views_open(options = {})
             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            if options.key?(:view)
+              view = options[:view]
+              view = JSON.dump(view) unless view.is_a?(String)
+              options = options.merge(view: view)
+            end
             post('views.open', options)
           end
 
@@ -35,6 +40,11 @@ module Slack
           def views_publish(options = {})
             throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            if options.key?(:view)
+              view = options[:view]
+              view = JSON.dump(view) unless view.is_a?(String)
+              options = options.merge(view: view)
+            end
             post('views.publish', options)
           end
 
@@ -50,6 +60,11 @@ module Slack
           def views_push(options = {})
             throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            if options.key?(:view)
+              view = options[:view]
+              view = JSON.dump(view) unless view.is_a?(String)
+              options = options.merge(view: view)
+            end
             post('views.push', options)
           end
 
@@ -68,6 +83,11 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.update.json
           def views_update(options = {})
             throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            if options.key?(:view)
+              view = options[:view]
+              view = JSON.dump(view) unless view.is_a?(String)
+              options = options.merge(view: view)
+            end
             post('views.update', options)
           end
         end
