@@ -6,7 +6,7 @@
 * [#327](https://github.com/slack-ruby/slack-ruby-client/pull/327), [#326](https://github.com/slack-ruby/slack-ruby-client/pull/326): Added `admin_conversations_whitelist`, `admin_usergroups`, `calls` and `calls_participants` endpoints  - [@wasabigeek](https://github.com/wasabigeek).
 * [#329](https://github.com/slack-ruby/slack-ruby-client/pull/329): Log when methods are deprecated - [@wasabigeek](https://github.com/wasabigeek).
 * [#325](https://github.com/slack-ruby/slack-ruby-client/pull/325): Remove activesupport dependency - [@ianks](https://github.com/ianks).
-* [#331](https://github.com/slack-ruby/slack-ruby-client/pull/331): Use conversations_list instead of deprecated channels_list. Added `admin_conversations_restrictAccess_addGroup`, `admin_conversations_restrictAccess_listGroups` and `admin_conversations_restrictAccess_removeGroup` endpoints. - [@wasabigeek](https://github.com/wasabigeek).
+* [#331](https://github.com/slack-ruby/slack-ruby-client/pull/331): Use `conversations_list` instead of deprecated `channels_list`. Added `admin_conversations_restrictAccess_addGroup`, `admin_conversations_restrictAccess_listGroups` and `admin_conversations_restrictAccess_removeGroup` endpoints. - [@wasabigeek](https://github.com/wasabigeek).
 * Your contribution here.
 
 ### 0.14.6 (2020/3/28)
