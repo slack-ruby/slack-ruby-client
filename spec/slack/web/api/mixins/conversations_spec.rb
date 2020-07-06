@@ -9,21 +9,19 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
   let(:klass) do
     Class.new do
       include Slack::Web::Api::Mixins::Conversations
+
+      def conversations_list
+        Slack::Messages::Message.new(
+          'channels' => [{
+            'id' => 'CDEADBEEF',
+            'name' => 'general'
+          }]
+        )
+      end
     end
   end
 
-  before do
-    allow(conversations).to receive(:conversations_list).and_return(
-      Slack::Messages::Message.new(
-        'channels' => [{
-          'id' => 'CDEADBEEF',
-          'name' => 'general'
-        }]
-      )
-    )
-  end
-
-  context '#conversations_id' do
+  describe '#conversations_id' do
     it 'leaves channels specified by ID alone' do
       expect(conversations.conversations_id(channel: 'C123456')).to(
         eq('ok' => true, 'channel' => { 'id' => 'C123456' })
