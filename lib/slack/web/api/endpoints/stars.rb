@@ -20,7 +20,7 @@ module Slack
           # @see https://api.slack.com/methods/stars.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.add.json
           def stars_add(options = {})
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('stars.add', options)
           end
 
@@ -57,7 +57,7 @@ module Slack
           # @see https://api.slack.com/methods/stars.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.remove.json
           def stars_remove(options = {})
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('stars.remove', options)
           end
         end

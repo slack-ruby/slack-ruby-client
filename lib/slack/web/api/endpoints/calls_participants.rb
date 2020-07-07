@@ -20,6 +20,21 @@ module Slack
             throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
             post('calls.participants.add', options)
           end
+
+          #
+          # Registers participants removed from a Call.
+          #
+          # @option options [Object] :id
+          #   id returned by the calls.add method.
+          # @option options [Object] :users
+          #   The list of users to remove as participants in the Call. Read more on how to specify users here.
+          # @see https://api.slack.com/methods/calls.participants.remove
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls.participants/calls.participants.remove.json
+          def calls_participants_remove(options = {})
+            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
+            throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
+            post('calls.participants.remove', options)
+          end
         end
       end
     end

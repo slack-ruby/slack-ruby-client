@@ -22,7 +22,7 @@ module Slack
           # @see https://api.slack.com/methods/chat.scheduledMessages.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat.scheduledMessages/chat.scheduledMessages.list.json
           def chat_scheduledMessages_list(options = {})
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             if block_given?
               Pagination::Cursor.new(self, :chat_scheduledMessages_list, options).each do |page|
                 yield page

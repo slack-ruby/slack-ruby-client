@@ -6,6 +6,7 @@ require_relative 'endpoints/admin_apps_approved'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
 require_relative 'endpoints/admin_conversations'
+require_relative 'endpoints/admin_conversations_restrictAccess'
 require_relative 'endpoints/admin_conversations_whitelist'
 require_relative 'endpoints/admin_emoji'
 require_relative 'endpoints/admin_inviteRequests'
@@ -64,6 +65,7 @@ module Slack
   module Web
     module Api
       module Endpoints
+        include Slack::Web::Api::Mixins::Conversations
         include Slack::Web::Api::Mixins::Channels
         include Slack::Web::Api::Mixins::Users
         include Slack::Web::Api::Mixins::Groups
@@ -73,6 +75,7 @@ module Slack
         include AdminAppsRequests
         include AdminAppsRestricted
         include AdminConversations
+        include AdminConversationsRestrictaccess
         include AdminConversationsWhitelist
         include AdminEmoji
         include AdminInviterequests

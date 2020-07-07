@@ -19,7 +19,7 @@ module Slack
           def chat_command(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :command missing') if options[:command].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('The chat.command method is undocumented.')
             post('chat.command', options)
           end
@@ -38,7 +38,7 @@ module Slack
           def chat_delete(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.delete', options)
           end
 
@@ -56,7 +56,7 @@ module Slack
           def chat_deleteScheduledMessage(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :scheduled_message_id missing') if options[:scheduled_message_id].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.deleteScheduledMessage', options)
           end
 
@@ -72,7 +72,7 @@ module Slack
           def chat_getPermalink(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :message_ts missing') if options[:message_ts].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.getPermalink', options)
           end
 
@@ -250,7 +250,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             throw ArgumentError.new('Required arguments :unfurls missing') if options[:unfurls].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.unfurl', options)
           end
 
@@ -279,7 +279,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
-            options = options.merge(channel: channels_id(options)['channel']['id']) if options[:channel]
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             # attachments must be passed as an encoded JSON string
             if options.key?(:attachments)
               attachments = options[:attachments]

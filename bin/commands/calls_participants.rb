@@ -12,4 +12,14 @@ command 'calls_participants' do |g|
       puts JSON.dump($client.calls_participants_add(options))
     end
   end
+
+  g.desc 'Registers participants removed from a Call.'
+  g.long_desc %( Registers participants removed from a Call. )
+  g.command 'remove' do |c|
+    c.flag 'id', desc: 'id returned by the calls.add method.'
+    c.flag 'users', desc: 'The list of users to remove as participants in the Call. Read more on how to specify users here.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.calls_participants_remove(options))
+    end
+  end
 end

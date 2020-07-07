@@ -7,19 +7,19 @@ command 'admin_usergroups' do |g|
   g.long_desc %( Add one or more default channels to an IDP group. )
   g.command 'addChannels' do |c|
     c.flag 'channel_ids', desc: 'Comma separated string of channel IDs.'
-    c.flag 'team_id', desc: 'The workspace to add default channels in.'
     c.flag 'usergroup_id', desc: 'ID of the IDP group to add default channels for.'
+    c.flag 'team_id', desc: 'The workspace to add default channels in.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_usergroups_addChannels(options))
     end
   end
 
-  g.desc 'Add one or more teams to the list of teams associated with an org-level usergroup.'
-  g.long_desc %( Add one or more teams to the list of teams associated with an org-level usergroup. )
+  g.desc 'Associate one or more default workspaces with an organization-wide IDP group.'
+  g.long_desc %( Associate one or more default workspaces with an organization-wide IDP group. )
   g.command 'addTeams' do |c|
-    c.flag 'team_ids', desc: 'A comma separated list of encoded team IDs. Teams MUST belong to the organization.'
-    c.flag 'usergroup_id', desc: 'A encoded usergroup ID.'
-    c.flag 'auto_provision', desc: 'A boolean to control whether to automatically create new team users for the usergroup memebrs or not.'
+    c.flag 'team_ids', desc: 'A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.'
+    c.flag 'usergroup_id', desc: 'An encoded usergroup (IDP Group) ID.'
+    c.flag 'auto_provision', desc: 'When true, this method automatically creates new workspace accounts for the IDP group members.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_usergroups_addTeams(options))
     end
