@@ -1,3 +1,7 @@
+### 0.15.1 (Next)
+
+* Your contribution here.
+
 ### 0.15.0 (2020/7/26)
 
 * [#322](https://github.com/slack-ruby/slack-ruby-client/pull/322): Cache `Faraday::Connection` for persistent adapters - [@drbrain](https://github.com/drbrain).
