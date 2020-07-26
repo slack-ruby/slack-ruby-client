@@ -1,4 +1,4 @@
-### 0.15.0 (Next)
+### 0.15.0 (2020/7/26)
 
 * [#322](https://github.com/slack-ruby/slack-ruby-client/pull/322): Cache `Faraday::Connection` for persistent adapters - [@drbrain](https://github.com/drbrain).
 * [#324](https://github.com/slack-ruby/slack-ruby-client/pull/324): Require Faraday >= 1.0 - [@dblock](https://github.com/dblock).
@@ -7,7 +7,6 @@
 * [#329](https://github.com/slack-ruby/slack-ruby-client/pull/329): Log when methods are deprecated - [@wasabigeek](https://github.com/wasabigeek).
 * [#325](https://github.com/slack-ruby/slack-ruby-client/pull/325): Remove activesupport dependency - [@ianks](https://github.com/ianks).
 * [#331](https://github.com/slack-ruby/slack-ruby-client/pull/331): Use `conversations_list` instead of deprecated `channels_list`. Added `admin_conversations_restrictAccess_addGroup`, `admin_conversations_restrictAccess_listGroups` and `admin_conversations_restrictAccess_removeGroup` endpoints - [@wasabigeek](https://github.com/wasabigeek).
-* Your contribution here.
 
 ### 0.14.6 (2020/3/28)
 

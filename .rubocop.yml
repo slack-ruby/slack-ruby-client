@@ -13,18 +13,25 @@ AllCops:
     - lib/slack/web/api/endpoints/* # Auto-generated
     - lib/slack/web/api/errors.rb # Auto-generated
     - spec/slack/web/api/endpoints/* # Auto-generated
+
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
+
 Metrics/BlockLength:
   Max: 250
+
 Metrics/ClassLength:
   Max: 250
-Metrics/LineLength:
+
+Layout/LineLength:
   Max: 128
+
 Style/Documentation:
   Enabled: false
+
 Style/ModuleFunction:
   Enabled: false
+
 Naming/FileName:
   Exclude:
     - lib/slack-ruby-client.rb # Required to match gemspec name
