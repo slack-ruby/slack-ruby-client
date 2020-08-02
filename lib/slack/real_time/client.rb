@@ -251,9 +251,11 @@ module Slack
       end
 
       def run_handlers(type, data)
-        handlers = store.class.events[type.to_s]
-        handlers&.each do |handler|
-          store.instance_exec(data, &handler)
+        if store.class.events
+          handlers = store.class.events[type.to_s]
+          handlers&.each do |handler|
+            store.instance_exec(data, &handler)
+          end
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }
