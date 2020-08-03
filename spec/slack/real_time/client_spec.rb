@@ -166,6 +166,36 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
           expect(client.store.team.name).to eq 'New Team Name Inc.'
         end
       end
+
+      context 'subclassed' do
+        it 'runs event handlers' do
+          event = Slack::RealTime::Event.new(
+            'type' => 'team_rename',
+            'name' => 'New Team Name Inc.'
+          )
+          client.send(:dispatch, event)
+          expect(client.store.team.name).to eq 'New Team Name Inc.'
+        end
+      end
+
+      describe '#run_handlers' do
+        describe 'empty events' do
+          before do
+            client.store.class.events = []
+          end
+
+          it 'returns false when event is []' do
+            expect(client.send(:run_handlers, "example", {})).to be false
+          end
+        end
+
+        describe 'unknown events' do
+          it 'returns false when unknown event' do
+            expect(client.send(:run_handlers, "unknown", {})).to be false
+          end
+        end
+      end
+
     end
 
     describe '#start_async' do
