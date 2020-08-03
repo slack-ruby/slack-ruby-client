@@ -1,7 +1,7 @@
 ### 0.15.1 (Next)
 
 * Your contribution here.
-* [#336](https://github.com/slack-ruby/slack-ruby-client/pull/336): Don't allways fill events - [@pyama86](https://github.com/pyama86).
+* [#336](https://github.com/slack-ruby/slack-ruby-client/pull/336): Fix: handle nil events - [@pyama86](https://github.com/pyama86).
 
 ### 0.15.0 (2020/7/26)
 
