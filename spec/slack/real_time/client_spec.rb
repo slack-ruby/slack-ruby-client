@@ -185,17 +185,16 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
           end
 
           it 'returns false when event is []' do
-            expect(client.send(:run_handlers, "example", {})).to be false
+            expect(client.send(:run_handlers, 'example', {})).to be false
           end
         end
 
         describe 'unknown events' do
           it 'returns false when unknown event' do
-            expect(client.send(:run_handlers, "unknown", {})).to be false
+            expect(client.send(:run_handlers, 'unknown', {})).to be false
           end
         end
       end
-
     end
 
     describe '#start_async' do

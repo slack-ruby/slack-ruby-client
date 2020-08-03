@@ -252,8 +252,10 @@ module Slack
 
       def run_handlers(type, data)
         return unless store.class.events
+
         handlers = store.class.events[type.to_s]
         return unless handlers
+
         handlers&.each do |handler|
           store.instance_exec(data, &handler)
         end
