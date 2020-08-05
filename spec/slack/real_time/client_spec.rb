@@ -170,17 +170,16 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
       describe '#run_handlers' do
         describe 'empty events' do
           before do
-            client.store.class.events = []
+            @e = client.store.class.events
+            client.store.class.events = nil
           end
 
-          it 'returns false when event is []' do
-            expect(client.send(:run_handlers, 'example', {})).to be false
+          after do
+            client.store.class.events = @e
           end
-        end
 
-        describe 'unknown events' do
-          it 'returns false when unknown event' do
-            expect(client.send(:run_handlers, 'unknown', {})).to be false
+          it 'returns false when event is nil' do
+            expect(client.send(:run_handlers, 'example', {})).to be nil
           end
         end
       end
