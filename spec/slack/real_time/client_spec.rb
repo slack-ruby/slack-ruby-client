@@ -166,6 +166,23 @@ RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
           expect(client.store.team.name).to eq 'New Team Name Inc.'
         end
       end
+
+      describe '#run_handlers' do
+        describe 'empty events' do
+          before do
+            @e = client.store.class.events
+            client.store.class.events = nil
+          end
+
+          after do
+            client.store.class.events = @e
+          end
+
+          it 'returns false when event is nil' do
+            expect(client.send(:run_handlers, 'example', {})).to be nil
+          end
+        end
+      end
     end
 
     describe '#start_async' do
