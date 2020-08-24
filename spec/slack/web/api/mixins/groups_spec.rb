@@ -13,7 +13,7 @@ RSpec.describe Slack::Web::Api::Mixins::Groups do
   end
 
   before do
-    allow(groups).to receive(:groups_list).and_return(
+    allow(groups).to receive(:groups_list).and_yield(
       Slack::Messages::Message.new(
         'groups' => [{
           'id' => 'CDEADBEEF',

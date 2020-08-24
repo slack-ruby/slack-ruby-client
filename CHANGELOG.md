@@ -1,7 +1,8 @@
 ### 0.15.1 (Next)
 
-* Your contribution here.
 * [#336](https://github.com/slack-ruby/slack-ruby-client/pull/336): Fix: handle nil events - [@pyama86](https://github.com/pyama86).
+* [#339](https://github.com/slack-ruby/slack-ruby-client/pull/339): Fix: `channel_not_found` resolving channel IDs with 100+ channels - [@dblock](https://github.com/dblock).
+* Your contribution here.
 
 ### 0.15.0 (2020/7/26)
 

@@ -9,16 +9,18 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
   let(:klass) do
     Class.new do
       include Slack::Web::Api::Mixins::Conversations
-
-      def conversations_list
-        Slack::Messages::Message.new(
-          'channels' => [{
-            'id' => 'CDEADBEEF',
-            'name' => 'general'
-          }]
-        )
-      end
     end
+  end
+
+  before do
+    allow(conversations).to receive(:conversations_list).and_yield(
+      Slack::Messages::Message.new(
+        'channels' => [{
+          'id' => 'CDEADBEEF',
+          'name' => 'general'
+        }]
+      )
+    )
   end
 
   describe '#conversations_id' do

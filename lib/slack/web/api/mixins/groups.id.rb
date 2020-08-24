@@ -16,9 +16,7 @@ module Slack
             name = options[:channel]
             throw ArgumentError.new('Required arguments :channel missing') if name.nil?
 
-            id_for(:group, name, '#', :groups, 'channel_not_found') do
-              groups_list
-            end
+            id_for :group, name, '#', :groups_list, :groups, 'channel_not_found'
           end
         end
       end

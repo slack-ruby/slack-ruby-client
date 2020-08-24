@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/conversations.setTopic
+    body:
+      encoding: UTF-8
+      string: channel=C018Y6VH39D&token=token&topic=new+topic
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.15.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 24 Aug 2020 14:14:24 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Req-Id:
+      - 2c9907ce8c0eb1e01689e7ab16ed7146
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Slack-Backend:
+      - r
+      X-Oauth-Scopes:
+      - read,client,admin,identify,post,apps
+      X-Accepted-Oauth-Scopes:
+      - channels:write,groups:write,mpim:write,im:write,post
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '332'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-bd6z,haproxy-edge-iad-3tbz
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":{"id":"C018Y6VH39D","name":"1","is_channel":true,"is_group":false,"is_im":false,"created":1598276409,"is_archived":false,"is_general":false,"unlinked":0,"name_normalized":"1","is_shared":false,"parent_conversation":null,"creator":"U04KB5WQR","is_ext_shared":false,"is_org_shared":false,"shared_team_ids":["T04KB5WQH"],"pending_shared":[],"pending_connected_team_ids":[],"is_pending_ext_shared":false,"is_member":true,"is_private":false,"is_mpim":false,"last_read":"1598276409.000200","topic":{"value":"new
+        topic","creator":"U04KB5WQR","last_set":1598278464},"purpose":{"value":"","creator":"","last_set":0},"previous_names":[]}}'
+  recorded_at: Mon, 24 Aug 2020 14:13:54 GMT
+recorded_with: VCR 6.0.0
