@@ -13,7 +13,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
   end
 
   before do
-    allow(users).to receive(:users_list).and_return(
+    allow(users).to receive(:users_list).and_yield(
       Slack::Messages::Message.new(
         'members' => [{
           'id' => 'UDEADBEEF',

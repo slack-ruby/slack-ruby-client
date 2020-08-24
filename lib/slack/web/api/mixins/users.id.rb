@@ -16,9 +16,7 @@ module Slack
             name = options[:user]
             throw ArgumentError.new('Required arguments :user missing') if name.nil?
 
-            id_for(:user, name, '@', :members, 'user_not_found') do
-              users_list
-            end
+            id_for :user, name, '@', :users_list, :members, 'user_not_found'
           end
         end
       end
