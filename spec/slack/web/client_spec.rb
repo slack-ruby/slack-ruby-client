@@ -150,6 +150,47 @@ RSpec.describe Slack::Web::Client do
       end
     end
 
+    context 'adapter option' do
+      let(:adapter) { Faraday.default_adapter }
+      let(:adapter_class) { Faraday::Adapter::NetHttp }
+
+      before do
+        # ensure default adapter is set for this spec
+        Faraday.default_adapter = :net_http
+      end
+
+      context 'default adapter' do
+        describe '#initialize' do
+          it 'sets adapter' do
+            expect(client.adapter).to eq adapter
+          end
+          it 'creates a connection with an adapter' do
+            expect(client.send(:connection).adapter).to eq adapter_class
+          end
+        end
+      end
+
+      context 'non default adapter' do
+        let(:adapter) { :typhoeus }
+        let(:adapter_class) { Faraday::Adapter::Typhoeus }
+
+        before do
+          described_class.configure do |config|
+            config.adapter = adapter
+          end
+        end
+
+        describe '#initialize' do
+          it 'sets adapter' do
+            expect(client.adapter).to eq adapter
+          end
+          it 'creates a connection with an adapter' do
+            expect(client.send(:connection).adapter).to eq adapter_class
+          end
+        end
+      end
+    end
+
     context 'timeout options' do
       before do
         described_class.configure do |config|

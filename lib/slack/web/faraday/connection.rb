@@ -29,7 +29,7 @@ module Slack
                 connection.use ::FaradayMiddleware::Mashify, mash_class: Slack::Messages::Message
                 connection.use ::FaradayMiddleware::ParseJson
                 connection.response :logger, logger if logger
-                connection.adapter ::Faraday.default_adapter
+                connection.adapter adapter
               end
             end
         end
