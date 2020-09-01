@@ -240,6 +240,7 @@ timeout             | Optional open/read timeout in seconds.
 open_timeout        | Optional connection open timeout in seconds.
 default_page_size   | Optional page size for paginated requests, default is _100_.
 default_max_retries | Optional number of retries for paginated requests, default is _100_.
+adapter             | Optional HTTP adapter to use, defaults to `Faraday.default_adapter`.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
