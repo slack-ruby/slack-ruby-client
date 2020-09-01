@@ -154,9 +154,12 @@ RSpec.describe Slack::Web::Client do
       let(:adapter) { Faraday.default_adapter }
       let(:adapter_class) { Faraday::Adapter::NetHttp }
 
-      before do
+      around do |ex|
+        previous_adapter = Faraday.default_adapter
         # ensure default adapter is set for this spec
         Faraday.default_adapter = :net_http
+        ex.run
+        Faraday.default_adapter = previous_adapter
       end
 
       context 'default adapter' do
