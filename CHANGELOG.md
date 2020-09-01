@@ -2,7 +2,7 @@
 
 * [#336](https://github.com/slack-ruby/slack-ruby-client/pull/336): Fix: handle nil events - [@pyama86](https://github.com/pyama86).
 * [#339](https://github.com/slack-ruby/slack-ruby-client/pull/339): Fix: `channel_not_found` resolving channel IDs with 100+ channels - [@dblock](https://github.com/dblock).
-- [#340](https://github.com/slack-ruby/slack-ruby-client/pull/340): Added `adapter` configuration setting to change the `Faraday` HTTP adapter - [@watsonjon](https://github.com/watsonjon)
+- [#340](https://github.com/slack-ruby/slack-ruby-client/pull/340): Added `adapter` configuration setting to change the `Faraday` HTTP adapter - [@watsonjon](https://github.com/watsonjon).
 * Your contribution here.
 
 ### 0.15.0 (2020/7/26)
