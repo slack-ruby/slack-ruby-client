@@ -1,3 +1,7 @@
+### 0.15.2 (Next)
+
+* Your contribution here.
+
 ### 0.15.1 (2020/9/3)
 
 * [#336](https://github.com/slack-ruby/slack-ruby-client/pull/336): Fix: handle nil events - [@pyama86](https://github.com/pyama86).
