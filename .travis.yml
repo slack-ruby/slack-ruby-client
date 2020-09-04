@@ -5,6 +5,7 @@ cache: bundler
 rvm:
   - 2.5.3
   - 2.6.0
+  - 2.7.1
   - ruby-head
   - jruby-head
 
