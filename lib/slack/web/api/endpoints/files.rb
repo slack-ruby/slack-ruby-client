@@ -36,7 +36,7 @@ module Slack
           end
 
           #
-          # Gets information about a team file.
+          # Gets information about a file.
           #
           # @option options [file] :file
           #   Specify a file by providing its ID.
@@ -58,7 +58,7 @@ module Slack
           end
 
           #
-          # Lists & filters team files.
+          # List for a team, in a channel, or from a user with applied filters.
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.

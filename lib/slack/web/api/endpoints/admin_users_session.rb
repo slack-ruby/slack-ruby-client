@@ -7,6 +7,21 @@ module Slack
       module Endpoints
         module AdminUsersSession
           #
+          # Invalidate a single session for a user by session_id
+          #
+          # @option options [Object] :session_id
+          #   .
+          # @option options [Object] :team_id
+          #   ID of the team that the session belongs to.
+          # @see https://api.slack.com/methods/admin.users.session.invalidate
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.invalidate.json
+          def admin_users_session_invalidate(options = {})
+            throw ArgumentError.new('Required arguments :session_id missing') if options[:session_id].nil?
+            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            post('admin.users.session.invalidate', options)
+          end
+
+          #
           # Wipes all valid sessions on all devices for a given user
           #
           # @option options [Object] :user_id

@@ -11,6 +11,8 @@ module Slack
           #
           # @option options [Object] :users
           #   A comma-separated list of user ids, up to 400 per request.
+          # @option options [Object] :team_id
+          #   Specify team_id starts with T in case of Org Token.
           # @option options [Object] :to_old
           #   Specify true to convert W global user IDs to workspace-specific U IDs. Defaults to false.
           # @see https://api.slack.com/methods/migration.exchange

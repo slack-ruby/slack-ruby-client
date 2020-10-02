@@ -49,7 +49,6 @@ module Slack
           # @see https://api.slack.com/methods/users.getPresence
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.getPresence.json
           def users_getPresence(options = {})
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.getPresence', options)
           end
@@ -86,7 +85,7 @@ module Slack
           # @option options [Object] :include_locale
           #   Set this to true to receive the locale for users. Defaults to false.
           # @option options [Object] :limit
-          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no limit value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience limit_required or HTTP 500 errors.
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.list.json
           def users_list(options = {})
@@ -123,18 +122,17 @@ module Slack
           #
           # Set the user profile photo
           #
-          # @option options [Object] :image
-          #   File contents via multipart/form-data.
           # @option options [Object] :crop_w
           #   Width/height of crop box (always square).
           # @option options [Object] :crop_x
           #   X coordinate of top-left corner of crop box.
           # @option options [Object] :crop_y
           #   Y coordinate of top-left corner of crop box.
+          # @option options [Object] :image
+          #   File contents via multipart/form-data.
           # @see https://api.slack.com/methods/users.setPhoto
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPhoto.json
           def users_setPhoto(options = {})
-            throw ArgumentError.new('Required arguments :image missing') if options[:image].nil?
             post('users.setPhoto', options)
           end
 

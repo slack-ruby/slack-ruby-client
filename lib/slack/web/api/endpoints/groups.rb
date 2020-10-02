@@ -174,7 +174,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-            logger.warn('groups.mark: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: .')
+            logger.warn('groups.mark: This method is deprecated. It will stop functioning in February 2021 and will not work with newly created apps after June 10th, 2020. Alternative methods: conversations.mark.')
             post('groups.mark', options)
           end
 

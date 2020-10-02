@@ -72,7 +72,7 @@ module Slack
           # Update an existing view.
           #
           # @option options [Object] :view
-          #   A view payload This must be a JSON-encoded string.
+          #   A view object. This must be a JSON-encoded string.
           # @option options [Object] :external_id
           #   A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either view_id or external_id is required.
           # @option options [Object] :hash
