@@ -89,16 +89,9 @@ The broad steps are:
 ##### Resolving Patch Errors
 
 The auto-generated method files may drift overtime e.g. new arguments may be added or descriptions changed. Since previous patches were based on the older auto-generated files, git may be unable to apply them to the new files. Resolving them requires some good ol' splicing:
-1. Comment out the patching code in `lib/tasks/web.rake`:
-    ```ruby
-    # Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
-    #   puts "- patching #{patch}"
-    #   system("git apply #{patch}") || raise('failed to apply patch')
-    # end
-    ```
-2. Run `rake slack:api:update` to create the raw auto-generated files. Commit the files that you are updating, so we can run `git diff` later.
-3. Go through the old patches for the files (e.g. in `lib/slack/web/api/patches/chat.1.patch`), copying code into the new files.
-4. Continue with Step 2 [above](#patching-slack-web-api).
+1. Run `rake slack:api:update SKIP_PATCH=true` to create the raw auto-generated files. Commit the files that you are updating, so we can run `git diff` later.
+2. Go through the old patches for the files (e.g. in `lib/slack/web/api/patches/chat.1.patch`), copying code into the new files.
+3. Continue with Step 2 [above](#patching-slack-web-api).
 
 
 ### Write Documentation

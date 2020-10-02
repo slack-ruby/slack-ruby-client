@@ -51,10 +51,14 @@ namespace :slack do
             rendered_method_spec = method_spec_template.result(group: group, names: names)
             File.write "spec/slack/web/api/endpoints/#{snaked_group}_spec.rb", rendered_method_spec
           end
-          Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
-            puts "- patching #{patch}"
-            system("git apply #{patch}") || raise('failed to apply patch')
+
+          unless ENV.key?('SKIP_PATCH')
+            Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
+              puts "- patching #{patch}"
+              system("git apply #{patch}") || raise('failed to apply patch')
+            end
           end
+
           # command
           raise "Missing group #{group}" unless groups.key?(group)
 
