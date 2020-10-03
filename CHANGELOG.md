@@ -1,5 +1,6 @@
 ### 0.15.2 (Next)
 
+* [#348](https://github.com/slack-ruby/slack-ruby-client/pull/348): Added `admin_conversations_archive`, `admin_conversations_convertToPrivate`, `admin_conversations_create`, `admin_conversations_delete`, `admin_conversations_disconnectShared`, `admin_conversations_getConversationPrefs`, `admin_conversations_getTeams`, `admin_conversations_invite`, `admin_conversations_rename`, `admin_conversations_search`, `admin_conversations_setConversationPrefs`, `admin_conversations_unarchive`, `admin_conversations_ekm_listOriginalConnectedChannelInfo`, `admin_users_session_invalidate`, `apps_event_authorizations_list`, `conversations_mark`, `workflows_stepCompleted`, `workflows_stepFailed`, `workflows_updateStep` endpoints - [@wasabigeek](https://github.com/wasabigeek).
 * Your contribution here.
 
 ### 0.15.1 (2020/9/3)
