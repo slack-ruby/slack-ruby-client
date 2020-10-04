@@ -61,7 +61,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
   end
   context 'admin.conversations_setConversationPrefs' do
     it 'requires channel_id' do
-      expect { client.admin_conversations_setConversationPrefs(prefs: '{'who_can_post':'type:admin,user:U1234,subteam:S1234'}') }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+      expect { client.admin_conversations_setConversationPrefs(prefs: '{"who_can_post":"type:admin,user:U1234,subteam:S1234"}') }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires prefs' do
       expect { client.admin_conversations_setConversationPrefs(channel_id: 'C1234') }.to raise_error ArgumentError, /Required arguments :prefs missing/
