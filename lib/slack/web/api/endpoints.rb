@@ -68,6 +68,7 @@ module Slack
   module Web
     module Api
       module Endpoints
+        include Slack::Web::Api::Mixins::Conversations
         include Slack::Web::Api::Mixins::Channels
         include Slack::Web::Api::Mixins::Users
         include Slack::Web::Api::Mixins::Groups
