@@ -7,18 +7,18 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminEmoji do
   let(:client) { Slack::Web::Client.new }
   context 'admin.emoji_add' do
     it 'requires name' do
-      expect { client.admin_emoji_add(url: '') }.to raise_error ArgumentError, /Required arguments :name missing/
+      expect { client.admin_emoji_add(url: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
     it 'requires url' do
-      expect { client.admin_emoji_add(name: '') }.to raise_error ArgumentError, /Required arguments :url missing/
+      expect { client.admin_emoji_add(name: %q[]) }.to raise_error ArgumentError, /Required arguments :url missing/
     end
   end
   context 'admin.emoji_addAlias' do
     it 'requires alias_for' do
-      expect { client.admin_emoji_addAlias(name: '') }.to raise_error ArgumentError, /Required arguments :alias_for missing/
+      expect { client.admin_emoji_addAlias(name: %q[]) }.to raise_error ArgumentError, /Required arguments :alias_for missing/
     end
     it 'requires name' do
-      expect { client.admin_emoji_addAlias(alias_for: '') }.to raise_error ArgumentError, /Required arguments :name missing/
+      expect { client.admin_emoji_addAlias(alias_for: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
   end
   context 'admin.emoji_remove' do
@@ -28,10 +28,10 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminEmoji do
   end
   context 'admin.emoji_rename' do
     it 'requires name' do
-      expect { client.admin_emoji_rename(new_name: '') }.to raise_error ArgumentError, /Required arguments :name missing/
+      expect { client.admin_emoji_rename(new_name: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
     it 'requires new_name' do
-      expect { client.admin_emoji_rename(name: '') }.to raise_error ArgumentError, /Required arguments :new_name missing/
+      expect { client.admin_emoji_rename(name: %q[]) }.to raise_error ArgumentError, /Required arguments :new_name missing/
     end
   end
 end

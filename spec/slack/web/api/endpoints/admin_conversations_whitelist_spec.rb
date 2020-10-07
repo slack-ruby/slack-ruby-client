@@ -7,10 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversationsWhitelist do
   let(:client) { Slack::Web::Client.new }
   context 'admin.conversations.whitelist_add' do
     it 'requires channel_id' do
-      expect { client.admin_conversations_whitelist_add(group_id: '') }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+      expect { client.admin_conversations_whitelist_add(group_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires group_id' do
-      expect { client.admin_conversations_whitelist_add(channel_id: '') }.to raise_error ArgumentError, /Required arguments :group_id missing/
+      expect { client.admin_conversations_whitelist_add(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :group_id missing/
     end
   end
   context 'admin.conversations.whitelist_listGroupsLinkedToChannel' do
@@ -20,13 +20,13 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversationsWhitelist do
   end
   context 'admin.conversations.whitelist_remove' do
     it 'requires channel_id' do
-      expect { client.admin_conversations_whitelist_remove(group_id: '', team_id: '') }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+      expect { client.admin_conversations_whitelist_remove(group_id: %q[], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires group_id' do
-      expect { client.admin_conversations_whitelist_remove(channel_id: '', team_id: '') }.to raise_error ArgumentError, /Required arguments :group_id missing/
+      expect { client.admin_conversations_whitelist_remove(channel_id: %q[], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :group_id missing/
     end
     it 'requires team_id' do
-      expect { client.admin_conversations_whitelist_remove(channel_id: '', group_id: '') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_conversations_whitelist_remove(channel_id: %q[], group_id: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
 end

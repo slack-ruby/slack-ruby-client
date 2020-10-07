@@ -7,18 +7,18 @@ RSpec.describe Slack::Web::Api::Endpoints::CallsParticipants do
   let(:client) { Slack::Web::Client.new }
   context 'calls.participants_add' do
     it 'requires id' do
-      expect { client.calls_participants_add(users: '[{"slack_id": "U1H77"}, {"external_id": "54321678", "display_name": "External User", "avatar_url": "https://example.com/users/avatar1234.jpg"}]') }.to raise_error ArgumentError, /Required arguments :id missing/
+      expect { client.calls_participants_add(users: %q[[{"slack_id": "U1H77"}, {"external_id": "54321678", "display_name": "External User", "avatar_url": "https://example.com/users/avatar1234.jpg"}]]) }.to raise_error ArgumentError, /Required arguments :id missing/
     end
     it 'requires users' do
-      expect { client.calls_participants_add(id: 'R0E69JAIF') }.to raise_error ArgumentError, /Required arguments :users missing/
+      expect { client.calls_participants_add(id: %q[R0E69JAIF]) }.to raise_error ArgumentError, /Required arguments :users missing/
     end
   end
   context 'calls.participants_remove' do
     it 'requires id' do
-      expect { client.calls_participants_remove(users: '[{"slack_id": "U1H77"}, {"external_id": "54321678", "display_name": "External User", "avatar_url": "https://example.com/users/avatar1234.jpg"}]') }.to raise_error ArgumentError, /Required arguments :id missing/
+      expect { client.calls_participants_remove(users: %q[[{"slack_id": "U1H77"}, {"external_id": "54321678", "display_name": "External User", "avatar_url": "https://example.com/users/avatar1234.jpg"}]]) }.to raise_error ArgumentError, /Required arguments :id missing/
     end
     it 'requires users' do
-      expect { client.calls_participants_remove(id: 'R0E69JAIF') }.to raise_error ArgumentError, /Required arguments :users missing/
+      expect { client.calls_participants_remove(id: %q[R0E69JAIF]) }.to raise_error ArgumentError, /Required arguments :users missing/
     end
   end
 end

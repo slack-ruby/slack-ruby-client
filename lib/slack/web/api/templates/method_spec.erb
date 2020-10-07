@@ -12,7 +12,7 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
   context '<%= group %>_<%= name %>' do
 <% required_params.each do |arg_name, arg_v| %>
     it 'requires <%= arg_name %>' do
-<% params_except_required = required_params.reject{ |name, _| name == arg_name  }.map{|var, opts| "#{var}: '#{opts['example'].gsub("'", '"')}'"}.join(', ') %>
+<% params_except_required = required_params.reject{ |name, _| name == arg_name  }.map{ |var, opts| "#{var}: %q[#{opts['example']}]"}.join(', ') %>
       expect { client.<%= group.gsub(".", "_") %>_<%= name %><%= params_except_required.empty? ? '' : "(#{params_except_required})" %> }.to raise_error ArgumentError, /Required arguments :<%= arg_name %> missing/
     end
 <% end %>

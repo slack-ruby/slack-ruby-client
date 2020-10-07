@@ -12,42 +12,42 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminTeamsSettings do
   end
   context 'admin.teams.settings_setDefaultChannels' do
     it 'requires channel_ids' do
-      expect { client.admin_teams_settings_setDefaultChannels(team_id: '') }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+      expect { client.admin_teams_settings_setDefaultChannels(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
     end
     it 'requires team_id' do
-      expect { client.admin_teams_settings_setDefaultChannels(channel_ids: '') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_teams_settings_setDefaultChannels(channel_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
   context 'admin.teams.settings_setDescription' do
     it 'requires description' do
-      expect { client.admin_teams_settings_setDescription(team_id: '') }.to raise_error ArgumentError, /Required arguments :description missing/
+      expect { client.admin_teams_settings_setDescription(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :description missing/
     end
     it 'requires team_id' do
-      expect { client.admin_teams_settings_setDescription(description: '') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_teams_settings_setDescription(description: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
   context 'admin.teams.settings_setDiscoverability' do
     it 'requires discoverability' do
-      expect { client.admin_teams_settings_setDiscoverability(team_id: '') }.to raise_error ArgumentError, /Required arguments :discoverability missing/
+      expect { client.admin_teams_settings_setDiscoverability(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :discoverability missing/
     end
     it 'requires team_id' do
-      expect { client.admin_teams_settings_setDiscoverability(discoverability: '') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_teams_settings_setDiscoverability(discoverability: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
   context 'admin.teams.settings_setIcon' do
     it 'requires image_url' do
-      expect { client.admin_teams_settings_setIcon(team_id: '') }.to raise_error ArgumentError, /Required arguments :image_url missing/
+      expect { client.admin_teams_settings_setIcon(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :image_url missing/
     end
     it 'requires team_id' do
-      expect { client.admin_teams_settings_setIcon(image_url: 'http://mysite.com/icon.jpeg') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_teams_settings_setIcon(image_url: %q[http://mysite.com/icon.jpeg]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
   context 'admin.teams.settings_setName' do
     it 'requires name' do
-      expect { client.admin_teams_settings_setName(team_id: '') }.to raise_error ArgumentError, /Required arguments :name missing/
+      expect { client.admin_teams_settings_setName(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
     it 'requires team_id' do
-      expect { client.admin_teams_settings_setName(name: '') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_teams_settings_setName(name: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
 end

@@ -7,10 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminTeams do
   let(:client) { Slack::Web::Client.new }
   context 'admin.teams_create' do
     it 'requires team_domain' do
-      expect { client.admin_teams_create(team_name: '') }.to raise_error ArgumentError, /Required arguments :team_domain missing/
+      expect { client.admin_teams_create(team_name: %q[]) }.to raise_error ArgumentError, /Required arguments :team_domain missing/
     end
     it 'requires team_name' do
-      expect { client.admin_teams_create(team_domain: '') }.to raise_error ArgumentError, /Required arguments :team_name missing/
+      expect { client.admin_teams_create(team_domain: %q[]) }.to raise_error ArgumentError, /Required arguments :team_name missing/
     end
   end
 end
