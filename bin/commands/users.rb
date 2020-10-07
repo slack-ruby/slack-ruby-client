@@ -65,7 +65,7 @@ command 'users' do |g|
   g.command 'list' do |c|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for users. Defaults to false.'
-    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
+    c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no limit value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience limit_required or HTTP 500 errors."
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_list(options))
     end
@@ -100,10 +100,10 @@ command 'users' do |g|
   g.desc 'Set the user profile photo'
   g.long_desc %( Set the user profile photo )
   g.command 'setPhoto' do |c|
-    c.flag 'image', desc: 'File contents via multipart/form-data.'
     c.flag 'crop_w', desc: 'Width/height of crop box (always square).'
     c.flag 'crop_x', desc: 'X coordinate of top-left corner of crop box.'
     c.flag 'crop_y', desc: 'Y coordinate of top-left corner of crop box.'
+    c.flag 'image', desc: 'File contents via multipart/form-data.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_setPhoto(options))
     end

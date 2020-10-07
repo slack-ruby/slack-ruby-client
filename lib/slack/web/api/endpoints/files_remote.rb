@@ -88,9 +88,9 @@ module Slack
           # @option options [Object] :channels
           #   Comma-separated list of channel IDs where the file will be shared.
           # @option options [Object] :external_id
-          #   Creator defined GUID for the file.
+          #   The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or file or both are required.
           # @option options [file] :file
-          #   Specify a file by providing its ID.
+          #   Specify a file registered with Slack by providing its ID. Either this field or external_id or both are required.
           # @see https://api.slack.com/methods/files.remote.share
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.share.json
           def files_remote_share(options = {})

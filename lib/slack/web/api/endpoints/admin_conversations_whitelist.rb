@@ -20,7 +20,7 @@ module Slack
           def admin_conversations_whitelist_add(options = {})
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
             throw ArgumentError.new('Required arguments :group_id missing') if options[:group_id].nil?
-            logger.warn('admin.conversations.whitelist.add:  Alternative methods: .')
+            logger.warn('admin.conversations.whitelist.add: This method is deprecated Alternative methods: .')
             post('admin.conversations.whitelist.add', options)
           end
 
@@ -35,7 +35,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.whitelist/admin.conversations.whitelist.listGroupsLinkedToChannel.json
           def admin_conversations_whitelist_listGroupsLinkedToChannel(options = {})
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            logger.warn('admin.conversations.whitelist.listGroupsLinkedToChannel:  Alternative methods: .')
+            logger.warn('admin.conversations.whitelist.listGroupsLinkedToChannel: This method is deprecated Alternative methods: .')
             post('admin.conversations.whitelist.listGroupsLinkedToChannel', options)
           end
 
@@ -54,7 +54,7 @@ module Slack
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
             throw ArgumentError.new('Required arguments :group_id missing') if options[:group_id].nil?
             throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
-            logger.warn('admin.conversations.whitelist.remove:  Alternative methods: .')
+            logger.warn('admin.conversations.whitelist.remove: This method is deprecated Alternative methods: .')
             post('admin.conversations.whitelist.remove', options)
           end
         end

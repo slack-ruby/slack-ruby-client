@@ -23,8 +23,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc 'Gets information about a team file.'
-  g.long_desc %( Gets information about a team file. )
+  g.desc 'Gets information about a file.'
+  g.long_desc %( Gets information about a file. )
   g.command 'info' do |c|
     c.flag 'file', desc: 'Specify a file by providing its ID.'
     c.flag 'cursor', desc: "Parameter for pagination. File comments are paginated for a single file. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection of comments. See pagination for more details."
@@ -34,8 +34,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc 'Lists & filters team files.'
-  g.long_desc %( Lists & filters team files. )
+  g.desc 'List for a team, in a channel, or from a user with applied filters.'
+  g.long_desc %( List for a team, in a channel, or from a user with applied filters. )
   g.command 'list' do |c|
     c.flag 'channel', desc: 'Filter files appearing in a specific channel, indicated by its ID.'
     c.flag 'show_files_hidden_by_limit', desc: 'Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.'

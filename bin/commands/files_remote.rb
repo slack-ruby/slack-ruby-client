@@ -54,8 +54,8 @@ command 'files_remote' do |g|
   g.long_desc %( Share a remote file into a channel. )
   g.command 'share' do |c|
     c.flag 'channels', desc: 'Comma-separated list of channel IDs where the file will be shared.'
-    c.flag 'external_id', desc: 'Creator defined GUID for the file.'
-    c.flag 'file', desc: 'Specify a file by providing its ID.'
+    c.flag 'external_id', desc: 'The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or file or both are required.'
+    c.flag 'file', desc: 'Specify a file registered with Slack by providing its ID. Either this field or external_id or both are required.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_remote_share(options))
     end

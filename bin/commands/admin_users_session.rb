@@ -3,6 +3,16 @@
 
 desc 'AdminUsersSession methods.'
 command 'admin_users_session' do |g|
+  g.desc 'Invalidate a single session for a user by session_id'
+  g.long_desc %( Invalidate a single session for a user by session_id )
+  g.command 'invalidate' do |c|
+    c.flag 'session_id', desc: '.'
+    c.flag 'team_id', desc: 'ID of the team that the session belongs to.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_session_invalidate(options))
+    end
+  end
+
   g.desc 'Wipes all valid sessions on all devices for a given user'
   g.long_desc %( Wipes all valid sessions on all devices for a given user )
   g.command 'reset' do |c|

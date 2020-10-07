@@ -14,7 +14,7 @@ module Slack
           # @option options [Object] :group_id
           #   The IDP Group ID to be an allowlist for the private channel.
           # @option options [Object] :team_id
-          #   The workspace where the IDP Group and channel exist.
+          #   The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
           # @see https://api.slack.com/methods/admin.conversations.restrictAccess.addGroup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.restrictAccess/admin.conversations.restrictAccess.addGroup.json
           def admin_conversations_restrictAccess_addGroup(options = {})
@@ -29,7 +29,7 @@ module Slack
           # @option options [Object] :channel_id
           #   .
           # @option options [Object] :team_id
-          #   The workspace where the channele exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
+          #   The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
           # @see https://api.slack.com/methods/admin.conversations.restrictAccess.listGroups
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.restrictAccess/admin.conversations.restrictAccess.listGroups.json
           def admin_conversations_restrictAccess_listGroups(options = {})
@@ -45,7 +45,7 @@ module Slack
           # @option options [Object] :group_id
           #   The IDP Group ID to remove from the private channel.
           # @option options [Object] :team_id
-          #   The workspace where the IDP Group and channel exist.
+          #   The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
           # @see https://api.slack.com/methods/admin.conversations.restrictAccess.removeGroup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.restrictAccess/admin.conversations.restrictAccess.removeGroup.json
           def admin_conversations_restrictAccess_removeGroup(options = {})

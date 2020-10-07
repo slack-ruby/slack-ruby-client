@@ -6,6 +6,7 @@ require_relative 'endpoints/admin_apps_approved'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
 require_relative 'endpoints/admin_conversations'
+require_relative 'endpoints/admin_conversations_ekm'
 require_relative 'endpoints/admin_conversations_restrictAccess'
 require_relative 'endpoints/admin_conversations_whitelist'
 require_relative 'endpoints/admin_emoji'
@@ -21,6 +22,7 @@ require_relative 'endpoints/admin_users'
 require_relative 'endpoints/admin_users_session'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
+require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_permissions'
 require_relative 'endpoints/apps_permissions_resources'
 require_relative 'endpoints/apps_permissions_scopes'
@@ -60,6 +62,7 @@ require_relative 'endpoints/users_admin'
 require_relative 'endpoints/users_prefs'
 require_relative 'endpoints/users_profile'
 require_relative 'endpoints/views'
+require_relative 'endpoints/workflows'
 
 module Slack
   module Web
@@ -75,6 +78,7 @@ module Slack
         include AdminAppsRequests
         include AdminAppsRestricted
         include AdminConversations
+        include AdminConversationsEkm
         include AdminConversationsRestrictaccess
         include AdminConversationsWhitelist
         include AdminEmoji
@@ -90,6 +94,7 @@ module Slack
         include AdminUsersSession
         include Api
         include Apps
+        include AppsEventAuthorizations
         include AppsPermissions
         include AppsPermissionsResources
         include AppsPermissionsScopes
@@ -129,6 +134,7 @@ module Slack
         include UsersPrefs
         include UsersProfile
         include Views
+        include Workflows
       end
     end
   end

@@ -56,6 +56,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
       expect { client.conversations_leave }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
+  context 'conversations_mark' do
+    it 'requires channel' do
+      expect { client.conversations_mark(ts: '1593473566.000200') }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires ts' do
+      expect { client.conversations_mark(channel: 'C012345678') }.to raise_error ArgumentError, /Required arguments :ts missing/
+    end
+  end
   context 'conversations_members' do
     it 'requires channel' do
       expect { client.conversations_members }.to raise_error ArgumentError, /Required arguments :channel missing/

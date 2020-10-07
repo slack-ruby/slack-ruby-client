@@ -5,6 +5,14 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::AdminUsersSession do
   let(:client) { Slack::Web::Client.new }
+  context 'admin.users.session_invalidate' do
+    it 'requires session_id' do
+      expect { client.admin_users_session_invalidate(team_id: '') }.to raise_error ArgumentError, /Required arguments :session_id missing/
+    end
+    it 'requires team_id' do
+      expect { client.admin_users_session_invalidate(session_id: '') }.to raise_error ArgumentError, /Required arguments :team_id missing/
+    end
+  end
   context 'admin.users.session_reset' do
     it 'requires user_id' do
       expect { client.admin_users_session_reset }.to raise_error ArgumentError, /Required arguments :user_id missing/

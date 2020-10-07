@@ -175,6 +175,22 @@ module Slack
           end
 
           #
+          # Sets the read cursor in a channel.
+          #
+          # @option options [channel] :channel
+          #   Channel or conversation to set the read cursor for.
+          # @option options [timestamp] :ts
+          #   Unique identifier of message you want marked as most recently seen in this conversation.
+          # @see https://api.slack.com/methods/conversations.mark
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.mark.json
+          def conversations_mark(options = {})
+            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
+            post('conversations.mark', options)
+          end
+
+          #
           # Retrieve members of a conversation.
           #
           # @option options [channel] :channel
@@ -235,7 +251,7 @@ module Slack
           # @option options [channel] :channel
           #   Conversation ID to fetch thread from.
           # @option options [timestamp] :ts
-          #   Unique identifier of a thread's parent message.
+          #   Unique identifier of a thread's parent message. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message.
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
           # @option options [Object] :inclusive
