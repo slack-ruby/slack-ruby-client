@@ -12,10 +12,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Workflows do
   end
   context 'workflows_stepFailed' do
     it 'requires error' do
-      expect { client.workflows_stepFailed(workflow_step_execute_id: '') }.to raise_error ArgumentError, /Required arguments :error missing/
+      expect { client.workflows_stepFailed(workflow_step_execute_id: %q[]) }.to raise_error ArgumentError, /Required arguments :error missing/
     end
     it 'requires workflow_step_execute_id' do
-      expect { client.workflows_stepFailed(error: '') }.to raise_error ArgumentError, /Required arguments :workflow_step_execute_id missing/
+      expect { client.workflows_stepFailed(error: %q[]) }.to raise_error ArgumentError, /Required arguments :workflow_step_execute_id missing/
     end
   end
   context 'workflows_updateStep' do

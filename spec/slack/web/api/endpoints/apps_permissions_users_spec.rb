@@ -7,13 +7,13 @@ RSpec.describe Slack::Web::Api::Endpoints::AppsPermissionsUsers do
   let(:client) { Slack::Web::Client.new }
   context 'apps.permissions.users_request' do
     it 'requires scopes' do
-      expect { client.apps_permissions_users_request(trigger_id: '', user: '') }.to raise_error ArgumentError, /Required arguments :scopes missing/
+      expect { client.apps_permissions_users_request(trigger_id: %q[], user: %q[]) }.to raise_error ArgumentError, /Required arguments :scopes missing/
     end
     it 'requires trigger_id' do
-      expect { client.apps_permissions_users_request(scopes: '', user: '') }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
+      expect { client.apps_permissions_users_request(scopes: %q[], user: %q[]) }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
     end
     it 'requires user' do
-      expect { client.apps_permissions_users_request(scopes: '', trigger_id: '') }.to raise_error ArgumentError, /Required arguments :user missing/
+      expect { client.apps_permissions_users_request(scopes: %q[], trigger_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user missing/
     end
   end
 end

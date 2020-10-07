@@ -7,13 +7,13 @@ RSpec.describe Slack::Web::Api::Endpoints::FilesRemote do
   let(:client) { Slack::Web::Client.new }
   context 'files.remote_add' do
     it 'requires external_id' do
-      expect { client.files_remote_add(external_url: 'http://example.com/my_cloud_service_file/abc123', title: 'Danger, High Voltage!') }.to raise_error ArgumentError, /Required arguments :external_id missing/
+      expect { client.files_remote_add(external_url: %q[http://example.com/my_cloud_service_file/abc123], title: %q[Danger, High Voltage!]) }.to raise_error ArgumentError, /Required arguments :external_id missing/
     end
     it 'requires external_url' do
-      expect { client.files_remote_add(external_id: '123456', title: 'Danger, High Voltage!') }.to raise_error ArgumentError, /Required arguments :external_url missing/
+      expect { client.files_remote_add(external_id: %q[123456], title: %q[Danger, High Voltage!]) }.to raise_error ArgumentError, /Required arguments :external_url missing/
     end
     it 'requires title' do
-      expect { client.files_remote_add(external_id: '123456', external_url: 'http://example.com/my_cloud_service_file/abc123') }.to raise_error ArgumentError, /Required arguments :title missing/
+      expect { client.files_remote_add(external_id: %q[123456], external_url: %q[http://example.com/my_cloud_service_file/abc123]) }.to raise_error ArgumentError, /Required arguments :title missing/
     end
   end
   context 'files.remote_share' do

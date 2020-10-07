@@ -17,10 +17,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Mpim do
   end
   context 'mpim_mark' do
     it 'requires channel' do
-      expect { client.mpim_mark(ts: '1234567890.123456') }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.mpim_mark(ts: %q[1234567890.123456]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.mpim_mark(channel: 'G1234567890') }.to raise_error ArgumentError, /Required arguments :ts missing/
+      expect { client.mpim_mark(channel: %q[G1234567890]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
   end
   context 'mpim_open' do
@@ -30,10 +30,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Mpim do
   end
   context 'mpim_replies' do
     it 'requires channel' do
-      expect { client.mpim_replies(thread_ts: '1234567890.123456') }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.mpim_replies(thread_ts: %q[1234567890.123456]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires thread_ts' do
-      expect { client.mpim_replies(channel: 'C1234567890') }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+      expect { client.mpim_replies(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
     end
   end
 end
