@@ -1,6 +1,12 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.16.0
+
+As of 0.16.0 `Faraday::Error` exceptions sans `Faraday::ClientError` are wrapped into `Slack::Web::Api::Errors::ServerError`, so if you're rescuing `Faraday::Error` — you should adjust your code to use `Slack::Web::Api::Errors::ServerError` and use `exception.cause` if underlying `Faraday::Error` is needed.
+
+See [README#other-errors](README.md#other-errors) and [#350](https://github.com/slack-ruby/slack-ruby-client/pull/350) for more information.
+
 ### Upgrading to >= 0.15.0
 
 As of 0.15.0, `activesupport` is no longer required. Add `gem 'activesupport'` to your Gemfile if you required ActiveSupport via this library.
@@ -130,5 +136,3 @@ gem 'celluloid-io'
 When in doubt, use `faye-websocket`.
 
 See [#5](https://github.com/slack-ruby/slack-ruby-client/issues/5) for more information.
-
-

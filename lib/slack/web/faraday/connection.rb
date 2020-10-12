@@ -24,7 +24,7 @@ module Slack
               ::Faraday::Connection.new(endpoint, options) do |connection|
                 connection.use ::Faraday::Request::Multipart
                 connection.use ::Faraday::Request::UrlEncoded
-                connection.use ::Faraday::Response::RaiseError
+                connection.use ::Slack::Web::Faraday::Response::WrapError
                 connection.use ::Slack::Web::Faraday::Response::RaiseError
                 connection.use ::FaradayMiddleware::Mashify, mash_class: Slack::Messages::Message
                 connection.use ::FaradayMiddleware::ParseJson

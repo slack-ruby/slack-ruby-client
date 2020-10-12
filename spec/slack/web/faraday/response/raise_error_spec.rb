@@ -2,14 +2,15 @@
 require 'spec_helper'
 
 RSpec.describe Slack::Web::Faraday::Response::RaiseError do
-  subject(:raise_error_obj) { described_class.new }
+  subject(:raise_error_obj) { described_class.new(app) }
+
+  let(:app) { proc {} }
+  let(:status) { 200 }
+  let(:response) { nil }
+  let(:body) { {} }
+  let(:env) { double status: status, response: response, body: body, success?: true }
 
   describe '#on_complete' do
-    let(:status) { 200 }
-    let(:response) { nil }
-    let(:body) { {} }
-    let(:env) { double status: status, response: response, body: body }
-
     context 'with status of 429' do
       let(:status) { 429 }
 

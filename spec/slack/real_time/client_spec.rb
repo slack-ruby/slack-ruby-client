@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client do # rubocop:disable Metrics/BlockLength
+RSpec.describe Slack::RealTime::Client do
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
 
   before do

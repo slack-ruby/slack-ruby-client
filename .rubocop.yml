@@ -18,7 +18,7 @@ Layout/EmptyLineAfterMagicComment:
   Enabled: false
 
 Metrics/BlockLength:
-  Max: 250
+  Enabled: false
 
 Metrics/ClassLength:
   Max: 250

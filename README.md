@@ -326,7 +326,11 @@ If you exceed [Slack’s rate limits](https://api.slack.com/docs/rate-limits), a
 
 ##### Other Errors
 
-In any other case, a `Faraday::ClientError` will be raised. This may be the case if Slack is temporarily unavailable, for example.
+In case of Slack temporarily unavailability a `Slack::Web::Api::Errors::ServerError` (`Slack::Web::Api::Errors::SlackError` subclass) subclasses will be raised and original `Faraday::Error` will be accesible via `exception.cause`.
+
+Specifically `Slack::Web::Api::Errors::ParsingError` will be raised on non-json response (i. e. 200 OK with `Slack unavailable` HTML page) and `Slack::Web::Api::Errors::HttpRequestError` subclasses for connection failures (`Slack::Web::Api::Errors::TimeoutError` for read/open timeouts & `Slack::Web::Api::Errors::UnavailableError` for 5xx HTTP responses).
+
+In any other case, a `Faraday::ClientError` will be raised.
 
 ### RealTime Client
 
