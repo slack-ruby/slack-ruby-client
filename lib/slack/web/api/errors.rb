@@ -161,6 +161,11 @@ module Slack
         class HashConflict < SlackError; end
         class InactiveCall < SlackError; end
         class InternalError < SlackError; end
+        class ServerError < InternalError; end
+        class ParsingError < ServerError; end
+        class HttpRequestError < ServerError; end
+        class TimeoutError < HttpRequestError; end
+        class UnavailableError < HttpRequestError; end
         class InvalidActor < SlackError; end
         class InvalidAppId < SlackError; end
         class InvalidArgName < SlackError; end

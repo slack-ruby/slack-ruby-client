@@ -275,5 +275,61 @@ RSpec.describe Slack::Web::Client do
         end
       end
     end
+
+    context 'server failures' do
+      subject(:request) { client.api_test }
+
+      let(:stub_slack_request) { stub_request(:post, 'https://slack.com/api/api.test') }
+      let(:exception) do
+        begin
+          request
+        rescue Slack::Web::Api::Errors::ServerError => e
+          return e
+        end
+      end
+
+      context 'parsing error' do
+        before {  stub_slack_request.to_return(body: '<html></html>') }
+
+        it 'raises ParsingError' do
+          expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
+          expect(exception.response.body).to eq('<html></html>')
+          expect(exception.cause).to be_a(Faraday::ParsingError)
+          expect(exception.cause.cause.cause).to be_a(JSON::ParserError)
+        end
+      end
+
+      context 'timeout' do
+        context 'open timeout' do
+          before { stub_slack_request.to_timeout }
+
+          it 'raises TimoutError' do
+            expect { request }.to raise_error(Slack::Web::Api::Errors::TimeoutError).with_message('timeout_error')
+            expect(exception.cause).to be_a(Faraday::ConnectionFailed)
+            expect(exception.cause.cause).to be_a(Net::OpenTimeout)
+          end
+        end
+
+        context 'read timeout' do
+          before { stub_slack_request.to_raise(Net::ReadTimeout) }
+
+          it 'raises TimeoutError' do
+            expect { request }.to raise_error(Slack::Web::Api::Errors::TimeoutError).with_message('timeout_error')
+            expect(exception.cause).to be_a(Faraday::TimeoutError)
+            expect(exception.cause.cause).to be_a(Net::ReadTimeout)
+          end
+        end
+      end
+
+      context '5xx response' do
+        before { stub_slack_request.to_return(status: 500, body: '{}') }
+
+        it 'raises UnavailableError' do
+          expect { request }.to raise_error(Slack::Web::Api::Errors::UnavailableError).with_message('unavailable_error')
+          expect(exception.cause).to be_a(Faraday::ServerError)
+          expect(exception.response.status).to eq(500)
+        end
+      end
+    end
   end
 end
