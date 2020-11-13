@@ -10,7 +10,6 @@ module Slack
         token
         websocket_ping
         websocket_proxy
-        concurrency
         start_method
         start_options
         store_class
