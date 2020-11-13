@@ -17,6 +17,7 @@ module Slack
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
+      attr_writer :concurrency
 
       def reset
         self.websocket_ping = 30
