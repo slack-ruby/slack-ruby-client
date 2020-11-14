@@ -17,7 +17,7 @@ module Slack
         logger
       ].freeze
 
-      attr_accessor(*Config::ATTRIBUTES  - [:concurrency])
+      attr_accessor(*Config::ATTRIBUTES - [:concurrency])
       attr_writer :concurrency
 
       def reset
