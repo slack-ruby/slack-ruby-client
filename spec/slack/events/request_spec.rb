@@ -26,9 +26,7 @@ RSpec.describe Slack::Events::Request do
         'X-Slack-Request-Timestamp' => timestamp,
         'X-Slack-Signature' => signature
       },
-      body: double(
-        read: body
-      )
+      body: StringIO.new(body)
     )
   end
 
@@ -42,6 +40,12 @@ RSpec.describe Slack::Events::Request do
     expect(request.timestamp).to eq timestamp
     expect(request.version).to eq 'v0'
   end
+
+  it 'rewinds the request body after reading it' do
+    expect(request.body).to eq body
+    expect(http_request.body.read).to eq body
+  end
+
   context 'time' do
     after do
       Timecop.return
