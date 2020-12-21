@@ -35,7 +35,11 @@ module Slack
 
       # Request body.
       def body
-        @body ||= http_request.body.read
+        @body ||= begin
+          body = http_request.body.read
+          http_request.body.rewind
+          body
+        end
       end
 
       # Returns true if the signature coming from Slack has expired.
