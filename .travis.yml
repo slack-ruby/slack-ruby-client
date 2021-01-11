@@ -15,8 +15,6 @@ matrix:
       script:
         - bundle exec danger
     - rvm: 2.4.1
-      env: CONCURRENCY=celluloid-io
-    - rvm: 2.4.1
       env: CONCURRENCY=faye-websocket
     - rvm: 2.5.3
       env: CONCURRENCY=async-websocket

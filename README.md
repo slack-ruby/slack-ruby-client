@@ -48,7 +48,6 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
     - [Concurrency](#concurrency)
       - [Async](#async)
       - [Faye::Websocket with Eventmachine](#fayewebsocket-with-eventmachine)
-      - [Celluloid](#celluloid)
   - [Events API](#events-api)
     - [Configuring Slack::Events](#configuring-slackevents)
     - [Verifying the Request Signature](#verifying-the-request-signature)
@@ -82,7 +81,7 @@ Add to Gemfile.
 gem 'slack-ruby-client'
 ```
 
-If you're going to be using the RealTime client, add either `async-websocket`, `eventmachine` and `faye-websocket` or `celluloid-io`. See below for more information about concurrency. We recommend you use `async-websocket`.
+If you're going to be using the RealTime client, add either `async-websocket`, `eventmachine` and `faye-websocket`. See below for more information about concurrency. We recommend you use `async-websocket`.
 
 ```
 gem 'async-websocket', '~> 0.8.0'
@@ -495,7 +494,7 @@ See [#134](https://github.com/slack-ruby/slack-ruby-client/issues/134) for a dis
 
 #### Concurrency
 
-`Slack::RealTime::Client` needs help from a concurrency library and supports [Async](https://github.com/socketry/async), [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine) and [Celluloid](https://github.com/celluloid/celluloid). It will auto-detect one or the other depending on the gems in your Gemfile, but you can also set concurrency explicitly.
+`Slack::RealTime::Client` needs help from a concurrency library and supports [Async](https://github.com/socketry/async) and [Faye::WebSocket](https://github.com/faye/faye-websocket-ruby) with [Eventmachine](https://github.com/eventmachine/eventmachine). It will auto-detect one or the other depending on the gems in your Gemfile, but you can also set concurrency explicitly.
 
 ```ruby
 Slack::RealTime.configure do |config|
@@ -530,16 +529,6 @@ gem 'faye-websocket'
 ```
 
 See a fully working example in [examples/hi_real_time_async_eventmachine](examples/hi_real_time_async_eventmachine/hi.rb).
-
-##### Celluloid
-
-Add the following to your Gemfile.
-
-```
-gem 'celluloid-io', require: ['celluloid/current', 'celluloid/io']
-```
-
-See a fully working example in [examples/hi_real_time_async_celluloid](examples/hi_real_time_async_celluloid/hi.rb).
 
 ### Events API
 

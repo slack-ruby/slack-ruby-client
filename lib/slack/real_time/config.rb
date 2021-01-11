@@ -38,7 +38,7 @@ module Slack
       private
 
       def detect_concurrency
-        %i[Async Eventmachine Celluloid].each do |concurrency|
+        %i[Async Eventmachine].each do |concurrency|
           begin
             return Slack::RealTime::Concurrency.const_get(concurrency)
           rescue LoadError, NameError
@@ -48,8 +48,8 @@ module Slack
 
         raise(
           NoConcurrencyError,
-          'Missing concurrency. Add async-websocket, faye-websocket ' \
-          'or celluloid-io to your Gemfile.'
+          'Missing concurrency. Add async-websocket or faye-websocket ' \
+          'to your Gemfile.'
         )
       end
     end
