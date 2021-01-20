@@ -39,10 +39,6 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel where the item is pinned to.
-          # @option options [file] :file
-          #   File to un-pin.
-          # @option options [Object] :file_comment
-          #   File comment to un-pin.
           # @option options [Object] :timestamp
           #   Timestamp of the message to un-pin.
           # @see https://api.slack.com/methods/pins.remove

@@ -36,9 +36,9 @@ command 'admin_users' do |g|
   g.desc 'List users on a workspace'
   g.long_desc %( List users on a workspace )
   g.command 'list' do |c|
-    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
     c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
     c.flag 'limit', desc: 'Limit for how many users to be retrieved per page.'
+    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_users_list(options))
     end
@@ -68,8 +68,8 @@ command 'admin_users' do |g|
   g.long_desc %( Set an expiration for a guest user )
   g.command 'setExpiration' do |c|
     c.flag 'expiration_ts', desc: 'Timestamp when guest account should be disabled.'
-    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
     c.flag 'user_id', desc: 'The ID of the user to set an expiration for.'
+    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_users_setExpiration(options))
     end

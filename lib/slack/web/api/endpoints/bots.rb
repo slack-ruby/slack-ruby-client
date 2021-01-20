@@ -11,6 +11,8 @@ module Slack
           #
           # @option options [Object] :bot
           #   Bot user to get info on.
+          # @option options [Object] :team_id
+          #   encoded team id or enterprise id where the bot exists, required if org token is used.
           # @see https://api.slack.com/methods/bots.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bots/bots.info.json
           def bots_info(options = {})

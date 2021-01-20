@@ -6,7 +6,7 @@ command 'admin_emoji' do |g|
   g.desc 'Add an emoji.'
   g.long_desc %( Add an emoji. )
   g.command 'add' do |c|
-    c.flag 'name', desc: 'The name of the emoji to be removed. Colons (:myemoji:) around the value are not required, although they may be included.'
+    c.flag 'name', desc: 'The name of the emoji to be added. Colons (:myemoji:) around the value are not required, although they may be included.'
     c.flag 'url', desc: 'The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_emoji_add(options))

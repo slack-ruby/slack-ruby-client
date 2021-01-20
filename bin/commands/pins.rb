@@ -26,8 +26,6 @@ command 'pins' do |g|
   g.long_desc %( Un-pins an item from a channel. )
   g.command 'remove' do |c|
     c.flag 'channel', desc: 'Channel where the item is pinned to.'
-    c.flag 'file', desc: 'File to un-pin.'
-    c.flag 'file_comment', desc: 'File comment to un-pin.'
     c.flag 'timestamp', desc: 'Timestamp of the message to un-pin.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.pins_remove(options))

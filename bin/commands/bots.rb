@@ -7,6 +7,7 @@ command 'bots' do |g|
   g.long_desc %( Gets information about a bot user. )
   g.command 'info' do |c|
     c.flag 'bot', desc: 'Bot user to get info on.'
+    c.flag 'team_id', desc: 'encoded team id or enterprise id where the bot exists, required if org token is used.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.bots_info(options))
     end

@@ -39,6 +39,8 @@ module Slack
           #   Name of the public or private channel to create.
           # @option options [Object] :is_private
           #   Create a private channel instead of a public one.
+          # @option options [Object] :team_id
+          #   encoded team id to create the channel in, required if org token is used.
           # @see https://api.slack.com/methods/conversations.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.create.json
           def conversations_create(options = {})
@@ -160,6 +162,8 @@ module Slack
           #   Set to true to exclude archived channels from the list.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+          # @option options [Object] :team_id
+          #   encoded team id to list channels in, required if org token is used.
           # @option options [Object] :types
           #   Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.
           # @see https://api.slack.com/methods/conversations.list

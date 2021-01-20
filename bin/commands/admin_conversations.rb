@@ -62,6 +62,15 @@ command 'admin_conversations' do |g|
     end
   end
 
+  g.desc "This API endpoint can be used by any admin to get a channel's retention policy."
+  g.long_desc %( This API endpoint can be used by any admin to get a channel's retention policy. )
+  g.command 'getCustomRetention' do |c|
+    c.flag 'channel_id', desc: 'The channel to get the retention policy for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_conversations_getCustomRetention(options))
+    end
+  end
+
   g.desc 'Get all the workspaces a given public or private channel is connected to within this Enterprise org.'
   g.long_desc %( Get all the workspaces a given public or private channel is connected to within this Enterprise org. )
   g.command 'getTeams' do |c|
@@ -80,6 +89,15 @@ command 'admin_conversations' do |g|
     c.flag 'user_ids', desc: 'The users to invite.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_invite(options))
+    end
+  end
+
+  g.desc "This API endpoint can be used by any admin to remove a channel's retention policy."
+  g.long_desc %( This API endpoint can be used by any admin to remove a channel's retention policy. )
+  g.command 'removeCustomRetention' do |c|
+    c.flag 'channel_id', desc: 'The channel to set the retention policy for.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_conversations_removeCustomRetention(options))
     end
   end
 
@@ -115,6 +133,16 @@ command 'admin_conversations' do |g|
     c.flag 'prefs', desc: 'The prefs for this channel in a stringified JSON format.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_setConversationPrefs(options))
+    end
+  end
+
+  g.desc "This API endpoint can be used by any admin to set a channel's retention policy."
+  g.long_desc %( This API endpoint can be used by any admin to set a channel's retention policy. )
+  g.command 'setCustomRetention' do |c|
+    c.flag 'channel_id', desc: 'The channel to set the retention policy for.'
+    c.flag 'duration_days', desc: 'The message retention duration in days to set for this channel.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_conversations_setCustomRetention(options))
     end
   end
 

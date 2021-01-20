@@ -8,6 +8,7 @@ command 'usergroups_users' do |g|
   g.command 'list' do |c|
     c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
     c.flag 'include_disabled', desc: 'Allow results that involve disabled User Groups.'
+    c.flag 'team_id', desc: 'encoded team id where the user group exists, required if org token is used.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.usergroups_users_list(options))
     end
@@ -19,6 +20,7 @@ command 'usergroups_users' do |g|
     c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
     c.flag 'users', desc: 'A comma separated string of encoded user IDs that represent the entire list of users for the User Group.'
     c.flag 'include_count', desc: 'Include the number of users in the User Group.'
+    c.flag 'team_id', desc: 'encoded team id where the user group exists, required if org token is used.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.usergroups_users_update(options))
     end

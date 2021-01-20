@@ -7,7 +7,6 @@ command 'api' do |g|
   g.long_desc %( Checks API calling code. )
   g.command 'test' do |c|
     c.flag 'error', desc: 'Error response to return.'
-    c.flag 'foo', desc: 'example property to return.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.api_test(options))
     end

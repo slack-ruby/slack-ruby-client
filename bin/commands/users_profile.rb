@@ -3,18 +3,18 @@
 
 desc 'UsersProfile methods.'
 command 'users_profile' do |g|
-  g.desc "Retrieves a user's profile information."
-  g.long_desc %( Retrieves a user's profile information. )
+  g.desc "Retrieve a user's profile information, including their custom status."
+  g.long_desc %( Retrieve a user's profile information, including their custom status. )
   g.command 'get' do |c|
-    c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields.'
+    c.flag 'include_labels', desc: 'Include labels for each ID in custom profile fields. Using this parameter will heavily rate-limit your requests and is not recommended.'
     c.flag 'user', desc: 'User to retrieve profile info for.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.users_profile_get(options))
     end
   end
 
-  g.desc 'Set the profile information for a user.'
-  g.long_desc %( Set the profile information for a user. )
+  g.desc "Set a user's profile information, including custom status."
+  g.long_desc %( Set a user's profile information, including custom status. )
   g.command 'set' do |c|
     c.flag 'name', desc: 'Name of a single key to set. Usable only if profile is not passed.'
     c.flag 'profile', desc: 'Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.'

@@ -3,13 +3,25 @@
 
 desc 'AdminUsersSession methods.'
 command 'admin_users_session' do |g|
-  g.desc 'Invalidate a single session for a user by session_id'
-  g.long_desc %( Invalidate a single session for a user by session_id )
+  g.desc 'Revoke a single session for a user. The user will be forced to login to Slack.'
+  g.long_desc %( Revoke a single session for a user. The user will be forced to login to Slack. )
   g.command 'invalidate' do |c|
-    c.flag 'session_id', desc: '.'
-    c.flag 'team_id', desc: 'ID of the team that the session belongs to.'
+    c.flag 'session_id', desc: 'ID of the session to invalidate.'
+    c.flag 'team_id', desc: 'ID of the workspace that the session belongs to.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_users_session_invalidate(options))
+    end
+  end
+
+  g.desc 'List active user sessions for an organization'
+  g.long_desc %( List active user sessions for an organization )
+  g.command 'list' do |c|
+    c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+    c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
+    c.flag 'team_id', desc: "The ID of the workspace you'd like active sessions for. If you pass a team_id, you'll need to pass a user_id as well."
+    c.flag 'user_id', desc: "The ID of user you'd like active sessions for. If you pass a user_id, you'll need to pass a team_id as well."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_session_list(options))
     end
   end
 

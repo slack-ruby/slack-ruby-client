@@ -11,10 +11,12 @@ module Slack
           #
           # @option options [Object] :app_id
           #   The id of the app to approve.
+          # @option options [Object] :enterprise_id
+          #   The ID of the enterprise to approve the app on.
           # @option options [Object] :request_id
           #   The id of the request to approve.
           # @option options [Object] :team_id
-          #   .
+          #   The ID of the workspace to approve the app on.
           # @see https://api.slack.com/methods/admin.apps.approve
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.approve.json
           def admin_apps_approve(options = {})
@@ -22,14 +24,32 @@ module Slack
           end
 
           #
+          # Clear an app resolution
+          #
+          # @option options [Object] :app_id
+          #   The id of the app whose resolution you want to clear/undo.
+          # @option options [Object] :enterprise_id
+          #   The enterprise to clear the app resolution from.
+          # @option options [Object] :team_id
+          #   The workspace to clear the app resolution from.
+          # @see https://api.slack.com/methods/admin.apps.clearResolution
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.clearResolution.json
+          def admin_apps_clearResolution(options = {})
+            throw ArgumentError.new('Required arguments :app_id missing') if options[:app_id].nil?
+            post('admin.apps.clearResolution', options)
+          end
+
+          #
           # Restrict an app for installation on a workspace.
           #
           # @option options [Object] :app_id
           #   The id of the app to restrict.
+          # @option options [Object] :enterprise_id
+          #   The ID of the enterprise to approve the app on.
           # @option options [Object] :request_id
           #   The id of the request to restrict.
           # @option options [Object] :team_id
-          #   .
+          #   The ID of the workspace to approve the app on.
           # @see https://api.slack.com/methods/admin.apps.restrict
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.restrict.json
           def admin_apps_restrict(options = {})

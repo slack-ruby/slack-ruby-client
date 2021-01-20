@@ -90,6 +90,18 @@ module Slack
           end
 
           #
+          # This API endpoint can be used by any admin to get a channel's retention policy.
+          #
+          # @option options [Object] :channel_id
+          #   The channel to get the retention policy for.
+          # @see https://api.slack.com/methods/admin.conversations.getCustomRetention
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getCustomRetention.json
+          def admin_conversations_getCustomRetention(options = {})
+            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            post('admin.conversations.getCustomRetention', options)
+          end
+
+          #
           # Get all the workspaces a given public or private channel is connected to within this Enterprise org.
           #
           # @option options [Object] :channel_id
@@ -124,6 +136,18 @@ module Slack
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
             throw ArgumentError.new('Required arguments :user_ids missing') if options[:user_ids].nil?
             post('admin.conversations.invite', options)
+          end
+
+          #
+          # This API endpoint can be used by any admin to remove a channel's retention policy.
+          #
+          # @option options [Object] :channel_id
+          #   The channel to set the retention policy for.
+          # @see https://api.slack.com/methods/admin.conversations.removeCustomRetention
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.removeCustomRetention.json
+          def admin_conversations_removeCustomRetention(options = {})
+            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            post('admin.conversations.removeCustomRetention', options)
           end
 
           #
@@ -183,6 +207,21 @@ module Slack
             throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
             throw ArgumentError.new('Required arguments :prefs missing') if options[:prefs].nil?
             post('admin.conversations.setConversationPrefs', options)
+          end
+
+          #
+          # This API endpoint can be used by any admin to set a channel's retention policy.
+          #
+          # @option options [Object] :channel_id
+          #   The channel to set the retention policy for.
+          # @option options [Object] :duration_days
+          #   The message retention duration in days to set for this channel.
+          # @see https://api.slack.com/methods/admin.conversations.setCustomRetention
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setCustomRetention.json
+          def admin_conversations_setCustomRetention(options = {})
+            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            throw ArgumentError.new('Required arguments :duration_days missing') if options[:duration_days].nil?
+            post('admin.conversations.setCustomRetention', options)
           end
 
           #
