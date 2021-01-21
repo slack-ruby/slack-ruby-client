@@ -38,6 +38,11 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_getConversationPrefs }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
+  context 'admin.conversations_getCustomRetention' do
+    it 'requires channel_id' do
+      expect { client.admin_conversations_getCustomRetention }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+  end
   context 'admin.conversations_getTeams' do
     it 'requires channel_id' do
       expect { client.admin_conversations_getTeams }.to raise_error ArgumentError, /Required arguments :channel_id missing/
@@ -49,6 +54,11 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
     end
     it 'requires user_ids' do
       expect { client.admin_conversations_invite(channel_id: %q[C12345]) }.to raise_error ArgumentError, /Required arguments :user_ids missing/
+    end
+  end
+  context 'admin.conversations_removeCustomRetention' do
+    it 'requires channel_id' do
+      expect { client.admin_conversations_removeCustomRetention }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
   context 'admin.conversations_rename' do
@@ -65,6 +75,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
     end
     it 'requires prefs' do
       expect { client.admin_conversations_setConversationPrefs(channel_id: %q[C1234]) }.to raise_error ArgumentError, /Required arguments :prefs missing/
+    end
+  end
+  context 'admin.conversations_setCustomRetention' do
+    it 'requires channel_id' do
+      expect { client.admin_conversations_setCustomRetention(duration_days: %q[500]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+    it 'requires duration_days' do
+      expect { client.admin_conversations_setCustomRetention(channel_id: %q[C12345678]) }.to raise_error ArgumentError, /Required arguments :duration_days missing/
     end
   end
   context 'admin.conversations_setTeams' do

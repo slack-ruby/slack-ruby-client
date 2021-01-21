@@ -154,9 +154,9 @@ module Slack
           # @option options [Object] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [Object] :icon_emoji
-          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below. This argument may not be used with newer bot tokens.
+          #   Emoji to use as the icon for this message. Overrides icon_url. See authorship below. Use with bot tokens requires chat:write.customize.
           # @option options [Object] :icon_url
-          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below. This argument may not be used with newer bot tokens.
+          #   URL to an image to use as the icon for this message. See authorship below. Use with bot tokens requires chat:write.customize.
           # @option options [Object] :link_names
           #   Find and link channel names and usernames.
           # @option options [Object] :mrkdwn
@@ -172,7 +172,7 @@ module Slack
           # @option options [Object] :unfurl_media
           #   Pass false to disable unfurling of media content.
           # @option options [Object] :username
-          #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Set your bot's user name. See authorship below. Use with bot tokens requires chat:write.customize.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})

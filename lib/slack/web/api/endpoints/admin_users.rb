@@ -60,16 +60,15 @@ module Slack
           #
           # List users on a workspace
           #
-          # @option options [Object] :team_id
-          #   The ID (T1234) of the workspace.
           # @option options [Object] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :limit
           #   Limit for how many users to be retrieved per page.
+          # @option options [Object] :team_id
+          #   The ID (T1234) of the workspace.
           # @see https://api.slack.com/methods/admin.users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.list.json
           def admin_users_list(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
             if block_given?
               Pagination::Cursor.new(self, :admin_users_list, options).each do |page|
                 yield page
@@ -114,15 +113,14 @@ module Slack
           #
           # @option options [Object] :expiration_ts
           #   Timestamp when guest account should be disabled.
-          # @option options [Object] :team_id
-          #   The ID (T1234) of the workspace.
           # @option options [Object] :user_id
           #   The ID of the user to set an expiration for.
+          # @option options [Object] :team_id
+          #   The ID (T1234) of the workspace.
           # @see https://api.slack.com/methods/admin.users.setExpiration
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setExpiration.json
           def admin_users_setExpiration(options = {})
             throw ArgumentError.new('Required arguments :expiration_ts missing') if options[:expiration_ts].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
             throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
             post('admin.users.setExpiration', options)
           end

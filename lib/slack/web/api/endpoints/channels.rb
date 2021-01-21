@@ -25,6 +25,8 @@ module Slack
           #
           # @option options [Object] :name
           #   Name of channel to create.
+          # @option options [Object] :team_id
+          #   encoded team id to create the channel in, required if org token is used.
           # @option options [Object] :validate
           #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
           # @see https://api.slack.com/methods/channels.create
@@ -109,6 +111,8 @@ module Slack
           #
           # @option options [Object] :name
           #   Name of channel to join.
+          # @option options [Object] :team_id
+          #   encoded team id to list channels in, required if org token is used.
           # @option options [Object] :validate
           #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
           # @see https://api.slack.com/methods/channels.join
@@ -162,6 +166,8 @@ module Slack
           #   Exclude the members collection from each channel.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+          # @option options [Object] :team_id
+          #   encoded team id to list channels in, required if org token is used.
           # @see https://api.slack.com/methods/channels.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.list.json
           def channels_list(options = {})
@@ -179,9 +185,9 @@ module Slack
           # Sets the read cursor in a channel.
           #
           # @option options [channel] :channel
-          #   Channel to set reading cursor in.
+          #   Channel or conversation to set the read cursor for.
           # @option options [timestamp] :ts
-          #   Timestamp of the most recently seen message.
+          #   Unique identifier of message you want marked as most recently seen in this conversation.
           # @see https://api.slack.com/methods/channels.mark
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/channels/channels.mark.json
           def channels_mark(options = {})

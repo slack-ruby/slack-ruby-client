@@ -25,6 +25,8 @@ module Slack
           #
           # @option options [Object] :name
           #   Name of private channel to create.
+          # @option options [Object] :team_id
+          #   encoded team id to create the channel in, required if org token is used.
           # @option options [Object] :validate
           #   Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
           # @see https://api.slack.com/methods/groups.create
@@ -148,6 +150,8 @@ module Slack
           #   Exclude the members from each group.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+          # @option options [Object] :team_id
+          #   encoded team id to list channels in, required if org token is used.
           # @see https://api.slack.com/methods/groups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.list.json
           def groups_list(options = {})
@@ -165,9 +169,9 @@ module Slack
           # Sets the read cursor in a private channel.
           #
           # @option options [group] :channel
-          #   Private channel to set reading cursor in.
+          #   Channel or conversation to set the read cursor for.
           # @option options [timestamp] :ts
-          #   Timestamp of the most recently seen message.
+          #   Unique identifier of message you want marked as most recently seen in this conversation.
           # @see https://api.slack.com/methods/groups.mark
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/groups/groups.mark.json
           def groups_mark(options = {})

@@ -36,7 +36,7 @@ module Slack
           end
 
           #
-          # Update the configuration for a workflow extension step.
+          # Update the configuration for a workflow step.
           #
           # @option options [Object] :workflow_step_edit_id
           #   A context identifier provided with view_submission payloads used to call back to workflows.updateStep.

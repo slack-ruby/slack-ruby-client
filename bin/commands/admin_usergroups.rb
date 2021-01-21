@@ -3,8 +3,8 @@
 
 desc 'AdminUsergroups methods.'
 command 'admin_usergroups' do |g|
-  g.desc 'Add one or more default channels to an IDP group.'
-  g.long_desc %( Add one or more default channels to an IDP group. )
+  g.desc 'Add up to one hundred default channels to an IDP group.'
+  g.long_desc %( Add up to one hundred default channels to an IDP group. )
   g.command 'addChannels' do |c|
     c.flag 'channel_ids', desc: 'Comma separated string of channel IDs.'
     c.flag 'usergroup_id', desc: 'ID of the IDP group to add default channels for.'

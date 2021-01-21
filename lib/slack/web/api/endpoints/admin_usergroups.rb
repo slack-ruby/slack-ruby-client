@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminUsergroups
           #
-          # Add one or more default channels to an IDP group.
+          # Add up to one hundred default channels to an IDP group.
           #
           # @option options [Object] :channel_ids
           #   Comma separated string of channel IDs.

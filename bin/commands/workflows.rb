@@ -23,8 +23,8 @@ command 'workflows' do |g|
     end
   end
 
-  g.desc 'Update the configuration for a workflow extension step.'
-  g.long_desc %( Update the configuration for a workflow extension step. )
+  g.desc 'Update the configuration for a workflow step.'
+  g.long_desc %( Update the configuration for a workflow step. )
   g.command 'updateStep' do |c|
     c.flag 'workflow_step_edit_id', desc: 'A context identifier provided with view_submission payloads used to call back to workflows.updateStep.'
     c.flag 'inputs', desc: 'A JSON key-value map of inputs required from a user during configuration. This is the data your app expects to receive when the workflow step starts. Please note: the embedded variable format is set and replaced by the workflow system. You cannot create custom variables that will be replaced at runtime. Read more about variables in workflow steps here.'

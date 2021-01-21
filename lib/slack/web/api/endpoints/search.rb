@@ -17,6 +17,8 @@ module Slack
           #   Return matches sorted by either score or timestamp.
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
+          # @option options [Object] :team_id
+          #   encoded team id to search in, required if org token is used.
           # @see https://api.slack.com/methods/search.all
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.all.json
           def search_all(options = {})
@@ -35,6 +37,8 @@ module Slack
           #   Return matches sorted by either score or timestamp.
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
+          # @option options [Object] :team_id
+          #   encoded team id to search in, required if org token is used.
           # @see https://api.slack.com/methods/search.files
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.files.json
           def search_files(options = {})
@@ -53,6 +57,8 @@ module Slack
           #   Return matches sorted by either score or timestamp.
           # @option options [Object] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
+          # @option options [Object] :team_id
+          #   encoded team id to search in, required if org token is used.
           # @see https://api.slack.com/methods/search.messages
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.messages.json
           def search_messages(options = {})

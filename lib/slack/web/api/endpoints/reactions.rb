@@ -54,6 +54,8 @@ module Slack
           #   If true always return the complete reaction list.
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+          # @option options [Object] :team_id
+          #   encoded team id to list reactions in, required if org token is used.
           # @option options [user] :user
           #   Show reactions made by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/reactions.list

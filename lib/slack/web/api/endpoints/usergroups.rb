@@ -19,6 +19,8 @@ module Slack
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [Object] :include_count
           #   Include the number of users in each User Group.
+          # @option options [Object] :team_id
+          #   Encoded team id where the user group has to be created, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
           def usergroups_create(options = {})
@@ -33,6 +35,8 @@ module Slack
           #   The encoded ID of the User Group to disable.
           # @option options [Object] :include_count
           #   Include the number of users in the User Group.
+          # @option options [Object] :team_id
+          #   Encoded team id where the user group is, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.disable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.disable.json
           def usergroups_disable(options = {})
@@ -47,6 +51,8 @@ module Slack
           #   The encoded ID of the User Group to enable.
           # @option options [Object] :include_count
           #   Include the number of users in the User Group.
+          # @option options [Object] :team_id
+          #   Encoded team id where the user group is, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.enable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
           def usergroups_enable(options = {})
@@ -63,6 +69,8 @@ module Slack
           #   Include disabled User Groups.
           # @option options [Object] :include_users
           #   Include the list of users for each User Group.
+          # @option options [Object] :team_id
+          #   encoded team id to list user groups in, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.list.json
           def usergroups_list(options = {})
@@ -84,6 +92,8 @@ module Slack
           #   Include the number of users in the User Group.
           # @option options [Object] :name
           #   A name for the User Group. Must be unique among User Groups.
+          # @option options [Object] :team_id
+          #   encoded team id where the user group exists, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.update.json
           def usergroups_update(options = {})

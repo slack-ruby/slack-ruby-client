@@ -7,10 +7,22 @@ command 'admin_apps' do |g|
   g.long_desc %( Approve an app for installation on a workspace. )
   g.command 'approve' do |c|
     c.flag 'app_id', desc: 'The id of the app to approve.'
+    c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
     c.flag 'request_id', desc: 'The id of the request to approve.'
-    c.flag 'team_id', desc: '.'
+    c.flag 'team_id', desc: 'The ID of the workspace to approve the app on.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_apps_approve(options))
+    end
+  end
+
+  g.desc 'Clear an app resolution'
+  g.long_desc %( Clear an app resolution )
+  g.command 'clearResolution' do |c|
+    c.flag 'app_id', desc: 'The id of the app whose resolution you want to clear/undo.'
+    c.flag 'enterprise_id', desc: 'The enterprise to clear the app resolution from.'
+    c.flag 'team_id', desc: 'The workspace to clear the app resolution from.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_apps_clearResolution(options))
     end
   end
 
@@ -18,8 +30,9 @@ command 'admin_apps' do |g|
   g.long_desc %( Restrict an app for installation on a workspace. )
   g.command 'restrict' do |c|
     c.flag 'app_id', desc: 'The id of the app to restrict.'
+    c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
     c.flag 'request_id', desc: 'The id of the request to restrict.'
-    c.flag 'team_id', desc: '.'
+    c.flag 'team_id', desc: 'The ID of the workspace to approve the app on.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_apps_restrict(options))
     end

@@ -66,9 +66,9 @@ module Slack
           # Sets the read cursor in a multiparty direct message channel.
           #
           # @option options [channel] :channel
-          #   multiparty direct message channel to set reading cursor in.
+          #   Channel or conversation to set the read cursor for.
           # @option options [timestamp] :ts
-          #   Timestamp of the most recently seen message.
+          #   Unique identifier of message you want marked as most recently seen in this conversation.
           # @see https://api.slack.com/methods/mpim.mark
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/mpim/mpim.mark.json
           def mpim_mark(options = {})

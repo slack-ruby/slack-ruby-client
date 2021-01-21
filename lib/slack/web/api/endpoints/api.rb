@@ -11,8 +11,6 @@ module Slack
           #
           # @option options [Object] :error
           #   Error response to return.
-          # @option options [Object] :foo
-          #   example property to return.
           # @see https://api.slack.com/methods/api.test
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/api/api.test.json
           def api_test(options = {})
