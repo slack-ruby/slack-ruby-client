@@ -38,7 +38,7 @@ module Slack
       private
 
       def detect_concurrency
-        %i[Async Eventmachine].each do |concurrency|
+        %i[Async].each do |concurrency|
           begin
             return Slack::RealTime::Concurrency.const_get(concurrency)
           rescue LoadError, NameError
