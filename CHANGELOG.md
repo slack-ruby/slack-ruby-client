@@ -1,3 +1,7 @@
+### 0.16.1 (Next)
+
+* Your contribution here.
+
 ### 0.16.0 (2021/01/24)
 
 * [#350](https://github.com/slack-ruby/slack-ruby-client/pull/350): Handle server errors such as timouts & non-json responses (see [Upgrading to 0.16.0](UPGRADING.md#upgrading-to--0160)) - [@ojab](https://github.com/ojab).
