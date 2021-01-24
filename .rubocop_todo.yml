@@ -18,13 +18,6 @@ Lint/RedundantCopDisableDirective:
   Exclude:
     - 'lib/slack-ruby-client.rb'
 
-# Offense count: 2
-# Configuration parameters: AllowComments.
-Lint/SuppressedException:
-  Exclude:
-    - 'spec/slack/real_time/concurrency/celluloid_spec.rb'
-    - 'spec/slack/real_time/concurrency/eventmachine_spec.rb'
-
 # Offense count: 11
 # Configuration parameters: IgnoredMethods.
 Metrics/AbcSize:
@@ -55,11 +48,6 @@ Metrics/PerceivedComplexity:
 Performance/RegexpMatch:
   Exclude:
     - 'lib/tasks/web.rake'
-
-# Offense count: 1
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/slack/real_time/concurrency/celluloid_spec.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.
@@ -134,8 +122,6 @@ RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/slack/events/request_spec.rb'
     - 'spec/slack/real_time/client_spec.rb'
-    - 'spec/slack/real_time/concurrency/celluloid_spec.rb'
-    - 'spec/slack/real_time/concurrency/eventmachine_spec.rb'
     - 'spec/slack/web/faraday/response/raise_error_spec.rb'
     - 'spec/support/real_time/connected_client.rb'
 
