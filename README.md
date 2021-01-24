@@ -646,6 +646,6 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
-Copyright (c) 2015-2019, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
+Copyright (c) 2015-2021, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
 
 This project is licensed under the [MIT License](LICENSE.md).
