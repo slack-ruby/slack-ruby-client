@@ -3,6 +3,14 @@ Upgrading Slack-Ruby-Client
 
 ### Upgrading to >= 0.16.0
 
+#### Removed Celluloid and Faye-Websocket Concurrency Support
+
+Concurrency support for `celluloid-io` and `faye-websocket` has been removed. If you are running a RealTime bot on Celluloid or Faye, you must upgrade to `async-websocket`. Please note that RealTime bots are deprecated by Slack, and we generally recommend you [migrate your classic, RealTime bot, to granular permissions](https://code.dblock.org/2020/11/30/migrating-classic-slack-ruby-bots-to-granular-permissions.html).
+
+See [#338](https://github.com/slack-ruby/slack-ruby-client/issues/338) for more information.
+
+#### Error Handling
+
 As of 0.16.0 `Faraday::Error` exceptions sans `Faraday::ClientError` are wrapped into `Slack::Web::Api::Errors::ServerError`, so if you're rescuing `Faraday::Error` — you should adjust your code to use `Slack::Web::Api::Errors::ServerError` and use `exception.cause` if underlying `Faraday::Error` is needed.
 
 See [README#other-errors](README.md#other-errors) and [#350](https://github.com/slack-ruby/slack-ruby-client/pull/350) for more information.

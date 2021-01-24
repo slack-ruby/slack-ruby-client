@@ -1,11 +1,10 @@
-### 0.16.0 (Next)
+### 0.16.0 (2021/01/24)
 
-* [#348](https://github.com/slack-ruby/slack-ruby-client/pull/348): Added `admin_conversations_archive`, `admin_conversations_convertToPrivate`, `admin_conversations_create`, `admin_conversations_delete`, `admin_conversations_disconnectShared`, `admin_conversations_getConversationPrefs`, `admin_conversations_getTeams`, `admin_conversations_invite`, `admin_conversations_rename`, `admin_conversations_search`, `admin_conversations_setConversationPrefs`, `admin_conversations_unarchive`, `admin_conversations_ekm_listOriginalConnectedChannelInfo`, `admin_users_session_invalidate`, `apps_event_authorizations_list`, `conversations_mark`, `workflows_stepCompleted`, `workflows_stepFailed` and `workflows_updateStep` endpoints - [@wasabigeek](https://github.com/wasabigeek).
 * [#350](https://github.com/slack-ruby/slack-ruby-client/pull/350): Handle server errors such as timouts & non-json responses (see [Upgrading to 0.16.0](UPGRADING.md#upgrading-to--0160)) - [@ojab](https://github.com/ojab).
 * [#354](https://github.com/slack-ruby/slack-ruby-client/pull/354): Rewind body after checking request signature - [@sunny](https://github.com/sunny).
-* [#355](https://github.com/slack-ruby/slack-ruby-client/pull/355), [#357](https://github.com/slack-ruby/slack-ruby-client/pull/357): Remove celluloid and faye-websocket support - [@wasabigeek](https://github.com/wasabigeek).
+* [#355](https://github.com/slack-ruby/slack-ruby-client/pull/355), [#357](https://github.com/slack-ruby/slack-ruby-client/pull/357): Removed celluloid and faye-websocket support - [@wasabigeek](https://github.com/wasabigeek).
 * [#356](https://github.com/slack-ruby/slack-ruby-client/pull/356): Added `admin_apps_clearResolution`, `admin_conversations_getCustomRetention`, `admin_conversations_removeCustomRetention`, `admin_conversations_setCustomRetention` and `admin_users_session_list` endpoints - [@dblock](https://github.com/dblock).
-* Your contribution here.
+* [#348](https://github.com/slack-ruby/slack-ruby-client/pull/348): Added `admin_conversations_archive`, `admin_conversations_convertToPrivate`, `admin_conversations_create`, `admin_conversations_delete`, `admin_conversations_disconnectShared`, `admin_conversations_getConversationPrefs`, `admin_conversations_getTeams`, `admin_conversations_invite`, `admin_conversations_rename`, `admin_conversations_search`, `admin_conversations_setConversationPrefs`, `admin_conversations_unarchive`, `admin_conversations_ekm_listOriginalConnectedChannelInfo`, `admin_users_session_invalidate`, `apps_event_authorizations_list`, `conversations_mark`, `workflows_stepCompleted`, `workflows_stepFailed` and `workflows_updateStep` endpoints - [@wasabigeek](https://github.com/wasabigeek).
 
 ### 0.15.1 (2020/9/3)
 
