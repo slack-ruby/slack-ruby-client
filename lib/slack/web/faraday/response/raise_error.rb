@@ -23,12 +23,8 @@ module Slack
 
           def call(env)
             super
-          rescue Slack::Web::Api::Errors::SlackError, Slack::Web::Api::Errors::TooManyRequestsError
-            raise
           rescue ::Faraday::ParsingError
             raise Slack::Web::Api::Errors::ParsingError.new('parsing_error', env.response)
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed
-            raise Slack::Web::Api::Errors::TimeoutError.new('timeout_error', env.response)
           end
         end
       end
