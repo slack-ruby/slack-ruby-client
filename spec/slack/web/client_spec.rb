@@ -322,12 +322,22 @@ RSpec.describe Slack::Web::Client do
       end
 
       context '5xx response' do
-        before { stub_slack_request.to_return(status: 500, body: '{}') }
+        context 'with a JSON body' do
+          before { stub_slack_request.to_return(status: 500, body: '{}') }
 
-        it 'raises UnavailableError' do
-          expect { request }.to raise_error(Slack::Web::Api::Errors::UnavailableError).with_message('unavailable_error')
-          expect(exception.cause).to be_a(Faraday::ServerError)
-          expect(exception.response.status).to eq(500)
+          it 'raises UnavailableError' do
+            expect { request }.to raise_error(Slack::Web::Api::Errors::UnavailableError).with_message('unavailable_error')
+            expect(exception.response.status).to eq(500)
+          end
+        end
+
+        context 'with a HTML response' do
+          before { stub_slack_request.to_return(status: 500, body: '<html></html>') }
+
+          it 'raises UnavailableError' do
+            expect { request }.to raise_error(Slack::Web::Api::Errors::UnavailableError).with_message('unavailable_error')
+            expect(exception.response.status).to eq(500)
+          end
         end
       end
     end
