@@ -38,19 +38,9 @@ module Slack
       private
 
       def detect_concurrency
-        %i[Async].each do |concurrency|
-          begin
-            return Slack::RealTime::Concurrency.const_get(concurrency)
-          rescue LoadError, NameError
-            false # could not be loaded, missing dependencies
-          end
-        end
-
-        raise(
-          NoConcurrencyError,
-          'Missing concurrency. Add async-websocket or faye-websocket ' \
-          'to your Gemfile.'
-        )
+        Slack::RealTime::Concurrency.const_get(:Async)
+      rescue LoadError, NameError
+        raise NoConcurrencyError, 'Missing concurrency. Add async-websocket to your Gemfile.'
       end
     end
 

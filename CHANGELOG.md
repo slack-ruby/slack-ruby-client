@@ -1,7 +1,8 @@
 ### 0.16.1 (Next)
 
-* Your contribution here.
 * [#359](https://github.com/slack-ruby/slack-ruby-client/pull/359): Handle non-JSON 500 errors - [@agrobbin](https://github.com/agrobbin).
+* [#360](https://github.com/slack-ruby/slack-ruby-client/pull/360): Remove faye-websocket from the concurrency detection error message - [@dblock](https://github.com/dblock).
+* Your contribution here.
 
 ### 0.16.0 (2021/01/24)
 
