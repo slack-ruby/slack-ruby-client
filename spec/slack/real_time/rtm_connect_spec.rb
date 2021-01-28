@@ -3,7 +3,7 @@
 
 #
 # to re-record a rtm_connect fixture run with
-# SLACK_API_TOKEN=... CONCURRENCY=faye-websocket rspec spec/slack/real_time/rtm_connect_spec.rb
+# SLACK_API_TOKEN=... CONCURRENCY=async-websocket rspec spec/slack/real_time/rtm_connect_spec.rb
 # edit rtm_connect.yml and remove the token, fix wss:// path (run specs, fix failures)
 #
 
