@@ -101,7 +101,7 @@ command 'conversations' do |g|
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
-    c.flag 'team_id', desc: 'encoded team id to list channels in, required if org token is used.'
+    c.flag 'team_id', desc: 'encoded team id to list channels in, required if token belongs to org-wide app.'
     c.flag 'types', desc: 'Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.conversations_list(options))
@@ -154,7 +154,7 @@ command 'conversations' do |g|
   g.long_desc %( Retrieve a thread of messages posted to a conversation )
   g.command 'replies' do |c|
     c.flag 'channel', desc: 'Conversation ID to fetch thread from.'
-    c.flag 'ts', desc: "Unique identifier of a thread's parent message. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message."
+    c.flag 'ts', desc: "Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message."
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
     c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results only when either timestamp is specified.'
     c.flag 'latest', desc: 'End of time range of messages to include in results.'

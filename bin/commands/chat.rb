@@ -80,20 +80,21 @@ command 'chat' do |g|
   g.long_desc %( Sends a message to a channel. )
   g.command 'postMessage' do |c|
     c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
-    c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
-    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below. This argument may not be used with newer bot tokens.'
+    c.flag 'as_user', desc: 'Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.'
     c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
     c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
-    c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. See authorship below. Use with bot tokens requires chat:write.customize.'
-    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. See authorship below. Use with bot tokens requires chat:write.customize.'
+    c.flag 'draft_id', desc: 'The id of the draft associated with the message.'
+    c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
+    c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
     c.flag 'link_names', desc: 'Find and link channel names and usernames.'
     c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
     c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
     c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
+    c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
     c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
     c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
     c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
-    c.flag 'username', desc: "Set your bot's user name. See authorship below. Use with bot tokens requires chat:write.customize."
+    c.flag 'username', desc: "Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below."
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.chat_postMessage(options))
     end
@@ -125,7 +126,8 @@ command 'chat' do |g|
     c.flag 'channel', desc: 'Channel ID of the message.'
     c.flag 'ts', desc: 'Timestamp of the message to add unfurl behavior to.'
     c.flag 'unfurls', desc: 'URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.'
-    c.flag 'user_auth_message', desc: 'Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior.'
+    c.flag 'user_auth_blocks', desc: 'Provide a JSON based array of structured blocks presented as URL-encoded string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior.'
+    c.flag 'user_auth_message', desc: 'Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior. Provides two buttons, Not now or Never ask me again.'
     c.flag 'user_auth_required', desc: 'Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain.'
     c.flag 'user_auth_url', desc: 'Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.'
     c.action do |_global_options, options, _args|

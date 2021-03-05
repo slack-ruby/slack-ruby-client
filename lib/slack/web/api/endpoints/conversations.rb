@@ -163,7 +163,7 @@ module Slack
           # @option options [Object] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
           # @option options [Object] :team_id
-          #   encoded team id to list channels in, required if org token is used.
+          #   encoded team id to list channels in, required if token belongs to org-wide app.
           # @option options [Object] :types
           #   Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.
           # @see https://api.slack.com/methods/conversations.list
@@ -255,7 +255,7 @@ module Slack
           # @option options [channel] :channel
           #   Conversation ID to fetch thread from.
           # @option options [timestamp] :ts
-          #   Unique identifier of a thread's parent message. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message.
+          #   Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message.
           # @option options [Object] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
           # @option options [Object] :inclusive

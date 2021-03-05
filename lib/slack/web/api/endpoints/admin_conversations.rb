@@ -64,20 +64,6 @@ module Slack
           end
 
           #
-          # Disconnect a connected channel from one or more workspaces.
-          #
-          # @option options [Object] :channel_id
-          #   The channel to be disconnected from some workspaces.
-          # @option options [Object] :leaving_team_ids
-          #   The team to be removed from the channel. Currently only a single team id can be specified.
-          # @see https://api.slack.com/methods/admin.conversations.disconnectShared
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.disconnectShared.json
-          def admin_conversations_disconnectShared(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            post('admin.conversations.disconnectShared', options)
-          end
-
-          #
           # Get conversation preferences for a public or private channel.
           #
           # @option options [Object] :channel_id
