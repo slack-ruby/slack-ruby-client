@@ -19,13 +19,13 @@ module Slack
 
       # Request timestamp.
       def timestamp
-        @timestamp ||= http_request.headers['X-Slack-Request-Timestamp']
+        @timestamp ||= http_request.get_header('HTTP_X_SLACK_REQUEST_TIMESTAMP')
       end
 
       # The signature is created by combining the signing secret with the body of the request
       # Slack is sending using a standard HMAC-SHA256 keyed hash.
       def signature
-        @signature ||= http_request.headers['X-Slack-Signature']
+        @signature ||= http_request.get_header('HTTP_X_SLACK_SIGNATURE')
       end
 
       # Signature version.
