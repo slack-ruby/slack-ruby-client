@@ -10,7 +10,6 @@ require_relative 'endpoints/admin_barriers'
 require_relative 'endpoints/admin_conversations'
 require_relative 'endpoints/admin_conversations_ekm'
 require_relative 'endpoints/admin_conversations_restrictAccess'
-require_relative 'endpoints/admin_conversations_whitelist'
 require_relative 'endpoints/admin_emoji'
 require_relative 'endpoints/admin_inviteRequests'
 require_relative 'endpoints/admin_inviteRequests_approved'
@@ -86,7 +85,6 @@ module Slack
         include AdminConversations
         include AdminConversationsEkm
         include AdminConversationsRestrictaccess
-        include AdminConversationsWhitelist
         include AdminEmoji
         include AdminInviterequests
         include AdminInviterequestsApproved

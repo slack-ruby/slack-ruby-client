@@ -6,7 +6,7 @@ command 'admin_teams' do |g|
   g.desc 'Create an Enterprise team.'
   g.long_desc %( Create an Enterprise team. )
   g.command 'create' do |c|
-    c.flag 'team_domain', desc: 'Team domain (for example, slacksoftballteam).'
+    c.flag 'team_domain', desc: 'Team domain (for example, slacksoftballteam). Domains are limited to 21 characters.'
     c.flag 'team_name', desc: 'Team name (for example, Slack Softball Team).'
     c.flag 'team_description', desc: 'Description for the team.'
     c.flag 'team_discoverability', desc: "Who can join the team. A team's discoverability can be open, closed, invite_only, or unlisted."

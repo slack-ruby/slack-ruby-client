@@ -10,7 +10,7 @@ module Slack
           # Create an Enterprise team.
           #
           # @option options [Object] :team_domain
-          #   Team domain (for example, slacksoftballteam).
+          #   Team domain (for example, slacksoftballteam). Domains are limited to 21 characters.
           # @option options [Object] :team_name
           #   Team name (for example, Slack Softball Team).
           # @option options [Object] :team_description

@@ -28,11 +28,6 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_delete }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
-  context 'admin.conversations_disconnectShared' do
-    it 'requires channel_id' do
-      expect { client.admin_conversations_disconnectShared }.to raise_error ArgumentError, /Required arguments :channel_id missing/
-    end
-  end
   context 'admin.conversations_getConversationPrefs' do
     it 'requires channel_id' do
       expect { client.admin_conversations_getConversationPrefs }.to raise_error ArgumentError, /Required arguments :channel_id missing/

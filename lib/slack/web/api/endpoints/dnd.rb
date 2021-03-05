@@ -27,6 +27,8 @@ module Slack
           #
           # Retrieves a user's current Do Not Disturb status.
           #
+          # @option options [Object] :team_id
+          #   Encoded team id where passed in user param belongs, required if org token is used. If no user param is passed, then a team which has access to the app should be passed.
           # @option options [user] :user
           #   User to fetch status for (defaults to current user).
           # @see https://api.slack.com/methods/dnd.info
@@ -53,6 +55,8 @@ module Slack
           #
           # @option options [Object] :users
           #   Comma-separated list of users to fetch Do Not Disturb status for.
+          # @option options [Object] :team_id
+          #   Encoded team id where passed in users belong, required if org token is used.
           # @see https://api.slack.com/methods/dnd.teamInfo
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.teamInfo.json
           def dnd_teamInfo(options = {})
