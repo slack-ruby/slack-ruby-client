@@ -21,13 +21,14 @@ RSpec.describe Slack::Events::Request do
     '"P7sFXA4o3HV2hTx4zb4zcQ9yrvuQs8pDh6EacOxmMRj0tJaXfQFF","type":"url_verification"}'
   end
   let(:http_request) do
-    double(
-      headers: {
-        'X-Slack-Request-Timestamp' => timestamp,
-        'X-Slack-Signature' => signature
-      },
+    request_double = double(
       body: StringIO.new(body)
     )
+
+    allow(request_double).to receive(:get_header).with('HTTP_X_SLACK_REQUEST_TIMESTAMP') { timestamp }
+    allow(request_double).to receive(:get_header).with('HTTP_X_SLACK_SIGNATURE') { signature }
+
+    request_double
   end
 
   after do
