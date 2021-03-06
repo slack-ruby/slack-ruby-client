@@ -166,7 +166,6 @@ module Slack
         class ForbiddenHandle < SlackError; end
         class ForbiddenTeam < SlackError; end
         class GroupAlreadyLinkedToChannel < SlackError; end
-        class GroupContainsOthers < SlackError; end
         class GroupMustNotBeEmpty < SlackError; end
         class GroupNotFound < SlackError; end
         class HandleAlreadyExists < SlackError; end
@@ -198,7 +197,6 @@ module Slack
         class InvalidEmail < SlackError; end
         class InvalidEventContext < SlackError; end
         class InvalidExternalId < SlackError; end
-        class InvalidForIsMpim < SlackError; end
         class InvalidFormData < SlackError; end
         class InvalidGrantType < SlackError; end
         class InvalidInputs < SlackError; end
@@ -316,7 +314,6 @@ module Slack
         class NotImplemented < SlackError; end
         class NotInChannel < SlackError; end
         class NotInDnd < SlackError; end
-        class NotInGroup < SlackError; end
         class NotPinnable < SlackError; end
         class NotPinned < SlackError; end
         class NotReactable < SlackError; end
@@ -588,7 +585,6 @@ module Slack
           'forbidden_handle' => ForbiddenHandle,
           'forbidden_team' => ForbiddenTeam,
           'group_already_linked_to_channel' => GroupAlreadyLinkedToChannel,
-          'group_contains_others' => GroupContainsOthers,
           'group_must_not_be_empty' => GroupMustNotBeEmpty,
           'group_not_found' => GroupNotFound,
           'handle_already_exists' => HandleAlreadyExists,
@@ -620,7 +616,6 @@ module Slack
           'invalid_email' => InvalidEmail,
           'invalid_event_context' => InvalidEventContext,
           'invalid_external_id' => InvalidExternalId,
-          'invalid_for_is_mpim' => InvalidForIsMpim,
           'invalid_form_data' => InvalidFormData,
           'invalid_grant_type' => InvalidGrantType,
           'invalid_inputs' => InvalidInputs,
@@ -738,7 +733,6 @@ module Slack
           'not_implemented' => NotImplemented,
           'not_in_channel' => NotInChannel,
           'not_in_dnd' => NotInDnd,
-          'not_in_group' => NotInGroup,
           'not_pinnable' => NotPinnable,
           'not_pinned' => NotPinned,
           'not_reactable' => NotReactable,
