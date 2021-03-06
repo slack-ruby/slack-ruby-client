@@ -150,10 +150,10 @@ See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
 ##### List Channels
 
-List channels with [channels_list](https://api.slack.com/methods/channels.list).
+List channels with [conversations_list](https://api.slack.com/methods/conversations.list).
 
 ```ruby
-channels = client.channels_list.channels
+channels = client.conversations_list.channels
 
 general_channel = channels.detect { |c| c.name == 'general' }
 ```
@@ -175,14 +175,14 @@ client.files_upload(
 
 ##### Get Channel Info
 
-You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `channels_list` in order to locate the channel ID.
+You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `conversations_list` in order to locate the channel ID.
 
 ```ruby
-client.channels_info(channel: 'C04KB5X4D') # calls channels_info
+client.conversations_info(channel: 'C04KB5X4D') # calls conversations_info
 ```
 
 ```ruby
-client.channels_info(channel: '#general') # calls channels_list followed by channels_info
+client.conversations_info(channel: '#general') # calls conversations_list followed by conversations_info
 ```
 
 ##### Get User Info
@@ -243,7 +243,7 @@ adapter             | Optional HTTP adapter to use, defaults to `Faraday.default
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
 ```ruby
-client.channels_list(request: { timeout: 180 })
+client.conversations_list(request: { timeout: 180 })
 ```
 
 You can also control what proxy options are used by modifying the `http_proxy` environment variable per [Net::HTTP's documentation](https://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html#class-Net::HTTP-label-Proxies).
