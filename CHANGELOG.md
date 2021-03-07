@@ -1,11 +1,10 @@
-### 0.17.0 (Next)
+### 0.17.0 (2021/03/07)
 
 * [#370](https://github.com/slack-ruby/slack-ruby-client/pull/370): Removed deprecated `im_`, `mpim_`, `channels_`, and `groups_` methods - [@dblock](https://github.com/dblock).
 * [#368](https://github.com/slack-ruby/slack-ruby-client/pull/368): Removed `admin_conversations_whitelist` and `admin_conversations_disconnectShared` - [@dblock](https://github.com/dblock).
 * [#359](https://github.com/slack-ruby/slack-ruby-client/pull/359): Handle non-JSON 500 errors - [@agrobbin](https://github.com/agrobbin).
 * [#360](https://github.com/slack-ruby/slack-ruby-client/pull/360): Remove faye-websocket from the concurrency detection error message - [@dblock](https://github.com/dblock).
 * [#369](https://github.com/slack-ruby/slack-ruby-client/pull/369): Support rack requests in `Slack::Events::Request` - [@wedgex](https://github.com/wedgex).
-* Your contribution here.
 
 ### 0.16.0 (2021/01/24)
 
