@@ -1,3 +1,7 @@
+### 0.17.1 (Next)
+
+* Your contribution here.
+
 ### 0.17.0 (2021/03/07)
 
 * [#370](https://github.com/slack-ruby/slack-ruby-client/pull/370): Removed deprecated `im_`, `mpim_`, `channels_`, and `groups_` methods - [@dblock](https://github.com/dblock).
