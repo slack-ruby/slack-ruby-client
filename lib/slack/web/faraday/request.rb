@@ -23,6 +23,9 @@ module Slack
 
         def request(method, path, options)
           options = options.merge(token: token)
+          use_full_response = options.fetch(:full_response) { full_response }
+          options.delete(:full_response)
+
           response = connection.send(method) do |request|
             case method
             when :get, :delete
@@ -33,7 +36,12 @@ module Slack
             end
             request.options.merge!(options.delete(:request)) if options.key?(:request)
           end
-          response.body
+
+          if use_full_response
+            response
+          else
+            response.body
+          end
         end
       end
     end
