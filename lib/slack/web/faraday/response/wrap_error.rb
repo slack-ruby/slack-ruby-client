@@ -9,13 +9,13 @@ module Slack
           def on_complete(env)
             return unless UNAVAILABLE_ERROR_STATUSES.cover?(env.status)
 
-            raise Slack::Web::Api::Errors::UnavailableError.new('unavailable_error', env.response)
+            raise Slack::Web::Api::Errors::UnavailableError.new(env.response)
           end
 
           def call(env)
             super
           rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed
-            raise Slack::Web::Api::Errors::TimeoutError.new('timeout_error', env.response)
+            raise Slack::Web::Api::Errors::TimeoutError.new(env.response)
           end
         end
       end
