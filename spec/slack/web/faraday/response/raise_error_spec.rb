@@ -13,6 +13,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
   describe '#on_complete' do
     context 'with status of 429' do
       let(:status) { 429 }
+      let(:response) { OpenStruct.new(headers: { 'retry-after' => 10 }) }
 
       it 'raises a TooManyRequestsError' do
         expect { raise_error_obj.on_complete(env) }.to(
