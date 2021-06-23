@@ -1,6 +1,42 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 0.18.0
+
+#### Error Handling
+
+As of 0.18.0 `Slack::Web::Api::Errors::ServerError` and its subclasses (introduced in 0.16.0) no longer extend `Slack::Web::Api::Errors::InternalError` or its parent `Slack::Web::Api::Errors::SlackError`. If you are rescuing `SlackError` or `InternalError` with the intention of including `ServerError` and its subclasses you should adjust your code to explicitly rescue `Slack::Web::Api::Errors::ServerError`.
+
+```ruby
+# Before
+begin
+  client.auth_test
+rescue Slack::Web::Api::Errors::SlackError
+  # Includes all server errors
+end
+
+# After
+begin
+  client.auth_test
+rescue Slack::Web::Api::Errors::SlackError, Slack::Web::Api::Errors::ServerError
+  # Need to rescue the server errors separately from SlackError
+end
+```
+
+Additionally the `initialize` method for `ParsingError`, `TimeoutError`, and `UnavailableError` have changed from `new(message, response)` to `new(response)`. The `message` is now built into the definition of these classes. If you are instantiating or raising these errors in your code (perhaps in tests) you will need to update your code.
+
+```ruby
+# Before
+error = Slack::Web::Api::Errors::TimeoutError.new('timeout_error', response)
+error.message
+# => 'timeout_error'
+
+# After
+error = Slack::Web::Api::Errors::TimeoutError.new(response)
+error.message
+# => 'timeout_error'
+```
+
 ### Upgrading to >= 0.16.0
 
 #### Removed Celluloid and Faye-Websocket Concurrency Support

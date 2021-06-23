@@ -24,7 +24,7 @@ module Slack
           def call(env)
             super
           rescue ::Faraday::ParsingError
-            raise Slack::Web::Api::Errors::ParsingError.new('parsing_error', env.response)
+            raise Slack::Web::Api::Errors::ParsingError, env.response
           end
         end
       end

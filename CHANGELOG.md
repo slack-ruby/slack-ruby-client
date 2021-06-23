@@ -1,6 +1,7 @@
-### 0.17.1 (Next)
+### 0.18.0 (Next)
 
 * Your contribution here.
+* [#380](https://github.com/slack-ruby/slack-ruby-client/pull/380): Updates to server error classes and hierarchy - [@jmanian](https://github.com/jmanian).
 
 ### 0.17.0 (2021/03/07)
 

@@ -30,7 +30,7 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
       cursor.to_a
     end
     context 'with rate limiting' do
-      let(:error) { Slack::Web::Api::Errors::TooManyRequestsError.new(nil) }
+      let(:error) { Slack::Web::Api::Errors::TooManyRequestsError.new(OpenStruct.new(headers: { 'retry-after' => 9 })) }
 
       context 'with default max retries' do
         it 'sleeps after a TooManyRequestsError' do
@@ -43,7 +43,6 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
           expect(client).to(
             receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_raise(error)
           )
-          expect(error).to receive(:retry_after).once.ordered.and_return(9)
           expect(cursor).to receive(:sleep).once.ordered.with(9)
           expect(client).to(
             receive(:users_list)
@@ -67,7 +66,6 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
           expect(client).to(
             receive(:users_list).with(limit: 100, cursor: 'next').exactly(5).times.and_raise(error)
           )
-          expect(error).to receive(:retry_after).exactly(4).times.and_return(9)
           expect(cursor).to receive(:sleep).exactly(4).times.with(9)
           expect { cursor.to_a }.to raise_error(error)
         end
