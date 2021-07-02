@@ -6,7 +6,7 @@ module Slack
       include Faraday::Request
       include Api::Endpoints
 
-      attr_accessor(*Config::ATTRIBUTES)
+      attr_accessor(*Config::ATTRIBUTES, :oauth_scopes)
 
       def initialize(options = {})
         Slack::Web::Config::ATTRIBUTES.each do |key|

@@ -28,6 +28,7 @@ module Slack
                 connection.use ::FaradayMiddleware::Mashify, mash_class: Slack::Messages::Message
                 connection.use ::FaradayMiddleware::ParseJson
                 connection.use ::Slack::Web::Faraday::Response::WrapError
+                connection.use ::Slack::Web::Faraday::Response::StoreScopes, client: self if store_scopes
                 connection.response :logger, logger if logger
                 connection.adapter adapter
               end
