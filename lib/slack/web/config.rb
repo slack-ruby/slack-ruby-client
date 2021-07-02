@@ -17,6 +17,7 @@ module Slack
         default_page_size
         default_max_retries
         adapter
+        store_scopes
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES)
@@ -34,6 +35,7 @@ module Slack
         self.default_page_size = 100
         self.default_max_retries = 100
         self.adapter = ::Faraday.default_adapter
+        self.store_scopes = nil
       end
     end
 
