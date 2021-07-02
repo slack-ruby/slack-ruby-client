@@ -1,6 +1,7 @@
 ### 0.18.0 (Next)
 
 * Your contribution here.
+* [#382](https://github.com/slack-ruby/slack-ruby-client/pull/382): Add option to extract OAuth scopes from Web response headers - [@jmanian](https://github.com/jmanian).
 * [#380](https://github.com/slack-ruby/slack-ruby-client/pull/380): Updates to server error classes and hierarchy - [@jmanian](https://github.com/jmanian).
 
 ### 0.17.0 (2021/03/07)
