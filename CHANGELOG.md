@@ -1,6 +1,7 @@
 ### 0.18.0 (Next)
 
 * Your contribution here.
+* [#386](https://github.com/slack-ruby/slack-ruby-client/pull/386): Gemspec: drop unused `test_files` directive - [@olleolleolle](https://github.com/olleolleolle).
 * [#380](https://github.com/slack-ruby/slack-ruby-client/pull/380): Updates to server error classes and hierarchy - [@jmanian](https://github.com/jmanian).
 
 ### 0.17.0 (2021/03/07)
