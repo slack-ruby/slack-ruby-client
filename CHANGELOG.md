@@ -3,6 +3,7 @@
 * Your contribution here.
 * [#386](https://github.com/slack-ruby/slack-ruby-client/pull/386): Gemspec: drop unused `test_files` directive - [@olleolleolle](https://github.com/olleolleolle).
 * [#380](https://github.com/slack-ruby/slack-ruby-client/pull/380): Updates to server error classes and hierarchy - [@jmanian](https://github.com/jmanian).
+* [#363](https://github.com/slack-ruby/slack-ruby-client/pull/387): Send token in Authorization header - [@chrisbloom7](https://github.com/chrisbloom7).
 
 ### 0.17.0 (2021/03/07)
 
