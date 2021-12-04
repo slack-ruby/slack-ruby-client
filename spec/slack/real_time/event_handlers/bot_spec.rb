@@ -6,7 +6,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
 
   context 'bot' do
     it 'sets bot data on rtm.start' do
-      expect(client.bots.count).to eq 16
+      expect(client.bots.count).to eq 83
     end
     it 'bot_added' do
       expect do

@@ -5,12 +5,12 @@ http_interactions:
     uri: https://slack.com/api/auth.test
     body:
       encoding: UTF-8
-      string: token=token
+      string: ''
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
-      - Slack Ruby Gem 1.1.1
+      - Slack Ruby Client/0.18.0
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -20,38 +20,60 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Cache-Control:
-      - private, no-cache, no-store, must-revalidate
-      Content-Type:
-      - application/json; charset=utf-8
       Date:
-      - Tue, 28 Apr 2015 12:55:23 GMT
-      Expires:
-      - Mon, 26 Jul 1997 05:00:00 GMT
-      Pragma:
-      - no-cache
+      - Sat, 04 Dec 2021 20:13:19 GMT
       Server:
       - Apache
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      X-Accepted-Oauth-Scopes:
-      - identify
-      X-Content-Type-Options:
-      - nosniff
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
       X-Oauth-Scopes:
-      - identify,read,post,client
+      - identify,read,post,client,apps
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
       X-Xss-Protection:
       - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - cf2877c6fab8f3aa7747f2e07d0b5fd5
+      Vary:
+      - Accept-Encoding
       Content-Length:
-      - '128'
-      Connection:
-      - keep-alive
+      - '165'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '18'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-i2dg
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      Via:
+      - envoy-www-iad-pwei, envoy-edge-iad-p7fn
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
     body:
       encoding: UTF-8
-      string: '{"ok":true,"url":"https:\/\/rubybot.slack.com\/","team":"team_name","user":"user_name","team_id":"TDEADBEEF","user_id":"UBAADFOOD"}'
-    http_version:
-  recorded_at: Tue, 28 Apr 2015 12:55:22 GMT
+      string: '{"ok":true,"url":"https:\/\/rubybot.slack.com\/","team":"team_name","user":"user_name","team_id":"TDEADBEEF","user_id":"UBAADFOOD","bot_id":"B0J1L75DY","is_enterprise_install":false}'
+  recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
+recorded_with: VCR 6.0.0

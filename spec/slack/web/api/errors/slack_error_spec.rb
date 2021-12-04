@@ -28,9 +28,8 @@ RSpec.describe Slack::Web::Api::Errors::SlackError do
       expect(e.error).to eql 'invalid_arguments'
       expect(e.response_metadata).to eq(
         'messages' => [
-          "[ERROR] missing required field: title [json-pointer:\/view]",
-          "[ERROR] missing required field: blocks [json-pointer:\/view]",
-          "[ERROR] missing required field: type [json-pointer:\/view]"
+          '[ERROR] failed to match all allowed schemas [json-pointer:/view]',
+          '[ERROR] missing required field: type [json-pointer:/view]'
         ]
       )
     end

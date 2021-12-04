@@ -32,6 +32,9 @@ Style/Documentation:
 Style/ModuleFunction:
   Enabled: false
 
+RSpec/InstanceVariable:
+  Enabled: false
+
 Naming/FileName:
   Exclude:
     - lib/slack-ruby-client.rb # Required to match gemspec name

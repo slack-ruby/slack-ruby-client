@@ -8,7 +8,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Users do
     it 'list', vcr: { cassette_name: 'web/users_list' } do
       json = client.users_list(presence: true)
       expect(json.ok).to be true
-      expect(json.members.size).to eq 9
+      expect(json.members.size).to eq 35
       expect(json.members.first.presence).to eq 'away'
     end
 
@@ -18,7 +18,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Users do
         expect(json.ok).to be true
         members.concat json.members
       end
-      expect(members.size).to eq 23
+      expect(members.size).to eq 35
     end
 
     it 'info', vcr: { cassette_name: 'web/users_info' } do

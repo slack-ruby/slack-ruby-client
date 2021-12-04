@@ -5,16 +5,9 @@ RSpec.describe Slack::RealTime::Client do
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
 
   before do
-    @token = ENV.delete('SLACK_API_TOKEN')
-    Slack::Config.reset
-    Slack::RealTime::Config.reset
     Slack::RealTime.configure do |config|
       config.concurrency = Slack::RealTime::Concurrency::Mock
     end
-  end
-
-  after do
-    ENV['SLACK_API_TOKEN'] = @token if @token
   end
 
   context 'token' do
@@ -70,7 +63,7 @@ RSpec.describe Slack::RealTime::Client do
   context 'client with a full store',
           vcr: { cassette_name: 'web/rtm_start', allow_playback_repeats: true } do
     let(:client) { described_class.new(store_class: Slack::RealTime::Stores::Store) }
-    let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
+    let(:url) { 'wss://cerberus-xxxx.lb.slack-msgs.com/websocket/uid' }
 
     describe '#start!' do
       let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
@@ -96,22 +89,22 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.teams.values.first).to eq client.team
         end
         it 'sets self' do
-          expect(client.self.id).to eq 'U07518DTL'
+          expect(client.self.id).to eq 'U0J1GAHN1'
         end
         it 'sets users' do
-          expect(client.users.count).to eq 18
-          expect(client.users.values.first['id']).to eq 'U07518DTL'
+          expect(client.users.count).to eq 35
+          expect(client.users.values.first['id']).to eq 'U0J1GAHN1'
         end
         it 'sets channels' do
-          expect(client.channels.count).to eq 37
-          expect(client.channels.values.first['name']).to eq 'a1'
+          expect(client.channels.count).to eq 156
+          expect(client.channels.values.first['name']).to eq 'general'
         end
         it 'sets ims' do
-          expect(client.ims.count).to eq 2
-          expect(client.ims.values.first['user']).to eq 'USLACKBOT'
+          expect(client.ims.count).to eq 10
+          expect(client.ims.values.first['user']).to eq 'U04KB5WQR'
         end
         it 'sets bots' do
-          expect(client.bots.count).to eq 16
+          expect(client.bots.count).to eq 83
           expect(client.bots.values.first['name']).to eq 'bot'
         end
         it 'sets groups' do
@@ -252,7 +245,7 @@ RSpec.describe Slack::RealTime::Client do
 
   context 'client with starter store', vcr: { cassette_name: 'web/rtm_connect' } do
     let(:client) { described_class.new(store_class: Slack::RealTime::Stores::Starter) }
-    let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
+    let(:url) { 'wss://cerberus-xxxx.lb.slack-msgs.com/websocket/uid' }
 
     describe '#start!' do
       let(:socket) { double(Slack::RealTime::Socket, connected?: true) }
@@ -274,7 +267,7 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.team.domain).to eq 'dblockdotorg'
         end
         it 'sets self' do
-          expect(client.self.id).to eq 'U07518DTL'
+          expect(client.self.id).to eq 'U0J1GAHN1'
         end
         it 'no users' do
           expect(client.users).to be_nil
@@ -431,7 +424,7 @@ RSpec.describe Slack::RealTime::Client do
       described_class.config.reset
     end
 
-    let(:url) { 'wss://ms173.slack-msgs.com/websocket/lqcUiAvrKTP-uuid=' }
+    let(:url) { 'wss://cerberus-xxxx.lb.slack-msgs.com/websocket/uid' }
     let(:client) { described_class.new }
 
     context 'ping' do

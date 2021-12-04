@@ -62,6 +62,8 @@ describe Slack do
       it 'succeeds' do
         json = Slack::Messages::Message.new(JSON[`#{command}`])
         expect(json).to eq(
+          'bot_id' => 'B0J1L75DY',
+          'is_enterprise_install' => false,
           'ok' => true,
           'url' => 'https://rubybot.slack.com/',
           'team' => 'team_name',
@@ -83,7 +85,7 @@ describe Slack do
     it 'list' do
       json = Slack::Messages::Message.new(JSON[`#{command}`])
       expect(json.ok).to be true
-      expect(json.members.size).to eq 9
+      expect(json.members.size).to eq 35
       expect(json.members.first['presence']).to eq 'away'
     end
   end

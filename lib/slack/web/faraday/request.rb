@@ -29,6 +29,7 @@ module Slack
               request.url(path, options)
             when :post, :put
               request.path = path
+              options.compact!
               request.body = options unless options.empty?
             end
             request.options.merge!(options.delete(:request)) if options.key?(:request)

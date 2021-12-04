@@ -10,7 +10,7 @@ http_interactions:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
-      - Slack Ruby Client/0.8.2
+      - Slack Ruby Client/0.18.0
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -20,51 +20,286 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '303'
-      Connection:
-      - keep-alive
-      Access-Control-Allow-Origin:
-      - "*"
-      Cache-Control:
-      - private, no-cache, no-store, must-revalidate
       Date:
-      - Fri, 28 Apr 2017 21:28:13 GMT
-      Expires:
-      - Mon, 26 Jul 1997 05:00:00 GMT
-      Pragma:
-      - no-cache
-      Referrer-Policy:
-      - no-referrer
+      - Sat, 04 Dec 2021 20:13:11 GMT
       Server:
       - Apache
+      X-Powered-By:
+      - HHVM/4.121.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      X-Accepted-Oauth-Scopes:
-      - rtm:stream,client
-      X-Content-Type-Options:
-      - nosniff
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
       X-Oauth-Scopes:
       - identify,read,post,client,apps
-      X-Slack-Backend:
-      - h
-      X-Slack-Req-Id:
-      - 5126a5af-f201-4e61-8615-85ed74719049
+      X-Accepted-Oauth-Scopes:
+      - rtm:stream,client
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
       X-Xss-Protection:
       - '0'
-      X-Cache:
-      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 3ac158c304111b4de99958fb108b1e6b
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '288'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '45'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-eojx
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
       Via:
-      - 1.1 bcaa616eaffeeb31e6c9015320755821.cloudfront.net (CloudFront)
-      X-Amz-Cf-Id:
-      - Hogs0uicEVP-FBGmgEZfEJz0EJHJwCny92KhIHz2j6YNYAJL0oVTJw==
+      - envoy-www-iad-sx6g, envoy-edge-iad-ysgd
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
     body:
-      encoding: ASCII-8BIT
-      string: '{"ok":true,"url":"wss:\/\/mpmulti-w5tz.slack-msgs.com\/websocket\/uid","team":{"id":"T04KB5WQH","name":"dblock","domain":"dblockdotorg"},"self":{"id":"U07518DTL","name":"testbot"}}'
-    http_version:
-  recorded_at: Fri, 28 Apr 2017 21:28:14 GMT
-recorded_with: VCR 3.0.3
+      encoding: UTF-8
+      string: '{"ok":true,"url":"wss:\/\/cerberus-xxxx.lb.slack-msgs.com\/websocket\/uid","team":{"id":"T04KB5WQH","name":"dblock","domain":"dblockdotorg"},"self":{"id":"U0J1GAHN1","name":"travis-ci"}}'
+  recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/rtm.connect
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.18.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 04 Dec 2021 20:13:11 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - HHVM/4.121.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Oauth-Scopes:
+      - identify,read,post,client,apps
+      X-Accepted-Oauth-Scopes:
+      - rtm:stream,client
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 3ac158c304111b4de99958fb108b1e6b
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '288'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '45'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-eojx
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      Via:
+      - envoy-www-iad-sx6g, envoy-edge-iad-ysgd
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"url":"wss:\/\/cerberus-xxxx.lb.slack-msgs.com\/websocket\/uid","team":{"id":"T04KB5WQH","name":"dblock","domain":"dblockdotorg"},"self":{"id":"U0J1GAHN1","name":"travis-ci"}}'
+  recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/rtm.connect
+    body:
+      encoding: UTF-8
+      string: token
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.18.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 04 Dec 2021 21:23:58 GMT
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Robots-Tag:
+      - noindex,nofollow
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 0b924e4cc784252e71d2e20636c56af4
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '60'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '8'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-wl6v
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      Via:
+      - envoy-www-iad-4jsh, envoy-edge-iad-2mik
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"invalid_form_data"}'
+  recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/rtm.connect
+    body:
+      encoding: UTF-8
+      string: request%5Btimeout%5D=180
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.18.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 04 Dec 2021 21:25:47 GMT
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Robots-Tag:
+      - noindex,nofollow
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 6e2dd859e49b2f74ac533ef7dc5d93c3
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '58'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '7'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-xh7k
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      Via:
+      - envoy-www-iad-9cor, envoy-edge-iad-85gg
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"invalid_array_arg"}'
+  recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
+recorded_with: VCR 6.0.0
