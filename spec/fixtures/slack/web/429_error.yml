@@ -5,47 +5,12 @@ http_interactions:
     uri: https://slack.com/api/auth.test
     body:
       encoding: UTF-8
-      string: token=
-    headers:
-      Accept:
-      - application/json; charset=utf-8
-      User-Agent:
-      - Slack Ruby Client 0.1.0
-      Content-Type:
-      - application/x-www-form-urlencoded
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 429
-      message: OK
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Retry-After:
-      - 3600
-      Date:
-      - Sat, 25 Jul 2015 14:42:07 GMT
-      Server:
-      - Apache
-      Connection:
-      - keep-alive
-    body:
-      encoding: US-ASCII
       string: ''
-    http_version: 
-  recorded_at: Sat, 25 Jul 2015 14:42:08 GMT
-- request:
-    method: post
-    uri: https://slack.com/api/auth.test
-    body:
-      encoding: UTF-8
-      string: token
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
-      - Slack Ruby Client/0.5.0
+      - Slack Ruby Client/0.18.0
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -55,31 +20,60 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Content-Security-Policy:
-      - referrer no-referrer;
-      Content-Type:
-      - application/json; charset=utf-8
       Date:
-      - Tue, 24 Nov 2015 20:03:05 GMT
+      - Sat, 04 Dec 2021 20:13:19 GMT
       Server:
       - Apache
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
-      X-Accepted-Oauth-Scopes:
-      - identify
-      X-Content-Type-Options:
-      - nosniff
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Oauth-Scopes:
+      - identify,read,post,client,apps
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
       X-Xss-Protection:
       - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 19b143ea43a655dcdc6c3debd59c41c0
+      Vary:
+      - Accept-Encoding
       Content-Length:
-      - '33'
-      Connection:
-      - keep-alive
+      - '165'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '18'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-d5j5
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      Via:
+      - envoy-www-iad-tdcc, envoy-edge-iad-olsk
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
     body:
       encoding: UTF-8
-      string: '{"ok":false,"error":"not_authed"}'
-    http_version: 
-  recorded_at: Tue, 24 Nov 2015 20:03:05 GMT
-recorded_with: VCR 2.9.3
+      string: '{"ok":true,"url":"https:\/\/dblockdotorg.slack.com\/","team":"dblock","user":"travis-ci","team_id":"T04KB5WQH","user_id":"U0J1GAHN1","bot_id":"B0J1L75DY","is_enterprise_install":false}'
+  recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
+recorded_with: VCR 6.0.0

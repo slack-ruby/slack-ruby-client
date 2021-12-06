@@ -6,8 +6,8 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
 
   context 'user' do
     it 'combines user and self data on rtm.start' do
-      expect(client.users['U07518DTL'].name).to eq 'rubybot'
-      expect(client.users['U07518DTL']['prefs']['push_sound']).to eq 'b2.mp3'
+      expect(client.users['U0J1GAHN1'].name).to eq 'travis-ci'
+      expect(client.users['U0J1GAHN1']['prefs']['push_sound']).to eq 'b2.mp3'
     end
     it 'user_change' do
       expect(client.users['U07KECJ77'].name).to eq 'aws'

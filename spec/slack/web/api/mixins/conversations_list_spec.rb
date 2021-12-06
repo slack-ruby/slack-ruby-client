@@ -4,7 +4,7 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Client do
   context 'conversations_setTopic' do
     it 'does not invoke conversations_list', vcr: { cassette_name: 'web/conversations_setTopic' } do
-      rc = subject.conversations_setTopic({ channel: 'C018Y6VH39D', topic: 'new topic' })
+      rc = subject.conversations_setTopic({ channel: 'C019CV63UTC', topic: 'new topic' })
       expect(rc.channel.topic.value).to eq 'new topic'
     end
 
