@@ -5,7 +5,7 @@ http_interactions:
     uri: https://slack.com/api/conversations.list
     body:
       encoding: UTF-8
-      string: limit=100
+      string: limit=100&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -91,7 +91,7 @@ http_interactions:
     uri: https://slack.com/api/conversations.list
     body:
       encoding: UTF-8
-      string: cursor=dGVhbTpDMDE5Q1Y1RFdNUQ%3D%3D&limit=100
+      string: cursor=dGVhbTpDMDE5Q1Y1RFdNUQ%3D%3D&limit=100&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -170,7 +170,7 @@ http_interactions:
     uri: https://slack.com/api/conversations.setTopic
     body:
       encoding: UTF-8
-      string: channel=C019CV63UTC&topic=new+topic
+      string: channel=C019CV63UTC&token=token&topic=new+topic
     headers:
       Accept:
       - application/json; charset=utf-8
