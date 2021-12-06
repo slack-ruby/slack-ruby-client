@@ -5,7 +5,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: presence=true
+      string: presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8

@@ -5,22 +5,25 @@ RSpec.describe Slack::RealTime::Client do
   let(:ws) { double(Slack::RealTime::Concurrency::Mock::WebSocket, on: true) }
 
   before do
+    # supports passing tests in CI even with an actual SLACK_API_TOKEN set
+    @token = ENV.delete('SLACK_API_TOKEN')
+    Slack::Config.reset
+    Slack::RealTime::Config.reset
     Slack::RealTime.configure do |config|
+      config.token = 'token'
       config.concurrency = Slack::RealTime::Concurrency::Mock
     end
   end
 
-  context 'token' do
-    before do
-      Slack.configure do |config|
-        config.token = 'global default'
-      end
-    end
+  after do
+    ENV['SLACK_API_TOKEN'] = @token if @token
+  end
 
+  context 'token' do
     it 'defaults token to global default' do
       client = described_class.new
-      expect(client.token).to eq 'global default'
-      expect(client.web_client.token).to eq 'global default'
+      expect(client.token).to eq 'token'
+      expect(client.web_client.token).to eq 'token'
     end
     context 'with real time config' do
       before do
@@ -372,7 +375,7 @@ RSpec.describe Slack::RealTime::Client do
       it 'sets default store_class' do
         expect(client.send(:store_class)).to eq Slack::RealTime::Store
       end
-      (Slack::RealTime::Config::ATTRIBUTES - %i[logger store_class]).each do |key|
+      (Slack::RealTime::Config::ATTRIBUTES - %i[logger store_class token]).each do |key|
         it "sets #{key}" do
           expect(client.send(key)).to eq Slack::RealTime::Config.send(key)
         end

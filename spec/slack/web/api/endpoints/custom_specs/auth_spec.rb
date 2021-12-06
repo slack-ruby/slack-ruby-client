@@ -5,19 +5,6 @@ RSpec.describe Slack::Web::Api::Endpoints::Auth do
   let(:client) { Slack::Web::Client.new }
 
   context 'without auth', vcr: { cassette_name: 'web/auth_test_error' } do
-    before do
-      Slack.configure do |config|
-        @token = config.token
-        config.token = nil
-      end
-    end
-
-    after do
-      Slack.configure do |config|
-        config.token = @token if @token
-      end
-    end
-
     it 'fails with an exception' do
       expect { client.auth_test }.to raise_error Slack::Web::Api::Errors::SlackError, 'not_authed'
     end

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: limit=5&presence=true
+      string: limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -89,7 +89,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMDc1MThEVEw%3D&limit=5&presence=true
+      string: cursor=dXNlcjpVMDc1MThEVEw%3D&limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -173,7 +173,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMEdQUjZLREo%3D&limit=5&presence=true
+      string: cursor=dXNlcjpVMEdQUjZLREo%3D&limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -262,7 +262,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMEhMRlVaTEo%3D&limit=5&presence=true
+      string: cursor=dXNlcjpVMEhMRlVaTEo%3D&limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -349,7 +349,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMFMwRzAyOEs%3D&limit=5&presence=true
+      string: cursor=dXNlcjpVMFMwRzAyOEs%3D&limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -435,7 +435,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVUEQ4WjJFM1Q%3D&limit=5&presence=true
+      string: cursor=dXNlcjpVUEQ4WjJFM1Q%3D&limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -518,7 +518,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMDEyU0E5S1c0Ug%3D%3D&limit=5&presence=true
+      string: cursor=dXNlcjpVMDEyU0E5S1c0Ug%3D%3D&limit=5&presence=true&token=token
     headers:
       Accept:
       - application/json; charset=utf-8

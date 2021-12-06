@@ -5,7 +5,7 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: limit=100
+      string: limit=100&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -133,7 +133,7 @@ http_interactions:
     uri: https://slack.com/api/users.info
     body:
       encoding: UTF-8
-      string: user=U07KECJ77
+      string: token=token&user=U07KECJ77
     headers:
       Accept:
       - application/json; charset=utf-8

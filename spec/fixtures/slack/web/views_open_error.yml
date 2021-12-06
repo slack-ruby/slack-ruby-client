@@ -5,7 +5,7 @@ http_interactions:
     uri: https://slack.com/api/views.open
     body:
       encoding: UTF-8
-      string: trigger_id=trigger_id&view=%7B%7D
+      string: token=token&trigger_id=trigger_id&view=%7B%7D
     headers:
       Accept:
       - application/json; charset=utf-8

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://slack.com/api/conversations.list
     body:
       encoding: UTF-8
-      string: limit=100
+      string: limit=100&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -85,7 +85,7 @@ http_interactions:
     uri: https://slack.com/api/conversations.info
     body:
       encoding: UTF-8
-      string: channel=G0K7EV5A7
+      string: channel=G0K7EV5A7&token=token
     headers:
       Accept:
       - application/json; charset=utf-8
