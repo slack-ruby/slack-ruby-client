@@ -31,7 +31,7 @@ module Slack
               options.compact!
               request.body = options unless options.empty?
             end
-            request.headers['Authorization'] = "Bearer #{token}"
+            request.headers['Authorization'] = "Bearer #{token}" if token
             request.options.merge!(options.delete(:request)) if options.key?(:request)
           end
           response.body

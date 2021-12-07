@@ -5,12 +5,14 @@ http_interactions:
     uri: https://slack.com/api/auth.test
     body:
       encoding: UTF-8
-      string: token=token
+      string: ''
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Length:
       - '0'
       Accept-Encoding:

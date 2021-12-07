@@ -5,12 +5,14 @@ http_interactions:
     uri: https://slack.com/api/conversations.list
     body:
       encoding: UTF-8
-      string: limit=100&token=token
+      string: limit=100
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -91,12 +93,14 @@ http_interactions:
     uri: https://slack.com/api/conversations.list
     body:
       encoding: UTF-8
-      string: cursor=dGVhbTpDMDE5Q1Y1RFdNUQ%3D%3D&limit=100&token=token
+      string: cursor=dGVhbTpDMDE5Q1Y1RFdNUQ%3D%3D&limit=100
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -170,12 +174,14 @@ http_interactions:
     uri: https://slack.com/api/conversations.setTopic
     body:
       encoding: UTF-8
-      string: channel=C019CV63UTC&token=token&topic=new+topic
+      string: channel=C019CV63UTC&topic=new+topic
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:

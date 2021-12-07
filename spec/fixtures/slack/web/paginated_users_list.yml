@@ -5,12 +5,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: limit=5&presence=true&token=token
+      string: limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -89,12 +91,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMDc1MThEVEw%3D&limit=5&presence=true&token=token
+      string: cursor=dXNlcjpVMDc1MThEVEw%3D&limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -173,12 +177,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMEdQUjZLREo%3D&limit=5&presence=true&token=token
+      string: cursor=dXNlcjpVMEdQUjZLREo%3D&limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -262,12 +268,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMEhMRlVaTEo%3D&limit=5&presence=true&token=token
+      string: cursor=dXNlcjpVMEhMRlVaTEo%3D&limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -349,12 +357,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMFMwRzAyOEs%3D&limit=5&presence=true&token=token
+      string: cursor=dXNlcjpVMFMwRzAyOEs%3D&limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -435,12 +445,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVUEQ4WjJFM1Q%3D&limit=5&presence=true&token=token
+      string: cursor=dXNlcjpVUEQ4WjJFM1Q%3D&limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -518,12 +530,14 @@ http_interactions:
     uri: https://slack.com/api/users.list
     body:
       encoding: UTF-8
-      string: cursor=dXNlcjpVMDEyU0E5S1c0Ug%3D%3D&limit=5&presence=true&token=token
+      string: cursor=dXNlcjpVMDEyU0E5S1c0Ug%3D%3D&limit=5&presence=true
     headers:
       Accept:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
