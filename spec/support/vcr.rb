@@ -6,7 +6,11 @@ VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/slack'
   config.hook_into :webmock
   config.configure_rspec_metadata!
-  config.filter_sensitive_data('<SLACK_API_TOKEN>') { ENV['SLACK_API_TOKEN'] }
+  if ENV['SLACK_API_TOKEN']
+    config.filter_sensitive_data('<SLACK_API_TOKEN>') do
+      ENV['SLACK_API_TOKEN']
+    end
+  end
   config.before_record do |i|
     i.response.body.force_encoding('UTF-8')
   end
@@ -18,4 +22,21 @@ VCR.configure do |config|
     match_requests_on: %i[method uri body client_headers]
     # record: :new_episodes
   }
+end
+
+module VCR
+  module Errors
+    class UnhandledHTTPRequestError
+      private
+
+      # Force unhandled HTTP error reports to include the headers
+      # for our custom matcher `client_headers`.
+      #
+      # This patch can be removed if https://github.com/vcr/vcr/issues/912
+      # is ever resolved.
+      def match_request_on_headers?
+        true
+      end
+    end
+  end
 end
