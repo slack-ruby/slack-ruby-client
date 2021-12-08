@@ -226,7 +226,10 @@ RSpec.describe Slack::Web::Client do
         request = nil
         response = conn.post do |r|
           r.path = 'rtm.start'
-          r.body = { token: 'token' }
+          r.headers = {
+            'Accept' => ['application/json; charset=utf-8'],
+            'Authorization' => ['Bearer <SLACK_API_TOKEN>']
+          }
           request = r
         end
 

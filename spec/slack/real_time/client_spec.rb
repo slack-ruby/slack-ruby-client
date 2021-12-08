@@ -10,7 +10,7 @@ RSpec.describe Slack::RealTime::Client do
     Slack::Config.reset
     Slack::RealTime::Config.reset
     Slack::RealTime.configure do |config|
-      config.token = 'token'
+      config.token = '<SLACK_API_TOKEN>'
       config.concurrency = Slack::RealTime::Concurrency::Mock
     end
   end
@@ -22,8 +22,8 @@ RSpec.describe Slack::RealTime::Client do
   context 'token' do
     it 'defaults token to global default' do
       client = described_class.new
-      expect(client.token).to eq 'token'
-      expect(client.web_client.token).to eq 'token'
+      expect(client.token).to eq '<SLACK_API_TOKEN>'
+      expect(client.web_client.token).to eq '<SLACK_API_TOKEN>'
     end
     context 'with real time config' do
       before do

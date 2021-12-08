@@ -22,7 +22,6 @@ module Slack
         private
 
         def request(method, path, options)
-          options = options.merge(token: token)
           response = connection.send(method) do |request|
             case method
             when :get, :delete
@@ -32,6 +31,7 @@ module Slack
               options.compact!
               request.body = options unless options.empty?
             end
+            request.headers['Authorization'] = "Bearer #{token}" if token
             request.options.merge!(options.delete(:request)) if options.key?(:request)
           end
           response.body
