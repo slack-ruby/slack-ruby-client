@@ -167,7 +167,7 @@ http_interactions:
     uri: https://slack.com/api/rtm.connect
     body:
       encoding: UTF-8
-      string: token
+      string: ''
     headers:
       Accept:
       - application/json; charset=utf-8
