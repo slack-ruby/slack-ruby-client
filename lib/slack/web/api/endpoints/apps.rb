@@ -9,9 +9,9 @@ module Slack
           #
           # Uninstalls your app from a workspace.
           #
-          # @option options [Object] :client_id
+          # @option options [string] :client_id
           #   Issued when you created your application.
-          # @option options [Object] :client_secret
+          # @option options [string] :client_secret
           #   Issued when you created your application.
           # @see https://api.slack.com/methods/apps.uninstall
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps/apps.uninstall.json

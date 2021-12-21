@@ -9,13 +9,13 @@ module Slack
           #
           # Create an Enterprise team.
           #
-          # @option options [Object] :team_domain
+          # @option options [string] :team_domain
           #   Team domain (for example, slacksoftballteam). Domains are limited to 21 characters.
-          # @option options [Object] :team_name
+          # @option options [string] :team_name
           #   Team name (for example, Slack Softball Team).
-          # @option options [Object] :team_description
+          # @option options [string] :team_description
           #   Description for the team.
-          # @option options [Object] :team_discoverability
+          # @option options [string] :team_discoverability
           #   Who can join the team. A team's discoverability can be open, closed, invite_only, or unlisted.
           # @see https://api.slack.com/methods/admin.teams.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams/admin.teams.create.json
@@ -28,9 +28,9 @@ module Slack
           #
           # List all teams on an Enterprise organization
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 100 both inclusive.
           # @see https://api.slack.com/methods/admin.teams.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams/admin.teams.list.json

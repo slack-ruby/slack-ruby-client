@@ -37,4 +37,15 @@ command 'admin_apps' do |g|
       puts JSON.dump($client.admin_apps_restrict(options))
     end
   end
+
+  g.desc 'Uninstall an app from one or many workspaces, or an entire enterprise organization.'
+  g.long_desc %( Uninstall an app from one or many workspaces, or an entire enterprise organization. )
+  g.command 'uninstall' do |c|
+    c.flag 'app_id', desc: 'The ID of the app to uninstall.'
+    c.flag 'enterprise_id', desc: 'The enterprise to completely uninstall the application from (across all workspaces). With an org-level token, this or team_ids is required.'
+    c.flag 'team_ids', desc: 'IDs of the teams to uninstall from (max 100). With an org-level token, this or enterprise_id is required.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_apps_uninstall(options))
+    end
+  end
 end

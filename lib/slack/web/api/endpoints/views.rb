@@ -9,9 +9,9 @@ module Slack
           #
           # Open a view for a user.
           #
-          # @option options [Object] :trigger_id
+          # @option options [string] :trigger_id
           #   Exchange a trigger to post to the user.
-          # @option options [Object] :view
+          # @option options [view as string] :view
           #   A view payload. This must be a JSON-encoded string.
           # @see https://api.slack.com/methods/views.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.open.json
@@ -29,11 +29,11 @@ module Slack
           #
           # Publish a static view for a User.
           #
-          # @option options [Object] :user_id
+          # @option options [string] :user_id
           #   id of the user you want publish a view to.
-          # @option options [Object] :view
+          # @option options [view as string] :view
           #   A view payload. This must be a JSON-encoded string.
-          # @option options [Object] :hash
+          # @option options [string] :hash
           #   A string that represents view state to protect against possible race conditions.
           # @see https://api.slack.com/methods/views.publish
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.publish.json
@@ -51,9 +51,9 @@ module Slack
           #
           # Push a view onto the stack of a root view.
           #
-          # @option options [Object] :trigger_id
+          # @option options [string] :trigger_id
           #   Exchange a trigger to post to the user.
-          # @option options [Object] :view
+          # @option options [view as string] :view
           #   A view payload. This must be a JSON-encoded string.
           # @see https://api.slack.com/methods/views.push
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.push.json
@@ -71,14 +71,14 @@ module Slack
           #
           # Update an existing view.
           #
-          # @option options [Object] :view
+          # @option options [view as string] :view
           #   A view object. This must be a JSON-encoded string.
-          # @option options [Object] :external_id
+          # @option options [string] :external_id
           #   A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either view_id or external_id is required.
-          # @option options [Object] :hash
-          #   A string that represents view state to protect against possible race conditions.
-          # @option options [Object] :view_id
+          # @option options [string] :view_id
           #   A unique identifier of the view to be updated. Either view_id or external_id is required.
+          # @option options [string] :hash
+          #   A string that represents view state to protect against possible race conditions.
           # @see https://api.slack.com/methods/views.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.update.json
           def views_update(options = {})

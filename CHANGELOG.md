@@ -1,9 +1,11 @@
-### 0.18.0 (Next)
+### 1.0.0 (Next)
 
-* Your contribution here.
+* [#393](https://github.com/slack-ruby/slack-ruby-client/pull/393): Removed deprecated `oauth_token`, and leftover traces of `channels` and `groups` APIs - [@dblock](https://github.com/dblock).
+* [#393](https://github.com/slack-ruby/slack-ruby-client/pull/393): Added `admin_auth_policy_assignEntities`, `admin_auth_policy_getEntities` and `admin_auth_policy_removeEntities` `admin_conversations_disconnectShared`, `admin_users_session_clearSettings`, `admin_users_session_getSettings`, `admin_users_session_resetBulk`, `admin_users_session_setSettings`, `apps_manifest_create`, `apps_manifest_delete`, `apps_manifest_export`, `apps_manifest_update`, `apps_manifest_validate`, `conversations_acceptSharedInvite`, `conversations_approveSharedInvite`, `conversations_declineSharedInvite`, `conversations_inviteShared`, `conversations_listConnectInvites`, `oauth_v2_exchange`, `openid_connect_token`, `openid_connect_userInfo`, `team_billing_info`, `team_preferences_list`, `tooling_tokens_rotate` - [@dblock](https://github.com/dblock).
 * [#386](https://github.com/slack-ruby/slack-ruby-client/pull/386): Gemspec: drop unused `test_files` directive - [@olleolleolle](https://github.com/olleolleolle).
 * [#380](https://github.com/slack-ruby/slack-ruby-client/pull/380): Updates to server error classes and hierarchy - [@jmanian](https://github.com/jmanian).
 * [#387](https://github.com/slack-ruby/slack-ruby-client/pull/387): Send token in Authorization header - [@chrisbloom7](https://github.com/chrisbloom7).
+* Your contribution here.
 
 ### 0.17.0 (2021/03/07)
 

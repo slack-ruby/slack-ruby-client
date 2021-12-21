@@ -5,9 +5,11 @@ module Slack
   module Web
     module Api
       module Errors
+        class AccessDenied < SlackError; end
         class Accesslimited < SlackError; end
         class AccountInactive < SlackError; end
         class AdminUnauthorized < SlackError; end
+        class AlreadyApproved < SlackError; end
         class AlreadyArchived < SlackError; end
         class AlreadyInChannel < SlackError; end
         class AlreadyInTeam < SlackError; end
@@ -19,9 +21,13 @@ module Slack
         class AlreadyStarred < SlackError; end
         class AppManagementAppNotInstalledOnOrg < SlackError; end
         class AppMissingActionUrl < SlackError; end
+        class AppNotFound < SlackError; end
         class AppRestrictedOrgWide < SlackError; end
+        class ApprovalInactive < SlackError; end
+        class ApprovalNotFound < SlackError; end
         class AsUserNotSupported < SlackError; end
-        class AuthedUserNotFound < SlackError; end
+        class AtLeastOneSessionSettingRequired < SlackError; end
+        class AuthMismatch < SlackError; end
         class AutoProvisionFailure < SlackError; end
         class BadClientSecret < SlackError; end
         class BadHandle < SlackError; end
@@ -36,23 +42,30 @@ module Slack
         class BarrierNotFound < SlackError; end
         class BarrieredFromUsergroupsNotFound < SlackError; end
         class BotNotFound < SlackError; end
+        class BotUserRequired < SlackError; end
         class BotsNotAllowed < SlackError; end
         class BotsNotFound < SlackError; end
+        class CanNotUninstall < SlackError; end
         class CannotAddBot < SlackError; end
+        class CannotAddLegacyDisconnectedChannelToWorkspaces < SlackError; end
         class CannotAddMoreChannelsToGroup < SlackError; end
         class CannotAddMoreGroupsToChannel < SlackError; end
         class CannotAddOthers < SlackError; end
         class CannotAddOthersRecurring < SlackError; end
+        class CannotAddProfileOnlyUser < SlackError; end
         class CannotAddSlackbot < SlackError; end
         class CannotAuthUser < SlackError; end
         class CannotCompleteOthers < SlackError; end
         class CannotCompleteRecurring < SlackError; end
+        class CannotCreateChannel < SlackError; end
         class CannotCreateDialog < SlackError; end
         class CannotFindChannel < SlackError; end
         class CannotFindMessage < SlackError; end
         class CannotFindService < SlackError; end
         class CannotInstallAnOrgInstalledApp < SlackError; end
         class CannotInvalidatePrimaryOwner < SlackError; end
+        class CannotKickHomeTeam < SlackError; end
+        class CannotKickTeam < SlackError; end
         class CannotModifyPrimaryOwner < SlackError; end
         class CannotMoveLocalChannel < SlackError; end
         class CannotParse < SlackError; end
@@ -60,10 +73,16 @@ module Slack
         class CannotPrompt < SlackError; end
         class CannotResetBot < SlackError; end
         class CannotResetPrimaryOwner < SlackError; end
+        class CannotSetBothNumMinutesAndIsIndefinite < SlackError; end
+        class CannotSetThisGuestToRegularAtTeamLevel < SlackError; end
+        class CannotShareCrossWorkspaceChannel < SlackError; end
+        class CannotShareMandatoryChannel < SlackError; end
         class CannotUnfurlMessage < SlackError; end
         class CannotUnfurlUrl < SlackError; end
         class CannotUpdateAdminUser < SlackError; end
         class CantArchiveGeneral < SlackError; end
+        class CantArchiveRequired < SlackError; end
+        class CantBroadcastMessage < SlackError; end
         class CantDelete < SlackError; end
         class CantDeleteFile < SlackError; end
         class CantDeleteMessage < SlackError; end
@@ -73,14 +92,19 @@ module Slack
         class CantKickSelf < SlackError; end
         class CantLeaveGeneral < SlackError; end
         class CantUpdateMessage < SlackError; end
+        class ChannelArchived < SlackError; end
         class ChannelCannotBeUnshared < SlackError; end
+        class ChannelConversionInProgress < SlackError; end
         class ChannelIsNotPrivate < SlackError; end
+        class ChannelMentionSyncRequired < SlackError; end
         class ChannelNotArchived < SlackError; end
         class ChannelNotFound < SlackError; end
         class ChannelTypeNotSupported < SlackError; end
         class ClientIdTokenMismatch < SlackError; end
         class CodeAlreadyUsed < SlackError; end
         class ComplianceExportsPreventDeletion < SlackError; end
+        class ConnectionLimitExceeded < SlackError; end
+        class ConnectionLimitExceededPending < SlackError; end
         class CouldNotArchiveChannel < SlackError; end
         class CouldNotConvertChannel < SlackError; end
         class CouldNotCreateChannel < SlackError; end
@@ -95,6 +119,7 @@ module Slack
         class CouldNotSetRetention < SlackError; end
         class CouldNotSetTeamsForChannel < SlackError; end
         class CouldNotUnarchiveChannel < SlackError; end
+        class CustomIntegrationNotAllowedAtEnterprise < SlackError; end
         class DataNotAvailable < SlackError; end
         class DefaultChannelRestricted < SlackError; end
         class DefaultOrgWideChannel < SlackError; end
@@ -107,11 +132,13 @@ module Slack
         class DuplicateMessageNotFound < SlackError; end
         class EditWindowClosed < SlackError; end
         class EkmAccessDenied < SlackError; end
+        class EmailDoesNotMatch < SlackError; end
         class EmailTaken < SlackError; end
         class EmojiLimitReached < SlackError; end
         class EmojiNotFound < SlackError; end
         class EnterpriseIsRestricted < SlackError; end
         class EnterpriseNotFound < SlackError; end
+        class EntityNotFound < SlackError; end
         class ErrorBadFormat < SlackError; end
         class ErrorBadNameI18n < SlackError; end
         class ErrorBadUpload < SlackError; end
@@ -123,9 +150,14 @@ module Slack
         class ErrorNameTakenI18n < SlackError; end
         class ErrorNoImage < SlackError; end
         class ErrorTooBig < SlackError; end
+        class ExchangedTriggerId < SlackError; end
+        class ExpiredTriggerId < SlackError; end
         class ExternalChannelMigrating < SlackError; end
         class ExternallySharedOrDisconnectedChannel < SlackError; end
         class FailToGetTeamsForRestrictedUser < SlackError; end
+        class FailedAddingCollaborator < SlackError; end
+        class FailedCreatingApp < SlackError; end
+        class FailedExport < SlackError; end
         class FailedForSomeUsers < SlackError; end
         class FailedLookingUpUser < SlackError; end
         class FailedSendingDialog < SlackError; end
@@ -147,6 +179,7 @@ module Slack
         class FailedToSetUserToOwner < SlackError; end
         class FailedToSetUserToRegular < SlackError; end
         class FailedToUnlinkChannel < SlackError; end
+        class FailedToUnshare < SlackError; end
         class FailedToValidateCaller < SlackError; end
         class FailedToValidateChannels < SlackError; end
         class FailedToValidateCustomMessage < SlackError; end
@@ -169,11 +202,15 @@ module Slack
         class GroupMustNotBeEmpty < SlackError; end
         class GroupNotFound < SlackError; end
         class HandleAlreadyExists < SlackError; end
+        class HasAlreadyConnectedToOrg < SlackError; end
         class HashConflict < SlackError; end
         class InactiveCall < SlackError; end
+        class InactiveInvite < SlackError; end
         class InsecureRequest < SlackError; end
         class InternalError < SlackError; end
+        class InvalidAction < SlackError; end
         class InvalidActor < SlackError; end
+        class InvalidApp < SlackError; end
         class InvalidAppId < SlackError; end
         class InvalidArgName < SlackError; end
         class InvalidArgs < SlackError; end
@@ -182,9 +219,11 @@ module Slack
         class InvalidAttachments < SlackError; end
         class InvalidAuth < SlackError; end
         class InvalidBlocks < SlackError; end
+        class InvalidBlocksFormat < SlackError; end
         class InvalidCallId < SlackError; end
         class InvalidChannel < SlackError; end
         class InvalidChannelId < SlackError; end
+        class InvalidChannelProvided < SlackError; end
         class InvalidChannelType < SlackError; end
         class InvalidChannelsLimit < SlackError; end
         class InvalidCharset < SlackError; end
@@ -195,12 +234,18 @@ module Slack
         class InvalidDate < SlackError; end
         class InvalidDuration < SlackError; end
         class InvalidEmail < SlackError; end
+        class InvalidEmojiNotAllowed < SlackError; end
         class InvalidEventContext < SlackError; end
         class InvalidExternalId < SlackError; end
         class InvalidFormData < SlackError; end
         class InvalidGrantType < SlackError; end
+        class InvalidGroupProvided < SlackError; end
+        class InvalidHostTeam < SlackError; end
         class InvalidInputs < SlackError; end
         class InvalidLimit < SlackError; end
+        class InvalidLink < SlackError; end
+        class InvalidManifest < SlackError; end
+        class InvalidMetadataFilterKeys < SlackError; end
         class InvalidName < SlackError; end
         class InvalidNameMaxlength < SlackError; end
         class InvalidNamePunctuation < SlackError; end
@@ -211,17 +256,19 @@ module Slack
         class InvalidPermissions < SlackError; end
         class InvalidPostType < SlackError; end
         class InvalidPresence < SlackError; end
+        class InvalidPrivacy < SlackError; end
         class InvalidProfile < SlackError; end
+        class InvalidRefreshToken < SlackError; end
         class InvalidRequest < SlackError; end
         class InvalidRequestId < SlackError; end
         class InvalidRestrictedSubjects < SlackError; end
         class InvalidRoleForUser < SlackError; end
         class InvalidScheduledMessageId < SlackError; end
-        class InvalidScope < SlackError; end
         class InvalidScopes < SlackError; end
         class InvalidSearchChannelType < SlackError; end
         class InvalidSort < SlackError; end
         class InvalidSortDir < SlackError; end
+        class InvalidSource < SlackError; end
         class InvalidStartTime < SlackError; end
         class InvalidStepStatus < SlackError; end
         class InvalidTargetTeam < SlackError; end
@@ -229,29 +276,46 @@ module Slack
         class InvalidTeamIds < SlackError; end
         class InvalidTime < SlackError; end
         class InvalidTimestamp < SlackError; end
+        class InvalidTitle < SlackError; end
         class InvalidToken < SlackError; end
         class InvalidTrigger < SlackError; end
+        class InvalidTriggerId < SlackError; end
         class InvalidTsLatest < SlackError; end
         class InvalidTsOldest < SlackError; end
         class InvalidType < SlackError; end
         class InvalidTypes < SlackError; end
+        class InvalidUnfurlId < SlackError; end
         class InvalidUnfurlsFormat < SlackError; end
         class InvalidUrl < SlackError; end
         class InvalidUser < SlackError; end
         class InvalidUserCombination < SlackError; end
         class InvalidUserId < SlackError; end
         class InvalidUsers < SlackError; end
+        class InvalidValue < SlackError; end
+        class InviteFromSameOrg < SlackError; end
+        class InviteLookupError < SlackError; end
+        class InviteNotFound < SlackError; end
+        class InviteUsed < SlackError; end
         class InvitedUserNotCreated < SlackError; end
         class InvitedUserNotReactivated < SlackError; end
         class InviteeCantSeeChannel < SlackError; end
         class IsArchived < SlackError; end
         class IsBot < SlackError; end
         class IsInactive < SlackError; end
+        class IsPendingConnectedToOrg < SlackError; end
         class LastMember < SlackError; end
+        class LeavingTeamNotInChannel < SlackError; end
+        class LeavingTeamRequired < SlackError; end
+        class LegacyConnectionInvalidOrg < SlackError; end
+        class LegacyConnectionLimitExceeded < SlackError; end
         class LimitRequired < SlackError; end
         class LinkNotFound < SlackError; end
+        class MalwareDetected < SlackError; end
         class MemberAnalyticsDisabled < SlackError; end
+        class MemberLimitExceeded < SlackError; end
         class MessageNotFound < SlackError; end
+        class MessageTooLong < SlackError; end
+        class MessagesTabDisabled < SlackError; end
         class MetadataNotAvailable < SlackError; end
         class MetadataOnlyDoesNotSupportDate < SlackError; end
         class MethodDeprecated < SlackError; end
@@ -263,25 +327,32 @@ module Slack
         class MissingDialog < SlackError; end
         class MissingDuration < SlackError; end
         class MissingPostType < SlackError; end
+        class MissingProfileId < SlackError; end
         class MissingResource < SlackError; end
         class MissingScope < SlackError; end
+        class MissingSource < SlackError; end
         class MissingSubteamName < SlackError; end
+        class MissingTargetTeam < SlackError; end
         class MissingTeam < SlackError; end
         class MissingTrigger < SlackError; end
         class MissingTs < SlackError; end
+        class MissingUnfurlId < SlackError; end
         class MissingUnfurls < SlackError; end
         class MissingUser < SlackError; end
-        class MixedScope < SlackError; end
         class MsgTooLong < SlackError; end
+        class MustClearBothStatusTextAndStatusEmoji < SlackError; end
         class MustProvideTeamDomain < SlackError; end
         class MustProvideTeamName < SlackError; end
+        class MustRevokeAccess < SlackError; end
         class NameAlreadyExists < SlackError; end
         class NameTaken < SlackError; end
         class NameTakenInOrg < SlackError; end
+        class NameTooLong < SlackError; end
         class NoActiveSessions < SlackError; end
         class NoAliasSelected < SlackError; end
         class NoBotUserForApp < SlackError; end
         class NoChannel < SlackError; end
+        class NoDualBroadcastContentUpdate < SlackError; end
         class NoImageUploaded < SlackError; end
         class NoItemSpecified < SlackError; end
         class NoLocalUserOnTeam < SlackError; end
@@ -292,6 +363,7 @@ module Slack
         class NoScopes < SlackError; end
         class NoSuchSubteam < SlackError; end
         class NoTeamIdsGiven < SlackError; end
+        class NoTeamsToDisconnect < SlackError; end
         class NoText < SlackError; end
         class NoUser < SlackError; end
         class NoUserProvided < SlackError; end
@@ -314,6 +386,8 @@ module Slack
         class NotImplemented < SlackError; end
         class NotInChannel < SlackError; end
         class NotInDnd < SlackError; end
+        class NotOwner < SlackError; end
+        class NotPaid < SlackError; end
         class NotPinnable < SlackError; end
         class NotPinned < SlackError; end
         class NotReactable < SlackError; end
@@ -325,19 +399,23 @@ module Slack
         class OrgLoginRequired < SlackError; end
         class OrgNotFound < SlackError; end
         class OrgUserNotInTeam < SlackError; end
+        class OverMaxEntityLimit < SlackError; end
         class OverPaginationLimit < SlackError; end
         class PaginationNotAvailable < SlackError; end
         class PaidOnly < SlackError; end
         class PaidTeamsOnly < SlackError; end
         class PermissionDenied < SlackError; end
         class PlanUpgradeRequired < SlackError; end
+        class PolicyNotFound < SlackError; end
         class PostingToGeneralChannelDenied < SlackError; end
         class PreviewFeatureNotAvailable < SlackError; end
         class PrimaryUsergroupNotFound < SlackError; end
         class ProfileSetFailed < SlackError; end
         class PublicVideoNotAllowed < SlackError; end
+        class PublishedAppOnly < SlackError; end
         class PushLimitReached < SlackError; end
         class RateLimited < SlackError; end
+        class Ratelimit < SlackError; end
         class Ratelimited < SlackError; end
         class RequestAlreadyResolved < SlackError; end
         class RequestIdOrAppIdIsRequired < SlackError; end
@@ -348,6 +426,7 @@ module Slack
         class RestrictedAction < SlackError; end
         class RestrictedActionNonThreadableChannel < SlackError; end
         class RestrictedActionReadOnlyChannel < SlackError; end
+        class RestrictedActionThreadLocked < SlackError; end
         class RestrictedActionThreadOnlyChannel < SlackError; end
         class RetentionOverrideNotAllowed < SlackError; end
         class RtmConnectRequired < SlackError; end
@@ -356,27 +435,38 @@ module Slack
         class SessionExpired < SlackError; end
         class SessionInvalidationFailed < SlackError; end
         class SessionNotFound < SlackError; end
+        class SessionResetNotAllowed < SlackError; end
         class SlackConnectBlockedFileType < SlackError; end
+        class SlackConnectClipSharingBlocked < SlackError; end
         class SlackConnectFileLinkSharingBlocked < SlackError; end
         class SlackConnectFileUploadSharingBlocked < SlackError; end
         class SnoozeEndFailed < SlackError; end
         class SnoozeFailed < SlackError; end
         class SnoozeNotActive < SlackError; end
+        class SpecifyEnterpriseOrTeams < SlackError; end
         class SubteamMaxUsersExceeded < SlackError; end
         class TeamAccessNotGranted < SlackError; end
         class TeamAddedToOrg < SlackError; end
         class TeamIdOrOrgRequired < SlackError; end
+        class TeamIdRequiredForEnterprise < SlackError; end
         class TeamNotFound < SlackError; end
         class TeamNotOnEnterprise < SlackError; end
+        class TeamsNotFound < SlackError; end
+        class ThreadLocked < SlackError; end
         class ThreadNotFound < SlackError; end
         class TimeInPast < SlackError; end
         class TimeTooFar < SlackError; end
+        class TokenAlreadyExchanged < SlackError; end
+        class TokenExpired < SlackError; end
         class TokenRevoked < SlackError; end
+        class TokenRotationNotEnabled < SlackError; end
         class TooLarge < SlackError; end
         class TooLong < SlackError; end
         class TooManyAttachments < SlackError; end
+        class TooManyContactCards < SlackError; end
         class TooManyConvosForAppOnTeam < SlackError; end
         class TooManyConvosForTeam < SlackError; end
+        class TooManyEmails < SlackError; end
         class TooManyEmoji < SlackError; end
         class TooManyFrames < SlackError; end
         class TooManyIds < SlackError; end
@@ -386,14 +476,16 @@ module Slack
         class TooManyPins < SlackError; end
         class TooManyReactions < SlackError; end
         class TooManyTargetTeams < SlackError; end
+        class TooManyTeams < SlackError; end
         class TooManyTeamsProvided < SlackError; end
         class TooManyUsers < SlackError; end
         class TriggerExchanged < SlackError; end
         class TriggerExpired < SlackError; end
         class TwoFactorSetupRequired < SlackError; end
-        class UnableToLeaveLastTeam < SlackError; end
         class UnableToLinkIdpGroupAndChannel < SlackError; end
         class UnableToUnlinkIdpGroupAndChannel < SlackError; end
+        class UnableToUpdateExistingSessions < SlackError; end
+        class UnknownError < SlackError; end
         class UnknownMethod < SlackError; end
         class UnknownType < SlackError; end
         class UnsupportedArguments < SlackError; end
@@ -401,8 +493,10 @@ module Slack
         class UnsupportedTeamType < SlackError; end
         class UpdateFailed < SlackError; end
         class UraMaxChannels < SlackError; end
+        class UrlInMessage < SlackError; end
         class UserAlreadyDeleted < SlackError; end
         class UserAlreadyTeamMember < SlackError; end
+        class UserCannotCreateChannel < SlackError; end
         class UserDisabled < SlackError; end
         class UserDoesNotOwnChannel < SlackError; end
         class UserIsAlreadyDeleted < SlackError; end
@@ -411,9 +505,11 @@ module Slack
         class UserIsRestricted < SlackError; end
         class UserIsUltraRestricted < SlackError; end
         class UserMustBeAdmin < SlackError; end
+        class UserMustBeInWorkspace < SlackError; end
         class UserNotFound < SlackError; end
         class UserNotInChannel < SlackError; end
         class UserNotVisible < SlackError; end
+        class UserRequiredToAcceptAsPrivateButCannot < SlackError; end
         class UserSessionResetFailed < SlackError; end
         class UsergroupNotFound < SlackError; end
         class UsergroupNotLinkedToTeam < SlackError; end
@@ -424,9 +520,11 @@ module Slack
         class ViewTooLarge < SlackError; end
 
         ERROR_CLASSES = {
+          'access_denied' => AccessDenied,
           'accesslimited' => Accesslimited,
           'account_inactive' => AccountInactive,
           'admin_unauthorized' => AdminUnauthorized,
+          'already_approved' => AlreadyApproved,
           'already_archived' => AlreadyArchived,
           'already_in_channel' => AlreadyInChannel,
           'already_in_team' => AlreadyInTeam,
@@ -438,9 +536,13 @@ module Slack
           'already_starred' => AlreadyStarred,
           'app_management_app_not_installed_on_org' => AppManagementAppNotInstalledOnOrg,
           'app_missing_action_url' => AppMissingActionUrl,
+          'app_not_found' => AppNotFound,
           'app_restricted_org_wide' => AppRestrictedOrgWide,
+          'approval_inactive' => ApprovalInactive,
+          'approval_not_found' => ApprovalNotFound,
           'as_user_not_supported' => AsUserNotSupported,
-          'authed_user_not_found' => AuthedUserNotFound,
+          'at_least_one_session_setting_required' => AtLeastOneSessionSettingRequired,
+          'auth_mismatch' => AuthMismatch,
           'auto_provision_failure' => AutoProvisionFailure,
           'bad_client_secret' => BadClientSecret,
           'bad_handle' => BadHandle,
@@ -455,23 +557,30 @@ module Slack
           'barrier_not_found' => BarrierNotFound,
           'barriered_from_usergroups_not_found' => BarrieredFromUsergroupsNotFound,
           'bot_not_found' => BotNotFound,
+          'bot_user_required' => BotUserRequired,
           'bots_not_allowed' => BotsNotAllowed,
           'bots_not_found' => BotsNotFound,
+          'can_not_uninstall' => CanNotUninstall,
           'cannot_add_bot' => CannotAddBot,
+          'cannot_add_legacy_disconnected_channel_to_workspaces' => CannotAddLegacyDisconnectedChannelToWorkspaces,
           'cannot_add_more_channels_to_group' => CannotAddMoreChannelsToGroup,
           'cannot_add_more_groups_to_channel' => CannotAddMoreGroupsToChannel,
           'cannot_add_others' => CannotAddOthers,
           'cannot_add_others_recurring' => CannotAddOthersRecurring,
+          'cannot_add_profile_only_user' => CannotAddProfileOnlyUser,
           'cannot_add_slackbot' => CannotAddSlackbot,
           'cannot_auth_user' => CannotAuthUser,
           'cannot_complete_others' => CannotCompleteOthers,
           'cannot_complete_recurring' => CannotCompleteRecurring,
+          'cannot_create_channel' => CannotCreateChannel,
           'cannot_create_dialog' => CannotCreateDialog,
           'cannot_find_channel' => CannotFindChannel,
           'cannot_find_message' => CannotFindMessage,
           'cannot_find_service' => CannotFindService,
           'cannot_install_an_org_installed_app' => CannotInstallAnOrgInstalledApp,
           'cannot_invalidate_primary_owner' => CannotInvalidatePrimaryOwner,
+          'cannot_kick_home_team' => CannotKickHomeTeam,
+          'cannot_kick_team' => CannotKickTeam,
           'cannot_modify_primary_owner' => CannotModifyPrimaryOwner,
           'cannot_move_local_channel' => CannotMoveLocalChannel,
           'cannot_parse' => CannotParse,
@@ -479,10 +588,16 @@ module Slack
           'cannot_prompt' => CannotPrompt,
           'cannot_reset_bot' => CannotResetBot,
           'cannot_reset_primary_owner' => CannotResetPrimaryOwner,
+          'cannot_set_both_num_minutes_and_is_indefinite' => CannotSetBothNumMinutesAndIsIndefinite,
+          'cannot_set_this_guest_to_regular_at_team_level' => CannotSetThisGuestToRegularAtTeamLevel,
+          'cannot_share_cross_workspace_channel' => CannotShareCrossWorkspaceChannel,
+          'cannot_share_mandatory_channel' => CannotShareMandatoryChannel,
           'cannot_unfurl_message' => CannotUnfurlMessage,
           'cannot_unfurl_url' => CannotUnfurlUrl,
           'cannot_update_admin_user' => CannotUpdateAdminUser,
           'cant_archive_general' => CantArchiveGeneral,
+          'cant_archive_required' => CantArchiveRequired,
+          'cant_broadcast_message' => CantBroadcastMessage,
           'cant_delete' => CantDelete,
           'cant_delete_file' => CantDeleteFile,
           'cant_delete_message' => CantDeleteMessage,
@@ -492,14 +607,19 @@ module Slack
           'cant_kick_self' => CantKickSelf,
           'cant_leave_general' => CantLeaveGeneral,
           'cant_update_message' => CantUpdateMessage,
+          'channel_archived' => ChannelArchived,
           'channel_cannot_be_unshared' => ChannelCannotBeUnshared,
+          'channel_conversion_in_progress' => ChannelConversionInProgress,
           'channel_is_not_private' => ChannelIsNotPrivate,
+          'channel_mention_sync_required' => ChannelMentionSyncRequired,
           'channel_not_archived' => ChannelNotArchived,
           'channel_not_found' => ChannelNotFound,
           'channel_type_not_supported' => ChannelTypeNotSupported,
           'client_id_token_mismatch' => ClientIdTokenMismatch,
           'code_already_used' => CodeAlreadyUsed,
           'compliance_exports_prevent_deletion' => ComplianceExportsPreventDeletion,
+          'connection_limit_exceeded' => ConnectionLimitExceeded,
+          'connection_limit_exceeded_pending' => ConnectionLimitExceededPending,
           'could_not_archive_channel' => CouldNotArchiveChannel,
           'could_not_convert_channel' => CouldNotConvertChannel,
           'could_not_create_channel' => CouldNotCreateChannel,
@@ -514,6 +634,7 @@ module Slack
           'could_not_set_retention' => CouldNotSetRetention,
           'could_not_set_teams_for_channel' => CouldNotSetTeamsForChannel,
           'could_not_unarchive_channel' => CouldNotUnarchiveChannel,
+          'custom_integration_not_allowed_at_enterprise' => CustomIntegrationNotAllowedAtEnterprise,
           'data_not_available' => DataNotAvailable,
           'default_channel_restricted' => DefaultChannelRestricted,
           'default_org_wide_channel' => DefaultOrgWideChannel,
@@ -526,11 +647,13 @@ module Slack
           'duplicate_message_not_found' => DuplicateMessageNotFound,
           'edit_window_closed' => EditWindowClosed,
           'ekm_access_denied' => EkmAccessDenied,
+          'email_does_not_match' => EmailDoesNotMatch,
           'email_taken' => EmailTaken,
           'emoji_limit_reached' => EmojiLimitReached,
           'emoji_not_found' => EmojiNotFound,
           'enterprise_is_restricted' => EnterpriseIsRestricted,
           'enterprise_not_found' => EnterpriseNotFound,
+          'entity_not_found' => EntityNotFound,
           'error_bad_format' => ErrorBadFormat,
           'error_bad_name_i18n' => ErrorBadNameI18n,
           'error_bad_upload' => ErrorBadUpload,
@@ -542,9 +665,14 @@ module Slack
           'error_name_taken_i18n' => ErrorNameTakenI18n,
           'error_no_image' => ErrorNoImage,
           'error_too_big' => ErrorTooBig,
+          'exchanged_trigger_id' => ExchangedTriggerId,
+          'expired_trigger_id' => ExpiredTriggerId,
           'external_channel_migrating' => ExternalChannelMigrating,
           'externally_shared_or_disconnected_channel' => ExternallySharedOrDisconnectedChannel,
           'fail_to_get_teams_for_restricted_user' => FailToGetTeamsForRestrictedUser,
+          'failed_adding_collaborator' => FailedAddingCollaborator,
+          'failed_creating_app' => FailedCreatingApp,
+          'failed_export' => FailedExport,
           'failed_for_some_users' => FailedForSomeUsers,
           'failed_looking_up_user' => FailedLookingUpUser,
           'failed_sending_dialog' => FailedSendingDialog,
@@ -566,6 +694,7 @@ module Slack
           'failed_to_set_user_to_owner' => FailedToSetUserToOwner,
           'failed_to_set_user_to_regular' => FailedToSetUserToRegular,
           'failed_to_unlink_channel' => FailedToUnlinkChannel,
+          'failed_to_unshare' => FailedToUnshare,
           'failed_to_validate_caller' => FailedToValidateCaller,
           'failed_to_validate_channels' => FailedToValidateChannels,
           'failed_to_validate_custom_message' => FailedToValidateCustomMessage,
@@ -588,11 +717,15 @@ module Slack
           'group_must_not_be_empty' => GroupMustNotBeEmpty,
           'group_not_found' => GroupNotFound,
           'handle_already_exists' => HandleAlreadyExists,
+          'has_already_connected_to_org' => HasAlreadyConnectedToOrg,
           'hash_conflict' => HashConflict,
           'inactive_call' => InactiveCall,
+          'inactive_invite' => InactiveInvite,
           'insecure_request' => InsecureRequest,
           'internal_error' => InternalError,
+          'invalid_action' => InvalidAction,
           'invalid_actor' => InvalidActor,
+          'invalid_app' => InvalidApp,
           'invalid_app_id' => InvalidAppId,
           'invalid_arg_name' => InvalidArgName,
           'invalid_args' => InvalidArgs,
@@ -601,9 +734,11 @@ module Slack
           'invalid_attachments' => InvalidAttachments,
           'invalid_auth' => InvalidAuth,
           'invalid_blocks' => InvalidBlocks,
+          'invalid_blocks_format' => InvalidBlocksFormat,
           'invalid_call_id' => InvalidCallId,
           'invalid_channel' => InvalidChannel,
           'invalid_channel_id' => InvalidChannelId,
+          'invalid_channel_provided' => InvalidChannelProvided,
           'invalid_channel_type' => InvalidChannelType,
           'invalid_channels_limit' => InvalidChannelsLimit,
           'invalid_charset' => InvalidCharset,
@@ -614,12 +749,18 @@ module Slack
           'invalid_date' => InvalidDate,
           'invalid_duration' => InvalidDuration,
           'invalid_email' => InvalidEmail,
+          'invalid_emoji_not_allowed' => InvalidEmojiNotAllowed,
           'invalid_event_context' => InvalidEventContext,
           'invalid_external_id' => InvalidExternalId,
           'invalid_form_data' => InvalidFormData,
           'invalid_grant_type' => InvalidGrantType,
+          'invalid_group_provided' => InvalidGroupProvided,
+          'invalid_host_team' => InvalidHostTeam,
           'invalid_inputs' => InvalidInputs,
           'invalid_limit' => InvalidLimit,
+          'invalid_link' => InvalidLink,
+          'invalid_manifest' => InvalidManifest,
+          'invalid_metadata_filter_keys' => InvalidMetadataFilterKeys,
           'invalid_name' => InvalidName,
           'invalid_name_maxlength' => InvalidNameMaxlength,
           'invalid_name_punctuation' => InvalidNamePunctuation,
@@ -630,17 +771,19 @@ module Slack
           'invalid_permissions' => InvalidPermissions,
           'invalid_post_type' => InvalidPostType,
           'invalid_presence' => InvalidPresence,
+          'invalid_privacy' => InvalidPrivacy,
           'invalid_profile' => InvalidProfile,
+          'invalid_refresh_token' => InvalidRefreshToken,
           'invalid_request' => InvalidRequest,
           'invalid_request_id' => InvalidRequestId,
           'invalid_restricted_subjects' => InvalidRestrictedSubjects,
           'invalid_role_for_user' => InvalidRoleForUser,
           'invalid_scheduled_message_id' => InvalidScheduledMessageId,
-          'invalid_scope' => InvalidScope,
           'invalid_scopes' => InvalidScopes,
           'invalid_search_channel_type' => InvalidSearchChannelType,
           'invalid_sort' => InvalidSort,
           'invalid_sort_dir' => InvalidSortDir,
+          'invalid_source' => InvalidSource,
           'invalid_start_time' => InvalidStartTime,
           'invalid_step_status' => InvalidStepStatus,
           'invalid_target_team' => InvalidTargetTeam,
@@ -648,29 +791,46 @@ module Slack
           'invalid_team_ids' => InvalidTeamIds,
           'invalid_time' => InvalidTime,
           'invalid_timestamp' => InvalidTimestamp,
+          'invalid_title' => InvalidTitle,
           'invalid_token' => InvalidToken,
           'invalid_trigger' => InvalidTrigger,
+          'invalid_trigger_id' => InvalidTriggerId,
           'invalid_ts_latest' => InvalidTsLatest,
           'invalid_ts_oldest' => InvalidTsOldest,
           'invalid_type' => InvalidType,
           'invalid_types' => InvalidTypes,
+          'invalid_unfurl_id' => InvalidUnfurlId,
           'invalid_unfurls_format' => InvalidUnfurlsFormat,
           'invalid_url' => InvalidUrl,
           'invalid_user' => InvalidUser,
           'invalid_user_combination' => InvalidUserCombination,
           'invalid_user_id' => InvalidUserId,
           'invalid_users' => InvalidUsers,
+          'invalid_value' => InvalidValue,
+          'invite_from_same_org' => InviteFromSameOrg,
+          'invite_lookup_error' => InviteLookupError,
+          'invite_not_found' => InviteNotFound,
+          'invite_used' => InviteUsed,
           'invited_user_not_created' => InvitedUserNotCreated,
           'invited_user_not_reactivated' => InvitedUserNotReactivated,
           'invitee_cant_see_channel' => InviteeCantSeeChannel,
           'is_archived' => IsArchived,
           'is_bot' => IsBot,
           'is_inactive' => IsInactive,
+          'is_pending_connected_to_org' => IsPendingConnectedToOrg,
           'last_member' => LastMember,
+          'leaving_team_not_in_channel' => LeavingTeamNotInChannel,
+          'leaving_team_required' => LeavingTeamRequired,
+          'legacy_connection_invalid_org' => LegacyConnectionInvalidOrg,
+          'legacy_connection_limit_exceeded' => LegacyConnectionLimitExceeded,
           'limit_required' => LimitRequired,
           'link_not_found' => LinkNotFound,
+          'malware_detected' => MalwareDetected,
           'member_analytics_disabled' => MemberAnalyticsDisabled,
+          'member_limit_exceeded' => MemberLimitExceeded,
           'message_not_found' => MessageNotFound,
+          'message_too_long' => MessageTooLong,
+          'messages_tab_disabled' => MessagesTabDisabled,
           'metadata_not_available' => MetadataNotAvailable,
           'metadata_only_does_not_support_date' => MetadataOnlyDoesNotSupportDate,
           'method_deprecated' => MethodDeprecated,
@@ -682,25 +842,32 @@ module Slack
           'missing_dialog' => MissingDialog,
           'missing_duration' => MissingDuration,
           'missing_post_type' => MissingPostType,
+          'missing_profile_id' => MissingProfileId,
           'missing_resource' => MissingResource,
           'missing_scope' => MissingScope,
+          'missing_source' => MissingSource,
           'missing_subteam_name' => MissingSubteamName,
+          'missing_target_team' => MissingTargetTeam,
           'missing_team' => MissingTeam,
           'missing_trigger' => MissingTrigger,
           'missing_ts' => MissingTs,
+          'missing_unfurl_id' => MissingUnfurlId,
           'missing_unfurls' => MissingUnfurls,
           'missing_user' => MissingUser,
-          'mixed_scope' => MixedScope,
           'msg_too_long' => MsgTooLong,
+          'must_clear_both_status_text_and_status_emoji' => MustClearBothStatusTextAndStatusEmoji,
           'must_provide_team_domain' => MustProvideTeamDomain,
           'must_provide_team_name' => MustProvideTeamName,
+          'must_revoke_access' => MustRevokeAccess,
           'name_already_exists' => NameAlreadyExists,
           'name_taken' => NameTaken,
           'name_taken_in_org' => NameTakenInOrg,
+          'name_too_long' => NameTooLong,
           'no_active_sessions' => NoActiveSessions,
           'no_alias_selected' => NoAliasSelected,
           'no_bot_user_for_app' => NoBotUserForApp,
           'no_channel' => NoChannel,
+          'no_dual_broadcast_content_update' => NoDualBroadcastContentUpdate,
           'no_image_uploaded' => NoImageUploaded,
           'no_item_specified' => NoItemSpecified,
           'no_local_user_on_team' => NoLocalUserOnTeam,
@@ -711,6 +878,7 @@ module Slack
           'no_scopes' => NoScopes,
           'no_such_subteam' => NoSuchSubteam,
           'no_team_ids_given' => NoTeamIdsGiven,
+          'no_teams_to_disconnect' => NoTeamsToDisconnect,
           'no_text' => NoText,
           'no_user' => NoUser,
           'no_user_provided' => NoUserProvided,
@@ -733,6 +901,8 @@ module Slack
           'not_implemented' => NotImplemented,
           'not_in_channel' => NotInChannel,
           'not_in_dnd' => NotInDnd,
+          'not_owner' => NotOwner,
+          'not_paid' => NotPaid,
           'not_pinnable' => NotPinnable,
           'not_pinned' => NotPinned,
           'not_reactable' => NotReactable,
@@ -744,19 +914,23 @@ module Slack
           'org_login_required' => OrgLoginRequired,
           'org_not_found' => OrgNotFound,
           'org_user_not_in_team' => OrgUserNotInTeam,
+          'over_max_entity_limit' => OverMaxEntityLimit,
           'over_pagination_limit' => OverPaginationLimit,
           'pagination_not_available' => PaginationNotAvailable,
           'paid_only' => PaidOnly,
           'paid_teams_only' => PaidTeamsOnly,
           'permission_denied' => PermissionDenied,
           'plan_upgrade_required' => PlanUpgradeRequired,
+          'policy_not_found' => PolicyNotFound,
           'posting_to_general_channel_denied' => PostingToGeneralChannelDenied,
           'preview_feature_not_available' => PreviewFeatureNotAvailable,
           'primary_usergroup_not_found' => PrimaryUsergroupNotFound,
           'profile_set_failed' => ProfileSetFailed,
           'public_video_not_allowed' => PublicVideoNotAllowed,
+          'published_app_only' => PublishedAppOnly,
           'push_limit_reached' => PushLimitReached,
           'rate_limited' => RateLimited,
+          'ratelimit' => Ratelimit,
           'ratelimited' => Ratelimited,
           'request_already_resolved' => RequestAlreadyResolved,
           'request_id_or_app_id_is_required' => RequestIdOrAppIdIsRequired,
@@ -767,6 +941,7 @@ module Slack
           'restricted_action' => RestrictedAction,
           'restricted_action_non_threadable_channel' => RestrictedActionNonThreadableChannel,
           'restricted_action_read_only_channel' => RestrictedActionReadOnlyChannel,
+          'restricted_action_thread_locked' => RestrictedActionThreadLocked,
           'restricted_action_thread_only_channel' => RestrictedActionThreadOnlyChannel,
           'retention_override_not_allowed' => RetentionOverrideNotAllowed,
           'rtm_connect_required' => RtmConnectRequired,
@@ -775,27 +950,38 @@ module Slack
           'session_expired' => SessionExpired,
           'session_invalidation_failed' => SessionInvalidationFailed,
           'session_not_found' => SessionNotFound,
+          'session_reset_not_allowed' => SessionResetNotAllowed,
           'slack_connect_blocked_file_type' => SlackConnectBlockedFileType,
+          'slack_connect_clip_sharing_blocked' => SlackConnectClipSharingBlocked,
           'slack_connect_file_link_sharing_blocked' => SlackConnectFileLinkSharingBlocked,
           'slack_connect_file_upload_sharing_blocked' => SlackConnectFileUploadSharingBlocked,
           'snooze_end_failed' => SnoozeEndFailed,
           'snooze_failed' => SnoozeFailed,
           'snooze_not_active' => SnoozeNotActive,
+          'specify_enterprise_or_teams' => SpecifyEnterpriseOrTeams,
           'subteam_max_users_exceeded' => SubteamMaxUsersExceeded,
           'team_access_not_granted' => TeamAccessNotGranted,
           'team_added_to_org' => TeamAddedToOrg,
           'team_id_or_org_required' => TeamIdOrOrgRequired,
+          'team_id_required_for_enterprise' => TeamIdRequiredForEnterprise,
           'team_not_found' => TeamNotFound,
           'team_not_on_enterprise' => TeamNotOnEnterprise,
+          'teams_not_found' => TeamsNotFound,
+          'thread_locked' => ThreadLocked,
           'thread_not_found' => ThreadNotFound,
           'time_in_past' => TimeInPast,
           'time_too_far' => TimeTooFar,
+          'token_already_exchanged' => TokenAlreadyExchanged,
+          'token_expired' => TokenExpired,
           'token_revoked' => TokenRevoked,
+          'token_rotation_not_enabled' => TokenRotationNotEnabled,
           'too_large' => TooLarge,
           'too_long' => TooLong,
           'too_many_attachments' => TooManyAttachments,
+          'too_many_contact_cards' => TooManyContactCards,
           'too_many_convos_for_app_on_team' => TooManyConvosForAppOnTeam,
           'too_many_convos_for_team' => TooManyConvosForTeam,
+          'too_many_emails' => TooManyEmails,
           'too_many_emoji' => TooManyEmoji,
           'too_many_frames' => TooManyFrames,
           'too_many_ids' => TooManyIds,
@@ -805,14 +991,16 @@ module Slack
           'too_many_pins' => TooManyPins,
           'too_many_reactions' => TooManyReactions,
           'too_many_target_teams' => TooManyTargetTeams,
+          'too_many_teams' => TooManyTeams,
           'too_many_teams_provided' => TooManyTeamsProvided,
           'too_many_users' => TooManyUsers,
           'trigger_exchanged' => TriggerExchanged,
           'trigger_expired' => TriggerExpired,
           'two_factor_setup_required' => TwoFactorSetupRequired,
-          'unable_to_leave_last_team' => UnableToLeaveLastTeam,
           'unable_to_link_idp_group_and_channel' => UnableToLinkIdpGroupAndChannel,
           'unable_to_unlink_idp_group_and_channel' => UnableToUnlinkIdpGroupAndChannel,
+          'unable_to_update_existing_sessions' => UnableToUpdateExistingSessions,
+          'unknown_error' => UnknownError,
           'unknown_method' => UnknownMethod,
           'unknown_type' => UnknownType,
           'unsupported_arguments' => UnsupportedArguments,
@@ -820,8 +1008,10 @@ module Slack
           'unsupported_team_type' => UnsupportedTeamType,
           'update_failed' => UpdateFailed,
           'ura_max_channels' => UraMaxChannels,
+          'url_in_message' => UrlInMessage,
           'user_already_deleted' => UserAlreadyDeleted,
           'user_already_team_member' => UserAlreadyTeamMember,
+          'user_cannot_create_channel' => UserCannotCreateChannel,
           'user_disabled' => UserDisabled,
           'user_does_not_own_channel' => UserDoesNotOwnChannel,
           'user_is_already_deleted' => UserIsAlreadyDeleted,
@@ -830,9 +1020,11 @@ module Slack
           'user_is_restricted' => UserIsRestricted,
           'user_is_ultra_restricted' => UserIsUltraRestricted,
           'user_must_be_admin' => UserMustBeAdmin,
+          'user_must_be_in_workspace' => UserMustBeInWorkspace,
           'user_not_found' => UserNotFound,
           'user_not_in_channel' => UserNotInChannel,
           'user_not_visible' => UserNotVisible,
+          'user_required_to_accept_as_private_but_cannot' => UserRequiredToAcceptAsPrivateButCannot,
           'user_session_reset_failed' => UserSessionResetFailed,
           'usergroup_not_found' => UsergroupNotFound,
           'usergroup_not_linked_to_team' => UsergroupNotLinkedToTeam,

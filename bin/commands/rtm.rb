@@ -13,8 +13,8 @@ command 'rtm' do |g|
     end
   end
 
-  g.desc 'Starts a Real Time Messaging session.'
-  g.long_desc %( Starts a Real Time Messaging session. )
+  g.desc 'Deprecated: Starts a Real Time Messaging session. Use rtm.connect instead.'
+  g.long_desc %( Deprecated: Starts a Real Time Messaging session. Use rtm.connect instead. )
   g.command 'start' do |c|
     c.flag 'batch_presence_aware', desc: 'Batch presence deliveries via subscription. Enabling changes the shape of presence_change events. See batch presence.'
     c.flag 'include_locale', desc: 'Set this to true to receive the locale for users and channels. Defaults to false.'

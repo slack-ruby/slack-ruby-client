@@ -6,12 +6,24 @@ command 'oauth_v2' do |g|
   g.desc 'Exchanges a temporary OAuth verifier code for an access token.'
   g.long_desc %( Exchanges a temporary OAuth verifier code for an access token. )
   g.command 'access' do |c|
-    c.flag 'code', desc: 'The code param returned via the OAuth callback.'
     c.flag 'client_id', desc: 'Issued when you created your application.'
     c.flag 'client_secret', desc: 'Issued when you created your application.'
+    c.flag 'code', desc: 'The code param returned via the OAuth callback.'
+    c.flag 'grant_type', desc: 'The grant_type param as described in the OAuth spec.'
     c.flag 'redirect_uri', desc: 'This must match the originally submitted URI (if one was sent).'
+    c.flag 'refresh_token', desc: 'The refresh_token param as described in the OAuth spec.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.oauth_v2_access(options))
+    end
+  end
+
+  g.desc 'Exchanges a legacy access token for a new expiring access token and refresh token'
+  g.long_desc %( Exchanges a legacy access token for a new expiring access token and refresh token )
+  g.command 'exchange' do |c|
+    c.flag 'client_id', desc: 'Issued when you created your application.'
+    c.flag 'client_secret', desc: 'Issued when you created your application.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.oauth_v2_exchange(options))
     end
   end
 end

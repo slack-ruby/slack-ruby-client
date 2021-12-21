@@ -7,15 +7,15 @@ module Slack
       module Endpoints
         module Stars
           #
-          # Adds a star to an item.
+          # Save an item for later. Formerly known as _adding a star_.
           #
           # @option options [channel] :channel
           #   Channel to add star to, or channel where the message to add star to was posted (used with timestamp).
           # @option options [file] :file
           #   File to add star to.
-          # @option options [Object] :file_comment
+          # @option options [string] :file_comment
           #   File comment to add star to.
-          # @option options [Object] :timestamp
+          # @option options [string] :timestamp
           #   Timestamp of the message to add star to.
           # @see https://api.slack.com/methods/stars.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.add.json
@@ -25,12 +25,14 @@ module Slack
           end
 
           #
-          # Lists stars for a user.
+          # List a user's saved items, formerly known as _stars_.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+          # @option options [string] :team_id
+          #   encoded team id to list stars in, required if org token is used.
           # @see https://api.slack.com/methods/stars.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.list.json
           def stars_list(options = {})
@@ -44,15 +46,15 @@ module Slack
           end
 
           #
-          # Removes a star from an item.
+          # Removes a saved item (star) from an item.
           #
           # @option options [channel] :channel
           #   Channel to remove star from, or channel where the message to remove star from was posted (used with timestamp).
           # @option options [file] :file
           #   File to remove star from.
-          # @option options [Object] :file_comment
+          # @option options [string] :file_comment
           #   File comment to remove star from.
-          # @option options [Object] :timestamp
+          # @option options [string] :timestamp
           #   Timestamp of the message to remove star from.
           # @see https://api.slack.com/methods/stars.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/stars/stars.remove.json

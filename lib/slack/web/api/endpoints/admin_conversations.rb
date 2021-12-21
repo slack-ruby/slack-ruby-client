@@ -33,13 +33,13 @@ module Slack
           #
           # Create a public or private channel-based conversation.
           #
-          # @option options [Object] :is_private
+          # @option options [boolean] :is_private
           #   When true, creates a private channel instead of a public channel.
-          # @option options [Object] :name
+          # @option options [string] :name
           #   Name of the public or private channel to create.
-          # @option options [Object] :description
+          # @option options [string] :description
           #   Description of the public or private channel to create.
-          # @option options [Object] :org_wide
+          # @option options [boolean] :org_wide
           #   When true, the channel will be available org-wide. Note: if the channel is not org_wide=true, you must specify a team_id for this channel.
           # @option options [Object] :team_id
           #   The workspace to create the channel in. Note: this argument is required unless you set org_wide=true.
@@ -64,6 +64,20 @@ module Slack
           end
 
           #
+          # Disconnect a connected channel from one or more workspaces.
+          #
+          # @option options [Object] :channel_id
+          #   The channel to be disconnected from some workspaces.
+          # @option options [array] :leaving_team_ids
+          #   team IDs getting removed from the channel, optional if there are only two teams in the channel.
+          # @see https://api.slack.com/methods/admin.conversations.disconnectShared
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.disconnectShared.json
+          def admin_conversations_disconnectShared(options = {})
+            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            post('admin.conversations.disconnectShared', options)
+          end
+
+          #
           # Get conversation preferences for a public or private channel.
           #
           # @option options [Object] :channel_id
@@ -78,7 +92,7 @@ module Slack
           #
           # This API endpoint can be used by any admin to get a channel's retention policy.
           #
-          # @option options [Object] :channel_id
+          # @option options [string] :channel_id
           #   The channel to get the retention policy for.
           # @see https://api.slack.com/methods/admin.conversations.getCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getCustomRetention.json
@@ -92,9 +106,9 @@ module Slack
           #
           # @option options [Object] :channel_id
           #   The channel to determine connected workspaces within the organization for.
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @see https://api.slack.com/methods/admin.conversations.getTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getTeams.json
@@ -114,7 +128,7 @@ module Slack
           #
           # @option options [Object] :channel_id
           #   The channel that the users will be invited to.
-          # @option options [Object] :user_ids
+          # @option options [array] :user_ids
           #   The users to invite.
           # @see https://api.slack.com/methods/admin.conversations.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.invite.json
@@ -127,7 +141,7 @@ module Slack
           #
           # This API endpoint can be used by any admin to remove a channel's retention policy.
           #
-          # @option options [Object] :channel_id
+          # @option options [string] :channel_id
           #   The channel to set the retention policy for.
           # @see https://api.slack.com/methods/admin.conversations.removeCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.removeCustomRetention.json
@@ -141,7 +155,7 @@ module Slack
           #
           # @option options [Object] :channel_id
           #   The channel to rename.
-          # @option options [Object] :name
+          # @option options [string] :name
           #   .
           # @see https://api.slack.com/methods/admin.conversations.rename
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.rename.json
@@ -154,19 +168,19 @@ module Slack
           #
           # Search for public or private channels in an Enterprise organization.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.
-          # @option options [Object] :query
+          # @option options [string] :query
           #   Name of the the channel to query by.
-          # @option options [Object] :search_channel_types
+          # @option options [array] :search_channel_types
           #   The type of channel to include or exclude in the search. For example private will search private channels, while private_exclude will exclude them. For a full list of types, check the Types section.
-          # @option options [Object] :sort
+          # @option options [string] :sort
           #   Possible values are relevant (search ranking based on what we think is closest), name (alphabetical), member_count (number of users in the channel), and created (date channel was created). You can optionally pair this with the sort_dir arg to change how it is sorted.
-          # @option options [Object] :sort_dir
+          # @option options [string] :sort_dir
           #   Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).
-          # @option options [Object] :team_ids
+          # @option options [array] :team_ids
           #   Comma separated string of team IDs, signifying the workspaces to search through.
           # @see https://api.slack.com/methods/admin.conversations.search
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.search.json
@@ -183,9 +197,9 @@ module Slack
           #
           # Set the posting permissions for a public or private channel.
           #
-          # @option options [Object] :channel_id
+          # @option options [string] :channel_id
           #   The channel to set the prefs for.
-          # @option options [Object] :prefs
+          # @option options [string] :prefs
           #   The prefs for this channel in a stringified JSON format.
           # @see https://api.slack.com/methods/admin.conversations.setConversationPrefs
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setConversationPrefs.json
@@ -198,9 +212,9 @@ module Slack
           #
           # This API endpoint can be used by any admin to set a channel's retention policy.
           #
-          # @option options [Object] :channel_id
+          # @option options [string] :channel_id
           #   The channel to set the retention policy for.
-          # @option options [Object] :duration_days
+          # @option options [integer] :duration_days
           #   The message retention duration in days to set for this channel.
           # @see https://api.slack.com/methods/admin.conversations.setCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setCustomRetention.json
@@ -213,11 +227,11 @@ module Slack
           #
           # Set the workspaces in an Enterprise grid org that connect to a public or private channel.
           #
-          # @option options [Object] :channel_id
+          # @option options [string] :channel_id
           #   The encoded channel_id to add or remove to workspaces.
-          # @option options [Object] :org_channel
+          # @option options [boolean] :org_channel
           #   True if channel has to be converted to an org channel.
-          # @option options [Object] :target_team_ids
+          # @option options [array] :target_team_ids
           #   A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.
           # @option options [Object] :team_id
           #   The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.

@@ -3,6 +3,6 @@
 
 require 'spec_helper'
 
-RSpec.describe Slack::Web::Api::Endpoints::Mpim do
+RSpec.describe Slack::Web::Api::Endpoints::OpenidConnect do
   let(:client) { Slack::Web::Client.new }
 end

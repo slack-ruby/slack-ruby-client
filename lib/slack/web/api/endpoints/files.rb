@@ -40,9 +40,9 @@ module Slack
           #
           # @option options [file] :file
           #   Specify a file by providing its ID.
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Parameter for pagination. File comments are paginated for a single file. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See pagination for more details.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.info.json
@@ -62,15 +62,17 @@ module Slack
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
-          # @option options [Object] :show_files_hidden_by_limit
+          # @option options [string] :files
+          #   .
+          # @option options [boolean] :show_files_hidden_by_limit
           #   Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to list files in, required if org token is used.
-          # @option options [Object] :ts_from
+          # @option options [string] :ts_from
           #   Filter files created after this timestamp (inclusive).
-          # @option options [Object] :ts_to
+          # @option options [string] :ts_to
           #   Filter files created before this timestamp (inclusive).
-          # @option options [Object] :types
+          # @option options [string] :types
           #   Filter files by type (see below). You can pass multiple values in the types argument, like types=spaces,snippets.The default value is all, which does not filter the list.
           # @option options [user] :user
           #   Filter files created by a single user.
@@ -125,21 +127,21 @@ module Slack
           #
           # Uploads or creates a file.
           #
-          # @option options [Object] :channels
+          # @option options [string] :channels
           #   Comma-separated list of channel names or IDs where the file will be shared.
-          # @option options [Object] :content
+          # @option options [string] :content
           #   File contents via a POST variable. If omitting this parameter, you must provide a file.
           # @option options [file] :file
           #   File contents via multipart/form-data. If omitting this parameter, you must submit content.
-          # @option options [Object] :filename
+          # @option options [string] :filename
           #   Filename of file.
-          # @option options [Object] :filetype
+          # @option options [string] :filetype
           #   A file type identifier.
-          # @option options [Object] :initial_comment
+          # @option options [string] :initial_comment
           #   The message text introducing the file in specified channels.
-          # @option options [Object] :thread_ts
+          # @option options [string] :thread_ts
           #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead.
-          # @option options [Object] :title
+          # @option options [string] :title
           #   Title of file.
           # @see https://api.slack.com/methods/files.upload
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.upload.json

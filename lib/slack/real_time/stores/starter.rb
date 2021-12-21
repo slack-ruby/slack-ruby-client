@@ -15,6 +15,11 @@ module Slack
 
         ### RealTime Events
 
+        # A shared channel invite was sent to a Slack user.
+        # @see https://api.slack.com/events/shared_channel_invite_received
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/shared_channel_invite_received.json
+        # on :shared_channel_invite_received do |data|
+
         # An enterprise grid migration has started on an external workspace..
         # @see https://api.slack.com/events/external_org_migration_started
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_started.json

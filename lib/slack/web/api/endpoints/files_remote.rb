@@ -9,17 +9,17 @@ module Slack
           #
           # Adds a file from a remote service
           #
-          # @option options [Object] :external_id
+          # @option options [string] :external_id
           #   Creator defined GUID for the file.
-          # @option options [Object] :external_url
+          # @option options [string] :external_url
           #   URL of the remote file.
-          # @option options [Object] :title
+          # @option options [string] :title
           #   Title of the file being shared.
-          # @option options [Object] :filetype
+          # @option options [string] :filetype
           #   type of file.
-          # @option options [Object] :indexable_file_contents
+          # @option options [string] :indexable_file_contents
           #   A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
-          # @option options [Object] :preview_image
+          # @option options [string] :preview_image
           #   Preview of the document via multipart/form-data.
           # @see https://api.slack.com/methods/files.remote.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.add.json
@@ -33,7 +33,7 @@ module Slack
           #
           # Retrieve information about a remote file added to Slack
           #
-          # @option options [Object] :external_id
+          # @option options [string] :external_id
           #   Creator defined GUID for the file.
           # @option options [file] :file
           #   Specify a file by providing its ID.
@@ -48,13 +48,13 @@ module Slack
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return.
-          # @option options [Object] :ts_from
+          # @option options [string] :ts_from
           #   Filter files created after this timestamp (inclusive).
-          # @option options [Object] :ts_to
+          # @option options [string] :ts_to
           #   Filter files created before this timestamp (inclusive).
           # @see https://api.slack.com/methods/files.remote.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.list.json
@@ -72,7 +72,7 @@ module Slack
           #
           # Remove a remote file.
           #
-          # @option options [Object] :external_id
+          # @option options [string] :external_id
           #   Creator defined GUID for the file.
           # @option options [file] :file
           #   Specify a file by providing its ID.
@@ -85,9 +85,9 @@ module Slack
           #
           # Share a remote file into a channel.
           #
-          # @option options [Object] :channels
+          # @option options [string] :channels
           #   Comma-separated list of channel IDs where the file will be shared.
-          # @option options [Object] :external_id
+          # @option options [string] :external_id
           #   The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or file or both are required.
           # @option options [file] :file
           #   Specify a file registered with Slack by providing its ID. Either this field or external_id or both are required.
@@ -101,19 +101,19 @@ module Slack
           #
           # Updates an existing remote file.
           #
-          # @option options [Object] :external_id
+          # @option options [string] :external_id
           #   Creator defined GUID for the file.
-          # @option options [Object] :external_url
+          # @option options [string] :external_url
           #   URL of the remote file.
           # @option options [file] :file
           #   Specify a file by providing its ID.
-          # @option options [Object] :filetype
+          # @option options [string] :filetype
           #   type of file.
-          # @option options [Object] :indexable_file_contents
+          # @option options [string] :indexable_file_contents
           #   File containing contents that can be used to improve searchability for the remote file.
-          # @option options [Object] :preview_image
+          # @option options [string] :preview_image
           #   Preview of the document via multipart/form-data.
-          # @option options [Object] :title
+          # @option options [string] :title
           #   Title of the file being shared.
           # @see https://api.slack.com/methods/files.remote.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.update.json

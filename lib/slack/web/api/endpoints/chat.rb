@@ -31,7 +31,7 @@ module Slack
           #   Channel containing the message to be deleted.
           # @option options [timestamp] :ts
           #   Timestamp of the message to be deleted.
-          # @option options [Object] :as_user
+          # @option options [boolean] :as_user
           #   Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
           # @see https://api.slack.com/methods/chat.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.delete.json
@@ -47,9 +47,9 @@ module Slack
           #
           # @option options [channel] :channel
           #   The channel the scheduled_message is posting to.
-          # @option options [Object] :scheduled_message_id
+          # @option options [string] :scheduled_message_id
           #   scheduled_message_id returned from call to chat.scheduleMessage.
-          # @option options [Object] :as_user
+          # @option options [boolean] :as_user
           #   Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
           # @see https://api.slack.com/methods/chat.deleteScheduledMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.deleteScheduledMessage.json
@@ -65,7 +65,7 @@ module Slack
           #
           # @option options [channel] :channel
           #   The ID of the conversation or channel containing the message.
-          # @option options [Object] :message_ts
+          # @option options [string] :message_ts
           #   A message's ts value, uniquely identifying it within a channel.
           # @see https://api.slack.com/methods/chat.getPermalink
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.getPermalink.json
@@ -81,7 +81,7 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
-          # @option options [Object] :text
+          # @option options [string] :text
           #   Text of the message to send.
           # @see https://api.slack.com/methods/chat.meMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.meMessage.json
@@ -94,29 +94,29 @@ module Slack
           #
           # Sends an ephemeral message to a user in a channel.
           #
-          # @option options [Object] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
-          # @option options [Object] :text
+          # @option options [string] :text
           #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [user] :user
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
-          # @option options [Object] :as_user
+          # @option options [boolean] :as_user
           #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
-          # @option options [Object] :blocks
+          # @option options [string] :attachments
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
-          # @option options [Object] :icon_emoji
+          # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
-          # @option options [Object] :icon_url
+          # @option options [string] :icon_url
           #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
-          # @option options [Object] :link_names
+          # @option options [boolean] :link_names
           #   Find and link channel names and usernames.
-          # @option options [Object] :parse
+          # @option options [string] :parse
           #   Change how messages are treated. Defaults to none. See below.
-          # @option options [Object] :thread_ts
+          # @option options [string] :thread_ts
           #   Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
-          # @option options [Object] :username
+          # @option options [string] :username
           #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @see https://api.slack.com/methods/chat.postEphemeral
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
@@ -145,35 +145,33 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
-          # @option options [Object] :as_user
-          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
-          # @option options [Object] :attachments
+          # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
-          # @option options [Object] :blocks
+          # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
-          # @option options [Object] :draft_id
-          #   The id of the draft associated with the message.
-          # @option options [Object] :icon_emoji
+          # @option options [string] :text
+          #   The formatted text of the message to be published. If blocks are included, this will become the fallback text used in notifications.
+          # @option options [boolean] :as_user
+          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
+          # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
-          # @option options [Object] :icon_url
+          # @option options [string] :icon_url
           #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
-          # @option options [Object] :link_names
+          # @option options [boolean] :link_names
           #   Find and link channel names and usernames.
-          # @option options [Object] :mrkdwn
+          # @option options [boolean] :mrkdwn
           #   Disable Slack markup parsing by setting to false. Enabled by default.
-          # @option options [Object] :parse
+          # @option options [string] :parse
           #   Change how messages are treated. Defaults to none. See below.
-          # @option options [Object] :reply_broadcast
+          # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
-          # @option options [Object] :text
-          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
-          # @option options [Object] :thread_ts
+          # @option options [string] :thread_ts
           #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
-          # @option options [Object] :unfurl_links
+          # @option options [boolean] :unfurl_links
           #   Pass true to enable unfurling of primarily text-based content.
-          # @option options [Object] :unfurl_media
+          # @option options [boolean] :unfurl_media
           #   Pass false to disable unfurling of media content.
-          # @option options [Object] :username
+          # @option options [string] :username
           #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
@@ -200,27 +198,27 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.
-          # @option options [Object] :post_at
+          # @option options [integer] :post_at
           #   Unix EPOCH timestamp of time in future to send the message.
-          # @option options [Object] :text
+          # @option options [string] :text
           #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
-          # @option options [Object] :as_user
+          # @option options [boolean] :as_user
           #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See chat.postMessage.
-          # @option options [Object] :attachments
+          # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
-          # @option options [Object] :blocks
+          # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
-          # @option options [Object] :link_names
+          # @option options [boolean] :link_names
           #   Find and link channel names and usernames.
-          # @option options [Object] :parse
+          # @option options [string] :parse
           #   Change how messages are treated. Defaults to none. See chat.postMessage.
-          # @option options [Object] :reply_broadcast
+          # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
-          # @option options [Object] :thread_ts
+          # @option options [string] :thread_ts
           #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
-          # @option options [Object] :unfurl_links
+          # @option options [boolean] :unfurl_links
           #   Pass true to enable unfurling of primarily text-based content.
-          # @option options [Object] :unfurl_media
+          # @option options [boolean] :unfurl_media
           #   Pass false to disable unfurling of media content.
           # @see https://api.slack.com/methods/chat.scheduleMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.scheduleMessage.json
@@ -235,16 +233,20 @@ module Slack
           # Provide custom unfurl behavior for user-posted URLs
           #
           # @option options [channel] :channel
-          #   Channel ID of the message.
+          #   Channel ID of the message. Both channel and ts must be provided together, or unfurl_id and source must be provided together.
           # @option options [timestamp] :ts
           #   Timestamp of the message to add unfurl behavior to.
-          # @option options [Object] :unfurls
+          # @option options [string] :unfurls
           #   URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.
+          # @option options [string] :source
+          #   The source of the link to unfurl. The source may either be composer, when the link is inside the message composer, or conversations_history, when the link has been posted to a conversation.
+          # @option options [string] :unfurl_id
+          #   The ID of the link to unfurl. Both unfurl_id and source must be provided together, or channel and ts must be provided together.
           # @option options [Object] :user_auth_blocks
           #   Provide a JSON based array of structured blocks presented as URL-encoded string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior.
           # @option options [Object] :user_auth_message
           #   Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior. Provides two buttons, Not now or Never ask me again.
-          # @option options [Object] :user_auth_required
+          # @option options [boolean] :user_auth_required
           #   Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain.
           # @option options [Object] :user_auth_url
           #   Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
@@ -265,17 +267,21 @@ module Slack
           #   Channel containing the message to be updated.
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
-          # @option options [Object] :as_user
+          # @option options [boolean] :as_user
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
-          # @option options [Object] :attachments
+          # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field.
-          # @option options [Object] :blocks
+          # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field.
-          # @option options [Object] :link_names
+          # @option options [array] :file_ids
+          #   Array of new file ids that will be sent with this message.
+          # @option options [boolean] :link_names
           #   Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.
-          # @option options [Object] :parse
+          # @option options [string] :parse
           #   Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.
-          # @option options [Object] :text
+          # @option options [boolean] :reply_broadcast
+          #   Broadcast an existing thread reply to make it visible to everyone in the channel or conversation.
+          # @option options [string] :text
           #   New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json

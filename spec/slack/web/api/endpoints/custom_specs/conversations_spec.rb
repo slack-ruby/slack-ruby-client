@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::Web::Api::Endpoints::Groups do
+RSpec.describe Slack::Web::Api::Endpoints::Conversations do
   let(:client) { Slack::Web::Client.new }
 
   context 'groups' do

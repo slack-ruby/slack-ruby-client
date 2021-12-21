@@ -9,13 +9,13 @@ module Slack
           #
           # List all disconnected channels—i.e., channels that were once connected to other workspaces and then disconnected—and the corresponding original channel IDs for key revocation with EKM.
           #
-          # @option options [Object] :channel_ids
+          # @option options [string] :channel_ids
           #   A comma-separated list of channels to filter to.
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-          # @option options [Object] :team_ids
+          # @option options [string] :team_ids
           #   A comma-separated list of the workspaces to which the channels you would like returned belong.
           # @see https://api.slack.com/methods/admin.conversations.ekm.listOriginalConnectedChannelInfo
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.ekm/admin.conversations.ekm.listOriginalConnectedChannelInfo.json

@@ -9,9 +9,9 @@ module Slack
           #
           # List all denied workspace invite requests.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Value of the next_cursor field sent as part of the previous api response.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive.
           # @option options [Object] :team_id
           #   ID for the workspace where the invite requests were made.

@@ -9,15 +9,15 @@ module Slack
           #
           # List conversations the calling user may access.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
-          # @option options [Object] :exclude_archived
+          # @option options [boolean] :exclude_archived
           #   Set to true to exclude archived channels from the list.
-          # @option options [Object] :limit
+          # @option options [number] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to list conversations in, required if org token is used.
-          # @option options [Object] :types
+          # @option options [string] :types
           #   Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.
           # @option options [user] :user
           #   Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
@@ -69,7 +69,7 @@ module Slack
           #
           # @option options [user] :user
           #   User to get info on.
-          # @option options [Object] :include_locale
+          # @option options [boolean] :include_locale
           #   Set this to true to receive the locale for this user. Defaults to false.
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.info.json
@@ -82,13 +82,13 @@ module Slack
           #
           # Lists all users in a Slack team.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
-          # @option options [Object] :include_locale
+          # @option options [boolean] :include_locale
           #   Set this to true to receive the locale for users. Defaults to false.
-          # @option options [Object] :limit
+          # @option options [number] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no limit value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience limit_required or HTTP 500 errors.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to list users in, required if org token is used.
           # @see https://api.slack.com/methods/users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.list.json
@@ -105,7 +105,7 @@ module Slack
           #
           # Find a user with an email address.
           #
-          # @option options [Object] :email
+          # @option options [string] :email
           #   An email address belonging to a user in the workspace.
           # @see https://api.slack.com/methods/users.lookupByEmail
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.lookupByEmail.json
@@ -126,13 +126,13 @@ module Slack
           #
           # Set the user profile photo
           #
-          # @option options [Object] :crop_w
+          # @option options [string] :crop_w
           #   Width/height of crop box (always square).
-          # @option options [Object] :crop_x
+          # @option options [string] :crop_x
           #   X coordinate of top-left corner of crop box.
-          # @option options [Object] :crop_y
+          # @option options [string] :crop_y
           #   Y coordinate of top-left corner of crop box.
-          # @option options [Object] :image
+          # @option options [string] :image
           #   File contents via multipart/form-data.
           # @see https://api.slack.com/methods/users.setPhoto
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPhoto.json
@@ -143,7 +143,7 @@ module Slack
           #
           # Manually sets user presence.
           #
-          # @option options [Object] :presence
+          # @option options [string] :presence
           #   Either auto or away.
           # @see https://api.slack.com/methods/users.setPresence
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPresence.json

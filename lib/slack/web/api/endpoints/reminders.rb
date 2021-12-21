@@ -9,10 +9,14 @@ module Slack
           #
           # Creates a reminder.
           #
-          # @option options [Object] :text
+          # @option options [string] :text
           #   The content of the reminder.
-          # @option options [Object] :time
+          # @option options [string] :time
           #   When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday").
+          # @option options [object] :recurrence
+          #   Specify the repeating behavior of a reminder. Available options: daily, weekly, monthly, or yearly. If weekly, may further specify the days of the week.
+          # @option options [string] :team_id
+          #   Encoded team id, required if org token is used.
           # @option options [user] :user
           #   The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
           # @see https://api.slack.com/methods/reminders.add
@@ -27,8 +31,10 @@ module Slack
           #
           # Marks a reminder as complete.
           #
-          # @option options [Object] :reminder
+          # @option options [string] :reminder
           #   The ID of the reminder to be marked as complete.
+          # @option options [string] :team_id
+          #   Encoded team id, required if org token is used.
           # @see https://api.slack.com/methods/reminders.complete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.complete.json
           def reminders_complete(options = {})
@@ -39,8 +45,10 @@ module Slack
           #
           # Deletes a reminder.
           #
-          # @option options [Object] :reminder
+          # @option options [string] :reminder
           #   The ID of the reminder.
+          # @option options [string] :team_id
+          #   Encoded team id, required if org token is used.
           # @see https://api.slack.com/methods/reminders.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.delete.json
           def reminders_delete(options = {})
@@ -51,8 +59,10 @@ module Slack
           #
           # Gets information about a reminder.
           #
-          # @option options [Object] :reminder
+          # @option options [string] :reminder
           #   The ID of the reminder.
+          # @option options [string] :team_id
+          #   Encoded team id, required if org token is passed.
           # @see https://api.slack.com/methods/reminders.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.info.json
           def reminders_info(options = {})
@@ -63,6 +73,8 @@ module Slack
           #
           # Lists all reminders created by or for a given user.
           #
+          # @option options [string] :team_id
+          #   Encoded team id, required if org token is passed.
           # @see https://api.slack.com/methods/reminders.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.list.json
           def reminders_list(options = {})

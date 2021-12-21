@@ -7,10 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Reminders do
   let(:client) { Slack::Web::Client.new }
   context 'reminders_add' do
     it 'requires text' do
-      expect { client.reminders_add(time: %q[1602288000]) }.to raise_error ArgumentError, /Required arguments :text missing/
+      expect { client.reminders_add(time: %q[]) }.to raise_error ArgumentError, /Required arguments :text missing/
     end
     it 'requires time' do
-      expect { client.reminders_add(text: %q[eat a banana]) }.to raise_error ArgumentError, /Required arguments :time missing/
+      expect { client.reminders_add(text: %q[]) }.to raise_error ArgumentError, /Required arguments :time missing/
     end
   end
   context 'reminders_complete' do

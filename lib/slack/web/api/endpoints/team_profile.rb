@@ -9,7 +9,7 @@ module Slack
           #
           # Retrieve a team's profile.
           #
-          # @option options [Object] :visibility
+          # @option options [string] :visibility
           #   Filter by visibility.
           # @see https://api.slack.com/methods/team.profile.get
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team.profile/team.profile.get.json

@@ -11,9 +11,9 @@ module Slack
           #
           # @option options [Object] :team_id
           #   .
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @see https://api.slack.com/methods/admin.teams.owners.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.owners/admin.teams.owners.list.json

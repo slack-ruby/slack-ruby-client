@@ -10,9 +10,9 @@ module Slack
           # Pins an item to a channel.
           #
           # @option options [channel] :channel
-          #   Channel to pin the item in.
-          # @option options [Object] :timestamp
-          #   Timestamp of the message to pin.
+          #   Channel to pin the messsage to. You must also include a timestamp when pinning messages.
+          # @option options [string] :timestamp
+          #   Timestamp of the message to pin. You must also include the channel.
           # @see https://api.slack.com/methods/pins.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.add.json
           def pins_add(options = {})
@@ -39,7 +39,7 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel where the item is pinned to.
-          # @option options [Object] :timestamp
+          # @option options [string] :timestamp
           #   Timestamp of the message to un-pin.
           # @see https://api.slack.com/methods/pins.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.remove.json

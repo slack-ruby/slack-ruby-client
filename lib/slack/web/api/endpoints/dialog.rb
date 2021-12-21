@@ -9,9 +9,9 @@ module Slack
           #
           # Open a dialog with a user
           #
-          # @option options [Object] :dialog
+          # @option options [string] :dialog
           #   The dialog definition. This must be a JSON-encoded string.
-          # @option options [Object] :trigger_id
+          # @option options [string] :trigger_id
           #   Exchange a trigger to post to the user.
           # @see https://api.slack.com/methods/dialog.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dialog/dialog.open.json

@@ -13,11 +13,11 @@ module Slack
           #   The ID (T1234) of the workspace.
           # @option options [Object] :user_id
           #   The ID of the user to add to the workspace.
-          # @option options [Object] :channel_ids
+          # @option options [string] :channel_ids
           #   Comma separated values of channel IDs to add user in the new workspace.
-          # @option options [Object] :is_restricted
+          # @option options [boolean] :is_restricted
           #   True if user should be added to the workspace as a guest.
-          # @option options [Object] :is_ultra_restricted
+          # @option options [boolean] :is_ultra_restricted
           #   True if user should be added to the workspace as a single-channel guest.
           # @see https://api.slack.com/methods/admin.users.assign
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.assign.json
@@ -30,23 +30,25 @@ module Slack
           #
           # Invite a user to a workspace.
           #
-          # @option options [Object] :channel_ids
+          # @option options [string] :channel_ids
           #   A comma-separated list of channel_ids for this user to join. At least one channel is required.
-          # @option options [Object] :email
+          # @option options [string] :email
           #   The email address of the person to invite.
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
-          # @option options [Object] :custom_message
+          # @option options [string] :custom_message
           #   An optional message to send to the user in the invite email.
-          # @option options [Object] :guest_expiration_ts
+          # @option options [boolean] :email_password_policy_enabled
+          #   Allow invited user to sign in via email and password. Only available for Enterprise Grid teams via admin invite.
+          # @option options [string] :guest_expiration_ts
           #   Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.
-          # @option options [Object] :is_restricted
+          # @option options [boolean] :is_restricted
           #   Is this user a multi-channel guest user? (default: false).
-          # @option options [Object] :is_ultra_restricted
+          # @option options [boolean] :is_ultra_restricted
           #   Is this user a single channel guest user? (default: false).
-          # @option options [Object] :real_name
+          # @option options [string] :real_name
           #   Full name of the user.
-          # @option options [Object] :resend
+          # @option options [boolean] :resend
           #   Allow this invite to be resent in the future if a user has not signed up yet. (default: false).
           # @see https://api.slack.com/methods/admin.users.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.invite.json
@@ -60,9 +62,9 @@ module Slack
           #
           # List users on a workspace
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   Limit for how many users to be retrieved per page.
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
@@ -83,7 +85,7 @@ module Slack
           #
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
-          # @option options [Object] :user_id
+          # @option options [string] :user_id
           #   The ID of the user to remove.
           # @see https://api.slack.com/methods/admin.users.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.remove.json
@@ -98,7 +100,7 @@ module Slack
           #
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
-          # @option options [Object] :user_id
+          # @option options [string] :user_id
           #   The ID of the user to designate as an admin.
           # @see https://api.slack.com/methods/admin.users.setAdmin
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setAdmin.json
@@ -111,9 +113,9 @@ module Slack
           #
           # Set an expiration for a guest user
           #
-          # @option options [Object] :expiration_ts
+          # @option options [integer] :expiration_ts
           #   Timestamp when guest account should be disabled.
-          # @option options [Object] :user_id
+          # @option options [string] :user_id
           #   The ID of the user to set an expiration for.
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
@@ -145,7 +147,7 @@ module Slack
           #
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
-          # @option options [Object] :user_id
+          # @option options [string] :user_id
           #   The ID of the user to designate as a regular user.
           # @see https://api.slack.com/methods/admin.users.setRegular
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setRegular.json

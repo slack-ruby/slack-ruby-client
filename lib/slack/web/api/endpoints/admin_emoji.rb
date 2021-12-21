@@ -9,9 +9,9 @@ module Slack
           #
           # Add an emoji.
           #
-          # @option options [Object] :name
+          # @option options [string] :name
           #   The name of the emoji to be added. Colons (:myemoji:) around the value are not required, although they may be included.
-          # @option options [Object] :url
+          # @option options [string] :url
           #   The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best.
           # @see https://api.slack.com/methods/admin.emoji.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.add.json
@@ -24,9 +24,9 @@ module Slack
           #
           # Add an emoji alias.
           #
-          # @option options [Object] :alias_for
+          # @option options [string] :alias_for
           #   The alias of the emoji.
-          # @option options [Object] :name
+          # @option options [string] :name
           #   The name of the emoji to be aliased. Colons (:myemoji:) around the value are not required, although they may be included.
           # @see https://api.slack.com/methods/admin.emoji.addAlias
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.addAlias.json
@@ -39,9 +39,9 @@ module Slack
           #
           # List emoji for an Enterprise Grid organization.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @see https://api.slack.com/methods/admin.emoji.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.list.json
@@ -58,7 +58,7 @@ module Slack
           #
           # Remove an emoji across an Enterprise Grid organization
           #
-          # @option options [Object] :name
+          # @option options [string] :name
           #   The name of the emoji to be removed. Colons (:myemoji:) around the value are not required, although they may be included.
           # @see https://api.slack.com/methods/admin.emoji.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.remove.json
@@ -70,9 +70,9 @@ module Slack
           #
           # Rename an emoji.
           #
-          # @option options [Object] :name
+          # @option options [string] :name
           #   The name of the emoji to be renamed. Colons (:myemoji:) around the value are not required, although they may be included.
-          # @option options [Object] :new_name
+          # @option options [string] :new_name
           #   The new name of the emoji.
           # @see https://api.slack.com/methods/admin.emoji.rename
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.rename.json

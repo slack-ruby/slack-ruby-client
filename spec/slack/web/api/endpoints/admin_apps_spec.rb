@@ -10,4 +10,9 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminApps do
       expect { client.admin_apps_clearResolution }.to raise_error ArgumentError, /Required arguments :app_id missing/
     end
   end
+  context 'admin.apps_uninstall' do
+    it 'requires app_id' do
+      expect { client.admin_apps_uninstall }.to raise_error ArgumentError, /Required arguments :app_id missing/
+    end
+  end
 end

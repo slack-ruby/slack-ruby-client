@@ -43,6 +43,16 @@ command 'admin_conversations' do |g|
     end
   end
 
+  g.desc 'Disconnect a connected channel from one or more workspaces.'
+  g.long_desc %( Disconnect a connected channel from one or more workspaces. )
+  g.command 'disconnectShared' do |c|
+    c.flag 'channel_id', desc: 'The channel to be disconnected from some workspaces.'
+    c.flag 'leaving_team_ids', desc: 'team IDs getting removed from the channel, optional if there are only two teams in the channel.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_conversations_disconnectShared(options))
+    end
+  end
+
   g.desc 'Get conversation preferences for a public or private channel.'
   g.long_desc %( Get conversation preferences for a public or private channel. )
   g.command 'getConversationPrefs' do |c|

@@ -9,11 +9,11 @@ module Slack
           #
           # For Enterprise Grid workspaces, map local user IDs to global user IDs
           #
-          # @option options [Object] :users
+          # @option options [array] :users
           #   A comma-separated list of user ids, up to 400 per request.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   Specify team_id starts with T in case of Org Token.
-          # @option options [Object] :to_old
+          # @option options [boolean] :to_old
           #   Specify true to convert W global user IDs to workspace-specific U IDs. Defaults to false.
           # @see https://api.slack.com/methods/migration.exchange
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/migration/migration.exchange.json

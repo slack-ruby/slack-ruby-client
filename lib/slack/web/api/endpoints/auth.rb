@@ -9,7 +9,7 @@ module Slack
           #
           # Revokes a token.
           #
-          # @option options [Object] :test
+          # @option options [boolean] :test
           #   Setting this parameter to 1 triggers a testing mode where the specified token will not actually be revoked.
           # @see https://api.slack.com/methods/auth.revoke
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/auth/auth.revoke.json

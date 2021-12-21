@@ -23,6 +23,7 @@ command 'admin_users' do |g|
     c.flag 'email', desc: 'The email address of the person to invite.'
     c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
     c.flag 'custom_message', desc: 'An optional message to send to the user in the invite email.'
+    c.flag 'email_password_policy_enabled', desc: 'Allow invited user to sign in via email and password. Only available for Enterprise Grid teams via admin invite.'
     c.flag 'guest_expiration_ts', desc: 'Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.'
     c.flag 'is_restricted', desc: 'Is this user a multi-channel guest user? (default: false).'
     c.flag 'is_ultra_restricted', desc: 'Is this user a single channel guest user? (default: false).'
