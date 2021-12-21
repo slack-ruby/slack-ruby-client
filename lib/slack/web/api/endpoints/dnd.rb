@@ -27,7 +27,7 @@ module Slack
           #
           # Retrieves a user's current Do Not Disturb status.
           #
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   Encoded team id where passed in user param belongs, required if org token is used. If no user param is passed, then a team which has access to the app should be passed.
           # @option options [user] :user
           #   User to fetch status for (defaults to current user).
@@ -41,21 +41,20 @@ module Slack
           #
           # Turns on Do Not Disturb mode for the current user, or changes its duration.
           #
-          # @option options [Object] :num_minutes
+          # @option options [string] :num_minutes
           #   Number of minutes, from now, to snooze until.
           # @see https://api.slack.com/methods/dnd.setSnooze
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.setSnooze.json
           def dnd_setSnooze(options = {})
-            throw ArgumentError.new('Required arguments :num_minutes missing') if options[:num_minutes].nil?
             post('dnd.setSnooze', options)
           end
 
           #
           # Retrieves the Do Not Disturb status for up to 50 users on a team.
           #
-          # @option options [Object] :users
+          # @option options [string] :users
           #   Comma-separated list of users to fetch Do Not Disturb status for.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   Encoded team id where passed in users belong, required if org token is used.
           # @see https://api.slack.com/methods/dnd.teamInfo
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.teamInfo.json

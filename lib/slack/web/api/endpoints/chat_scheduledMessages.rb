@@ -11,15 +11,15 @@ module Slack
           #
           # @option options [channel] :channel
           #   The channel of the scheduled messages.
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   For pagination purposes, this is the cursor value returned from a previous call to chat.scheduledmessages.list indicating where you want to start this call from.
           # @option options [timestamp] :latest
           #   A UNIX timestamp of the latest value in the time range.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   Maximum number of original entries to return.
           # @option options [timestamp] :oldest
           #   A UNIX timestamp of the oldest value in the time range.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to list channels in, required if org token is used.
           # @see https://api.slack.com/methods/chat.scheduledMessages.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat.scheduledMessages/chat.scheduledMessages.list.json

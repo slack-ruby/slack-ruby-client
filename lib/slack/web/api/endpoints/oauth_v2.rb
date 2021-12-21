@@ -9,19 +9,37 @@ module Slack
           #
           # Exchanges a temporary OAuth verifier code for an access token.
           #
-          # @option options [Object] :code
+          # @option options [string] :client_id
+          #   Issued when you created your application.
+          # @option options [string] :client_secret
+          #   Issued when you created your application.
+          # @option options [string] :code
           #   The code param returned via the OAuth callback.
-          # @option options [Object] :client_id
-          #   Issued when you created your application.
-          # @option options [Object] :client_secret
-          #   Issued when you created your application.
-          # @option options [Object] :redirect_uri
+          # @option options [string] :grant_type
+          #   The grant_type param as described in the OAuth spec.
+          # @option options [string] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).
+          # @option options [string] :refresh_token
+          #   The refresh_token param as described in the OAuth spec.
           # @see https://api.slack.com/methods/oauth.v2.access
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.access.json
           def oauth_v2_access(options = {})
-            throw ArgumentError.new('Required arguments :code missing') if options[:code].nil?
             post('oauth.v2.access', options)
+          end
+
+          #
+          # Exchanges a legacy access token for a new expiring access token and refresh token
+          #
+          # @option options [string] :client_id
+          #   Issued when you created your application.
+          # @option options [string] :client_secret
+          #   Issued when you created your application.
+          # @see https://api.slack.com/methods/oauth.v2.exchange
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.exchange.json
+          def oauth_v2_exchange(options = {})
+            throw ArgumentError.new('Required arguments :client_id missing') if options[:client_id].nil?
+            throw ArgumentError.new('Required arguments :client_secret missing') if options[:client_secret].nil?
+            post('oauth.v2.exchange', options)
           end
         end
       end

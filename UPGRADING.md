@@ -1,11 +1,17 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
-### Upgrading to >= 0.18.0
+### Upgrading to >= 1.0.0
+
+#### Deprecated Methods
+
+Slack has deprecated all `channel` and `group` methods, which have been removed from the library.
+
+See [this announcement from Slack](https://api.slack.com/changelog/2020-01-deprecating-antecedents-to-the-conversations-api) for details.
 
 #### Error Handling
 
-As of 0.18.0 `Slack::Web::Api::Errors::ServerError` and its subclasses (introduced in 0.16.0) no longer extend `Slack::Web::Api::Errors::InternalError` or its parent `Slack::Web::Api::Errors::SlackError`. If you are rescuing `SlackError` or `InternalError` with the intention of including `ServerError` and its subclasses you should adjust your code to explicitly rescue `Slack::Web::Api::Errors::ServerError`.
+As of 1.0.0 `Slack::Web::Api::Errors::ServerError` and its subclasses (introduced in 0.16.0) no longer extend `Slack::Web::Api::Errors::InternalError` or its parent `Slack::Web::Api::Errors::SlackError`. If you are rescuing `SlackError` or `InternalError` with the intention of including `ServerError` and its subclasses you should adjust your code to explicitly rescue `Slack::Web::Api::Errors::ServerError`.
 
 ```ruby
 # Before

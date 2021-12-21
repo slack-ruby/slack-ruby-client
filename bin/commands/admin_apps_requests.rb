@@ -7,6 +7,7 @@ command 'admin_apps_requests' do |g|
   g.long_desc %( List app requests for a team/workspace. )
   g.command 'list' do |c|
     c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+    c.flag 'enterprise_id', desc: '.'
     c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
     c.flag 'team_id', desc: '.'
     c.action do |_global_options, options, _args|

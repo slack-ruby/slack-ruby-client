@@ -9,9 +9,9 @@ module Slack
           #
           # Registers new participants added to a Call.
           #
-          # @option options [Object] :id
+          # @option options [string] :id
           #   id returned by the calls.add method.
-          # @option options [Object] :users
+          # @option options [array] :users
           #   The list of users to add as participants in the Call. Read more on how to specify users here.
           # @see https://api.slack.com/methods/calls.participants.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls.participants/calls.participants.add.json
@@ -24,9 +24,9 @@ module Slack
           #
           # Registers participants removed from a Call.
           #
-          # @option options [Object] :id
+          # @option options [string] :id
           #   id returned by the calls.add method.
-          # @option options [Object] :users
+          # @option options [array] :users
           #   The list of users to remove as participants in the Call. Read more on how to specify users here.
           # @see https://api.slack.com/methods/calls.participants.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls.participants/calls.participants.remove.json

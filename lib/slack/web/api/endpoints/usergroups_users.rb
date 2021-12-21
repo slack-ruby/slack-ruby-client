@@ -9,11 +9,11 @@ module Slack
           #
           # List all users in a User Group
           #
-          # @option options [Object] :usergroup
+          # @option options [string] :usergroup
           #   The encoded ID of the User Group to update.
-          # @option options [Object] :include_disabled
+          # @option options [boolean] :include_disabled
           #   Allow results that involve disabled User Groups.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id where the user group exists, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups.users/usergroups.users.list.json
@@ -25,13 +25,13 @@ module Slack
           #
           # Update the list of users for a User Group
           #
-          # @option options [Object] :usergroup
+          # @option options [string] :usergroup
           #   The encoded ID of the User Group to update.
-          # @option options [Object] :users
+          # @option options [array] :users
           #   A comma separated string of encoded user IDs that represent the entire list of users for the User Group.
-          # @option options [Object] :include_count
+          # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id where the user group exists, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.users.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups.users/usergroups.users.update.json

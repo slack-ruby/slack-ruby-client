@@ -9,17 +9,17 @@ module Slack
           #
           # Create a User Group
           #
-          # @option options [Object] :name
+          # @option options [string] :name
           #   A name for the User Group. Must be unique among User Groups.
-          # @option options [Object] :channels
+          # @option options [array] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
-          # @option options [Object] :description
+          # @option options [string] :description
           #   A short description of the User Group.
-          # @option options [Object] :handle
+          # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
-          # @option options [Object] :include_count
+          # @option options [boolean] :include_count
           #   Include the number of users in each User Group.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   Encoded team id where the user group has to be created, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
@@ -33,7 +33,7 @@ module Slack
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to disable.
-          # @option options [Object] :include_count
+          # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
           # @option options [Object] :team_id
           #   Encoded team id where the user group is, required if org token is used.
@@ -47,11 +47,11 @@ module Slack
           #
           # Enable a User Group
           #
-          # @option options [Object] :usergroup
+          # @option options [string] :usergroup
           #   The encoded ID of the User Group to enable.
-          # @option options [Object] :include_count
+          # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   Encoded team id where the user group is, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.enable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
@@ -63,13 +63,13 @@ module Slack
           #
           # List all User Groups for a team
           #
-          # @option options [Object] :include_count
+          # @option options [boolean] :include_count
           #   Include the number of users in each User Group.
-          # @option options [Object] :include_disabled
+          # @option options [boolean] :include_disabled
           #   Include disabled User Groups.
-          # @option options [Object] :include_users
+          # @option options [boolean] :include_users
           #   Include the list of users for each User Group.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to list user groups in, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.list.json
@@ -82,15 +82,15 @@ module Slack
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to update.
-          # @option options [Object] :channels
+          # @option options [array] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
-          # @option options [Object] :description
+          # @option options [string] :description
           #   A short description of the User Group.
-          # @option options [Object] :handle
+          # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
-          # @option options [Object] :include_count
+          # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
-          # @option options [Object] :name
+          # @option options [string] :name
           #   A name for the User Group. Must be unique among User Groups.
           # @option options [Object] :team_id
           #   encoded team id where the user group exists, required if org token is used.

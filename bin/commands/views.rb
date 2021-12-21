@@ -39,8 +39,8 @@ command 'views' do |g|
   g.command 'update' do |c|
     c.flag 'view', desc: 'A view object. This must be a JSON-encoded string.'
     c.flag 'external_id', desc: 'A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either view_id or external_id is required.'
-    c.flag 'hash', desc: 'A string that represents view state to protect against possible race conditions.'
     c.flag 'view_id', desc: 'A unique identifier of the view to be updated. Either view_id or external_id is required.'
+    c.flag 'hash', desc: 'A string that represents view state to protect against possible race conditions.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.views_update(options))
     end

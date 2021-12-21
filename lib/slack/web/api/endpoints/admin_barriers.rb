@@ -9,11 +9,11 @@ module Slack
           #
           # Create an Information Barrier
           #
-          # @option options [Object] :barriered_from_usergroup_ids
+          # @option options [array] :barriered_from_usergroup_ids
           #   A list of IDP Groups ids that the primary usergroup is to be barriered from.
           # @option options [Object] :primary_usergroup_id
           #   The id of the primary IDP Group.
-          # @option options [Object] :restricted_subjects
+          # @option options [array] :restricted_subjects
           #   What kind of interactions are blocked by this barrier? For v1, we only support a list of all 3, eg im, mpim, call.
           # @see https://api.slack.com/methods/admin.barriers.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.barriers/admin.barriers.create.json
@@ -39,9 +39,9 @@ module Slack
           #
           # Get all Information Barriers for your organization
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @see https://api.slack.com/methods/admin.barriers.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.barriers/admin.barriers.list.json
@@ -60,11 +60,11 @@ module Slack
           #
           # @option options [Object] :barrier_id
           #   The ID of the barrier you're trying to modify.
-          # @option options [Object] :barriered_from_usergroup_ids
+          # @option options [array] :barriered_from_usergroup_ids
           #   A list of IDP Groups ids that the primary usergroup is to be barriered from.
           # @option options [Object] :primary_usergroup_id
           #   The id of the primary IDP Group.
-          # @option options [Object] :restricted_subjects
+          # @option options [array] :restricted_subjects
           #   What kind of interactions are blocked by this barrier? For v1, we only support a list of all 3, eg im, mpim, call.
           # @see https://api.slack.com/methods/admin.barriers.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.barriers/admin.barriers.update.json

@@ -11,7 +11,7 @@ module Slack
           #
           # @option options [file] :file
           #   File to delete a comment from.
-          # @option options [Object] :id
+          # @option options [string] :id
           #   The comment to delete.
           # @see https://api.slack.com/methods/files.comments.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.delete.json

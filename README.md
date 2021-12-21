@@ -2,14 +2,14 @@ Slack Ruby Client
 =================
 
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
-[![Build Status](https://travis-ci.org/slack-ruby/slack-ruby-client.svg?branch=master)](https://travis-ci.org/slack-ruby/slack-ruby-client)
+[![Build Status](https://app.travis-ci.com/slack-ruby/slack-ruby-client.svg?branch=master)](https://app.travis-ci.com/slack-ruby/slack-ruby-client)
 [![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-client)
 
 A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messaging](https://api.slack.com/rtm) and [Events](https://api.slack.com/events-api) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 
 ![](slack.png)
 
-## Table of Contents
+# Table of Contents
 
 - [Useful to Me?](#useful-to-me)
 - [Stable Release](#stable-release)

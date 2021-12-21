@@ -11,9 +11,9 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel where the message to add reaction to was posted.
-          # @option options [Object] :name
+          # @option options [string] :name
           #   Reaction (emoji) name.
-          # @option options [Object] :timestamp
+          # @option options [string] :timestamp
           #   Timestamp of the message to add reaction to.
           # @see https://api.slack.com/methods/reactions.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.add.json
@@ -32,11 +32,11 @@ module Slack
           #   Channel where the message to get reactions for was posted.
           # @option options [file] :file
           #   File to get reactions for.
-          # @option options [Object] :file_comment
+          # @option options [string] :file_comment
           #   File comment to get reactions for.
-          # @option options [Object] :full
+          # @option options [boolean] :full
           #   If true always return the complete reaction list.
-          # @option options [Object] :timestamp
+          # @option options [string] :timestamp
           #   Timestamp of the message to get reactions for.
           # @see https://api.slack.com/methods/reactions.get
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.get.json
@@ -48,13 +48,13 @@ module Slack
           #
           # Lists reactions made by a user.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
-          # @option options [Object] :full
+          # @option options [boolean] :full
           #   If true always return the complete reaction list.
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to list reactions in, required if org token is used.
           # @option options [user] :user
           #   Show reactions made by this user. Defaults to the authed user.
@@ -74,15 +74,15 @@ module Slack
           #
           # Removes a reaction from an item.
           #
-          # @option options [Object] :name
+          # @option options [string] :name
           #   Reaction (emoji) name.
           # @option options [channel] :channel
           #   Channel where the message to remove reaction from was posted.
           # @option options [file] :file
           #   File to remove reaction from.
-          # @option options [Object] :file_comment
+          # @option options [string] :file_comment
           #   File comment to remove reaction from.
-          # @option options [Object] :timestamp
+          # @option options [string] :timestamp
           #   Timestamp of the message to remove reaction from.
           # @see https://api.slack.com/methods/reactions.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.remove.json

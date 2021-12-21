@@ -9,11 +9,11 @@ module Slack
           #
           # List approved apps for an org or workspace.
           #
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :enterprise_id
           #   .
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @option options [Object] :team_id
           #   .

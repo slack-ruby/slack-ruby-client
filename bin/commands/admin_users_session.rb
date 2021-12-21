@@ -3,6 +3,24 @@
 
 desc 'AdminUsersSession methods.'
 command 'admin_users_session' do |g|
+  g.desc 'Clear user-specific session settings—the session duration and what happens when the client closes—for a list of users.'
+  g.long_desc %( Clear user-specific session settings—the session duration and what happens when the client closes—for a list of users. )
+  g.command 'clearSettings' do |c|
+    c.flag 'user_ids', desc: "The IDs of users you'd like to clear session settings for."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_session_clearSettings(options))
+    end
+  end
+
+  g.desc 'Get user-specific session settings—the session duration and what happens when the client closes—given a list of users.'
+  g.long_desc %( Get user-specific session settings—the session duration and what happens when the client closes—given a list of users. )
+  g.command 'getSettings' do |c|
+    c.flag 'user_ids', desc: "The IDs of users you'd like to fetch session settings for. Note: if a user does not have any active sessions, they will not be returned in the response."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_session_getSettings(options))
+    end
+  end
+
   g.desc 'Revoke a single session for a user. The user will be forced to login to Slack.'
   g.long_desc %( Revoke a single session for a user. The user will be forced to login to Slack. )
   g.command 'invalidate' do |c|
@@ -33,6 +51,28 @@ command 'admin_users_session' do |g|
     c.flag 'web_only', desc: 'Only expire web sessions (default: false).'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_users_session_reset(options))
+    end
+  end
+
+  g.desc 'Enqueues an asynchronous job to wipe all valid sessions on all devices for a given list of users'
+  g.long_desc %( Enqueues an asynchronous job to wipe all valid sessions on all devices for a given list of users )
+  g.command 'resetBulk' do |c|
+    c.flag 'user_ids', desc: 'The ID of the user to wipe sessions for.'
+    c.flag 'mobile_only', desc: 'Only expire mobile sessions (default: false).'
+    c.flag 'web_only', desc: 'Only expire web sessions (default: false).'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_session_resetBulk(options))
+    end
+  end
+
+  g.desc 'Configure the user-level session settings—the session duration and what happens when the client closes—for one or more users.'
+  g.long_desc %( Configure the user-level session settings—the session duration and what happens when the client closes—for one or more users. )
+  g.command 'setSettings' do |c|
+    c.flag 'user_ids', desc: 'The list of user IDs to apply the session settings for.'
+    c.flag 'desktop_app_browser_quit', desc: 'Terminate the session when the client—either the desktop app or a browser window—is closed.'
+    c.flag 'duration', desc: "The session duration, in seconds. The minimum value is 28800, which represents 8 hours; the max value is 315569520 or 10 years (that's a long Slack session)."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_users_session_setSettings(options))
     end
   end
 end

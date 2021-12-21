@@ -9,15 +9,15 @@ module Slack
           #
           # Searches for messages and files matching a query.
           #
-          # @option options [Object] :query
+          # @option options [string] :query
           #   Search query. May contains booleans, etc.
-          # @option options [Object] :highlight
+          # @option options [boolean] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
-          # @option options [Object] :sort
+          # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
-          # @option options [Object] :sort_dir
+          # @option options [string] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to search in, required if org token is used.
           # @see https://api.slack.com/methods/search.all
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.all.json
@@ -29,15 +29,15 @@ module Slack
           #
           # Searches for files matching a query.
           #
-          # @option options [Object] :query
+          # @option options [string] :query
           #   Search query.
-          # @option options [Object] :highlight
+          # @option options [boolean] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
-          # @option options [Object] :sort
+          # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
-          # @option options [Object] :sort_dir
+          # @option options [string] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to search in, required if org token is used.
           # @see https://api.slack.com/methods/search.files
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.files.json
@@ -49,21 +49,29 @@ module Slack
           #
           # Searches for messages matching a query.
           #
-          # @option options [Object] :query
+          # @option options [string] :query
           #   Search query.
-          # @option options [Object] :highlight
+          # @option options [string] :cursor
+          #   Use this when getting results with cursormark pagination. For first call send * for subsequent calls, send the value of next_cursor returned in the previous call's results.
+          # @option options [boolean] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
-          # @option options [Object] :sort
+          # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
-          # @option options [Object] :sort_dir
+          # @option options [string] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   encoded team id to search in, required if org token is used.
           # @see https://api.slack.com/methods/search.messages
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.messages.json
           def search_messages(options = {})
             throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
-            post('search.messages', options)
+            if block_given?
+              Pagination::Cursor.new(self, :search_messages, options).each do |page|
+                yield page
+              end
+            else
+              post('search.messages', options)
+            end
           end
         end
       end

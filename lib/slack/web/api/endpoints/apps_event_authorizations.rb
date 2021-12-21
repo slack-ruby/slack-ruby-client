@@ -9,11 +9,11 @@ module Slack
           #
           # Get a list of authorizations for the given event context. Each authorization represents an app installation that the event is visible to.
           #
-          # @option options [Object] :event_context
+          # @option options [string] :event_context
           #   .
-          # @option options [Object] :cursor
+          # @option options [string] :cursor
           #   .
-          # @option options [Object] :limit
+          # @option options [integer] :limit
           #   .
           # @see https://api.slack.com/methods/apps.event.authorizations.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.event.authorizations/apps.event.authorizations.list.json

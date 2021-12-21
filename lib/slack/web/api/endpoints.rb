@@ -6,6 +6,7 @@ require_relative 'endpoints/admin_apps'
 require_relative 'endpoints/admin_apps_approved'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
+require_relative 'endpoints/admin_auth_policy'
 require_relative 'endpoints/admin_barriers'
 require_relative 'endpoints/admin_conversations'
 require_relative 'endpoints/admin_conversations_ekm'
@@ -25,16 +26,12 @@ require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_connections'
 require_relative 'endpoints/apps_event_authorizations'
-require_relative 'endpoints/apps_permissions'
-require_relative 'endpoints/apps_permissions_resources'
-require_relative 'endpoints/apps_permissions_scopes'
-require_relative 'endpoints/apps_permissions_users'
+require_relative 'endpoints/apps_manifest'
 require_relative 'endpoints/auth'
 require_relative 'endpoints/auth_teams'
 require_relative 'endpoints/bots'
 require_relative 'endpoints/calls'
 require_relative 'endpoints/calls_participants'
-require_relative 'endpoints/channels'
 require_relative 'endpoints/chat'
 require_relative 'endpoints/chat_scheduledMessages'
 require_relative 'endpoints/conversations'
@@ -44,12 +41,10 @@ require_relative 'endpoints/emoji'
 require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files_remote'
-require_relative 'endpoints/groups'
-require_relative 'endpoints/im'
 require_relative 'endpoints/migration'
-require_relative 'endpoints/mpim'
 require_relative 'endpoints/oauth'
 require_relative 'endpoints/oauth_v2'
+require_relative 'endpoints/openid_connect'
 require_relative 'endpoints/pins'
 require_relative 'endpoints/reactions'
 require_relative 'endpoints/reminders'
@@ -57,7 +52,10 @@ require_relative 'endpoints/rtm'
 require_relative 'endpoints/search'
 require_relative 'endpoints/stars'
 require_relative 'endpoints/team'
+require_relative 'endpoints/team_billing'
+require_relative 'endpoints/team_preferences'
 require_relative 'endpoints/team_profile'
+require_relative 'endpoints/tooling_tokens'
 require_relative 'endpoints/usergroups'
 require_relative 'endpoints/usergroups_users'
 require_relative 'endpoints/users'
@@ -72,15 +70,14 @@ module Slack
     module Api
       module Endpoints
         include Slack::Web::Api::Mixins::Conversations
-        include Slack::Web::Api::Mixins::Channels
         include Slack::Web::Api::Mixins::Users
-        include Slack::Web::Api::Mixins::Groups
 
         include AdminAnalytics
         include AdminApps
         include AdminAppsApproved
         include AdminAppsRequests
         include AdminAppsRestricted
+        include AdminAuthPolicy
         include AdminBarriers
         include AdminConversations
         include AdminConversationsEkm
@@ -100,16 +97,12 @@ module Slack
         include Apps
         include AppsConnections
         include AppsEventAuthorizations
-        include AppsPermissions
-        include AppsPermissionsResources
-        include AppsPermissionsScopes
-        include AppsPermissionsUsers
+        include AppsManifest
         include Auth
         include AuthTeams
         include Bots
         include Calls
         include CallsParticipants
-        include Channels
         include Chat
         include ChatScheduledmessages
         include Conversations
@@ -119,12 +112,10 @@ module Slack
         include Files
         include FilesComments
         include FilesRemote
-        include Groups
-        include Im
         include Migration
-        include Mpim
         include Oauth
         include OauthV2
+        include OpenidConnect
         include Pins
         include Reactions
         include Reminders
@@ -132,7 +123,10 @@ module Slack
         include Search
         include Stars
         include Team
+        include TeamBilling
+        include TeamPreferences
         include TeamProfile
+        include ToolingTokens
         include Usergroups
         include UsergroupsUsers
         include Users

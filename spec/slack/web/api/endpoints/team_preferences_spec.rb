@@ -3,6 +3,6 @@
 
 require 'spec_helper'
 
-RSpec.describe Slack::Web::Api::Endpoints::AppsPermissionsResources do
+RSpec.describe Slack::Web::Api::Endpoints::TeamPreferences do
   let(:client) { Slack::Web::Client.new }
 end

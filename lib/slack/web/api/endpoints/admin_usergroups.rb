@@ -9,11 +9,11 @@ module Slack
           #
           # Add up to one hundred default channels to an IDP group.
           #
-          # @option options [Object] :channel_ids
+          # @option options [array] :channel_ids
           #   Comma separated string of channel IDs.
-          # @option options [Object] :usergroup_id
+          # @option options [string] :usergroup_id
           #   ID of the IDP group to add default channels for.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   The workspace to add default channels in.
           # @see https://api.slack.com/methods/admin.usergroups.addChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addChannels.json
@@ -26,11 +26,11 @@ module Slack
           #
           # Associate one or more default workspaces with an organization-wide IDP group.
           #
-          # @option options [Object] :team_ids
+          # @option options [array] :team_ids
           #   A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.
-          # @option options [Object] :usergroup_id
+          # @option options [string] :usergroup_id
           #   An encoded usergroup (IDP Group) ID.
-          # @option options [Object] :auto_provision
+          # @option options [boolean] :auto_provision
           #   When true, this method automatically creates new workspace accounts for the IDP group members.
           # @see https://api.slack.com/methods/admin.usergroups.addTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addTeams.json
@@ -45,9 +45,9 @@ module Slack
           #
           # @option options [Object] :usergroup_id
           #   ID of the IDP group to list default channels for.
-          # @option options [Object] :include_num_members
+          # @option options [boolean] :include_num_members
           #   Flag to include or exclude the count of members per channel.
-          # @option options [Object] :team_id
+          # @option options [string] :team_id
           #   ID of the the workspace.
           # @see https://api.slack.com/methods/admin.usergroups.listChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.listChannels.json
@@ -59,9 +59,9 @@ module Slack
           #
           # Remove one or more default channels from an org-level IDP group (user group).
           #
-          # @option options [Object] :channel_ids
+          # @option options [array] :channel_ids
           #   Comma-separated string of channel IDs.
-          # @option options [Object] :usergroup_id
+          # @option options [string] :usergroup_id
           #   ID of the IDP Group.
           # @see https://api.slack.com/methods/admin.usergroups.removeChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.removeChannels.json

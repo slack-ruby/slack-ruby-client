@@ -5,9 +5,12 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::OauthV2 do
   let(:client) { Slack::Web::Client.new }
-  context 'oauth.v2_access' do
-    it 'requires code' do
-      expect { client.oauth_v2_access }.to raise_error ArgumentError, /Required arguments :code missing/
+  context 'oauth.v2_exchange' do
+    it 'requires client_id' do
+      expect { client.oauth_v2_exchange(client_secret: %q[]) }.to raise_error ArgumentError, /Required arguments :client_id missing/
+    end
+    it 'requires client_secret' do
+      expect { client.oauth_v2_exchange(client_id: %q[]) }.to raise_error ArgumentError, /Required arguments :client_secret missing/
     end
   end
 end

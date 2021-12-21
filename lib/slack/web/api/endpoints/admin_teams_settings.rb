@@ -21,7 +21,7 @@ module Slack
           #
           # Set the default channels of a workspace.
           #
-          # @option options [Object] :channel_ids
+          # @option options [array] :channel_ids
           #   An array of channel IDs.
           # @option options [Object] :team_id
           #   ID for the workspace to set the default channel for.
@@ -36,7 +36,7 @@ module Slack
           #
           # Set the description of a given workspace.
           #
-          # @option options [Object] :description
+          # @option options [string] :description
           #   The new description for the workspace.
           # @option options [Object] :team_id
           #   ID for the workspace to set the description for.
@@ -51,7 +51,7 @@ module Slack
           #
           # An API method that allows admins to set the discoverability of a given workspace
           #
-          # @option options [Object] :discoverability
+          # @option options [string] :discoverability
           #   This workspace's discovery setting. It must be set to one of open, invite_only, closed, or unlisted.
           # @option options [Object] :team_id
           #   The ID of the workspace to set discoverability on.
@@ -66,7 +66,7 @@ module Slack
           #
           # Sets the icon of a workspace.
           #
-          # @option options [Object] :image_url
+          # @option options [string] :image_url
           #   Image URL for the icon.
           # @option options [Object] :team_id
           #   ID for the workspace to set the icon for.
@@ -81,7 +81,7 @@ module Slack
           #
           # Set the name of a given workspace.
           #
-          # @option options [Object] :name
+          # @option options [string] :name
           #   The new name of the workspace.
           # @option options [Object] :team_id
           #   ID for the workspace to set the name for.

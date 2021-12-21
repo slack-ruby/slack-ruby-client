@@ -15,18 +15,18 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsers do
   end
   context 'admin.users_invite' do
     it 'requires channel_ids' do
-      expect { client.admin_users_invite(email: %q[joe@email.com], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+      expect { client.admin_users_invite(email: %q[], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
     end
     it 'requires email' do
-      expect { client.admin_users_invite(channel_ids: %q[C1A2B3C4D,C26Z25Y24], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :email missing/
+      expect { client.admin_users_invite(channel_ids: %q[], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :email missing/
     end
     it 'requires team_id' do
-      expect { client.admin_users_invite(channel_ids: %q[C1A2B3C4D,C26Z25Y24], email: %q[joe@email.com]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_users_invite(channel_ids: %q[], email: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
   end
   context 'admin.users_remove' do
     it 'requires team_id' do
-      expect { client.admin_users_remove(user_id: %q[W12345678]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_users_remove(user_id: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
     it 'requires user_id' do
       expect { client.admin_users_remove(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
@@ -34,7 +34,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsers do
   end
   context 'admin.users_setAdmin' do
     it 'requires team_id' do
-      expect { client.admin_users_setAdmin(user_id: %q[W12345678]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_users_setAdmin(user_id: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
     it 'requires user_id' do
       expect { client.admin_users_setAdmin(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
@@ -42,10 +42,10 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsers do
   end
   context 'admin.users_setExpiration' do
     it 'requires expiration_ts' do
-      expect { client.admin_users_setExpiration(user_id: %q[W12345678]) }.to raise_error ArgumentError, /Required arguments :expiration_ts missing/
+      expect { client.admin_users_setExpiration(user_id: %q[]) }.to raise_error ArgumentError, /Required arguments :expiration_ts missing/
     end
     it 'requires user_id' do
-      expect { client.admin_users_setExpiration(expiration_ts: %q[1234567890]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
+      expect { client.admin_users_setExpiration(expiration_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
     end
   end
   context 'admin.users_setOwner' do
@@ -58,7 +58,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsers do
   end
   context 'admin.users_setRegular' do
     it 'requires team_id' do
-      expect { client.admin_users_setRegular(user_id: %q[W12345678]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+      expect { client.admin_users_setRegular(user_id: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
     it 'requires user_id' do
       expect { client.admin_users_setRegular(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user_id missing/

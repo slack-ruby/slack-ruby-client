@@ -9,7 +9,7 @@ module Slack
           #
           # Checks API calling code.
           #
-          # @option options [Object] :error
+          # @option options [string] :error
           #   Error response to return.
           # @see https://api.slack.com/methods/api.test
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/api/api.test.json
