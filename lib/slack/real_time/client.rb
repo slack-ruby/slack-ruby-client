@@ -3,6 +3,7 @@ module Slack
   module RealTime
     class Client
       class ClientNotStartedError < StandardError; end
+
       class ClientAlreadyStartedError < StandardError; end
 
       include Api::MessageId
@@ -16,10 +17,7 @@ module Slack
         attr_accessor :events
       end
 
-      attr_accessor :web_client
-      attr_accessor :store
-      attr_accessor :url
-      attr_accessor(*Config::ATTRIBUTES)
+      attr_accessor :web_client, :store, :url, *Config::ATTRIBUTES
 
       protected :store_class, :store_class=
 
@@ -133,7 +131,7 @@ module Slack
       rescue Slack::Web::Api::Errors::SlackError => e
         # stop pinging if bot was uninstalled
         case e.message
-        when 'account_inactive', 'invalid_auth' then
+        when 'account_inactive', 'invalid_auth'
           logger.warn(to_s) { e.message }
           raise e
         end
@@ -201,6 +199,7 @@ module Slack
       end
 
       attr_reader :callbacks
+
       def socket_class
         concurrency::Socket
       end

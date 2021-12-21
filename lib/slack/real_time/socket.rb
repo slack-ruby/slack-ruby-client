@@ -2,8 +2,7 @@
 module Slack
   module RealTime
     class Socket
-      attr_accessor :url
-      attr_accessor :options
+      attr_accessor :url, :options
       attr_reader :driver
 
       def initialize(url, options = {})
