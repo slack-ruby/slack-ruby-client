@@ -5,6 +5,8 @@ require:
   - rubocop-rspec
 
 AllCops:
+  TargetRubyVersion: 2.5
+  NewCops: enable
   DisplayCopNames: true
   Exclude:
     - bin/**/*

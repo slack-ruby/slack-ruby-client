@@ -6,11 +6,7 @@ module Slack
         class Cursor
           include Enumerable
 
-          attr_reader :client
-          attr_reader :verb
-          attr_reader :sleep_interval
-          attr_reader :max_retries
-          attr_reader :params
+          attr_reader :client, :verb, :sleep_interval, :max_retries, :params
 
           def initialize(client, verb, params = {})
             @client = client

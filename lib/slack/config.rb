@@ -3,8 +3,7 @@ module Slack
   module Config
     extend self
 
-    attr_accessor :token
-    attr_accessor :logger
+    attr_accessor :token, :logger
 
     def reset
       self.token = nil

@@ -8,12 +8,7 @@ module Slack
           attr_accessor :events
         end
 
-        attr_accessor :users
-        attr_accessor :bots
-        attr_accessor :channels
-        attr_accessor :groups
-        attr_accessor :teams
-        attr_accessor :ims
+        attr_accessor :users, :bots, :channels, :groups, :teams, :ims
 
         def self
           nil

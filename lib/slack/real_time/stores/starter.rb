@@ -4,9 +4,7 @@ module Slack
     module Stores
       # Only stores initial information.
       class Starter < Base
-        attr_reader :self
-
-        attr_reader :team
+        attr_reader :self, :team
 
         def initialize(attrs)
           @team = Models::Team.new(attrs.team)

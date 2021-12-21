@@ -269,11 +269,9 @@ RSpec.describe Slack::Web::Client do
 
       let(:stub_slack_request) { stub_request(:post, 'https://slack.com/api/api.test') }
       let(:exception) do
-        begin
-          request
-        rescue Slack::Web::Api::Errors::ServerError => e
-          return e
-        end
+        request
+      rescue Slack::Web::Api::Errors::ServerError => e
+        return e
       end
 
       context 'parsing error' do

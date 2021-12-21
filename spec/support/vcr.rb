@@ -6,7 +6,7 @@ VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/slack'
   config.hook_into :webmock
   config.configure_rspec_metadata!
-  if ENV['SLACK_API_TOKEN']
+  if ENV.key?('SLACK_API_TOKEN')
     config.filter_sensitive_data('<SLACK_API_TOKEN>') do
       ENV['SLACK_API_TOKEN']
     end
@@ -14,9 +14,12 @@ VCR.configure do |config|
   config.before_record do |i|
     i.response.body.force_encoding('UTF-8')
   end
-  config.register_request_matcher :client_headers do |request1, request2|
-    request1.headers['Accept'] == request2.headers['Accept'] &&
-      request1.headers['Authorization'] == request2.headers['Authorization']
+  config.register_request_matcher :client_headers do |recorded, actual|
+    authorizations = ENV.key?('SLACK_API_TOKEN') ? actual.headers['Authorization'].map do |auth|
+      auth.gsub(ENV['SLACK_API_TOKEN'], '<SLACK_API_TOKEN>')
+    end : actual.headers['Authorization']
+    actual.headers['Accept'] == recorded.headers['Accept'] &&
+      authorizations == recorded.headers['Authorization']
   end
   config.default_cassette_options = {
     match_requests_on: %i[method uri body client_headers]

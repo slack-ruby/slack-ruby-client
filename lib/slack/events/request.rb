@@ -3,7 +3,9 @@ module Slack
   module Events
     class Request
       class MissingSigningSecret < StandardError; end
+
       class TimestampExpired < StandardError; end
+
       class InvalidSignature < StandardError; end
 
       attr_reader :http_request,
@@ -51,7 +53,7 @@ module Slack
       def valid?
         raise MissingSigningSecret unless signing_secret
 
-        digest = OpenSSL::Digest::SHA256.new
+        digest = OpenSSL::Digest.new('SHA256')
         signature_basestring = [version, timestamp, body].join(':')
         hex_hash = OpenSSL::HMAC.hexdigest(digest, signing_secret, signature_basestring)
         computed_signature = [version, hex_hash].join('=')
