@@ -1,3 +1,7 @@
+### 1.0.1 (Next)
+
+* Your contribution here.
+
 ### 1.0.0 (2021/12/21)
 
 * [#394](https://github.com/slack-ruby/slack-ruby-client/pull/394): Added support for Ruby 3.0 - [@dblock](https://github.com/dblock).
