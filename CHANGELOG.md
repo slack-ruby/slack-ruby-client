@@ -1,4 +1,4 @@
-### 1.0.0 (Next)
+### 1.0.0 (2021/12/21)
 
 * [#394](https://github.com/slack-ruby/slack-ruby-client/pull/394): Added support for Ruby 3.0 - [@dblock](https://github.com/dblock).
 * [#394](https://github.com/slack-ruby/slack-ruby-client/pull/394): Upgraded to RuboCop 0.93.1 - [@dblock](https://github.com/dblock).
@@ -7,7 +7,6 @@
 * [#386](https://github.com/slack-ruby/slack-ruby-client/pull/386): Gemspec: drop unused `test_files` directive - [@olleolleolle](https://github.com/olleolleolle).
 * [#380](https://github.com/slack-ruby/slack-ruby-client/pull/380): Updates to server error classes and hierarchy - [@jmanian](https://github.com/jmanian).
 * [#387](https://github.com/slack-ruby/slack-ruby-client/pull/387): Send token in Authorization header - [@chrisbloom7](https://github.com/chrisbloom7).
-* Your contribution here.
 
 ### 0.17.0 (2021/03/07)
 
