@@ -24,6 +24,7 @@ jobs:
       - name: Set Concurrency
         run: |
           if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
+            echo "Setting concurrency to ${{ matrix.entry.concurrency }}."
             echo "CONCURRENCY=${{ matrix.entry.concurrency }}" >> $GITHUB_ENV
           fi
       - name: Run Tests
