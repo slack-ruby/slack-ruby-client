@@ -73,7 +73,7 @@ RSpec.describe Slack::RealTime::Client do
 
       before do
         allow(Slack::RealTime::Socket).to(
-          receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+          receive(:new).with(url, { ping: 30, logger: Slack::Logger.default }).and_return(socket)
         )
         allow(socket).to receive(:connect!)
         allow(socket).to receive(:start_sync)
@@ -186,7 +186,7 @@ RSpec.describe Slack::RealTime::Client do
 
       before do
         allow(Slack::RealTime::Socket).to(
-          receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+          receive(:new).with(url, { ping: 30, logger: Slack::Logger.default }).and_return(socket)
         )
         allow(socket).to receive(:connect!)
         allow(socket).to receive(:start_async)
@@ -255,7 +255,7 @@ RSpec.describe Slack::RealTime::Client do
 
       before do
         allow(Slack::RealTime::Socket).to(
-          receive(:new).with(url, ping: 30, logger: Slack::Logger.default).and_return(socket)
+          receive(:new).with(url, { ping: 30, logger: Slack::Logger.default }).and_return(socket)
         )
         allow(socket).to receive(:connect!)
         allow(socket).to receive(:start_sync)
@@ -443,7 +443,7 @@ RSpec.describe Slack::RealTime::Client do
         end
         it 'creates a connection with custom ping', vcr: { cassette_name: 'web/rtm_start' } do
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to(
-            receive(:new).with(url, nil, ping: 15).and_return(ws)
+            receive(:new).with(url, nil, { ping: 15 }).and_return(ws)
           )
           client.start!
         end
@@ -474,10 +474,12 @@ RSpec.describe Slack::RealTime::Client do
           expect(Slack::RealTime::Concurrency::Mock::WebSocket).to receive(:new).with(
             url,
             nil,
-            ping: 30,
-            proxy: {
-              origin: 'http://username:password@proxy.example.com',
-              headers: { 'User-Agent' => 'ruby' }
+            {
+              ping: 30,
+              proxy: {
+                origin: 'http://username:password@proxy.example.com',
+                headers: { 'User-Agent' => 'ruby' }
+              }
             }
           ).and_return(ws)
           client.start!
@@ -507,7 +509,7 @@ RSpec.describe Slack::RealTime::Client do
 
           it 'calls rtm_start with start options', vcr: { cassette_name: 'web/rtm_start' } do
             expect(client.web_client).to(
-              receive(:rtm_start).with(simple_latest: true).and_call_original
+              receive(:rtm_start).with({ simple_latest: true }).and_call_original
             )
             client.start!
           end

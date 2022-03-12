@@ -1,0 +1,15 @@
+name: PR Linter
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          bundler-cache: true
+      - run: |
+          # the personal token is public, this is ok, base64 encode to avoid tripping Github
+          TOKEN=$(echo -n NWY1ZmM5MzEyMzNlYWY4OTZiOGU3MmI3MWQ3Mzk0MzgxMWE4OGVmYwo= | base64 --decode)
+          DANGER_GITHUB_API_TOKEN=$TOKEN bundle exec danger --verbose

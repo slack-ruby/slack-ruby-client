@@ -8,8 +8,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Dialog do
     it 'automatically converts dialog into JSON' do
       expect(client).to receive(:post).with(
         'dialog.open',
-        trigger_id: '12345.98765.abcd2358fdea',
-        dialog: '[]'
+        {
+          trigger_id: '12345.98765.abcd2358fdea',
+          dialog: '[]'
+        }
       )
       client.dialog_open(trigger_id: '12345.98765.abcd2358fdea', dialog: [])
     end

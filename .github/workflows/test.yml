@@ -1,0 +1,35 @@
+name: Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        entry:
+          - { ruby: 2.5.3 }
+          - { ruby: 2.6.2 }
+          - { ruby: 2.7.1 }
+          - { ruby: 2.7.1, concurrency: async-websocket }
+          - { ruby: 3.0.2 }
+          - { ruby: ruby-head, ignore: true }
+          - { ruby: jruby-head, ignore: true }
+    name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.entry.ruby }}
+      - name: Set Concurrency
+        run: |
+          if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
+            echo "CONCURRENCY=${{ matrix.entry.concurrency }}" >> $GITHUB_ENV
+          fi
+      - name: Run Tests
+        continue-on-error: ${{ matrix.entry.ignore || false }}
+        env:
+          RACK_ENV: test
+        run: |
+          bundle install
+          bundle exec rake
+        

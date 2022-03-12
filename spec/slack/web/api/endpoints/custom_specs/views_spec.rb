@@ -10,7 +10,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { '{"celery":"man"}' }
 
       it 'automatically converts view into JSON' do
-        expect(client).to receive(:post).with('views.open', trigger_id: trigger_id, view: view_str)
+        expect(client).to receive(:post).with('views.open', { trigger_id: trigger_id, view: view_str })
         client.views_open(trigger_id: trigger_id, view: { celery: 'man' })
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { 'celery man' }
 
       it 'leaves view as is' do
-        expect(client).to receive(:post).with('views.open', trigger_id: trigger_id, view: view_str)
+        expect(client).to receive(:post).with('views.open', { trigger_id: trigger_id, view: view_str })
         client.views_open(trigger_id: trigger_id, view: 'celery man')
       end
     end
@@ -32,10 +32,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { '{"celery":"man"}' }
 
       it 'automatically converts view into JSON' do
-        expect(client).to receive(:post).with('views.publish',
-                                              user_id: user_id,
-                                              trigger_id: trigger_id,
-                                              view: view_str)
+        expect(client).to receive(:post).with(
+          'views.publish',
+          {
+            trigger_id: trigger_id,
+            user_id: user_id,
+            view: view_str
+          }
+        )
         client.views_publish(user_id: user_id, trigger_id: trigger_id, view: { celery: 'man' })
       end
     end
@@ -44,10 +48,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { 'celery man' }
 
       it 'leaves view as is' do
-        expect(client).to receive(:post).with('views.publish',
-                                              user_id: user_id,
-                                              trigger_id: trigger_id,
-                                              view: view_str)
+        expect(client).to receive(:post).with(
+          'views.publish',
+          {
+            user_id: user_id,
+            trigger_id: trigger_id,
+            view: view_str
+          }
+        )
         client.views_publish(user_id: user_id, trigger_id: trigger_id, view: 'celery man')
       end
     end
@@ -58,7 +66,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { '{"celery":"man"}' }
 
       it 'automatically converts view into JSON' do
-        expect(client).to receive(:post).with('views.push', trigger_id: trigger_id, view: view_str)
+        expect(client).to receive(:post).with('views.push', { trigger_id: trigger_id, view: view_str })
         client.views_push(trigger_id: trigger_id, view: { celery: 'man' })
       end
     end
@@ -67,7 +75,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { 'celery man' }
 
       it 'leaves view as is' do
-        expect(client).to receive(:post).with('views.push', trigger_id: trigger_id, view: view_str)
+        expect(client).to receive(:post).with('views.push', { trigger_id: trigger_id, view: view_str })
         client.views_push(trigger_id: trigger_id, view: 'celery man')
       end
     end
@@ -78,7 +86,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { '{"celery":"man"}' }
 
       it 'automatically converts view into JSON' do
-        expect(client).to receive(:post).with('views.update', view: view_str)
+        expect(client).to receive(:post).with('views.update', { view: view_str })
         client.views_update(view: { celery: 'man' })
       end
     end
@@ -87,7 +95,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       let(:view_str) { 'celery man' }
 
       it 'leaves view as is' do
-        expect(client).to receive(:post).with('views.update', view: view_str)
+        expect(client).to receive(:post).with('views.update', { view: view_str })
         client.views_update(view: 'celery man')
       end
     end

@@ -14,11 +14,13 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     it 'automatically converts attachments and blocks into JSON' do
       expect(client).to receive(:post).with(
         'chat.postEphemeral',
-        channel: 'channel',
-        text: 'text',
-        user: '123',
-        attachments: '[]',
-        blocks: '[]'
+        {
+          channel: 'channel',
+          text: 'text',
+          user: '123',
+          attachments: '[]',
+          blocks: '[]'
+        }
       )
       client.chat_postEphemeral(
         channel: 'channel',
@@ -88,10 +90,12 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     it 'automatically converts attachments and blocks into JSON' do
       expect(client).to receive(:post).with(
         'chat.postMessage',
-        channel: 'channel',
-        text: 'text',
-        attachments: '[]',
-        blocks: '[]'
+        {
+          channel: 'channel',
+          text: 'text',
+          attachments: '[]',
+          blocks: '[]'
+        }
       )
       client.chat_postMessage(channel: 'channel', text: 'text', attachments: [], blocks: [])
     end
@@ -131,11 +135,13 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     it 'automatically converts attachments and blocks into JSON' do
       expect(client).to receive(:post).with(
         'chat.update',
-        channel: 'channel',
-        text: 'text',
-        ts: ts,
-        attachments: '[]',
-        blocks: '[]'
+        {
+          channel: 'channel',
+          text: 'text',
+          ts: ts,
+          attachments: '[]',
+          blocks: '[]'
+        }
       )
       client.chat_update(channel: 'channel', text: 'text', ts: ts, attachments: [], blocks: [])
     end
