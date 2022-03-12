@@ -8,7 +8,7 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
     let(:cursor) { described_class.new(client, 'users_list', {}) }
 
     it 'provides a default limit' do
-      expect(client).to receive(:users_list).with(limit: 100, cursor: nil)
+      expect(client).to receive(:users_list).with({ limit: 100, cursor: nil })
       cursor.first
     end
     it 'handles blank response metadata' do
@@ -36,17 +36,17 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
         it 'sleeps after a TooManyRequestsError' do
           expect(client).to(
             receive(:users_list)
-              .with(limit: 100, cursor: nil)
+              .with({ limit: 100, cursor: nil })
               .ordered
               .and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
           )
           expect(client).to(
-            receive(:users_list).with(limit: 100, cursor: 'next').ordered.and_raise(error)
+            receive(:users_list).with({ limit: 100, cursor: 'next' }).ordered.and_raise(error)
           )
           expect(cursor).to receive(:sleep).once.ordered.with(9)
           expect(client).to(
             receive(:users_list)
-              .with(limit: 100, cursor: 'next')
+              .with({ limit: 100, cursor: 'next' })
               .ordered
               .and_return(Slack::Messages::Message.new)
           )
@@ -60,11 +60,11 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
         it 'raises the error after hitting the max retries' do
           expect(client).to(
             receive(:users_list)
-              .with(limit: 100, cursor: nil)
+              .with({ limit: 100, cursor: nil })
               .and_return(Slack::Messages::Message.new(response_metadata: { next_cursor: 'next' }))
           )
           expect(client).to(
-            receive(:users_list).with(limit: 100, cursor: 'next').exactly(5).times.and_raise(error)
+            receive(:users_list).with({ limit: 100, cursor: 'next' }).exactly(5).times.and_raise(error)
           )
           expect(cursor).to receive(:sleep).exactly(4).times.with(9)
           expect { cursor.to_a }.to raise_error(error)
@@ -77,7 +77,7 @@ RSpec.describe Slack::Web::Api::Pagination::Cursor do
     let(:cursor) { described_class.new(client, 'users_list', limit: 42) }
 
     it 'overrides default limit' do
-      expect(client).to receive(:users_list).with(limit: 42, cursor: nil)
+      expect(client).to receive(:users_list).with({ limit: 42, cursor: nil })
       cursor.first
     end
   end
