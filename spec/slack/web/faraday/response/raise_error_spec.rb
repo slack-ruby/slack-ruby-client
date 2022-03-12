@@ -26,7 +26,7 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
       let(:body) { { 'ok' => 'true' } }
 
       it 'is nil' do
-        expect(raise_error_obj.on_complete(env)).to eq nil
+        expect(raise_error_obj.on_complete(env)).to be_nil
       end
     end
 

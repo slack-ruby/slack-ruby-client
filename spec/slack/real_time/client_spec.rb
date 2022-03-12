@@ -124,7 +124,7 @@ RSpec.describe Slack::RealTime::Client do
         expect(client.web_client).to be_a Slack::Web::Client
       end
       it 'remembers socket' do
-        expect(client.instance_variable_get('@socket')).to eq socket
+        expect(client.instance_variable_get(:@socket)).to eq socket
       end
       it 'cannot be invoked twice' do
         expect do
@@ -138,7 +138,7 @@ RSpec.describe Slack::RealTime::Client do
         end
 
         it 'cannot be invoked twice' do
-          client.instance_variable_set('@socket', nil) # caused by a :close callback
+          client.instance_variable_set(:@socket, nil) # caused by a :close callback
           expect do
             client.stop!
           end.to raise_error Slack::RealTime::Client::ClientNotStartedError
@@ -175,7 +175,7 @@ RSpec.describe Slack::RealTime::Client do
           end
 
           it 'returns false when event is nil' do
-            expect(client.send(:run_handlers, 'example', {})).to be nil
+            expect(client.send(:run_handlers, 'example', {})).to be_nil
           end
         end
       end
@@ -301,7 +301,7 @@ RSpec.describe Slack::RealTime::Client do
         expect(client.web_client).to be_a Slack::Web::Client
       end
       it 'remembers socket' do
-        expect(client.instance_variable_get('@socket')).to eq socket
+        expect(client.instance_variable_get(:@socket)).to eq socket
       end
       it 'cannot be invoked twice' do
         expect do
@@ -315,7 +315,7 @@ RSpec.describe Slack::RealTime::Client do
         end
 
         it 'cannot be invoked twice' do
-          client.instance_variable_set('@socket', nil) # caused by a :close callback
+          client.instance_variable_set(:@socket, nil) # caused by a :close callback
           expect do
             client.stop!
           end.to raise_error Slack::RealTime::Client::ClientNotStartedError
@@ -336,7 +336,7 @@ RSpec.describe Slack::RealTime::Client do
     let(:url) { 'wss://mpmulti-w5tz.slack-msgs.com/websocket/uid' }
 
     it 'sets store to nil' do
-      expect(client.store).to be nil
+      expect(client.store).to be_nil
     end
     it "doesn't handle events" do
       event = Slack::RealTime::Event.new(
@@ -347,10 +347,10 @@ RSpec.describe Slack::RealTime::Client do
       client.send(:dispatch, event)
     end
     it 'self' do
-      expect(client.self).to be nil
+      expect(client.self).to be_nil
     end
     it 'team' do
-      expect(client.team).to be nil
+      expect(client.team).to be_nil
     end
     describe 'to_s' do
       it 'defaults to class instance' do
@@ -367,7 +367,7 @@ RSpec.describe Slack::RealTime::Client do
         expect(client.websocket_ping).to eq 30
       end
       it "doesn't set proxy" do
-        expect(client.websocket_proxy).to be nil
+        expect(client.websocket_proxy).to be_nil
       end
       it 'defaults logger' do
         expect(client.send(:logger)).to be_a ::Logger

@@ -182,7 +182,7 @@ RSpec.describe 'integration test', skip: ( # rubocop:disable RSpec/DescribeClass
       start_server
       wait_for_server
 
-      expect(@reply_to).to be nil
+      expect(@reply_to).to be_nil
     end
   end
 

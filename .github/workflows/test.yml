@@ -11,6 +11,7 @@ jobs:
           - { ruby: 2.7.1 }
           - { ruby: 2.7.1, concurrency: async-websocket }
           - { ruby: 3.0.2 }
+          - { ruby: 3.1.1 }
           - { ruby: ruby-head, ignore: true }
           - { ruby: jruby-head, ignore: true }
     name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
