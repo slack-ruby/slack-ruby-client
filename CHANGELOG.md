@@ -1,6 +1,8 @@
 ### 1.0.1 (Next)
 
 * [#400](https://github.com/slack-ruby/slack-ruby-client/pull/400): Replace Travis-CI with GitHub Actions - [@dblock](https://github.com/dblock).
+* [#401](https://github.com/slack-ruby/slack-ruby-client/pull/401): Upgraded RuboCop to 1.26.0 - [@dblock](https://github.com/dblock).
+* [#401](https://github.com/slack-ruby/slack-ruby-client/pull/401): Added support for Ruby 3.1.1 - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 1.0.0 (2021/12/21)
