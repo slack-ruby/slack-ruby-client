@@ -1,0 +1,25 @@
+name: Integration Tests
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        entry:
+          - { ruby: 2.7.1, concurrency: async-websocket }
+    name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.entry.ruby }}
+      - name: Run Tests
+        env:
+          CONCURRENCY: ${{ matrix.entry.concurrency }}
+          SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
+          RACK_ENV: test
+        run: |
+          bundle install
+          bundle exec rake
+        
