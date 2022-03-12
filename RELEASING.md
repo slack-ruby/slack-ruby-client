@@ -11,7 +11,7 @@ bundle install
 rake
 ```
 
-Check that the last build succeeded in [Travis CI](https://app.travis-ci.com/github/slack-ruby/slack-ruby-client) for all supported platforms.
+Check that the last build succeeded in [GitHub Actions](https://github.com/slack-ruby/slack-ruby-client/actions) for all supported platforms.
 
 Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
 
