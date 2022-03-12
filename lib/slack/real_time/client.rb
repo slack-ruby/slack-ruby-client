@@ -44,7 +44,7 @@ module Slack
 
       # Start RealTime client and block until it disconnects.
       def start!(&block)
-        @callback = block if block_given?
+        @callback = block if block
         build_socket
         @socket.start_sync(self)
       end
@@ -52,7 +52,7 @@ module Slack
       # Start RealTime client and return immediately.
       # The RealTime::Client will run in the background.
       def start_async(&block)
-        @callback = block if block_given?
+        @callback = block if block
         build_socket
         @socket.start_async(self)
       end

@@ -9,7 +9,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       expect(client.groups.count).to eq 1
     end
     it 'group_joined' do
-      expect(client.groups['CDEADBEEF']).to be nil
+      expect(client.groups['CDEADBEEF']).to be_nil
       event = Slack::RealTime::Event.new(
         'type' => 'group_joined',
         'channel' => {
@@ -19,7 +19,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       )
       client.send(:dispatch, event)
       group = client.groups['CDEADBEEF']
-      expect(group).not_to be nil
+      expect(group).not_to be_nil
       expect(group.name).to eq 'beef'
     end
     it 'group_left' do

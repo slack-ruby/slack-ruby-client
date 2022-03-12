@@ -22,7 +22,7 @@ describe Slack do
   context 'globals' do
     let(:command) do
       "\"#{slack}\" --vcr-cassette-name=web/auth_test_success " \
-      '--slack-api-token=token -d auth test 2>&1'
+        '--slack-api-token=token -d auth test 2>&1'
     end
 
     it 'enables request and response logging with -d' do
@@ -44,7 +44,7 @@ describe Slack do
     context 'bad auth' do
       let(:command) do
         "\"#{slack}\" --vcr-cassette-name=web/auth_test_error " \
-        '--slack-api-token=token auth test 2>&1'
+          '--slack-api-token=token auth test 2>&1'
       end
 
       it 'fails with an exception' do
@@ -56,7 +56,7 @@ describe Slack do
     context 'good auth' do
       let(:command) do
         "\"#{slack}\" --vcr-cassette-name=web/auth_test_success " \
-        '--slack-api-token=token auth test 2>&1'
+          '--slack-api-token=token auth test 2>&1'
       end
 
       it 'succeeds' do
@@ -79,7 +79,7 @@ describe Slack do
   describe '#users' do
     let(:command) do
       "\"#{slack}\" --vcr-cassette-name=web/users_list " \
-      '--slack-api-token=token users list --presence=true 2>&1'
+        '--slack-api-token=token users list --presence=true 2>&1'
     end
 
     it 'list' do

@@ -9,7 +9,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       expect(client.ims.count).to eq 10
     end
     it 'im_created' do
-      expect(client.ims['CDEADBEEF']).to be nil
+      expect(client.ims['CDEADBEEF']).to be_nil
       event = Slack::RealTime::Event.new(
         'type' => 'im_created',
         'channel' => {
@@ -19,7 +19,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       )
       client.send(:dispatch, event)
       im = client.ims['CDEADBEEF']
-      expect(im).not_to be nil
+      expect(im).not_to be_nil
       expect(im.name).to eq 'beef'
     end
     it 'im_open' do

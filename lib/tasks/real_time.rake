@@ -49,9 +49,7 @@ namespace :slack do
             end
           end
 
-          File.open store_file, 'w' do |f|
-            f.write store_file_contents
-          end
+          File.write(store_file, store_file_contents)
 
           puts ' done.'
         end

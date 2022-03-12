@@ -18,7 +18,7 @@ RSpec.describe Slack::Events::Request do
   let(:timestamp) { '1547933148' }
   let(:body) do
     '{"token":"X34FAqCu8tmGEkEEpoDncnja","challenge":' \
-    '"P7sFXA4o3HV2hTx4zb4zcQ9yrvuQs8pDh6EacOxmMRj0tJaXfQFF","type":"url_verification"}'
+      '"P7sFXA4o3HV2hTx4zb4zcQ9yrvuQs8pDh6EacOxmMRj0tJaXfQFF","type":"url_verification"}'
   end
   let(:http_request) do
     request_double = double(
