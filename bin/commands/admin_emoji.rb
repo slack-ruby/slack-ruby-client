@@ -16,8 +16,8 @@ command 'admin_emoji' do |g|
   g.desc 'Add an emoji alias.'
   g.long_desc %( Add an emoji alias. )
   g.command 'addAlias' do |c|
-    c.flag 'alias_for', desc: 'The alias of the emoji.'
-    c.flag 'name', desc: 'The name of the emoji to be aliased. Colons (:myemoji:) around the value are not required, although they may be included.'
+    c.flag 'alias_for', desc: 'Name of the emoji for which the alias is being made. Any wrapping whitespace or colons will be automatically trimmed.'
+    c.flag 'name', desc: 'The new alias for the specified emoji. Any wrapping whitespace or colons will be automatically trimmed.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_emoji_addAlias(options))
     end

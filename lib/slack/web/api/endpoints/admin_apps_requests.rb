@@ -7,6 +7,22 @@ module Slack
       module Endpoints
         module AdminAppsRequests
           #
+          # Cancel approval request for team
+          #
+          # @option options [string] :request_id
+          #   The id of the request to cancel.
+          # @option options [Object] :enterprise_id
+          #   The ID of the enterprise where this request belongs.
+          # @option options [Object] :team_id
+          #   The ID of the workspace where this request belongs.
+          # @see https://api.slack.com/methods/admin.apps.requests.cancel
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.requests/admin.apps.requests.cancel.json
+          def admin_apps_requests_cancel(options = {})
+            throw ArgumentError.new('Required arguments :request_id missing') if options[:request_id].nil?
+            post('admin.apps.requests.cancel', options)
+          end
+
+          #
           # List app requests for a team/workspace.
           #
           # @option options [string] :cursor

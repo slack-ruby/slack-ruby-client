@@ -5,4 +5,9 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::AdminAppsRequests do
   let(:client) { Slack::Web::Client.new }
+  context 'admin.apps.requests_cancel' do
+    it 'requires request_id' do
+      expect { client.admin_apps_requests_cancel }.to raise_error ArgumentError, /Required arguments :request_id missing/
+    end
+  end
 end

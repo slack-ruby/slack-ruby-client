@@ -25,9 +25,9 @@ module Slack
           # Add an emoji alias.
           #
           # @option options [string] :alias_for
-          #   The alias of the emoji.
+          #   Name of the emoji for which the alias is being made. Any wrapping whitespace or colons will be automatically trimmed.
           # @option options [string] :name
-          #   The name of the emoji to be aliased. Colons (:myemoji:) around the value are not required, although they may be included.
+          #   The new alias for the specified emoji. Any wrapping whitespace or colons will be automatically trimmed.
           # @see https://api.slack.com/methods/admin.emoji.addAlias
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.addAlias.json
           def admin_emoji_addAlias(options = {})
