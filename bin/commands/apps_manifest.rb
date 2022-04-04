@@ -44,6 +44,7 @@ command 'apps_manifest' do |g|
   g.long_desc %( Validate an app manifest )
   g.command 'validate' do |c|
     c.flag 'manifest', desc: 'The manifest to be validated. Will be validated against the app manifest schema - read our guide.'
+    c.flag 'app_id', desc: 'The ID of the app whose configuration you want to validate.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.apps_manifest_validate(options))
     end

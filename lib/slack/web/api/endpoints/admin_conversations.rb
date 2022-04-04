@@ -23,6 +23,8 @@ module Slack
           #
           # @option options [Object] :channel_id
           #   The channel to convert to private.
+          # @option options [string] :name
+          #   Name of private channel to create. Only respected when converting an MPIM.
           # @see https://api.slack.com/methods/admin.conversations.convertToPrivate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.convertToPrivate.json
           def admin_conversations_convertToPrivate(options = {})

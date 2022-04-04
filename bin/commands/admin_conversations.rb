@@ -16,6 +16,7 @@ command 'admin_conversations' do |g|
   g.long_desc %( Convert a public channel to a private channel. )
   g.command 'convertToPrivate' do |c|
     c.flag 'channel_id', desc: 'The channel to convert to private.'
+    c.flag 'name', desc: 'Name of private channel to create. Only respected when converting an MPIM.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_convertToPrivate(options))
     end
