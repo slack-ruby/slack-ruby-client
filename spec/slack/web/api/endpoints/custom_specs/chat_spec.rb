@@ -154,9 +154,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     end
 
     context 'text, attachment and blocks arguments' do
-      it 'requires text, attachments or blocks' do
+      it 'requires text, attachments, blocks or reply_broadcast' do
         expect { client.chat_update(channel: 'channel', ts: ts) }.to(
-          raise_error(ArgumentError, /Required arguments :text, :attachments or :blocks missing/)
+          raise_error(ArgumentError, /Required arguments :text, :attachments, :blocks or :reply_broadcast missing/)
         )
       end
       it 'only text' do
@@ -175,6 +175,12 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
         expect(client).to receive(:post).with('chat.update', hash_including(blocks: '[]'))
         expect do
           client.chat_update(channel: 'channel', ts: ts, blocks: [])
+        end.not_to raise_error
+      end
+      it 'only reply_broadcast' do
+        expect(client).to receive(:post).with('chat.update', hash_including(reply_broadcast: true))
+        expect do
+          client.chat_update(channel: 'channel', ts: ts, reply_broadcast: true)
         end.not_to raise_error
       end
       it 'all text, attachments and blocks' do

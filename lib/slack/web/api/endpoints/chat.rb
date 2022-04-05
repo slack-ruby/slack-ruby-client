@@ -287,7 +287,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
             throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :text, :attachments or :blocks missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
+            throw ArgumentError.new('Required arguments :text, :attachments, :blocks or :reply_broadcast missing') if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil? && options[:reply_broadcast].nil?
             throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             # attachments must be passed as an encoded JSON string
