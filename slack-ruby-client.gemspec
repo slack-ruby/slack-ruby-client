@@ -10,14 +10,16 @@ Gem::Specification.new do |s|
   s.authors = ['Daniel Doubrovkine']
   s.email = 'dblock@dblock.org'
   s.platform = Gem::Platform::RUBY
+  s.required_ruby_version = '>= 2.7'
   s.required_rubygems_version = '>= 1.3.6'
   s.files = `git ls-files`.split("\n")
   s.require_paths = ['lib']
   s.homepage = 'http://github.com/slack-ruby/slack-ruby-client'
   s.licenses = ['MIT']
   s.summary = 'Slack Web and RealTime API client.'
-  s.add_dependency 'faraday', '>= 1.0'
-  s.add_dependency 'faraday_middleware'
+  s.add_dependency 'faraday', '>= 2.0'
+  s.add_dependency 'faraday-mashify'
+  s.add_dependency 'faraday-multipart'
   s.add_dependency 'gli'
   s.add_dependency 'hashie'
   s.add_dependency 'websocket-driver'

@@ -1,7 +1,9 @@
-.env
-pkg
-Gemfile.lock
 .DS_Store
 .bundle
+.byebug_history
+.env
 .idea
 .rspec_status
+.ruby-version
+Gemfile.lock
+pkg

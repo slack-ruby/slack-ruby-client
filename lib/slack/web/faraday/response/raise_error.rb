@@ -3,7 +3,7 @@ module Slack
   module Web
     module Faraday
       module Response
-        class RaiseError < ::Faraday::Response::Middleware
+        class RaiseError < ::Faraday::Middleware
           def on_complete(env)
             raise Slack::Web::Api::Errors::TooManyRequestsError, env.response if env.status == 429
 
@@ -13,18 +13,10 @@ module Slack
             return unless body
             return if body['ok']
 
-            error_message =
-              body['error'] || body['errors'].map { |message| message['error'] }.join(',')
-
+            error_message = body['error'] || body['errors'].map { |message| message['error'] }.join(',')
             error_class = Slack::Web::Api::Errors::ERROR_CLASSES[error_message]
             error_class ||= Slack::Web::Api::Errors::SlackError
             raise error_class.new(error_message, env.response)
-          end
-
-          def call(env)
-            super
-          rescue ::Faraday::ParsingError
-            raise Slack::Web::Api::Errors::ParsingError, env.response
           end
         end
       end
