@@ -62,6 +62,8 @@ module Slack
           #
           # @option options [manifest object as string] :manifest
           #   The manifest to be validated. Will be validated against the app manifest schema - read our guide.
+          # @option options [Object] :app_id
+          #   The ID of the app whose configuration you want to validate.
           # @see https://api.slack.com/methods/apps.manifest.validate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.validate.json
           def apps_manifest_validate(options = {})

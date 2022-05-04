@@ -22,6 +22,7 @@ require_relative 'endpoints/admin_teams_settings'
 require_relative 'endpoints/admin_usergroups'
 require_relative 'endpoints/admin_users'
 require_relative 'endpoints/admin_users_session'
+require_relative 'endpoints/admin_users_unsupportedVersions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_connections'
@@ -29,6 +30,7 @@ require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_manifest'
 require_relative 'endpoints/auth'
 require_relative 'endpoints/auth_teams'
+require_relative 'endpoints/bookmarks'
 require_relative 'endpoints/bots'
 require_relative 'endpoints/calls'
 require_relative 'endpoints/calls_participants'
@@ -93,6 +95,7 @@ module Slack
         include AdminUsergroups
         include AdminUsers
         include AdminUsersSession
+        include AdminUsersUnsupportedversions
         include Api
         include Apps
         include AppsConnections
@@ -100,6 +103,7 @@ module Slack
         include AppsManifest
         include Auth
         include AuthTeams
+        include Bookmarks
         include Bots
         include Calls
         include CallsParticipants

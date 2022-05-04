@@ -3,6 +3,17 @@
 
 desc 'AdminAppsRequests methods.'
 command 'admin_apps_requests' do |g|
+  g.desc 'Cancel approval request for team'
+  g.long_desc %( Cancel approval request for team )
+  g.command 'cancel' do |c|
+    c.flag 'request_id', desc: 'The id of the request to cancel.'
+    c.flag 'enterprise_id', desc: 'The ID of the enterprise where this request belongs.'
+    c.flag 'team_id', desc: 'The ID of the workspace where this request belongs.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.admin_apps_requests_cancel(options))
+    end
+  end
+
   g.desc 'List app requests for a team/workspace.'
   g.long_desc %( List app requests for a team/workspace. )
   g.command 'list' do |c|

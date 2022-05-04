@@ -102,7 +102,6 @@ module Slack
         class ChannelTypeNotSupported < SlackError; end
         class ClientIdTokenMismatch < SlackError; end
         class CodeAlreadyUsed < SlackError; end
-        class ComplianceExportsPreventDeletion < SlackError; end
         class ConnectionLimitExceeded < SlackError; end
         class ConnectionLimitExceededPending < SlackError; end
         class CouldNotArchiveChannel < SlackError; end
@@ -110,6 +109,7 @@ module Slack
         class CouldNotCreateChannel < SlackError; end
         class CouldNotCreateWorkspace < SlackError; end
         class CouldNotDeleteChannel < SlackError; end
+        class CouldNotExport < SlackError; end
         class CouldNotGetConversationPrefs < SlackError; end
         class CouldNotGetRetention < SlackError; end
         class CouldNotGetTeams < SlackError; end
@@ -220,6 +220,7 @@ module Slack
         class InvalidAuth < SlackError; end
         class InvalidBlocks < SlackError; end
         class InvalidBlocksFormat < SlackError; end
+        class InvalidBookmarkType < SlackError; end
         class InvalidCallId < SlackError; end
         class InvalidChannel < SlackError; end
         class InvalidChannelId < SlackError; end
@@ -227,6 +228,7 @@ module Slack
         class InvalidChannelType < SlackError; end
         class InvalidChannelsLimit < SlackError; end
         class InvalidCharset < SlackError; end
+        class InvalidChildType < SlackError; end
         class InvalidClientId < SlackError; end
         class InvalidCode < SlackError; end
         class InvalidCreatedBy < SlackError; end
@@ -234,7 +236,9 @@ module Slack
         class InvalidDate < SlackError; end
         class InvalidDuration < SlackError; end
         class InvalidEmail < SlackError; end
+        class InvalidEmoji < SlackError; end
         class InvalidEmojiNotAllowed < SlackError; end
+        class InvalidEntityId < SlackError; end
         class InvalidEventContext < SlackError; end
         class InvalidExternalId < SlackError; end
         class InvalidFormData < SlackError; end
@@ -252,12 +256,14 @@ module Slack
         class InvalidNameRequired < SlackError; end
         class InvalidNameSpecials < SlackError; end
         class InvalidOutputs < SlackError; end
+        class InvalidParentType < SlackError; end
         class InvalidPayload < SlackError; end
         class InvalidPermissions < SlackError; end
         class InvalidPostType < SlackError; end
         class InvalidPresence < SlackError; end
         class InvalidPrivacy < SlackError; end
         class InvalidProfile < SlackError; end
+        class InvalidRecipientTeam < SlackError; end
         class InvalidRefreshToken < SlackError; end
         class InvalidRequest < SlackError; end
         class InvalidRequestId < SlackError; end
@@ -273,6 +279,7 @@ module Slack
         class InvalidStepStatus < SlackError; end
         class InvalidTargetTeam < SlackError; end
         class InvalidTeam < SlackError; end
+        class InvalidTeamId < SlackError; end
         class InvalidTeamIds < SlackError; end
         class InvalidTime < SlackError; end
         class InvalidTimestamp < SlackError; end
@@ -299,6 +306,7 @@ module Slack
         class InvitedUserNotCreated < SlackError; end
         class InvitedUserNotReactivated < SlackError; end
         class InviteeCantSeeChannel < SlackError; end
+        class InvitorCannotSeeChannel < SlackError; end
         class IsArchived < SlackError; end
         class IsBot < SlackError; end
         class IsInactive < SlackError; end
@@ -404,6 +412,9 @@ module Slack
         class PaginationNotAvailable < SlackError; end
         class PaidOnly < SlackError; end
         class PaidTeamsOnly < SlackError; end
+        class ParentBookmarkDisabled < SlackError; end
+        class ParentWithLink < SlackError; end
+        class PartialProfileSetFailed < SlackError; end
         class PermissionDenied < SlackError; end
         class PlanUpgradeRequired < SlackError; end
         class PolicyNotFound < SlackError; end
@@ -417,6 +428,7 @@ module Slack
         class RateLimited < SlackError; end
         class Ratelimit < SlackError; end
         class Ratelimited < SlackError; end
+        class RecipientsNotSpecified < SlackError; end
         class RequestAlreadyResolved < SlackError; end
         class RequestIdOrAppIdIsRequired < SlackError; end
         class RequestIdRequiredForCustomIntegrations < SlackError; end
@@ -463,6 +475,7 @@ module Slack
         class TooLarge < SlackError; end
         class TooLong < SlackError; end
         class TooManyAttachments < SlackError; end
+        class TooManyBookmarks < SlackError; end
         class TooManyContactCards < SlackError; end
         class TooManyConvosForAppOnTeam < SlackError; end
         class TooManyConvosForTeam < SlackError; end
@@ -617,7 +630,6 @@ module Slack
           'channel_type_not_supported' => ChannelTypeNotSupported,
           'client_id_token_mismatch' => ClientIdTokenMismatch,
           'code_already_used' => CodeAlreadyUsed,
-          'compliance_exports_prevent_deletion' => ComplianceExportsPreventDeletion,
           'connection_limit_exceeded' => ConnectionLimitExceeded,
           'connection_limit_exceeded_pending' => ConnectionLimitExceededPending,
           'could_not_archive_channel' => CouldNotArchiveChannel,
@@ -625,6 +637,7 @@ module Slack
           'could_not_create_channel' => CouldNotCreateChannel,
           'could_not_create_workspace' => CouldNotCreateWorkspace,
           'could_not_delete_channel' => CouldNotDeleteChannel,
+          'could_not_export' => CouldNotExport,
           'could_not_get_conversation_prefs' => CouldNotGetConversationPrefs,
           'could_not_get_retention' => CouldNotGetRetention,
           'could_not_get_teams' => CouldNotGetTeams,
@@ -735,6 +748,7 @@ module Slack
           'invalid_auth' => InvalidAuth,
           'invalid_blocks' => InvalidBlocks,
           'invalid_blocks_format' => InvalidBlocksFormat,
+          'invalid_bookmark_type' => InvalidBookmarkType,
           'invalid_call_id' => InvalidCallId,
           'invalid_channel' => InvalidChannel,
           'invalid_channel_id' => InvalidChannelId,
@@ -742,6 +756,7 @@ module Slack
           'invalid_channel_type' => InvalidChannelType,
           'invalid_channels_limit' => InvalidChannelsLimit,
           'invalid_charset' => InvalidCharset,
+          'invalid_child_type' => InvalidChildType,
           'invalid_client_id' => InvalidClientId,
           'invalid_code' => InvalidCode,
           'invalid_created_by' => InvalidCreatedBy,
@@ -749,7 +764,9 @@ module Slack
           'invalid_date' => InvalidDate,
           'invalid_duration' => InvalidDuration,
           'invalid_email' => InvalidEmail,
+          'invalid_emoji' => InvalidEmoji,
           'invalid_emoji_not_allowed' => InvalidEmojiNotAllowed,
+          'invalid_entity_id' => InvalidEntityId,
           'invalid_event_context' => InvalidEventContext,
           'invalid_external_id' => InvalidExternalId,
           'invalid_form_data' => InvalidFormData,
@@ -767,12 +784,14 @@ module Slack
           'invalid_name_required' => InvalidNameRequired,
           'invalid_name_specials' => InvalidNameSpecials,
           'invalid_outputs' => InvalidOutputs,
+          'invalid_parent_type' => InvalidParentType,
           'invalid_payload' => InvalidPayload,
           'invalid_permissions' => InvalidPermissions,
           'invalid_post_type' => InvalidPostType,
           'invalid_presence' => InvalidPresence,
           'invalid_privacy' => InvalidPrivacy,
           'invalid_profile' => InvalidProfile,
+          'invalid_recipient_team' => InvalidRecipientTeam,
           'invalid_refresh_token' => InvalidRefreshToken,
           'invalid_request' => InvalidRequest,
           'invalid_request_id' => InvalidRequestId,
@@ -788,6 +807,7 @@ module Slack
           'invalid_step_status' => InvalidStepStatus,
           'invalid_target_team' => InvalidTargetTeam,
           'invalid_team' => InvalidTeam,
+          'invalid_team_id' => InvalidTeamId,
           'invalid_team_ids' => InvalidTeamIds,
           'invalid_time' => InvalidTime,
           'invalid_timestamp' => InvalidTimestamp,
@@ -814,6 +834,7 @@ module Slack
           'invited_user_not_created' => InvitedUserNotCreated,
           'invited_user_not_reactivated' => InvitedUserNotReactivated,
           'invitee_cant_see_channel' => InviteeCantSeeChannel,
+          'invitor_cannot_see_channel' => InvitorCannotSeeChannel,
           'is_archived' => IsArchived,
           'is_bot' => IsBot,
           'is_inactive' => IsInactive,
@@ -919,6 +940,9 @@ module Slack
           'pagination_not_available' => PaginationNotAvailable,
           'paid_only' => PaidOnly,
           'paid_teams_only' => PaidTeamsOnly,
+          'parent_bookmark_disabled' => ParentBookmarkDisabled,
+          'parent_with_link' => ParentWithLink,
+          'partial_profile_set_failed' => PartialProfileSetFailed,
           'permission_denied' => PermissionDenied,
           'plan_upgrade_required' => PlanUpgradeRequired,
           'policy_not_found' => PolicyNotFound,
@@ -932,6 +956,7 @@ module Slack
           'rate_limited' => RateLimited,
           'ratelimit' => Ratelimit,
           'ratelimited' => Ratelimited,
+          'recipients_not_specified' => RecipientsNotSpecified,
           'request_already_resolved' => RequestAlreadyResolved,
           'request_id_or_app_id_is_required' => RequestIdOrAppIdIsRequired,
           'request_id_required_for_custom_integrations' => RequestIdRequiredForCustomIntegrations,
@@ -978,6 +1003,7 @@ module Slack
           'too_large' => TooLarge,
           'too_long' => TooLong,
           'too_many_attachments' => TooManyAttachments,
+          'too_many_bookmarks' => TooManyBookmarks,
           'too_many_contact_cards' => TooManyContactCards,
           'too_many_convos_for_app_on_team' => TooManyConvosForAppOnTeam,
           'too_many_convos_for_team' => TooManyConvosForTeam,
