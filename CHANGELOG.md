@@ -1,19 +1,16 @@
-### 1.1.0 (TBC)
-
-* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Update Faraday to `>= 2.0` - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
-* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Removed support for Ruby 2.5 and 2.6 - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
-* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Test against latest Ruby 2.7, 3.0 and 3.1 - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
-* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Upgraded RuboCop to 1.26.1 and lock to version - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
-* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Updated Danger PR Linter GitHub action to use separate `Gemfile`  - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
-* Your contribution here.
-  
-### 1.0.1 (Next)
+### 1.1.0 (Next)
 
 * [#400](https://github.com/slack-ruby/slack-ruby-client/pull/400): Replace Travis-CI with GitHub Actions - [@dblock](https://github.com/dblock).
 * [#401](https://github.com/slack-ruby/slack-ruby-client/pull/401): Upgraded RuboCop to 1.26.0 - [@dblock](https://github.com/dblock).
 * [#401](https://github.com/slack-ruby/slack-ruby-client/pull/401): Added support for Ruby 3.1.1 - [@dblock](https://github.com/dblock).
 * [#405](https://github.com/slack-ruby/slack-ruby-client/pull/405): Added `admin_apps_requests_cancel`, `admin_users_unsupportedVersions_export`, `bookmarks_add`, `bookmarks_edit`, `bookmarks_list`, `bookmarks_remove` - [@dblock](https://github.com/dblock).
 * [#404](https://github.com/slack-ruby/slack-ruby-client/pull/404): Update `chat_update` method not to raise error with parameter which contains only `reply_broadcast` - [@colorbox](https://github.com/colorbox).
+* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Update Faraday to `>= 2.0` - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
+* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Removed support for Ruby 2.5 and 2.6 - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
+* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Test against latest Ruby 2.7, 3.0 and 3.1 - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
+* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Upgraded RuboCop to 1.26.1 and lock to version - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
+* [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Updated Danger PR Linter GitHub action to use separate `Gemfile`  - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
+* Your contribution here.
 
 ### 1.0.0 (2021/12/21)
 
