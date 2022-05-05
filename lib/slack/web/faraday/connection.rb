@@ -26,9 +26,6 @@ module Slack
                 connection.request :url_encoded
                 connection.use ::Slack::Web::Faraday::Response::RaiseError
                 connection.response :mashify, mash_class: Slack::Messages::Message
-                # Match any content type for JSON responses meaning Faraday::ParsingError will be raised for non-JSON
-                # responses such as HTML 500 errors.
-                # TODO: Should this be more restrictive?
                 connection.response :json, content_type: /\b*$/
                 connection.use ::Slack::Web::Faraday::Response::WrapError
                 connection.response :logger, logger if logger
