@@ -35,6 +35,8 @@ module Slack
             request.options.merge!(options.delete(:request)) if options.key?(:request)
           end
           response.body
+        rescue ::Faraday::ParsingError => e
+          raise Slack::Web::Api::Errors::ParsingError, e.response
         end
       end
     end

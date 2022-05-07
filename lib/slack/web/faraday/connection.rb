@@ -22,11 +22,11 @@ module Slack
               options[:request] = request_options if request_options.any?
 
               ::Faraday::Connection.new(endpoint, options) do |connection|
-                connection.use ::Faraday::Request::Multipart
-                connection.use ::Faraday::Request::UrlEncoded
+                connection.request :multipart
+                connection.request :url_encoded
                 connection.use ::Slack::Web::Faraday::Response::RaiseError
-                connection.use ::FaradayMiddleware::Mashify, mash_class: Slack::Messages::Message
-                connection.use ::FaradayMiddleware::ParseJson
+                connection.response :mashify, mash_class: Slack::Messages::Message
+                connection.response :json, content_type: /\b*$/
                 connection.use ::Slack::Web::Faraday::Response::WrapError
                 connection.response :logger, logger if logger
                 connection.adapter adapter

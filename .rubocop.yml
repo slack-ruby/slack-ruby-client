@@ -2,10 +2,11 @@ inherit_from: .rubocop_todo.yml
 
 require:
   - rubocop-performance
+  - rubocop-rake
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   NewCops: enable
   DisplayCopNames: true
   Exclude:

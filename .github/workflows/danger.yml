@@ -1,15 +1,17 @@
 name: PR Linter
 on: [pull_request]
 jobs:
-  lint:
+  danger:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile.danger
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.5
+          ruby-version: 2.6
           bundler-cache: true
       - run: |
           # the personal token is public, this is ok, base64 encode to avoid tripping Github

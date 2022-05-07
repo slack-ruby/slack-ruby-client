@@ -10,7 +10,8 @@ require_relative 'slack/messages/formatting'
 
 # Web API
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/mashify'
+require 'faraday/multipart'
 require 'json'
 require 'logger'
 begin

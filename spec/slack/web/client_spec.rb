@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'spec_helper'
+require 'faraday/typhoeus'
 
 RSpec.describe Slack::Web::Client do
   before do
@@ -275,13 +276,28 @@ RSpec.describe Slack::Web::Client do
       end
 
       context 'parsing error' do
-        before {  stub_slack_request.to_return(body: '<html></html>') }
+        context 'when the response is not JSON' do
+          before do
+            stub_slack_request.to_return(body: '<html></html>', headers: { 'Content-Type' => 'text/html' })
+          end
 
-        it 'raises ParsingError' do
-          expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
-          expect(exception.response.body).to eq('<html></html>')
-          expect(exception.cause).to be_a(Faraday::ParsingError)
-          expect(exception.cause.cause.cause).to be_a(JSON::ParserError)
+          it 'raises ParsingError' do
+            expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
+            expect(exception.response.body).to eq('<html></html>')
+            expect(exception.cause).to be_a(Faraday::ParsingError)
+            expect(exception.cause.cause).to be_a(JSON::ParserError)
+          end
+        end
+
+        context 'when the response is malformed JSON' do
+          before { stub_slack_request.to_return(body: '{') }
+
+          it 'raises ParsingError' do
+            expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
+            expect(exception.response.body).to eq('{')
+            expect(exception.cause).to be_a(Faraday::ParsingError)
+            expect(exception.cause.cause).to be_a(JSON::ParserError)
+          end
         end
       end
 
@@ -318,7 +334,9 @@ RSpec.describe Slack::Web::Client do
         end
 
         context 'with a HTML response' do
-          before { stub_slack_request.to_return(status: 500, body: '<html></html>') }
+          before do
+            stub_slack_request.to_return(status: 500, body: '<html></html>', headers: { 'Content-Type' => 'text/html' })
+          end
 
           it 'raises UnavailableError' do
             expect { request }.to raise_error(Slack::Web::Api::Errors::UnavailableError).with_message('unavailable_error')

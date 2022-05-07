@@ -3,7 +3,7 @@ module Slack
   module Web
     module Faraday
       module Response
-        class WrapError < ::Faraday::Response::Middleware
+        class WrapError < ::Faraday::Middleware
           UNAVAILABLE_ERROR_STATUSES = (500..599).freeze
 
           def on_complete(env)
