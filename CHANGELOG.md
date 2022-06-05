@@ -1,3 +1,7 @@
+### 1.1.1 (Next)
+
+* Your contribution here.
+
 ### 1.1.0 (2022/06/05)
 
 * [#400](https://github.com/slack-ruby/slack-ruby-client/pull/400): Replace Travis-CI with GitHub Actions - [@dblock](https://github.com/dblock).
