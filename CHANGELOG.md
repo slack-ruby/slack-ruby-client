@@ -1,4 +1,4 @@
-### 1.1.0 (Next)
+### 1.1.0 (2022/06/05)
 
 * [#400](https://github.com/slack-ruby/slack-ruby-client/pull/400): Replace Travis-CI with GitHub Actions - [@dblock](https://github.com/dblock).
 * [#401](https://github.com/slack-ruby/slack-ruby-client/pull/401): Upgraded RuboCop to 1.26.0 - [@dblock](https://github.com/dblock).
@@ -10,7 +10,6 @@
 * [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Test against latest Ruby 2.7, 3.0 and 3.1 - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
 * [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Upgraded RuboCop to 1.26.1 and lock to version - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
 * [#406](https://github.com/slack-ruby/slack-ruby-client/pull/406): Updated Danger PR Linter GitHub action to use separate `Gemfile`  - [@schinery](https://github.com/slack-ruby/slack-ruby-client/pull/406).
-* Your contribution here.
 
 ### 1.0.0 (2021/12/21)
 
