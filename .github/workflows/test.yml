@@ -31,4 +31,4 @@ jobs:
           RACK_ENV: test
         run: |
           bundle install
-          bundle exec rake
+          RUBYOPT=W0 bundle exec rake
