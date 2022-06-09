@@ -24,11 +24,6 @@ group :test do
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
   gem 'timecop'
-  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
-    # https://github.com/vcr/vcr/pull/907
-    gem 'vcr', github: 'vcr/vcr', ref: '7ac8292c'
-  else
-    gem 'vcr'
-  end
+  gem 'vcr'
   gem 'webmock'
 end
