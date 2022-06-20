@@ -176,7 +176,7 @@ client.files_upload(
 
 ##### Get Channel Info
 
-You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `conversations_list` in order to locate the channel ID.
+You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `conversations_list` in order to locate the channel ID. This invocation can have a cost if you have many Slack channels. In this scenario, we encourage you to use channel id.
 
 ```ruby
 client.conversations_info(channel: 'C04KB5X4D') # calls conversations_info
