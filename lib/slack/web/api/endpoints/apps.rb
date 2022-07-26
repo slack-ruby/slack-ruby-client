@@ -16,8 +16,8 @@ module Slack
           # @see https://api.slack.com/methods/apps.uninstall
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps/apps.uninstall.json
           def apps_uninstall(options = {})
-            throw ArgumentError.new('Required arguments :client_id missing') if options[:client_id].nil?
-            throw ArgumentError.new('Required arguments :client_secret missing') if options[:client_secret].nil?
+            raise ArgumentError, 'Required arguments :client_id missing' if options[:client_id].nil?
+            raise ArgumentError, 'Required arguments :client_secret missing' if options[:client_secret].nil?
             post('apps.uninstall', options)
           end
         end

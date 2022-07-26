@@ -20,8 +20,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams/admin.teams.create.json
           def admin_teams_create(options = {})
-            throw ArgumentError.new('Required arguments :team_domain missing') if options[:team_domain].nil?
-            throw ArgumentError.new('Required arguments :team_name missing') if options[:team_name].nil?
+            raise ArgumentError, 'Required arguments :team_domain missing' if options[:team_domain].nil?
+            raise ArgumentError, 'Required arguments :team_name missing' if options[:team_name].nil?
             post('admin.teams.create', options)
           end
 

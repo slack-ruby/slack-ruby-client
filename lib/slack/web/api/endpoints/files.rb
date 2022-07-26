@@ -14,7 +14,7 @@ module Slack
           # @see https://api.slack.com/methods/files.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.delete.json
           def files_delete(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
             post('files.delete', options)
           end
 
@@ -29,8 +29,8 @@ module Slack
           #   New filetype of the file. See https://api.slack.com/types/file#file_types for a list of all supported types.
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/files/files.edit.json
           def files_edit(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            throw ArgumentError.new('Required arguments :title missing') if options[:title].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
+            raise ArgumentError, 'Required arguments :title missing' if options[:title].nil?
             logger.warn('The files.edit method is undocumented.')
             post('files.edit', options)
           end
@@ -47,7 +47,7 @@ module Slack
           # @see https://api.slack.com/methods/files.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.info.json
           def files_info(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
             if block_given?
               Pagination::Cursor.new(self, :files_info, options).each do |page|
                 yield page
@@ -92,7 +92,7 @@ module Slack
           # @see https://api.slack.com/methods/files.revokePublicURL
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.revokePublicURL.json
           def files_revokePublicURL(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
             post('files.revokePublicURL', options)
           end
 
@@ -105,8 +105,8 @@ module Slack
           #   Channel to share the file in. Works with both public (channel ID) and private channels (group ID).
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/files/files.share.json
           def files_share(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('The files.share method is undocumented.')
             post('files.share', options)
@@ -120,7 +120,7 @@ module Slack
           # @see https://api.slack.com/methods/files.sharedPublicURL
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.sharedPublicURL.json
           def files_sharedPublicURL(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
             post('files.sharedPublicURL', options)
           end
 

@@ -18,9 +18,9 @@ module Slack
           # @see https://api.slack.com/methods/admin.auth.policy.assignEntities
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.auth.policy/admin.auth.policy.assignEntities.json
           def admin_auth_policy_assignEntities(options = {})
-            throw ArgumentError.new('Required arguments :entity_ids missing') if options[:entity_ids].nil?
-            throw ArgumentError.new('Required arguments :entity_type missing') if options[:entity_type].nil?
-            throw ArgumentError.new('Required arguments :policy_name missing') if options[:policy_name].nil?
+            raise ArgumentError, 'Required arguments :entity_ids missing' if options[:entity_ids].nil?
+            raise ArgumentError, 'Required arguments :entity_type missing' if options[:entity_type].nil?
+            raise ArgumentError, 'Required arguments :policy_name missing' if options[:policy_name].nil?
             post('admin.auth.policy.assignEntities', options)
           end
 
@@ -38,7 +38,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.auth.policy.getEntities
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.auth.policy/admin.auth.policy.getEntities.json
           def admin_auth_policy_getEntities(options = {})
-            throw ArgumentError.new('Required arguments :policy_name missing') if options[:policy_name].nil?
+            raise ArgumentError, 'Required arguments :policy_name missing' if options[:policy_name].nil?
             if block_given?
               Pagination::Cursor.new(self, :admin_auth_policy_getEntities, options).each do |page|
                 yield page
@@ -60,9 +60,9 @@ module Slack
           # @see https://api.slack.com/methods/admin.auth.policy.removeEntities
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.auth.policy/admin.auth.policy.removeEntities.json
           def admin_auth_policy_removeEntities(options = {})
-            throw ArgumentError.new('Required arguments :entity_ids missing') if options[:entity_ids].nil?
-            throw ArgumentError.new('Required arguments :entity_type missing') if options[:entity_type].nil?
-            throw ArgumentError.new('Required arguments :policy_name missing') if options[:policy_name].nil?
+            raise ArgumentError, 'Required arguments :entity_ids missing' if options[:entity_ids].nil?
+            raise ArgumentError, 'Required arguments :entity_type missing' if options[:entity_type].nil?
+            raise ArgumentError, 'Required arguments :policy_name missing' if options[:policy_name].nil?
             post('admin.auth.policy.removeEntities', options)
           end
         end

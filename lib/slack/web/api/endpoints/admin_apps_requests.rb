@@ -18,7 +18,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.apps.requests.cancel
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.requests/admin.apps.requests.cancel.json
           def admin_apps_requests_cancel(options = {})
-            throw ArgumentError.new('Required arguments :request_id missing') if options[:request_id].nil?
+            raise ArgumentError, 'Required arguments :request_id missing' if options[:request_id].nil?
             post('admin.apps.requests.cancel', options)
           end
 

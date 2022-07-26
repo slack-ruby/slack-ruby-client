@@ -22,8 +22,8 @@ module Slack
           # @see https://api.slack.com/methods/reminders.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.add.json
           def reminders_add(options = {})
-            throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
-            throw ArgumentError.new('Required arguments :time missing') if options[:time].nil?
+            raise ArgumentError, 'Required arguments :text missing' if options[:text].nil?
+            raise ArgumentError, 'Required arguments :time missing' if options[:time].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('reminders.add', options)
           end
@@ -38,7 +38,7 @@ module Slack
           # @see https://api.slack.com/methods/reminders.complete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.complete.json
           def reminders_complete(options = {})
-            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
+            raise ArgumentError, 'Required arguments :reminder missing' if options[:reminder].nil?
             post('reminders.complete', options)
           end
 
@@ -52,7 +52,7 @@ module Slack
           # @see https://api.slack.com/methods/reminders.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.delete.json
           def reminders_delete(options = {})
-            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
+            raise ArgumentError, 'Required arguments :reminder missing' if options[:reminder].nil?
             post('reminders.delete', options)
           end
 
@@ -66,7 +66,7 @@ module Slack
           # @see https://api.slack.com/methods/reminders.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.info.json
           def reminders_info(options = {})
-            throw ArgumentError.new('Required arguments :reminder missing') if options[:reminder].nil?
+            raise ArgumentError, 'Required arguments :reminder missing' if options[:reminder].nil?
             post('reminders.info', options)
           end
 

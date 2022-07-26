@@ -24,7 +24,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.acceptSharedInvite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.acceptSharedInvite.json
           def conversations_acceptSharedInvite(options = {})
-            throw ArgumentError.new('Required arguments :channel_name missing') if options[:channel_name].nil?
+            raise ArgumentError, 'Required arguments :channel_name missing' if options[:channel_name].nil?
             post('conversations.acceptSharedInvite', options)
           end
 
@@ -38,7 +38,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.approveSharedInvite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.approveSharedInvite.json
           def conversations_approveSharedInvite(options = {})
-            throw ArgumentError.new('Required arguments :invite_id missing') if options[:invite_id].nil?
+            raise ArgumentError, 'Required arguments :invite_id missing' if options[:invite_id].nil?
             post('conversations.approveSharedInvite', options)
           end
 
@@ -50,7 +50,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.archive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.archive.json
           def conversations_archive(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.archive', options)
           end
@@ -63,7 +63,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.close
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.close.json
           def conversations_close(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.close', options)
           end
@@ -80,7 +80,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.create.json
           def conversations_create(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             post('conversations.create', options)
           end
 
@@ -94,7 +94,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.declineSharedInvite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.declineSharedInvite.json
           def conversations_declineSharedInvite(options = {})
-            throw ArgumentError.new('Required arguments :invite_id missing') if options[:invite_id].nil?
+            raise ArgumentError, 'Required arguments :invite_id missing' if options[:invite_id].nil?
             post('conversations.declineSharedInvite', options)
           end
 
@@ -116,7 +116,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.history
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.history.json
           def conversations_history(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             if block_given?
               Pagination::Cursor.new(self, :conversations_history, options).each do |page|
@@ -139,7 +139,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.info.json
           def conversations_info(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.info', options)
           end
@@ -154,8 +154,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.invite.json
           def conversations_invite(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.invite', options)
           end
@@ -174,7 +174,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.inviteShared
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.inviteShared.json
           def conversations_inviteShared(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.inviteShared', options)
           end
@@ -187,7 +187,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.join
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.join.json
           def conversations_join(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.join', options)
           end
@@ -202,8 +202,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.kick
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.kick.json
           def conversations_kick(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('conversations.kick', options)
@@ -217,7 +217,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.leave
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.leave.json
           def conversations_leave(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.leave', options)
           end
@@ -276,8 +276,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.mark
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.mark.json
           def conversations_mark(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.mark', options)
           end
@@ -294,7 +294,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.members
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.members.json
           def conversations_members(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             if block_given?
               Pagination::Cursor.new(self, :conversations_members, options).each do |page|
@@ -333,8 +333,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.rename
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.rename.json
           def conversations_rename(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.rename', options)
           end
@@ -359,8 +359,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.replies
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.replies.json
           def conversations_replies(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :ts missing') if options[:ts].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             if block_given?
               Pagination::Cursor.new(self, :conversations_replies, options).each do |page|
@@ -381,8 +381,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.setPurpose
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.setPurpose.json
           def conversations_setPurpose(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :purpose missing') if options[:purpose].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :purpose missing' if options[:purpose].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.setPurpose', options)
           end
@@ -397,8 +397,8 @@ module Slack
           # @see https://api.slack.com/methods/conversations.setTopic
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.setTopic.json
           def conversations_setTopic(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :topic missing') if options[:topic].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :topic missing' if options[:topic].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.setTopic', options)
           end
@@ -411,7 +411,7 @@ module Slack
           # @see https://api.slack.com/methods/conversations.unarchive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.unarchive.json
           def conversations_unarchive(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.unarchive', options)
           end

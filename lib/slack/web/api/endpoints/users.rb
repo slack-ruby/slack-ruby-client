@@ -74,7 +74,7 @@ module Slack
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.info.json
           def users_info(options = {})
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.info', options)
           end
@@ -110,7 +110,7 @@ module Slack
           # @see https://api.slack.com/methods/users.lookupByEmail
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.lookupByEmail.json
           def users_lookupByEmail(options = {})
-            throw ArgumentError.new('Required arguments :email missing') if options[:email].nil?
+            raise ArgumentError, 'Required arguments :email missing' if options[:email].nil?
             post('users.lookupByEmail', options)
           end
 
@@ -148,7 +148,7 @@ module Slack
           # @see https://api.slack.com/methods/users.setPresence
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPresence.json
           def users_setPresence(options = {})
-            throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
+            raise ArgumentError, 'Required arguments :presence missing' if options[:presence].nil?
             post('users.setPresence', options)
           end
         end

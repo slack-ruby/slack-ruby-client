@@ -26,9 +26,9 @@ module Slack
           # @see https://api.slack.com/methods/bookmarks.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.add.json
           def bookmarks_add(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :title missing') if options[:title].nil?
-            throw ArgumentError.new('Required arguments :type missing') if options[:type].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :title missing' if options[:title].nil?
+            raise ArgumentError, 'Required arguments :type missing' if options[:type].nil?
             post('bookmarks.add', options)
           end
 
@@ -48,8 +48,8 @@ module Slack
           # @see https://api.slack.com/methods/bookmarks.edit
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.edit.json
           def bookmarks_edit(options = {})
-            throw ArgumentError.new('Required arguments :bookmark_id missing') if options[:bookmark_id].nil?
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('bookmarks.edit', options)
           end
 
@@ -61,7 +61,7 @@ module Slack
           # @see https://api.slack.com/methods/bookmarks.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.list.json
           def bookmarks_list(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('bookmarks.list', options)
           end
 
@@ -75,8 +75,8 @@ module Slack
           # @see https://api.slack.com/methods/bookmarks.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.remove.json
           def bookmarks_remove(options = {})
-            throw ArgumentError.new('Required arguments :bookmark_id missing') if options[:bookmark_id].nil?
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('bookmarks.remove', options)
           end
         end

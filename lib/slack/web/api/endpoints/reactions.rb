@@ -18,9 +18,9 @@ module Slack
           # @see https://api.slack.com/methods/reactions.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.add.json
           def reactions_add(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            throw ArgumentError.new('Required arguments :timestamp missing') if options[:timestamp].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
+            raise ArgumentError, 'Required arguments :timestamp missing' if options[:timestamp].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('reactions.add', options)
           end
@@ -87,7 +87,7 @@ module Slack
           # @see https://api.slack.com/methods/reactions.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.remove.json
           def reactions_remove(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('reactions.remove', options)
           end

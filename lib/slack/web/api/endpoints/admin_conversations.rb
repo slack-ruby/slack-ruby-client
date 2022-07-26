@@ -14,7 +14,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.archive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.archive.json
           def admin_conversations_archive(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.archive', options)
           end
 
@@ -28,7 +28,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.convertToPrivate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.convertToPrivate.json
           def admin_conversations_convertToPrivate(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.convertToPrivate', options)
           end
 
@@ -48,8 +48,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.create.json
           def admin_conversations_create(options = {})
-            throw ArgumentError.new('Required arguments :is_private missing') if options[:is_private].nil?
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :is_private missing' if options[:is_private].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             post('admin.conversations.create', options)
           end
 
@@ -61,7 +61,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.delete.json
           def admin_conversations_delete(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.delete', options)
           end
 
@@ -75,7 +75,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.disconnectShared
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.disconnectShared.json
           def admin_conversations_disconnectShared(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.disconnectShared', options)
           end
 
@@ -87,7 +87,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.getConversationPrefs
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getConversationPrefs.json
           def admin_conversations_getConversationPrefs(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.getConversationPrefs', options)
           end
 
@@ -99,7 +99,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.getCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getCustomRetention.json
           def admin_conversations_getCustomRetention(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.getCustomRetention', options)
           end
 
@@ -115,7 +115,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.getTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getTeams.json
           def admin_conversations_getTeams(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             if block_given?
               Pagination::Cursor.new(self, :admin_conversations_getTeams, options).each do |page|
                 yield page
@@ -135,8 +135,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.invite.json
           def admin_conversations_invite(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :user_ids missing') if options[:user_ids].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
             post('admin.conversations.invite', options)
           end
 
@@ -148,7 +148,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.removeCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.removeCustomRetention.json
           def admin_conversations_removeCustomRetention(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.removeCustomRetention', options)
           end
 
@@ -162,8 +162,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.rename
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.rename.json
           def admin_conversations_rename(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             post('admin.conversations.rename', options)
           end
 
@@ -206,8 +206,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.setConversationPrefs
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setConversationPrefs.json
           def admin_conversations_setConversationPrefs(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :prefs missing') if options[:prefs].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :prefs missing' if options[:prefs].nil?
             post('admin.conversations.setConversationPrefs', options)
           end
 
@@ -221,8 +221,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.setCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setCustomRetention.json
           def admin_conversations_setCustomRetention(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :duration_days missing') if options[:duration_days].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :duration_days missing' if options[:duration_days].nil?
             post('admin.conversations.setCustomRetention', options)
           end
 
@@ -240,7 +240,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.setTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setTeams.json
           def admin_conversations_setTeams(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.setTeams', options)
           end
 
@@ -252,7 +252,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.unarchive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.unarchive.json
           def admin_conversations_unarchive(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.unarchive', options)
           end
         end

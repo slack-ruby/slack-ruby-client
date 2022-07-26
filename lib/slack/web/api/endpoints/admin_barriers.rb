@@ -18,9 +18,9 @@ module Slack
           # @see https://api.slack.com/methods/admin.barriers.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.barriers/admin.barriers.create.json
           def admin_barriers_create(options = {})
-            throw ArgumentError.new('Required arguments :barriered_from_usergroup_ids missing') if options[:barriered_from_usergroup_ids].nil?
-            throw ArgumentError.new('Required arguments :primary_usergroup_id missing') if options[:primary_usergroup_id].nil?
-            throw ArgumentError.new('Required arguments :restricted_subjects missing') if options[:restricted_subjects].nil?
+            raise ArgumentError, 'Required arguments :barriered_from_usergroup_ids missing' if options[:barriered_from_usergroup_ids].nil?
+            raise ArgumentError, 'Required arguments :primary_usergroup_id missing' if options[:primary_usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :restricted_subjects missing' if options[:restricted_subjects].nil?
             post('admin.barriers.create', options)
           end
 
@@ -32,7 +32,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.barriers.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.barriers/admin.barriers.delete.json
           def admin_barriers_delete(options = {})
-            throw ArgumentError.new('Required arguments :barrier_id missing') if options[:barrier_id].nil?
+            raise ArgumentError, 'Required arguments :barrier_id missing' if options[:barrier_id].nil?
             post('admin.barriers.delete', options)
           end
 
@@ -69,10 +69,10 @@ module Slack
           # @see https://api.slack.com/methods/admin.barriers.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.barriers/admin.barriers.update.json
           def admin_barriers_update(options = {})
-            throw ArgumentError.new('Required arguments :barrier_id missing') if options[:barrier_id].nil?
-            throw ArgumentError.new('Required arguments :barriered_from_usergroup_ids missing') if options[:barriered_from_usergroup_ids].nil?
-            throw ArgumentError.new('Required arguments :primary_usergroup_id missing') if options[:primary_usergroup_id].nil?
-            throw ArgumentError.new('Required arguments :restricted_subjects missing') if options[:restricted_subjects].nil?
+            raise ArgumentError, 'Required arguments :barrier_id missing' if options[:barrier_id].nil?
+            raise ArgumentError, 'Required arguments :barriered_from_usergroup_ids missing' if options[:barriered_from_usergroup_ids].nil?
+            raise ArgumentError, 'Required arguments :primary_usergroup_id missing' if options[:primary_usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :restricted_subjects missing' if options[:restricted_subjects].nil?
             post('admin.barriers.update', options)
           end
         end

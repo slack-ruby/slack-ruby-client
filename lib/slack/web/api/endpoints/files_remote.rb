@@ -24,9 +24,9 @@ module Slack
           # @see https://api.slack.com/methods/files.remote.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.add.json
           def files_remote_add(options = {})
-            throw ArgumentError.new('Required arguments :external_id missing') if options[:external_id].nil?
-            throw ArgumentError.new('Required arguments :external_url missing') if options[:external_url].nil?
-            throw ArgumentError.new('Required arguments :title missing') if options[:title].nil?
+            raise ArgumentError, 'Required arguments :external_id missing' if options[:external_id].nil?
+            raise ArgumentError, 'Required arguments :external_url missing' if options[:external_url].nil?
+            raise ArgumentError, 'Required arguments :title missing' if options[:title].nil?
             post('files.remote.add', options)
           end
 
@@ -94,7 +94,7 @@ module Slack
           # @see https://api.slack.com/methods/files.remote.share
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.share.json
           def files_remote_share(options = {})
-            throw ArgumentError.new('Required arguments :channels missing') if options[:channels].nil?
+            raise ArgumentError, 'Required arguments :channels missing' if options[:channels].nil?
             post('files.remote.share', options)
           end
 

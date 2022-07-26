@@ -14,7 +14,7 @@ module Slack
           # @see https://api.slack.com/methods/apps.manifest.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.create.json
           def apps_manifest_create(options = {})
-            throw ArgumentError.new('Required arguments :manifest missing') if options[:manifest].nil?
+            raise ArgumentError, 'Required arguments :manifest missing' if options[:manifest].nil?
             post('apps.manifest.create', options)
           end
 
@@ -26,7 +26,7 @@ module Slack
           # @see https://api.slack.com/methods/apps.manifest.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.delete.json
           def apps_manifest_delete(options = {})
-            throw ArgumentError.new('Required arguments :app_id missing') if options[:app_id].nil?
+            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             post('apps.manifest.delete', options)
           end
 
@@ -38,7 +38,7 @@ module Slack
           # @see https://api.slack.com/methods/apps.manifest.export
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.export.json
           def apps_manifest_export(options = {})
-            throw ArgumentError.new('Required arguments :app_id missing') if options[:app_id].nil?
+            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             post('apps.manifest.export', options)
           end
 
@@ -52,8 +52,8 @@ module Slack
           # @see https://api.slack.com/methods/apps.manifest.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.update.json
           def apps_manifest_update(options = {})
-            throw ArgumentError.new('Required arguments :app_id missing') if options[:app_id].nil?
-            throw ArgumentError.new('Required arguments :manifest missing') if options[:manifest].nil?
+            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
+            raise ArgumentError, 'Required arguments :manifest missing' if options[:manifest].nil?
             post('apps.manifest.update', options)
           end
 
@@ -67,7 +67,7 @@ module Slack
           # @see https://api.slack.com/methods/apps.manifest.validate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.validate.json
           def apps_manifest_validate(options = {})
-            throw ArgumentError.new('Required arguments :manifest missing') if options[:manifest].nil?
+            raise ArgumentError, 'Required arguments :manifest missing' if options[:manifest].nil?
             post('apps.manifest.validate', options)
           end
         end

@@ -37,9 +37,9 @@ module Slack
           # @see https://api.slack.com/methods/apps.permissions.users.request
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.permissions.users/apps.permissions.users.request.json
           def apps_permissions_users_request(options = {})
-            throw ArgumentError.new('Required arguments :scopes missing') if options[:scopes].nil?
-            throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
-            throw ArgumentError.new('Required arguments :user missing') if options[:user].nil?
+            raise ArgumentError, 'Required arguments :scopes missing' if options[:scopes].nil?
+            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
+            raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('apps.permissions.users.request', options)
           end

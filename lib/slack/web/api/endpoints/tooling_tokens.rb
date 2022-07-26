@@ -14,7 +14,7 @@ module Slack
           # @see https://api.slack.com/methods/tooling.tokens.rotate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/tooling.tokens/tooling.tokens.rotate.json
           def tooling_tokens_rotate(options = {})
-            throw ArgumentError.new('Required arguments :refresh_token missing') if options[:refresh_token].nil?
+            raise ArgumentError, 'Required arguments :refresh_token missing' if options[:refresh_token].nil?
             post('tooling.tokens.rotate', options)
           end
         end

@@ -16,7 +16,7 @@ module Slack
           # @see https://api.slack.com/methods/workflows.stepCompleted
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows/workflows.stepCompleted.json
           def workflows_stepCompleted(options = {})
-            throw ArgumentError.new('Required arguments :workflow_step_execute_id missing') if options[:workflow_step_execute_id].nil?
+            raise ArgumentError, 'Required arguments :workflow_step_execute_id missing' if options[:workflow_step_execute_id].nil?
             post('workflows.stepCompleted', options)
           end
 
@@ -30,8 +30,8 @@ module Slack
           # @see https://api.slack.com/methods/workflows.stepFailed
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows/workflows.stepFailed.json
           def workflows_stepFailed(options = {})
-            throw ArgumentError.new('Required arguments :error missing') if options[:error].nil?
-            throw ArgumentError.new('Required arguments :workflow_step_execute_id missing') if options[:workflow_step_execute_id].nil?
+            raise ArgumentError, 'Required arguments :error missing' if options[:error].nil?
+            raise ArgumentError, 'Required arguments :workflow_step_execute_id missing' if options[:workflow_step_execute_id].nil?
             post('workflows.stepFailed', options)
           end
 
@@ -51,7 +51,7 @@ module Slack
           # @see https://api.slack.com/methods/workflows.updateStep
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows/workflows.updateStep.json
           def workflows_updateStep(options = {})
-            throw ArgumentError.new('Required arguments :workflow_step_edit_id missing') if options[:workflow_step_edit_id].nil?
+            raise ArgumentError, 'Required arguments :workflow_step_edit_id missing' if options[:workflow_step_edit_id].nil?
             post('workflows.updateStep', options)
           end
         end

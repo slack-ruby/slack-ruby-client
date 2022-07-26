@@ -14,7 +14,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.session.clearSettings
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.clearSettings.json
           def admin_users_session_clearSettings(options = {})
-            throw ArgumentError.new('Required arguments :user_ids missing') if options[:user_ids].nil?
+            raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
             post('admin.users.session.clearSettings', options)
           end
 
@@ -26,7 +26,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.session.getSettings
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.getSettings.json
           def admin_users_session_getSettings(options = {})
-            throw ArgumentError.new('Required arguments :user_ids missing') if options[:user_ids].nil?
+            raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
             post('admin.users.session.getSettings', options)
           end
 
@@ -40,8 +40,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.session.invalidate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.invalidate.json
           def admin_users_session_invalidate(options = {})
-            throw ArgumentError.new('Required arguments :session_id missing') if options[:session_id].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :session_id missing' if options[:session_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.users.session.invalidate', options)
           end
 
@@ -80,7 +80,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.session.reset
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.reset.json
           def admin_users_session_reset(options = {})
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.session.reset', options)
           end
 
@@ -96,7 +96,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.session.resetBulk
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.resetBulk.json
           def admin_users_session_resetBulk(options = {})
-            throw ArgumentError.new('Required arguments :user_ids missing') if options[:user_ids].nil?
+            raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
             post('admin.users.session.resetBulk', options)
           end
 
@@ -112,7 +112,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.session.setSettings
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.setSettings.json
           def admin_users_session_setSettings(options = {})
-            throw ArgumentError.new('Required arguments :user_ids missing') if options[:user_ids].nil?
+            raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
             post('admin.users.session.setSettings', options)
           end
         end

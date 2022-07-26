@@ -24,7 +24,7 @@ module Slack
           # @see https://api.slack.com/methods/usergroups.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
           def usergroups_create(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             post('usergroups.create', options)
           end
 
@@ -40,7 +40,7 @@ module Slack
           # @see https://api.slack.com/methods/usergroups.disable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.disable.json
           def usergroups_disable(options = {})
-            throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
+            raise ArgumentError, 'Required arguments :usergroup missing' if options[:usergroup].nil?
             post('usergroups.disable', options)
           end
 
@@ -56,7 +56,7 @@ module Slack
           # @see https://api.slack.com/methods/usergroups.enable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
           def usergroups_enable(options = {})
-            throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
+            raise ArgumentError, 'Required arguments :usergroup missing' if options[:usergroup].nil?
             post('usergroups.enable', options)
           end
 
@@ -97,7 +97,7 @@ module Slack
           # @see https://api.slack.com/methods/usergroups.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.update.json
           def usergroups_update(options = {})
-            throw ArgumentError.new('Required arguments :usergroup missing') if options[:usergroup].nil?
+            raise ArgumentError, 'Required arguments :usergroup missing' if options[:usergroup].nil?
             post('usergroups.update', options)
           end
         end

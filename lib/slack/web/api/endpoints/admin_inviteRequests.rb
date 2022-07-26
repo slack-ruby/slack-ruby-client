@@ -16,7 +16,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.inviteRequests.approve
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.inviteRequests/admin.inviteRequests.approve.json
           def admin_inviteRequests_approve(options = {})
-            throw ArgumentError.new('Required arguments :invite_request_id missing') if options[:invite_request_id].nil?
+            raise ArgumentError, 'Required arguments :invite_request_id missing' if options[:invite_request_id].nil?
             post('admin.inviteRequests.approve', options)
           end
 
@@ -30,7 +30,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.inviteRequests.deny
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.inviteRequests/admin.inviteRequests.deny.json
           def admin_inviteRequests_deny(options = {})
-            throw ArgumentError.new('Required arguments :invite_request_id missing') if options[:invite_request_id].nil?
+            raise ArgumentError, 'Required arguments :invite_request_id missing' if options[:invite_request_id].nil?
             post('admin.inviteRequests.deny', options)
           end
 

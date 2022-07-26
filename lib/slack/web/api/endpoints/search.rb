@@ -22,7 +22,7 @@ module Slack
           # @see https://api.slack.com/methods/search.all
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.all.json
           def search_all(options = {})
-            throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
+            raise ArgumentError, 'Required arguments :query missing' if options[:query].nil?
             post('search.all', options)
           end
 
@@ -42,7 +42,7 @@ module Slack
           # @see https://api.slack.com/methods/search.files
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.files.json
           def search_files(options = {})
-            throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
+            raise ArgumentError, 'Required arguments :query missing' if options[:query].nil?
             post('search.files', options)
           end
 
@@ -64,7 +64,7 @@ module Slack
           # @see https://api.slack.com/methods/search.messages
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/search/search.messages.json
           def search_messages(options = {})
-            throw ArgumentError.new('Required arguments :query missing') if options[:query].nil?
+            raise ArgumentError, 'Required arguments :query missing' if options[:query].nil?
             if block_given?
               Pagination::Cursor.new(self, :search_messages, options).each do |page|
                 yield page

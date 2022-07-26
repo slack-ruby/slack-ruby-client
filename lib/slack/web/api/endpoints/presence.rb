@@ -13,7 +13,7 @@ module Slack
           # @see https://api.slack.com/methods/presence.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/presence.set.json
           def presence_set(options = {})
-            throw ArgumentError.new('Required arguments :presence missing') if options[:presence].nil?
+            raise ArgumentError, 'Required arguments :presence missing' if options[:presence].nil?
             post('presence.set', options)
           end
         end

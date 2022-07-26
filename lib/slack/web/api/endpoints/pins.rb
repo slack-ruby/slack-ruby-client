@@ -16,7 +16,7 @@ module Slack
           # @see https://api.slack.com/methods/pins.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.add.json
           def pins_add(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('pins.add', options)
           end
@@ -29,7 +29,7 @@ module Slack
           # @see https://api.slack.com/methods/pins.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.list.json
           def pins_list(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('pins.list', options)
           end
@@ -44,7 +44,7 @@ module Slack
           # @see https://api.slack.com/methods/pins.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/pins/pins.remove.json
           def pins_remove(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('pins.remove', options)
           end

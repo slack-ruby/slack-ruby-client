@@ -37,8 +37,8 @@ module Slack
           # @see https://api.slack.com/methods/oauth.v2.exchange
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.exchange.json
           def oauth_v2_exchange(options = {})
-            throw ArgumentError.new('Required arguments :client_id missing') if options[:client_id].nil?
-            throw ArgumentError.new('Required arguments :client_secret missing') if options[:client_secret].nil?
+            raise ArgumentError, 'Required arguments :client_id missing' if options[:client_id].nil?
+            raise ArgumentError, 'Required arguments :client_secret missing' if options[:client_secret].nil?
             post('oauth.v2.exchange', options)
           end
         end

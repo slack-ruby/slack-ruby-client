@@ -149,7 +149,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       it 'requires ts' do
         expect do
           client.chat_update(channel: 'channel', text: 'text')
-        end.to raise_error(ArgumentError, /Required arguments :ts missing>/)
+        end.to raise_error(ArgumentError, /Required arguments :ts missing/)
       end
     end
 

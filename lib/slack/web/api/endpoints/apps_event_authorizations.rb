@@ -18,7 +18,7 @@ module Slack
           # @see https://api.slack.com/methods/apps.event.authorizations.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.event.authorizations/apps.event.authorizations.list.json
           def apps_event_authorizations_list(options = {})
-            throw ArgumentError.new('Required arguments :event_context missing') if options[:event_context].nil?
+            raise ArgumentError, 'Required arguments :event_context missing' if options[:event_context].nil?
             if block_given?
               Pagination::Cursor.new(self, :apps_event_authorizations_list, options).each do |page|
                 yield page
