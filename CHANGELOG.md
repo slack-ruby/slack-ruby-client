@@ -1,5 +1,6 @@
-### 1.1.1 (Next)
+### 2.0.0 (Next)
 
+* [#416](https://github.com/slack-ruby/slack-ruby-client/pull/416): Removes default values for Faraday's SSL settings `ca_file` and `ca_path` - [@irphilli](https://github.com/irphilli).
 * Your contribution here.
 
 ### 1.1.0 (2022/06/05)

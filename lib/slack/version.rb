@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 module Slack
-  VERSION = '1.1.1'
+  VERSION = '2.0.0'
 end

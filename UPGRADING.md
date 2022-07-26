@@ -1,6 +1,25 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 2.0.0
+
+[#416](https://github.com/slack-ruby/slack-ruby-client/pull/416) Removes default values for Faraday's SSL settings `ca_file` and `ca_path`.
+
+If you previously relied on `OpenSSL::X509::DEFAULT_CERT_FILE` or `OpenSSL::X509::DEFAULT_CERT_DIR` to set these values you must now do so explicitly. E.g.:
+
+```ruby
+Slack::Web::Client.configure do |config|
+  config.ca_file = OpenSSL::X509::DEFAULT_CERT_FILE
+  config.ca_path = OpenSSL::X509::DEFAULT_CERT_DIR
+end
+```
+
+or
+
+```ruby
+client = Slack::Web::Client.new(ca_file: OpenSSL::X509::DEFAULT_CERT_FILE, ca_path: OpenSSL::X509::DEFAULT_CERT_DIR)
+```
+
 ### Upgrading to >= 1.0.0
 
 #### Deprecated Methods
