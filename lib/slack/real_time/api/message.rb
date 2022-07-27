@@ -12,8 +12,9 @@ module Slack
         # @option options [Object] :text
         #   Text of the message to send. See below for an explanation of formatting.
         def message(options = {})
-          throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
-          throw ArgumentError.new('Required arguments :text missing') if options[:text].nil?
+          raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+          raise ArgumentError, 'Required arguments :text missing' if options[:text].nil?
+
           send_json({ type: 'message', id: next_id }.merge(options))
         end
       end

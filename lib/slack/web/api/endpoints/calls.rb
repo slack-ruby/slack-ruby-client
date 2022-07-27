@@ -28,8 +28,8 @@ module Slack
           # @see https://api.slack.com/methods/calls.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls/calls.add.json
           def calls_add(options = {})
-            throw ArgumentError.new('Required arguments :external_unique_id missing') if options[:external_unique_id].nil?
-            throw ArgumentError.new('Required arguments :join_url missing') if options[:join_url].nil?
+            raise ArgumentError, 'Required arguments :external_unique_id missing' if options[:external_unique_id].nil?
+            raise ArgumentError, 'Required arguments :join_url missing' if options[:join_url].nil?
             post('calls.add', options)
           end
 
@@ -43,7 +43,7 @@ module Slack
           # @see https://api.slack.com/methods/calls.end
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls/calls.end.json
           def calls_end(options = {})
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
             post('calls.end', options)
           end
 
@@ -55,7 +55,7 @@ module Slack
           # @see https://api.slack.com/methods/calls.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls/calls.info.json
           def calls_info(options = {})
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
             post('calls.info', options)
           end
 
@@ -73,7 +73,7 @@ module Slack
           # @see https://api.slack.com/methods/calls.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls/calls.update.json
           def calls_update(options = {})
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
             post('calls.update', options)
           end
         end

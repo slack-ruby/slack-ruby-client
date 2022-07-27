@@ -16,8 +16,8 @@ module Slack
           # @see https://api.slack.com/methods/dialog.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dialog/dialog.open.json
           def dialog_open(options = {})
-            throw ArgumentError.new('Required arguments :dialog missing') if options[:dialog].nil?
-            throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
+            raise ArgumentError, 'Required arguments :dialog missing' if options[:dialog].nil?
+            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
             # dialog must be passed as an encoded JSON string
             if options.key?(:dialog)
               dialog = options[:dialog]

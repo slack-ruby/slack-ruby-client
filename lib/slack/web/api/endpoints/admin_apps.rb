@@ -35,7 +35,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.apps.clearResolution
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.clearResolution.json
           def admin_apps_clearResolution(options = {})
-            throw ArgumentError.new('Required arguments :app_id missing') if options[:app_id].nil?
+            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             post('admin.apps.clearResolution', options)
           end
 
@@ -68,7 +68,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.apps.uninstall
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.uninstall.json
           def admin_apps_uninstall(options = {})
-            throw ArgumentError.new('Required arguments :app_id missing') if options[:app_id].nil?
+            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             post('admin.apps.uninstall', options)
           end
         end

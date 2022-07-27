@@ -14,7 +14,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.settings.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.info.json
           def admin_teams_settings_info(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.teams.settings.info', options)
           end
 
@@ -28,8 +28,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.settings.setDefaultChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setDefaultChannels.json
           def admin_teams_settings_setDefaultChannels(options = {})
-            throw ArgumentError.new('Required arguments :channel_ids missing') if options[:channel_ids].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.teams.settings.setDefaultChannels', options)
           end
 
@@ -43,8 +43,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.settings.setDescription
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setDescription.json
           def admin_teams_settings_setDescription(options = {})
-            throw ArgumentError.new('Required arguments :description missing') if options[:description].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :description missing' if options[:description].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.teams.settings.setDescription', options)
           end
 
@@ -58,8 +58,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.settings.setDiscoverability
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setDiscoverability.json
           def admin_teams_settings_setDiscoverability(options = {})
-            throw ArgumentError.new('Required arguments :discoverability missing') if options[:discoverability].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :discoverability missing' if options[:discoverability].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.teams.settings.setDiscoverability', options)
           end
 
@@ -73,8 +73,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.settings.setIcon
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setIcon.json
           def admin_teams_settings_setIcon(options = {})
-            throw ArgumentError.new('Required arguments :image_url missing') if options[:image_url].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :image_url missing' if options[:image_url].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.teams.settings.setIcon', options)
           end
 
@@ -88,8 +88,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.settings.setName
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.settings/admin.teams.settings.setName.json
           def admin_teams_settings_setName(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.teams.settings.setName', options)
           end
         end

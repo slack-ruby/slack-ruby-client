@@ -18,8 +18,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.restrictAccess.addGroup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.restrictAccess/admin.conversations.restrictAccess.addGroup.json
           def admin_conversations_restrictAccess_addGroup(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :group_id missing') if options[:group_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :group_id missing' if options[:group_id].nil?
             post('admin.conversations.restrictAccess.addGroup', options)
           end
 
@@ -33,7 +33,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.restrictAccess.listGroups
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.restrictAccess/admin.conversations.restrictAccess.listGroups.json
           def admin_conversations_restrictAccess_listGroups(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.restrictAccess.listGroups', options)
           end
 
@@ -49,9 +49,9 @@ module Slack
           # @see https://api.slack.com/methods/admin.conversations.restrictAccess.removeGroup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.restrictAccess/admin.conversations.restrictAccess.removeGroup.json
           def admin_conversations_restrictAccess_removeGroup(options = {})
-            throw ArgumentError.new('Required arguments :channel_id missing') if options[:channel_id].nil?
-            throw ArgumentError.new('Required arguments :group_id missing') if options[:group_id].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :group_id missing' if options[:group_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.conversations.restrictAccess.removeGroup', options)
           end
         end

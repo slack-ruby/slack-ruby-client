@@ -18,7 +18,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.teams.admins.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.admins/admin.teams.admins.list.json
           def admin_teams_admins_list(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             if block_given?
               Pagination::Cursor.new(self, :admin_teams_admins_list, options).each do |page|
                 yield page

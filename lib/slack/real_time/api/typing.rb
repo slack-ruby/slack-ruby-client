@@ -10,7 +10,8 @@ module Slack
         #   Channel to send message to. Can be a public channel, private group or IM channel.
         #   Can be an encoded ID, or a name.
         def typing(options = {})
-          throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+          raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+
           send_json({ type: 'typing', id: next_id }.merge(options))
         end
       end

@@ -16,8 +16,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.emoji.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.add.json
           def admin_emoji_add(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            throw ArgumentError.new('Required arguments :url missing') if options[:url].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
+            raise ArgumentError, 'Required arguments :url missing' if options[:url].nil?
             post('admin.emoji.add', options)
           end
 
@@ -31,8 +31,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.emoji.addAlias
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.addAlias.json
           def admin_emoji_addAlias(options = {})
-            throw ArgumentError.new('Required arguments :alias_for missing') if options[:alias_for].nil?
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :alias_for missing' if options[:alias_for].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             post('admin.emoji.addAlias', options)
           end
 
@@ -63,7 +63,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.emoji.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.remove.json
           def admin_emoji_remove(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
             post('admin.emoji.remove', options)
           end
 
@@ -77,8 +77,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.emoji.rename
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.rename.json
           def admin_emoji_rename(options = {})
-            throw ArgumentError.new('Required arguments :name missing') if options[:name].nil?
-            throw ArgumentError.new('Required arguments :new_name missing') if options[:new_name].nil?
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
+            raise ArgumentError, 'Required arguments :new_name missing' if options[:new_name].nil?
             post('admin.emoji.rename', options)
           end
         end

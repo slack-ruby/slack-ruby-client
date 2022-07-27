@@ -18,7 +18,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.analytics.getFile
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.analytics/admin.analytics.getFile.json
           def admin_analytics_getFile(options = {})
-            throw ArgumentError.new('Required arguments :type missing') if options[:type].nil?
+            raise ArgumentError, 'Required arguments :type missing' if options[:type].nil?
             post('admin.analytics.getFile', options)
           end
         end

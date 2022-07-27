@@ -13,7 +13,7 @@ module Slack
           #   Channel to delete.
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/undocumented/channels/channels.delete.json
           def channels_delete(options = {})
-            throw ArgumentError.new('Required arguments :channel missing') if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('The channels.delete method is undocumented.')
             post('channels.delete', options)

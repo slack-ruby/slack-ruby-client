@@ -59,7 +59,7 @@ module Slack
           # @see https://api.slack.com/methods/dnd.teamInfo
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.teamInfo.json
           def dnd_teamInfo(options = {})
-            throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
             post('dnd.teamInfo', options)
           end
         end

@@ -18,7 +18,7 @@ module Slack
           # @see https://api.slack.com/methods/migration.exchange
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/migration/migration.exchange.json
           def migration_exchange(options = {})
-            throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
             post('migration.exchange', options)
           end
         end

@@ -16,8 +16,8 @@ module Slack
           # @see https://api.slack.com/methods/files.comments.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.comments/files.comments.delete.json
           def files_comments_delete(options = {})
-            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
+            raise ArgumentError, 'Required arguments :file missing' if options[:file].nil?
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
             post('files.comments.delete', options)
           end
         end

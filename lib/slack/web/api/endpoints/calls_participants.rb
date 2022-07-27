@@ -16,8 +16,8 @@ module Slack
           # @see https://api.slack.com/methods/calls.participants.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls.participants/calls.participants.add.json
           def calls_participants_add(options = {})
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
-            throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
             post('calls.participants.add', options)
           end
 
@@ -31,8 +31,8 @@ module Slack
           # @see https://api.slack.com/methods/calls.participants.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/calls.participants/calls.participants.remove.json
           def calls_participants_remove(options = {})
-            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
-            throw ArgumentError.new('Required arguments :users missing') if options[:users].nil?
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
             post('calls.participants.remove', options)
           end
         end

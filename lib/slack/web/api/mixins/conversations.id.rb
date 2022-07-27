@@ -14,7 +14,7 @@ module Slack
           #   Channel to get ID for, prefixed with #.
           def conversations_id(options = {})
             name = options[:channel]
-            throw ArgumentError.new('Required arguments :channel missing') if name.nil?
+            raise ArgumentError, 'Required arguments :channel missing' if name.nil?
 
             id_for :channel, name, '#', :conversations_list, :channels, 'channel_not_found'
           end

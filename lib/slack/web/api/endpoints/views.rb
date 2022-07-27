@@ -16,8 +16,8 @@ module Slack
           # @see https://api.slack.com/methods/views.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.open.json
           def views_open(options = {})
-            throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
-            throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
+            raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)
@@ -38,8 +38,8 @@ module Slack
           # @see https://api.slack.com/methods/views.publish
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.publish.json
           def views_publish(options = {})
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
-            throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)
@@ -58,8 +58,8 @@ module Slack
           # @see https://api.slack.com/methods/views.push
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.push.json
           def views_push(options = {})
-            throw ArgumentError.new('Required arguments :trigger_id missing') if options[:trigger_id].nil?
-            throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
+            raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)
@@ -82,7 +82,7 @@ module Slack
           # @see https://api.slack.com/methods/views.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.update.json
           def views_update(options = {})
-            throw ArgumentError.new('Required arguments :view missing') if options[:view].nil?
+            raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)

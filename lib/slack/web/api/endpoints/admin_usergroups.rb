@@ -18,8 +18,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.usergroups.addChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addChannels.json
           def admin_usergroups_addChannels(options = {})
-            throw ArgumentError.new('Required arguments :channel_ids missing') if options[:channel_ids].nil?
-            throw ArgumentError.new('Required arguments :usergroup_id missing') if options[:usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            raise ArgumentError, 'Required arguments :usergroup_id missing' if options[:usergroup_id].nil?
             post('admin.usergroups.addChannels', options)
           end
 
@@ -35,8 +35,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.usergroups.addTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addTeams.json
           def admin_usergroups_addTeams(options = {})
-            throw ArgumentError.new('Required arguments :team_ids missing') if options[:team_ids].nil?
-            throw ArgumentError.new('Required arguments :usergroup_id missing') if options[:usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :team_ids missing' if options[:team_ids].nil?
+            raise ArgumentError, 'Required arguments :usergroup_id missing' if options[:usergroup_id].nil?
             post('admin.usergroups.addTeams', options)
           end
 
@@ -52,7 +52,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.usergroups.listChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.listChannels.json
           def admin_usergroups_listChannels(options = {})
-            throw ArgumentError.new('Required arguments :usergroup_id missing') if options[:usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :usergroup_id missing' if options[:usergroup_id].nil?
             post('admin.usergroups.listChannels', options)
           end
 
@@ -66,8 +66,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.usergroups.removeChannels
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.removeChannels.json
           def admin_usergroups_removeChannels(options = {})
-            throw ArgumentError.new('Required arguments :channel_ids missing') if options[:channel_ids].nil?
-            throw ArgumentError.new('Required arguments :usergroup_id missing') if options[:usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            raise ArgumentError, 'Required arguments :usergroup_id missing' if options[:usergroup_id].nil?
             post('admin.usergroups.removeChannels', options)
           end
         end

@@ -22,8 +22,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.assign
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.assign.json
           def admin_users_assign(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.assign', options)
           end
 
@@ -53,9 +53,9 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.invite.json
           def admin_users_invite(options = {})
-            throw ArgumentError.new('Required arguments :channel_ids missing') if options[:channel_ids].nil?
-            throw ArgumentError.new('Required arguments :email missing') if options[:email].nil?
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            raise ArgumentError, 'Required arguments :email missing' if options[:email].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.users.invite', options)
           end
 
@@ -90,8 +90,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.remove.json
           def admin_users_remove(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.remove', options)
           end
 
@@ -105,8 +105,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.setAdmin
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setAdmin.json
           def admin_users_setAdmin(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.setAdmin', options)
           end
 
@@ -122,8 +122,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.setExpiration
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setExpiration.json
           def admin_users_setExpiration(options = {})
-            throw ArgumentError.new('Required arguments :expiration_ts missing') if options[:expiration_ts].nil?
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :expiration_ts missing' if options[:expiration_ts].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.setExpiration', options)
           end
 
@@ -137,8 +137,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.setOwner
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setOwner.json
           def admin_users_setOwner(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.setOwner', options)
           end
 
@@ -152,8 +152,8 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.setRegular
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setRegular.json
           def admin_users_setRegular(options = {})
-            throw ArgumentError.new('Required arguments :team_id missing') if options[:team_id].nil?
-            throw ArgumentError.new('Required arguments :user_id missing') if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.setRegular', options)
           end
         end
