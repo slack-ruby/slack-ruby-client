@@ -20,6 +20,8 @@ or
 client = Slack::Web::Client.new(ca_file: OpenSSL::X509::DEFAULT_CERT_FILE, ca_path: OpenSSL::X509::DEFAULT_CERT_DIR)
 ```
 
+Slack has deprecated the `rtm.start` method and replaced its response with that of `rtm.connect`, so it has been removed from the library along with the `start_method` configuration.
+
 ### Upgrading to >= 1.0.0
 
 #### Deprecated Methods

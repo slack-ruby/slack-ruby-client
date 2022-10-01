@@ -15,6 +15,7 @@ RSpec.describe Slack::Web::Client do
         expect(client.user_agent).to eq Slack::Web::Config.user_agent
         expect(client.user_agent).to include Slack::VERSION
       end
+
       (Slack::Web::Config::ATTRIBUTES - [:logger]).each do |key|
         it "sets #{key}" do
           expect(client.send(key)).to eq Slack::Web::Config.send(key)
@@ -56,6 +57,7 @@ RSpec.describe Slack::Web::Client do
         it 'sets user-agent' do
           expect(client.user_agent).to eq 'custom/user-agent'
         end
+
         it 'creates a connection with the custom user-agent' do
           expect(client.send(:connection).headers).to eq(
             'Accept' => 'application/json; charset=utf-8',
@@ -76,6 +78,7 @@ RSpec.describe Slack::Web::Client do
         client = described_class.new
         expect(client.token).to eq 'global default'
       end
+
       context 'with web config' do
         before do
           described_class.configure do |config|
@@ -87,6 +90,7 @@ RSpec.describe Slack::Web::Client do
           client = described_class.new
           expect(client.token).to eq 'custom web token'
         end
+
         it 'overrides token to specific token' do
           client = described_class.new(token: 'local token')
           expect(client.token).to eq 'local token'
@@ -105,6 +109,7 @@ RSpec.describe Slack::Web::Client do
         it 'sets proxy' do
           expect(client.proxy).to eq 'http://localhost:8080'
         end
+
         it 'creates a connection with the proxy' do
           expect(client.send(:connection).proxy.uri.to_s).to eq 'http://localhost:8080'
         end
@@ -124,6 +129,7 @@ RSpec.describe Slack::Web::Client do
           expect(client.ca_path).to eq '/ca_path'
           expect(client.ca_file).to eq '/ca_file'
         end
+
         it 'creates a connection with ssl options' do
           ssl = client.send(:connection).ssl
           expect(ssl.ca_path).to eq '/ca_path'
@@ -145,6 +151,7 @@ RSpec.describe Slack::Web::Client do
         it 'sets logger' do
           expect(client.logger).to eq logger
         end
+
         it 'creates a connection with a logger' do
           expect(client.send(:connection).builder.handlers).to include ::Faraday::Response::Logger
         end
@@ -168,6 +175,7 @@ RSpec.describe Slack::Web::Client do
           it 'sets adapter' do
             expect(client.adapter).to eq adapter
           end
+
           it 'creates a connection with an adapter' do
             expect(client.send(:connection).adapter).to eq adapter_class
           end
@@ -188,6 +196,7 @@ RSpec.describe Slack::Web::Client do
           it 'sets adapter' do
             expect(client.adapter).to eq adapter
           end
+
           it 'creates a connection with an adapter' do
             expect(client.send(:connection).adapter).to eq adapter_class
           end
@@ -208,6 +217,7 @@ RSpec.describe Slack::Web::Client do
           expect(client.timeout).to eq 10
           expect(client.open_timeout).to eq 15
         end
+
         it 'creates a connection with timeout options' do
           conn = client.send(:connection)
           expect(conn.options.timeout).to eq 10
@@ -217,16 +227,16 @@ RSpec.describe Slack::Web::Client do
     end
 
     context 'per-request options' do
-      it 'applies timeout', vcr: { cassette_name: 'web/rtm_start', allow_playback_repeats: true } do
+      it 'applies timeout', vcr: { cassette_name: 'web/rtm_connect', allow_playback_repeats: true } do
         # reuse the same connection for the test, otherwise it creates a new one every time
         conn = client.send(:connection)
         expect(client).to receive(:connection).and_return(conn)
 
         # get the yielded request to reuse in the next call to
-        # rtm_start so that we can examine request.options later
+        # rtm.connect so that we can examine request.options later
         request = nil
         response = conn.post do |r|
-          r.path = 'rtm.start'
+          r.path = 'rtm.connect'
           r.headers = {
             'Accept' => ['application/json; charset=utf-8'],
             'Authorization' => ['Bearer <SLACK_API_TOKEN>']
@@ -236,7 +246,7 @@ RSpec.describe Slack::Web::Client do
 
         expect(conn).to receive(:post).and_yield(request).and_return(response)
 
-        client.rtm_start(request: { timeout: 3 })
+        client.rtm_connect(request: { timeout: 3 })
 
         expect(request.options.timeout).to eq 3
       end

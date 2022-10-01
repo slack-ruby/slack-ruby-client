@@ -304,4 +304,88 @@ http_interactions:
       encoding: UTF-8
       string: '{"ok":false,"error":"invalid_array_arg"}'
   recorded_at: Sat, 19 Jan 2019 21:25:48 GMT
-recorded_with: VCR 6.0.0
+- request:
+    method: post
+    uri: https://slack.com/api/rtm.connect
+    body:
+      encoding: UTF-8
+      string: presence_sub=true
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/2.0.0
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 25 Sep 2022 22:32:50 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - HHVM/4.153.1
+      Access-Control-Allow-Origin:
+      - "*"
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Backend:
+      - r
+      X-Slack-Unique-Id:
+      - YzDXEnlUBjX0uWkT8kmCzwAAABM
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Oauth-Scopes:
+      - identify,bot:basic
+      X-Accepted-Oauth-Scopes:
+      - rtm:stream,client
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 20417f9da55172a329704fca8e35f683
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '275'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '116'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-fbwt
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      Via:
+      - envoy-www-iad-twh3, envoy-edge-pdx-hvfy
+      X-Edge-Backend:
+      - envoy-www
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"url":"wss:\/\/wss-primary.slack.com\/websocket\/IDugmjBU5vPyDN1rGavpMHB1CdAznuJDyHl3pqAHz_DSflTYmCyuPIxH1vwqvz3aIXhyarUZMxyWiJD7zako2Wqc_poO8uiP3i6teabXYTA4vx4Hu2pa9k9PACV1apgYJFRU_iw4g2c5qeo=\/2","team":{"id":"T04KB5WQH","name":"dblock","domain":"dblockdotorg"},"self":{"id":"U0J1GAHN1","name":"travis-ci"}}'
+  recorded_at: Sun, 25 Sep 2022 22:32:50 GMT
+recorded_with: VCR 6.1.0

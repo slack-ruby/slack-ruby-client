@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
+RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' } do
   include_context 'connected client'
+  include_context 'loaded client'
 
   context 'channel' do
-    it 'sets channel data' do
-      expect(client.channels.count).to eq 156
-    end
     it 'channel_archive' do
       channel = client.channels['C0HNTD0CW']
       expect(channel.is_archived).to be false
@@ -19,6 +17,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(channel.is_archived).to be true
     end
+
     it 'channel_created' do
       expect(client.channels['C024BE91L']).to be_nil
       event = Slack::RealTime::Event.new(
@@ -26,7 +25,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         'channel' => {
           'id' => 'C024BE91L',
           'name' => 'fun',
-          'created' => 1_360_782_804,
+          'created' => 1360782804,
           'creator' => 'U04KB5WQR'
         }
       )
@@ -35,8 +34,9 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       expect(channel).not_to be_nil
       expect(channel.name).to eq 'fun'
       expect(channel.creator).to eq 'U04KB5WQR'
-      expect(channel.created).to eq 1_360_782_804
+      expect(channel.created).to eq 1360782804
     end
+
     it 'channel_deleted' do
       expect(client.channels['C0HLE0BBL']).not_to be_nil
       event = Slack::RealTime::Event.new(
@@ -46,6 +46,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(client.channels['C0HLE0BBL']).to be_nil
     end
+
     context 'channel_joined' do
       it 'creates channel' do
         expect(client.channels['CDEADBEEF']).to be_nil
@@ -61,6 +62,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
         expect(channel).not_to be_nil
         expect(channel.name).to eq 'beef'
       end
+
       it 'updates channel' do
         expect(client.channels['CDEADBEEF']).to be_nil
         client.channels['CDEADBEEF'] =
@@ -90,6 +92,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(channel.members).not_to include client.self.id
     end
+
     it 'channel_rename' do
       channel = client.channels['C0HLE0BBL']
       expect(channel.name).to eq 'gifs'
@@ -104,6 +107,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(channel.name).to eq 'updated'
     end
+
     it 'channel_unarchive' do
       channel = client.channels['C0HLE0BBL']
       expect(channel.is_archived).to be true

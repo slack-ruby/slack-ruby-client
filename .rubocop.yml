@@ -35,6 +35,10 @@ Style/Documentation:
 Style/ModuleFunction:
   Enabled: false
 
+Style/NumericLiterals:
+  Exclude:
+    - 'spec/**/*'
+
 RSpec/InstanceVariable:
   Enabled: false
 

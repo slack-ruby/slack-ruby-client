@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
+RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' } do
   include_context 'connected client'
+  include_context 'loaded client'
 
   context 'user' do
-    it 'combines user and self data on rtm.start' do
-      expect(client.users['U0J1GAHN1'].name).to eq 'travis-ci'
-      expect(client.users['U0J1GAHN1']['prefs']['push_sound']).to eq 'b2.mp3'
-    end
     it 'user_change' do
       expect(client.users['U07KECJ77'].name).to eq 'aws'
       event = Slack::RealTime::Event.new(
@@ -20,6 +17,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(client.users['U07KECJ77'].name).to eq 'renamed'
     end
+
     it 'team_join' do
       expect do
         event = Slack::RealTime::Event.new(
@@ -32,6 +30,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       end.to change(client.users, :count).by(1)
       expect(client.users['DEADBEEF'].name).to eq 'added'
     end
+
     it 'pref_change' do
       event = Slack::RealTime::Event.new(
         'type' => 'pref_change',
@@ -41,6 +40,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(client.self.prefs['push_sound']).to eq 'updated.mp3'
     end
+
     it 'presence_change' do
       expect(client.users['U07KECJ77'].presence).to eq 'away'
       event = Slack::RealTime::Event.new(
@@ -51,6 +51,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(client.users['U07KECJ77'].presence).to eq 'updated'
     end
+
     it 'manual_presence_change' do
       expect(client.self['presence']).to eq 'away'
       event = Slack::RealTime::Event.new(

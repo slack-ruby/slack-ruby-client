@@ -162,7 +162,7 @@ module Slack
       def restart_async
         logger.debug("#{self}##{__method__}")
         @socket.close
-        start = web_client.send(rtm_start_method, start_options)
+        start = web_client.rtm_connect(start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
         @store = @store_class.new(data) if @store_class
@@ -173,21 +173,11 @@ module Slack
       def build_socket
         raise ClientAlreadyStartedError if started?
 
-        start = web_client.send(rtm_start_method, start_options)
+        start = web_client.rtm_connect(start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
         @store = @store_class.new(data) if @store_class
         @socket = socket_class.new(@url, socket_options)
-      end
-
-      def rtm_start_method
-        if start_method
-          start_method
-        elsif @store_class && @store_class <= Slack::RealTime::Stores::Store
-          :rtm_start
-        else
-          :rtm_connect
-        end
       end
 
       def socket_options
