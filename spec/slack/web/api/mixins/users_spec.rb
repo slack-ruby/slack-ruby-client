@@ -28,9 +28,11 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
     it 'leaves users specified by ID alone' do
       expect(users.users_id(user: 'U123456')).to eq('ok' => true, 'user' => { 'id' => 'U123456' })
     end
+
     it 'translates a user that starts with a #' do
       expect(users.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
     end
+
     it 'fails with an exception' do
       expect { users.users_id(user: '@foo') }.to(
         raise_error(Slack::Web::Api::Errors::SlackError, 'user_not_found')

@@ -101,6 +101,7 @@ RSpec.describe Slack::Events::Request do
         expect(request).to be_valid
         expect(request).not_to be_expired
       end
+
       it 'does not raise an error and returns true' do
         expect(request.verify!).to be true
       end
@@ -115,6 +116,7 @@ RSpec.describe Slack::Events::Request do
         expect(request).to be_valid
         expect(request).to be_expired
       end
+
       it 'raises an error on verify!' do
         expect { request.verify! }.to raise_error Slack::Events::Request::TimestampExpired
       end
@@ -129,6 +131,7 @@ RSpec.describe Slack::Events::Request do
         expect(request).to be_valid
         expect(request).not_to be_expired
       end
+
       it 'does not raise an error on verify!' do
         expect(request.verify!).to be true
       end
@@ -143,6 +146,7 @@ RSpec.describe Slack::Events::Request do
         expect(request).to be_valid
         expect(request).to be_expired
       end
+
       it 'raises an error on verify!' do
         expect { request.verify! }.to raise_error Slack::Events::Request::TimestampExpired
       end

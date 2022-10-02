@@ -22,11 +22,13 @@ RSpec.describe Slack::Web::Api::Endpoints::Dialog do
           raise_error(ArgumentError, /Required arguments :dialog missing/)
         )
       end
+
       it 'requires trigger_id' do
         expect { client.dialog_open(dialog: []) }.to(
           raise_error(ArgumentError, /Required arguments :trigger_id missing/)
         )
       end
+
       it 'likes both dialog and trigger_id' do
         expect(client).to(
           receive(:post).with('dialog.open', hash_including(trigger_id: '123', dialog: '[]'))

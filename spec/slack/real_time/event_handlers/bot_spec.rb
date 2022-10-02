@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
+RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' } do
   include_context 'connected client'
 
   context 'bot' do
-    it 'sets bot data on rtm.start' do
-      expect(client.bots.count).to eq 83
-    end
     it 'bot_added' do
       expect do
         event = Slack::RealTime::Event.new(
@@ -27,19 +24,24 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       expect(bot['name']).to eq 'hugbot'
       expect(bot['icons']['image_48']).to eq 'https:\/\/slack.com\/path\/to\/hugbot_48.png'
     end
-    it 'bot_changed' do
-      expect do
-        event = Slack::RealTime::Event.new(
-          'type' => 'bot_changed',
-          'bot' => {
-            'id' => 'B0751JU2H',
-            'name' => 'hugbot'
-          }
-        )
-        client.send(:dispatch, event)
-      end.not_to change(client.bots, :count)
-      bot = client.bots['B0751JU2H']
-      expect(bot['name']).to eq 'hugbot'
+
+    context 'with bot loaded in the store' do
+      include_context 'loaded client'
+
+      it 'bot_changed' do
+        expect do
+          event = Slack::RealTime::Event.new(
+            'type' => 'bot_changed',
+            'bot' => {
+              'id' => 'B0751JU2H',
+              'name' => 'hugbot'
+            }
+          )
+          client.send(:dispatch, event)
+        end.not_to change(client.bots, :count)
+        bot = client.bots['B0751JU2H']
+        expect(bot['name']).to eq 'hugbot'
+      end
     end
   end
 end

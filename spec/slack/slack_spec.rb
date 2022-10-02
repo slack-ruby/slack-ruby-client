@@ -30,6 +30,7 @@ describe Slack do
       expect(output).to include 'POST https://slack.com/api/auth.test'
       expect(output).to include 'Status 200'
     end
+
     it 'requires --slack-api-token' do
       err = `"#{slack}" auth test 2>&1`
       expect(err).to(

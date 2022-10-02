@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } do
+RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' } do
   include_context 'connected client'
+  include_context 'loaded client'
 
   context 'group' do
     it 'sets group data' do
       expect(client.groups.count).to eq 1
     end
+
     it 'group_joined' do
       expect(client.groups['CDEADBEEF']).to be_nil
       event = Slack::RealTime::Event.new(
@@ -22,6 +24,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       expect(group).not_to be_nil
       expect(group.name).to eq 'beef'
     end
+
     it 'group_left' do
       group = client.groups['G0K7EV5A7']
       expect(group.members).to include client.self.id
@@ -32,6 +35,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(group.members).not_to include client.self.id
     end
+
     it 'group_archive' do
       group = client.groups['G0K7EV5A7']
       expect(group.is_archived).to be false
@@ -42,6 +46,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(group.is_archived).to be true
     end
+
     it 'group_unarchive' do
       group = client.groups['G0K7EV5A7']
       group.is_archived = true
@@ -52,6 +57,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(group.is_archived).to be false
     end
+
     it 'group_rename' do
       group = client.groups['G0K7EV5A7']
       expect(group.name).to eq 'mpdm-dblock--rubybot--player1-1'
@@ -66,6 +72,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(group.name).to eq 'updated'
     end
+
     it 'group_open' do
       group = client.groups['G0K7EV5A7']
       expect(group).not_to be_nil
@@ -76,6 +83,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_start' } 
       client.send(:dispatch, event)
       expect(group.is_open).to be true
     end
+
     it 'group_close' do
       group = client.groups['G0K7EV5A7']
       expect(group).not_to be_nil
