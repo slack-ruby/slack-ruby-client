@@ -3,6 +3,7 @@
 * [#416](https://github.com/slack-ruby/slack-ruby-client/pull/416): Removes default values for Faraday's SSL settings `ca_file` and `ca_path` - [@irphilli](https://github.com/irphilli).
 * [#417](https://github.com/slack-ruby/slack-ruby-client/pull/417): Raise rescuable errors - [@zachahn](https://github.com/zachahn).
 * [#419](https://github.com/slack-ruby/slack-ruby-client/pull/419): Use `rtm.connect` instead of `rtm.start` - [@kstole](https://github.com/kstole).
+* [#420](https://github.com/slack-ruby/slack-ruby-client/pull/420): Fix default store missing event hooks - [@kstole](https://github.com/kstole).
 * Your contribution here.
 
 ### 1.1.0 (2022/06/05)

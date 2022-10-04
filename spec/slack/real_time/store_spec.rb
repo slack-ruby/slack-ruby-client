@@ -9,4 +9,9 @@ RSpec.describe Slack::RealTime::Store do
     expect(store.team).to be_nil
     expect(store.teams.count).to eq 0
   end
+
+  it 'includes event handlers from superclass' do
+    Slack::RealTime::Stores::Store.on :channel_created, &proc {}
+    expect(described_class.events.key?('channel_created')).to be true
+  end
 end

@@ -159,18 +159,18 @@ RSpec.describe Slack::RealTime::Client do
       end
 
       describe '#run_handlers' do
-        describe 'empty events' do
+        context 'when store has no event hooks' do
           before do
-            @e = client.store.class.events
-            client.store.class.events = nil
+            @events = client.store.class.events.dup
+            client.store.class.events.clear
           end
 
           after do
-            client.store.class.events = @e
+            client.store.class.events.merge!(@events)
           end
 
-          it 'returns false when event is nil' do
-            expect(client.send(:run_handlers, 'example', {})).to be_nil
+          it 'returns empty array of handlers' do
+            expect(client.send(:run_handlers, 'example', {})).to be_empty
           end
         end
       end
