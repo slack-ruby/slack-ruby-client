@@ -11,12 +11,6 @@ module Slack
       include Api::Message
       include Api::Typing
 
-      @events = {}
-
-      class << self
-        attr_accessor :events
-      end
-
       attr_accessor :web_client, :store, :url, *Config::ATTRIBUTES
 
       protected :store_class, :store_class=
@@ -239,10 +233,8 @@ module Slack
       end
 
       def run_handlers(type, data)
-        return unless store.class.events
-
         handlers = store.class.events[type.to_s]
-        handlers&.each do |handler|
+        handlers.each do |handler|
           store.instance_exec(data, &handler)
         end
       rescue StandardError => e
