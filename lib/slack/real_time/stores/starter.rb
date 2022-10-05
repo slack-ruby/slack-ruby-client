@@ -13,6 +13,21 @@ module Slack
 
         ### RealTime Events
 
+        # A user's status has changed.
+        # @see https://api.slack.com/events/user_status_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_status_changed.json
+        # on :user_status_changed do |data|
+
+        # A user's profile data has changed.
+        # @see https://api.slack.com/events/user_profile_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_profile_changed.json
+        # on :user_profile_changed do |data|
+
+        # A user's huddle status has changed.
+        # @see https://api.slack.com/events/user_huddle_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_huddle_changed.json
+        # on :user_huddle_changed do |data|
+
         # A shared channel invite was sent to a Slack user.
         # @see https://api.slack.com/events/shared_channel_invite_received
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/shared_channel_invite_received.json
