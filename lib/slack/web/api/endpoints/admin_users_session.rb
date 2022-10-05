@@ -104,7 +104,7 @@ module Slack
           # Configure the user-level session settings—the session duration and what happens when the client closes—for one or more users.
           #
           # @option options [array] :user_ids
-          #   The list of user IDs to apply the session settings for.
+          #   The list of up to 1,000 user IDs to apply the session settings for.
           # @option options [boolean] :desktop_app_browser_quit
           #   Terminate the session when the client—either the desktop app or a browser window—is closed.
           # @option options [integer] :duration

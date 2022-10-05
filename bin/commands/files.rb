@@ -3,6 +3,18 @@
 
 desc 'Files methods.'
 command 'files' do |g|
+  g.desc 'Finishes an upload started with files.getUploadURLExternal'
+  g.long_desc %( Finishes an upload started with files.getUploadURLExternal )
+  g.command 'completeUploadExternal' do |c|
+    c.flag 'files', desc: 'Array of file ids and their corresponding (optional) titles.'
+    c.flag 'channel_id', desc: 'Channel ID where the file will be shared. If not specified the file will be private.'
+    c.flag 'initial_comment', desc: 'The message text introducing the file in specified channels.'
+    c.flag 'thread_ts', desc: "Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead."
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_completeUploadExternal(options))
+    end
+  end
+
   g.desc 'Deletes a file.'
   g.long_desc %( Deletes a file. )
   g.command 'delete' do |c|
@@ -20,6 +32,18 @@ command 'files' do |g|
     c.flag 'filetype', desc: 'New filetype of the file. See https://api.slack.com/types/file#file_types for a list of all supported types.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.files_edit(options))
+    end
+  end
+
+  g.desc 'Gets a URL for an edge external upload'
+  g.long_desc %( Gets a URL for an edge external upload )
+  g.command 'getUploadURLExternal' do |c|
+    c.flag 'filename', desc: 'Name of the file being uploaded.'
+    c.flag 'length', desc: 'Size in bytes of the file being uploaded.'
+    c.flag 'alt_txt', desc: 'Description of image for screen-reader.'
+    c.flag 'snippet_type', desc: 'Syntax type of the snippet being uploaded.'
+    c.action do |_global_options, options, _args|
+      puts JSON.dump($client.files_getUploadURLExternal(options))
     end
   end
 

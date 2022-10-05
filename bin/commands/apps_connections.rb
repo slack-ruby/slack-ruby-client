@@ -3,8 +3,8 @@
 
 desc 'AppsConnections methods.'
 command 'apps_connections' do |g|
-  g.desc 'Generate a temporary Socket Mode WebSocket URL that your app can connect to in order to receive events and interactive payloads over,'
-  g.long_desc %( Generate a temporary Socket Mode WebSocket URL that your app can connect to in order to receive events and interactive payloads over, )
+  g.desc 'Generate a temporary Socket Mode WebSocket URL that your app can connect to in order to receive events and interactive payloads over.'
+  g.long_desc %( Generate a temporary Socket Mode WebSocket URL that your app can connect to in order to receive events and interactive payloads over. )
   g.command 'open' do |c|
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.apps_connections_open(options))
