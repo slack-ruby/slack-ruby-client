@@ -1,9 +1,8 @@
 diff --git a/lib/slack/web/api/endpoints/chat.rb b/lib/slack/web/api/endpoints/chat.rb
-index d090ae2..50186d5 100644
+index 701cd1e..07acc40 100644
 --- a/lib/slack/web/api/endpoints/chat.rb
 +++ b/lib/slack/web/api/endpoints/chat.rb
-@@ -121,10 +121,22 @@ module Slack
-           # @see https://api.slack.com/methods/chat.postEphemeral
+@@ -122,9 +122,21 @@ module Slack
            # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
            def chat_postEphemeral(options = {})
              raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
@@ -26,7 +25,7 @@ index d090ae2..50186d5 100644
              post('chat.postEphemeral', options)
            end
  
-@@ -168,6 +179,19 @@ module Slack
+@@ -167,6 +179,19 @@ module Slack
            # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
            def chat_postMessage(options = {})
              raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
@@ -46,7 +45,7 @@ index d090ae2..50186d5 100644
              post('chat.postMessage', options)
            end
  
-@@ -257,8 +281,21 @@ module Slack
+@@ -268,8 +293,21 @@ module Slack
            # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
            def chat_update(options = {})
              raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
