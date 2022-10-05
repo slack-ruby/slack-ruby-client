@@ -35,8 +35,8 @@ command 'files' do |g|
     end
   end
 
-  g.desc 'Gets a URL for an edge external upload'
-  g.long_desc %( Gets a URL for an edge external upload )
+  g.desc 'Gets a URL for an edge external file upload'
+  g.long_desc %( Gets a URL for an edge external file upload )
   g.command 'getUploadURLExternal' do |c|
     c.flag 'filename', desc: 'Name of the file being uploaded.'
     c.flag 'length', desc: 'Size in bytes of the file being uploaded.'

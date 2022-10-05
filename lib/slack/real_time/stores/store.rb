@@ -55,119 +55,19 @@ module Slack
 
         ### RealTime Events
 
-        # A user's status has changed.
-        # @see https://api.slack.com/events/user_status_changed
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_status_changed.json
-        # on :user_status_changed do |data|
-
-        # A user's profile data has changed.
-        # @see https://api.slack.com/events/user_profile_changed
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_profile_changed.json
-        # on :user_profile_changed do |data|
-
-        # A user's huddle status has changed.
-        # @see https://api.slack.com/events/user_huddle_changed
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_huddle_changed.json
-        # on :user_huddle_changed do |data|
-
-        # A shared channel invite was sent to a Slack user.
-        # @see https://api.slack.com/events/shared_channel_invite_received
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/shared_channel_invite_received.json
-        # on :shared_channel_invite_received do |data|
-
-        # An enterprise grid migration has started on an external workspace..
-        # @see https://api.slack.com/events/external_org_migration_started
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_started.json
-        # on :external_org_migration_started do |data|
-
-        # An enterprise grid migration has finished on an external workspace..
-        # @see https://api.slack.com/events/external_org_migration_finished
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_finished.json
-        # on :external_org_migration_finished do |data|
-
-        # A private channel was deleted.
-        # @see https://api.slack.com/events/group_deleted
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_deleted.json
-        # on :group_deleted do |data|
-
-        # Determine the current presence status for a list of users.
-        # @see https://api.slack.com/events/presence_query
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_query.json
-        # on :presence_query do |data|
-
-        # The membership of an existing User Group has changed.
-        # @see https://api.slack.com/events/subteam_members_changed
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_members_changed.json
-        # on :subteam_members_changed do |data|
-
-        # Subscribe to presence events for the specified users.
-        # @see https://api.slack.com/events/presence_sub
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_sub.json
-        # on :presence_sub do |data|
-
-        # A user left a public or private channel.
-        # @see https://api.slack.com/events/member_left_channel
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/member_left_channel.json
-        # on :member_left_channel do |data|
-
-        # A user joined a public or private channel.
-        # @see https://api.slack.com/events/member_joined_channel
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/member_joined_channel.json
-        # on :member_joined_channel do |data|
-
-        # The server intends to close the connection soon..
-        # @see https://api.slack.com/events/goodbye
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/goodbye.json
-        # on :goodbye do |data|
-
-        # Verifies ownership of an Events API Request URL.
-        # @see https://api.slack.com/events/url_verification
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/url_verification.json
-        # on :url_verification do |data|
-
-        # A message was posted in a multiparty direct message channel.
-        # @see https://api.slack.com/events/message.mpim
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/message.mpim.json
-        # on :message.mpim do |data|
-
-        # A message was posted in a direct message channel.
-        # @see https://api.slack.com/events/message.im
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/message.im.json
-        # on :message.im do |data|
-
-        # A message was posted to a private channel.
-        # @see https://api.slack.com/events/message.groups
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/message.groups.json
-        # on :message.groups do |data|
-
-        # A message was posted to a channel.
-        # @see https://api.slack.com/events/message.channels
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/message.channels.json
-        # on :message.channels do |data|
-
-        # A direct message read marker was updated.
-        # @see https://api.slack.com/events/im_marked
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_marked.json
-        # on :im_marked do |data|
-
-        # Bulk updates were made to a DM channel's history.
-        # @see https://api.slack.com/events/im_history_changed
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_history_changed.json
-        # on :im_history_changed do |data|
-
         # The list of accounts a user is signed into has changed.
         # @see https://api.slack.com/events/accounts_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/accounts_changed.json
         # on :accounts_changed do |data|
 
-        # An integration bot was added.
+        # A bot user was added.
         # @see https://api.slack.com/events/bot_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/bot_added.json
         on :bot_added do |data|
           bots[data.bot.id] = Models::Bot.new(data.bot)
         end
 
-        # An integration bot was changed.
+        # A bot user was changed.
         # @see https://api.slack.com/events/bot_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/bot_changed.json
         on :bot_changed do |data|
@@ -175,7 +75,7 @@ module Slack
           bot&.merge!(data.bot)
         end
 
-        # A team channel was archived.
+        # A channel was archived.
         # @see https://api.slack.com/events/channel_archive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_archive.json
         on :channel_archive do |data|
@@ -183,7 +83,7 @@ module Slack
           channel.is_archived = true if channel
         end
 
-        # A team channel was created.
+        # A channel was created.
         # @see https://api.slack.com/events/channel_created
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_created.json
         on :channel_created do |data|
@@ -191,7 +91,7 @@ module Slack
           channels[channel.id] = channel
         end
 
-        # A team channel was deleted.
+        # A channel was deleted.
         # @see https://api.slack.com/events/channel_deleted
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_deleted.json
         on :channel_deleted do |data|
@@ -229,7 +129,7 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_marked.json
         # on :channel_marked do |data|
 
-        # A team channel was renamed.
+        # A channel was renamed.
         # @see https://api.slack.com/events/channel_rename
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_rename.json
         on :channel_rename do |data|
@@ -237,7 +137,7 @@ module Slack
           channel.name = data.channel.name if channel
         end
 
-        # A team channel was unarchived.
+        # A channel was unarchived.
         # @see https://api.slack.com/events/channel_unarchive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_unarchive.json
         on :channel_unarchive do |data|
@@ -245,7 +145,7 @@ module Slack
           channel.is_archived = false if channel
         end
 
-        # A team slash command has been added or changed.
+        # A slash command has been added or changed.
         # @see https://api.slack.com/events/commands_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/commands_changed.json
         # on :commands_changed do |data|
@@ -255,22 +155,32 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/dnd_updated.json
         # on :dnd_updated do |data|
 
-        # Do not Disturb settings changed for a team member.
+        # Do not Disturb settings changed for a member.
         # @see https://api.slack.com/events/dnd_updated_user
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/dnd_updated_user.json
         # on :dnd_updated_user do |data|
 
-        # The team email domain has changed.
+        # The workspace email domain has changed.
         # @see https://api.slack.com/events/email_domain_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/email_domain_changed.json
         on :email_domain_changed do |data|
           team.email_domain = data.email_domain
         end
 
-        # A team custom emoji has been added or changed.
+        # A custom emoji has been added or changed.
         # @see https://api.slack.com/events/emoji_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/emoji_changed.json
         # on :emoji_changed do |data|
+
+        # An enterprise grid migration has finished on an external workspace..
+        # @see https://api.slack.com/events/external_org_migration_finished
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_finished.json
+        # on :external_org_migration_finished do |data|
+
+        # An enterprise grid migration has started on an external workspace..
+        # @see https://api.slack.com/events/external_org_migration_started
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/external_org_migration_started.json
+        # on :external_org_migration_started do |data|
 
         # A file was changed.
         # @see https://api.slack.com/events/file_change
@@ -280,7 +190,7 @@ module Slack
         # A file comment was added.
         # @see https://api.slack.com/events/file_comment_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/file_comment_added.json
-        # on :file_comment_added do |data| do
+        # on :file_comment_added do |data|
 
         # A file comment was deleted.
         # @see https://api.slack.com/events/file_comment_deleted
@@ -302,11 +212,6 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/file_deleted.json
         # on :file_deleted do |data|
 
-        # A file was made private.
-        # @see https://api.slack.com/events/file_private
-        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/file_private.json
-        # on :file_private do |data|
-
         # A file was made public.
         # @see https://api.slack.com/events/file_public
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/file_public.json
@@ -322,7 +227,12 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/file_unshared.json
         # on :file_unshared do |data|
 
-        # A private group was archived.
+        # The server intends to close the connection soon..
+        # @see https://api.slack.com/events/goodbye
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/goodbye.json
+        # on :goodbye do |data|
+
+        # A private channel was archived.
         # @see https://api.slack.com/events/group_archive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_archive.json
         on :group_archive do |data|
@@ -330,26 +240,31 @@ module Slack
           channel.is_archived = true if channel
         end
 
-        # You closed a group channel.
+        # You closed a private channel.
         # @see https://api.slack.com/events/group_close
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_close.json
         on :group_close do |data|
           groups[data.channel].is_open = false
         end
 
-        # Bulk updates were made to a group's history.
+        # A private channel was deleted.
+        # @see https://api.slack.com/events/group_deleted
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_deleted.json
+        # on :group_deleted do |data|
+
+        # Bulk updates were made to a private channel's history.
         # @see https://api.slack.com/events/group_history_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_history_changed.json
         # on :group_history_changed do |data|
 
-        # You joined a private group.
+        # You joined a private channel.
         # @see https://api.slack.com/events/group_joined
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_joined.json
         on :group_joined do |data|
           groups[data.channel.id] = Models::Channel.new(data.channel)
         end
 
-        # You left a private group.
+        # You left a private channel.
         # @see https://api.slack.com/events/group_left
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_left.json
         on :group_left do |data|
@@ -357,19 +272,19 @@ module Slack
           channel.members.delete(self.self.id) if channel&.key?(:members)
         end
 
-        # A private group read marker was updated.
+        # A private channel read marker was updated.
         # @see https://api.slack.com/events/group_marked
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_marked.json
         # on :group_marked do |data|
 
-        # You opened a group channel.
+        # You created a group DM.
         # @see https://api.slack.com/events/group_open
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_open.json
         on :group_open do |data|
           groups[data.channel].is_open = true
         end
 
-        # A private group was renamed.
+        # A private channel was renamed.
         # @see https://api.slack.com/events/group_rename
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_rename.json
         on :group_rename do |data|
@@ -377,7 +292,7 @@ module Slack
           channel.name = data.channel.name if channel
         end
 
-        # A private group was unarchived.
+        # A private channel was unarchived.
         # @see https://api.slack.com/events/group_unarchive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_unarchive.json
         on :group_unarchive do |data|
@@ -385,7 +300,12 @@ module Slack
           channel.is_archived = false if channel
         end
 
-        # You closed a direct message channel.
+        # The client has successfully connected to the server.
+        # @see https://api.slack.com/events/hello
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/hello.json
+        # on :hello do |data|
+
+        # You closed a DM.
         # @see https://api.slack.com/events/im_close
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_close.json
         on :im_close do |data|
@@ -394,14 +314,14 @@ module Slack
           ims[data.channel].is_open = false
         end
 
-        # A direct message channel was created.
+        # A DM was created.
         # @see https://api.slack.com/events/im_created
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_created.json
         on :im_created do |data|
           ims[data.channel.id] = Models::Im.new(data.channel)
         end
 
-        # Bulk updates were made to a DM channel's history.
+        # Bulk updates were made to a DM's history.
         # @see https://api.slack.com/events/im_history_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_history_changed.json
         # on :im_history_changed do |data|
@@ -411,7 +331,7 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_marked.json
         # on :im_marked do |data|
 
-        # You opened a direct message channel.
+        # You opened a DM.
         # @see https://api.slack.com/events/im_open
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_open.json
         on :im_open do |data|
@@ -426,6 +346,16 @@ module Slack
         on :manual_presence_change do |data|
           self.self.presence = data.presence
         end
+
+        # A user joined a public channel, private channel or MPDM..
+        # @see https://api.slack.com/events/member_joined_channel
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/member_joined_channel.json
+        # on :member_joined_channel do |data|
+
+        # A user left a public or private channel.
+        # @see https://api.slack.com/events/member_left_channel
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/member_left_channel.json
+        # on :member_left_channel do |data|
 
         # A pin was added to a channel.
         # @see https://api.slack.com/events/pin_added
@@ -445,7 +375,7 @@ module Slack
           self.self.prefs[data.name] = data.value
         end
 
-        # A team member's presence changed.
+        # A member's presence changed.
         # @see https://api.slack.com/events/presence_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_change.json
         on :presence_change do |data|
@@ -453,12 +383,22 @@ module Slack
           user.presence = data.presence if user
         end
 
-        # A team member has added an emoji reaction to an item.
+        # Determine the current presence status for a list of users.
+        # @see https://api.slack.com/events/presence_query
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_query.json
+        # on :presence_query do |data|
+
+        # Subscribe to presence events for the specified users.
+        # @see https://api.slack.com/events/presence_sub
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/presence_sub.json
+        # on :presence_sub do |data|
+
+        # A member has added an emoji reaction to an item.
         # @see https://api.slack.com/events/reaction_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/reaction_added.json
         # on :reaction_added do |data|
 
-        # A team member removed an emoji reaction.
+        # A member removed an emoji reaction.
         # @see https://api.slack.com/events/reaction_removed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/reaction_removed.json
         # on :reaction_removed do |data|
@@ -468,37 +408,47 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/reconnect_url.json
         # on :reconnect_url do |data|
 
-        # A team member has starred an item.
+        # A shared channel invite was sent to a Slack user.
+        # @see https://api.slack.com/events/shared_channel_invite_received
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/shared_channel_invite_received.json
+        # on :shared_channel_invite_received do |data|
+
+        # A member has starred an item.
         # @see https://api.slack.com/events/star_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/star_added.json
         # on :star_added do |data|
 
-        # A team member removed a star.
+        # A member removed a star.
         # @see https://api.slack.com/events/star_removed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/star_removed.json
         # on :star_removed do |data|
 
-        # A user group has been added to the team.
+        # A User Group has been added to the workspace.
         # @see https://api.slack.com/events/subteam_created
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_created.json
         # on :subteam_created do |data|
 
-        # You have been added to a user group.
+        # The membership of an existing User Group has changed.
+        # @see https://api.slack.com/events/subteam_members_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_members_changed.json
+        # on :subteam_members_changed do |data|
+
+        # You have been added to a User Group.
         # @see https://api.slack.com/events/subteam_self_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_self_added.json
         # on :subteam_self_added do |data|
 
-        # You have been removed from a user group.
+        # You have been removed from a User Group.
         # @see https://api.slack.com/events/subteam_self_removed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_self_removed.json
         # on :subteam_self_removed do |data|
 
-        # An existing user group has been updated or its members changed.
+        # An existing User Group has been updated or its members changed.
         # @see https://api.slack.com/events/subteam_updated
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/subteam_updated.json
         # on :subteam_updated do |data|
 
-        # The team domain has changed.
+        # The workspace domain has changed.
         # @see https://api.slack.com/events/team_domain_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_domain_change.json
         on :team_domain_change do |data|
@@ -506,26 +456,26 @@ module Slack
           team.domain = data.domain
         end
 
-        # A new team member has joined.
+        # A new member has joined.
         # @see https://api.slack.com/events/team_join
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_join.json
         on :team_join do |data|
           users[data.user.id] = Models::User.new(data.user)
         end
 
-        # The team is being migrated between servers.
+        # The workspace is being migrated between servers.
         # @see https://api.slack.com/events/team_migration_started
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_migration_started.json
         # on :team_migration_started do |data|
 
-        # The team billing plan has changed.
+        # The account billing plan has changed.
         # @see https://api.slack.com/events/team_plan_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_plan_change.json
         on :team_plan_change do |data|
           team.plan = data.plan
         end
 
-        # A team preference has been updated.
+        # A preference has been updated.
         # @see https://api.slack.com/events/team_pref_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_pref_change.json
         on :team_pref_change do |data|
@@ -533,34 +483,49 @@ module Slack
           team.prefs[data.name] = data.value
         end
 
-        # Team profile fields have been updated.
+        # The workspace profile fields have been updated.
         # @see https://api.slack.com/events/team_profile_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_profile_change.json
         # on :team_profile_change do |data|
 
-        # Team profile fields have been deleted.
+        # The workspace profile fields have been deleted.
         # @see https://api.slack.com/events/team_profile_delete
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_profile_delete.json
         # on :team_profile_delete do |data|
 
-        # Team profile fields have been reordered.
+        # The workspace profile fields have been reordered.
         # @see https://api.slack.com/events/team_profile_reorder
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_profile_reorder.json
         # on :team_profile_reorder do |data|
 
-        # The team name has changed.
+        # The workspace name has changed.
         # @see https://api.slack.com/events/team_rename
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_rename.json
         on :team_rename do |data|
           team.name = data.name
         end
 
-        # A team member's data has changed.
+        # A member's data has changed.
         # @see https://api.slack.com/events/user_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_change.json
         on :user_change do |data|
           users[data.user.id] = Models::User.new(data.user)
         end
+
+        # A user's huddle status has changed.
+        # @see https://api.slack.com/events/user_huddle_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_huddle_changed.json
+        # on :user_huddle_changed do |data|
+
+        # A user's profile data has changed.
+        # @see https://api.slack.com/events/user_profile_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_profile_changed.json
+        # on :user_profile_changed do |data|
+
+        # A user's status has changed.
+        # @see https://api.slack.com/events/user_status_changed
+        # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_status_changed.json
+        # on :user_status_changed do |data|
 
         # A channel member is typing a message.
         # @see https://api.slack.com/events/user_typing
