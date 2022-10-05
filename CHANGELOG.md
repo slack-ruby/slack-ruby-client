@@ -4,6 +4,8 @@
 * [#417](https://github.com/slack-ruby/slack-ruby-client/pull/417): Raise rescuable errors - [@zachahn](https://github.com/zachahn).
 * [#419](https://github.com/slack-ruby/slack-ruby-client/pull/419): Use `rtm.connect` instead of `rtm.start` - [@kstole](https://github.com/kstole).
 * [#420](https://github.com/slack-ruby/slack-ruby-client/pull/420): Fix default store missing event hooks - [@kstole](https://github.com/kstole).
+* [#421](https://github.com/slack-ruby/slack-ruby-client/pull/421): Added `admin_audit_anomaly_allow_getItem`, `admin_audit_anomaly_allow_updateItem`, `files_completeUploadExternal`, `files_getUploadURLExternal` - [@kstole](https://github.com/kstole).
+* [#421](https://github.com/slack-ruby/slack-ruby-client/pull/421): Raise error for mutually exclusive required options in views methods - [@kstole](https://github.com/kstole).
 * Your contribution here.
 
 ### 1.1.0 (2022/06/05)
