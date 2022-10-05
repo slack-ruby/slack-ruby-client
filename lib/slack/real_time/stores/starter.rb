@@ -1,14 +1,15 @@
 # frozen_string_literal: true
+
 module Slack
   module RealTime
     module Stores
-      # Only stores initial information.
+      # Stores only basic team and self info
       class Starter < Base
         attr_reader :self, :team
 
-        def initialize(attrs)
+        def initialize(attrs, _options = {})
           @team = Models::Team.new(attrs.team)
-          @self = Models::Team.new(attrs.self)
+          @self = Models::User.new(attrs.self)
         end
 
         ### RealTime Events
@@ -268,7 +269,10 @@ module Slack
         # You have updated your preferences.
         # @see https://api.slack.com/events/pref_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/pref_change.json
-        # on :pref_change do |data|
+        on :pref_change do |data|
+          self.self.prefs ||= {}
+          self.self.prefs[data.name] = data.value
+        end
 
         # A member's presence changed.
         # @see https://api.slack.com/events/presence_change

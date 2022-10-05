@@ -35,7 +35,7 @@ Create a new App under [https://api.slack.com/apps](https://api.slack.com/apps).
 
 On the next screen, note the API token.
 
-To run [the example in examples/hi_real_time](examples/hi_real_time/hi.rb), open a terminal, cd into _examples/hi_real_time_, run `bundle install`, followed by `SLACK_API_TOKEN=<your API token> bundle exec ruby hi.rb`.
+To run [the example in examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb), open a terminal, cd into _examples/hi_real_time_and_web_, run `bundle install`, followed by `SLACK_API_TOKEN=<your API token> bundle exec ruby hi.rb`.
 
 ## Contribute Code
 

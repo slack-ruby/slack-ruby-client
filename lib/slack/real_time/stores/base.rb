@@ -5,6 +5,16 @@ module Slack
     module Stores
       # Doesn't store anything.
       class Base
+        CACHES = %i[
+          teams
+          users
+          bots
+          public_channels
+          private_channels
+          ims
+          mpims
+        ].freeze
+
         @events = Hash.new { |h, k| h[k] = [] }
 
         class << self
@@ -20,7 +30,7 @@ module Slack
           end
         end
 
-        attr_accessor :users, :bots, :channels, :groups, :teams, :ims
+        attr_accessor(*CACHES)
 
         def self
           nil
@@ -30,7 +40,7 @@ module Slack
           nil
         end
 
-        def initialize(_attrs); end
+        def initialize(_attrs, _options = {}); end
       end
     end
   end

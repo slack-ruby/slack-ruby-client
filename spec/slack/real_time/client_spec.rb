@@ -272,28 +272,32 @@ RSpec.describe Slack::RealTime::Client do
           expect(client.self.id).to eq 'U0J1GAHN1'
         end
 
-        it 'no users' do
-          expect(client.users).to be_nil
-        end
-
         it 'no teams' do
           expect(client.teams).to be_nil
         end
 
-        it 'no channels' do
-          expect(client.channels).to be_nil
-        end
-
-        it 'no ims' do
-          expect(client.ims).to be_nil
+        it 'no users' do
+          expect(client.users).to be_nil
         end
 
         it 'no bots' do
           expect(client.bots).to be_nil
         end
 
-        it 'no groups' do
-          expect(client.groups).to be_nil
+        it 'no public channels' do
+          expect(client.public_channels).to be_nil
+        end
+
+        it 'no private channels' do
+          expect(client.private_channels).to be_nil
+        end
+
+        it 'no ims' do
+          expect(client.ims).to be_nil
+        end
+
+        it 'no mpims' do
+          expect(client.mpims).to be_nil
         end
 
         it 'includes team name in to_s' do
@@ -389,7 +393,7 @@ RSpec.describe Slack::RealTime::Client do
       end
 
       it 'sets default store_class' do
-        expect(client.send(:store_class)).to eq Slack::RealTime::Store
+        expect(client.send(:store_class)).to eq Slack::RealTime::Stores::Starter
       end
 
       (Slack::RealTime::Config::ATTRIBUTES - %i[logger store_class token]).each do |key|
@@ -541,7 +545,7 @@ RSpec.describe Slack::RealTime::Client do
     end
 
     context 'store_class' do
-      context 'starter' do
+      context 'when configured with Starter class' do
         before do
           described_class.configure do |config|
             config.store_class = Slack::RealTime::Stores::Starter
@@ -549,9 +553,9 @@ RSpec.describe Slack::RealTime::Client do
         end
 
         describe '#initialize' do
-          it 'can be overriden explicitly' do
-            client = described_class.new(store_class: Slack::RealTime::Store)
-            expect(client.send(:store_class)).to eq Slack::RealTime::Store
+          it 'can override the configured store class' do
+            client = described_class.new(store_class: Slack::RealTime::Stores::Store)
+            expect(client.send(:store_class)).to eq Slack::RealTime::Stores::Store
           end
 
           it 'sets store_class' do
