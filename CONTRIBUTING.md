@@ -82,7 +82,7 @@ The broad steps are:
 2. Make a change to a generated file, for example `lib/slack/web/api/endpoints/chat.rb`.
 3. Generate a patch:
     ```
-    git diff --no-color HEAD lib/slack/web/api/endpoints/chat.rb > lib/slack/web/api/patches/chat.1.patch
+    git diff --no-color HEAD lib/slack/web/api/endpoints/chat.rb > lib/slack/web/api/patches/chat.added-support.patch
     ```
 4. Run `rake slack:api:update` to ensure that the patch is cleanly applied. Implement a test for the added or modified functionality and commit the patch file.
 
@@ -90,7 +90,8 @@ The broad steps are:
 
 The auto-generated method files may drift overtime e.g. new arguments may be added or descriptions changed. Since previous patches were based on the older auto-generated files, git may be unable to apply them to the new files. Resolving them requires some good ol' splicing:
 1. Run `rake slack:api:update SKIP_PATCH=true` to create the raw auto-generated files. Commit the files that you are updating, so we can run `git diff` later.
-2. Go through the old patches for the files (e.g. in `lib/slack/web/api/patches/chat.1.patch`), copying code into the new files.
+2. Go through the old patches for the files (e.g. in `lib/slack/web/api/patches/chat.added-support.patch`), copying code into the new files.
+    - Run `git apply --reject path/to/patch-file.patch` to see hunks that couldn't be applied.
 3. Continue with Step 2 [above](#patching-slack-web-api).
 
 

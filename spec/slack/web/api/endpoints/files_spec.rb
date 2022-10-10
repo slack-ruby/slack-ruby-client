@@ -5,6 +5,11 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Files do
   let(:client) { Slack::Web::Client.new }
+  context 'files_completeUploadExternal' do
+    it 'requires files' do
+      expect { client.files_completeUploadExternal }.to raise_error ArgumentError, /Required arguments :files missing/
+    end
+  end
   context 'files_delete' do
     it 'requires file' do
       expect { client.files_delete }.to raise_error ArgumentError, /Required arguments :file missing/
@@ -16,6 +21,14 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
     it 'requires title' do
       expect { client.files_edit(file: %q[F2147483862]) }.to raise_error ArgumentError, /Required arguments :title missing/
+    end
+  end
+  context 'files_getUploadURLExternal' do
+    it 'requires filename' do
+      expect { client.files_getUploadURLExternal(length: %q[]) }.to raise_error ArgumentError, /Required arguments :filename missing/
+    end
+    it 'requires length' do
+      expect { client.files_getUploadURLExternal(filename: %q[]) }.to raise_error ArgumentError, /Required arguments :length missing/
     end
   end
   context 'files_info' do

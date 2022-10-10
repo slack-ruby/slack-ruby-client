@@ -39,7 +39,7 @@ command 'admin_users' do |g|
   g.command 'list' do |c|
     c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
     c.flag 'limit', desc: 'Limit for how many users to be retrieved per page.'
-    c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
+    c.flag 'team_id', desc: 'The ID (T1234) of the workspace. The team_id is required if you use an org-level token.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_users_list(options))
     end

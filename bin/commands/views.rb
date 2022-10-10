@@ -6,8 +6,9 @@ command 'views' do |g|
   g.desc 'Open a view for a user.'
   g.long_desc %( Open a view for a user. )
   g.command 'open' do |c|
-    c.flag 'trigger_id', desc: 'Exchange a trigger to post to the user.'
     c.flag 'view', desc: 'A view payload. This must be a JSON-encoded string.'
+    c.flag 'trigger_id', desc: 'Exchange a trigger to post to the user.'
+    c.flag 'interactivity_pointer', desc: 'Exchange an interactivity pointer to post to the user.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.views_open(options))
     end
@@ -27,8 +28,9 @@ command 'views' do |g|
   g.desc 'Push a view onto the stack of a root view.'
   g.long_desc %( Push a view onto the stack of a root view. )
   g.command 'push' do |c|
-    c.flag 'trigger_id', desc: 'Exchange a trigger to post to the user.'
     c.flag 'view', desc: 'A view payload. This must be a JSON-encoded string.'
+    c.flag 'trigger_id', desc: 'Exchange a trigger to post to the user.'
+    c.flag 'interactivity_pointer', desc: 'Exchange an interactivity pointer to post to the user.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.views_push(options))
     end

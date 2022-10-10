@@ -6,6 +6,7 @@ require_relative 'endpoints/admin_apps'
 require_relative 'endpoints/admin_apps_approved'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
+require_relative 'endpoints/admin_audit_anomaly_allow'
 require_relative 'endpoints/admin_auth_policy'
 require_relative 'endpoints/admin_barriers'
 require_relative 'endpoints/admin_conversations'
@@ -79,6 +80,7 @@ module Slack
         include AdminAppsApproved
         include AdminAppsRequests
         include AdminAppsRestricted
+        include AdminAuditAnomalyAllow
         include AdminAuthPolicy
         include AdminBarriers
         include AdminConversations

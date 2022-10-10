@@ -9,15 +9,17 @@ module Slack
           #
           # Open a view for a user.
           #
-          # @option options [string] :trigger_id
-          #   Exchange a trigger to post to the user.
           # @option options [view as string] :view
           #   A view payload. This must be a JSON-encoded string.
+          # @option options [string] :trigger_id
+          #   Exchange a trigger to post to the user.
+          # @option options [string] :interactivity_pointer
+          #   Exchange an interactivity pointer to post to the user.
           # @see https://api.slack.com/methods/views.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.open.json
           def views_open(options = {})
-            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
+            raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)
@@ -51,15 +53,17 @@ module Slack
           #
           # Push a view onto the stack of a root view.
           #
-          # @option options [string] :trigger_id
-          #   Exchange a trigger to post to the user.
           # @option options [view as string] :view
           #   A view payload. This must be a JSON-encoded string.
+          # @option options [string] :trigger_id
+          #   Exchange a trigger to post to the user.
+          # @option options [string] :interactivity_pointer
+          #   Exchange an interactivity pointer to post to the user.
           # @see https://api.slack.com/methods/views.push
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.push.json
           def views_push(options = {})
-            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
+            raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)
@@ -83,6 +87,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.update.json
           def views_update(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
+            raise ArgumentError, 'One of :external_id, :view_id is required' unless options[:external_id].nil? ^ options[:view_id].nil?
             if options.key?(:view)
               view = options[:view]
               view = JSON.dump(view) unless view.is_a?(String)

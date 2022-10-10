@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AppsConnections
           #
-          # Generate a temporary Socket Mode WebSocket URL that your app can connect to in order to receive events and interactive payloads over,
+          # Generate a temporary Socket Mode WebSocket URL that your app can connect to in order to receive events and interactive payloads over.
           #
           # @see https://api.slack.com/methods/apps.connections.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.connections/apps.connections.open.json

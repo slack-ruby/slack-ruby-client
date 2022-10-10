@@ -71,10 +71,11 @@ command 'conversations' do |g|
   g.command 'history' do |c|
     c.flag 'channel', desc: 'Conversation ID to fetch history for.'
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
-    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results only when either timestamp is specified.'
-    c.flag 'latest', desc: 'End of time range of messages to include in results. Default is the current time.'
+    c.flag 'include_all_metadata', desc: 'Return all metadata associated with this message.'
+    c.flag 'inclusive', desc: 'Include messages with oldest or latest timestamps in results. Ignored unless either timestamp is specified.'
+    c.flag 'latest', desc: 'Only messages before this Unix timestamp will be included in results. Default is the current time.'
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
-    c.flag 'oldest', desc: 'Start of time range of messages to include in results.'
+    c.flag 'oldest', desc: 'Only messages after this Unix timestamp will be included in results.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.conversations_history(options))
     end
@@ -213,10 +214,11 @@ command 'conversations' do |g|
     c.flag 'channel', desc: 'Conversation ID to fetch thread from.'
     c.flag 'ts', desc: "Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message."
     c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
-    c.flag 'inclusive', desc: 'Include messages with latest or oldest timestamp in results only when either timestamp is specified.'
-    c.flag 'latest', desc: 'End of time range of messages to include in results.'
+    c.flag 'include_all_metadata', desc: 'Return all metadata associated with this message.'
+    c.flag 'inclusive', desc: 'Include messages with oldest or latest timestamps in results. Ignored unless either timestamp is specified.'
+    c.flag 'latest', desc: 'Only messages before this Unix timestamp will be included in results.'
     c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
-    c.flag 'oldest', desc: 'Start of time range of messages to include in results.'
+    c.flag 'oldest', desc: 'Only messages after this Unix timestamp will be included in results.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.conversations_replies(options))
     end

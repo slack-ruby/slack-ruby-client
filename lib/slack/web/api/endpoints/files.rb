@@ -7,6 +7,24 @@ module Slack
       module Endpoints
         module Files
           #
+          # Finishes an upload started with files.getUploadURLExternal
+          #
+          # @option options [array] :files
+          #   Array of file ids and their corresponding (optional) titles.
+          # @option options [Object] :channel_id
+          #   Channel ID where the file will be shared. If not specified the file will be private.
+          # @option options [string] :initial_comment
+          #   The message text introducing the file in specified channels.
+          # @option options [string] :thread_ts
+          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead.
+          # @see https://api.slack.com/methods/files.completeUploadExternal
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.completeUploadExternal.json
+          def files_completeUploadExternal(options = {})
+            raise ArgumentError, 'Required arguments :files missing' if options[:files].nil?
+            post('files.completeUploadExternal', options)
+          end
+
+          #
           # Deletes a file.
           #
           # @option options [file] :file
@@ -33,6 +51,25 @@ module Slack
             raise ArgumentError, 'Required arguments :title missing' if options[:title].nil?
             logger.warn('The files.edit method is undocumented.')
             post('files.edit', options)
+          end
+
+          #
+          # Gets a URL for an edge external upload
+          #
+          # @option options [string] :filename
+          #   Name of the file being uploaded.
+          # @option options [integer] :length
+          #   Size in bytes of the file being uploaded.
+          # @option options [string] :alt_txt
+          #   Description of image for screen-reader.
+          # @option options [string] :snippet_type
+          #   Syntax type of the snippet being uploaded.
+          # @see https://api.slack.com/methods/files.getUploadURLExternal
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.getUploadURLExternal.json
+          def files_getUploadURLExternal(options = {})
+            raise ArgumentError, 'Required arguments :filename missing' if options[:filename].nil?
+            raise ArgumentError, 'Required arguments :length missing' if options[:length].nil?
+            post('files.getUploadURLExternal', options)
           end
 
           #

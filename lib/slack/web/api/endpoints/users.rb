@@ -132,7 +132,7 @@ module Slack
           #   X coordinate of top-left corner of crop box.
           # @option options [string] :crop_y
           #   Y coordinate of top-left corner of crop box.
-          # @option options [string] :image
+          # @option options [Object] :image
           #   File contents via multipart/form-data.
           # @see https://api.slack.com/methods/users.setPhoto
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPhoto.json

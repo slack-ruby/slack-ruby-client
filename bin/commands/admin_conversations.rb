@@ -63,10 +63,10 @@ command 'admin_conversations' do |g|
     end
   end
 
-  g.desc "This API endpoint can be used by any admin to get a channel's retention policy."
-  g.long_desc %( This API endpoint can be used by any admin to get a channel's retention policy. )
+  g.desc "This API endpoint can be used by any admin to get a conversation's retention policy."
+  g.long_desc %( This API endpoint can be used by any admin to get a conversation's retention policy. )
   g.command 'getCustomRetention' do |c|
-    c.flag 'channel_id', desc: 'The channel to get the retention policy for.'
+    c.flag 'channel_id', desc: 'The conversation to get the retention policy for.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_getCustomRetention(options))
     end
@@ -93,10 +93,10 @@ command 'admin_conversations' do |g|
     end
   end
 
-  g.desc "This API endpoint can be used by any admin to remove a channel's retention policy."
-  g.long_desc %( This API endpoint can be used by any admin to remove a channel's retention policy. )
+  g.desc "This API endpoint can be used by any admin to remove a conversation's retention policy."
+  g.long_desc %( This API endpoint can be used by any admin to remove a conversation's retention policy. )
   g.command 'removeCustomRetention' do |c|
-    c.flag 'channel_id', desc: 'The channel to set the retention policy for.'
+    c.flag 'channel_id', desc: 'The conversation to set the retention policy for.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_removeCustomRetention(options))
     end
@@ -115,13 +115,14 @@ command 'admin_conversations' do |g|
   g.desc 'Search for public or private channels in an Enterprise organization.'
   g.long_desc %( Search for public or private channels in an Enterprise organization. )
   g.command 'search' do |c|
+    c.flag 'connected_team_ids', desc: 'Array of encoded team IDs, signifying the external orgs to search through.'
     c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
     c.flag 'limit', desc: 'Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.'
     c.flag 'query', desc: 'Name of the the channel to query by.'
     c.flag 'search_channel_types', desc: 'The type of channel to include or exclude in the search. For example private will search private channels, while private_exclude will exclude them. For a full list of types, check the Types section.'
     c.flag 'sort', desc: 'Possible values are relevant (search ranking based on what we think is closest), name (alphabetical), member_count (number of users in the channel), and created (date channel was created). You can optionally pair this with the sort_dir arg to change how it is sorted.'
     c.flag 'sort_dir', desc: 'Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).'
-    c.flag 'team_ids', desc: 'Comma separated string of team IDs, signifying the workspaces to search through.'
+    c.flag 'team_ids', desc: 'Comma separated string of team IDs, signifying the internal workspaces to search through.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_search(options))
     end
@@ -137,11 +138,11 @@ command 'admin_conversations' do |g|
     end
   end
 
-  g.desc "This API endpoint can be used by any admin to set a channel's retention policy."
-  g.long_desc %( This API endpoint can be used by any admin to set a channel's retention policy. )
+  g.desc "This API endpoint can be used by any admin to set a conversation's retention policy."
+  g.long_desc %( This API endpoint can be used by any admin to set a conversation's retention policy. )
   g.command 'setCustomRetention' do |c|
-    c.flag 'channel_id', desc: 'The channel to set the retention policy for.'
-    c.flag 'duration_days', desc: 'The message retention duration in days to set for this channel.'
+    c.flag 'channel_id', desc: 'The conversation to set the retention policy for.'
+    c.flag 'duration_days', desc: 'The message retention duration in days to set for this conversation.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.admin_conversations_setCustomRetention(options))
     end

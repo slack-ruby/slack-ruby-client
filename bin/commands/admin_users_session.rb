@@ -68,7 +68,7 @@ command 'admin_users_session' do |g|
   g.desc 'Configure the user-level session settings—the session duration and what happens when the client closes—for one or more users.'
   g.long_desc %( Configure the user-level session settings—the session duration and what happens when the client closes—for one or more users. )
   g.command 'setSettings' do |c|
-    c.flag 'user_ids', desc: 'The list of user IDs to apply the session settings for.'
+    c.flag 'user_ids', desc: 'The list of up to 1,000 user IDs to apply the session settings for.'
     c.flag 'desktop_app_browser_quit', desc: 'Terminate the session when the client—either the desktop app or a browser window—is closed.'
     c.flag 'duration', desc: "The session duration, in seconds. The minimum value is 28800, which represents 8 hours; the max value is 315569520 or 10 years (that's a long Slack session)."
     c.action do |_global_options, options, _args|

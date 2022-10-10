@@ -72,6 +72,8 @@ module Slack
           #   Bookmark to remove.
           # @option options [string] :channel_id
           #   Channel to remove bookmark.
+          # @option options [string] :quip_section_id
+          #   Quip section ID to unbookmark.
           # @see https://api.slack.com/methods/bookmarks.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.remove.json
           def bookmarks_remove(options = {})

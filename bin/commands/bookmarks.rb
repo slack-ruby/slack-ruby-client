@@ -45,6 +45,7 @@ command 'bookmarks' do |g|
   g.command 'remove' do |c|
     c.flag 'bookmark_id', desc: 'Bookmark to remove.'
     c.flag 'channel_id', desc: 'Channel to remove bookmark.'
+    c.flag 'quip_section_id', desc: 'Quip section ID to unbookmark.'
     c.action do |_global_options, options, _args|
       puts JSON.dump($client.bookmarks_remove(options))
     end

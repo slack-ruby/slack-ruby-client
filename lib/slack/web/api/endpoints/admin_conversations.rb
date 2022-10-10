@@ -92,10 +92,10 @@ module Slack
           end
 
           #
-          # This API endpoint can be used by any admin to get a channel's retention policy.
+          # This API endpoint can be used by any admin to get a conversation's retention policy.
           #
           # @option options [string] :channel_id
-          #   The channel to get the retention policy for.
+          #   The conversation to get the retention policy for.
           # @see https://api.slack.com/methods/admin.conversations.getCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.getCustomRetention.json
           def admin_conversations_getCustomRetention(options = {})
@@ -141,10 +141,10 @@ module Slack
           end
 
           #
-          # This API endpoint can be used by any admin to remove a channel's retention policy.
+          # This API endpoint can be used by any admin to remove a conversation's retention policy.
           #
           # @option options [string] :channel_id
-          #   The channel to set the retention policy for.
+          #   The conversation to set the retention policy for.
           # @see https://api.slack.com/methods/admin.conversations.removeCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.removeCustomRetention.json
           def admin_conversations_removeCustomRetention(options = {})
@@ -170,6 +170,8 @@ module Slack
           #
           # Search for public or private channels in an Enterprise organization.
           #
+          # @option options [array] :connected_team_ids
+          #   Array of encoded team IDs, signifying the external orgs to search through.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit
@@ -183,7 +185,7 @@ module Slack
           # @option options [string] :sort_dir
           #   Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).
           # @option options [array] :team_ids
-          #   Comma separated string of team IDs, signifying the workspaces to search through.
+          #   Comma separated string of team IDs, signifying the internal workspaces to search through.
           # @see https://api.slack.com/methods/admin.conversations.search
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.search.json
           def admin_conversations_search(options = {})
@@ -212,12 +214,12 @@ module Slack
           end
 
           #
-          # This API endpoint can be used by any admin to set a channel's retention policy.
+          # This API endpoint can be used by any admin to set a conversation's retention policy.
           #
           # @option options [string] :channel_id
-          #   The channel to set the retention policy for.
+          #   The conversation to set the retention policy for.
           # @option options [integer] :duration_days
-          #   The message retention duration in days to set for this channel.
+          #   The message retention duration in days to set for this conversation.
           # @see https://api.slack.com/methods/admin.conversations.setCustomRetention
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setCustomRetention.json
           def admin_conversations_setCustomRetention(options = {})

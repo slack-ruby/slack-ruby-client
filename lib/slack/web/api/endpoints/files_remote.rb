@@ -17,9 +17,9 @@ module Slack
           #   Title of the file being shared.
           # @option options [string] :filetype
           #   type of file.
-          # @option options [string] :indexable_file_contents
+          # @option options [Object] :indexable_file_contents
           #   A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
-          # @option options [string] :preview_image
+          # @option options [Object] :preview_image
           #   Preview of the document via multipart/form-data.
           # @see https://api.slack.com/methods/files.remote.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.add.json
@@ -109,9 +109,9 @@ module Slack
           #   Specify a file by providing its ID.
           # @option options [string] :filetype
           #   type of file.
-          # @option options [string] :indexable_file_contents
+          # @option options [Object] :indexable_file_contents
           #   File containing contents that can be used to improve searchability for the remote file.
-          # @option options [string] :preview_image
+          # @option options [Object] :preview_image
           #   Preview of the document via multipart/form-data.
           # @option options [string] :title
           #   Title of the file being shared.

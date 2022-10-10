@@ -152,17 +152,19 @@ module Slack
           # @option options [string] :text
           #   The formatted text of the message to be published. If blocks are included, this will become the fallback text used in notifications.
           # @option options [boolean] :as_user
-          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See authorship below.
+          #   Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See authorship below.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [string] :icon_url
           #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [boolean] :link_names
-          #   Find and link channel names and usernames.
+          #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
+          # @option options [string] :metadata
+          #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [boolean] :mrkdwn
           #   Disable Slack markup parsing by setting to false. Enabled by default.
           # @option options [string] :parse
-          #   Change how messages are treated. Defaults to none. See below.
+          #   Change how messages are treated. See below.
           # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
           # @option options [string] :thread_ts
@@ -203,15 +205,17 @@ module Slack
           # @option options [string] :text
           #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [boolean] :as_user
-          #   Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See chat.postMessage.
+          #   Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [boolean] :link_names
-          #   Find and link channel names and usernames.
+          #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
+          # @option options [string] :metadata
+          #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [string] :parse
-          #   Change how messages are treated. Defaults to none. See chat.postMessage.
+          #   Change how messages are treated. See chat.postMessage.
           # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
           # @option options [string] :thread_ts
@@ -277,6 +281,8 @@ module Slack
           #   Array of new file ids that will be sent with this message.
           # @option options [boolean] :link_names
           #   Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.
+          # @option options [string] :metadata
+          #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. If you don't include this field, the message's previous metadata will be retained. To remove previous metadata, include an empty object for this field. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [string] :parse
           #   Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.
           # @option options [boolean] :reply_broadcast
