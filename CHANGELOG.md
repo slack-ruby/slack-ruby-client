@@ -6,6 +6,7 @@
 * [#420](https://github.com/slack-ruby/slack-ruby-client/pull/420): Fix default store missing event hooks - [@kstole](https://github.com/kstole).
 * [#421](https://github.com/slack-ruby/slack-ruby-client/pull/421): Added `admin_audit_anomaly_allow_getItem`, `admin_audit_anomaly_allow_updateItem`, `files_completeUploadExternal`, `files_getUploadURLExternal` - [@kstole](https://github.com/kstole).
 * [#421](https://github.com/slack-ruby/slack-ruby-client/pull/421): Raise error for mutually exclusive required options in views methods - [@kstole](https://github.com/kstole).
+* [#424](https://github.com/slack-ruby/slack-ruby-client/pull/424): Updated real_time.rake to remove outdated event hooks and organize alphabetically - [@kstole](https://github.com/kstole).
 * Your contribution here.
 
 ### 1.1.0 (2022/06/05)

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-# largely from https://github.com/aki017/slack-ruby-gem
+
 require 'json-schema'
 require 'erubis'
 require 'active_support'
 require 'active_support/core_ext'
 
+# largely from https://github.com/aki017/slack-ruby-gem
 namespace :slack do
   namespace :web do
     namespace :api do

@@ -54,7 +54,7 @@ module Slack
           end
 
           #
-          # Gets a URL for an edge external upload
+          # Gets a URL for an edge external file upload
           #
           # @option options [string] :filename
           #   Name of the file being uploaded.
