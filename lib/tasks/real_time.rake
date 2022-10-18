@@ -56,7 +56,7 @@ namespace :slack do
           end
 
           # Render latest event documentation with current hook implementations
-          rendered_hooks = events.map do |event_name, event_data|
+          rendered_hooks = events.sort.map do |event_name, event_data|
             STDOUT.write(hooks.key?(event_name) ? '.' : 'x')
 
             hook_template.result(

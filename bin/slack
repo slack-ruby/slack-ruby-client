@@ -40,7 +40,7 @@ pre do |global_options, _command, options, _args|
   end
 
   # remove any nil values from options
-  options.select! { |_k, v| v }
+  options.compact!
 
   true
 end

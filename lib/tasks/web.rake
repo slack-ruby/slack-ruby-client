@@ -40,10 +40,16 @@ namespace :slack do
           result[prefix][name] = parsed
         end
 
+        # Start with a fresh slate
+        Dir.glob('lib/slack/web/api/endpoints/*.rb').each { |file| File.delete(file) }
+        Dir.glob('spec/slack/web/api/endpoints/*_spec.rb').each { |file| File.delete(file) }
+        Dir.glob('bin/commands/*.rb').each { |file| File.delete(file) }
+
         method_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method.erb'))
         method_spec_template =
           Erubis::Eruby.new(File.read('lib/slack/web/api/templates/method_spec.erb'))
         command_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/command.erb'))
+
         data.each.with_index(1) do |(group, names), index|
           printf "%2d/%2d %10s %s\n", index, data.size, group, names.keys
           # method

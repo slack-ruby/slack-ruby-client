@@ -10,6 +10,7 @@
 * [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Changed default store to `Slack::RealTime::Stores::Starter` and removed `Slack::RealTime::Store` - [@kstole](https://github.com/kstole).
 * [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Replaced `channels` and `groups` caches with `public_channels` and `private_channels` - [@kstole](https://github.com/kstole).
 * [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Added configurable `hello` hook to initialize `Slack::RealTime::Stores::Store` upon successful connection - [@kstole](https://github.com/kstole).
+* [#425](https://github.com/slack-ruby/slack-ruby-client/pull/425): Updated web.rake to remove outdated endpoints and commands - [@kstole](https://github.com/kstole).
 * Your contribution here.
 
 ### 1.1.0 (2022/06/05)
