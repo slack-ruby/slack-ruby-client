@@ -1,19 +1,21 @@
 name: Integration Tests
-on: [push]
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         entry:
-          - { ruby: 2.7.1, concurrency: async-websocket }
+          - { ruby: 2.7, concurrency: async-websocket }
     name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Ruby
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.entry.ruby }}
+          bundler-cache: true
       - name: Run Tests
         env:
           CONCURRENCY: ${{ matrix.entry.concurrency }}
@@ -22,4 +24,3 @@ jobs:
         run: |
           bundle install
           bundle exec rake
-        

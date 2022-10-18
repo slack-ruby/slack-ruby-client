@@ -14,11 +14,13 @@ jobs:
           - { ruby: jruby-head, ignore: true }
     name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Ruby
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.entry.ruby }}
+          bundler-cache: true
       - name: Set Concurrency
         run: |
           if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
