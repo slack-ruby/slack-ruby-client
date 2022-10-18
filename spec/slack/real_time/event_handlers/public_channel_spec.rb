@@ -5,9 +5,9 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
   include_context 'connected client'
   include_context 'loaded client'
 
-  context 'channel' do
+  context 'public channel' do
     it 'channel_archive' do
-      channel = client.channels['C0HNTD0CW']
+      channel = client.public_channels['C0HNTD0CW']
       expect(channel.is_archived).to be false
       event = Slack::RealTime::Event.new(
         'type' => 'channel_archive',
@@ -19,7 +19,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
     end
 
     it 'channel_created' do
-      expect(client.channels['C024BE91L']).to be_nil
+      expect(client.public_channels['C024BE91L']).to be_nil
       event = Slack::RealTime::Event.new(
         'type' => 'channel_created',
         'channel' => {
@@ -30,7 +30,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
         }
       )
       client.send(:dispatch, event)
-      channel = client.channels['C024BE91L']
+      channel = client.public_channels['C024BE91L']
       expect(channel).not_to be_nil
       expect(channel.name).to eq 'fun'
       expect(channel.creator).to eq 'U04KB5WQR'
@@ -38,18 +38,18 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
     end
 
     it 'channel_deleted' do
-      expect(client.channels['C0HLE0BBL']).not_to be_nil
+      expect(client.public_channels['C0HLE0BBL']).not_to be_nil
       event = Slack::RealTime::Event.new(
         'type' => 'channel_deleted',
         'channel' => 'C0HLE0BBL'
       )
       client.send(:dispatch, event)
-      expect(client.channels['C0HLE0BBL']).to be_nil
+      expect(client.public_channels['C0HLE0BBL']).to be_nil
     end
 
     context 'channel_joined' do
       it 'creates channel' do
-        expect(client.channels['CDEADBEEF']).to be_nil
+        expect(client.public_channels['CDEADBEEF']).to be_nil
         event = Slack::RealTime::Event.new(
           'type' => 'channel_joined',
           'channel' => {
@@ -58,14 +58,14 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
           }
         )
         client.send(:dispatch, event)
-        channel = client.channels['CDEADBEEF']
+        channel = client.public_channels['CDEADBEEF']
         expect(channel).not_to be_nil
         expect(channel.name).to eq 'beef'
       end
 
       it 'updates channel' do
-        expect(client.channels['CDEADBEEF']).to be_nil
-        client.channels['CDEADBEEF'] =
+        expect(client.public_channels['CDEADBEEF']).to be_nil
+        client.public_channels['CDEADBEEF'] =
           Slack::RealTime::Models::Channel.new('id' => 'CDEADBEEF', name: 'beef')
         event = Slack::RealTime::Event.new(
           'type' => 'channel_joined',
@@ -76,14 +76,14 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
           }
         )
         client.send(:dispatch, event)
-        channel = client.channels['CDEADBEEF']
+        channel = client.public_channels['CDEADBEEF']
         expect(channel).not_to be_nil
         expect(channel.updated).to be true
       end
     end
 
     it 'channel_left' do
-      channel = client.channels['C0JHNAB5H']
+      channel = client.public_channels['C0JHNAB5H']
       expect(channel.members).to include client.self.id
       event = Slack::RealTime::Event.new(
         'type' => 'channel_left',
@@ -94,7 +94,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
     end
 
     it 'channel_rename' do
-      channel = client.channels['C0HLE0BBL']
+      channel = client.public_channels['C0HLE0BBL']
       expect(channel.name).to eq 'gifs'
       event = Slack::RealTime::Event.new(
         'type' => 'channel_rename',
@@ -109,7 +109,7 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
     end
 
     it 'channel_unarchive' do
-      channel = client.channels['C0HLE0BBL']
+      channel = client.public_channels['C0HLE0BBL']
       expect(channel.is_archived).to be true
       event = Slack::RealTime::Event.new(
         'type' => 'channel_unarchive',

@@ -38,11 +38,12 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
       - [Rate Limiting](#rate-limiting)
       - [Other Errors](#other-errors)
   - [RealTime Client](#realtime-client)
-    - [Slack::RealTime::Stores::Store](#slackrealtimestoresstore)
-    - [Slack::RealTime::Stores::Starter](#slackrealtimestoresstarter)
-  - [Configuring Slack::RealTime::Client](#configuring-slackrealtimeclient)
-    - [Caveats](#caveats)
-      - [websocket_ping](#websocket_ping)
+    - [Configuring Slack::RealTime::Client](#configuring-slackrealtimeclient)
+      - [Caveats](#caveats)
+        - [websocket_ping](#websocket_ping)
+    - [RealTime Store](#realtime-store)
+      - [Slack::RealTime::Stores::Starter](#slackrealtimestoresstarter)
+      - [Slack::RealTime::Stores::Store](#slackrealtimestoresstore)
   - [Combining RealTime and Web Clients](#combining-realtime-and-web-clients)
     - [Concurrency](#concurrency)
       - [Async](#async)
@@ -372,32 +373,7 @@ You can send a ping with `ping`.
 client.ping
 ```
 
-By default, the RealTime client exposes and maintains a local store upon a successful connection.
-
-property | description
----------|-------------------------------------------------------------------------------------------------
-url      | A WebSocket Message Server URL.
-self     | The authenticated bot user.
-team     | Details on the authenticated user's team.
-users    | A hash of user objects by user ID.
-channels | A hash of channel objects, one for every channel visible to the authenticated user.
-groups   | A hash of group objects, one for every group the authenticated user is in.
-ims      | A hash of IM objects, one for every direct message channel visible to the authenticated user.
-bots     | Details of the integrations set up on this team.
-
-It also tracks changes, such as users being renamed, added or deleted, therefore `client.users` is always up-to-date.
-
-Tracking with a local store can be disabled with `Slack::RealTime::Client.new(store_class: nil)`. Other stores are also available.
-
-#### Slack::RealTime::Stores::Store
-
-The default store that tracks all changes.
-
-#### Slack::RealTime::Stores::Starter
-
-A smaller store that only stores and tracks information about the bot user, but not channels, users, groups, ims or bots.
-
-### Configuring Slack::RealTime::Client
+#### Configuring Slack::RealTime::Client
 
 You can configure the RealTime client either globally or via the initializer.
 
@@ -418,19 +394,21 @@ setting         | description
 token           | Slack API token.
 websocket_ping  | How long the socket can be idle before sending a ping message to confirm it's still connected, default is 30.
 websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
-store_class     | Local store class name, default is an in-memory `Slack::RealTime::Stores::Store`.
 start_options   | Options to pass to `rtm.connect`, default is `{ request: { timeout: 180 } }`.
+store_class     | Local store class, default is an in-memory `Slack::RealTime::Stores::Starter`.
+store_options   | Options to initialize the store, default is `{}`.
 logger          | Optional `Logger` instance that logs RealTime requests and socket data.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.connect](https://api.slack.com/methods/rtm.connect). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
 
-See a fully working example in [examples/hi_real_time](examples/hi_real_time/hi.rb).
+See a fully working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb).
 
-![](examples/hi_real_time/hi.gif)
+![](examples/hi_real_time_and_web/hi.gif)
 
-#### Caveats
+##### Caveats
 
-##### `websocket_ping`
+###### `websocket_ping`
+
 This setting determines how long the socket can be idle before sending a ping message to confirm it's still connected.
 
 It's important to note that if a ping message was sent and no response was received within the amount of time specified in `websocket_ping` the client will attempt to reestablish it's connection to the message server.
@@ -438,6 +416,55 @@ It's important to note that if a ping message was sent and no response was recei
 Note that the ping may take between `websocket_ping` and `websocket_ping * 3/2` seconds to actually trigger when there is no activity on the socket. This is because the timer that checks whether to ping is triggered at every `websocket_ping / 2` interval.
 
 To disable this feature set `websocket_ping` to 0.
+
+#### RealTime Store
+
+The RealTime client exposes and maintains a local store upon successful connection.
+Event hooks keep the store's cached data up-to-date.
+
+Tracking with a local store can be disabled with `Slack::RealTime::Client.new(store_class: nil)`.
+
+##### `Slack::RealTime::Stores::Starter`
+
+A small store that only caches and tracks data returned in the [rtm.connect](https://api.slack.com/methods/rtm.connect#examples) response.
+This store provides `self` and `team` for accessing the limited data about the authenticated user and its workspace, but does not cache other users or bots, channels, or direct messages.
+
+##### `Slack::RealTime::Stores::Store`
+
+A more complete store that tracks most changes visible to the authenticated user.
+
+You can see all of the cache types in the table below (each is a hash indexed by its objects' `id`).
+
+Cache              | Description
+-------------------|-------------------------------------------------------------------------------------------------
+`teams`            | Workspaces (teams). Will likely contain only one `team`.
+`users`            | All [user](https://api.slack.com/types/user) objects, including `self`.
+`bots`             | All [bot users](https://api.slack.com/bot-users) (from Slack Apps and legacy custom integrations).
+`public_channels`  | Public [conversation](https://api.slack.com/types/conversation) objects.
+`private_channels` | Private [conversation](https://api.slack.com/types/conversation) and [group](https://api.slack.com/types/group) objects with the authenticated user as a member.
+`ims`              | Visible [im](https://api.slack.com/types/im) objects, direct message channels with the authenticated user.
+`mpims`            | Visible [mpim](https://api.slack.com/types/mpim) objects, multiparty direct message channels that include the authenticated user.
+
+By default, none of these caches are initialized with data beyond what is returned from [rtm.connect](https://api.slack.com/methods/rtm.connect#examples), same as [Slack::RealTime::Stores::Starter](#slackrealtimestoresstarter).
+When configured, this store initializes its caches by making additional calls to Web API methods upon successful connection to the RTM API (i.e. "hello" message).
+
+Configure by specifying which caches to fetch:
+```ruby
+Slack::RealTime::Client.configure do |config|
+  config.store_class = Slack::RealTime::Stores::Store
+  config.store_options = { caches: %i[teams users public_channels private_channels ims] }
+end
+```
+or with the `:all` option:
+```ruby
+Slack::RealTime::Client.configure do |config|
+  config.store_class = Slack::RealTime::Stores::Store
+  config.store_options = { caches: :all }
+end
+```
+
+Note: For `teams`, this makes a single call to `team.info`, while for `users` and all conversation-like types, this makes paginated calls to `users.list` and `conversations.list` respectively.
+Only `bots` requires a separate call for every bot user, so may be slow if your workplace has a lot of bot users.
 
 ### Combining RealTime and Web Clients
 

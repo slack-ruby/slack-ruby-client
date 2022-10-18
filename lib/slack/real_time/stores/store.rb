@@ -1,56 +1,58 @@
 # frozen_string_literal: true
+
 module Slack
   module RealTime
     module Stores
-      # Stores everything.
+      # Full store with initialization logic
       class Store < Base
+        CONVERSATION_TYPES = {
+          public_channels: 'public_channel',
+          private_channels: 'private_channel',
+          ims: 'im',
+          mpims: 'mpim'
+        }.freeze
+
+        attr_reader :caches
+
+        def initialize(attrs, options = {})
+          @teams = {}
+          @users = {}
+          @bots = {}
+          @public_channels = {}
+          @private_channels = {}
+          @ims = {}
+          @mpims = {}
+
+          if attrs.team
+            @team_id = attrs.team.id
+            @teams[@team_id] = Models::Team.new(attrs.team)
+          end
+
+          if attrs.self
+            @self_id = attrs.self.id
+            @users[@self_id] = Models::User.new(attrs.self)
+          end
+
+          @caches =
+            if options[:caches].is_a?(Array) || options[:caches].nil?
+              caches = options[:caches].to_a.map(&:to_sym)
+              unknown_caches = caches - CACHES
+              raise ArgumentError, "Unknown caches: #{unknown_caches.join(', ')}" unless unknown_caches.empty?
+
+              Set.new(caches).freeze
+            elsif options[:caches] == :all
+              Set.new(CACHES).freeze
+            else
+              raise ArgumentError, 'Unexpected value for option `caches`. Expects :all or an array of caches'
+            end
+        end
+
         def self
           users[@self_id]
         end
 
         def team
           teams[@team_id]
-        end
-
-        def initialize(attrs)
-          if attrs.team
-            @team_id = attrs.team.id
-            @teams = { @team_id => Slack::RealTime::Models::Team.new(attrs.team) }
-          else
-            @teams = {}
-          end
-
-          if attrs.self
-            @self_id = attrs.self.id
-            @users = { @self_id => Slack::RealTime::Models::User.new(attrs.self) }
-          else
-            @users = {}
-          end
-
-          attrs.users&.each do |data|
-            user = Models::User.new(data)
-            @users[data.id] = @users.key?(data.id) ? @users[data.id].merge(user) : user
-          end
-
-          @channels = {}
-          attrs.channels&.each do |data|
-            @channels[data.id] = Models::Channel.new(data)
-          end
-
-          @bots = {}
-          attrs.bots&.each do |data|
-            @bots[data.id] = Models::Bot.new(data)
-          end
-
-          @groups = {}
-          attrs.groups&.each do |data|
-            @groups[data.id] = Models::Group.new(data)
-          end
-
-          @ims = {}
-          attrs.ims&.each do |data|
-            @ims[data.id] = Models::Im.new(data)
-          end
         end
 
         ### RealTime Events
@@ -64,7 +66,8 @@ module Slack
         # @see https://api.slack.com/events/bot_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/bot_added.json
         on :bot_added do |data|
-          bots[data.bot.id] = Models::Bot.new(data.bot)
+          bot = Models::Bot.new(data.bot)
+          bots[bot.id] = bot
         end
 
         # A bot user was changed.
@@ -79,7 +82,7 @@ module Slack
         # @see https://api.slack.com/events/channel_archive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_archive.json
         on :channel_archive do |data|
-          channel = channels[data.channel]
+          channel = public_channels[data.channel]
           channel.is_archived = true if channel
         end
 
@@ -88,14 +91,14 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_created.json
         on :channel_created do |data|
           channel = Models::Channel.new(data.channel)
-          channels[channel.id] = channel
+          public_channels[channel.id] = channel
         end
 
         # A channel was deleted.
         # @see https://api.slack.com/events/channel_deleted
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_deleted.json
         on :channel_deleted do |data|
-          channels.delete(data.channel)
+          public_channels.delete(data.channel)
         end
 
         # Bulk updates were made to a channel's history.
@@ -108,11 +111,20 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_joined.json
         on :channel_joined do |data|
           channel_id = data.channel.id
-          channel = channels[channel_id]
-          if channel
-            channel.merge!(data.channel)
+          if data.channel.is_private?
+            channel = private_channels[channel_id]
+            if channel
+              channel.merge!(data.channel)
+            else
+              private_channels[channel_id] = Models::Channel.new(data.channel)
+            end
           else
-            channels[channel_id] = Models::Channel.new(data.channel)
+            channel = public_channels[channel_id]
+            if channel
+              channel.merge!(data.channel)
+            else
+              public_channels[channel_id] = Models::Channel.new(data.channel)
+            end
           end
         end
 
@@ -120,8 +132,8 @@ module Slack
         # @see https://api.slack.com/events/channel_left
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_left.json
         on :channel_left do |data|
-          channel = channels[data.channel]
-          channel.members.delete(self.self.id) if channel.key? :members
+          channel = public_channels[data.channel]
+          channel&.members&.delete(self.self.id)
         end
 
         # Your channel read marker was updated.
@@ -133,15 +145,15 @@ module Slack
         # @see https://api.slack.com/events/channel_rename
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_rename.json
         on :channel_rename do |data|
-          channel = channels[data.channel.id]
-          channel.name = data.channel.name if channel
+          channel = public_channels[data.channel.id]
+          channel&.merge!(data.channel)
         end
 
         # A channel was unarchived.
         # @see https://api.slack.com/events/channel_unarchive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/channel_unarchive.json
         on :channel_unarchive do |data|
-          channel = channels[data.channel]
+          channel = public_channels[data.channel]
           channel.is_archived = false if channel
         end
 
@@ -153,12 +165,17 @@ module Slack
         # Do not Disturb settings changed for the current user.
         # @see https://api.slack.com/events/dnd_updated
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/dnd_updated.json
-        # on :dnd_updated do |data|
+        on :dnd_updated do |data|
+          self.dnd_status = data.dnd_status
+        end
 
         # Do not Disturb settings changed for a member.
         # @see https://api.slack.com/events/dnd_updated_user
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/dnd_updated_user.json
-        # on :dnd_updated_user do |data|
+        on :dnd_updated_user do |data|
+          user = users[data.user]
+          user.dnd_status = data.dnd_status if user
+        end
 
         # The workspace email domain has changed.
         # @see https://api.slack.com/events/email_domain_changed
@@ -236,7 +253,7 @@ module Slack
         # @see https://api.slack.com/events/group_archive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_archive.json
         on :group_archive do |data|
-          channel = groups[data.channel]
+          channel = private_channels[data.channel]
           channel.is_archived = true if channel
         end
 
@@ -244,13 +261,16 @@ module Slack
         # @see https://api.slack.com/events/group_close
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_close.json
         on :group_close do |data|
-          groups[data.channel].is_open = false
+          channel = private_channels[data.channel]
+          channel.is_open = false if channel
         end
 
         # A private channel was deleted.
         # @see https://api.slack.com/events/group_deleted
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_deleted.json
-        # on :group_deleted do |data|
+        on :group_deleted do |data|
+          private_channels.delete(data.channel)
+        end
 
         # Bulk updates were made to a private channel's history.
         # @see https://api.slack.com/events/group_history_changed
@@ -261,15 +281,16 @@ module Slack
         # @see https://api.slack.com/events/group_joined
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_joined.json
         on :group_joined do |data|
-          groups[data.channel.id] = Models::Channel.new(data.channel)
+          channel = Models::Channel.new(data.channel)
+          private_channels[channel.id] = channel
         end
 
         # You left a private channel.
         # @see https://api.slack.com/events/group_left
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_left.json
         on :group_left do |data|
-          channel = groups[data.channel]
-          channel.members.delete(self.self.id) if channel&.key?(:members)
+          # Deleting because we can't access a private channel when we're not a member
+          private_channels.delete(data.channel)
         end
 
         # A private channel read marker was updated.
@@ -281,29 +302,80 @@ module Slack
         # @see https://api.slack.com/events/group_open
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_open.json
         on :group_open do |data|
-          groups[data.channel].is_open = true
+          channel = private_channels[data.channel]
+          channel.is_open = true if channel
         end
 
         # A private channel was renamed.
         # @see https://api.slack.com/events/group_rename
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_rename.json
         on :group_rename do |data|
-          channel = groups[data.channel.id]
-          channel.name = data.channel.name if channel
+          channel = private_channels[data.channel.id]
+          channel&.merge!(data.channel)
         end
 
         # A private channel was unarchived.
         # @see https://api.slack.com/events/group_unarchive
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/group_unarchive.json
         on :group_unarchive do |data|
-          channel = groups[data.channel]
+          channel = private_channels[data.channel]
           channel.is_archived = false if channel
         end
 
         # The client has successfully connected to the server.
         # @see https://api.slack.com/events/hello
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/hello.json
-        # on :hello do |data|
+        on :hello do |_data, client|
+          # rubocop:disable Metrics/BlockNesting
+          if caches.include?(:teams)
+            team_info = client.web_client.team_info
+            team = Models::Team.new(team_info.team)
+            teams[team.id] = teams.key?(team.id) ? teams[team.id].merge(team) : team
+          end
+
+          if caches.include?(:users) || caches.include?(:bots)
+            client.web_client.users_list do |users_list|
+              users_list.members.each do |user_data|
+                if caches.include?(:users)
+                  user = Models::User.new(user_data)
+                  users[user.id] = users.key?(user.id) ? users[user.id].merge(user) : user
+                end
+
+                next unless user_data.is_bot? && caches.include?(:bots)
+
+                bot_info = client.web_client.bots_info(bot: user_data.profile.bot_id)
+                bot = Models::Bot.new(bot_info.bot)
+                bots[bot.id] = bots.key?(bot.id) ? bots[bot.id].merge(bot) : bot
+              end
+            end
+          end
+
+          if caches.include?(:public_channels) || caches.include?(:private_channels) ||
+             caches.include?(:ims) || caches.include?(:mpims)
+            types = CONVERSATION_TYPES.slice(*caches).values.join(',')
+            client.web_client.conversations_list(types: types) do |conversations|
+              conversations.channels.each do |channel_data|
+                if channel_data.is_mpim?
+                  mpim = Models::Mpim.new(channel_data)
+                  mpims[mpim.id] = mpims.key?(mpim.id) ? mpims[mpim.id].merge(mpim) : mpim
+                elsif channel_data.is_im?
+                  im = Models::Im.new(channel_data)
+                  ims[im.id] = ims.key?(im.id) ? ims[im.id].merge(im) : im
+                elsif channel_data.is_channel? || channel_data.is_group?
+                  channel = Models::Channel.new(channel_data)
+                  if channel.is_private?
+                    private_channels[channel.id] =
+                      private_channels.key?(channel.id) ? private_channels[channel.id].merge(channel) : channel
+                  else
+                    public_channels[channel.id] =
+                      public_channels.key?(channel.id) ? public_channels[channel.id].merge(channel) : channel
+                  end
+                end
+              end
+            end
+          end
+          # rubocop:enable Metrics/BlockNesting
+        end
 
         # You closed a DM.
         # @see https://api.slack.com/events/im_close
@@ -318,7 +390,8 @@ module Slack
         # @see https://api.slack.com/events/im_created
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/im_created.json
         on :im_created do |data|
-          ims[data.channel.id] = Models::Im.new(data.channel)
+          im = Models::Im.new(data.channel)
+          ims[im.id] = im
         end
 
         # Bulk updates were made to a DM's history.
@@ -350,12 +423,21 @@ module Slack
         # A user joined a public channel, private channel or MPDM..
         # @see https://api.slack.com/events/member_joined_channel
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/member_joined_channel.json
-        # on :member_joined_channel do |data|
+        on :member_joined_channel do |data|
+          channel = public_channels[data.channel] || private_channels[data.channel]
+          if channel
+            channel.members ||= Set.new
+            channel.members << data.user
+          end
+        end
 
         # A user left a public or private channel.
         # @see https://api.slack.com/events/member_left_channel
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/member_left_channel.json
-        # on :member_left_channel do |data|
+        on :member_left_channel do |data|
+          channel = public_channels[data.channel] || private_channels[data.channel]
+          channel&.members&.delete(data.user)
+        end
 
         # A pin was added to a channel.
         # @see https://api.slack.com/events/pin_added
@@ -460,7 +542,8 @@ module Slack
         # @see https://api.slack.com/events/team_join
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/team_join.json
         on :team_join do |data|
-          users[data.user.id] = Models::User.new(data.user)
+          user = Models::User.new(data.user)
+          users[user.id] = user
         end
 
         # The workspace is being migrated between servers.
@@ -509,23 +592,27 @@ module Slack
         # @see https://api.slack.com/events/user_change
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_change.json
         on :user_change do |data|
-          users[data.user.id] = Models::User.new(data.user)
+          user = Models::User.new(data.user)
+          users[user.id] = user
         end
 
         # A user's huddle status has changed.
         # @see https://api.slack.com/events/user_huddle_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_huddle_changed.json
         # on :user_huddle_changed do |data|
+        # (handled by :user_change)
 
         # A user's profile data has changed.
         # @see https://api.slack.com/events/user_profile_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_profile_changed.json
         # on :user_profile_changed do |data|
+        # (handled by :user_change)
 
         # A user's status has changed.
         # @see https://api.slack.com/events/user_status_changed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/user_status_changed.json
         # on :user_status_changed do |data|
+        # (handled by :user_change)
 
         # A channel member is typing a message.
         # @see https://api.slack.com/events/user_typing

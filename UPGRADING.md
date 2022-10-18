@@ -20,7 +20,14 @@ or
 client = Slack::Web::Client.new(ca_file: OpenSSL::X509::DEFAULT_CERT_FILE, ca_path: OpenSSL::X509::DEFAULT_CERT_DIR)
 ```
 
-Slack has deprecated the `rtm.start` method and replaced its response with that of `rtm.connect`, so it has been removed from the library along with the `start_method` configuration.
+#### RealTime Stores
+
+Slack has deprecated the `rtm.start` method and [replaced its response](https://api.slack.com/changelog/2021-10-rtm-start-to-stop) with that of `rtm.connect`, so it has been removed from the library along with the `start_method` configuration ([#419](https://github.com/slack-ruby/slack-ruby-client/pull/419)) and `Slack::RealTime::Stores::Starter` is now the default store.
+If your app still relies on the old `rtm.start` behavior, you can achieve a similar result with `Slack::RealTime::Stores::Store`, which initializes itself using Web API methods (see [README](README.md#slackrealtimestoresstore)).
+
+The names of the Store caches `channels` and `groups` have been changed to `public_channels` and `private_channels` to reflect their true meaning.
+This is consistent with the [Slack Web API](https://api.slack.com/methods/conversations.list#arg_types), although [event types for private channels](https://api.slack.com/events?query=group) still use the term `group`.
+In both cases, private channels consist of both [conversation types](https://api.slack.com/types/conversation) (`id: 'C...'', is_channel: true, is_group: false, is_private: true`) and [group types](https://api.slack.com/types/group) (`id: 'G...', is_channel: false, is_group: true, is_private: true`) depending whether the object was created before or after March 2021.
 
 ### Upgrading to >= 1.0.0
 

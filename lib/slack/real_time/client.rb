@@ -13,7 +13,7 @@ module Slack
 
       attr_accessor :web_client, :store, :url, *Config::ATTRIBUTES
 
-      protected :store_class, :store_class=
+      protected :store_class, :store_class=, :store_options, :store_options=
 
       def initialize(options = {})
         @callbacks = Hash.new { |h, k| h[k] = [] }
@@ -25,7 +25,7 @@ module Slack
         @web_client = Slack::Web::Client.new(token: token, logger: logger)
       end
 
-      %i[users self channels team teams groups ims bots].each do |store_method|
+      [:self, :team, *Stores::Base::CACHES].each do |store_method|
         define_method store_method do
           store&.send(store_method)
         end
@@ -159,7 +159,7 @@ module Slack
         start = web_client.rtm_connect(start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
-        @store = @store_class.new(data) if @store_class
+        @store = store_class.new(data, store_options.to_h) if store_class
         @socket.restart_async(self, @url)
       end
 
@@ -170,7 +170,7 @@ module Slack
         start = web_client.rtm_connect(start_options)
         data = Slack::Messages::Message.new(start)
         @url = data.url
-        @store = @store_class.new(data) if @store_class
+        @store = store_class.new(data, store_options.to_h) if store_class
         @socket = socket_class.new(@url, socket_options)
       end
 
@@ -235,7 +235,7 @@ module Slack
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
         handlers.each do |handler|
-          store.instance_exec(data, &handler)
+          store.instance_exec(data, self, &handler)
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }

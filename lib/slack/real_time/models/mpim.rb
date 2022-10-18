@@ -2,7 +2,7 @@
 module Slack
   module RealTime
     module Models
-      class Group < Base
+      class Mpim < Base
       end
     end
   end

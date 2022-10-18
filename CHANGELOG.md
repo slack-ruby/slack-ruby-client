@@ -7,6 +7,9 @@
 * [#421](https://github.com/slack-ruby/slack-ruby-client/pull/421): Added `admin_audit_anomaly_allow_getItem`, `admin_audit_anomaly_allow_updateItem`, `files_completeUploadExternal`, `files_getUploadURLExternal` - [@kstole](https://github.com/kstole).
 * [#421](https://github.com/slack-ruby/slack-ruby-client/pull/421): Raise error for mutually exclusive required options in views methods - [@kstole](https://github.com/kstole).
 * [#424](https://github.com/slack-ruby/slack-ruby-client/pull/424): Updated real_time.rake to remove outdated event hooks and organize alphabetically - [@kstole](https://github.com/kstole).
+* [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Changed default store to `Slack::RealTime::Stores::Starter` and removed `Slack::RealTime::Store` - [@kstole](https://github.com/kstole).
+* [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Replaced `channels` and `groups` caches with `public_channels` and `private_channels` - [@kstole](https://github.com/kstole).
+* [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Added configurable `hello` hook to initialize `Slack::RealTime::Stores::Store` upon successful connection - [@kstole](https://github.com/kstole).
 * Your contribution here.
 
 ### 1.1.0 (2022/06/05)

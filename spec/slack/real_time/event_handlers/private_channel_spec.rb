@@ -5,13 +5,13 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
   include_context 'connected client'
   include_context 'loaded client'
 
-  context 'group' do
-    it 'sets group data' do
-      expect(client.groups.count).to eq 1
+  context 'private channel' do
+    it 'sets private channel data' do
+      expect(client.private_channels.count).to eq 1
     end
 
     it 'group_joined' do
-      expect(client.groups['CDEADBEEF']).to be_nil
+      expect(client.private_channels['CDEADBEEF']).to be_nil
       event = Slack::RealTime::Event.new(
         'type' => 'group_joined',
         'channel' => {
@@ -20,47 +20,47 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
         }
       )
       client.send(:dispatch, event)
-      group = client.groups['CDEADBEEF']
-      expect(group).not_to be_nil
-      expect(group.name).to eq 'beef'
+      channel = client.private_channels['CDEADBEEF']
+      expect(channel).not_to be_nil
+      expect(channel.name).to eq 'beef'
     end
 
     it 'group_left' do
-      group = client.groups['G0K7EV5A7']
-      expect(group.members).to include client.self.id
+      channel = client.private_channels['G0K7EV5A7']
+      expect(channel.members).to include client.self.id
       event = Slack::RealTime::Event.new(
         'type' => 'group_left',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group.members).not_to include client.self.id
+      expect(client.private_channels['G0K7EV5A7']).to be_nil
     end
 
     it 'group_archive' do
-      group = client.groups['G0K7EV5A7']
-      expect(group.is_archived).to be false
+      channel = client.private_channels['G0K7EV5A7']
+      expect(channel.is_archived).to be false
       event = Slack::RealTime::Event.new(
         'type' => 'group_archive',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group.is_archived).to be true
+      expect(channel.is_archived).to be true
     end
 
     it 'group_unarchive' do
-      group = client.groups['G0K7EV5A7']
-      group.is_archived = true
+      channel = client.private_channels['G0K7EV5A7']
+      channel.is_archived = true
       event = Slack::RealTime::Event.new(
         'type' => 'group_unarchive',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group.is_archived).to be false
+      expect(channel.is_archived).to be false
     end
 
     it 'group_rename' do
-      group = client.groups['G0K7EV5A7']
-      expect(group.name).to eq 'mpdm-dblock--rubybot--player1-1'
+      channel = client.private_channels['G0K7EV5A7']
+      expect(channel.name).to eq 'mpdm-dblock--rubybot--player1-1'
       event = Slack::RealTime::Event.new(
         'type' => 'group_rename',
         'channel' => {
@@ -70,30 +70,30 @@ RSpec.describe Slack::RealTime::Client, vcr: { cassette_name: 'web/rtm_connect' 
         }
       )
       client.send(:dispatch, event)
-      expect(group.name).to eq 'updated'
+      expect(channel.name).to eq 'updated'
     end
 
     it 'group_open' do
-      group = client.groups['G0K7EV5A7']
-      expect(group).not_to be_nil
+      channel = client.private_channels['G0K7EV5A7']
+      expect(channel).not_to be_nil
       event = Slack::RealTime::Event.new(
         'type' => 'group_open',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group.is_open).to be true
+      expect(channel.is_open).to be true
     end
 
     it 'group_close' do
-      group = client.groups['G0K7EV5A7']
-      expect(group).not_to be_nil
-      group.is_open = true
+      channel = client.private_channels['G0K7EV5A7']
+      expect(channel).not_to be_nil
+      channel.is_open = true
       event = Slack::RealTime::Event.new(
         'type' => 'group_close',
         'channel' => 'G0K7EV5A7'
       )
       client.send(:dispatch, event)
-      expect(group.is_open).to be false
+      expect(channel.is_open).to be false
     end
   end
 end
