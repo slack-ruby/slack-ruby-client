@@ -1,4 +1,4 @@
-name: PR Linter
+name: PR Lint
 on: pull_request
 jobs:
   danger:
