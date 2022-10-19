@@ -1,4 +1,4 @@
-### 2.0.0 (Next)
+### 2.0.0 (2022/10/19)
 
 * [#416](https://github.com/slack-ruby/slack-ruby-client/pull/416): Removes default values for Faraday's SSL settings `ca_file` and `ca_path` - [@irphilli](https://github.com/irphilli).
 * [#417](https://github.com/slack-ruby/slack-ruby-client/pull/417): Raise rescuable errors - [@zachahn](https://github.com/zachahn).
@@ -11,7 +11,6 @@
 * [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Replaced `channels` and `groups` caches with `public_channels` and `private_channels` - [@kstole](https://github.com/kstole).
 * [#423](https://github.com/slack-ruby/slack-ruby-client/pull/423): Added configurable `hello` hook to initialize `Slack::RealTime::Stores::Store` upon successful connection - [@kstole](https://github.com/kstole).
 * [#425](https://github.com/slack-ruby/slack-ruby-client/pull/425): Updated web.rake to remove outdated endpoints and commands - [@kstole](https://github.com/kstole).
-* Your contribution here.
 
 ### 1.1.0 (2022/06/05)
 
