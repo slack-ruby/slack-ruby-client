@@ -2,7 +2,7 @@ Slack Ruby Client
 =================
 
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
-[![Integration Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integtest.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integtest.yml)
+[![Integration Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integration_test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integration_test.yml)
 [![Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-client)
 
