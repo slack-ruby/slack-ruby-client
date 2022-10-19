@@ -1,4 +1,4 @@
-name: Rubocop
+name: Lint
 on: [push, pull_request]
 jobs:
   rubocop:
