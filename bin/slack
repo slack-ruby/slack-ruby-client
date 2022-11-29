@@ -3,7 +3,7 @@ require 'gli'
 require 'slack_ruby_client'
 
 module Slack
-  module CLI
+  module Cli
     class App
       extend GLI::App
 
@@ -53,4 +53,4 @@ module Slack
   end
 end
 
-exit Slack::CLI::App.run(ARGV)
+exit Slack::Cli::App.run(ARGV)
