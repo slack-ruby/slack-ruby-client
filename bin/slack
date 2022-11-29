@@ -2,50 +2,55 @@
 require 'gli'
 require 'slack_ruby_client'
 
-include GLI::App
+module Slack
+  module CLI
+    class App
+      extend GLI::App
 
-program_desc 'Slack client.'
+      program_desc 'Slack client.'
 
-default_command :help
+      default_command :help
 
-switch %i[d debug], desc: 'Enable debug-level logging.', default_value: false
-flag [:t, 'slack-api-token'], desc: 'Slack API token.', default_value: ENV['SLACK_API_TOKEN']
-flag ['vcr-cassette-name'], desc: 'Offline VCR cassette.'
+      switch %i[d debug], desc: 'Enable debug-level logging.', default_value: false
+      flag [:t, 'slack-api-token'], desc: 'Slack API token.', default_value: ENV['SLACK_API_TOKEN']
+      flag ['vcr-cassette-name'], desc: 'Offline VCR cassette.'
 
-pre do |global_options, _command, options, _args|
-  # global Slack configuration
-  Slack.config.token = global_options['slack-api-token']
-  help_now! 'Set Slack API token via --slack-api-token or SLACK_API_TOKEN.' unless Slack.config.token && !Slack.config.token.empty?
+      commands_from File.expand_path('commands', __dir__)
 
-  if global_options['debug']
-    require 'logger'
-    logger = Logger.new(STDOUT)
-    logger.level = Logger::DEBUG
-    Slack::Web::Client.config.logger = logger
-  end
+      pre do |global_options, _command, options, _args|
+        # global Slack configuration
+        Slack.config.token = global_options['slack-api-token']
+        help_now! 'Set Slack API token via --slack-api-token or SLACK_API_TOKEN.' unless Slack.config.token && !Slack.config.token.empty?
 
-  $client = Slack::Web::Client.new
+        if global_options['debug']
+          require 'logger'
+          logger = Logger.new(STDOUT)
+          logger.level = Logger::DEBUG
+          Slack::Web::Client.config.logger = logger
+        end
 
-  # Offline VCR cassette
-  if global_options['vcr-cassette-name']
-    require 'webmock'
-    WebMock.enable!
-    require 'vcr'
-    VCR.configure do |config|
-      config.cassette_library_dir = 'spec/fixtures/slack'
-      config.hook_into :webmock
-      config.default_cassette_options = { record: :new_episodes }
+        @client = Slack::Web::Client.new
+
+        # Offline VCR cassette
+        if global_options['vcr-cassette-name']
+          require 'webmock'
+          WebMock.enable!
+          require 'vcr'
+          VCR.configure do |config|
+            config.cassette_library_dir = 'spec/fixtures/slack'
+            config.hook_into :webmock
+            config.default_cassette_options = { record: :new_episodes }
+          end
+          VCR.insert_cassette global_options['vcr-cassette-name']
+        end
+
+        # remove any nil values from options
+        options.compact!
+
+        true
+      end
     end
-    VCR.insert_cassette global_options['vcr-cassette-name']
   end
-
-  # remove any nil values from options
-  options.compact!
-
-  true
 end
 
-$LOAD_PATH.push File.expand_path(__dir__)
-require 'commands'
-
-exit run(ARGV)
+exit Slack::CLI::App.run(ARGV)

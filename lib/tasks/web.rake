@@ -84,12 +84,6 @@ namespace :slack do
           endpoints_template.result(files: data.keys.map { |key| key.tr('.', '_') })
         )
 
-        commands_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/commands.erb'))
-        File.write(
-          'bin/commands.rb',
-          commands_template.result(files: data.keys.map { |key| key.tr('.', '_') })
-        )
-
         errors_template = Erubis::Eruby.new(File.read('lib/slack/web/api/templates/errors.erb'))
         errors = data.values.map do |names|
           names.values.map do |d|
