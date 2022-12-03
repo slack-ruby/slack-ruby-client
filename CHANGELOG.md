@@ -1,4 +1,4 @@
-### 2.0.1 (Next)
+### 2.1.0 (Next)
 
 * Your contribution here.
 * [#434](https://github.com/slack-ruby/slack-ruby-client/pull/434): Fix incompatibility with Faraday >= 2.7.0 and GLI usage in the `slack` script - [@blowfishpro](https://github.com/blowfishpro).
