@@ -22,6 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday-multipart'
   s.add_dependency 'gli'
   s.add_dependency 'hashie'
-  s.add_dependency 'websocket-driver'
   s.metadata['rubygems_mfa_required'] = 'true'
 end
