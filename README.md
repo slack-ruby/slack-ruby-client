@@ -57,7 +57,9 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
     - [Get Channel Id](#get-channel-id)
     - [Get Channel Info](#get-channel-info-1)
     - [List Users](#list-users)
+- [Enterprise Support](#enterprise-support)
 - [History](#history)
+- [Security](#security)
 - [Contributing](#contributing)
 - [Copyright and License](#copyright-and-license)
 
@@ -634,9 +636,19 @@ $ slack users list | jq '.members | map({(.id): .name})'
 
 See `slack help` for a complete command-line reference.
 
+## Enterprise Support
+
+Available as part of the Tidelift Subscription.
+
+The maintainers of slack-ruby-client are working with Tidelift to deliver commercial support and maintenance. Save time, reduce risk, and improve code health, while paying the maintainers of slack-ruby-client. Click [here](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) for more details.
+
 ## History
 
 This gem is based on [slack-ruby-gem](https://github.com/aki017/slack-ruby-gem), but it more clearly separates the Web and RTM APIs, is more thoroughly tested and is in active development.
+
+## Security
+
+See [SECURITY](SECURITY.md).
 
 ## Contributing
 
