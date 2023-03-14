@@ -18,7 +18,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
 - [Usage](#usage)
   - [Create a New Bot Integration](#create-a-new-bot-integration)
   - [OAuth Code Grant](#oauth-code-grant)
-  - [Using the Legacy API Token](#using-the-legacy-api-token)
+  - [Using an API Token](#using-an-api-token)
   - [Global Settings](#global-settings)
   - [Web Client](#web-client)
     - [Web Client Examples](#web-client-examples)
@@ -102,9 +102,9 @@ To integrate your bot with Slack, you must first create a new [Slack App](https:
 
 Once created, go to the app's Basic Info tab and grab the Client ID and Client Secret.  You'll need these in order complete an [OAuth code grant flow](https://api.slack.com/docs/oauth#flow) as described at [slack-ruby-bot-server](https://github.com/slack-ruby/slack-ruby-bot-server).
 
-### Using the Legacy API Token
+### Using an API Token
 
-Although OAuth is recommended, you can still [generate a legacy API token](https://api.slack.com/custom-integrations/legacy-tokens) for your app and use it for some interactions.
+Although OAuth is recommended, you can also [generate an API token](https://api.slack.com/tutorials/tracks/getting-a-token) for your app and use it for some interactions.
 
 ```ruby
 Slack.configure do |config|
