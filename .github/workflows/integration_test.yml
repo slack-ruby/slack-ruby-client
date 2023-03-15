@@ -1,8 +1,25 @@
 name: Integration Tests
 on: push
 jobs:
+  check-secret:
+    runs-on: ubuntu-latest
+    outputs:
+      secret-exists: ${{ steps.check-secret.outputs.defined }}
+    steps:
+      - name: Check for SLACK_API_TOKEN availability
+        id: check-secret
+        shell: bash
+        run: |
+          if [ "${{ secrets.SLACK_API_TOKEN }}" != '' ]; then
+            echo "defined=true" >> $GITHUB_OUTPUT;
+          else
+            echo "defined=false" >> $GITHUB_OUTPUT;
+          fi
+
   test:
     runs-on: ubuntu-latest
+    needs: [check-secret]
+    if: needs.check-secret.outputs.secret-exists == 'true'
     strategy:
       matrix:
         entry:
@@ -21,6 +38,8 @@ jobs:
           CONCURRENCY: ${{ matrix.entry.concurrency }}
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
           RACK_ENV: test
+          SPEC: "--pattern spec/**/integration/*_spec.rb"
+          SPEC_OPTS: "--pattern spec/**/integration/*_spec.rb"
         run: |
           bundle install
           bundle exec rake
