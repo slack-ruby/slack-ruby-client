@@ -604,17 +604,10 @@ $ slack chat postMessage --text="hello world" --channel="#general"
 {"ok":true,"channel":"...","ts":"...","message":{"text":"hello world","username":"bot","type":"message","subtype":"bot_message","ts":"..."}}
 ```
 
-#### Get Channel Id
-
-```
-$ slack channels id --channel=#general
-{"ok":true,"channel":{"id":"C04KB5X4D"}}
-```
-
 #### Get Channel Info
 
 ```
-$ slack channels info --channel=#general
+$ slack conversations info --channel=#general
 {"ok":true,"channel":{"id":"C04KB5X4D","name":"general", ...}}
 ```
 
