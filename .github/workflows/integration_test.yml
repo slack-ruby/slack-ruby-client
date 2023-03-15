@@ -1,25 +1,25 @@
 name: Integration Tests
 on: push
 jobs:
-  check-secret:
+  check-slack-api-token:
     runs-on: ubuntu-latest
     outputs:
-      secret-exists: ${{ steps.check-secret.outputs.defined }}
+      SLACK_API_TOKEN_EXISTS: ${{ steps.check-slack-api-token.outputs.SLACK_API_TOKEN_EXISTS }}
     steps:
       - name: Check for SLACK_API_TOKEN availability
-        id: check-secret
+        id: check-slack-api-token
         shell: bash
         run: |
           if [ "${{ secrets.SLACK_API_TOKEN }}" != '' ]; then
-            echo "defined=true" >> $GITHUB_OUTPUT;
+            echo "SLACK_API_TOKEN_EXISTS=true" >> $GITHUB_OUTPUT;
           else
-            echo "defined=false" >> $GITHUB_OUTPUT;
+            echo "SLACK_API_TOKEN_EXISTS=false" >> $GITHUB_OUTPUT;
           fi
 
   test:
     runs-on: ubuntu-latest
-    needs: [check-secret]
-    if: needs.check-secret.outputs.secret-exists == 'true'
+    needs: [check-slack-api-token]
+    if: needs.check-slack-api-token.outputs.SLACK_API_TOKEN_EXISTS == 'true'
     strategy:
       matrix:
         entry:
