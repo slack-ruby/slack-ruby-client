@@ -54,7 +54,6 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
   - [Command-Line Client](#command-line-client)
     - [Authenticate with Slack](#authenticate-with-slack)
     - [Send a Message](#send-a-message)
-    - [Get Channel Id](#get-channel-id)
     - [Get Channel Info](#get-channel-info-1)
     - [List Users](#list-users)
 - [Enterprise Support](#enterprise-support)
@@ -604,17 +603,10 @@ $ slack chat postMessage --text="hello world" --channel="#general"
 {"ok":true,"channel":"...","ts":"...","message":{"text":"hello world","username":"bot","type":"message","subtype":"bot_message","ts":"..."}}
 ```
 
-#### Get Channel Id
-
-```
-$ slack channels id --channel=#general
-{"ok":true,"channel":{"id":"C04KB5X4D"}}
-```
-
 #### Get Channel Info
 
 ```
-$ slack channels info --channel=#general
+$ slack conversations info --channel=#general
 {"ok":true,"channel":{"id":"C04KB5X4D","name":"general", ...}}
 ```
 
