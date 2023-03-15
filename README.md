@@ -54,7 +54,6 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
   - [Command-Line Client](#command-line-client)
     - [Authenticate with Slack](#authenticate-with-slack)
     - [Send a Message](#send-a-message)
-    - [Get Channel Id](#get-channel-id)
     - [Get Channel Info](#get-channel-info-1)
     - [List Users](#list-users)
 - [Enterprise Support](#enterprise-support)
