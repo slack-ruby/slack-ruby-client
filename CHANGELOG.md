@@ -4,6 +4,7 @@
 * [#436](https://github.com/slack-ruby/slack-ruby-client/pull/436): Remove dependency on unused websocket-driver - [@blowfishpro](https://github.com/blowfishpro).
 * [#434](https://github.com/slack-ruby/slack-ruby-client/pull/434): Fix incompatibility with Faraday >= 2.7.0 and GLI usage in the `slack` script - [@blowfishpro](https://github.com/blowfishpro).
 * [#440](https://github.com/ruby-grape/slack-ruby-client/pull/440): Enterprise support is now available [via TideLift](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) - [@dblock](https://github.com/dblock).
+* [#446](https://github.com/slack-ruby/slack-ruby-client/pull/446): Add support for Ruby 3.2 - [@duffn](https://github.com/duffn).
 
 ### 2.0.0 (2022/10/19)
 
