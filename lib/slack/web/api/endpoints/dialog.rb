@@ -18,7 +18,7 @@ module Slack
           def dialog_open(options = {})
             raise ArgumentError, 'Required arguments :dialog missing' if options[:dialog].nil?
             raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
-            options = encode_options('dialog', options)
+            options = encode_options_as_json(options, %i[dialog])
             post('dialog.open', options)
           end
         end

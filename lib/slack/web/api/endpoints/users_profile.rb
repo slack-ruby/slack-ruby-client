@@ -35,6 +35,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.profile/users.profile.set.json
           def users_profile_set(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
+            options = encode_options_as_json(options, %i[profile])
             post('users.profile.set', options)
           end
         end

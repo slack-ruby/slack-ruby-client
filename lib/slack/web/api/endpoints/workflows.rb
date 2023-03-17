@@ -32,6 +32,7 @@ module Slack
           def workflows_stepFailed(options = {})
             raise ArgumentError, 'Required arguments :error missing' if options[:error].nil?
             raise ArgumentError, 'Required arguments :workflow_step_execute_id missing' if options[:workflow_step_execute_id].nil?
+            options = encode_options_as_json(options, %i[error])
             post('workflows.stepFailed', options)
           end
 
@@ -52,6 +53,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows/workflows.updateStep.json
           def workflows_updateStep(options = {})
             raise ArgumentError, 'Required arguments :workflow_step_edit_id missing' if options[:workflow_step_edit_id].nil?
+            options = encode_options_as_json(options, %i[inputs outputs])
             post('workflows.updateStep', options)
           end
         end

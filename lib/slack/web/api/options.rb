@@ -2,28 +2,20 @@ module Slack
   module Web
     module Api
       module Options
-        def encode_options(group, options)
-          case group
-          when 'chat'
-            options = encode_json(options, :attachments)
-            encode_json(options, :blocks)
-          when 'views'
-            encode_json(options, :view)
-          when 'dialog'
-            encode_json(options, :dialog)
-          else
-            options
+        def encode_options_as_json(options, keys)
+          encoded_options = options.slice(*keys).transform_values do |value|
+            encode_json(value)
           end
+          options.merge(encoded_options)
         end
 
         private
 
-        def encode_json(options, key)
-          if options.key?(key) && !options[key].is_a?(String)
-            option = JSON.dump(options[key])
-            options.merge(key => option)
+        def encode_json(value)
+          if value.is_a?(String)
+            value
           else
-            options
+            JSON.dump(value)
           end
         end
       end

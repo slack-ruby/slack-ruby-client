@@ -21,7 +21,6 @@ module Slack
             raise ArgumentError, 'Required arguments :command missing' if options[:command].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             logger.warn('The chat.command method is undocumented.')
-            options = encode_options('chat', options)
             post('chat.command', options)
           end
 
@@ -40,7 +39,6 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            options = encode_options('chat', options)
             post('chat.delete', options)
           end
 
@@ -59,7 +57,6 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :scheduled_message_id missing' if options[:scheduled_message_id].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            options = encode_options('chat', options)
             post('chat.deleteScheduledMessage', options)
           end
 
@@ -76,7 +73,6 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :message_ts missing' if options[:message_ts].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            options = encode_options('chat', options)
             post('chat.getPermalink', options)
           end
 
@@ -92,7 +88,6 @@ module Slack
           def chat_meMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :text missing' if options[:text].nil?
-            options = encode_options('chat', options)
             post('chat.meMessage', options)
           end
 
@@ -127,10 +122,10 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :text, :attachments or :blocks missing' if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
+            raise ArgumentError, 'Required arguments :text missing' if options[:text].nil?
             raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            options = encode_options('chat', options)
+            options = encode_options_as_json(options, %i[attachments blocks])
             post('chat.postEphemeral', options)
           end
 
@@ -173,8 +168,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :text, :attachments or :blocks missing' if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
-            options = encode_options('chat', options)
+            options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postMessage', options)
           end
 
@@ -213,7 +207,7 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :post_at missing' if options[:post_at].nil?
             raise ArgumentError, 'Required arguments :text missing' if options[:text].nil?
-            options = encode_options('chat', options)
+            options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.scheduleMessage', options)
           end
 
@@ -245,7 +239,7 @@ module Slack
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
             raise ArgumentError, 'Required arguments :unfurls missing' if options[:unfurls].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            options = encode_options('chat', options)
+            options = encode_options_as_json(options, %i[unfurls user_auth_blocks])
             post('chat.unfurl', options)
           end
 
@@ -279,9 +273,8 @@ module Slack
           def chat_update(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
-            raise ArgumentError, 'Required arguments :text, :attachments, :blocks or :reply_broadcast missing' if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil? && options[:reply_broadcast].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            options = encode_options('chat', options)
+            options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.update', options)
           end
         end

@@ -288,6 +288,7 @@ module Slack
           def admin_conversations_setConversationPrefs(options = {})
             raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             raise ArgumentError, 'Required arguments :prefs missing' if options[:prefs].nil?
+            options = encode_options_as_json(options, %i[prefs])
             post('admin.conversations.setConversationPrefs', options)
           end
 

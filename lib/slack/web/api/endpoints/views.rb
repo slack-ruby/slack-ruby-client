@@ -19,8 +19,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.open.json
           def views_open(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
-            raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
-            options = encode_options('views', options)
+            options = encode_options_as_json(options, %i[view])
             post('views.open', options)
           end
 
@@ -38,7 +37,7 @@ module Slack
           def views_publish(options = {})
             raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
-            options = encode_options('views', options)
+            options = encode_options_as_json(options, %i[view])
             post('views.publish', options)
           end
 
@@ -55,8 +54,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.push.json
           def views_push(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
-            raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
-            options = encode_options('views', options)
+            options = encode_options_as_json(options, %i[view])
             post('views.push', options)
           end
 
@@ -75,8 +73,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.update.json
           def views_update(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
-            raise ArgumentError, 'One of :external_id, :view_id is required' unless options[:external_id].nil? ^ options[:view_id].nil?
-            options = encode_options('views', options)
+            options = encode_options_as_json(options, %i[view])
             post('views.update', options)
           end
         end
