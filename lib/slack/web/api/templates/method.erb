@@ -51,6 +51,9 @@ module Slack
 <% if data['deprecated'] %>
             logger.warn('<%= group %>.<%= name %>: <%= data['deprecation']['deprecation_warning']%> Alternative methods: <%= data['deprecation']['alternative_methods'].join(', ')%>.')
 <% end %>
+<% if %w[chat views dialog].include?(group) %>
+            options = encode_options('<%= group %>', options)
+<% end %>
 <% if data['args'].keys.include?('cursor') %>
             if block_given?
               Pagination::Cursor.new(self, :<%= group.gsub(".", "_") %>_<%= name %>, options).each do |page|
