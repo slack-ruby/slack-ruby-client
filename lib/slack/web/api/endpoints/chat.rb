@@ -101,7 +101,7 @@ module Slack
           # @option options [user] :user
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
           # @option options [boolean] :as_user
-          #   Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
+          #   (Legacy) Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
@@ -152,7 +152,7 @@ module Slack
           # @option options [string] :text
           #   The formatted text of the message to be published. If blocks are included, this will become the fallback text used in notifications.
           # @option options [boolean] :as_user
-          #   Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See authorship below.
+          #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
           # @option options [string] :icon_url

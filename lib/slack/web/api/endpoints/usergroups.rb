@@ -36,7 +36,7 @@ module Slack
           # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
           # @option options [Object] :team_id
-          #   Encoded team id where the user group is, required if org token is used.
+          #   Encoded target team id where the user group is, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.disable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.disable.json
           def usergroups_disable(options = {})

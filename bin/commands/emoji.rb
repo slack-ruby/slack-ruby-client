@@ -9,6 +9,7 @@ module Slack
         g.desc 'Lists custom emoji for a team.'
         g.long_desc %( Lists custom emoji for a team. )
         g.command 'list' do |c|
+          c.flag 'include_categories', desc: 'Include a list of categories for Unicode emoji and the emoji in each category.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.emoji_list(options))
           end

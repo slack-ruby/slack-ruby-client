@@ -19,7 +19,7 @@ module Slack
           #   See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation.
           # @option options [boolean] :is_private
           #   Whether the channel should be private.
-          # @option options [string] :team_id
+          # @option options [Object] :team_id
           #   The ID of the workspace to accept the channel in. If an org-level token is used to call this method, the team_id argument is required.
           # @see https://api.slack.com/methods/conversations.acceptSharedInvite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.acceptSharedInvite.json

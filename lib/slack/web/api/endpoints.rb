@@ -16,6 +16,7 @@ require_relative 'endpoints/admin_emoji'
 require_relative 'endpoints/admin_inviteRequests'
 require_relative 'endpoints/admin_inviteRequests_approved'
 require_relative 'endpoints/admin_inviteRequests_denied'
+require_relative 'endpoints/admin_roles'
 require_relative 'endpoints/admin_teams'
 require_relative 'endpoints/admin_teams_admins'
 require_relative 'endpoints/admin_teams_owners'
@@ -44,6 +45,8 @@ require_relative 'endpoints/emoji'
 require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files_remote'
+require_relative 'endpoints/functions_workflows_steps'
+require_relative 'endpoints/functions_workflows_steps_responses'
 require_relative 'endpoints/migration'
 require_relative 'endpoints/oauth'
 require_relative 'endpoints/oauth_v2'
@@ -90,6 +93,7 @@ module Slack
         include AdminInviterequests
         include AdminInviterequestsApproved
         include AdminInviterequestsDenied
+        include AdminRoles
         include AdminTeams
         include AdminTeamsAdmins
         include AdminTeamsOwners
@@ -118,6 +122,8 @@ module Slack
         include Files
         include FilesComments
         include FilesRemote
+        include FunctionsWorkflowsSteps
+        include FunctionsWorkflowsStepsResponses
         include Migration
         include Oauth
         include OauthV2

@@ -19,6 +19,8 @@ module Slack
         g.desc 'Gets billable users information for the current team.'
         g.long_desc %( Gets billable users information for the current team. )
         g.command 'billableInfo' do |c|
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by previous call, to indicate from where you want to list next page of users list. Default value fetches the first page.'
+          c.flag 'limit', desc: 'The maximum number of items to return.'
           c.flag 'team_id', desc: 'encoded team id to get the billable information from, required if org token is used.'
           c.flag 'user', desc: 'A user to retrieve the billable information for. Defaults to all users.'
           c.action do |_global_options, options, _args|

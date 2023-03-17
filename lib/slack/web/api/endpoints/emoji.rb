@@ -9,6 +9,8 @@ module Slack
           #
           # Lists custom emoji for a team.
           #
+          # @option options [boolean] :include_categories
+          #   Include a list of categories for Unicode emoji and the emoji in each category.
           # @see https://api.slack.com/methods/emoji.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/emoji/emoji.list.json
           def emoji_list(options = {})

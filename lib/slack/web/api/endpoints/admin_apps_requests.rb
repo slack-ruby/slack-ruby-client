@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminAppsRequests
           #
-          # Cancel approval request for team
+          # Cancel app request for team
           #
           # @option options [string] :request_id
           #   The id of the request to cancel.

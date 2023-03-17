@@ -19,6 +19,45 @@ module Slack
           end
 
           #
+          # Archive public or private channels in bulk.
+          #
+          # @option options [array] :channel_ids
+          #   An array of channel IDs to archive.
+          # @see https://api.slack.com/methods/admin.conversations.bulkArchive
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.bulkArchive.json
+          def admin_conversations_bulkArchive(options = {})
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            post('admin.conversations.bulkArchive', options)
+          end
+
+          #
+          # Delete public or private channels in bulk
+          #
+          # @option options [array] :channel_ids
+          #   An array of channel IDs.
+          # @see https://api.slack.com/methods/admin.conversations.bulkDelete
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.bulkDelete.json
+          def admin_conversations_bulkDelete(options = {})
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            post('admin.conversations.bulkDelete', options)
+          end
+
+          #
+          # Move public or private channels in bulk.
+          #
+          # @option options [array] :channel_ids
+          #   An array of channel IDs.
+          # @option options [string] :target_team_id
+          #   Target team ID.
+          # @see https://api.slack.com/methods/admin.conversations.bulkMove
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.bulkMove.json
+          def admin_conversations_bulkMove(options = {})
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            raise ArgumentError, 'Required arguments :target_team_id missing' if options[:target_team_id].nil?
+            post('admin.conversations.bulkMove', options)
+          end
+
+          #
           # Convert a public channel to a private channel.
           #
           # @option options [Object] :channel_id
@@ -30,6 +69,18 @@ module Slack
           def admin_conversations_convertToPrivate(options = {})
             raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.convertToPrivate', options)
+          end
+
+          #
+          # Convert a private channel to a public channel.
+          #
+          # @option options [Object] :channel_id
+          #   The channel to convert to public.
+          # @see https://api.slack.com/methods/admin.conversations.convertToPublic
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.convertToPublic.json
+          def admin_conversations_convertToPublic(options = {})
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            post('admin.conversations.convertToPublic', options)
           end
 
           #
@@ -138,6 +189,33 @@ module Slack
             raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
             post('admin.conversations.invite', options)
+          end
+
+          #
+          # Returns channels on the given team using the filters.
+          #
+          # @option options [integer] :last_message_activity_before
+          #   Filter by public channels where the most recent message was sent before last_message_activity.
+          # @option options [array] :team_ids
+          #   Array of team IDs to filter by.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned in the previous call, to fetch the next page.
+          # @option options [integer] :limit
+          #   Maximum number of results.
+          # @option options [integer] :max_member_count
+          #   Filter by public channels with member count equal to or less than the specified number.
+          # @see https://api.slack.com/methods/admin.conversations.lookup
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.lookup.json
+          def admin_conversations_lookup(options = {})
+            raise ArgumentError, 'Required arguments :last_message_activity_before missing' if options[:last_message_activity_before].nil?
+            raise ArgumentError, 'Required arguments :team_ids missing' if options[:team_ids].nil?
+            if block_given?
+              Pagination::Cursor.new(self, :admin_conversations_lookup, options).each do |page|
+                yield page
+              end
+            else
+              post('admin.conversations.lookup', options)
+            end
           end
 
           #
