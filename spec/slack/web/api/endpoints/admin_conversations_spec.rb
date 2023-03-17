@@ -10,9 +10,32 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_archive }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
+  context 'admin.conversations_bulkArchive' do
+    it 'requires channel_ids' do
+      expect { client.admin_conversations_bulkArchive }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+    end
+  end
+  context 'admin.conversations_bulkDelete' do
+    it 'requires channel_ids' do
+      expect { client.admin_conversations_bulkDelete }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+    end
+  end
+  context 'admin.conversations_bulkMove' do
+    it 'requires channel_ids' do
+      expect { client.admin_conversations_bulkMove(target_team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+    end
+    it 'requires target_team_id' do
+      expect { client.admin_conversations_bulkMove(channel_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :target_team_id missing/
+    end
+  end
   context 'admin.conversations_convertToPrivate' do
     it 'requires channel_id' do
       expect { client.admin_conversations_convertToPrivate }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+  end
+  context 'admin.conversations_convertToPublic' do
+    it 'requires channel_id' do
+      expect { client.admin_conversations_convertToPublic }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
   context 'admin.conversations_create' do
@@ -54,6 +77,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
     end
     it 'requires user_ids' do
       expect { client.admin_conversations_invite(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user_ids missing/
+    end
+  end
+  context 'admin.conversations_lookup' do
+    it 'requires last_message_activity_before' do
+      expect { client.admin_conversations_lookup(team_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :last_message_activity_before missing/
+    end
+    it 'requires team_ids' do
+      expect { client.admin_conversations_lookup(last_message_activity_before: %q[]) }.to raise_error ArgumentError, /Required arguments :team_ids missing/
     end
   end
   context 'admin.conversations_removeCustomRetention' do

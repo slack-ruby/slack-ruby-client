@@ -1,10 +1,12 @@
 ### 2.1.0 (Next)
 
 * Your contribution here.
-* [#436](https://github.com/slack-ruby/slack-ruby-client/pull/436): Remove dependency on unused websocket-driver - [@blowfishpro](https://github.com/blowfishpro).
-* [#434](https://github.com/slack-ruby/slack-ruby-client/pull/434): Fix incompatibility with Faraday >= 2.7.0 and GLI usage in the `slack` script - [@blowfishpro](https://github.com/blowfishpro).
-* [#440](https://github.com/ruby-grape/slack-ruby-client/pull/440): Enterprise support is now available [via TideLift](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) - [@dblock](https://github.com/dblock).
-* [#446](https://github.com/slack-ruby/slack-ruby-client/pull/446): Add support for Ruby 3.2 - [@duffn](https://github.com/duffn).
+* [#440](https://github.com/ruby-grape/slack-ruby-client/pull/440): Added Enterprise support [via TideLift](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) - [@dblock](https://github.com/dblock).
+* [#436](https://github.com/slack-ruby/slack-ruby-client/pull/436): Removed dependency on unused websocket-driver - [@blowfishpro](https://github.com/blowfishpro).
+* [#434](https://github.com/slack-ruby/slack-ruby-client/pull/434): Fixed incompatibility with Faraday >= 2.7.0 and GLI usage in the `slack` script - [@blowfishpro](https://github.com/blowfishpro).
+* [#446](https://github.com/slack-ruby/slack-ruby-client/pull/446): Added support for Ruby 3.2 - [@duffn](https://github.com/duffn).
+* [#447](https://github.com/slack-ruby/slack-ruby-client/pull/447): Added `admin_conversations_bulkArchive`, `admin_conversations_bulkDelete`, `admin_conversations_bulkMove`, `admin_conversations_convertToPublic`, `admin_conversations_lookup`, `admin_roles_addAssignments`, `admin_roles_listAssignments`, `admin_roles_removeAssignments`, `functions_workflows_steps_list`, and `functions_workflows_steps_responses_export` - [@dblock](https://github.com/dblock).
+* [#447](https://github.com/slack-ruby/slack-ruby-client/pull/447): Added pagination to `team_accessLogs` - [@dblock](https://github.com/dblock).
 
 ### 2.0.0 (2022/10/19)
 

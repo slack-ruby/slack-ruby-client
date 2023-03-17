@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'AdminAppsRequests methods.'
       command 'admin_apps_requests' do |g|
-        g.desc 'Cancel approval request for team'
-        g.long_desc %( Cancel approval request for team )
+        g.desc 'Cancel app request for team'
+        g.long_desc %( Cancel app request for team )
         g.command 'cancel' do |c|
           c.flag 'request_id', desc: 'The id of the request to cancel.'
           c.flag 'enterprise_id', desc: 'The ID of the enterprise where this request belongs.'

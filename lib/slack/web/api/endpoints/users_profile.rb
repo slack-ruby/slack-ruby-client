@@ -28,7 +28,7 @@ module Slack
           # @option options [string] :profile
           #   Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.
           # @option options [user] :user
-          #   ID of user to change. This argument may only be specified by team admins on paid teams.
+          #   ID of user to change. This argument may only be specified by admins on paid teams.
           # @option options [string] :value
           #   Value to set a single key to. Usable only if profile is not passed.
           # @see https://api.slack.com/methods/users.profile.set

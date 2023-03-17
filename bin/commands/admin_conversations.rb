@@ -15,6 +15,34 @@ module Slack
           end
         end
 
+        g.desc 'Archive public or private channels in bulk.'
+        g.long_desc %( Archive public or private channels in bulk. )
+        g.command 'bulkArchive' do |c|
+          c.flag 'channel_ids', desc: 'An array of channel IDs to archive.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_bulkArchive(options))
+          end
+        end
+
+        g.desc 'Delete public or private channels in bulk'
+        g.long_desc %( Delete public or private channels in bulk )
+        g.command 'bulkDelete' do |c|
+          c.flag 'channel_ids', desc: 'An array of channel IDs.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_bulkDelete(options))
+          end
+        end
+
+        g.desc 'Move public or private channels in bulk.'
+        g.long_desc %( Move public or private channels in bulk. )
+        g.command 'bulkMove' do |c|
+          c.flag 'channel_ids', desc: 'An array of channel IDs.'
+          c.flag 'target_team_id', desc: 'Target team ID.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_bulkMove(options))
+          end
+        end
+
         g.desc 'Convert a public channel to a private channel.'
         g.long_desc %( Convert a public channel to a private channel. )
         g.command 'convertToPrivate' do |c|
@@ -22,6 +50,15 @@ module Slack
           c.flag 'name', desc: 'Name of private channel to create. Only respected when converting an MPIM.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_convertToPrivate(options))
+          end
+        end
+
+        g.desc 'Convert a private channel to a public channel.'
+        g.long_desc %( Convert a private channel to a public channel. )
+        g.command 'convertToPublic' do |c|
+          c.flag 'channel_id', desc: 'The channel to convert to public.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_convertToPublic(options))
           end
         end
 
@@ -93,6 +130,19 @@ module Slack
           c.flag 'user_ids', desc: 'The users to invite.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_invite(options))
+          end
+        end
+
+        g.desc 'Returns channels on the given team using the filters.'
+        g.long_desc %( Returns channels on the given team using the filters. )
+        g.command 'lookup' do |c|
+          c.flag 'last_message_activity_before', desc: 'Filter by public channels where the most recent message was sent before last_message_activity.'
+          c.flag 'team_ids', desc: 'Array of team IDs to filter by.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned in the previous call, to fetch the next page.'
+          c.flag 'limit', desc: 'Maximum number of results.'
+          c.flag 'max_member_count', desc: 'Filter by public channels with member count equal to or less than the specified number.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_lookup(options))
           end
         end
 

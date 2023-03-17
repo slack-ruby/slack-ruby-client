@@ -25,7 +25,7 @@ module Slack
         g.command 'disable' do |c|
           c.flag 'usergroup', desc: 'The encoded ID of the User Group to disable.'
           c.flag 'include_count', desc: 'Include the number of users in the User Group.'
-          c.flag 'team_id', desc: 'Encoded team id where the user group is, required if org token is used.'
+          c.flag 'team_id', desc: 'Encoded target team id where the user group is, required if org token is used.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.usergroups_disable(options))
           end

@@ -22,6 +22,10 @@ module Slack
           #
           # Gets billable users information for the current team.
           #
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by previous call, to indicate from where you want to list next page of users list. Default value fetches the first page.
+          # @option options [integer] :limit
+          #   The maximum number of items to return.
           # @option options [string] :team_id
           #   encoded team id to get the billable information from, required if org token is used.
           # @option options [user] :user
@@ -30,7 +34,13 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.billableInfo.json
           def team_billableInfo(options = {})
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            post('team.billableInfo', options)
+            if block_given?
+              Pagination::Cursor.new(self, :team_billableInfo, options).each do |page|
+                yield page
+              end
+            else
+              post('team.billableInfo', options)
+            end
           end
 
           #
