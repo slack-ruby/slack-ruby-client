@@ -1,5 +1,5 @@
 diff --git a/lib/slack/web/api/endpoints/views.rb b/lib/slack/web/api/endpoints/views.rb
-index 6f70fef..d34b395 100644
+index 2102b07..6b2f97c 100644
 --- a/lib/slack/web/api/endpoints/views.rb
 +++ b/lib/slack/web/api/endpoints/views.rb
 @@ -19,6 +19,7 @@ module Slack
@@ -7,7 +7,7 @@ index 6f70fef..d34b395 100644
            def views_open(options = {})
              raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
 +            raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
-             options = encode_options('views', options)
+             options = encode_options_as_json(options, %i[view])
              post('views.open', options)
            end
 @@ -54,6 +55,7 @@ module Slack
@@ -15,7 +15,7 @@ index 6f70fef..d34b395 100644
            def views_push(options = {})
              raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
 +            raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
-             options = encode_options('views', options)
+             options = encode_options_as_json(options, %i[view])
              post('views.push', options)
            end
 @@ -73,6 +75,7 @@ module Slack
@@ -23,6 +23,6 @@ index 6f70fef..d34b395 100644
            def views_update(options = {})
              raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
 +            raise ArgumentError, 'One of :external_id, :view_id is required' unless options[:external_id].nil? ^ options[:view_id].nil?
-             options = encode_options('views', options)
+             options = encode_options_as_json(options, %i[view])
              post('views.update', options)
            end

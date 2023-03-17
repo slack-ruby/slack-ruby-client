@@ -1,8 +1,8 @@
 diff --git a/lib/slack/web/api/endpoints/chat.rb b/lib/slack/web/api/endpoints/chat.rb
-index 4adcbf5..ec0bdc2 100644
+index c3100ec..5909f4e 100644
 --- a/lib/slack/web/api/endpoints/chat.rb
 +++ b/lib/slack/web/api/endpoints/chat.rb
-@@ -127,7 +127,7 @@ module Slack
+@@ -122,7 +122,7 @@ module Slack
            # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
            def chat_postEphemeral(options = {})
              raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
@@ -10,20 +10,20 @@ index 4adcbf5..ec0bdc2 100644
 +            raise ArgumentError, 'Required arguments :text, :attachments or :blocks missing' if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
              raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
              options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-             options = encode_options('chat', options)
-@@ -173,6 +173,7 @@ module Slack
+             options = encode_options_as_json(options, %i[attachments blocks])
+@@ -168,6 +168,7 @@ module Slack
            # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
            def chat_postMessage(options = {})
              raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
 +            raise ArgumentError, 'Required arguments :text, :attachments or :blocks missing' if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil?
-             options = encode_options('chat', options)
+             options = encode_options_as_json(options, %i[attachments blocks metadata])
              post('chat.postMessage', options)
            end
-@@ -278,6 +279,7 @@ module Slack
+@@ -273,6 +274,7 @@ module Slack
            def chat_update(options = {})
              raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
              raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
 +            raise ArgumentError, 'Required arguments :text, :attachments, :blocks or :reply_broadcast missing' if options[:text].nil? && options[:attachments].nil? && options[:blocks].nil? && options[:reply_broadcast].nil?
              options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-             options = encode_options('chat', options)
+             options = encode_options_as_json(options, %i[attachments blocks metadata])
              post('chat.update', options)
