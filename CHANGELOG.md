@@ -1,6 +1,7 @@
 ### 2.1.1 (Next)
 
 * Your contribution here.
+* [#450](https://github.com/slack-ruby/slack-ruby-client/pull/450): Add Jekyll docs - [@duffn](https://github.com/duffn).
 
 ### 2.1.0 (2023/03/17)
 
