@@ -9,6 +9,14 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
 
 ![](slack.png)
 
+# Table of Contents
+
+- [Slack Ruby Client](#slack-ruby-client)
+  - [Documentation](#documentation)
+  - [Security](#security)
+  - [Contributing](#contributing)
+  - [Copyright and License](#copyright-and-license)
+
 ## Documentation
 
 See the [documentation](https://slack-ruby.github.io/slack-ruby-client/).
