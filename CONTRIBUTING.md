@@ -97,7 +97,16 @@ The auto-generated method files may drift overtime e.g. new arguments may be add
 
 ### Write Documentation
 
-Document any external behavior in the [README](README.md).
+Documentation is hosted at https://slack-ruby.github.com/slack-ruby-client and built with [Jekyll](https://jekyllrb.com/).
+
+In the `docs` directory:
+
+```
+bundle install
+bundle exec jekyll serve --watch
+```
+
+Browse to http://127.0.0.1:4000/ to view the documentation locally.
 
 ### Update Changelog
 

@@ -6,3 +6,5 @@
 .rspec_status
 Gemfile.lock
 pkg
+docs/_site
+docs/.jekyll-cache

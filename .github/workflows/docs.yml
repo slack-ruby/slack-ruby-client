@@ -1,0 +1,50 @@
+name: Deploy documentation
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+env:
+  docs_version_path: /
+
+jobs:
+  deploy-documentation:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
+    steps:
+      # If this is a tag, deploy the docs to a `/version/tag` directory so we can have
+      # versions of docs for each tag.
+      - name: Update docs_version_path environment variable
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        run: echo docs_version_path=/version/$GITHUB_REF_NAME >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+          working-directory: docs
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "/slack-ruby-client${{ env.docs_version_path }}"
+        working-directory: docs
+        env:
+          JEKYLL_ENV: production
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: docs/_site
+          target-folder: ${{ env.docs_version_path }}
+          clean: true
+          # Don't delete the content of the "version" directory as that contains
+          # docs for past tagged versions.
+          clean-exclude: |
+            version/*
