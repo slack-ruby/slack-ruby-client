@@ -25,7 +25,7 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
 <% if json_params.any? %>
 <% example_json_params = json_params.to_h { |name| [name, {data: ['data']}] } %>
 <% params = example_params.merge(example_json_params).map { |name, val| val = val.is_a?(String) ? "%q[#{val}]" : val; "#{name}: #{val}" }.join(', ') %>
-<% expected_params = example_params.merge(example_json_params).map { |name, val| val = val.is_a?(String) ? "%q[#{val}]" : "'#{JSON.dump(val)}'"; "#{name}: #{val}" }.join(', ') %>
+<% expected_params = example_params.merge(example_json_params.transform_values { |v| JSON.dump(v) }).map { |name, val| val = "%q[#{val}]"; "#{name}: #{val}" }.join(', ') %>
     it 'encodes <%= json_params.join(', ') %> as json' do
       expect(client).to receive(:post).with('<%= group %>.<%= name %>', <%= expected_params %>)
       client.<%= method_name %>(<%= params %>)

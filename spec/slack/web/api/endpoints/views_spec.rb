@@ -7,25 +7,25 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
   let(:client) { Slack::Web::Client.new }
   context 'views_open' do
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.open', view: '{"data":["data"]}', trigger_id: %q[])
+      expect(client).to receive(:post).with('views.open', view: %q[{"data":["data"]}], trigger_id: %q[])
       client.views_open(view: {:data=>["data"]}, trigger_id: %q[])
     end
   end
   context 'views_publish' do
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.publish', user_id: %q[], view: '{"data":["data"]}')
+      expect(client).to receive(:post).with('views.publish', user_id: %q[], view: %q[{"data":["data"]}])
       client.views_publish(user_id: %q[], view: {:data=>["data"]})
     end
   end
   context 'views_push' do
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.push', view: '{"data":["data"]}', trigger_id: %q[])
+      expect(client).to receive(:post).with('views.push', view: %q[{"data":["data"]}], trigger_id: %q[])
       client.views_push(view: {:data=>["data"]}, trigger_id: %q[])
     end
   end
   context 'views_update' do
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.update', view: '{"data":["data"]}', external_id: %q[])
+      expect(client).to receive(:post).with('views.update', view: %q[{"data":["data"]}], external_id: %q[])
       client.views_update(view: {:data=>["data"]}, external_id: %q[])
     end
   end
