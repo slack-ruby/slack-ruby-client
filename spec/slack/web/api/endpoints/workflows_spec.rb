@@ -18,7 +18,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Workflows do
       expect { client.workflows_stepFailed(error: %q[]) }.to raise_error ArgumentError, /Required arguments :workflow_step_execute_id missing/
     end
     it 'encodes error as json' do
-      expect(client).to receive(:post).with('workflows.stepFailed', error: %q[{"data":["data"]}], workflow_step_execute_id: %q[])
+      expect(client).to receive(:post).with('workflows.stepFailed', {error: %q[{"data":["data"]}], workflow_step_execute_id: %q[]})
       client.workflows_stepFailed(error: {:data=>["data"]}, workflow_step_execute_id: %q[])
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Workflows do
       expect { client.workflows_updateStep }.to raise_error ArgumentError, /Required arguments :workflow_step_edit_id missing/
     end
     it 'encodes inputs, outputs as json' do
-      expect(client).to receive(:post).with('workflows.updateStep', workflow_step_edit_id: %q[], inputs: %q[{"data":["data"]}], outputs: %q[{"data":["data"]}])
+      expect(client).to receive(:post).with('workflows.updateStep', {workflow_step_edit_id: %q[], inputs: %q[{"data":["data"]}], outputs: %q[{"data":["data"]}]})
       client.workflows_updateStep(workflow_step_edit_id: %q[], inputs: {:data=>["data"]}, outputs: {:data=>["data"]})
     end
   end

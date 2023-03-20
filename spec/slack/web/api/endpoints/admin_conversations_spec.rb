@@ -108,7 +108,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_setConversationPrefs(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :prefs missing/
     end
     it 'encodes prefs as json' do
-      expect(client).to receive(:post).with('admin.conversations.setConversationPrefs', channel_id: %q[], prefs: %q[{"data":["data"]}])
+      expect(client).to receive(:post).with('admin.conversations.setConversationPrefs', {channel_id: %q[], prefs: %q[{"data":["data"]}]})
       client.admin_conversations_setConversationPrefs(channel_id: %q[], prefs: {:data=>["data"]})
     end
   end
