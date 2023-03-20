@@ -7,13 +7,28 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
   let(:client) { Slack::Web::Client.new }
 <% names.sort.each_with_index do |(name, data), index| %>
 <% next if data['mixin'] %>
-<% required_params = data['args'].select{ |k, v| v['required'] } %>
-<% next if required_params.none? %>
+<% group_required_params = data['arg_groups']&.map { |grp| grp['args'].first } || [] %>
+<% required_params = data['args'].select{ |k, v| v['required'] || group_required_params.include?(k) } %>
+<% json_params = data['args'].map { |arg_name, arg_v| arg_name if arg_v['format'] == 'json' }.compact %>
+<% next if (required_params.none? || custom_spec_exists) && json_params.none? %>
+<% method_name = [group.gsub(".", "_"), name].join('_') %>
+<% example_params = required_params.to_h { |var, opts| [var, opts['example']] } %>
   context '<%= group %>_<%= name %>' do
+<% unless custom_spec_exists %>
 <% required_params.each do |arg_name, arg_v| %>
     it 'requires <%= arg_name %>' do
-<% params_except_required = required_params.reject{ |name, _| name == arg_name  }.map{ |var, opts| "#{var}: %q[#{opts['example']}]"}.join(', ') %>
-      expect { client.<%= group.gsub(".", "_") %>_<%= name %><%= params_except_required.empty? ? '' : "(#{params_except_required})" %> }.to raise_error ArgumentError, /Required arguments :<%= arg_name %> missing/
+<% params_except_required = example_params.reject { |name, _| name == arg_name  }.map { |name, val| "#{name}: %q[#{val}]" }.join(', ') %>
+      expect { client.<%= method_name %><%= params_except_required.empty? ? '' : "(#{params_except_required})" %> }.to raise_error ArgumentError, /Required arguments :<%= arg_name %> missing/
+    end
+<% end %>
+<% end %>
+<% if json_params.any? %>
+<% example_json_params = json_params.to_h { |name| [name, {data: ['data']}] } %>
+<% params = example_params.merge(example_json_params).map { |name, val| val = val.is_a?(String) ? "%q[#{val}]" : val; "#{name}: #{val}" }.join(', ') %>
+<% expected_params = example_params.merge(example_json_params).map { |name, val| val = val.is_a?(String) ? "%q[#{val}]" : "'#{JSON.dump(val)}'"; "#{name}: #{val}" }.join(', ') %>
+    it 'encodes <%= json_params.join(', ') %> as json' do
+      expect(client).to receive(:post).with('<%= group %>.<%= name %>', <%= expected_params %>)
+      client.<%= method_name %>(<%= params %>)
     end
 <% end %>
   end

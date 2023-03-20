@@ -5,4 +5,10 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::UsersProfile do
   let(:client) { Slack::Web::Client.new }
+  context 'users.profile_set' do
+    it 'encodes profile as json' do
+      expect(client).to receive(:post).with('users.profile.set', profile: '{"data":["data"]}')
+      client.users_profile_set(profile: {:data=>["data"]})
+    end
+  end
 end
