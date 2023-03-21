@@ -37,6 +37,14 @@ module Slack
 <% data['args'].select{ |k, v| v['required'] }.each do |arg_name, arg_v| %>
             raise ArgumentError, 'Required arguments :<%= arg_name %> missing' if options[:<%= arg_name %>].nil?
 <% end %>
+<% data['arg_groups']&.each do |arg_group| %>
+<% arg_string = arg_group['args'].map { |arg_name| ":#{arg_name}" }.join(', ') %>
+<% if arg_group['mutually_exclusive'] %>
+            raise ArgumentError, 'Exactly one of <%= arg_string %> is required' unless <%= arg_group['args'].map { |arg_name| "options[:#{arg_name}].nil?" }.join(' ^ ') %>
+<% else %>
+            raise ArgumentError, 'At least one of <%= arg_string %> is required' if <%= arg_group['args'].map { |arg_name| "options[:#{arg_name}].nil?"}.join(' && ') %>
+<% end %>
+<% end %>
 <% if data['group'] == 'groups' && data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
 <% elsif data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
