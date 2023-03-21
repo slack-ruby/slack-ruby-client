@@ -104,7 +104,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
         it 'raises error' do
           expect do
             client.views_update(external_id: trigger_id, view_id: view_id, view: 'celery man')
-          end.to raise_error ArgumentError, 'One of :external_id, :view_id is required'
+          end.to raise_error ArgumentError, 'Exactly one of :external_id, :view_id is required'
         end
       end
     end

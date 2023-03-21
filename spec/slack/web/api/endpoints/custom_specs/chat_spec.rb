@@ -34,7 +34,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     context 'text and user arguments' do
       it 'requires text or attachments' do
         expect { client.chat_postEphemeral(channel: 'channel') }.to(
-          raise_error(ArgumentError, /Required arguments :text, :attachments or :blocks missing/)
+          raise_error(ArgumentError, /At least one of :attachments, :blocks, :text is required/)
         )
       end
 
@@ -108,7 +108,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     context 'text, attachment and blocks arguments' do
       it 'requires text, attachments or blocks' do
         expect { client.chat_postMessage(channel: 'channel') }.to(
-          raise_error(ArgumentError, /Required arguments :text, :attachments or :blocks missing/)
+          raise_error(ArgumentError, /At least one of :attachments, :blocks, :text is required/)
         )
       end
 
@@ -167,7 +167,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     context 'text, attachment and blocks arguments' do
       it 'requires text, attachments, blocks or reply_broadcast' do
         expect { client.chat_update(channel: 'channel', ts: ts) }.to(
-          raise_error(ArgumentError, /Required arguments :text, :attachments, :blocks or :reply_broadcast missing/)
+          raise_error(ArgumentError, /At least one of :attachments, :blocks, :text, :reply_broadcast is required/)
         )
       end
 
