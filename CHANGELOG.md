@@ -1,6 +1,7 @@
-### 2.1.1 (Next)
+### 2.2.0 (Next)
 
 * Your contribution here.
+* [#452](https://github.com/slack-ruby/slack-ruby-client/pull/452): Automatically generate Web API multi-argument requirements from docs - [@jmanian](https://github.com/jmanian).
 * [#448](https://github.com/slack-ruby/slack-ruby-client/pull/448): Automatically convert more Web API arguments to JSON-encoded strings - [@jmanian](https://github.com/jmanian).
 
 ### 2.1.0 (2023/03/17)
