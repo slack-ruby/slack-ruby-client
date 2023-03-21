@@ -20,11 +20,7 @@ module Slack
           def views_open(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
-            if options.key?(:view)
-              view = options[:view]
-              view = JSON.dump(view) unless view.is_a?(String)
-              options = options.merge(view: view)
-            end
+            options = encode_options_as_json(options, %i[view])
             post('views.open', options)
           end
 
@@ -42,11 +38,7 @@ module Slack
           def views_publish(options = {})
             raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
-            if options.key?(:view)
-              view = options[:view]
-              view = JSON.dump(view) unless view.is_a?(String)
-              options = options.merge(view: view)
-            end
+            options = encode_options_as_json(options, %i[view])
             post('views.publish', options)
           end
 
@@ -64,11 +56,7 @@ module Slack
           def views_push(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             raise ArgumentError, 'One of :trigger_id, :interactivity_pointer is required' unless options[:trigger_id].nil? ^ options[:interactivity_pointer].nil?
-            if options.key?(:view)
-              view = options[:view]
-              view = JSON.dump(view) unless view.is_a?(String)
-              options = options.merge(view: view)
-            end
+            options = encode_options_as_json(options, %i[view])
             post('views.push', options)
           end
 
@@ -88,11 +76,7 @@ module Slack
           def views_update(options = {})
             raise ArgumentError, 'Required arguments :view missing' if options[:view].nil?
             raise ArgumentError, 'One of :external_id, :view_id is required' unless options[:external_id].nil? ^ options[:view_id].nil?
-            if options.key?(:view)
-              view = options[:view]
-              view = JSON.dump(view) unless view.is_a?(String)
-              options = options.merge(view: view)
-            end
+            options = encode_options_as_json(options, %i[view])
             post('views.update', options)
           end
         end

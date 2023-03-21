@@ -15,6 +15,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.create.json
           def apps_manifest_create(options = {})
             raise ArgumentError, 'Required arguments :manifest missing' if options[:manifest].nil?
+            options = encode_options_as_json(options, %i[manifest])
             post('apps.manifest.create', options)
           end
 
@@ -54,6 +55,7 @@ module Slack
           def apps_manifest_update(options = {})
             raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             raise ArgumentError, 'Required arguments :manifest missing' if options[:manifest].nil?
+            options = encode_options_as_json(options, %i[manifest])
             post('apps.manifest.update', options)
           end
 

@@ -1,6 +1,7 @@
 ### 2.1.1 (Next)
 
 * Your contribution here.
+* [#448](https://github.com/slack-ruby/slack-ruby-client/pull/448): Automatically convert more Web API arguments to JSON-encoded strings - [@jmanian](https://github.com/jmanian).
 
 ### 2.1.0 (2023/03/17)
 

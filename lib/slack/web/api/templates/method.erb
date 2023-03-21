@@ -51,6 +51,10 @@ module Slack
 <% if data['deprecated'] %>
             logger.warn('<%= group %>.<%= name %>: <%= data['deprecation']['deprecation_warning']%> Alternative methods: <%= data['deprecation']['alternative_methods'].join(', ')%>.')
 <% end %>
+<% json_args = data['args'].map { |arg_name, arg_v| arg_name if arg_v['format'] == 'json' }.compact %>
+<% if json_args.any? %>
+            options = encode_options_as_json(options, %i[<%= json_args.join(' ') %>])
+<% end %>
 <% if data['args'].keys.include?('cursor') %>
             if block_given?
               Pagination::Cursor.new(self, :<%= group.gsub(".", "_") %>_<%= name %>, options).each do |page|

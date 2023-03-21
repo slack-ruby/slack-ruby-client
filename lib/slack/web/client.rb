@@ -5,6 +5,7 @@ module Slack
       include Faraday::Connection
       include Faraday::Request
       include Api::Endpoints
+      include Api::Options
 
       attr_accessor(*Config::ATTRIBUTES)
 
