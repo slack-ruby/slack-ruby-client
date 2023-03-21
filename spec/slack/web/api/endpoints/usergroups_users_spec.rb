@@ -12,10 +12,10 @@ RSpec.describe Slack::Web::Api::Endpoints::UsergroupsUsers do
   end
   context 'usergroups.users_update' do
     it 'requires usergroup' do
-      expect { client.usergroups_users_update(users: %q[]) }.to raise_error ArgumentError, /Required arguments :usergroup missing/
+      expect { client.usergroups_users_update(users: %q[U060R4BJ4,U060RNRCZ]) }.to raise_error ArgumentError, /Required arguments :usergroup missing/
     end
     it 'requires users' do
-      expect { client.usergroups_users_update(usergroup: %q[]) }.to raise_error ArgumentError, /Required arguments :users missing/
+      expect { client.usergroups_users_update(usergroup: %q[S0604QSJC]) }.to raise_error ArgumentError, /Required arguments :users missing/
     end
   end
 end

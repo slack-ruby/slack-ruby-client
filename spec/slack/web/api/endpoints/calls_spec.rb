@@ -7,10 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Calls do
   let(:client) { Slack::Web::Client.new }
   context 'calls_add' do
     it 'requires external_unique_id' do
-      expect { client.calls_add(join_url: %q[]) }.to raise_error ArgumentError, /Required arguments :external_unique_id missing/
+      expect { client.calls_add(join_url: %q[https://example.com/calls/1234567890]) }.to raise_error ArgumentError, /Required arguments :external_unique_id missing/
     end
     it 'requires join_url' do
-      expect { client.calls_add(external_unique_id: %q[]) }.to raise_error ArgumentError, /Required arguments :join_url missing/
+      expect { client.calls_add(external_unique_id: %q[025169F6-E37A-4E62-BB54-7F93A0FC4C1F]) }.to raise_error ArgumentError, /Required arguments :join_url missing/
     end
   end
   context 'calls_end' do
