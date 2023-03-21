@@ -30,6 +30,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
       - [Get User Info](#get-user-info)
       - [Search for a User](#search-for-a-user)
       - [Other](#other)
+    - [JSON Arguments](#json-arguments)
     - [Web Client Options](#web-client-options)
     - [Pagination Support](#pagination-support)
     - [Character Encoding](#character-encoding)
@@ -209,6 +210,31 @@ client.users_search(user: 'dblock')
 ##### Other
 
 Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
+
+#### JSON Arguments
+
+The Web API expects certain arguments to be sent as JSON-encoded strings. With the client you can pass these args as ruby hashes or arrays and they will be converted automatically to JSON, or you can provide the JSON directly.
+
+```ruby
+# As ruby objects
+client.chat_postMessage(
+  channel: 'C123456',
+  text: 'Hello World',
+  blocks: [{type: 'section', text: {type: 'mrkdwn', text: 'Hello World'}}]
+)
+
+# As a JSON string
+client.chat_postMessage(
+  channel: 'C123456',
+  text: 'Hello World',
+  blocks: JSON.dump([{type: 'section', text: {type: 'mrkdwn', text: 'Hello World'}}])
+)
+client.chat_postMessage(
+  channel: 'C123456',
+  text: 'Hello World',
+  blocks: '[{"type":"section","text":{"type":"mrkdwn","text":"Hello World"}}]'
+)
+```
 
 #### Web Client Options
 
