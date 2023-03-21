@@ -7,32 +7,32 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
   let(:client) { Slack::Web::Client.new }
   context 'chat_postEphemeral' do
     it 'encodes attachments, blocks as json' do
-      expect(client).to receive(:post).with('chat.postEphemeral', {channel: %q[], text: %q[], user: %q[], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}]})
-      client.chat_postEphemeral(channel: %q[], text: %q[], user: %q[], attachments: {:data=>["data"]}, blocks: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.postEphemeral', {channel: %q[C1234567890], text: %q[Hello world], user: %q[U0BPQUNTA], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}]})
+      client.chat_postEphemeral(channel: %q[C1234567890], text: %q[Hello world], user: %q[U0BPQUNTA], attachments: {:data=>["data"]}, blocks: {:data=>["data"]})
     end
   end
   context 'chat_postMessage' do
     it 'encodes attachments, blocks, metadata as json' do
-      expect(client).to receive(:post).with('chat.postMessage', {channel: %q[], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
-      client.chat_postMessage(channel: %q[], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.postMessage', {channel: %q[C1234567890], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_postMessage(channel: %q[C1234567890], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
   context 'chat_scheduleMessage' do
     it 'encodes attachments, blocks, metadata as json' do
-      expect(client).to receive(:post).with('chat.scheduleMessage', {channel: %q[], post_at: %q[], text: %q[], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
-      client.chat_scheduleMessage(channel: %q[], post_at: %q[], text: %q[], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.scheduleMessage', {channel: %q[C1234567890], post_at: %q[299876400], text: %q[Hello world], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_scheduleMessage(channel: %q[C1234567890], post_at: %q[299876400], text: %q[Hello world], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
   context 'chat_unfurl' do
     it 'encodes unfurls, user_auth_blocks as json' do
-      expect(client).to receive(:post).with('chat.unfurl', {channel: %q[], ts: %q[], unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}]})
-      client.chat_unfurl(channel: %q[], ts: %q[], unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.unfurl', {channel: %q[C1234567890], ts: %q[], unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}]})
+      client.chat_unfurl(channel: %q[C1234567890], ts: %q[], unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]})
     end
   end
   context 'chat_update' do
     it 'encodes attachments, blocks, metadata as json' do
-      expect(client).to receive(:post).with('chat.update', {channel: %q[], ts: %q[], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
-      client.chat_update(channel: %q[], ts: %q[], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.update', {channel: %q[C1234567890], ts: %q["1405894322.002768"], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_update(channel: %q[C1234567890], ts: %q["1405894322.002768"], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
 end

@@ -7,10 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Apps do
   let(:client) { Slack::Web::Client.new }
   context 'apps_uninstall' do
     it 'requires client_id' do
-      expect { client.apps_uninstall(client_secret: %q[]) }.to raise_error ArgumentError, /Required arguments :client_id missing/
+      expect { client.apps_uninstall(client_secret: %q[f25b5ceaf8a3c2a2c4f52bb4f0b0499e]) }.to raise_error ArgumentError, /Required arguments :client_id missing/
     end
     it 'requires client_secret' do
-      expect { client.apps_uninstall(client_id: %q[]) }.to raise_error ArgumentError, /Required arguments :client_secret missing/
+      expect { client.apps_uninstall(client_id: %q[56579136444.26251006572]) }.to raise_error ArgumentError, /Required arguments :client_secret missing/
     end
   end
 end
