@@ -11,22 +11,12 @@ module Slack
           #
           # @option options [string] :before
           #   End of time range of logs to include in results (inclusive).
-          # @option options [string] :cursor
-          #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
-          # @option options [integer] :limit
-          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. If specified, result is returned using a cursor-based approach instead of a classic one.
           # @option options [string] :team_id
           #   encoded team id to get logs from, required if org token is used.
           # @see https://api.slack.com/methods/team.accessLogs
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.accessLogs.json
           def team_accessLogs(options = {})
-            if block_given?
-              Pagination::Cursor.new(self, :team_accessLogs, options).each do |page|
-                yield page
-              end
-            else
-              post('team.accessLogs', options)
-            end
+            post('team.accessLogs', options)
           end
 
           #

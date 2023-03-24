@@ -10,8 +10,6 @@ module Slack
         g.long_desc %( Gets the access logs for the current team. )
         g.command 'accessLogs' do |c|
           c.flag 'before', desc: 'End of time range of logs to include in results (inclusive).'
-          c.flag 'cursor', desc: "Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection. See pagination for more details."
-          c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. If specified, result is returned using a cursor-based approach instead of a classic one."
           c.flag 'team_id', desc: 'encoded team id to get logs from, required if org token is used.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.team_accessLogs(options))

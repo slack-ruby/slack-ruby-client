@@ -25,7 +25,6 @@ module Slack
         class AppMissingActionUrl < SlackError; end
         class AppNotEligible < SlackError; end
         class AppNotFound < SlackError; end
-        class AppNotHosted < SlackError; end
         class AppRestrictedOrgWide < SlackError; end
         class ApprovalInactive < SlackError; end
         class ApprovalNotFound < SlackError; end
@@ -134,8 +133,6 @@ module Slack
         class CouldNotUnarchiveChannel < SlackError; end
         class CustomIntegrationNotAllowedAtEnterprise < SlackError; end
         class DataNotAvailable < SlackError; end
-        class DatastoreError < SlackError; end
-        class DatastoreMigrationInProgress < SlackError; end
         class DefaultChannelRestricted < SlackError; end
         class DefaultOrgWideChannel < SlackError; end
         class DeleteNotAllowed < SlackError; end
@@ -224,7 +221,6 @@ module Slack
         class FileUploadsDisabled < SlackError; end
         class ForbiddenHandle < SlackError; end
         class ForbiddenTeam < SlackError; end
-        class FreeTeamNotAllowed < SlackError; end
         class GroupAlreadyLinkedToChannel < SlackError; end
         class GroupMustNotBeEmpty < SlackError; end
         class GroupNotFound < SlackError; end
@@ -260,7 +256,6 @@ module Slack
         class InvalidCode < SlackError; end
         class InvalidCreatedBy < SlackError; end
         class InvalidCursor < SlackError; end
-        class InvalidDatastore < SlackError; end
         class InvalidDate < SlackError; end
         class InvalidDuration < SlackError; end
         class InvalidEmail < SlackError; end
@@ -513,7 +508,6 @@ module Slack
         class TeamIdRequiredForEnterprise < SlackError; end
         class TeamNotFound < SlackError; end
         class TeamNotOnEnterprise < SlackError; end
-        class TeamQuotaExceeded < SlackError; end
         class TeamsNotFound < SlackError; end
         class ThreadLocked < SlackError; end
         class ThreadNotFound < SlackError; end
@@ -615,7 +609,6 @@ module Slack
           'app_missing_action_url' => AppMissingActionUrl,
           'app_not_eligible' => AppNotEligible,
           'app_not_found' => AppNotFound,
-          'app_not_hosted' => AppNotHosted,
           'app_restricted_org_wide' => AppRestrictedOrgWide,
           'approval_inactive' => ApprovalInactive,
           'approval_not_found' => ApprovalNotFound,
@@ -724,8 +717,6 @@ module Slack
           'could_not_unarchive_channel' => CouldNotUnarchiveChannel,
           'custom_integration_not_allowed_at_enterprise' => CustomIntegrationNotAllowedAtEnterprise,
           'data_not_available' => DataNotAvailable,
-          'datastore_error' => DatastoreError,
-          'datastore_migration_in_progress' => DatastoreMigrationInProgress,
           'default_channel_restricted' => DefaultChannelRestricted,
           'default_org_wide_channel' => DefaultOrgWideChannel,
           'delete_not_allowed' => DeleteNotAllowed,
@@ -814,7 +805,6 @@ module Slack
           'file_uploads_disabled' => FileUploadsDisabled,
           'forbidden_handle' => ForbiddenHandle,
           'forbidden_team' => ForbiddenTeam,
-          'free_team_not_allowed' => FreeTeamNotAllowed,
           'group_already_linked_to_channel' => GroupAlreadyLinkedToChannel,
           'group_must_not_be_empty' => GroupMustNotBeEmpty,
           'group_not_found' => GroupNotFound,
@@ -850,7 +840,6 @@ module Slack
           'invalid_code' => InvalidCode,
           'invalid_created_by' => InvalidCreatedBy,
           'invalid_cursor' => InvalidCursor,
-          'invalid_datastore' => InvalidDatastore,
           'invalid_date' => InvalidDate,
           'invalid_duration' => InvalidDuration,
           'invalid_email' => InvalidEmail,
@@ -1103,7 +1092,6 @@ module Slack
           'team_id_required_for_enterprise' => TeamIdRequiredForEnterprise,
           'team_not_found' => TeamNotFound,
           'team_not_on_enterprise' => TeamNotOnEnterprise,
-          'team_quota_exceeded' => TeamQuotaExceeded,
           'teams_not_found' => TeamsNotFound,
           'thread_locked' => ThreadLocked,
           'thread_not_found' => ThreadNotFound,
