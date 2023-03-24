@@ -585,7 +585,7 @@ The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Sl
 
 ### Message Parsing
 
-All text in Slack uses the same [system of escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. Use [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) to unescape incoming messages. This comes handy, for example, you want to treat all input to a real time bot as plain text.
+All text in Slack uses the same [system of escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. Use [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) to escape or unescape messages. This comes handy, for example, you want to treat all input to a real time bot as plain text.
 
 ```ruby
 Slack::Messages::Formatting.unescape('Hello &amp; &lt;world&gt;'))
@@ -608,6 +608,12 @@ Slack::Messages::Formatting.unescape('“hello”'))
   # => '"hello"'
 Slack::Messages::Formatting.unescape('‘hello’'))
   # => "'hello'"
+```
+
+
+```ruby
+Slack::Messages::Formatting.escape('Hello & <world>')
+  # => 'Hello &amp; &lt;world&gt;'
 ```
 
 ### Command-Line Client
