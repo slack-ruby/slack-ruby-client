@@ -61,4 +61,14 @@ describe Slack::Messages::Formatting do
       expect(formatting.unescape('‘hello’')).to eq "'hello'"
     end
   end
+
+  context '#escape' do
+    it 'plain text' do
+      expect(formatting.escape('plain text')).to eq 'plain text'
+    end
+
+    it 'escapes a message' do
+      expect(formatting.escape('Hello & <world>')).to eq 'Hello &amp; &lt;world&gt;'
+    end
+  end
 end

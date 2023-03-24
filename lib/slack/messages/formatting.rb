@@ -24,6 +24,17 @@ module Slack
               end
             end)
         end
+
+        #
+        # Escape a message.
+        # @see https://api.slack.com/reference/surfaces/formatting#escaping
+        #
+        def escape(message)
+          message
+            .gsub('&', '&amp;')
+            .gsub('>', '&gt;')
+            .gsub('<', '&lt;')
+        end
       end
     end
   end
