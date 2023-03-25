@@ -28,6 +28,7 @@ require_relative 'endpoints/admin_users_unsupportedVersions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_connections'
+require_relative 'endpoints/apps_datastore'
 require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_manifest'
 require_relative 'endpoints/auth'
@@ -105,6 +106,7 @@ module Slack
         include Api
         include Apps
         include AppsConnections
+        include AppsDatastore
         include AppsEventAuthorizations
         include AppsManifest
         include Auth
