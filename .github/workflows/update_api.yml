@@ -22,7 +22,7 @@ jobs:
         id: create-initial-pull-request
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: update-api
+          branch: automated-api-update
           base: master
       # Generation of new API methods and update of pull request
       - name: Set up Ruby
@@ -45,7 +45,7 @@ jobs:
           title: Update API from slack-api-ref (${{ env.CURRENT_DATE }})
           body: |
             Update API from [slack-api-ref](https://github.com/slack-ruby/slack-api-ref) (${{ env.CURRENT_DATE }})
-          branch: update-api
+          branch: automated-api-update
           base: master
           committer: GitHub <noreply@github.com>
           author: GitHub <noreply@github.com>
