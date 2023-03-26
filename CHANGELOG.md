@@ -1,6 +1,7 @@
 ### 2.2.0 (Next)
 
 * Your contribution here.
+* [#458](https://github.com/slack-ruby/slack-ruby-client/pull/458): Add workflow for automatic API updates - [@duffn](https://github.com/duffn).
 * [#455](https://github.com/slack-ruby/slack-ruby-client/pull/455): Update Slack API: Added pagination to `team.accessLogs` and `AppsDatastore` methods - [@marfoldi](https://github.com/marfoldi).
 * [#454](https://github.com/slack-ruby/slack-ruby-client/pull/454): Added `Slack::Messages::Formatting#escape` - [@marfoldi](https://github.com/marfoldi).
 * [#452](https://github.com/slack-ruby/slack-ruby-client/pull/452): Automatically generate Web API multi-argument requirements from docs - [@jmanian](https://github.com/jmanian).

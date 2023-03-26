@@ -1,0 +1,51 @@
+name: Update API from slack-api-ref
+on:
+  schedule:
+    - cron: "15 23 * * *"
+jobs:
+  update-api:
+    if: ${{ github.repository == 'slack-ruby/slack-ruby-client' }}
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+      pull-requests: write
+    steps:
+      # Setup and potential creation of initial pull request
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive  
+      - name: Get current date
+        run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Make a file to trigger an initial pull request
+        run : echo "${{ env.CURRENT_DATE }}" > file.txt
+      - name: Create initial pull request
+        id: create-initial-pull-request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: automated-api-update
+          base: master
+      # Generation of new API methods and update of pull request
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+      - name: Update API from slack-api-ref
+        run: bundle exec rake slack:api:update
+      - name: Remove files added by setup-ruby
+        run: rm -rf vendor
+      - name: Update changelog
+        run: |
+          ruby -i -pe 'sub(/\* Your contribution here\./, "* Your contribution here.\n* [#${{ steps.create-initial-pull-request.outputs.pull-request-number }}](https://github.com/slack-ruby/slack-ruby-client/pull/${{ steps.create-initial-pull-request.outputs.pull-request-number }}): Update Slack API (${{ env.CURRENT_DATE }}) - [@slack-ruby-client](https://github.com/slack-ruby/slack-ruby-client).")' CHANGELOG.md
+      - name: Create pull request with changelog
+        id: update-changelog
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Update API from slack-api-ref (${{ env.CURRENT_DATE }})
+          title: Update API from slack-api-ref (${{ env.CURRENT_DATE }})
+          body: |
+            Update API from [slack-api-ref](https://github.com/slack-ruby/slack-api-ref) (${{ env.CURRENT_DATE }})
+          branch: automated-api-update
+          base: master
+          committer: GitHub <noreply@github.com>
+          author: GitHub <noreply@github.com>
