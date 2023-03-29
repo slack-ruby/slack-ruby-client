@@ -6,18 +6,20 @@ jobs:
   update-api:
     if: ${{ github.repository == 'slack-ruby/slack-ruby-client' }}
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       contents: write
       pull-requests: write
     steps:
       # Setup and potential creation of initial pull request
       - uses: actions/checkout@v3
         with:
-          submodules: recursive  
+          submodules: recursive
+      - name: Config git to rebase
+        run: git config --global pull.rebase true
       - name: Get current date
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Make a file to trigger an initial pull request
-        run : echo "${{ env.CURRENT_DATE }}" > file.txt
+        run: echo "${{ env.CURRENT_DATE }}" > file.txt
       - name: Create initial pull request
         id: create-initial-pull-request
         uses: peter-evans/create-pull-request@v4
