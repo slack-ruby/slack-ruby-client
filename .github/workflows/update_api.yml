@@ -26,10 +26,18 @@ jobs:
         run: bundle exec rake slack:api:update
       - name: Remove files added by setup-ruby
         run: rm -rf vendor
+      - name: GitHub App token
+        id: github_app_token
+        uses: tibdex/github-app-token@v1.6.0
+        with:
+          app_id: ${{ secrets.CI_APP_ID }}
+          private_key: ${{ secrets.CI_APP_PRIVATE_KEY }}
+          installation_id: 36985419
       - name: Create pull request
         id: create-pull-request
         uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ steps.github_app_token.outputs.token }}
           commit-message: Update API from slack-api-ref
           title: Update API from slack-api-ref
           body: |
