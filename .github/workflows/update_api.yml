@@ -26,7 +26,14 @@ jobs:
         run: bundle exec rake slack:api:update
       - name: Remove files added by setup-ruby
         run: rm -rf vendor
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Get slack-api-ref ref
+        id: api-ref
+        run: echo "::set-output name=api-ref::$(git rev-parse --short HEAD:lib/slack/web/api/slack-api-ref)"
       - name: GitHub App token
+        if: ${{ github.repository == 'slack-ruby/slack-ruby-client' }}
         id: github_app_token
         uses: tibdex/github-app-token@v1.6.0
         with:
@@ -34,15 +41,38 @@ jobs:
           private_key: ${{ secrets.CI_APP_PRIVATE_KEY }}
           installation_id: 36985419
       - name: Create pull request
-        id: create-pull-request
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ steps.github_app_token.outputs.token }}
-          commit-message: Update API from slack-api-ref
-          title: Update API from slack-api-ref
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
+          title: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}
           body: |
-            Update API from [slack-api-ref](https://github.com/slack-ruby/slack-api-ref)
+            Update API from [slack-api-ref](https://github.com/slack-ruby/slack-api-ref).
+            Rev: ${{ steps.api-ref.outputs.api-ref }}
+            Date: ${{ steps.date.outputs.date }}
           branch: automated-api-update
           base: master
-          committer: GitHub <noreply@github.com>
-          author: GitHub <noreply@github.com>
+          committer: slack-ruby-ci-bot <noreply@github.com>
+          author: slack-ruby-ci-bot <noreply@github.com>
+      - name: Fetch pull request
+        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
+        run: |
+          git config user.name slack-ruby-ci-bot
+          git config user.email noreply@github.com
+          git pull
+          git checkout automated-api-update
+      - uses: jacobtomlinson/gha-find-replace@v3
+        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
+        with:
+          include: CHANGELOG.md
+          find: "\\* Your contribution here."
+          replace: "* [#${{steps.cpr.outputs.pull-request-number}}](https://github.com/slack-ruby-client/pulls/${{steps.cpr.outputs.pull-request-number}}): Update API from [slack-api-ref@${{ steps.api-ref.outputs.api-ref }}](https://github.com/slack-ruby/slack-api-ref/commit/${{ steps.api-ref.outputs.api-ref }}) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).\n* Your contribution here."
+      - name: Update pull request
+        env:
+          GITHUB_TOKEN: ${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}
+        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
+        run: |
+          git add CHANGELOG.md
+          git commit --amend --no-edit
+          git push origin automated-api-update -f
