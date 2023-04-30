@@ -44,7 +44,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}
           commit-message: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
           title: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}
           body: |
@@ -61,15 +61,11 @@ jobs:
           include: CHANGELOG.md
           find: "\\* Your contribution here."
           replace: "* [#${{steps.cpr.outputs.pull-request-number}}](https://github.com/slack-ruby-client/pulls/${{steps.cpr.outputs.pull-request-number}}): Update API from [slack-api-ref@${{ steps.api-ref.outputs.api-ref }}](https://github.com/slack-ruby/slack-api-ref/commit/${{ steps.api-ref.outputs.api-ref }}) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).\n* Your contribution here."
-      - name: push
-        uses: dblock/commit@edcd15e90878df73c18a5bbdcd5755f10be8baa0
-        with:
-          github-token: ${{ steps.github_app_token.outputs.token }}
-          push-branch: 'automated-api-update'
-          commit-message: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
-          commit-amend: true
-          force-add: true
-          force-push: true
-          files: CHANGELOG.md
-          name: slack-ruby-ci-bot
-          email: noreply@github.com
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'slack-ruby-ci-bot'
+          git config --global user.email 'noreply@github.com'
+          git remote set-url origin https://x-access-token:${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git add CHANGELOG.md
+          git commit --amend --no-edit
+          git push origin automated-api-update -f
