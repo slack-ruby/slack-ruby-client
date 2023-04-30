@@ -55,13 +55,15 @@ jobs:
           base: master
           committer: slack-ruby-ci-bot <noreply@github.com>
           author: slack-ruby-ci-bot <noreply@github.com>
-      - uses: jacobtomlinson/gha-find-replace@v3
+      - name: Update CHANGELOG
+        uses: jacobtomlinson/gha-find-replace@v3
         if: ${{ steps.cpr.outputs.pull-request-number != '' }}
         with:
           include: CHANGELOG.md
           find: "\\* Your contribution here."
           replace: "* [#${{steps.cpr.outputs.pull-request-number}}](https://github.com/slack-ruby-client/pulls/${{steps.cpr.outputs.pull-request-number}}): Update API from [slack-api-ref@${{ steps.api-ref.outputs.api-ref }}](https://github.com/slack-ruby/slack-api-ref/commit/${{ steps.api-ref.outputs.api-ref }}) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).\n* Your contribution here."
       - name: Commit and Push
+        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
         run: |
           git config --local user.name 'slack-ruby-ci-bot'
           git config --local user.email 'noreply@github.com'
