@@ -14,7 +14,7 @@ module Slack
           # @option options [boolean] :exclude_archived
           #   Set to true to exclude archived channels from the list.
           # @option options [number] :limit
-          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer with a max value of 999.
           # @option options [string] :team_id
           #   encoded team id to list conversations in, required if org token is used.
           # @option options [string] :types

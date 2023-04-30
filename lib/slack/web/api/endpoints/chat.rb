@@ -107,9 +107,9 @@ module Slack
           # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [string] :icon_emoji
-          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
-          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   URL to an image to use as the icon for this message.
           # @option options [boolean] :link_names
           #   Find and link channel names and usernames.
           # @option options [string] :parse
@@ -117,7 +117,7 @@ module Slack
           # @option options [string] :thread_ts
           #   Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
           # @option options [string] :username
-          #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Set your bot's user name.
           # @see https://api.slack.com/methods/chat.postEphemeral
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
@@ -143,9 +143,9 @@ module Slack
           # @option options [boolean] :as_user
           #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.
           # @option options [string] :icon_emoji
-          #   Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
-          #   URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   URL to an image to use as the icon for this message.
           # @option options [boolean] :link_names
           #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
           # @option options [string] :metadata
@@ -163,7 +163,7 @@ module Slack
           # @option options [boolean] :unfurl_media
           #   Pass false to disable unfurling of media content.
           # @option options [string] :username
-          #   Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.
+          #   Set your bot's user name.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})

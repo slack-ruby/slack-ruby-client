@@ -9,8 +9,9 @@ module Slack
         g.desc 'Download form responses of a workflow'
         g.long_desc %( Download form responses of a workflow )
         g.command 'export' do |c|
-          c.flag 'step_id', desc: '.'
+          c.flag 'step_id', desc: 'The ID of the OpenForm step to export.'
           c.flag 'workflow', desc: 'The workflow encoded ID or workflow reference.'
+          c.flag 'workflow_app_id', desc: 'The app tied to the workflow reference.'
           c.flag 'workflow_id', desc: 'The workflow ID, starts with Wf*.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.functions_workflows_steps_responses_export(options))
