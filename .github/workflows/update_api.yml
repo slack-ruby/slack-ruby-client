@@ -64,7 +64,7 @@ jobs:
       - name: push
         uses: dblock/commit@edcd15e90878df73c18a5bbdcd5755f10be8baa0
         with:
-          github-token: ${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.github_app_token.outputs.token }}
           push-branch: 'automated-api-update'
           commit-message: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
           commit-amend: true
