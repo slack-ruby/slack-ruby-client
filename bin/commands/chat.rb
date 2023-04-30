@@ -68,12 +68,12 @@ module Slack
           c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
-          c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
-          c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
+          c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
+          c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames.'
           c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread."
-          c.flag 'username', desc: "Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below."
+          c.flag 'username', desc: "Set your bot's user name."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_postEphemeral(options))
           end
@@ -87,8 +87,8 @@ module Slack
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'text', desc: 'The formatted text of the message to be published. If blocks are included, this will become the fallback text used in notifications.'
           c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.'
-          c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
-          c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below.'
+          c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
+          c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
           c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
           c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
@@ -97,7 +97,7 @@ module Slack
           c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
           c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
           c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
-          c.flag 'username', desc: "Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See authorship below."
+          c.flag 'username', desc: "Set your bot's user name."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_postMessage(options))
           end

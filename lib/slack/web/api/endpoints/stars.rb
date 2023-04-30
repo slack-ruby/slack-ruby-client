@@ -25,7 +25,7 @@ module Slack
           end
 
           #
-          # List a user's saved items, formerly known as _stars_.
+          # List a user's saved items, formerly known as stars.
           #
           # @option options [string] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.

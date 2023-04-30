@@ -5,6 +5,7 @@
 * [#454](https://github.com/slack-ruby/slack-ruby-client/pull/454): Added `Slack::Messages::Formatting#escape` - [@marfoldi](https://github.com/marfoldi).
 * [#452](https://github.com/slack-ruby/slack-ruby-client/pull/452): Automatically generate Web API multi-argument requirements from docs - [@jmanian](https://github.com/jmanian).
 * [#448](https://github.com/slack-ruby/slack-ruby-client/pull/448), [#453](https://github.com/slack-ruby/slack-ruby-client/pull/453): Automatically convert more Web API arguments to JSON-encoded strings - [@jmanian](https://github.com/jmanian).
+* [#465](https://github.com/slack-ruby-client/pulls/465): Update API from [slack-api-ref@878be8f](https://github.com/slack-ruby/slack-api-ref/commit/878be8f) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.1.0 (2023/03/17)

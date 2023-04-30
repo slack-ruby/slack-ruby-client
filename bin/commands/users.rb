@@ -11,7 +11,7 @@ module Slack
         g.command 'conversations' do |c|
           c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
           c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'
-          c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
+          c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer with a max value of 999."
           c.flag 'team_id', desc: 'encoded team id to list conversations in, required if org token is used.'
           c.flag 'types', desc: 'Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.'
           c.flag 'user', desc: "Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership."
