@@ -32,7 +32,7 @@ module Slack
           # @option options [array] :entity_ids
           #   The entities for which the roles apply.
           # @option options [integer] :limit
-          #   The maximum number of items to return. Must be between 1 - 100 both inclusive.
+          #   The maximum number of items to return. Must be between 1 - 200 both inclusive.
           # @option options [array] :role_ids
           #   collection of role ids to scope results by.
           # @option options [string] :sort_dir

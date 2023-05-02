@@ -22,7 +22,7 @@ module Slack
         g.command 'listAssignments' do |c|
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'entity_ids', desc: 'The entities for which the roles apply.'
-          c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 100 both inclusive.'
+          c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 200 both inclusive.'
           c.flag 'role_ids', desc: 'collection of role ids to scope results by.'
           c.flag 'sort_dir', desc: 'Sort direction. Default is descending on date_create, can be either ASC or DESC.'
           c.action do |_global_options, options, _args|
