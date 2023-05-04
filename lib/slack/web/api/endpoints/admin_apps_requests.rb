@@ -25,6 +25,8 @@ module Slack
           #
           # List app requests for a team/workspace.
           #
+          # @option options [boolean] :certified
+          #   Limit the results to only include certified apps. When false, no certified apps will appear in the result.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :enterprise_id

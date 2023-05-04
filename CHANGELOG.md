@@ -7,6 +7,7 @@
 * [#448](https://github.com/slack-ruby/slack-ruby-client/pull/448), [#453](https://github.com/slack-ruby/slack-ruby-client/pull/453): Automatically convert more Web API arguments to JSON-encoded strings - [@jmanian](https://github.com/jmanian).
 * [#465](https://github.com/slack-ruby-client/pulls/465): Update API from [slack-api-ref@878be8f](https://github.com/slack-ruby/slack-api-ref/commit/878be8f) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#473](https://github.com/slack-ruby-client/pulls/473): Update API from [slack-api-ref@a29b520](https://github.com/slack-ruby/slack-api-ref/commit/a29b520) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#474](https://github.com/slack-ruby-client/pulls/474): Update API from [slack-api-ref@629967e](https://github.com/slack-ruby/slack-api-ref/commit/629967e) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.1.0 (2023/03/17)
