@@ -9,6 +9,7 @@ module Slack
         g.desc 'List approved apps for an org or workspace.'
         g.long_desc %( List approved apps for an org or workspace. )
         g.command 'list' do |c|
+          c.flag 'certified', desc: 'Only return certified apps when true, return only non-certified apps when false.'
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'enterprise_id', desc: '.'
           c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
