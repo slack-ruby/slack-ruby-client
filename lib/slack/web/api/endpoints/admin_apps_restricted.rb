@@ -9,6 +9,8 @@ module Slack
           #
           # List restricted apps for an org or workspace.
           #
+          # @option options [boolean] :certified
+          #   Only return certified apps when true, return only non-certified apps when false.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :enterprise_id
