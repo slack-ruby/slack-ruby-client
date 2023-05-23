@@ -602,6 +602,7 @@ module Slack
         class UsersNotFound < SlackError; end
         class ValidationErrors < SlackError; end
         class ViewTooLarge < SlackError; end
+        class WorkflowsExportCsvNotEnabled < SlackError; end
 
         ERROR_CLASSES = {
           'access_denied' => AccessDenied,
@@ -1201,6 +1202,7 @@ module Slack
           'users_not_found' => UsersNotFound,
           'validation_errors' => ValidationErrors,
           'view_too_large' => ViewTooLarge,
+          'workflows_export_csv_not_enabled' => WorkflowsExportCsvNotEnabled,
         }.freeze
       end
     end
