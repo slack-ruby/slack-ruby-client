@@ -9,6 +9,7 @@
 * [#473](https://github.com/slack-ruby-client/pulls/473): Update API from [slack-api-ref@a29b520](https://github.com/slack-ruby/slack-api-ref/commit/a29b520) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#474](https://github.com/slack-ruby-client/pulls/474): Update API from [slack-api-ref@629967e](https://github.com/slack-ruby/slack-api-ref/commit/629967e) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#475](https://github.com/slack-ruby-client/pulls/475): Update API from [slack-api-ref@977dad5](https://github.com/slack-ruby/slack-api-ref/commit/977dad5) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#476](https://github.com/slack-ruby-client/pulls/476): Update API from [slack-api-ref@d0b2989](https://github.com/slack-ruby/slack-api-ref/commit/d0b2989) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.1.0 (2023/03/17)

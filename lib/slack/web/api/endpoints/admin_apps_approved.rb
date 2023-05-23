@@ -10,7 +10,7 @@ module Slack
           # List approved apps for an org or workspace.
           #
           # @option options [boolean] :certified
-          #   Only return certified apps when true, return only non-certified apps when false.
+          #   Limit the results to only include certified apps. When false, no certified apps will appear in the result.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :enterprise_id
