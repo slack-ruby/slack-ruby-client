@@ -12,7 +12,7 @@ module Slack
           c.flag 'external_unique_id', desc: 'An ID supplied by the 3rd-party Call provider. It must be unique across all Calls from that service.'
           c.flag 'join_url', desc: 'The URL required for a client to join the Call.'
           c.flag 'created_by', desc: 'The valid Slack user ID of the user who created this Call. When this method is called with a user token, the created_by field is optional and defaults to the authed user of the token. Otherwise, the field is required.'
-          c.flag 'date_start', desc: 'Call start time in UTC UNIX timestamp format.'
+          c.flag 'date_start', desc: 'Unix timestamp of the call start time.'
           c.flag 'desktop_app_join_url', desc: 'When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL.'
           c.flag 'external_display_id', desc: 'An optional, human-readable ID supplied by the 3rd-party Call provider. If supplied, this ID will be displayed in the Call object.'
           c.flag 'title', desc: 'The name of the Call.'

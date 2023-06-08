@@ -11,9 +11,9 @@ module Slack
         g.command 'list' do |c|
           c.flag 'channel', desc: 'The channel of the scheduled messages.'
           c.flag 'cursor', desc: 'For pagination purposes, this is the cursor value returned from a previous call to chat.scheduledmessages.list indicating where you want to start this call from.'
-          c.flag 'latest', desc: 'A UNIX timestamp of the latest value in the time range.'
+          c.flag 'latest', desc: 'A Unix timestamp of the latest value in the time range.'
           c.flag 'limit', desc: 'Maximum number of original entries to return.'
-          c.flag 'oldest', desc: 'A UNIX timestamp of the oldest value in the time range.'
+          c.flag 'oldest', desc: 'A Unix timestamp of the oldest value in the time range.'
           c.flag 'team_id', desc: 'encoded team id to list channels in, required if org token is used.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_scheduledMessages_list(options))

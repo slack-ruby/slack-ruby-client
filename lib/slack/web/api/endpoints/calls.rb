@@ -16,7 +16,7 @@ module Slack
           # @option options [string] :created_by
           #   The valid Slack user ID of the user who created this Call. When this method is called with a user token, the created_by field is optional and defaults to the authed user of the token. Otherwise, the field is required.
           # @option options [integer] :date_start
-          #   Call start time in UTC UNIX timestamp format.
+          #   Unix timestamp of the call start time.
           # @option options [string] :desktop_app_join_url
           #   When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL.
           # @option options [string] :external_display_id
