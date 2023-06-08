@@ -78,6 +78,7 @@ module Slack
         class CannotParse < SlackError; end
         class CannotParseAttachment < SlackError; end
         class CannotPrompt < SlackError; end
+        class CannotReplyToMessage < SlackError; end
         class CannotResetBot < SlackError; end
         class CannotResetPrimaryOwner < SlackError; end
         class CannotResolveAlias < SlackError; end
@@ -678,6 +679,7 @@ module Slack
           'cannot_parse' => CannotParse,
           'cannot_parse_attachment' => CannotParseAttachment,
           'cannot_prompt' => CannotPrompt,
+          'cannot_reply_to_message' => CannotReplyToMessage,
           'cannot_reset_bot' => CannotResetBot,
           'cannot_reset_primary_owner' => CannotResetPrimaryOwner,
           'cannot_resolve_alias' => CannotResolveAlias,
