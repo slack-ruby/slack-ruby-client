@@ -102,7 +102,7 @@ module Slack
         return false if @socket.nil? || !@socket.connected?
 
         time_since_last_message = @socket.time_since_last_message
-
+        logger.info(to_s) { "time_since_last_message #{time_since_last_message}" }
         # If the server responded within the specified time, we are okay:
         return true if time_since_last_message < websocket_ping
 
@@ -235,7 +235,7 @@ module Slack
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
         handlers.each do |handler|
-          store.instance_exec(data, self, &handler)
+          Async.run { store.instance_exec(data, self, &handler) }
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }
