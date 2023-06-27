@@ -102,7 +102,7 @@ module Slack
         return false if @socket.nil? || !@socket.connected?
 
         time_since_last_message = @socket.time_since_last_message
-        logger.info(to_s) { "time_since_last_message #{time_since_last_message}" }
+
         # If the server responded within the specified time, we are okay:
         return true if time_since_last_message < websocket_ping
 
