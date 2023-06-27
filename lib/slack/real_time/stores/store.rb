@@ -327,48 +327,50 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/hello.json
         on :hello do |_data, client|
           # rubocop:disable Metrics/BlockNesting
-          if caches.include?(:teams)
-            team_info = client.web_client.team_info
-            team = Models::Team.new(team_info.team)
-            teams[team.id] = teams.key?(team.id) ? teams[team.id].merge(team) : team
-          end
+          Async.run do
+            if caches.include?(:teams)
+              team_info = client.web_client.team_info
+              team = Models::Team.new(team_info.team)
+              teams[team.id] = teams.key?(team.id) ? teams[team.id].merge(team) : team
+            end
 
-          if caches.include?(:users) || caches.include?(:bots)
-            client.web_client.users_list do |users_list|
-              users_list.members.each do |user_data|
-                if caches.include?(:users)
-                  user = Models::User.new(user_data)
-                  users[user.id] = users.key?(user.id) ? users[user.id].merge(user) : user
+            if caches.include?(:users) || caches.include?(:bots)
+              client.web_client.users_list do |users_list|
+                users_list.members.each do |user_data|
+                  if caches.include?(:users)
+                    user = Models::User.new(user_data)
+                    users[user.id] = users.key?(user.id) ? users[user.id].merge(user) : user
+                  end
+
+                  next unless user_data.is_bot? && caches.include?(:bots)
+
+                  bot_info = client.web_client.bots_info(bot: user_data.profile.bot_id)
+                  bot = Models::Bot.new(bot_info.bot)
+                  bots[bot.id] = bots.key?(bot.id) ? bots[bot.id].merge(bot) : bot
                 end
-
-                next unless user_data.is_bot? && caches.include?(:bots)
-
-                bot_info = client.web_client.bots_info(bot: user_data.profile.bot_id)
-                bot = Models::Bot.new(bot_info.bot)
-                bots[bot.id] = bots.key?(bot.id) ? bots[bot.id].merge(bot) : bot
               end
             end
-          end
 
-          if caches.include?(:public_channels) || caches.include?(:private_channels) ||
-             caches.include?(:ims) || caches.include?(:mpims)
-            types = CONVERSATION_TYPES.slice(*caches).values.join(',')
-            client.web_client.conversations_list(types: types) do |conversations|
-              conversations.channels.each do |channel_data|
-                if channel_data.is_mpim?
-                  mpim = Models::Mpim.new(channel_data)
-                  mpims[mpim.id] = mpims.key?(mpim.id) ? mpims[mpim.id].merge(mpim) : mpim
-                elsif channel_data.is_im?
-                  im = Models::Im.new(channel_data)
-                  ims[im.id] = ims.key?(im.id) ? ims[im.id].merge(im) : im
-                elsif channel_data.is_channel? || channel_data.is_group?
-                  channel = Models::Channel.new(channel_data)
-                  if channel.is_private?
-                    private_channels[channel.id] =
-                      private_channels.key?(channel.id) ? private_channels[channel.id].merge(channel) : channel
-                  else
-                    public_channels[channel.id] =
-                      public_channels.key?(channel.id) ? public_channels[channel.id].merge(channel) : channel
+            if caches.include?(:public_channels) || caches.include?(:private_channels) ||
+              caches.include?(:ims) || caches.include?(:mpims)
+              types = CONVERSATION_TYPES.slice(*caches).values.join(',')
+              client.web_client.conversations_list(types: types) do |conversations|
+                conversations.channels.each do |channel_data|
+                  if channel_data.is_mpim?
+                    mpim = Models::Mpim.new(channel_data)
+                    mpims[mpim.id] = mpims.key?(mpim.id) ? mpims[mpim.id].merge(mpim) : mpim
+                  elsif channel_data.is_im?
+                    im = Models::Im.new(channel_data)
+                    ims[im.id] = ims.key?(im.id) ? ims[im.id].merge(im) : im
+                  elsif channel_data.is_channel? || channel_data.is_group?
+                    channel = Models::Channel.new(channel_data)
+                    if channel.is_private?
+                      private_channels[channel.id] =
+                        private_channels.key?(channel.id) ? private_channels[channel.id].merge(channel) : channel
+                    else
+                      public_channels[channel.id] =
+                        public_channels.key?(channel.id) ? public_channels[channel.id].merge(channel) : channel
+                    end
                   end
                 end
               end
