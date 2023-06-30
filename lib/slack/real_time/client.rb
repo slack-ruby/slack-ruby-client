@@ -23,6 +23,7 @@ module Slack
         @token ||= Slack.config.token
         @logger ||= (Slack::Config.logger || Slack::Logger.default)
         @web_client = Slack::Web::Client.new(token: token, logger: logger)
+        logger.info(to_s) {}
       end
 
       [:self, :team, *Stores::Base::CACHES].each do |store_method|
@@ -234,8 +235,10 @@ module Slack
 
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
-        handlers.each do |handler|
-          Async.run { store.instance_exec(data, self, &handler) }
+        Async.run do
+          handlers.each do |handler|
+            store.instance_exec(data, self, &handler)
+          end
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }

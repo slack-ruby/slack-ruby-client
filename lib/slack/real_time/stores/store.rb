@@ -351,7 +351,7 @@ module Slack
           end
 
           if caches.include?(:public_channels) || caches.include?(:private_channels) ||
-              caches.include?(:ims) || caches.include?(:mpims)
+             caches.include?(:ims) || caches.include?(:mpims)
             types = CONVERSATION_TYPES.slice(*caches).values.join(',')
             client.web_client.conversations_list(types: types) do |conversations|
               conversations.channels.each do |channel_data|
