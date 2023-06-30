@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'gli'
-require 'slack_ruby_client'
+require_relative '../lib/slack_ruby_client'
 
 module Slack
   module Cli

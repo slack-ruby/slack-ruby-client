@@ -1,2 +1,2 @@
 # frozen_string_literal: true
-require 'slack-ruby-client'
+require_relative 'slack-ruby-client'
