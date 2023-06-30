@@ -51,7 +51,9 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
   - [Events API](#events-api)
     - [Configuring Slack::Events](#configuring-slackevents)
     - [Verifying the Request Signature](#verifying-the-request-signature)
-  - [Message Parsing](#message-parsing)
+  - [Message Handling](#message-handling)
+    - [Formatting Messages](#formatting-messages)
+    - [Parsing Messages](#parsing-messages)
   - [Command-Line Client](#command-line-client)
     - [Authenticate with Slack](#authenticate-with-slack)
     - [Send a Message](#send-a-message)
@@ -583,33 +585,100 @@ Slack::Events::Request.new(http_request,
 
 The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Slack::Events::Request::InvalidSignature` or `Slack::Events::Request::TimestampExpired` errors.
 
-### Message Parsing
+### Message Handling
 
-All text in Slack uses the same [system of escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. Use [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) to escape or unescape messages. This comes handy, for example, you want to treat all input to a real time bot as plain text.
+All text in Slack uses the same [system of formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
+
+#### Formatting Messages
+
+`Slack::Messages::Formatting` provides a number of methods for formatting objects that you can then embed in outgoing messages.
+
+##### Date and time formatting
+
+You can embed a pre-formatted date in a message as a string like any other text, but using Slack's date formatting allows you to display dates based on user preferences for dates and times, incorporating users' local time zones, and optionally using relative values like "yesterday", "today", or "tomorrow" when appropriate.
 
 ```ruby
-Slack::Messages::Formatting.unescape('Hello &amp; &lt;world&gt;'))
+date = Time.now
+
+# Display date as `YYYY-MM-DD HH:MM:SS`
+Slack::Messages::Formatting.date(date)
+  # => "<!date^1688150386^{date_num} {time_secs}|2023-06-30 18:39:46 +0000>"
+
+# Specify a different format
+# See https://api.slack.com/reference/surfaces/formatting#date-formatting for supported formats
+Slack::Messages::Formatting.date(date, format: 'date_long_pretty')
+  # => "<!date^1688150386^date_long_pretty|2023-06-30 18:39:46 +0000>"
+
+# Link your timestamp to a fully qualified URL
+Slack::Messages::Formatting.date(date, link: 'https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif')
+  # => "<!date^1688150386^{date_num} {time_secs}^https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif|2023-06-30 18:39:46 +0000>"
+
+# Specify custom fallback text to use if the client is unable to process the date
+Slack::Messages::Formatting.date(date, text: 'party time!')
+  # => "<!date^1688150386^{date_num} {time_secs}|party time!>"
+```
+
+##### Channel ID formatting
+
+If you already know the channel name you can just embed it in the message as `#some-channel`, but if you only have the ID you can embed it using special syntax which Slack will display as the channel name (while respecting channel visibility).
+
+```ruby
+channel_id = 'C0000000001'
+Slack::Messages::Formatting.channel_link(channel_id)
+  # => "<#C0000000001>"
+```
+
+##### User ID formatting
+
+If you already know the user name you can just embed it in the message as `@some_username`, but if you only have the ID you can embed it using special syntax which Slack will display as the user name.
+
+```ruby
+user_id = 'U0000000001'
+Slack::Messages::Formatting.user_link(user_id)
+  # => "<@U0000000001>"
+```
+
+##### URL formatting
+
+Slack will automatically parse fully qualified URLs in messages, but you need special formatting to embed a link with different text.
+
+```ruby
+text = 'party time'
+url = 'https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif'
+Slack::Messages::Formatting.url_link(text, url)
+  # => "<https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif|party time>"
+```
+
+#### Parsing Messages
+
+`Slack::Messages::Formatting` also provides ways to escape or unescape messages. This comes handy, for example, you want to treat all input to a real time bot as plain text.
+
+##### Unescaping message content
+
+```ruby
+Slack::Messages::Formatting.unescape('Hello &amp; &lt;world&gt;')
   # => 'Hello & <world>'
-Slack::Messages::Formatting.unescape('Hey <@U024BE7LH|bob>, did you see my file?'))
+Slack::Messages::Formatting.unescape('Hey <@U024BE7LH|bob>, did you see my file?')
   # => 'Hey @bob, did you see my file?'
-Slack::Messages::Formatting.unescape('Hey <@U02BEFY4U>'))
+Slack::Messages::Formatting.unescape('Hey <@U02BEFY4U>')
   # => 'Hey @U02BEFY4U'
-Slack::Messages::Formatting.unescape('This message contains a URL <http://foo.com/>'))
+Slack::Messages::Formatting.unescape('This message contains a URL <http://foo.com/>')
   # => 'This message contains a URL http://foo.com/'
-Slack::Messages::Formatting.unescape('So does this one: <http://www.foo.com|www.foo.com>'))
+Slack::Messages::Formatting.unescape('So does this one: <http://www.foo.com|www.foo.com>')
   # => 'So does this one: www.foo.com'
-Slack::Messages::Formatting.unescape('<mailto:bob@example.com|Bob>'))
+Slack::Messages::Formatting.unescape('<mailto:bob@example.com|Bob>')
   # => 'Bob'
-Slack::Messages::Formatting.unescape('Hello <@U123|bob>, say hi to <!everyone> in <#C1234|general>'))
+Slack::Messages::Formatting.unescape('Hello <@U123|bob>, say hi to <!everyone> in <#C1234|general>')
   # => 'Hello @bob, say hi to @everyone in #general'
-Slack::Messages::Formatting.unescape('Hello <@U123|bob> &gt; file.txt'))
+Slack::Messages::Formatting.unescape('Hello <@U123|bob> &gt; file.txt')
   # => 'Hello @bob > file.txt'
-Slack::Messages::Formatting.unescape('“hello”'))
+Slack::Messages::Formatting.unescape('“hello”')
   # => '"hello"'
-Slack::Messages::Formatting.unescape('‘hello’'))
+Slack::Messages::Formatting.unescape('‘hello’')
   # => "'hello'"
 ```
 
+##### Escaping message content
 
 ```ruby
 Slack::Messages::Formatting.escape('Hello & <world>')
