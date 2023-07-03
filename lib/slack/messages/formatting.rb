@@ -35,6 +35,39 @@ module Slack
             .gsub('>', '&gt;')
             .gsub('<', '&lt;')
         end
+
+        #
+        # Format a DateTime or Time object as a date and time in a Slack message
+        # @see https://api.slack.com/reference/surfaces/formatting#date-formatting
+        #
+        def date(time, format: '{date_num} {time_secs}', link: nil, text: nil)
+          args = [time.to_i, format, link].compact
+          "<!date^#{args.join('^')}|#{text || time}>"
+        end
+
+        #
+        # Embed a link to a Slack channel in a message by channel ID
+        # @see https://api.slack.com/reference/surfaces/formatting#linking-channels
+        #
+        def channel_link(channel_id)
+          "<##{channel_id}>"
+        end
+
+        #
+        # Embed a link to a user in a message by user ID
+        # @see https://api.slack.com/reference/surfaces/formatting#mentioning-users
+        #
+        def user_link(user_id)
+          "<@#{user_id}>"
+        end
+
+        #
+        # Embed a URL with custom link text in a message
+        # @see https://api.slack.com/reference/surfaces/formatting#linking-urls
+        #
+        def url_link(text, url)
+          "<#{url}|#{text}>"
+        end
       end
     end
   end
