@@ -23,7 +23,6 @@ module Slack
         @token ||= Slack.config.token
         @logger ||= (Slack::Config.logger || Slack::Logger.default)
         @web_client = Slack::Web::Client.new(token: token, logger: logger)
-        logger.info(to_s) { "@async_handlers = #{@async_handlers}"}
       end
 
       [:self, :team, *Stores::Base::CACHES].each do |store_method|
