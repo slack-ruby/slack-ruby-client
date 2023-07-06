@@ -71,4 +71,54 @@ describe Slack::Messages::Formatting do
       expect(formatting.escape('Hello & <world>')).to eq 'Hello &amp; &lt;world&gt;'
     end
   end
+
+  context '#date' do
+    let(:timestamp) { -2955646679 }
+    let(:time) { Time.at(timestamp) }
+    let(:custom_format) { '{date_short}' }
+    let(:optional_link) { 'https://www.timeanddate.com/worldclock/fixedtime.html?year=1876&month=5&day=4&hour=03&min=02&sec=01' }
+    let(:fallback_text) { 'a long, long time ago' }
+
+    it 'formats a timestamp' do
+      expect(formatting.date(time)).to eq "<!date^#{timestamp}^{date_num} {time_secs}|#{time}>"
+    end
+
+    it 'can use custom format' do
+      expect(formatting.date(time, format: custom_format)).to eq "<!date^#{timestamp}^#{custom_format}|#{time}>"
+    end
+
+    it 'can add a custom link' do
+      expect(formatting.date(time,
+                             link: optional_link)).to eq "<!date^#{timestamp}^{date_num} {time_secs}^#{optional_link}|#{time}>"
+    end
+
+    it 'can add custom fallback text' do
+      expect(formatting.date(time, text: fallback_text)).to eq "<!date^#{timestamp}^{date_num} {time_secs}|#{fallback_text}>"
+    end
+  end
+
+  context '#channel_link' do
+    let(:channel_id) { 'C0000000001' }
+
+    it 'links to a channel by its ID' do
+      expect(formatting.channel_link(channel_id)).to eq "<##{channel_id}>"
+    end
+  end
+
+  context '#user_link' do
+    let(:user_id) { 'U0000000001' }
+
+    it 'links to a user by its ID' do
+      expect(formatting.user_link(user_id)).to eq "<@#{user_id}>"
+    end
+  end
+
+  context '#url_link' do
+    let(:text) { 'super cool website' }
+    let(:url) { 'https://theuselessweb.site/' }
+
+    it 'formats a URL with custom link text' do
+      expect(formatting.url_link(text, url)).to eq "<#{url}|#{text}>"
+    end
+  end
 end

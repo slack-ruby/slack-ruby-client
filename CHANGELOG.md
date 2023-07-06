@@ -11,7 +11,8 @@
 * [#475](https://github.com/slack-ruby-client/pulls/475): Update API from [slack-api-ref@977dad5](https://github.com/slack-ruby/slack-api-ref/commit/977dad5) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#476](https://github.com/slack-ruby-client/pulls/476): Update API from [slack-api-ref@d0b2989](https://github.com/slack-ruby/slack-api-ref/commit/d0b2989) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#478](https://github.com/slack-ruby-client/pulls/478): Update API from [slack-api-ref@d797055](https://github.com/slack-ruby/slack-api-ref/commit/d797055) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#486](https://github.com/slack-ruby/slack-ruby-client/pull/486): Async cache build for slack::realtime::stores::store - [@milestruecar](https://github.com/milestruecar).
+* [#480](https://github.com/slack-ruby-client/pulls/480): Add common message formatting utilities - [@chrisbloom7](https://github.com/chrisbloom7).
+* [#486](https://github.com/slack-ruby/slack-ruby-client/pull/486): Async handler support for Slack::RealTime::Config and Client - [@milestruecar](https://github.com/milestruecar).
 * Your contribution here.
 
 ### 2.1.0 (2023/03/17)
