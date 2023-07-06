@@ -23,7 +23,7 @@ module Slack
         @token ||= Slack.config.token
         @logger ||= (Slack::Config.logger || Slack::Logger.default)
         @web_client = Slack::Web::Client.new(token: token, logger: logger)
-        logger.info(to_s) {}
+        logger.info(to_s) { "@async_handlers = #{@async_handlers}"}
       end
 
       [:self, :team, *Stores::Base::CACHES].each do |store_method|
@@ -235,14 +235,27 @@ module Slack
 
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
+        send("async_handlers_#{@async_handlers.to_s}", handlers, data)
+      rescue NoMethodError => e
+        logger.error(to_s) { "Invalid RealTime::Client config! async_handlers must be :all or :none" }
+        false
+      rescue StandardError => e
+        logger.error("#{self}##{__method__}") { e }
+        false
+      end
+
+      def async_handlers_all(handlers, data)
         Async.run do
           handlers.each do |handler|
             store.instance_exec(data, self, &handler)
           end
         end
-      rescue StandardError => e
-        logger.error("#{self}##{__method__}") { e }
-        false
+      end
+
+      def async_handlers_none(handlers, data)
+        handlers.each do |handler|
+          store.instance_exec(data, self, &handler)
+        end
       end
 
       def run_callbacks(type, data)
