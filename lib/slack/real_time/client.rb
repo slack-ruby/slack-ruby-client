@@ -241,7 +241,7 @@ module Slack
           handlers_loop(handlers, data)
         else
           raise Config::InvalidAsyncHandlersError,
-            "Invalid Slack::RealTime::Client config! async_handlers must be :all or :none, currently set to #{async_handlers.inspect}"
+            "Invalid value '#{async_handlers.inspect}' for config#async_handlers, must be :all or :none."
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }
