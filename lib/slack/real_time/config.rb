@@ -3,6 +3,7 @@ module Slack
   module RealTime
     module Config
       class NoConcurrencyError < StandardError; end
+      class InvalidAsyncHandlersError < StandardError; end
 
       extend self
 

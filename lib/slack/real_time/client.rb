@@ -234,13 +234,14 @@ module Slack
 
       def run_handlers(type, data)
         handlers = store.class.events[type.to_s]
-        case @async_handlers
-        when :all 
+        case async_handlers
+        when :all
           Async.run { handlers_loop(handlers, data) }
-        when :none 
+        when :none
           handlers_loop(handlers, data)
         else
-          raise "Invalid Slack::RealTime::Client config! async_handlers must be :all or :none"
+          raise Config::InvalidAsyncHandlersError,
+            "Invalid Slack::RealTime::Client config! async_handlers must be :all or :none, currently set to #{async_handlers.inspect}"
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }
