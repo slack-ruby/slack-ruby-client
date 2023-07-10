@@ -18,7 +18,7 @@ module Slack
           # @option options [string] :team_id
           #   Encoded team id, required if org token is used.
           # @option options [user] :user
-          #   The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
+          #   No longer supported - reminders cannot be set for other users. Previously, was the user who would receive the reminder.
           # @see https://api.slack.com/methods/reminders.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.add.json
           def reminders_add(options = {})
