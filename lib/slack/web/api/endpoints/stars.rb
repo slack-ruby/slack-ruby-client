@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Stars
           #
-          # Save an item for later. Formerly known as _adding a star_.
+          # Save an item for later. Formerly known as adding a star.
           #
           # @option options [channel] :channel
           #   Channel to add star to, or channel where the message to add star to was posted (used with timestamp).
@@ -25,7 +25,7 @@ module Slack
           end
 
           #
-          # List a user's saved items, formerly known as stars.
+          # Listed a user's saved items, formerly known as stars.
           #
           # @option options [string] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
