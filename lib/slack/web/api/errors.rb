@@ -594,6 +594,7 @@ module Slack
         class UserIsUltraRestricted < SlackError; end
         class UserMustBeAdmin < SlackError; end
         class UserMustBeInWorkspace < SlackError; end
+        class UserNotAMemberOfThisWorkspace < SlackError; end
         class UserNotFound < SlackError; end
         class UserNotInChannel < SlackError; end
         class UserNotVisible < SlackError; end
@@ -1198,6 +1199,7 @@ module Slack
           'user_is_ultra_restricted' => UserIsUltraRestricted,
           'user_must_be_admin' => UserMustBeAdmin,
           'user_must_be_in_workspace' => UserMustBeInWorkspace,
+          'user_not_a_member_of_this_workspace' => UserNotAMemberOfThisWorkspace,
           'user_not_found' => UserNotFound,
           'user_not_in_channel' => UserNotInChannel,
           'user_not_visible' => UserNotVisible,
