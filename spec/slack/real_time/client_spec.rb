@@ -159,16 +159,30 @@ RSpec.describe Slack::RealTime::Client do
       end
 
       describe '#run_handlers' do
-        context 'when store has no event hooks' do
+        before do
+          @events = client.store.class.events.dup
+          client.store.class.events.clear
+        end
+
+        after do
+          client.store.class.events.merge!(@events)
+        end
+
+        context 'when config#async_handlers is :all' do
           before do
-            @events = client.store.class.events.dup
-            client.store.class.events.clear
+            client.async_handlers = :all
           end
 
           after do
-            client.store.class.events.merge!(@events)
+            client.async_handlers = :none
           end
 
+          it 'returns an Async::Task' do
+            expect(client.send(:run_handlers, 'example', {})).to be_a Async::Task
+          end
+        end
+
+        context 'when store has no event hooks' do
           it 'returns empty array of handlers' do
             expect(client.send(:run_handlers, 'example', {})).to be_empty
           end
