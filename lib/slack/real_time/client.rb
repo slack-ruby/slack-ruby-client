@@ -241,13 +241,13 @@ module Slack
           handlers_loop(handlers, data)
         else
           raise Config::InvalidAsyncHandlersError,
-            "Invalid value '#{async_handlers.inspect}' for config#async_handlers, must be :all or :none."
+                "Invalid value '#{async_handlers.inspect}' for config#async_handlers, must be :all or :none."
         end
       rescue StandardError => e
         logger.error("#{self}##{__method__}") { e }
         false
       end
-      
+
       def handlers_loop(handlers, data)
         handlers.each do |handler|
           store.instance_exec(data, self, &handler)
