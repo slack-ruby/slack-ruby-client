@@ -236,7 +236,7 @@ module Slack
         handlers = store.class.events[type.to_s]
         case async_handlers
         when :all
-          Async.run { handlers_loop(handlers, data) }
+          ::Async.run { handlers_loop(handlers, data) }
         when :none
           handlers_loop(handlers, data)
         else
