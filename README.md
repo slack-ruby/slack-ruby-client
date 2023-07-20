@@ -432,6 +432,7 @@ websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
 start_options   | Options to pass to `rtm.connect`, default is `{ request: { timeout: 180 } }`.
 store_class     | Local store class, default is an in-memory `Slack::RealTime::Stores::Starter`.
 store_options   | Options to initialize the store, default is `{}`.
+async_handlers  | Option to run handlers asynchronously. Valid options are `:all` or `:none`, default is `:none`
 logger          | Optional `Logger` instance that logs RealTime requests and socket data.
 
 Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.connect](https://api.slack.com/methods/rtm.connect). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
