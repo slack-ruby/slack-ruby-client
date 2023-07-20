@@ -150,6 +150,7 @@ module Slack
         class EditWindowClosed < SlackError; end
         class EkmAccessDenied < SlackError; end
         class EmailDoesNotMatch < SlackError; end
+        class EmailNotVerified < SlackError; end
         class EmailTaken < SlackError; end
         class EmojiLimitReached < SlackError; end
         class EmojiNotFound < SlackError; end
@@ -455,6 +456,7 @@ module Slack
         class OrgLevelEmailDisplayDisabled < SlackError; end
         class OrgLoginRequired < SlackError; end
         class OrgNotFound < SlackError; end
+        class OrgResolutionRequired < SlackError; end
         class OrgUserNotInTeam < SlackError; end
         class OverMaxEntityLimit < SlackError; end
         class OverPaginationLimit < SlackError; end
@@ -523,6 +525,7 @@ module Slack
         class TeamNotOnEnterprise < SlackError; end
         class TeamQuotaExceeded < SlackError; end
         class TeamsNotFound < SlackError; end
+        class TemplateNotVisible < SlackError; end
         class ThreadLocked < SlackError; end
         class ThreadNotFound < SlackError; end
         class TimeInPast < SlackError; end
@@ -591,6 +594,7 @@ module Slack
         class UserIsUltraRestricted < SlackError; end
         class UserMustBeAdmin < SlackError; end
         class UserMustBeInWorkspace < SlackError; end
+        class UserNotAMemberOfThisWorkspace < SlackError; end
         class UserNotFound < SlackError; end
         class UserNotInChannel < SlackError; end
         class UserNotVisible < SlackError; end
@@ -751,6 +755,7 @@ module Slack
           'edit_window_closed' => EditWindowClosed,
           'ekm_access_denied' => EkmAccessDenied,
           'email_does_not_match' => EmailDoesNotMatch,
+          'email_not_verified' => EmailNotVerified,
           'email_taken' => EmailTaken,
           'emoji_limit_reached' => EmojiLimitReached,
           'emoji_not_found' => EmojiNotFound,
@@ -1056,6 +1061,7 @@ module Slack
           'org_level_email_display_disabled' => OrgLevelEmailDisplayDisabled,
           'org_login_required' => OrgLoginRequired,
           'org_not_found' => OrgNotFound,
+          'org_resolution_required' => OrgResolutionRequired,
           'org_user_not_in_team' => OrgUserNotInTeam,
           'over_max_entity_limit' => OverMaxEntityLimit,
           'over_pagination_limit' => OverPaginationLimit,
@@ -1124,6 +1130,7 @@ module Slack
           'team_not_on_enterprise' => TeamNotOnEnterprise,
           'team_quota_exceeded' => TeamQuotaExceeded,
           'teams_not_found' => TeamsNotFound,
+          'template_not_visible' => TemplateNotVisible,
           'thread_locked' => ThreadLocked,
           'thread_not_found' => ThreadNotFound,
           'time_in_past' => TimeInPast,
@@ -1192,6 +1199,7 @@ module Slack
           'user_is_ultra_restricted' => UserIsUltraRestricted,
           'user_must_be_admin' => UserMustBeAdmin,
           'user_must_be_in_workspace' => UserMustBeInWorkspace,
+          'user_not_a_member_of_this_workspace' => UserNotAMemberOfThisWorkspace,
           'user_not_found' => UserNotFound,
           'user_not_in_channel' => UserNotInChannel,
           'user_not_visible' => UserNotVisible,

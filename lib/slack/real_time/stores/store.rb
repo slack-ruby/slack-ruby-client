@@ -495,12 +495,12 @@ module Slack
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/shared_channel_invite_received.json
         # on :shared_channel_invite_received do |data|
 
-        # A member has starred an item.
+        # A member has saved an item for later or starred an item.
         # @see https://api.slack.com/events/star_added
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/star_added.json
         # on :star_added do |data|
 
-        # A member removed a star.
+        # A member has removed an item saved for later or starred an item.
         # @see https://api.slack.com/events/star_removed
         # @see https://github.com/slack-ruby/slack-api-ref/blob/master/events/star_removed.json
         # on :star_removed do |data|
