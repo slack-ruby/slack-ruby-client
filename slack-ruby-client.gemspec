@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'gli'
   s.add_dependency 'hashie'
   s.metadata['rubygems_mfa_required'] = 'true'
+  s.metadata['changelog_uri'] = 'https://github.com/slack-ruby/slack-ruby-client/blob/master/CHANGELOG.md'
 end
