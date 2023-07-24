@@ -14,6 +14,7 @@
 * [#480](https://github.com/slack-ruby-client/pulls/480): Add common message formatting utilities - [@chrisbloom7](https://github.com/chrisbloom7).
 * [#481](https://github.com/slack-ruby-client/pulls/481): Update API from [slack-api-ref@7c22d0b](https://github.com/slack-ruby/slack-api-ref/commit/7c22d0b) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#488](https://github.com/slack-ruby-client/pulls/488): Update API from [slack-api-ref@a45def2](https://github.com/slack-ruby/slack-api-ref/commit/a45def2) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#490](https://github.com/slack-ruby/slack-ruby-client/pull/490): Add changelog uri to gemspec - [@MatheusRich](https://github.com/MatheusRich).
 * [#486](https://github.com/slack-ruby/slack-ruby-client/pull/486): Async handler support for Slack::RealTime::Config and Client - [@milestruecar](https://github.com/milestruecar).
 * Your contribution here.
 
