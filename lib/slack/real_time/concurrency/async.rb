@@ -67,6 +67,10 @@ module Slack
             @restart&.signal
           end
 
+          def run_async(&block)
+            ::Async.run(&block)
+          end
+
           def current_time
             ::Async::Clock.now
           end

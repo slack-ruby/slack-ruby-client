@@ -168,7 +168,7 @@ RSpec.describe Slack::RealTime::Client do
           client.store.class.events.merge!(@events)
         end
 
-        context 'when config#async_handlers is :all' do
+        context 'when config#async_handlers is :all', if: ENV['CONCURRENCY'] == 'async-websocket' do
           before do
             client.async_handlers = :all
           end
