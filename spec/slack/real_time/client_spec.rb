@@ -171,6 +171,7 @@ RSpec.describe Slack::RealTime::Client do
         context 'when config#async_handlers is :all', if: ENV['CONCURRENCY'] == 'async-websocket' do
           before do
             client.async_handlers = :all
+            allow(socket).to receive(:run_async).and_return(Async.run { nil })
           end
 
           after do
