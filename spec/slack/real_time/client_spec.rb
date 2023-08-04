@@ -183,7 +183,6 @@ RSpec.describe Slack::RealTime::Client do
             expect(socket).to receive(:run_async)
             client.send(:run_handlers, 'example', {})
           end
-         
 
           it 'returns an Async::Task' do
             expect(client.send(:run_handlers, 'example', {})).to be_a Async::Task
