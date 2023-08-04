@@ -201,18 +201,14 @@ RSpec.describe Slack::RealTime::Client do
           end
 
           it 'does not run tasks async' do
-            expect(socket).to_not receive(:run_async)
+            expect(socket).not_to receive(:run_async)
             client.send(:run_handlers, 'example', {})
           end
 
-          it 'does not return an Async::Task' do
-            expect(client.send(:run_handlers, 'example', {})).not_to be_a Async::Task
-          end
-        end
-
-        context 'when store has no event hooks' do
-          it 'returns empty array of handlers' do
-            expect(client.send(:run_handlers, 'example', {})).to be_empty
+          context 'when store has no event hooks' do
+            it 'returns empty array of handlers, not an async task' do
+              expect(client.send(:run_handlers, 'example', {})).to be_empty
+            end
           end
         end
       end
