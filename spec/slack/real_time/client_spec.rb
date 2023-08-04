@@ -170,16 +170,43 @@ RSpec.describe Slack::RealTime::Client do
 
         context 'when config#async_handlers is :all', if: ENV['CONCURRENCY'] == 'async-websocket' do
           before do
+            @async_handlers = client.async_handlers.dup
             client.async_handlers = :all
-            allow(socket).to receive(:run_async).and_return(Async.run { nil })
+            allow(socket).to receive(:run_async)
           end
 
           after do
-            client.async_handlers = :none
+            client.async_handlers = @async_handlers
           end
+
+          it 'runs tasks async' do
+            expect(socket).to receive(:run_async)
+            client.send(:run_handlers, 'example', {})
+          end
+         
 
           it 'returns an Async::Task' do
             expect(client.send(:run_handlers, 'example', {})).to be_a Async::Task
+          end
+        end
+
+        context 'when config#async_handlers is :none' do
+          before do
+            @async_handlers = client.async_handlers.dup
+            client.async_handlers = :none
+          end
+
+          after do
+            client.async_handlers = @async_handlers
+          end
+
+          it 'does not run tasks async' do
+            expect(socket).to_not receive(:run_async)
+            client.send(:run_handlers, 'example', {})
+          end
+
+          it 'does not return an Async::Task' do
+            expect(client.send(:run_handlers, 'example', {})).not_to be_a Async::Task
           end
         end
 
