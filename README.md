@@ -5,6 +5,7 @@ Slack Ruby Client
 [![Integration Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integration_test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integration_test.yml)
 [![Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-client/badges/gpa.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-client)
+[![Coverage Status](https://coveralls.io/repos/github/slack-ruby/slack-ruby-client/badge.svg?branch=master)](https://coveralls.io/github/slack-ruby/slack-ruby-client?branch=master)
 
 A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messaging](https://api.slack.com/rtm) and [Events](https://api.slack.com/events-api) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 

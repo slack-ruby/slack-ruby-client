@@ -35,3 +35,9 @@ jobs:
         run: |
           bundle install
           bundle exec rake
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
