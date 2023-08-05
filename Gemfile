@@ -23,6 +23,8 @@ group :test do
   gem 'rubocop-performance'
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
+  gem 'simplecov'
+  gem 'simplecov-lcov'
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
