@@ -3,6 +3,7 @@ module Slack
   module RealTime
     module Config
       class NoConcurrencyError < StandardError; end
+      class InvalidAsyncHandlersError < StandardError; end
 
       extend self
 
@@ -15,6 +16,7 @@ module Slack
         store_class
         store_options
         logger
+        async_handlers
       ].freeze
 
       attr_accessor(*Config::ATTRIBUTES - [:concurrency])
@@ -29,6 +31,7 @@ module Slack
         self.store_class = Slack::RealTime::Stores::Starter
         self.store_options = {}
         self.logger = nil
+        self.async_handlers = :none
       end
 
       def concurrency

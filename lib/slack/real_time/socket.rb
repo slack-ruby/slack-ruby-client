@@ -63,6 +63,10 @@ module Slack
         raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
       end
 
+      def run_async(&_block)
+        raise NotImplementedError, "Expected #{self.class} to implement #{__method__}."
+      end
+
       def time_since_last_message
         return 0 unless @last_message_at
 
