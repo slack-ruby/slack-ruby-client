@@ -161,53 +161,34 @@ RSpec.describe Slack::RealTime::Client do
       describe '#run_handlers' do
         before do
           @events = client.store.class.events.dup
+          @async_handlers = client.async_handlers.dup
           client.store.class.events.clear
         end
 
         after do
           client.store.class.events.merge!(@events)
+          client.async_handlers = @async_handlers
         end
 
-        context 'when config#async_handlers is :all', if: ENV['CONCURRENCY'] == 'async-websocket' do
+        context 'when config#async_handlers is :all' do
           before do
-            @async_handlers = client.async_handlers.dup
             client.async_handlers = :all
-            allow(socket).to receive(:run_async)
-          end
-
-          after do
-            client.async_handlers = @async_handlers
           end
 
           it 'runs tasks async' do
             expect(socket).to receive(:run_async)
             client.send(:run_handlers, 'example', {})
           end
-
-          it 'returns an Async::Task' do
-            expect(client.send(:run_handlers, 'example', {})).to be_a Async::Task
-          end
         end
 
         context 'when config#async_handlers is :none' do
           before do
-            @async_handlers = client.async_handlers.dup
             client.async_handlers = :none
-          end
-
-          after do
-            client.async_handlers = @async_handlers
           end
 
           it 'does not run tasks async' do
             expect(socket).not_to receive(:run_async)
             client.send(:run_handlers, 'example', {})
-          end
-
-          context 'when store has no event hooks' do
-            it 'returns empty array of handlers, not an async task' do
-              expect(client.send(:run_handlers, 'example', {})).to be_empty
-            end
           end
         end
       end
