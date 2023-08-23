@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'AuthTeams methods.'
       command 'auth_teams' do |g|
-        g.desc 'List the workspaces a token can access.'
-        g.long_desc %( List the workspaces a token can access. )
+        g.desc 'Obtain a full list of workspaces your org-wide app has been approved for.'
+        g.long_desc %( Obtain a full list of workspaces your org-wide app has been approved for. )
         g.command 'list' do |c|
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'include_icon', desc: 'Whether to return icon paths for each workspace. An icon path represents a URI pointing to the image signifying the workspace.'

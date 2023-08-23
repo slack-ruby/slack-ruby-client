@@ -17,6 +17,7 @@
 * [#490](https://github.com/slack-ruby/slack-ruby-client/pull/490): Add changelog uri to gemspec - [@MatheusRich](https://github.com/MatheusRich).
 * [#491](https://github.com/slack-ruby/slack-ruby-client/pull/491): Added code coverage - [@dblock](https://github.com/dblock).
 * [#486](https://github.com/slack-ruby/slack-ruby-client/pull/486): Async handler support for Slack::RealTime::Config and Client - [@milestruecar](https://github.com/milestruecar).
+* [#489](https://github.com/slack-ruby-client/pulls/489): Update API from [slack-api-ref@0d3f0b6](https://github.com/slack-ruby/slack-api-ref/commit/0d3f0b6) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.1.0 (2023/03/17)

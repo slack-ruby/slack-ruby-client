@@ -31,7 +31,7 @@ module Slack
           c.flag 'is_restricted', desc: 'Is this user a multi-channel guest user? (default: false).'
           c.flag 'is_ultra_restricted', desc: 'Is this user a single channel guest user? (default: false).'
           c.flag 'real_name', desc: 'Full name of the user.'
-          c.flag 'resend', desc: 'Allow this invite to be resent in the future if a user has not signed up yet. (default: false).'
+          c.flag 'resend', desc: 'Allow this invite to be resent in the future if a user has not signed up yet. Resending can only be done via the UI and has no expiration. (default: false).'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_users_invite(options))
           end
