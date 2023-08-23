@@ -49,7 +49,7 @@ module Slack
           # @option options [string] :real_name
           #   Full name of the user.
           # @option options [boolean] :resend
-          #   Allow this invite to be resent in the future if a user has not signed up yet. (default: false).
+          #   Allow this invite to be resent in the future if a user has not signed up yet. Resending can only be done via the UI and has no expiration. (default: false).
           # @see https://api.slack.com/methods/admin.users.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.invite.json
           def admin_users_invite(options = {})

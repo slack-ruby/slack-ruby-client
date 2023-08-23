@@ -16,7 +16,7 @@ module Slack
           # @option options [boolean] :free_trial_accepted
           #   Whether you'd like to use your workspace's free trial to begin using Slack Connect.
           # @option options [Object] :invite_id
-          #   See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation.
+          #   ID of the invite that you'd like to accept. Must provide either invite_id or channel_id. See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation.
           # @option options [boolean] :is_private
           #   Whether the channel should be private.
           # @option options [Object] :team_id
@@ -168,11 +168,11 @@ module Slack
           # @option options [channel] :channel
           #   ID of the channel on your team that you'd like to share.
           # @option options [array] :emails
-          #   Optional email to receive this invite. Either emails or user_ids must be provided.
+          #   Optional email to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.
           # @option options [boolean] :external_limited
           #   Optional boolean on whether invite is to a external limited member. Defaults to true.
           # @option options [array] :user_ids
-          #   Optional user_id to receive this invite. Either emails or user_ids must be provided.
+          #   Optional user_id to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.
           # @see https://api.slack.com/methods/conversations.inviteShared
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.inviteShared.json
           def conversations_inviteShared(options = {})

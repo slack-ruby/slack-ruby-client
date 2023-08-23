@@ -6,6 +6,7 @@ module Slack
     module Api
       module Errors
         class AccessDenied < SlackError; end
+        class AccessTokenExchangeFailed < SlackError; end
         class Accesslimited < SlackError; end
         class AccountInactive < SlackError; end
         class ActionAlreadyInProgress < SlackError; end
@@ -594,7 +595,6 @@ module Slack
         class UserIsUltraRestricted < SlackError; end
         class UserMustBeAdmin < SlackError; end
         class UserMustBeInWorkspace < SlackError; end
-        class UserNotAMemberOfThisWorkspace < SlackError; end
         class UserNotFound < SlackError; end
         class UserNotInChannel < SlackError; end
         class UserNotVisible < SlackError; end
@@ -611,6 +611,7 @@ module Slack
 
         ERROR_CLASSES = {
           'access_denied' => AccessDenied,
+          'access_token_exchange_failed' => AccessTokenExchangeFailed,
           'accesslimited' => Accesslimited,
           'account_inactive' => AccountInactive,
           'action_already_in_progress' => ActionAlreadyInProgress,
@@ -1199,7 +1200,6 @@ module Slack
           'user_is_ultra_restricted' => UserIsUltraRestricted,
           'user_must_be_admin' => UserMustBeAdmin,
           'user_must_be_in_workspace' => UserMustBeInWorkspace,
-          'user_not_a_member_of_this_workspace' => UserNotAMemberOfThisWorkspace,
           'user_not_found' => UserNotFound,
           'user_not_in_channel' => UserNotInChannel,
           'user_not_visible' => UserNotVisible,

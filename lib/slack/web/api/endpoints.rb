@@ -3,6 +3,7 @@
 
 require_relative 'endpoints/admin_analytics'
 require_relative 'endpoints/admin_apps'
+require_relative 'endpoints/admin_apps_activities'
 require_relative 'endpoints/admin_apps_approved'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
@@ -83,6 +84,7 @@ module Slack
 
         include AdminAnalytics
         include AdminApps
+        include AdminAppsActivities
         include AdminAppsApproved
         include AdminAppsRequests
         include AdminAppsRestricted

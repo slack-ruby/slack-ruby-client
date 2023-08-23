@@ -12,7 +12,7 @@ module Slack
           c.flag 'channel_name', desc: 'Name of the channel. If the channel does not exist already in your workspace, this name is the one that the channel will take.'
           c.flag 'channel_id', desc: "ID of the channel that you'd like to accept. Must provide either invite_id or channel_id."
           c.flag 'free_trial_accepted', desc: "Whether you'd like to use your workspace's free trial to begin using Slack Connect."
-          c.flag 'invite_id', desc: 'See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation.'
+          c.flag 'invite_id', desc: "ID of the invite that you'd like to accept. Must provide either invite_id or channel_id. See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation."
           c.flag 'is_private', desc: 'Whether the channel should be private.'
           c.flag 'team_id', desc: 'The ID of the workspace to accept the channel in. If an org-level token is used to call this method, the team_id argument is required.'
           c.action do |_global_options, options, _args|
@@ -109,9 +109,9 @@ module Slack
         g.long_desc %( Sends an invitation to a Slack Connect channel )
         g.command 'inviteShared' do |c|
           c.flag 'channel', desc: "ID of the channel on your team that you'd like to share."
-          c.flag 'emails', desc: 'Optional email to receive this invite. Either emails or user_ids must be provided.'
+          c.flag 'emails', desc: 'Optional email to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.'
           c.flag 'external_limited', desc: 'Optional boolean on whether invite is to a external limited member. Defaults to true.'
-          c.flag 'user_ids', desc: 'Optional user_id to receive this invite. Either emails or user_ids must be provided.'
+          c.flag 'user_ids', desc: 'Optional user_id to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_inviteShared(options))
           end

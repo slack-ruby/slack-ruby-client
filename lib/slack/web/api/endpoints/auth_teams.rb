@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AuthTeams
           #
-          # List the workspaces a token can access.
+          # Obtain a full list of workspaces your org-wide app has been approved for.
           #
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
