@@ -257,8 +257,12 @@ module Slack
           # @see https://api.slack.com/methods/chat.unfurl
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.unfurl.json
           def chat_unfurl(options = {})
-            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
+            if options[:channel].nil? || options[:ts].nil?
+              if options[:unfurl_id].nil? || options[:source].nil?
+                raise ArgumentError, 'Either a combination of :channel and :ts or :unfurl_id and :source is required'
+              end
+            end
+          
             raise ArgumentError, 'Required arguments :unfurls missing' if options[:unfurls].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.unfurl', options)
