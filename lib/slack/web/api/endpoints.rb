@@ -5,6 +5,7 @@ require_relative 'endpoints/admin_analytics'
 require_relative 'endpoints/admin_apps'
 require_relative 'endpoints/admin_apps_activities'
 require_relative 'endpoints/admin_apps_approved'
+require_relative 'endpoints/admin_apps_config'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
 require_relative 'endpoints/admin_audit_anomaly_allow'
@@ -14,6 +15,8 @@ require_relative 'endpoints/admin_conversations'
 require_relative 'endpoints/admin_conversations_ekm'
 require_relative 'endpoints/admin_conversations_restrictAccess'
 require_relative 'endpoints/admin_emoji'
+require_relative 'endpoints/admin_functions'
+require_relative 'endpoints/admin_functions_permissions'
 require_relative 'endpoints/admin_inviteRequests'
 require_relative 'endpoints/admin_inviteRequests_approved'
 require_relative 'endpoints/admin_inviteRequests_denied'
@@ -26,6 +29,9 @@ require_relative 'endpoints/admin_usergroups'
 require_relative 'endpoints/admin_users'
 require_relative 'endpoints/admin_users_session'
 require_relative 'endpoints/admin_users_unsupportedVersions'
+require_relative 'endpoints/admin_workflows'
+require_relative 'endpoints/admin_workflows_collaborators'
+require_relative 'endpoints/admin_workflows_permissions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_activities'
@@ -86,6 +92,7 @@ module Slack
         include AdminApps
         include AdminAppsActivities
         include AdminAppsApproved
+        include AdminAppsConfig
         include AdminAppsRequests
         include AdminAppsRestricted
         include AdminAuditAnomalyAllow
@@ -95,6 +102,8 @@ module Slack
         include AdminConversationsEkm
         include AdminConversationsRestrictaccess
         include AdminEmoji
+        include AdminFunctions
+        include AdminFunctionsPermissions
         include AdminInviterequests
         include AdminInviterequestsApproved
         include AdminInviterequestsDenied
@@ -107,6 +116,9 @@ module Slack
         include AdminUsers
         include AdminUsersSession
         include AdminUsersUnsupportedversions
+        include AdminWorkflows
+        include AdminWorkflowsCollaborators
+        include AdminWorkflowsPermissions
         include Api
         include Apps
         include AppsActivities

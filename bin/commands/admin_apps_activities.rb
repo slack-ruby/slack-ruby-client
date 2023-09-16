@@ -9,8 +9,8 @@ module Slack
         g.desc 'Get logs for a specified team/org'
         g.long_desc %( Get logs for a specified team/org )
         g.command 'list' do |c|
-          c.flag 'app_id', desc: 'The id of the app to get activities from.'
-          c.flag 'component_id', desc: "The component id of log events to be returned. Will be 'FnXXXXXX' for functions, and 'WfXXXXXX' for worflows."
+          c.flag 'app_id', desc: 'The ID of the app to get activities from.'
+          c.flag 'component_id', desc: "The component ID of log events to be returned. Will be 'FnXXXXXX' for functions, and 'WfXXXXXX' for worflows."
           c.flag 'component_type', desc: "The component type of log events to be returned. Acceptable values are ('events_api', 'workflows', 'functions', 'tables')."
           c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. See pagination for more detail."
           c.flag 'limit', desc: 'The maximum number of items to return.'
@@ -21,7 +21,7 @@ module Slack
           c.flag 'sort_direction', desc: 'The direction you want the data sorted by (always by timestamp).'
           c.flag 'source', desc: "The source of log events to be returned. Acceptable values are ('slack', 'developer')."
           c.flag 'team_id', desc: 'The team who owns this log.'
-          c.flag 'trace_id', desc: 'The trace id of log events to be returned.'
+          c.flag 'trace_id', desc: 'The trace ID of log events to be returned.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_activities_list(options))
           end

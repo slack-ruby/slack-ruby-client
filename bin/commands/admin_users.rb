@@ -71,7 +71,7 @@ module Slack
         g.desc 'Set an expiration for a guest user'
         g.long_desc %( Set an expiration for a guest user )
         g.command 'setExpiration' do |c|
-          c.flag 'expiration_ts', desc: 'Timestamp when guest account should be disabled.'
+          c.flag 'expiration_ts', desc: 'Epoch timestamp in seconds when guest account should be disabled.'
           c.flag 'user_id', desc: 'The ID of the user to set an expiration for.'
           c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
           c.action do |_global_options, options, _args|
