@@ -114,7 +114,7 @@ module Slack
           # Set an expiration for a guest user
           #
           # @option options [integer] :expiration_ts
-          #   Timestamp when guest account should be disabled.
+          #   Epoch timestamp in seconds when guest account should be disabled.
           # @option options [string] :user_id
           #   The ID of the user to set an expiration for.
           # @option options [Object] :team_id

@@ -31,7 +31,7 @@ module Slack
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit
-          #   The maximum number of items to return. Must be between 1 - 100 both inclusive.
+          #   The maximum number of items to return. Must be a positive integer no larger than 1000.
           # @see https://api.slack.com/methods/admin.teams.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams/admin.teams.list.json
           def admin_teams_list(options = {})

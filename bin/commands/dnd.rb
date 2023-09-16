@@ -35,7 +35,7 @@ module Slack
         g.desc 'Turns on Do Not Disturb mode for the current user, or changes its duration.'
         g.long_desc %( Turns on Do Not Disturb mode for the current user, or changes its duration. )
         g.command 'setSnooze' do |c|
-          c.flag 'num_minutes', desc: 'Number of minutes, from now, to snooze until.'
+          c.flag 'num_minutes', desc: 'This argument is required. Number of minutes, from now, to snooze until.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.dnd_setSnooze(options))
           end

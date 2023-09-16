@@ -10,9 +10,9 @@ module Slack
           # Get logs for a specified team/org
           #
           # @option options [Object] :app_id
-          #   The id of the app to get activities from.
+          #   The ID of the app to get activities from.
           # @option options [string] :component_id
-          #   The component id of log events to be returned. Will be 'FnXXXXXX' for functions, and 'WfXXXXXX' for worflows.
+          #   The component ID of log events to be returned. Will be 'FnXXXXXX' for functions, and 'WfXXXXXX' for worflows.
           # @option options [string] :component_type
           #   The component type of log events to be returned. Acceptable values are ('events_api', 'workflows', 'functions', 'tables').
           # @option options [string] :cursor
@@ -34,7 +34,7 @@ module Slack
           # @option options [string] :team_id
           #   The team who owns this log.
           # @option options [string] :trace_id
-          #   The trace id of log events to be returned.
+          #   The trace ID of log events to be returned.
           # @see https://api.slack.com/methods/admin.apps.activities.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.activities/admin.apps.activities.list.json
           def admin_apps_activities_list(options = {})

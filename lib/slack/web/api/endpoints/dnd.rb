@@ -42,7 +42,7 @@ module Slack
           # Turns on Do Not Disturb mode for the current user, or changes its duration.
           #
           # @option options [string] :num_minutes
-          #   Number of minutes, from now, to snooze until.
+          #   This argument is required. Number of minutes, from now, to snooze until.
           # @see https://api.slack.com/methods/dnd.setSnooze
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.setSnooze.json
           def dnd_setSnooze(options = {})
