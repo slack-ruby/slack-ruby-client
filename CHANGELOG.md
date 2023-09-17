@@ -1,4 +1,4 @@
-### 2.1.1 (Next)
+### 2.2.0 (2023/09/17)
 
 * [#458](https://github.com/slack-ruby/slack-ruby-client/pull/458): Add workflow for automatic API updates - [@duffn](https://github.com/duffn).
 * [#455](https://github.com/slack-ruby/slack-ruby-client/pull/455): Update Slack API: Added pagination to `team.accessLogs` and `AppsDatastore` methods - [@marfoldi](https://github.com/marfoldi).
@@ -19,7 +19,6 @@
 * [#486](https://github.com/slack-ruby/slack-ruby-client/pull/486): Async handler support for Slack::RealTime::Config and Client - [@milestruecar](https://github.com/milestruecar).
 * [#489](https://github.com/slack-ruby-client/pulls/489): Update API from [slack-api-ref@0d3f0b6](https://github.com/slack-ruby/slack-api-ref/commit/0d3f0b6) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#493](https://github.com/slack-ruby-client/pulls/493): Update API from [slack-api-ref@f2e768a](https://github.com/slack-ruby/slack-api-ref/commit/f2e768a) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* Your contribution here.
 
 ### 2.1.0 (2023/03/17)
 
