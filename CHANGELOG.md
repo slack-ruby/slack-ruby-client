@@ -1,3 +1,7 @@
+### 2.2.1 (Next)
+
+* Your contribution here.
+
 ### 2.2.0 (2023/09/17)
 
 * [#458](https://github.com/slack-ruby/slack-ruby-client/pull/458): Add workflow for automatic API updates - [@duffn](https://github.com/duffn).
