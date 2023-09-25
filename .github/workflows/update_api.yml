@@ -35,7 +35,7 @@ jobs:
       - name: GitHub App token
         if: ${{ github.repository == 'slack-ruby/slack-ruby-client' }}
         id: github_app_token
-        uses: tibdex/github-app-token@v2.0.0
+        uses: tibdex/github-app-token@v2.1.0
         with:
           app_id: ${{ secrets.CI_APP_ID }}
           private_key: ${{ secrets.CI_APP_PRIVATE_KEY }}
