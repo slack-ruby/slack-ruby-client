@@ -240,6 +240,7 @@ module Slack
         class HashConflict < SlackError; end
         class InactiveCall < SlackError; end
         class InactiveInvite < SlackError; end
+        class IncludeDeactivatedWorkspacesInvalid < SlackError; end
         class InsecureRequest < SlackError; end
         class InternalError < SlackError; end
         class InvalidAction < SlackError; end
@@ -384,6 +385,7 @@ module Slack
         class MissingChannel < SlackError; end
         class MissingDialog < SlackError; end
         class MissingDuration < SlackError; end
+        class MissingFileData < SlackError; end
         class MissingPostType < SlackError; end
         class MissingProfileId < SlackError; end
         class MissingResource < SlackError; end
@@ -855,6 +857,7 @@ module Slack
           'hash_conflict' => HashConflict,
           'inactive_call' => InactiveCall,
           'inactive_invite' => InactiveInvite,
+          'include_deactivated_workspaces_invalid' => IncludeDeactivatedWorkspacesInvalid,
           'insecure_request' => InsecureRequest,
           'internal_error' => InternalError,
           'invalid_action' => InvalidAction,
@@ -999,6 +1002,7 @@ module Slack
           'missing_channel' => MissingChannel,
           'missing_dialog' => MissingDialog,
           'missing_duration' => MissingDuration,
+          'missing_file_data' => MissingFileData,
           'missing_post_type' => MissingPostType,
           'missing_profile_id' => MissingProfileId,
           'missing_resource' => MissingResource,

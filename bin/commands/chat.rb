@@ -94,6 +94,7 @@ module Slack
           c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
           c.flag 'parse', desc: 'Change how messages are treated. See below.'
           c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
+          c.flag 'service_team_id', desc: 'For a message posted in App Home, Team ID corresponding to the selected app installation.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
           c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
           c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
@@ -148,13 +149,13 @@ module Slack
           c.flag 'ts', desc: 'Timestamp of the message to be updated.'
           c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
           c.flag 'attachments', desc: "A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field."
-          c.flag 'blocks', desc: "A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field."
+          c.flag 'blocks', desc: "A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will only be retained if the text argument is not provided. If the text argument is provided and blocks are not provided, the blocks will be unset. To remove previous blocks, include an empty array for this field."
           c.flag 'file_ids', desc: 'Array of new file ids that will be sent with this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.'
           c.flag 'metadata', desc: "JSON object with event_type and event_payload fields, presented as a URL-encoded string. If you don't include this field, the message's previous metadata will be retained. To remove previous metadata, include an empty object for this field. Metadata you post to Slack is accessible to any app or user who is a member of that workspace."
           c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.'
           c.flag 'reply_broadcast', desc: 'Broadcast an existing thread reply to make it visible to everyone in the channel or conversation.'
-          c.flag 'text', desc: "New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments."
+          c.flag 'text', desc: 'New text for the message, using the default formatting rules. This text, combined with either blocks or attachments, is used as fallback text for notifications.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_update(options))
           end

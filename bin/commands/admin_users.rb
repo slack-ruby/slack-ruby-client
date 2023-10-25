@@ -41,6 +41,8 @@ module Slack
         g.long_desc %( List users on a workspace )
         g.command 'list' do |c|
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+          c.flag 'include_deactivated_workspaces', desc: 'Only applies with org token and no team_id. If true, both active and deactivated workspaces are returned for a user in workspaces. If false, only active workspaces are returned for a user in workspaces. Default is false.'
+          c.flag 'is_active', desc: 'If true, only active users will be returned. If false, only deactivated users will be returned. Default is true.'
           c.flag 'limit', desc: 'Limit for how many users to be retrieved per page.'
           c.flag 'team_id', desc: 'The ID (T1234) of the workspace. The team_id is required if you use an org-level token.'
           c.action do |_global_options, options, _args|

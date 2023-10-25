@@ -156,6 +156,8 @@ module Slack
           #   Change how messages are treated. See below.
           # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
+          # @option options [string] :service_team_id
+          #   For a message posted in App Home, Team ID corresponding to the selected app installation.
           # @option options [string] :thread_ts
           #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
           # @option options [boolean] :unfurl_links
@@ -256,7 +258,7 @@ module Slack
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field.
           # @option options [blocks[] as string] :blocks
-          #   A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field.
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will only be retained if the text argument is not provided. If the text argument is provided and blocks are not provided, the blocks will be unset. To remove previous blocks, include an empty array for this field.
           # @option options [array] :file_ids
           #   Array of new file ids that will be sent with this message.
           # @option options [boolean] :link_names
@@ -268,7 +270,7 @@ module Slack
           # @option options [boolean] :reply_broadcast
           #   Broadcast an existing thread reply to make it visible to everyone in the channel or conversation.
           # @option options [string] :text
-          #   New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments.
+          #   New text for the message, using the default formatting rules. This text, combined with either blocks or attachments, is used as fallback text for notifications.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
