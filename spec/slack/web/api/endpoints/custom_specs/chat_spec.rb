@@ -139,6 +139,95 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     end
   end
 
+  context '#chat_unfurl' do
+    it 'calls the post method with the correct parameters channel and ts' do
+      # Mock the conversations_id method
+      expect(client).to receive(:conversations_id).with(hash_including(channel: 'channel')).and_return({'channel' => {'id' => 'channel_id'}})
+  
+      # Expect the post method to be called with the updated parameters
+      expect(client).to receive(:post).with('chat.unfurl', hash_including(
+        channel: 'channel_id',
+        ts: 'timestamp',
+        unfurls: {
+          'http://www.foo.com' => {
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "plain_text",
+                  "text": "This is a plain text section block.",
+                  "emoji": true
+                }
+              }
+            ]
+          }
+        }
+      ))
+  
+      # Call the chat_unfurl method with valid arguments
+      client.chat_unfurl(channel: 'channel', ts: 'timestamp', unfurls: {
+        'http://www.foo.com' => {
+          "blocks": [
+            {
+              "type": "section",
+              "text": {
+                "type": "plain_text",
+                "text": "This is a plain text section block.",
+                "emoji": true
+              }
+            }
+          ]
+        }
+      })
+    end
+  
+    it 'calls the post method with the correct parameters unfurl_id and source' do
+      # Expect the post method to be called with the updated parameters
+      expect(client).to receive(:post).with('chat.unfurl', hash_including(
+        unfurl_id: 'unfurl_id',
+        source: 'source',
+        unfurls: {
+          'http://www.foo.com' => {
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "plain_text",
+                  "text": "This is a plain text section block.",
+                  "emoji": true
+                }
+              }
+            ]
+          }
+        }
+      ))
+  
+      # Call the chat_unfurl method with valid arguments
+      client.chat_unfurl(unfurl_id: 'unfurl_id', source: 'source', unfurls: {
+        'http://www.foo.com' => {
+          "blocks": [
+            {
+              "type": "section",
+              "text": {
+                "type": "plain_text",
+                "text": "This is a plain text section block.",
+                "emoji": true
+              }
+            }
+          ]
+        }
+      })
+    end
+  
+    it 'raises an error if :channel and :ts are missing' do
+      expect { client.chat_unfurl(unfurls: {}) }.to raise_error(ArgumentError, /Either a combination of :channel and :ts or :unfurl_id and :source is required/)
+    end
+  
+    it 'raises an error if :unfurls is missing' do
+      expect { client.chat_unfurl(channel: 'channel', ts: 'timestamp') }.to raise_error(ArgumentError, /Required arguments :unfurls missing/)
+    end
+  end
+
   context 'chat_update' do
     let(:ts) { '1405894322.002768' }
 
