@@ -63,11 +63,11 @@ module Slack
         g.long_desc %( Sends an ephemeral message to a user in a channel. )
         g.command 'postEphemeral' do |c|
           c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.'
-          c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
           c.flag 'user', desc: 'id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.'
-          c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
+          c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
+          c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.'
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames.'
@@ -85,7 +85,7 @@ module Slack
           c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
-          c.flag 'text', desc: 'The formatted text of the message to be published. If blocks are included, this will become the fallback text used in notifications.'
+          c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
           c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.'
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
@@ -94,6 +94,7 @@ module Slack
           c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
           c.flag 'parse', desc: 'Change how messages are treated. See below.'
           c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
+          c.flag 'service_team_id', desc: 'For a message posted in App Home, Team ID corresponding to the selected app installation.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
           c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
           c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
@@ -108,10 +109,10 @@ module Slack
         g.command 'scheduleMessage' do |c|
           c.flag 'channel', desc: 'Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
           c.flag 'post_at', desc: 'Unix EPOCH timestamp of time in future to send the message.'
-          c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
-          c.flag 'as_user', desc: 'Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
+          c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
+          c.flag 'as_user', desc: 'Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
           c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
           c.flag 'parse', desc: 'Change how messages are treated. See chat.postMessage.'
@@ -146,15 +147,15 @@ module Slack
         g.command 'update' do |c|
           c.flag 'channel', desc: 'Channel containing the message to be updated.'
           c.flag 'ts', desc: 'Timestamp of the message to be updated.'
+          c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
+          c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
+          c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
           c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
-          c.flag 'attachments', desc: "A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field."
-          c.flag 'blocks', desc: "A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field."
           c.flag 'file_ids', desc: 'Array of new file ids that will be sent with this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.'
           c.flag 'metadata', desc: "JSON object with event_type and event_payload fields, presented as a URL-encoded string. If you don't include this field, the message's previous metadata will be retained. To remove previous metadata, include an empty object for this field. Metadata you post to Slack is accessible to any app or user who is a member of that workspace."
           c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.'
           c.flag 'reply_broadcast', desc: 'Broadcast an existing thread reply to make it visible to everyone in the channel or conversation.'
-          c.flag 'text', desc: "New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_update(options))
           end

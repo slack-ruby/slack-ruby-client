@@ -12,9 +12,9 @@ module Slack
           # @option options [Object] :app_id
           #   The ID of the app to get activities from.
           # @option options [string] :component_id
-          #   The component ID of log events to be returned. Will be 'FnXXXXXX' for functions, and 'WfXXXXXX' for worflows.
+          #   The component ID of log events to be returned. Will be FnXXXXXX for functions, and WfXXXXXX for worflows.
           # @option options [string] :component_type
-          #   The component type of log events to be returned. Acceptable values are ('events_api', 'workflows', 'functions', 'tables').
+          #   The component type of log events to be returned. Acceptable values are events_api, workflows, functions and tables.
           # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. See pagination for more detail.
           # @option options [integer] :limit
@@ -26,11 +26,11 @@ module Slack
           # @option options [integer] :min_date_created
           #   The earliest timestamp of the log to retrieve (epoch microseconds).
           # @option options [string] :min_log_level
-          #   The minimum log level of the log events to be returned. Defaults to 'info'. Acceptable values (in order of relative importance from smallest to largest) are ('trace', 'debug', 'info', 'warn', 'error', 'fatal').
+          #   The minimum log level of the log events to be returned. Defaults to info. Acceptable values (in order of relative importance from smallest to largest) are trace, debug, info, warn, error and fatal.
           # @option options [string] :sort_direction
           #   The direction you want the data sorted by (always by timestamp).
           # @option options [string] :source
-          #   The source of log events to be returned. Acceptable values are ('slack', 'developer').
+          #   The source of log events to be returned. Acceptable values are slack and developer.
           # @option options [string] :team_id
           #   The team who owns this log.
           # @option options [string] :trace_id

@@ -19,8 +19,8 @@ module Slack
         g.long_desc %( Set the app config for a connector )
         g.command 'set' do |c|
           c.flag 'app_id', desc: 'The encoded app ID to set the app config for.'
-          c.flag 'domain_restrictions', desc: 'Domain restrictions for the app.'
-          c.flag 'workflow_auth_strategy', desc: 'The workflow auth permission.'
+          c.flag 'domain_restrictions', desc: 'Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.'
+          c.flag 'workflow_auth_strategy', desc: 'The workflow auth permission. Can be one of builder_choice or end_user_only.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_config_set(options))
           end

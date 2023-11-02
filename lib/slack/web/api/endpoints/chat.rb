@@ -96,16 +96,16 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
-          # @option options [string] :text
-          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [user] :user
           #   id of the user who will receive the ephemeral message. The user should be in the channel specified by the channel argument.
-          # @option options [boolean] :as_user
-          #   (Legacy) Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          # @option options [string] :text
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
+          # @option options [boolean] :as_user
+          #   (Legacy) Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
@@ -122,8 +122,8 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postEphemeral.json
           def chat_postEphemeral(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
             raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             options = encode_options_as_json(options, %i[attachments blocks])
             post('chat.postEphemeral', options)
@@ -139,7 +139,7 @@ module Slack
           # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [string] :text
-          #   The formatted text of the message to be published. If blocks are included, this will become the fallback text used in notifications.
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [boolean] :as_user
           #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.
           # @option options [string] :icon_emoji
@@ -156,6 +156,8 @@ module Slack
           #   Change how messages are treated. See below.
           # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
+          # @option options [string] :service_team_id
+          #   For a message posted in App Home, Team ID corresponding to the selected app installation.
           # @option options [string] :thread_ts
           #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
           # @option options [boolean] :unfurl_links
@@ -180,14 +182,14 @@ module Slack
           #   Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [integer] :post_at
           #   Unix EPOCH timestamp of time in future to send the message.
-          # @option options [string] :text
-          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
-          # @option options [boolean] :as_user
-          #   Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          # @option options [string] :text
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
+          # @option options [boolean] :as_user
+          #   Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.
           # @option options [boolean] :link_names
           #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
           # @option options [string] :metadata
@@ -207,7 +209,7 @@ module Slack
           def chat_scheduleMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :post_at missing' if options[:post_at].nil?
-            raise ArgumentError, 'Required arguments :text missing' if options[:text].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.scheduleMessage', options)
           end
@@ -251,12 +253,14 @@ module Slack
           #   Channel containing the message to be updated.
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
+          # @option options [string] :attachments
+          #   A JSON-based array of structured attachments, presented as a URL-encoded string.
+          # @option options [blocks[] as string] :blocks
+          #   A JSON-based array of structured blocks, presented as a URL-encoded string.
+          # @option options [string] :text
+          #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [boolean] :as_user
           #   Pass true to update the message as the authed user. Bot users in this context are considered authed users.
-          # @option options [string] :attachments
-          #   A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field.
-          # @option options [blocks[] as string] :blocks
-          #   A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field.
           # @option options [array] :file_ids
           #   Array of new file ids that will be sent with this message.
           # @option options [boolean] :link_names
@@ -267,14 +271,12 @@ module Slack
           #   Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.
           # @option options [boolean] :reply_broadcast
           #   Broadcast an existing thread reply to make it visible to everyone in the channel or conversation.
-          # @option options [string] :text
-          #   New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments.
           # @see https://api.slack.com/methods/chat.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.update.json
           def chat_update(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
-            raise ArgumentError, 'At least one of :attachments, :blocks, :text, :reply_broadcast is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:reply_broadcast].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.update', options)

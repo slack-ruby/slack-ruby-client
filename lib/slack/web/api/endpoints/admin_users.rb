@@ -64,6 +64,10 @@ module Slack
           #
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
+          # @option options [boolean] :include_deactivated_user_workspaces
+          #   Only applies with org token and no team_id. If true, return workspaces for a user even if they may be deactivated on them. If false, return workspaces for a user only when user is active on them. Default is false.
+          # @option options [boolean] :is_active
+          #   If true, only active users will be returned. If false, only deactivated users will be returned. Default is true.
           # @option options [integer] :limit
           #   Limit for how many users to be retrieved per page.
           # @option options [Object] :team_id
