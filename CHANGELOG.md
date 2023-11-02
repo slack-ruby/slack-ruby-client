@@ -1,7 +1,8 @@
 ### 2.2.1 (Next)
 
-* Your contribution here.
 * [#494](https://github.com/slack-ruby/slack-ruby-client/pull/494): Configure Dependabot to update GitHub Actions - [@olleolleolle](https://github.com/olleolleolle).
+* [#503](https://github.com/slack-ruby/slack-ruby-client/pull/503): Update Slack API Update API from [slack-api-ref@bc545649](https://github.com/slack-ruby/slack-api-ref/commit/bc545649) - [@dblock](https://github.com/dblock).
+* Your contribution here.
 
 ### 2.2.0 (2023/09/17)
 
