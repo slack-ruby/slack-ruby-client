@@ -176,6 +176,7 @@ module Slack
           c.flag 'sort', desc: 'Possible values are relevant (search ranking based on what we think is closest), name (alphabetical), member_count (number of users in the channel), and created (date channel was created). You can optionally pair this with the sort_dir arg to change how it is sorted.'
           c.flag 'sort_dir', desc: 'Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).'
           c.flag 'team_ids', desc: 'Comma separated string of team IDs, signifying the internal workspaces to search through.'
+          c.flag 'total_count_only', desc: 'Only return the total_count of channels. Omits channel data and allows access for admins without channel manager permissions.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_search(options))
           end

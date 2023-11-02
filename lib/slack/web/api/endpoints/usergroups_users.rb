@@ -7,10 +7,10 @@ module Slack
       module Endpoints
         module UsergroupsUsers
           #
-          # List all users in a User Group
+          # List all users in a User Group.
           #
           # @option options [string] :usergroup
-          #   The encoded ID of the User Group to update.
+          #   The encoded ID of the User Group to list users for.
           # @option options [boolean] :include_disabled
           #   Allow results that involve disabled User Groups.
           # @option options [string] :team_id
@@ -23,7 +23,7 @@ module Slack
           end
 
           #
-          # Update the list of users for a User Group
+          # Update the list of users for a User Group.
           #
           # @option options [string] :usergroup
           #   The encoded ID of the User Group to update.

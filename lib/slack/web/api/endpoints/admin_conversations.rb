@@ -264,6 +264,8 @@ module Slack
           #   Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).
           # @option options [array] :team_ids
           #   Comma separated string of team IDs, signifying the internal workspaces to search through.
+          # @option options [boolean] :total_count_only
+          #   Only return the total_count of channels. Omits channel data and allows access for admins without channel manager permissions.
           # @see https://api.slack.com/methods/admin.conversations.search
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.search.json
           def admin_conversations_search(options = {})

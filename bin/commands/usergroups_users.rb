@@ -6,10 +6,10 @@ module Slack
     class App
       desc 'UsergroupsUsers methods.'
       command 'usergroups_users' do |g|
-        g.desc 'List all users in a User Group'
-        g.long_desc %( List all users in a User Group )
+        g.desc 'List all users in a User Group.'
+        g.long_desc %( List all users in a User Group. )
         g.command 'list' do |c|
-          c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
+          c.flag 'usergroup', desc: 'The encoded ID of the User Group to list users for.'
           c.flag 'include_disabled', desc: 'Allow results that involve disabled User Groups.'
           c.flag 'team_id', desc: 'encoded team id where the user group exists, required if org token is used.'
           c.action do |_global_options, options, _args|
@@ -17,8 +17,8 @@ module Slack
           end
         end
 
-        g.desc 'Update the list of users for a User Group'
-        g.long_desc %( Update the list of users for a User Group )
+        g.desc 'Update the list of users for a User Group.'
+        g.long_desc %( Update the list of users for a User Group. )
         g.command 'update' do |c|
           c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
           c.flag 'users', desc: 'A comma separated string of encoded user IDs that represent the entire list of users for the User Group.'

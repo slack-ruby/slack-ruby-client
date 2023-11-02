@@ -72,7 +72,7 @@ module Slack
           # @option options [string] :app_id
           #   Filter logs to this Slack app. Defaults to all logs.
           # @option options [string] :change_type
-          #   Filter logs with this change type. Defaults to all logs.
+          #   Filter logs with this change type. Possible values are added, removed, enabled, disabled, and updated. Defaults to all logs.
           # @option options [string] :service_id
           #   Filter logs to this service. Defaults to all logs.
           # @option options [string] :team_id
