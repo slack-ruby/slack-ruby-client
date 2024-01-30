@@ -23,14 +23,14 @@ module Slack
           end
 
           #
-          # Update the list of users for a User Group.
+          # Update the list of users for a user group.
           #
           # @option options [string] :usergroup
-          #   The encoded ID of the User Group to update.
+          #   The encoded ID of the user group to update.
           # @option options [array] :users
-          #   A comma separated string of encoded user IDs that represent the entire list of users for the User Group.
+          #   A comma separated string of encoded user IDs that represent the entire list of users for the user group.
           # @option options [boolean] :include_count
-          #   Include the number of users in the User Group.
+          #   Include the number of users in the user group.
           # @option options [string] :team_id
           #   encoded team id where the user group exists, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.users.update

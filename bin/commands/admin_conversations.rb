@@ -18,7 +18,7 @@ module Slack
         g.desc 'Archive public or private channels in bulk.'
         g.long_desc %( Archive public or private channels in bulk. )
         g.command 'bulkArchive' do |c|
-          c.flag 'channel_ids', desc: 'An array of channel IDs to archive.'
+          c.flag 'channel_ids', desc: 'An array of channel IDs to archive. No more than 100 items are allowed.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_bulkArchive(options))
           end

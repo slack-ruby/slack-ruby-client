@@ -11,8 +11,6 @@ module Slack
           #
           # @option options [channel] :channel
           #   Channel to pin the messsage to. You must also include a timestamp when pinning messages.
-          # @option options [string] :quip_component_id
-          #   Component ID for the pins component that was inserted into the channel canvas, if any.
           # @option options [string] :timestamp
           #   Timestamp of the message to pin. You must also include the channel.
           # @see https://api.slack.com/methods/pins.add

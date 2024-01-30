@@ -55,6 +55,7 @@ require_relative 'endpoints/emoji'
 require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files_remote'
+require_relative 'endpoints/functions'
 require_relative 'endpoints/functions_workflows_steps'
 require_relative 'endpoints/functions_workflows_steps_responses'
 require_relative 'endpoints/migration'
@@ -142,6 +143,7 @@ module Slack
         include Files
         include FilesComments
         include FilesRemote
+        include Functions
         include FunctionsWorkflowsSteps
         include FunctionsWorkflowsStepsResponses
         include Migration

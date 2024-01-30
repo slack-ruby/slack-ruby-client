@@ -15,7 +15,7 @@ module Slack
           #   Pass a value of true to enable query highlight markers (see below).
           # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
-          # @option options [string] :sort_dir
+          # @option options [enum] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
           # @option options [string] :team_id
           #   encoded team id to search in, required if org token is used.
@@ -35,7 +35,7 @@ module Slack
           #   Pass a value of true to enable query highlight markers (see below).
           # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
-          # @option options [string] :sort_dir
+          # @option options [enum] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
           # @option options [string] :team_id
           #   encoded team id to search in, required if org token is used.
@@ -57,7 +57,7 @@ module Slack
           #   Pass a value of true to enable query highlight markers (see below).
           # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
-          # @option options [string] :sort_dir
+          # @option options [enum] :sort_dir
           #   Change sort direction to ascending (asc) or descending (desc).
           # @option options [string] :team_id
           #   encoded team id to search in, required if org token is used.

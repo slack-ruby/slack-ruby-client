@@ -25,7 +25,7 @@ module Slack
           #   The encoded app ID to set the app config for.
           # @option options [object] :domain_restrictions
           #   Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.
-          # @option options [string] :workflow_auth_strategy
+          # @option options [enum] :workflow_auth_strategy
           #   The workflow auth permission. Can be one of builder_choice or end_user_only.
           # @see https://api.slack.com/methods/admin.apps.config.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.config/admin.apps.config.set.json

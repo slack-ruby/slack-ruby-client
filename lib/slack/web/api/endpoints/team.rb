@@ -57,7 +57,7 @@ module Slack
           # Gets information about the current team.
           #
           # @option options [string] :domain
-          #   Query by domain instead of team (only when team is null). This only works for domains in the same enterprise as the querying team token. This also expects the domain to belong to a team and not the enterprise itself.
+          #   Query by domain instead of team (only when team is null). This only works for domains in the same enterprise as the querying team token. This also expects the domain to belong to a team and not the enterprise itself. This is the value set up for the 'Joining This Workspace' workspace setting. If it contains more than one domain, the field will contain multiple comma-separated domain values. If no domain is set, the field is empty.
           # @option options [string] :team
           #   Team to get info about; if omitted, will return information about the current team.
           # @see https://api.slack.com/methods/team.info
@@ -71,7 +71,7 @@ module Slack
           #
           # @option options [string] :app_id
           #   Filter logs to this Slack app. Defaults to all logs.
-          # @option options [string] :change_type
+          # @option options [enum] :change_type
           #   Filter logs with this change type. Possible values are added, removed, enabled, disabled, and updated. Defaults to all logs.
           # @option options [string] :service_id
           #   Filter logs to this service. Defaults to all logs.

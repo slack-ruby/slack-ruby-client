@@ -156,8 +156,6 @@ module Slack
           #   Change how messages are treated. See below.
           # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
-          # @option options [string] :service_team_id
-          #   For a message posted in App Home, Team ID corresponding to the selected app installation.
           # @option options [string] :thread_ts
           #   Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead.
           # @option options [boolean] :unfurl_links
@@ -181,7 +179,7 @@ module Slack
           # @option options [channel] :channel
           #   Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [integer] :post_at
-          #   Unix EPOCH timestamp of time in future to send the message.
+          #   Unix timestamp representing the future time the message should post to Slack.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
@@ -194,7 +192,7 @@ module Slack
           #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
           # @option options [string] :metadata
           #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
-          # @option options [string] :parse
+          # @option options [enum] :parse
           #   Change how messages are treated. See chat.postMessage.
           # @option options [boolean] :reply_broadcast
           #   Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
@@ -223,7 +221,7 @@ module Slack
           #   Timestamp of the message to add unfurl behavior to.
           # @option options [string] :unfurls
           #   URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.
-          # @option options [string] :source
+          # @option options [enum] :source
           #   The source of the link to unfurl. The source may either be composer, when the link is inside the message composer, or conversations_history, when the link has been posted to a conversation.
           # @option options [string] :unfurl_id
           #   The ID of the link to unfurl. Both unfurl_id and source must be provided together, or channel and ts must be provided together.

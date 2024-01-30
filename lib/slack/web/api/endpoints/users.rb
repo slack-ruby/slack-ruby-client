@@ -143,7 +143,7 @@ module Slack
           #
           # Manually sets user presence.
           #
-          # @option options [string] :presence
+          # @option options [enum] :presence
           #   Either auto or away.
           # @see https://api.slack.com/methods/users.setPresence
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.setPresence.json

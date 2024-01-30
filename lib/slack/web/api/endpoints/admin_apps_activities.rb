@@ -27,7 +27,7 @@ module Slack
           #   The earliest timestamp of the log to retrieve (epoch microseconds).
           # @option options [string] :min_log_level
           #   The minimum log level of the log events to be returned. Defaults to info. Acceptable values (in order of relative importance from smallest to largest) are trace, debug, info, warn, error and fatal.
-          # @option options [string] :sort_direction
+          # @option options [enum] :sort_direction
           #   The direction you want the data sorted by (always by timestamp).
           # @option options [string] :source
           #   The source of log events to be returned. Acceptable values are slack and developer.

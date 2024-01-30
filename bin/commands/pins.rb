@@ -10,7 +10,6 @@ module Slack
         g.long_desc %( Pins an item to a channel. )
         g.command 'add' do |c|
           c.flag 'channel', desc: 'Channel to pin the messsage to. You must also include a timestamp when pinning messages.'
-          c.flag 'quip_component_id', desc: 'Component ID for the pins component that was inserted into the channel canvas, if any.'
           c.flag 'timestamp', desc: 'Timestamp of the message to pin. You must also include the channel.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.pins_add(options))

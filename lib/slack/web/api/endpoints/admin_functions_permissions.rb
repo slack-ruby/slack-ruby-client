@@ -23,7 +23,7 @@ module Slack
           #
           # @option options [string] :function_id
           #   The function ID to set permissions for.
-          # @option options [string] :visibility
+          # @option options [enum] :visibility
           #   The function visibility.
           # @option options [array] :user_ids
           #   List of user IDs to allow for named_entities visibility.
