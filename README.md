@@ -177,7 +177,7 @@ Upload a file with [files_upload](https://api.slack.com/methods/files.upload).
 client.files_upload(
   channels: '#general',
   as_user: true,
-  file: Faraday::UploadIO.new('/path/to/avatar.jpg', 'image/jpeg'),
+  file: Faraday::Multipart::FilePart.new('/path/to/avatar.jpg', 'image/jpeg'),
   title: 'My Avatar',
   filename: 'avatar.jpg',
   initial_comment: 'Attached a selfie.'
