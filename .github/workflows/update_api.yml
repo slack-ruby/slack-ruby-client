@@ -55,6 +55,11 @@ jobs:
           base: master
           committer: slack-ruby-ci-bot <noreply@github.com>
           author: slack-ruby-ci-bot <noreply@github.com>
+      - name: Check out update branch
+        if: ${{ steps.cpr.outputs.pull-request-number != '' }}
+        run: |
+          git fetch origin automated-api-update
+          git checkout automated-api-update
       - name: Update CHANGELOG
         uses: jacobtomlinson/gha-find-replace@v3
         if: ${{ steps.cpr.outputs.pull-request-number != '' }}
