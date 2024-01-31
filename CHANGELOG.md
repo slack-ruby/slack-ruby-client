@@ -1,6 +1,7 @@
 ### 2.2.1 (Next)
 
 * [#494](https://github.com/slack-ruby/slack-ruby-client/pull/494): Configure Dependabot to update GitHub Actions - [@olleolleolle](https://github.com/olleolleolle).
+* [#508](https://github.com/slack-ruby/slack-ruby-client/pull/508): Fix `Slack::Events::Request#verify!` compatibility with Rack 3.x - [@dblock](https://github.com/dblock).
 * [#503](https://github.com/slack-ruby/slack-ruby-client/pull/503): Update Slack API Update API from [slack-api-ref@bc545649](https://github.com/slack-ruby/slack-api-ref/commit/bc545649) - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
