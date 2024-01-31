@@ -38,8 +38,10 @@ module Slack
       # Request body.
       def body
         @body ||= begin
-          body = http_request.body.read
-          http_request.body.rewind
+          input = http_request.body
+          input.rewind
+          body = input.read
+          input.rewind
           body
         end
       end

@@ -47,6 +47,17 @@ RSpec.describe Slack::Events::Request do
     expect(http_request.body.read).to eq body
   end
 
+  context 'with an already read body' do
+    before do
+      http_request.body.read
+    end
+
+    it 'rewinds the request body before reading it' do
+      expect(request.body).to eq body
+      expect(http_request.body.read).to eq body
+    end
+  end
+
   context 'time' do
     after do
       Timecop.return
