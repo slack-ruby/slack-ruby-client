@@ -100,6 +100,7 @@ module Slack
         g.command 'invite' do |c|
           c.flag 'channel', desc: 'The ID of the public or private channel to invite user(s) to.'
           c.flag 'users', desc: 'A comma separated list of user IDs. Up to 1000 users may be listed.'
+          c.flag 'force', desc: 'When set to true and multiple user IDs are provided, continue inviting the valid ones while disregarding invalid IDs. Defaults to false.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_invite(options))
           end

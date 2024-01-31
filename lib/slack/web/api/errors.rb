@@ -32,6 +32,7 @@ module Slack
         class ApprovalNotFound < SlackError; end
         class AsUserNotSupported < SlackError; end
         class AtLeastOneSessionSettingRequired < SlackError; end
+        class AttachmentPayloadLimitExceeded < SlackError; end
         class AuthMismatch < SlackError; end
         class AuthorizationNotFound < SlackError; end
         class AutoProvisionFailure < SlackError; end
@@ -174,6 +175,7 @@ module Slack
         class ErrorTooBig < SlackError; end
         class ErrorUnpublishingWorkflows < SlackError; end
         class ExchangedTriggerId < SlackError; end
+        class ExecutionNotInRunningState < SlackError; end
         class ExpiredTriggerId < SlackError; end
         class ExternalChannelMigrating < SlackError; end
         class ExternalLimitedRestriction < SlackError; end
@@ -231,6 +233,7 @@ module Slack
         class ForbiddenHandle < SlackError; end
         class ForbiddenTeam < SlackError; end
         class FreeTeamNotAllowed < SlackError; end
+        class FunctionExecutionNotFound < SlackError; end
         class FunctionNotFound < SlackError; end
         class GroupAlreadyLinkedToChannel < SlackError; end
         class GroupMustNotBeEmpty < SlackError; end
@@ -391,6 +394,7 @@ module Slack
         class MissingResource < SlackError; end
         class MissingScope < SlackError; end
         class MissingSource < SlackError; end
+        class MissingStepIds < SlackError; end
         class MissingSubteamName < SlackError; end
         class MissingTargetTeam < SlackError; end
         class MissingTeam < SlackError; end
@@ -474,6 +478,7 @@ module Slack
         class PaginationNotAvailable < SlackError; end
         class PaidOnly < SlackError; end
         class PaidTeamsOnly < SlackError; end
+        class ParameterValidationFailed < SlackError; end
         class ParentBookmarkDisabled < SlackError; end
         class ParentWithLink < SlackError; end
         class PartialProfileSetFailed < SlackError; end
@@ -649,6 +654,7 @@ module Slack
           'approval_not_found' => ApprovalNotFound,
           'as_user_not_supported' => AsUserNotSupported,
           'at_least_one_session_setting_required' => AtLeastOneSessionSettingRequired,
+          'attachment_payload_limit_exceeded' => AttachmentPayloadLimitExceeded,
           'auth_mismatch' => AuthMismatch,
           'authorization_not_found' => AuthorizationNotFound,
           'auto_provision_failure' => AutoProvisionFailure,
@@ -791,6 +797,7 @@ module Slack
           'error_too_big' => ErrorTooBig,
           'error_unpublishing_workflows' => ErrorUnpublishingWorkflows,
           'exchanged_trigger_id' => ExchangedTriggerId,
+          'execution_not_in_running_state' => ExecutionNotInRunningState,
           'expired_trigger_id' => ExpiredTriggerId,
           'external_channel_migrating' => ExternalChannelMigrating,
           'external_limited_restriction' => ExternalLimitedRestriction,
@@ -848,6 +855,7 @@ module Slack
           'forbidden_handle' => ForbiddenHandle,
           'forbidden_team' => ForbiddenTeam,
           'free_team_not_allowed' => FreeTeamNotAllowed,
+          'function_execution_not_found' => FunctionExecutionNotFound,
           'function_not_found' => FunctionNotFound,
           'group_already_linked_to_channel' => GroupAlreadyLinkedToChannel,
           'group_must_not_be_empty' => GroupMustNotBeEmpty,
@@ -1008,6 +1016,7 @@ module Slack
           'missing_resource' => MissingResource,
           'missing_scope' => MissingScope,
           'missing_source' => MissingSource,
+          'missing_step_ids' => MissingStepIds,
           'missing_subteam_name' => MissingSubteamName,
           'missing_target_team' => MissingTargetTeam,
           'missing_team' => MissingTeam,
@@ -1091,6 +1100,7 @@ module Slack
           'pagination_not_available' => PaginationNotAvailable,
           'paid_only' => PaidOnly,
           'paid_teams_only' => PaidTeamsOnly,
+          'parameter_validation_failed' => ParameterValidationFailed,
           'parent_bookmark_disabled' => ParentBookmarkDisabled,
           'parent_with_link' => ParentWithLink,
           'partial_profile_set_failed' => PartialProfileSetFailed,

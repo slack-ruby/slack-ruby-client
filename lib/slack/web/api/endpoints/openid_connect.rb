@@ -15,7 +15,7 @@ module Slack
           #   Issued when you created your application.
           # @option options [string] :code
           #   The code param returned via the OAuth callback.
-          # @option options [string] :grant_type
+          # @option options [enum] :grant_type
           #   The grant_type param as described in the OAuth spec.
           # @option options [string] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).

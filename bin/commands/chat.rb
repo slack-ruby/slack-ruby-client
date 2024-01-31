@@ -94,7 +94,6 @@ module Slack
           c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
           c.flag 'parse', desc: 'Change how messages are treated. See below.'
           c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
-          c.flag 'service_team_id', desc: 'For a message posted in App Home, Team ID corresponding to the selected app installation.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead."
           c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
           c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
@@ -108,7 +107,7 @@ module Slack
         g.long_desc %( Schedules a message to be sent to a channel. )
         g.command 'scheduleMessage' do |c|
           c.flag 'channel', desc: 'Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
-          c.flag 'post_at', desc: 'Unix EPOCH timestamp of time in future to send the message.'
+          c.flag 'post_at', desc: 'Unix timestamp representing the future time the message should post to Slack.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'

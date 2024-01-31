@@ -23,11 +23,11 @@ module Slack
           #   Number of trigger IDs to fetch for each workflow; default is 0.
           # @option options [string] :query
           #   A search query to filter for workflow name or description.
-          # @option options [string] :sort
+          # @option options [enum] :sort
           #   The field used to sort the returned workflows.
-          # @option options [string] :sort_dir
+          # @option options [enum] :sort_dir
           #   Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).
-          # @option options [string] :source
+          # @option options [enum] :source
           #   Source of workflow creation, either from code or workflow builder.
           # @see https://api.slack.com/methods/admin.workflows.search
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.workflows/admin.workflows.search.json

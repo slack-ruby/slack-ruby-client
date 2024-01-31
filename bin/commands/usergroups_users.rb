@@ -17,12 +17,12 @@ module Slack
           end
         end
 
-        g.desc 'Update the list of users for a User Group.'
-        g.long_desc %( Update the list of users for a User Group. )
+        g.desc 'Update the list of users for a user group.'
+        g.long_desc %( Update the list of users for a user group. )
         g.command 'update' do |c|
-          c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
-          c.flag 'users', desc: 'A comma separated string of encoded user IDs that represent the entire list of users for the User Group.'
-          c.flag 'include_count', desc: 'Include the number of users in the User Group.'
+          c.flag 'usergroup', desc: 'The encoded ID of the user group to update.'
+          c.flag 'users', desc: 'A comma separated string of encoded user IDs that represent the entire list of users for the user group.'
+          c.flag 'include_count', desc: 'Include the number of users in the user group.'
           c.flag 'team_id', desc: 'encoded team id where the user group exists, required if org token is used.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.usergroups_users_update(options))

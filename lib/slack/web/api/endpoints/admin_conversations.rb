@@ -22,7 +22,7 @@ module Slack
           # Archive public or private channels in bulk.
           #
           # @option options [array] :channel_ids
-          #   An array of channel IDs to archive.
+          #   An array of channel IDs to archive. No more than 100 items are allowed.
           # @see https://api.slack.com/methods/admin.conversations.bulkArchive
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.bulkArchive.json
           def admin_conversations_bulkArchive(options = {})
