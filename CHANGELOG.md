@@ -1,3 +1,7 @@
+### 2.3.1 (Next)
+
+* Your contribution here.
+
 ### 2.3.0 (2024/01/31)
 
 * [#494](https://github.com/slack-ruby/slack-ruby-client/pull/494): Configure Dependabot to update GitHub Actions - [@olleolleolle](https://github.com/olleolleolle).
