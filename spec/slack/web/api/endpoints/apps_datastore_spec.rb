@@ -5,6 +5,35 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::AppsDatastore do
   let(:client) { Slack::Web::Client.new }
+  context 'apps.datastore_bulkDelete' do
+    it 'requires datastore' do
+      expect { client.apps_datastore_bulkDelete(ids: %q[["7c6dd137", "c7d6d731"]]) }.to raise_error ArgumentError, /Required arguments :datastore missing/
+    end
+    it 'requires ids' do
+      expect { client.apps_datastore_bulkDelete(datastore: %q[]) }.to raise_error ArgumentError, /Required arguments :ids missing/
+    end
+  end
+  context 'apps.datastore_bulkGet' do
+    it 'requires datastore' do
+      expect { client.apps_datastore_bulkGet(ids: %q[["7c6dd137", "c7d6d731"]]) }.to raise_error ArgumentError, /Required arguments :datastore missing/
+    end
+    it 'requires ids' do
+      expect { client.apps_datastore_bulkGet(datastore: %q[]) }.to raise_error ArgumentError, /Required arguments :ids missing/
+    end
+  end
+  context 'apps.datastore_bulkPut' do
+    it 'requires datastore' do
+      expect { client.apps_datastore_bulkPut(items: %q[[{"id": "7c6dd137", "favourite_meal": "Shawarma", "reason": "Who doesn't like Shawarma?"}]]) }.to raise_error ArgumentError, /Required arguments :datastore missing/
+    end
+    it 'requires items' do
+      expect { client.apps_datastore_bulkPut(datastore: %q[]) }.to raise_error ArgumentError, /Required arguments :items missing/
+    end
+  end
+  context 'apps.datastore_count' do
+    it 'requires datastore' do
+      expect { client.apps_datastore_count }.to raise_error ArgumentError, /Required arguments :datastore missing/
+    end
+  end
   context 'apps.datastore_delete' do
     it 'requires datastore' do
       expect { client.apps_datastore_delete(id: %q[]) }.to raise_error ArgumentError, /Required arguments :datastore missing/

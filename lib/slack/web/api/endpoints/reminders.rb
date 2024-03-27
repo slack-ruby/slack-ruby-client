@@ -12,7 +12,7 @@ module Slack
           # @option options [string] :text
           #   The content of the reminder.
           # @option options [string] :time
-          #   When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday").
+          #   Can also take a type of integer. When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday").
           # @option options [object] :recurrence
           #   Specify the repeating behavior of a reminder. Available options: daily, weekly, monthly, or yearly. If weekly, may further specify the days of the week.
           # @option options [string] :team_id

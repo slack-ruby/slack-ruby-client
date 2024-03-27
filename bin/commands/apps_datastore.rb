@@ -6,6 +6,52 @@ module Slack
     class App
       desc 'AppsDatastore methods.'
       command 'apps_datastore' do |g|
+        g.desc 'Delete items from a datastore in bulk'
+        g.long_desc %( Delete items from a datastore in bulk )
+        g.command 'bulkDelete' do |c|
+          c.flag 'datastore', desc: 'name of the datastore.'
+          c.flag 'ids', desc: 'IDs of items to be deleted.'
+          c.flag 'app_id', desc: '.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.apps_datastore_bulkDelete(options))
+          end
+        end
+
+        g.desc 'Get items from a datastore in bulk'
+        g.long_desc %( Get items from a datastore in bulk )
+        g.command 'bulkGet' do |c|
+          c.flag 'datastore', desc: 'name of the datastore.'
+          c.flag 'ids', desc: "items' ids."
+          c.flag 'app_id', desc: '.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.apps_datastore_bulkGet(options))
+          end
+        end
+
+        g.desc 'Creates or replaces existing items in bulk'
+        g.long_desc %( Creates or replaces existing items in bulk )
+        g.command 'bulkPut' do |c|
+          c.flag 'datastore', desc: 'name of the datastore.'
+          c.flag 'items', desc: 'attribute names and values of the items; limit of 25.'
+          c.flag 'app_id', desc: '.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.apps_datastore_bulkPut(options))
+          end
+        end
+
+        g.desc 'Count the number of items in a datastore that match a query'
+        g.long_desc %( Count the number of items in a datastore that match a query )
+        g.command 'count' do |c|
+          c.flag 'datastore', desc: 'Name of the datastore.'
+          c.flag 'app_id', desc: 'Required if calling with user token.'
+          c.flag 'expression', desc: 'A query filter expression https://api.slack.com/future/datastores.'
+          c.flag 'expression_attributes', desc: 'A map of attributes referenced in expression.'
+          c.flag 'expression_values', desc: 'A map of values referenced in expression.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.apps_datastore_count(options))
+          end
+        end
+
         g.desc 'Delete an item from a datastore'
         g.long_desc %( Delete an item from a datastore )
         g.command 'delete' do |c|

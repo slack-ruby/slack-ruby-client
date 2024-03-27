@@ -77,7 +77,7 @@ module Slack
           c.flag 'include_all_metadata', desc: 'Return all metadata associated with this message.'
           c.flag 'inclusive', desc: 'Include messages with oldest or latest timestamps in results. Ignored unless either timestamp is specified.'
           c.flag 'latest', desc: 'Only messages before this Unix timestamp will be included in results. Default is the current time.'
-          c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
+          c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the conversation history hasn't been reached. Maximum of 999."
           c.flag 'oldest', desc: 'Only messages after this Unix timestamp will be included in results.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_history(options))

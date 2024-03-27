@@ -32,6 +32,7 @@ require_relative 'endpoints/admin_users_unsupportedVersions'
 require_relative 'endpoints/admin_workflows'
 require_relative 'endpoints/admin_workflows_collaborators'
 require_relative 'endpoints/admin_workflows_permissions'
+require_relative 'endpoints/admin_workflows_triggers_types_permissions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_activities'
@@ -56,6 +57,7 @@ require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files_remote'
 require_relative 'endpoints/functions'
+require_relative 'endpoints/functions_distributions_permissions'
 require_relative 'endpoints/functions_workflows_steps'
 require_relative 'endpoints/functions_workflows_steps_responses'
 require_relative 'endpoints/migration'
@@ -81,6 +83,7 @@ require_relative 'endpoints/users_prefs'
 require_relative 'endpoints/users_profile'
 require_relative 'endpoints/views'
 require_relative 'endpoints/workflows'
+require_relative 'endpoints/workflows_triggers_permissions'
 
 module Slack
   module Web
@@ -120,6 +123,7 @@ module Slack
         include AdminWorkflows
         include AdminWorkflowsCollaborators
         include AdminWorkflowsPermissions
+        include AdminWorkflowsTriggersTypesPermissions
         include Api
         include Apps
         include AppsActivities
@@ -144,6 +148,7 @@ module Slack
         include FilesComments
         include FilesRemote
         include Functions
+        include FunctionsDistributionsPermissions
         include FunctionsWorkflowsSteps
         include FunctionsWorkflowsStepsResponses
         include Migration
@@ -169,6 +174,7 @@ module Slack
         include UsersProfile
         include Views
         include Workflows
+        include WorkflowsTriggersPermissions
       end
     end
   end
