@@ -7,6 +7,77 @@ module Slack
       module Endpoints
         module AppsDatastore
           #
+          # Delete items from a datastore in bulk
+          #
+          # @option options [string] :datastore
+          #   name of the datastore.
+          # @option options [array] :ids
+          #   IDs of items to be deleted.
+          # @option options [Object] :app_id
+          #   .
+          # @see https://api.slack.com/methods/apps.datastore.bulkDelete
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.bulkDelete.json
+          def apps_datastore_bulkDelete(options = {})
+            raise ArgumentError, 'Required arguments :datastore missing' if options[:datastore].nil?
+            raise ArgumentError, 'Required arguments :ids missing' if options[:ids].nil?
+            post('apps.datastore.bulkDelete', options)
+          end
+
+          #
+          # Get items from a datastore in bulk
+          #
+          # @option options [string] :datastore
+          #   name of the datastore.
+          # @option options [array] :ids
+          #   items' ids.
+          # @option options [Object] :app_id
+          #   .
+          # @see https://api.slack.com/methods/apps.datastore.bulkGet
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.bulkGet.json
+          def apps_datastore_bulkGet(options = {})
+            raise ArgumentError, 'Required arguments :datastore missing' if options[:datastore].nil?
+            raise ArgumentError, 'Required arguments :ids missing' if options[:ids].nil?
+            post('apps.datastore.bulkGet', options)
+          end
+
+          #
+          # Creates or replaces existing items in bulk
+          #
+          # @option options [string] :datastore
+          #   name of the datastore.
+          # @option options [array] :items
+          #   attribute names and values of the items; limit of 25.
+          # @option options [Object] :app_id
+          #   .
+          # @see https://api.slack.com/methods/apps.datastore.bulkPut
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.bulkPut.json
+          def apps_datastore_bulkPut(options = {})
+            raise ArgumentError, 'Required arguments :datastore missing' if options[:datastore].nil?
+            raise ArgumentError, 'Required arguments :items missing' if options[:items].nil?
+            post('apps.datastore.bulkPut', options)
+          end
+
+          #
+          # Count the number of items in a datastore that match a query
+          #
+          # @option options [string] :datastore
+          #   Name of the datastore.
+          # @option options [Object] :app_id
+          #   Required if calling with user token.
+          # @option options [string] :expression
+          #   A query filter expression https://api.slack.com/future/datastores.
+          # @option options [object] :expression_attributes
+          #   A map of attributes referenced in expression.
+          # @option options [object] :expression_values
+          #   A map of values referenced in expression.
+          # @see https://api.slack.com/methods/apps.datastore.count
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.count.json
+          def apps_datastore_count(options = {})
+            raise ArgumentError, 'Required arguments :datastore missing' if options[:datastore].nil?
+            post('apps.datastore.count', options)
+          end
+
+          #
           # Delete an item from a datastore
           #
           # @option options [string] :datastore
