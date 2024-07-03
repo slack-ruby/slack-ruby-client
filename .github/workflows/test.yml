@@ -11,6 +11,7 @@ jobs:
           - { ruby: "3.0" }
           - { ruby: "3.1" }
           - { ruby: "3.2" }
+          - { ruby: "3.3" }
           - { ruby: ruby-head, ignore: true }
           - { ruby: jruby-head, ignore: true }
     name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
