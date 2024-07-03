@@ -21,7 +21,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.entry.ruby }}
-          bundler-cache: true
+          bundler-cache: true # 'bundle install' and cache gems
       - name: Set Concurrency
         run: |
           if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
@@ -32,9 +32,7 @@ jobs:
         continue-on-error: ${{ matrix.entry.ignore || false }}
         env:
           RACK_ENV: test
-        run: |
-          bundle install
-          bundle exec rake
+        run: bundle exec rake
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
