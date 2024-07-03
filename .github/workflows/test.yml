@@ -17,17 +17,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.entry.ruby }}
-          bundler-cache: true # 'bundle install' and cache gems
       - name: Set Concurrency
         run: |
           if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
             echo "Setting concurrency to ${{ matrix.entry.concurrency }}."
             echo "CONCURRENCY=${{ matrix.entry.concurrency }}" >> $GITHUB_ENV
           fi
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.entry.ruby }}
+          bundler-cache: true # 'bundle install' and cache gems
       - name: Run Tests
         continue-on-error: ${{ matrix.entry.ignore || false }}
         env:
