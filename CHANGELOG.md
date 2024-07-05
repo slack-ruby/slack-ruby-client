@@ -1,6 +1,6 @@
 ### 2.3.1 (Next)
 
-* Your contribution here.
+* [#519](https://github.com/slack-ruby/slack-ruby-client/pull/519): Support basic markdown formatting - [@nbgoodall](https://github.com/nbgoodall).
 
 ### 2.3.0 (2024/01/31)
 
