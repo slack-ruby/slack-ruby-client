@@ -81,9 +81,7 @@ module Slack
           slack_md = slack_md.gsub(/~~(.*?)~~/, '~\1~')
 
           # convert links
-          slack_md = slack_md.gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>')
-
-          slack_md
+          slack_md.gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>')
         end
       end
     end
