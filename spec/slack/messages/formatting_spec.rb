@@ -135,6 +135,12 @@ describe Slack::Messages::Formatting do
       expect(formatting.markdown('[Le link](https://theuselessweb.site)')).to eq '<https://theuselessweb.site|Le link>'
     end
 
+    it 'formats nested markdown' do
+      expect(formatting.markdown('**[Le **bold and ~~struckout~~** link](https://theuselessweb.site)**')).to(
+        eq '*<https://theuselessweb.site|Le *bold and ~struckout~* link>*'
+      )
+    end
+
     it "doesn't format other markdown" do
       expect(formatting.markdown('## A heading\n_Italics_\n`code`')).to eq '## A heading\n_Italics_\n`code`'
     end

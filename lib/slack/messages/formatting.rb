@@ -74,14 +74,10 @@ module Slack
         # @see https://api.slack.com/reference/surfaces/formatting#basic-formatting
         #
         def markdown(text)
-          # convert bold
-          slack_md = text.gsub(/\*\*(.*?)\*\*/, '*\1*')
-
-          # convert strikethrough
-          slack_md = slack_md.gsub(/~~(.*?)~~/, '~\1~')
-
-          # convert links
-          slack_md.gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>')
+          text
+            .gsub(/\*\*(.*?)\*\*/, '*\1*') # bold
+            .gsub(/~~(.*?)~~/, '~\1~') # strikethrough
+            .gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>') # links
         end
       end
     end
