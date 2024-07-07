@@ -58,6 +58,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
       - [Channel ID formatting](#channel-id-formatting)
       - [User ID formatting](#user-id-formatting)
       - [URL formatting](#url-formatting)
+      - [Markdown formatting](#markdown-formatting)
     - [Parsing Messages](#parsing-messages)
       - [Unescaping message content](#unescaping-message-content)
       - [Escaping message content](#escaping-message-content)
@@ -655,6 +656,30 @@ text = 'party time'
 url = 'https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif'
 Slack::Messages::Formatting.url_link(text, url)
   # => "<https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif|party time>"
+```
+
+##### Markdown formatting
+
+Slack uses a mishmash of regular markdown formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
+
+```ruby
+text = """
+## A heading
+**Bold text**
+~~Strikethrough text~~
+_Italic text_
+[A link](https://example.com)
+`code`
+"""
+Slack::Messages::Formatting.markdown(text)
+  # => """
+  # ## A heading
+  # *Bold text*
+  # ~Strikethrough text~
+  # _Italic text_
+  # <https://example.com|A link>
+  # `code`
+  # """
 ```
 
 #### Parsing Messages

@@ -121,4 +121,36 @@ describe Slack::Messages::Formatting do
       expect(formatting.url_link(text, url)).to eq "<#{url}|#{text}>"
     end
   end
+
+  context '#markdown' do
+    it 'formats markdown bold' do
+      expect(formatting.markdown('**Le bold**')).to eq '*Le bold*'
+    end
+
+    it 'formats markdown italic' do
+      expect(formatting.markdown("*L'italic*")).to eq "_L'italic_"
+    end
+
+    it 'formats markdown bold and italic' do
+      expect(formatting.markdown('***Le bold italic***')).to eq '*_Le bold italic_*'
+    end
+
+    it 'formats markdown strikethrough' do
+      expect(formatting.markdown('~~Le strikethrough~~')).to eq '~Le strikethrough~'
+    end
+
+    it 'formats markdown links' do
+      expect(formatting.markdown('[Le link](https://theuselessweb.site)')).to eq '<https://theuselessweb.site|Le link>'
+    end
+
+    it 'formats nested markdown' do
+      expect(formatting.markdown('**[Le **bold and ~~struckout with *italic*~~** link](https://theuselessweb.site)**')).to(
+        eq '*<https://theuselessweb.site|Le *bold and ~struckout with _italic_~* link>*'
+      )
+    end
+
+    it "doesn't format other markdown" do
+      expect(formatting.markdown('## A heading\n_Italics_\n`code`')).to eq '## A heading\n_Italics_\n`code`'
+    end
+  end
 end

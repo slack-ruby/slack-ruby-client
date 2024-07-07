@@ -68,6 +68,19 @@ module Slack
         def url_link(text, url)
           "<#{url}|#{text}>"
         end
+
+        #
+        # Converts text from basic markdown into Slack's mishmash
+        # @see https://api.slack.com/reference/surfaces/formatting#basic-formatting
+        #
+        def markdown(text)
+          text
+            .gsub(/(?<!\*)\*([^*]+)\*(?!\*)/, '_\1_') # italic
+            .gsub(/\*\*\*(.*?)\*\*\*/, '*_\1_*') # bold & italic
+            .gsub(/\*\*(.*?)\*\*/, '*\1*') # bold
+            .gsub(/~~(.*?)~~/, '~\1~') # strikethrough
+            .gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>') # links
+        end
       end
     end
   end

@@ -1,6 +1,7 @@
 ### 2.3.1 (Next)
 
 * [#516](https://github.com/slack-ruby/slack-ruby-client/pull/516): Add support for Ruby 3.3 - [@olleolleolle](https://github.com/olleolleolle).
+* [#520](https://github.com/slack-ruby/slack-ruby-client/pull/520): Support basic markdown formatting - [@nbgoodall](https://github.com/nbgoodall).
 * Your contribution here.
 
 ### 2.3.0 (2024/01/31)
