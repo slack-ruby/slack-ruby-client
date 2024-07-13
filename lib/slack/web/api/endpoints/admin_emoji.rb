@@ -10,7 +10,7 @@ module Slack
           # Add an emoji.
           #
           # @option options [string] :name
-          #   The name of the emoji to be added. Colons (:myemoji:) around the value are not required, although they may be included.
+          #   The name of the emoji to be added (using lower-case letters only). Colons (:myemoji:) around the value are not required, although they may be included.
           # @option options [string] :url
           #   The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best.
           # @see https://api.slack.com/methods/admin.emoji.add

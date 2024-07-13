@@ -32,6 +32,7 @@ require_relative 'endpoints/admin_users_unsupportedVersions'
 require_relative 'endpoints/admin_workflows'
 require_relative 'endpoints/admin_workflows_collaborators'
 require_relative 'endpoints/admin_workflows_permissions'
+require_relative 'endpoints/admin_workflows_triggers_types_permissions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_activities'
@@ -46,9 +47,14 @@ require_relative 'endpoints/bookmarks'
 require_relative 'endpoints/bots'
 require_relative 'endpoints/calls'
 require_relative 'endpoints/calls_participants'
+require_relative 'endpoints/canvases'
+require_relative 'endpoints/canvases_access'
+require_relative 'endpoints/canvases_sections'
 require_relative 'endpoints/chat'
 require_relative 'endpoints/chat_scheduledMessages'
 require_relative 'endpoints/conversations'
+require_relative 'endpoints/conversations_canvases'
+require_relative 'endpoints/conversations_externalInvitePermissions'
 require_relative 'endpoints/dialog'
 require_relative 'endpoints/dnd'
 require_relative 'endpoints/emoji'
@@ -56,6 +62,7 @@ require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files_remote'
 require_relative 'endpoints/functions'
+require_relative 'endpoints/functions_distributions_permissions'
 require_relative 'endpoints/functions_workflows_steps'
 require_relative 'endpoints/functions_workflows_steps_responses'
 require_relative 'endpoints/migration'
@@ -70,6 +77,7 @@ require_relative 'endpoints/search'
 require_relative 'endpoints/stars'
 require_relative 'endpoints/team'
 require_relative 'endpoints/team_billing'
+require_relative 'endpoints/team_externalTeams'
 require_relative 'endpoints/team_preferences'
 require_relative 'endpoints/team_profile'
 require_relative 'endpoints/tooling_tokens'
@@ -77,10 +85,12 @@ require_relative 'endpoints/usergroups'
 require_relative 'endpoints/usergroups_users'
 require_relative 'endpoints/users'
 require_relative 'endpoints/users_admin'
+require_relative 'endpoints/users_discoverableContacts'
 require_relative 'endpoints/users_prefs'
 require_relative 'endpoints/users_profile'
 require_relative 'endpoints/views'
 require_relative 'endpoints/workflows'
+require_relative 'endpoints/workflows_triggers_permissions'
 
 module Slack
   module Web
@@ -120,6 +130,7 @@ module Slack
         include AdminWorkflows
         include AdminWorkflowsCollaborators
         include AdminWorkflowsPermissions
+        include AdminWorkflowsTriggersTypesPermissions
         include Api
         include Apps
         include AppsActivities
@@ -134,9 +145,14 @@ module Slack
         include Bots
         include Calls
         include CallsParticipants
+        include Canvases
+        include CanvasesAccess
+        include CanvasesSections
         include Chat
         include ChatScheduledmessages
         include Conversations
+        include ConversationsCanvases
+        include ConversationsExternalinvitepermissions
         include Dialog
         include Dnd
         include Emoji
@@ -144,6 +160,7 @@ module Slack
         include FilesComments
         include FilesRemote
         include Functions
+        include FunctionsDistributionsPermissions
         include FunctionsWorkflowsSteps
         include FunctionsWorkflowsStepsResponses
         include Migration
@@ -158,6 +175,7 @@ module Slack
         include Stars
         include Team
         include TeamBilling
+        include TeamExternalteams
         include TeamPreferences
         include TeamProfile
         include ToolingTokens
@@ -165,10 +183,12 @@ module Slack
         include UsergroupsUsers
         include Users
         include UsersAdmin
+        include UsersDiscoverablecontacts
         include UsersPrefs
         include UsersProfile
         include Views
         include Workflows
+        include WorkflowsTriggersPermissions
       end
     end
   end

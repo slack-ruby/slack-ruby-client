@@ -60,8 +60,8 @@ module Slack
           end
         end
 
-        g.desc 'Set an existing guest, regular user, or owner to be an admin user.'
-        g.long_desc %( Set an existing guest, regular user, or owner to be an admin user. )
+        g.desc 'Set an existing regular user or owner to be a workspace admin.'
+        g.long_desc %( Set an existing regular user or owner to be a workspace admin. )
         g.command 'setAdmin' do |c|
           c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
           c.flag 'user_id', desc: 'The ID of the user to designate as an admin.'
@@ -81,8 +81,8 @@ module Slack
           end
         end
 
-        g.desc 'Set an existing guest, regular user, or admin user to be a workspace owner.'
-        g.long_desc %( Set an existing guest, regular user, or admin user to be a workspace owner. )
+        g.desc 'Set an existing regular user or admin to be a workspace owner.'
+        g.long_desc %( Set an existing regular user or admin to be a workspace owner. )
         g.command 'setOwner' do |c|
           c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
           c.flag 'user_id', desc: 'Id of the user to promote to owner.'

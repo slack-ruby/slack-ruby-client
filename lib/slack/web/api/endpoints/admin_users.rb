@@ -100,7 +100,7 @@ module Slack
           end
 
           #
-          # Set an existing guest, regular user, or owner to be an admin user.
+          # Set an existing regular user or owner to be a workspace admin.
           #
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
@@ -132,7 +132,7 @@ module Slack
           end
 
           #
-          # Set an existing guest, regular user, or admin user to be a workspace owner.
+          # Set an existing regular user or admin to be a workspace owner.
           #
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
