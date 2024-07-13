@@ -7,7 +7,7 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
   let(:client) { Slack::Web::Client.new }
 <% names.sort.each_with_index do |(name, data), index| %>
 <% next if data['mixin'] %>
-<% group_required_params = data['arg_groups']&.map { |grp| grp['args'].first } || [] %>
+<% group_required_params = data['arg_groups']&.map { |grp| grp['args'].first if grp['args'].size > 1 } || [] %>
 <% required_params = data['args'].select{ |k, v| v['required'] || group_required_params.include?(k) } %>
 <% json_params = data['args'].map { |arg_name, arg_v| arg_name if arg_v['format'] == 'json' }.compact %>
 <% next if (required_params.none? || custom_spec_exists) && json_params.none? && data['arg_groups'].nil? %>
@@ -23,6 +23,7 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
 <% end %>
 <% end %>
 <% data['arg_groups']&.each do |arg_group| %>
+    <% next if arg_group['args'].size <= 1 %>
     it 'requires one of <%= arg_group['args'].join(', ') %>' do
 <% params_except_required = example_params.reject { |name, _| arg_group['args'].include?(name)  }.map { |name, val| "#{name}: %q[#{val}]" }.join(', ') %>
 <% error_message = arg_group['mutually_exclusive'] ? 'Exactly' : 'At least' %>
