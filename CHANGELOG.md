@@ -1,3 +1,7 @@
+### 2.4.1 (Next)
+
+* Your contribution here.
+
 ### 2.4.0 (2024/07/14)
 
 * [#516](https://github.com/slack-ruby/slack-ruby-client/pull/516): Add support for Ruby 3.3 - [@olleolleolle](https://github.com/olleolleolle).
