@@ -1,7 +1,8 @@
-### 2.3.1 (Next)
+### 2.4.0 (Next)
 
 * [#516](https://github.com/slack-ruby/slack-ruby-client/pull/516): Add support for Ruby 3.3 - [@olleolleolle](https://github.com/olleolleolle).
-* [#520](https://github.com/slack-ruby/slack-ruby-client/pull/520): Support basic markdown formatting - [@nbgoodall](https://github.com/nbgoodall).
+* [#520](https://github.com/slack-ruby/slack-ruby-client/pull/520): Add support for basic markdown formatting - [@nbgoodall](https://github.com/nbgoodall).
+* [#523](https://github.com/slack-ruby/slack-ruby-client/pull/523): Fix coveralls handling parallel jobs - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.3.0 (2024/01/31)

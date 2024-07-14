@@ -14,7 +14,7 @@ jobs:
           - { ruby: "3.3" }
           - { ruby: ruby-head, ignore: true }
           - { ruby: jruby-head, ignore: true }
-    name: test (ruby=${{ matrix.entry.ruby }}, concurrency=${{ matrix.entry.concurrency || 'none' }})
+    name: test (ruby=${{ matrix.entry.ruby }}${{ matrix.entry.concurrency && ', concurrency=' }}${{ matrix.entry.concurrency }})
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,8 +35,19 @@ jobs:
           RACK_ENV: test
         run: bundle exec rake
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
+          parallel: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
+          flag-name: run-${{ matrix.entry.ruby }}${{ matrix.entry.concurrency && '-'}}${{ matrix.entry.concurrency }}
+
+  finish:
+    name: coveralls
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close Parallel Build
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
+          carryforward: 'run-2.7,run-2.7-async-websocket,run-3.0,run-3.1,run-3.2,run-3.3'
