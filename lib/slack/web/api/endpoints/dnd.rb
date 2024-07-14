@@ -46,6 +46,7 @@ module Slack
           # @see https://api.slack.com/methods/dnd.setSnooze
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/dnd/dnd.setSnooze.json
           def dnd_setSnooze(options = {})
+            raise ArgumentError, 'Required arguments :num_minutes missing' if options[:num_minutes].nil?
             post('dnd.setSnooze', options)
           end
 

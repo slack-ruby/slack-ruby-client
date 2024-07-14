@@ -12,15 +12,17 @@ module Slack
           # @option options [Object] :app_id
           #   The parent app ID for which to return workflows.
           # @option options [array] :collaborator_ids
-          #   Only include workflows by the collaborators inputted.
+          #   Only include workflows where the provided user IDs are a manager/collaborator of that workflow.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
+          # @option options [boolean] :is_sales_elevate
+          #   Filter workflows by their Sales Elevate status.
           # @option options [integer] :limit
           #   The number of results that will be returned by the API on each invocation.
           # @option options [boolean] :no_collaborators
           #   Only include workflows with no collaborators in the result; default is false.
           # @option options [integer] :num_trigger_ids
-          #   Number of trigger IDs to fetch for each workflow; default is 0.
+          #   Number of trigger IDs to fetch for each workflow; default is 10.
           # @option options [string] :query
           #   A search query to filter for workflow name or description.
           # @option options [enum] :sort
@@ -29,6 +31,8 @@ module Slack
           #   Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).
           # @option options [enum] :source
           #   Source of workflow creation, either from code or workflow builder.
+          # @option options [string] :trigger_type_id
+          #   Only include workflows with this trigger type.
           # @see https://api.slack.com/methods/admin.workflows.search
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.workflows/admin.workflows.search.json
           def admin_workflows_search(options = {})
