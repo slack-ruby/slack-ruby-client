@@ -112,7 +112,7 @@ module Slack
           # @option options [timestamp] :latest
           #   Only messages before this Unix timestamp will be included in results. Default is the current time.
           # @option options [number] :limit
-          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+          #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the conversation history hasn't been reached. Maximum of 999.
           # @option options [timestamp] :oldest
           #   Only messages after this Unix timestamp will be included in results.
           # @see https://api.slack.com/methods/conversations.history

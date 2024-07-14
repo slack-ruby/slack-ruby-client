@@ -10,9 +10,9 @@ module Slack
           # Exchanges a temporary OAuth verifier code for an access token.
           #
           # @option options [string] :client_id
-          #   Issued when you created your application.
+          #   Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.
           # @option options [string] :client_secret
-          #   Issued when you created your application.
+          #   Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.
           # @option options [string] :code
           #   The code param returned via the OAuth callback.
           # @option options [string] :redirect_uri
