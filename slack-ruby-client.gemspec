@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 2.7'
   s.required_rubygems_version = '>= 1.3.6'
-  s.files = `git ls-files`.split("\n")
+  s.files = `git ls-files`.split("\n").grep_v(%r{^spec/})
   s.require_paths = ['lib']
   s.homepage = 'http://github.com/slack-ruby/slack-ruby-client'
   s.licenses = ['MIT']
