@@ -178,6 +178,7 @@ module Slack
         class ErrorBadWide < SlackError; end
         class ErrorInvalidAlias < SlackError; end
         class ErrorInvalidEmojiToRename < SlackError; end
+        class ErrorLowerCaseNamesOnly < SlackError; end
         class ErrorMissingName < SlackError; end
         class ErrorNameTaken < SlackError; end
         class ErrorNameTakenI18n < SlackError; end
@@ -833,6 +834,7 @@ module Slack
           'error_bad_wide' => ErrorBadWide,
           'error_invalid_alias' => ErrorInvalidAlias,
           'error_invalid_emoji_to_rename' => ErrorInvalidEmojiToRename,
+          'error_lower_case_names_only' => ErrorLowerCaseNamesOnly,
           'error_missing_name' => ErrorMissingName,
           'error_name_taken' => ErrorNameTaken,
           'error_name_taken_i18n' => ErrorNameTakenI18n,
