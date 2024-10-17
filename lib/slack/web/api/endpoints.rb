@@ -41,6 +41,7 @@ require_relative 'endpoints/apps_connections'
 require_relative 'endpoints/apps_datastore'
 require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_manifest'
+require_relative 'endpoints/assistant_threads'
 require_relative 'endpoints/auth'
 require_relative 'endpoints/auth_teams'
 require_relative 'endpoints/bookmarks'
@@ -55,6 +56,7 @@ require_relative 'endpoints/chat_scheduledMessages'
 require_relative 'endpoints/conversations'
 require_relative 'endpoints/conversations_canvases'
 require_relative 'endpoints/conversations_externalInvitePermissions'
+require_relative 'endpoints/conversations_requestSharedInvite'
 require_relative 'endpoints/dialog'
 require_relative 'endpoints/dnd'
 require_relative 'endpoints/emoji'
@@ -139,6 +141,7 @@ module Slack
         include AppsDatastore
         include AppsEventAuthorizations
         include AppsManifest
+        include AssistantThreads
         include Auth
         include AuthTeams
         include Bookmarks
@@ -153,6 +156,7 @@ module Slack
         include Conversations
         include ConversationsCanvases
         include ConversationsExternalinvitepermissions
+        include ConversationsRequestsharedinvite
         include Dialog
         include Dnd
         include Emoji

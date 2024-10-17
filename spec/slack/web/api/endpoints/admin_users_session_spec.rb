@@ -17,10 +17,21 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsersSession do
   end
   context 'admin.users.session_invalidate' do
     it 'requires session_id' do
-      expect { client.admin_users_session_invalidate(team_id: %q[T1234]) }.to raise_error ArgumentError, /Required arguments :session_id missing/
+      expect { client.admin_users_session_invalidate(user_id: %q[U12345]) }.to raise_error ArgumentError, /Required arguments :session_id missing/
     end
-    it 'requires team_id' do
-      expect { client.admin_users_session_invalidate(session_id: %q[12345]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+    it 'requires user_id' do
+      expect { client.admin_users_session_invalidate(session_id: %q[12345]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
+    end
+    it 'requires one of user_id, team_id' do
+      expect { client.admin_users_session_invalidate(session_id: %q[12345]) }.to raise_error ArgumentError, /Exactly one of/
+
+      expect(client).to receive(:post).with('admin.users.session.invalidate', {user_id: %q[U12345], session_id: %q[12345]})
+      client.admin_users_session_invalidate(user_id: %q[U12345], session_id: %q[12345])
+
+      expect(client).to receive(:post).with('admin.users.session.invalidate', {team_id: %q[T1234], session_id: %q[12345]})
+      client.admin_users_session_invalidate(team_id: %q[T1234], session_id: %q[12345])
+
+      expect { client.admin_users_session_invalidate(user_id: %q[U12345], team_id: %q[T1234], session_id: %q[12345]) }.to raise_error ArgumentError, /Exactly one of/
     end
   end
   context 'admin.users.session_reset' do
