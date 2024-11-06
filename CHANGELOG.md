@@ -1,6 +1,7 @@
 ### 2.4.1 (Next)
 
 * [#525](https://github.com/slack-ruby/slack-ruby-client/pull/525): Exclude spec files from gem package - [@amatsuda](https://github.com/amatsuda).
+* [#527](https://github.com/slack-ruby/slack-ruby-client/pull/527): Explicitly require `racc` and `ostruct` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.4.0 (2024/07/14)

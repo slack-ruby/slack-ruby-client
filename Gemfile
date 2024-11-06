@@ -17,6 +17,7 @@ group :test do
   gem 'erubis'
   gem 'faraday-typhoeus'
   gem 'json-schema'
+  gem 'racc'
   gem 'rake', '~> 13'
   gem 'rspec'
   gem 'rubocop', '1.26.1' # Lock to specific version to avoid breaking cops/changes
