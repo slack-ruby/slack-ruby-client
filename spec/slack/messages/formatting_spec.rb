@@ -149,6 +149,18 @@ describe Slack::Messages::Formatting do
       )
     end
 
+    it "doesn't treat list items as text formatting" do
+      msg = <<~MSG
+        Une liste:
+
+        * Article 1
+        * Article 2
+        * Article 3
+      MSG
+
+      expect(formatting.markdown(msg)).to eq msg
+    end
+
     it "doesn't format other markdown" do
       expect(formatting.markdown('## A heading\n_Italics_\n`code`')).to eq '## A heading\n_Italics_\n`code`'
     end

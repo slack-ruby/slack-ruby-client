@@ -75,7 +75,7 @@ module Slack
         #
         def markdown(text)
           text
-            .gsub(/(?<!\*)\*([^*]+)\*(?!\*)/, '_\1_') # italic
+            .gsub(/(?<!\*)\*([^*\n]+)\*(?!\*)/, '_\1_') # italic
             .gsub(/\*\*\*(.*?)\*\*\*/, '*_\1_*') # bold & italic
             .gsub(/\*\*(.*?)\*\*/, '*\1*') # bold
             .gsub(/~~(.*?)~~/, '~\1~') # strikethrough
