@@ -8,11 +8,12 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
 <% names.sort.each_with_index do |(name, data), index| %>
 <% next if data['mixin'] %>
 <% group_required_params = data['arg_groups']&.map { |grp| grp['args'].first if grp['args'].size > 1 } || [] %>
-<% required_params = data['args'].select{ |k, v| v['required'] || group_required_params.include?(k) } %>
+<% required_params = data['args'].select{ |k, v| v['required'] } %>
+<% all_required_params = data['args'].select{ |k, v| v['required'] || group_required_params.include?(k) } %>
 <% json_params = data['args'].map { |arg_name, arg_v| arg_name if arg_v['format'] == 'json' }.compact %>
-<% next if (required_params.none? || custom_spec_exists) && json_params.none? && data['arg_groups'].nil? %>
+<% next if (all_required_params.none? || custom_spec_exists) && json_params.none? && data['arg_groups'].nil? %>
 <% method_name = [group.gsub(".", "_"), name].join('_') %>
-<% example_params = required_params.to_h { |var, opts| [var, opts['example']] } %>
+<% example_params = all_required_params.to_h { |var, opts| [var, opts['example']] } %>
   context '<%= group %>_<%= name %>' do
 <% unless custom_spec_exists %>
 <% required_params.each do |arg_name, arg_v| %>
