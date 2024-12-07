@@ -79,6 +79,17 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_invite(channel_id: %q[C12345]) }.to raise_error ArgumentError, /Required arguments :user_ids missing/
     end
   end
+  context 'admin.conversations_linkObjects' do
+    it 'requires channel' do
+      expect { client.admin_conversations_linkObjects(record_id: %q[0019000000DmehKAAR], salesforce_org_id: %q[00DGC00000024hsuWY]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires record_id' do
+      expect { client.admin_conversations_linkObjects(channel: %q[C1234567890], salesforce_org_id: %q[00DGC00000024hsuWY]) }.to raise_error ArgumentError, /Required arguments :record_id missing/
+    end
+    it 'requires salesforce_org_id' do
+      expect { client.admin_conversations_linkObjects(channel: %q[C1234567890], record_id: %q[0019000000DmehKAAR]) }.to raise_error ArgumentError, /Required arguments :salesforce_org_id missing/
+    end
+  end
   context 'admin.conversations_lookup' do
     it 'requires last_message_activity_before' do
       expect { client.admin_conversations_lookup(team_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :last_message_activity_before missing/
@@ -128,6 +139,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
   context 'admin.conversations_unarchive' do
     it 'requires channel_id' do
       expect { client.admin_conversations_unarchive }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+  end
+  context 'admin.conversations_unlinkObjects' do
+    it 'requires channel' do
+      expect { client.admin_conversations_unlinkObjects(new_name: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires new_name' do
+      expect { client.admin_conversations_unlinkObjects(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :new_name missing/
     end
   end
 end

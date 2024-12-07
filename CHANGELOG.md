@@ -3,6 +3,7 @@
 * [#525](https://github.com/slack-ruby/slack-ruby-client/pull/525): Exclude spec files from gem package - [@amatsuda](https://github.com/amatsuda).
 * [#527](https://github.com/slack-ruby/slack-ruby-client/pull/527): Explicitly require `racc` and `ostruct` - [@dblock](https://github.com/dblock).
 * [#528](https://github.com/slack-ruby/slack-ruby-client/pull/528): Don't treat asterisks in list items as italic in markdown - [@rspeicher](https://github.com/rspeicher).
+* [#524](https://github.com/slack-ruby-client/pulls/524): Update API from [slack-api-ref@3ec3c10](https://github.com/slack-ruby/slack-api-ref/commit/3ec3c10) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.4.0 (2024/07/14)
