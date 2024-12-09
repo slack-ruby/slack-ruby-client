@@ -111,7 +111,7 @@ module Slack
         g.command 'inviteShared' do |c|
           c.flag 'channel', desc: "ID of the channel on your team that you'd like to share."
           c.flag 'emails', desc: 'Optional email to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.'
-          c.flag 'external_limited', desc: 'Optional boolean on whether invite is to a external limited member. Defaults to true.'
+          c.flag 'external_limited', desc: 'Optional boolean on whether invite is to an external limited member. Defaults to true.'
           c.flag 'user_ids', desc: 'Optional user_id to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_inviteShared(options))
@@ -228,11 +228,11 @@ module Slack
           end
         end
 
-        g.desc 'Sets the purpose for a conversation.'
-        g.long_desc %( Sets the purpose for a conversation. )
+        g.desc 'Sets the channel description.'
+        g.long_desc %( Sets the channel description. )
         g.command 'setPurpose' do |c|
-          c.flag 'channel', desc: 'Conversation to set the purpose of.'
-          c.flag 'purpose', desc: 'A new, specialer purpose.'
+          c.flag 'channel', desc: 'Channel to set the description of.'
+          c.flag 'purpose', desc: 'The description.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_setPurpose(options))
           end
