@@ -20,7 +20,7 @@ module Slack
         g.desc 'Sets the access level to a canvas for specified entities'
         g.long_desc %( Sets the access level to a canvas for specified entities )
         g.command 'set' do |c|
-          c.flag 'access_level', desc: 'Desired level of access (e.g. read, write).'
+          c.flag 'access_level', desc: 'Desired level of access (e.g. read, write, owner).'
           c.flag 'canvas_id', desc: 'Encoded ID of the canvas.'
           c.flag 'channel_ids', desc: 'List of channels you wish to update access for.'
           c.flag 'user_ids', desc: 'List of users you wish to update access for.'

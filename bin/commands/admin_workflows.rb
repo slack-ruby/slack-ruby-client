@@ -10,7 +10,7 @@ module Slack
         g.long_desc %( Search workflows within the team or enterprise )
         g.command 'search' do |c|
           c.flag 'app_id', desc: 'The parent app ID for which to return workflows.'
-          c.flag 'collaborator_ids', desc: 'Only include workflows where the provided user IDs are a manager/collaborator of that workflow.'
+          c.flag 'collaborator_ids', desc: 'Only include workflows where all of the provided user IDs are a manager/collaborator of that workflow.'
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'is_sales_elevate', desc: 'Filter workflows by their Sales Elevate status.'
           c.flag 'limit', desc: 'The number of results that will be returned by the API on each invocation.'
