@@ -26,7 +26,7 @@ module Slack
           # Sets the access level to a canvas for specified entities
           #
           # @option options [Object] :access_level
-          #   Desired level of access (e.g. read, write).
+          #   Desired level of access (e.g. read, write, owner).
           # @option options [Object] :canvas_id
           #   Encoded ID of the canvas.
           # @option options [array] :channel_ids
