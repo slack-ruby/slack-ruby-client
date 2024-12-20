@@ -12,7 +12,7 @@ module Slack
           # @option options [Object] :app_id
           #   The parent app ID for which to return workflows.
           # @option options [array] :collaborator_ids
-          #   Only include workflows where the provided user IDs are a manager/collaborator of that workflow.
+          #   Only include workflows where all of the provided user IDs are a manager/collaborator of that workflow.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [boolean] :is_sales_elevate
