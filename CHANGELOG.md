@@ -4,6 +4,7 @@
 * [#527](https://github.com/slack-ruby/slack-ruby-client/pull/527): Explicitly require `racc` and `ostruct` - [@dblock](https://github.com/dblock).
 * [#528](https://github.com/slack-ruby/slack-ruby-client/pull/528): Don't treat asterisks in list items as italic in markdown - [@rspeicher](https://github.com/rspeicher).
 * [#530](https://github.com/slack-ruby/slack-ruby-client/pull/530): Specify dependency on logger - [@rwstauner](https://github.com/rwstauner).
+* [#531](https://github.com/slack-ruby/slack-ruby-client/pull/531): File upload v2 - [@monkeyWzr](https://github.com/monkeyWzr).
 * Your contribution here.
 
 ### 2.4.0 (2024/07/14)
