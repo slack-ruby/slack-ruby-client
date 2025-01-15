@@ -25,14 +25,14 @@ module Slack
           #
           # Sets the access level to a canvas for specified entities
           #
-          # @option options [Object] :access_level
-          #   Desired level of access (e.g. read, write).
+          # @option options [enum] :access_level
+          #   Desired level of access.
           # @option options [Object] :canvas_id
           #   Encoded ID of the canvas.
           # @option options [array] :channel_ids
-          #   List of channels you wish to update access for.
+          #   List of channels you wish to update access for. Can only be used if user_ids is not provided.
           # @option options [array] :user_ids
-          #   List of users you wish to update access for.
+          #   List of users you wish to update access for. Can only be used if channel_ids is not provided.
           # @see https://api.slack.com/methods/canvases.access.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/canvases.access/canvases.access.set.json
           def canvases_access_set(options = {})
