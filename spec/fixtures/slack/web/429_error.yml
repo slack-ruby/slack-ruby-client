@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - application/json; charset=utf-8
+      - application/json; charset=utf-8, text/plain; charset=utf-8
       User-Agent:
       - Slack Ruby Client/0.18.0
       Authorization:
