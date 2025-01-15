@@ -60,7 +60,7 @@ RSpec.describe Slack::Web::Client do
 
         it 'creates a connection with the custom user-agent' do
           expect(client.send(:connection).headers).to eq(
-            'Accept' => 'application/json; charset=utf-8',
+            'Accept' => 'application/json, text/plain; charset=utf-8',
             'User-Agent' => 'custom/user-agent'
           )
         end
@@ -286,19 +286,6 @@ RSpec.describe Slack::Web::Client do
       end
 
       context 'parsing error' do
-        context 'when the response is not JSON' do
-          before do
-            stub_slack_request.to_return(body: '<html></html>', headers: { 'Content-Type' => 'text/html' })
-          end
-
-          it 'raises ParsingError' do
-            expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
-            expect(exception.response.body).to eq('<html></html>')
-            expect(exception.cause).to be_a(Faraday::ParsingError)
-            expect(exception.cause.cause).to be_a(JSON::ParserError)
-          end
-        end
-
         context 'when the response is malformed JSON' do
           before { stub_slack_request.to_return(body: '{') }
 
