@@ -15,6 +15,8 @@ module Slack
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
           # @option options [string] :description
           #   A short description of the User Group.
+          # @option options [boolean] :enable_section
+          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [boolean] :include_count
@@ -86,6 +88,8 @@ module Slack
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
           # @option options [string] :description
           #   A short description of the User Group.
+          # @option options [boolean] :enable_section
+          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [boolean] :include_count
