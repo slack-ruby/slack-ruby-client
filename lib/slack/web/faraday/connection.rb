@@ -9,7 +9,7 @@ module Slack
           @connection ||=
             begin
               options = {
-                headers: { 'Accept' => 'application/json; charset=utf-8' }
+                headers: { 'Accept' => 'application/json, text/plain; charset=utf-8' }
               }
 
               options[:headers]['User-Agent'] = user_agent if user_agent
@@ -26,7 +26,7 @@ module Slack
                 connection.request :url_encoded
                 connection.use ::Slack::Web::Faraday::Response::RaiseError
                 connection.response :mashify, mash_class: Slack::Messages::Message
-                connection.response :json, content_type: /\b*$/
+                connection.response :json, content_type: /\b*json$/
                 connection.use ::Slack::Web::Faraday::Response::WrapError
                 connection.response :logger, logger if logger
                 connection.adapter adapter

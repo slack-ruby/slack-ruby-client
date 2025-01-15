@@ -183,6 +183,71 @@ module Slack
           def files_upload(options = {})
             post('files.upload', options)
           end
+
+          #
+          # Uploads or creates a file (V2).
+          #
+          # @option options [string] :content
+          #   File contents via a POST variable. If omitting this parameter, you must provide a file.
+          # @option options [file] :file
+          #   File contents via multipart/form-data. If omitting this parameter, you must submit content.
+          #
+          # params for files_getUploadURLExternal:
+          #
+          # @option options [string] :filename
+          #   Name of the file being uploaded.
+          # @option options [string] :alt_txt
+          #   Description of image for screen-reader.
+          # @option options [string] :snippet_type
+          #   Syntax type of the snippet being uploaded.
+          #
+          # params for files_completeUploadExternal:
+          #
+          # @option options [Object] :channel_id
+          #   Channel ID where the file will be shared. If not specified the file will be private.
+          # @option options [string] :initial_comment
+          #   The message text introducing the file in specified channels.
+          # @option options [string] :thread_ts
+          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead.
+          #
+          # @see https://api.slack.com/messaging/files#uploading_files
+          # @see https://github.com/slackapi/node-slack-sdk/blob/96d846a79878f0d33893d14a9942ed9c4f678f2d/packages/web-api/src/WebClient.ts#L495
+          # @see https://github.com/slackapi/python-slack-sdk/blob/a7223d9852de8a4ef9156552d7c50a92ec92669e/slack_sdk/web/client.py#L3737
+          def files_upload_v2(options = {})
+            file = ::Faraday::UploadIO.new(StringIO.new(options[:content]), 'text/plain') if options[:content]
+            file ||= options[:file]
+            if file.nil?
+              raise(
+                ArgumentError, 'Either a file or content field is required for valid file upload. You must supply one'
+              )
+            end
+            # step 1: get upload url
+            response = files_getUploadURLExternal(
+              length: file.size, **options.slice(:filename, :length, :alt_txt, :snippet_type)
+            )
+            upload_url = response[:upload_url]
+            file_id = response[:file_id]
+
+            file = ::Faraday::UploadIO.new(StringIO.new(options[:content]), 'text/plain') if options[:content]
+            file ||= options[:file]
+            if file.nil?
+              raise(
+                ArgumentError, 'Either a file or content field is required for valid file upload. You must supply one'
+              )
+            end
+
+            # step 2: upload file
+            post(
+              upload_url,
+              { file: file }
+            )
+
+            # step 3: complete upload
+            files_completeUploadExternal(
+              files: [{ id: file_id, title: options[:filename] }].to_json,
+              **options.slice(:channel_id, :initial_comment, :thread_ts)
+            )
+          end
         end
       end
     end

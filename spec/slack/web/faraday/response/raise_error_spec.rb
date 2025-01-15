@@ -82,5 +82,24 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
         )
       end
     end
+
+    context 'with a non-JSON 200 response' do
+      let(:body) { 'OK - 9' }
+
+      it 'raises a ServerError' do
+        expect(raise_error_obj.on_complete(env)).to be_nil
+      end
+    end
+
+    context 'with a non-JSON failed response' do
+      let(:body) { 'not json' }
+      let(:env) { double status: status, response: response, body: body, success?: false }
+
+      it 'raises a ServerError' do
+        expect { raise_error_obj.on_complete(env) }.to(
+          raise_error(Slack::Web::Api::Errors::ServerError, 'request failed!')
+        )
+      end
+    end
   end
 end
