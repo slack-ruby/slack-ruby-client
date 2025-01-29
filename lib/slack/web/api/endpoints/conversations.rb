@@ -172,7 +172,7 @@ module Slack
           # @option options [array] :emails
           #   Optional email to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.
           # @option options [boolean] :external_limited
-          #   Optional boolean on whether invite is to a external limited member. Defaults to true.
+          #   Optional boolean on whether invite is to an external limited member. Defaults to true.
           # @option options [array] :user_ids
           #   Optional user_id to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.
           # @see https://api.slack.com/methods/conversations.inviteShared
@@ -378,12 +378,12 @@ module Slack
           end
 
           #
-          # Sets the purpose for a conversation.
+          # Sets the channel description.
           #
           # @option options [channel] :channel
-          #   Conversation to set the purpose of.
+          #   Channel to set the description of.
           # @option options [string] :purpose
-          #   A new, specialer purpose.
+          #   The description.
           # @see https://api.slack.com/methods/conversations.setPurpose
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.setPurpose.json
           def conversations_setPurpose(options = {})

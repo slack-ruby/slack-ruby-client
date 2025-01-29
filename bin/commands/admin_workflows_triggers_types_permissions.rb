@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'AdminWorkflowsTriggersTypesPermissions methods.'
       command 'admin_workflows_triggers_types_permissions' do |g|
-        g.desc 'list the permissions for using each trigger type in workflow builder'
-        g.long_desc %( list the permissions for using each trigger type in workflow builder )
+        g.desc 'list the permissions for using each trigger type'
+        g.long_desc %( list the permissions for using each trigger type )
         g.command 'lookup' do |c|
           c.flag 'trigger_type_ids', desc: 'The trigger types IDs for which to get the permissions.'
           c.action do |_global_options, options, _args|
@@ -15,8 +15,8 @@ module Slack
           end
         end
 
-        g.desc 'Set the permissions for using a trigger type in workflow builder'
-        g.long_desc %( Set the permissions for using a trigger type in workflow builder )
+        g.desc 'Set the permissions for using a trigger type'
+        g.long_desc %( Set the permissions for using a trigger type )
         g.command 'set' do |c|
           c.flag 'id', desc: 'The trigger type ID for which to set the permissions.'
           c.flag 'visibility', desc: 'The function visibility.'

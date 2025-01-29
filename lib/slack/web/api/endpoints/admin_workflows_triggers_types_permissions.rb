@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminWorkflowsTriggersTypesPermissions
           #
-          # list the permissions for using each trigger type in workflow builder
+          # list the permissions for using each trigger type
           #
           # @option options [array] :trigger_type_ids
           #   The trigger types IDs for which to get the permissions.
@@ -19,7 +19,7 @@ module Slack
           end
 
           #
-          # Set the permissions for using a trigger type in workflow builder
+          # Set the permissions for using a trigger type
           #
           # @option options [Object] :id
           #   The trigger type ID for which to set the permissions.
