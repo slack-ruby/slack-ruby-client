@@ -26,7 +26,7 @@ module Slack
                 connection.request :url_encoded
                 connection.use ::Slack::Web::Faraday::Response::RaiseError
                 connection.response :mashify, mash_class: Slack::Messages::Message
-                connection.response :json, content_type: /\b*$/
+                connection.response :json, content_type: /\bjson$/
                 connection.use ::Slack::Web::Faraday::Response::WrapError
                 connection.response :logger, logger if logger
                 connection.adapter adapter

@@ -10,6 +10,7 @@ module Slack
             return unless env.success?
 
             body = env.body
+            return if env.success? && body.is_a?(String)
             return unless body
             return if body['ok']
 
