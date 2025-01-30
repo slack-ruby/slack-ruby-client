@@ -12,7 +12,6 @@ module Slack
           c.flag 'channel_id', desc: 'Channel to add bookmark in.'
           c.flag 'title', desc: 'Title for the bookmark.'
           c.flag 'type', desc: 'Type of the bookmark i.e link.'
-          c.flag 'access_level', desc: "The level that we are setting the file's permission to (read or write)."
           c.flag 'emoji', desc: 'Emoji tag to apply to the link.'
           c.flag 'entity_id', desc: 'ID of the entity being bookmarked. Only applies to message and file types.'
           c.flag 'link', desc: 'Link to bookmark.'

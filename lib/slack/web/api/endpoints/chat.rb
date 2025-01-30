@@ -133,7 +133,7 @@ module Slack
           # Sends a message to a channel.
           #
           # @option options [channel] :channel
-          #   An encoded ID that represents a channel, private group, or IM channel to send the message to. See below for more details.
+          #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
@@ -141,7 +141,7 @@ module Slack
           # @option options [string] :text
           #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [boolean] :as_user
-          #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic apps. See legacy as_user parameter below.
+          #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
@@ -169,7 +169,6 @@ module Slack
           def chat_postMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
-            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postMessage', options)
           end

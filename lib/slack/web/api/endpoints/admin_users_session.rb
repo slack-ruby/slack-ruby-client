@@ -35,12 +35,13 @@ module Slack
           #
           # @option options [integer] :session_id
           #   ID of the session to invalidate.
-          # @option options [Object] :user_id
-          #   ID of the user that the session belongs to.
+          # @option options [string] :team_id
+          #   ID of the workspace that the session belongs to.
           # @see https://api.slack.com/methods/admin.users.session.invalidate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.invalidate.json
           def admin_users_session_invalidate(options = {})
             raise ArgumentError, 'Required arguments :session_id missing' if options[:session_id].nil?
+            raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
             post('admin.users.session.invalidate', options)
           end
 

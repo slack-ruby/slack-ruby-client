@@ -133,17 +133,6 @@ module Slack
           end
         end
 
-        g.desc 'Link a Salesforce record to a channel'
-        g.long_desc %( Link a Salesforce record to a channel )
-        g.command 'linkObjects' do |c|
-          c.flag 'channel', desc: 'Channel ID for Slack channel that will be linked to a Salesforce record.'
-          c.flag 'record_id', desc: 'Salesforce record ID (15 or 18 digit accepted). See here for how to look up record ID.'
-          c.flag 'salesforce_org_id', desc: 'Salesforce org ID (15 or 18 digit accepted). See here for how to look up Salesforce org ID.'
-          c.action do |_global_options, options, _args|
-            puts JSON.dump(@client.admin_conversations_linkObjects(options))
-          end
-        end
-
         g.desc 'Returns channels on the given team using the filters.'
         g.long_desc %( Returns channels on the given team using the filters. )
         g.command 'lookup' do |c|
@@ -231,16 +220,6 @@ module Slack
           c.flag 'channel_id', desc: 'The channel to unarchive.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_unarchive(options))
-          end
-        end
-
-        g.desc 'Unlink a Salesforce record from a channel'
-        g.long_desc %( Unlink a Salesforce record from a channel )
-        g.command 'unlinkObjects' do |c|
-          c.flag 'channel', desc: 'Channel ID for Slack channel that will be unlinked from the Salesforce record.'
-          c.flag 'new_name', desc: 'Channel name you would like to give to the channel that is being unlinked from the Salesforce record.'
-          c.action do |_global_options, options, _args|
-            puts JSON.dump(@client.admin_conversations_unlinkObjects(options))
           end
         end
       end

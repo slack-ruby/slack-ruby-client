@@ -192,25 +192,6 @@ module Slack
           end
 
           #
-          # Link a Salesforce record to a channel
-          #
-          # @option options [channel] :channel
-          #   Channel ID for Slack channel that will be linked to a Salesforce record.
-          # @option options [string] :record_id
-          #   Salesforce record ID (15 or 18 digit accepted). See here for how to look up record ID.
-          # @option options [string] :salesforce_org_id
-          #   Salesforce org ID (15 or 18 digit accepted). See here for how to look up Salesforce org ID.
-          # @see https://api.slack.com/methods/admin.conversations.linkObjects
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.linkObjects.json
-          def admin_conversations_linkObjects(options = {})
-            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :record_id missing' if options[:record_id].nil?
-            raise ArgumentError, 'Required arguments :salesforce_org_id missing' if options[:salesforce_org_id].nil?
-            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            post('admin.conversations.linkObjects', options)
-          end
-
-          #
           # Returns channels on the given team using the filters.
           #
           # @option options [integer] :last_message_activity_before
@@ -356,22 +337,6 @@ module Slack
           def admin_conversations_unarchive(options = {})
             raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('admin.conversations.unarchive', options)
-          end
-
-          #
-          # Unlink a Salesforce record from a channel
-          #
-          # @option options [channel] :channel
-          #   Channel ID for Slack channel that will be unlinked from the Salesforce record.
-          # @option options [string] :new_name
-          #   Channel name you would like to give to the channel that is being unlinked from the Salesforce record.
-          # @see https://api.slack.com/methods/admin.conversations.unlinkObjects
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.unlinkObjects.json
-          def admin_conversations_unlinkObjects(options = {})
-            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :new_name missing' if options[:new_name].nil?
-            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
-            post('admin.conversations.unlinkObjects', options)
           end
         end
       end

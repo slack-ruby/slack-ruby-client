@@ -15,8 +15,6 @@ module Slack
           #   Title for the bookmark.
           # @option options [string] :type
           #   Type of the bookmark i.e link.
-          # @option options [enum] :access_level
-          #   The level that we are setting the file's permission to (read or write).
           # @option options [string] :emoji
           #   Emoji tag to apply to the link.
           # @option options [string] :entity_id

@@ -82,11 +82,11 @@ module Slack
         g.desc 'Sends a message to a channel.'
         g.long_desc %( Sends a message to a channel. )
         g.command 'postMessage' do |c|
-          c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or IM channel to send the message to. See below for more details.'
+          c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
-          c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic apps. See legacy as_user parameter below.'
+          c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.'
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'

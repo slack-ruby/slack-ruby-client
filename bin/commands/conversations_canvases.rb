@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'ConversationsCanvases methods.'
       command 'conversations_canvases' do |g|
-        g.desc 'Create a channel canvas for a channel'
-        g.long_desc %( Create a channel canvas for a channel )
+        g.desc 'Create a Channel Canvas for a channel.'
+        g.long_desc %( Create a Channel Canvas for a channel. )
         g.command 'create' do |c|
           c.flag 'channel_id', desc: 'Channel ID of the channel we create the channel canvas for.'
           c.flag 'document_content', desc: 'Structure describing the type and value of the content to create.'

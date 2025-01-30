@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'Canvases methods.'
       command 'canvases' do |g|
-        g.desc 'Create canvas for a user'
-        g.long_desc %( Create canvas for a user )
+        g.desc 'Create Canvas for a user.'
+        g.long_desc %( Create Canvas for a user. )
         g.command 'create' do |c|
           c.flag 'document_content', desc: 'Structure describing the type and value of the content to create.'
           c.flag 'title', desc: 'Title of the newly created canvas.'
@@ -16,8 +16,8 @@ module Slack
           end
         end
 
-        g.desc 'Deletes a canvas'
-        g.long_desc %( Deletes a canvas )
+        g.desc 'Deletes a canvas.'
+        g.long_desc %( Deletes a canvas. )
         g.command 'delete' do |c|
           c.flag 'canvas_id', desc: 'Encoded ID of the canvas.'
           c.action do |_global_options, options, _args|

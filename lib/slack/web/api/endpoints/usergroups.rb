@@ -11,14 +11,10 @@ module Slack
           #
           # @option options [string] :name
           #   A name for the User Group. Must be unique among User Groups.
-          # @option options [array] :additional_channels
-          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [array] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
           # @option options [string] :description
           #   A short description of the User Group.
-          # @option options [boolean] :enable_section
-          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [boolean] :include_count
@@ -75,8 +71,6 @@ module Slack
           #   Include the list of users for each User Group.
           # @option options [string] :team_id
           #   encoded team id to list user groups in, required if org token is used.
-          # @option options [Object] :usergroup_id
-          #   The id of the usergroup you would like to filter the results down to.
           # @see https://api.slack.com/methods/usergroups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.list.json
           def usergroups_list(options = {})
@@ -88,14 +82,10 @@ module Slack
           #
           # @option options [Object] :usergroup
           #   The encoded ID of the User Group to update.
-          # @option options [array] :additional_channels
-          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [array] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
           # @option options [string] :description
           #   A short description of the User Group.
-          # @option options [boolean] :enable_section
-          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [boolean] :include_count
