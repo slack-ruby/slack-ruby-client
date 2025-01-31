@@ -4,12 +4,12 @@ module Slack
     module Faraday
       module Response
         class RaiseError < ::Faraday::Middleware
-          def throw_if_too_many_requests(env)
+          def raise_if_too_many_requests!(env)
             raise Slack::Web::Api::Errors::TooManyRequestsError, env.response if env.status == 429
           end
 
-          def throw_if_response_is_invalid_json(env)
-            return unless !response_content_type_is_a_string?(env) && !env.body.is_a?(Hash)
+          def raise_if_response_is_invalid_json!(env)
+            return if response_content_type_is_a_string?(env) || env.body.is_a?(Hash)
 
             raise ::Faraday::ParsingError.new(nil, env.response)
           end
@@ -28,8 +28,8 @@ module Slack
           end
 
           def on_complete(env)
-            throw_if_too_many_requests(env)
-            throw_if_response_is_invalid_json(env)
+            raise_if_too_many_requests!(env)
+            raise_if_response_is_invalid_json!(env)
 
             body = env.body
             return if should_return?(env)

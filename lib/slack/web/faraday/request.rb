@@ -28,12 +28,12 @@ module Slack
               request.url(path, options)
             when :post, :put
               request.path = path
-              options.compact! unless options.is_a? String
+              options.compact! if options.respond_to? :compact
               request.body = options unless options.empty?
             end
             request.headers['Authorization'] = "Bearer #{token}" if token
 
-            request.options.merge!(options.delete(:request)) if !options.is_a?(String) && options.key?(:request)
+            request.options.merge!(options.delete(:request)) if options.respond_to?(:key) && options.key?(:request)
           end
           response.body
         rescue ::Faraday::ParsingError => e
