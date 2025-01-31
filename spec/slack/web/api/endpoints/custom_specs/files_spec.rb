@@ -7,7 +7,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     { filename: 'test.txt', content: 'Test File Contents', channels: 'C08AZ76CA4V' }
   end
   let(:all_params) do
-    required_params.merge!({ title: 'title', alt_txt: 'alt_txt', snippet_type: 'text', initial_comment: 'initial_comment' })
+    required_params.merge!({ title: 'title', initial_comment: 'initial_comment', thread_ts: '1738331914.958599',
+                             snippet_type: 'text' })
   end
 
   context 'when filename is missing from options' do
