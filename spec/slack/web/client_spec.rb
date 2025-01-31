@@ -295,6 +295,7 @@ RSpec.describe Slack::Web::Client do
             expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
             expect(exception.response.body).to eq('<html></html>')
             expect(exception.cause).to be_a(Faraday::ParsingError)
+            expect(exception.cause.cause).to be_a(JSON::ParserError)
           end
         end
 
@@ -305,6 +306,7 @@ RSpec.describe Slack::Web::Client do
             expect { request }.to raise_error(Slack::Web::Api::Errors::ParsingError).with_message('parsing_error')
             expect(exception.response.body).to eq('{')
             expect(exception.cause).to be_a(Faraday::ParsingError)
+            expect(exception.cause.cause).to be_a(JSON::ParserError)
           end
         end
       end
