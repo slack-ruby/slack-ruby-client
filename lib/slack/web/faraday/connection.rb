@@ -28,7 +28,7 @@ module Slack
                 connection.response :mashify, mash_class: Slack::Messages::Message
                 connection.response :json, content_type: /\b*$/
                 connection.use ::Slack::Web::Faraday::Response::WrapError
-                connection.response :logger, logger if logger
+                connection.response :logger, logger, bodies: true if logger
                 connection.adapter adapter
               end
             end
