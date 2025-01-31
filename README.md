@@ -171,8 +171,6 @@ general_channel = channels.detect { |c| c.name == 'general' }
 
 ##### Upload a File
 
-###### New Method
-
 Upload files with [sequenced API calls](https://api.slack.com/messaging/files#uploading_files).
 
 This library provides a helper method `files_upload_v2` that wraps the three separate API calls.
@@ -192,8 +190,7 @@ client.files_upload_v2(
   thread_ts: '1738331487.481469' # specifies a thread to add this file to
 )
 ```
-
-###### Legacy Method
+Note: This library includes a `files_upload` method that uses a deprecated endpoint `files.upload` that will [no longer be supported on 3/11/2025](https://api.slack.com/methods/files.upload#markdown).
 
 ```ruby
 client.files_upload(
@@ -205,8 +202,6 @@ client.files_upload(
   initial_comment: 'Attached a selfie.'
 )
 ```
-
-The client.files_upload uses a deprecated endpoint `files.upload` that will [no longer be supported on 3/11/2025](https://api.slack.com/methods/files.upload#markdown).
 
 ##### Get Channel Info
 
