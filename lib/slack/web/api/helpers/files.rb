@@ -24,7 +24,9 @@ module Slack
           # @option options [string] :initial_comment
           #   The message text introducing the file in specified channels.
           # @option options [string] :thread_ts
-          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead. Also make sure to provide only one channel when using 'thread_ts'.
+          #   Provide another message's ts value to upload this file as a reply.
+          #   Never use a reply's ts value; use its parent instead.
+          #   Also make sure to provide only one channel when using 'thread_ts'.
           def files_upload_v2(options = {})
             %i[filename content channels].each do |param|
               raise ArgumentError, "Required argument :#{param} missing" if options[param].nil?
