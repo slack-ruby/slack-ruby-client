@@ -20,14 +20,16 @@ module Slack
 
           def should_return?(env)
             body = env.body
-            (env.success? && body.is_a?(String) && response_content_type_is_a_string?(env)) || !body || body['ok']
+            return true unless env.success?
+            return true if env.success? && body.is_a?(String) && response_content_type_is_a_string?(env)
+            return true if !body || body['ok']
+
+            false
           end
 
           def on_complete(env)
             throw_if_too_many_requests(env)
             throw_if_response_is_invalid_json(env)
-
-            return unless env.success?
 
             body = env.body
             return if should_return?(env)
