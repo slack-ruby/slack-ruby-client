@@ -6,6 +6,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
   let(:required_params) do
     { filename: 'test.txt', content: 'Test File Contents', channels: 'C08AZ76CA4V' }
   end
+  let(:required_params_with_channel_array) do
+    required_params.merge!({ channels: 'C08AZ76CA4V,C08BHPZBZ8A' })
+  end
   let(:all_params) do
     required_params.merge!({ title: 'title', initial_comment: 'initial_comment', thread_ts: '1738331914.958599',
                              snippet_type: 'text' })
@@ -48,12 +51,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
   end
 
   context 'when using an array for channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_array' } do
-    before do
-      required_params[:channels] = "#{required_params[:channels]},C08BHPZBZ8A"
-    end
-
     it 'completes the upload' do
-      client.files_upload_v2(required_params)
+      client.files_upload_v2(required_params_with_channel_array)
     end
   end
 
