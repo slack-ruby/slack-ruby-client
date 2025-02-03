@@ -176,12 +176,11 @@ Upload files with [sequenced API calls](https://api.slack.com/messaging/files#up
 This library provides a helper method `files_upload_v2` that wraps the three separate API calls.
 
 ```ruby
-contents = File.read('/users/me/results.pdf')
 client.files_upload_v2(
   # required options
   channels: 'C000000,C000001', # comma delimited channel ids, only one channel is required
   filename: 'results.pdf', # this is used for the file title, unless a :title option is provided
-  contents: contents, # the string contents of the file
+  contents: File.read('/users/me/results.pdf'), # the string contents of the file
   
   # optional options
   initial_comment: 'Sharing the Q1 results :tada:', # the message that is included with the file share thread
