@@ -47,6 +47,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
 
+  context 'when using an array for channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_array' } do
+    before do
+      required_params[:channels] = "#{required_params[:channels]},C08BHPZBZ8A"
+      print required_params
+    end
+
+    it 'completes the upload' do
+      client.files_upload_v2(required_params)
+    end
+  end
+
   context 'when all options specified', vcr: { cassette_name: 'web/files_upload_v2_with_all_options' } do
     it 'completes the upload' do
       client.files_upload_v2(all_params)
