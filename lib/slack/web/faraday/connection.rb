@@ -3,7 +3,7 @@ module Slack
   module Web
     module Faraday
       module Connection
-        def default_options
+        def create_connection(expect_json_response: true)
           options = {
             headers: { 'Accept' => 'application/json; charset=utf-8' }
           }
@@ -15,11 +15,7 @@ module Slack
           request_options[:timeout] = timeout if timeout
           request_options[:open_timeout] = open_timeout if open_timeout
           options[:request] = request_options if request_options.any?
-          options
-        end
 
-        def create_connection(expect_json_response: true)
-          options = default_options
           ::Faraday::Connection.new(endpoint, options) do |connection|
             connection.request :multipart
             connection.request :url_encoded
