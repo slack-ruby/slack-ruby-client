@@ -20,7 +20,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
 
     it 'throws argument error' do
-      expect { client.files_upload_v2(required_params) }.to raise_error ArgumentError
+      expect { client.files_upload_external(required_params) }.to raise_error ArgumentError
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
 
     it 'throws argument error' do
-      expect { client.files_upload_v2(required_params) }.to raise_error ArgumentError
+      expect { client.files_upload_external(required_params) }.to raise_error ArgumentError
     end
   end
 
@@ -40,25 +40,25 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
 
     it 'throws argument error' do
-      expect { client.files_upload_v2(required_params) }.to raise_error ArgumentError
+      expect { client.files_upload_external(required_params) }.to raise_error ArgumentError
     end
   end
 
-  context 'when all required options are sent', vcr: { cassette_name: 'web/files_upload_v2' } do
+  context 'when all required options are sent', vcr: { cassette_name: 'web/files_upload_external' } do
     it 'completes the upload' do
-      client.files_upload_v2(required_params)
+      client.files_upload_external(required_params)
     end
   end
 
-  context 'when using an array for channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_array' } do
+  context 'when using an array for channels', vcr: { cassette_name: 'web/files_upload_external_with_channels_array' } do
     it 'completes the upload' do
-      client.files_upload_v2(required_params_with_channel_array)
+      client.files_upload_external(required_params_with_channel_array)
     end
   end
 
-  context 'when all options specified', vcr: { cassette_name: 'web/files_upload_v2_with_all_options' } do
+  context 'when all options specified', vcr: { cassette_name: 'web/files_upload_external_with_all_options' } do
     it 'completes the upload' do
-      client.files_upload_v2(all_params)
+      client.files_upload_external(all_params)
     end
   end
 end

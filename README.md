@@ -173,10 +173,10 @@ general_channel = channels.detect { |c| c.name == 'general' }
 
 Upload files with [sequenced API calls](https://api.slack.com/messaging/files#uploading_files).
 
-This library provides a helper method `files_upload_v2` that wraps the three separate API calls.
+This library provides a helper method `files_upload_external` that wraps the three separate API calls.
 
 ```ruby
-client.files_upload_v2(
+client.files_upload_external(
   # required options
   channels: 'C000000,C000001', # comma delimited channel ids, only one channel is required
   filename: 'results.pdf', # this is used for the file title, unless a :title option is provided

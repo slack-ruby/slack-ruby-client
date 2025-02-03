@@ -27,7 +27,7 @@ module Slack
           #   Provide another message's ts value to upload this file as a reply.
           #   Never use a reply's ts value; use its parent instead.
           #   Also make sure to provide only one channel when using 'thread_ts'.
-          def files_upload_v2(options = {})
+          def files_upload_external(options = {})
             %i[filename content channels].each do |param|
               raise ArgumentError, "Required argument :#{param} missing" if options[param].nil?
             end

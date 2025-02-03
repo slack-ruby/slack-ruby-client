@@ -23,13 +23,13 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 03 Feb 2025 16:37:47 GMT
+      - Mon, 03 Feb 2025 19:07:21 GMT
       Server:
       - Apache
       Vary:
       - Accept-Encoding
       X-Slack-Req-Id:
-      - 9fdcd5e664268c3d60b32943f5fdf230
+      - bb40844ec97c51f02d505e54b4f647ed
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
@@ -56,23 +56,23 @@ http_interactions:
       Referrer-Policy:
       - no-referrer
       X-Slack-Unique-Id:
-      - Z6Dw2-lKn4h8eN3ey8V0iQAAAAc
+      - Z6ET6VB0_ozRJQFDEiQehgAAADM
       X-Slack-Backend:
       - r
       Access-Control-Allow-Origin:
       - "*"
       Via:
-      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-ockkbnmz,envoy-edge-iad-nrxfmhuu
+      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-jhhmuzpj,envoy-edge-iad-kakvcgrs
       Content-Length:
       - '233'
       X-Envoy-Attempt-Count:
       - '1'
       X-Envoy-Upstream-Service-Time:
-      - '30'
+      - '37'
       X-Backend:
       - main_normal main_canary_with_overflow main_control_with_overflow
       X-Server:
-      - slack-www-hhvm-main-iad-xbpk
+      - slack-www-hhvm-main-iad-qcpv
       X-Slack-Shared-Secret-Outcome:
       - no-match
       X-Edge-Backend:
@@ -83,11 +83,11 @@ http_interactions:
       - no-match
     body:
       encoding: UTF-8
-      string: '{"ok":true,"upload_url":"https:\/\/files.slack.com\/upload\/v1\/CwABAAAAWgoAAcQ1xi8VHowpCgACGCDAGG0xIcAMAAMLAAEAAAAJVDM5QTBCWThQCwACAAAAC1UwOEIyMVRKSjRCCwADAAAAC0YwOEJIVFpOTlA1AAoABAAAAAAAAAASAAsAAgAAABSk2WCWOGnp8XCUzyPG1Co4WufioAA","file_id":"F08BHTZNNP5"}'
-  recorded_at: Mon, 03 Feb 2025 16:37:47 GMT
+      string: '{"ok":true,"upload_url":"https:\/\/files.slack.com\/upload\/v1\/CwABAAAAWgoAARp1LS_By9BlCgACGCDIQeR9aOgMAAMLAAEAAAAJVDM5QTBCWThQCwACAAAAC1UwOEIyMVRKSjRCCwADAAAAC0YwOEJYS0FGRFI3AAoABAAAAAAAAAASAAsAAgAAABRKNIx2Ehw4jpoOjEq_50pyBLHgmwA","file_id":"F08BXKAFDR7"}'
+  recorded_at: Mon, 03 Feb 2025 19:07:21 GMT
 - request:
     method: post
-    uri: https://files.slack.com/upload/v1/CwABAAAAWgoAAcQ1xi8VHowpCgACGCDAGG0xIcAMAAMLAAEAAAAJVDM5QTBCWThQCwACAAAAC1UwOEIyMVRKSjRCCwADAAAAC0YwOEJIVFpOTlA1AAoABAAAAAAAAAASAAsAAgAAABSk2WCWOGnp8XCUzyPG1Co4WufioAA
+    uri: https://files.slack.com/upload/v1/CwABAAAAWgoAARp1LS_By9BlCgACGCDIQeR9aOgMAAMLAAEAAAAJVDM5QTBCWThQCwACAAAAC1UwOEIyMVRKSjRCCwADAAAAC0YwOEJYS0FGRFI3AAoABAAAAAAAAAASAAsAAgAAABRKNIx2Ehw4jpoOjEq_50pyBLHgmwA
     body:
       encoding: UTF-8
       string: Test File Contents
@@ -114,13 +114,13 @@ http_interactions:
       Connection:
       - keep-alive
       X-Backend:
-      - miata-prod-iad-v2-d8874bfdc-lv8lx
+      - miata-prod-iad-v2-d8874bfdc-plmqq
       Date:
-      - Mon, 03 Feb 2025 16:37:47 GMT
+      - Mon, 03 Feb 2025 19:07:21 GMT
       X-Envoy-Upstream-Service-Time:
-      - '71'
+      - '56'
       Via:
-      - envoy-edge-iad-gmifwpir, 1.1 c0b0d7167cc2eb52d8d154aa7fc03a0a.cloudfront.net
+      - envoy-edge-iad-vdiyqgjd, 1.1 9b9a066c240ddede25e109bd9f493f86.cloudfront.net
         (CloudFront)
       X-Slack-Edge-Shared-Secret-Outcome:
       - shared-secret
@@ -129,21 +129,21 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       X-Amz-Cf-Pop:
-      - IAD12-P3
+      - IAD61-P6
       X-Amz-Cf-Id:
-      - DNAFARDw6Uj51uZ7efN3_UCc28jI0HVVNFJItUqJiSMX8z4-owwE_A==
+      - hiPzy4cR1LytzqdXEpqjkZvZ2Kym8lTXXRy8fnYPeoU2rO-O3_W5sA==
       Cross-Origin-Resource-Policy:
       - cross-origin
     body:
       encoding: UTF-8
       string: OK - 18
-  recorded_at: Mon, 03 Feb 2025 16:37:47 GMT
+  recorded_at: Mon, 03 Feb 2025 19:07:21 GMT
 - request:
     method: post
     uri: https://slack.com/api/files.completeUploadExternal
     body:
       encoding: UTF-8
-      string: channels=C08AZ76CA4V&files=%5B%7B%22id%22%3A%22F08BHTZNNP5%22%2C%22title%22%3A%22test.txt%22%7D%5D
+      string: channels=C08AZ76CA4V&files=%5B%7B%22id%22%3A%22F08BXKAFDR7%22%2C%22title%22%3A%22test.txt%22%7D%5D
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -161,13 +161,13 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 03 Feb 2025 16:37:47 GMT
+      - Mon, 03 Feb 2025 19:07:21 GMT
       Server:
       - Apache
       Vary:
       - Accept-Encoding
       X-Slack-Req-Id:
-      - 92bcea7185701c1903b833331bf12009
+      - ae185e91164a0cc9d7f9b9685e0949ea
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
@@ -194,23 +194,23 @@ http_interactions:
       Referrer-Policy:
       - no-referrer
       X-Slack-Unique-Id:
-      - Z6Dw29hsRZ-ZNBqhM4D7hQAAEAM
+      - Z6ET6QmBLZbPtUHqt8W9CwAAADg
       X-Slack-Backend:
       - r
       Access-Control-Allow-Origin:
       - "*"
       Via:
-      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-paseqeyz,envoy-edge-iad-skxulhsf
+      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-dtifuyeu,envoy-edge-iad-wthkjneq
       Content-Length:
       - '447'
       X-Envoy-Attempt-Count:
       - '1'
       X-Envoy-Upstream-Service-Time:
-      - '78'
+      - '73'
       X-Backend:
       - main_normal main_canary_with_overflow main_control_with_overflow
       X-Server:
-      - slack-www-hhvm-main-iad-isdg
+      - slack-www-hhvm-main-iad-uzex
       X-Slack-Shared-Secret-Outcome:
       - no-match
       X-Edge-Backend:
@@ -221,6 +221,6 @@ http_interactions:
       - no-match
     body:
       encoding: UTF-8
-      string: '{"ok":true,"files":[{"id":"F08BHTZNNP5","created":1738600667,"timestamp":1738600667,"name":"test.txt","title":"test.txt","mimetype":"","filetype":"","pretty_type":"","user":"U08B21TJJ4B","user_team":"T39A0BY8P","editable":false,"size":18,"mode":"hosted","is_external":false,"external_type":"","is_public":false,"public_url_shared":false,"display_as_bot":false,"username":"","url_private":"https:\/\/files.slack.com\/files-pri\/T39A0BY8P-F08BHTZNNP5\/test.txt","url_private_download":"https:\/\/files.slack.com\/files-pri\/T39A0BY8P-F08BHTZNNP5\/download\/test.txt","media_display_type":"unknown","permalink":"https:\/\/popsql.slack.com\/files\/U08B21TJJ4B\/F08BHTZNNP5\/test.txt","permalink_public":"https:\/\/slack-files.com\/T39A0BY8P-F08BHTZNNP5-872cfa0bba","comments_count":0,"is_starred":false,"shares":{},"channels":[],"groups":[],"ims":[],"has_more_shares":false,"has_rich_preview":false,"file_access":"visible"}]}'
-  recorded_at: Mon, 03 Feb 2025 16:37:47 GMT
+      string: '{"ok":true,"files":[{"id":"F08BXKAFDR7","created":1738609641,"timestamp":1738609641,"name":"test.txt","title":"test.txt","mimetype":"","filetype":"","pretty_type":"","user":"U08B21TJJ4B","user_team":"T39A0BY8P","editable":false,"size":18,"mode":"hosted","is_external":false,"external_type":"","is_public":false,"public_url_shared":false,"display_as_bot":false,"username":"","url_private":"https:\/\/files.slack.com\/files-pri\/T39A0BY8P-F08BXKAFDR7\/test.txt","url_private_download":"https:\/\/files.slack.com\/files-pri\/T39A0BY8P-F08BXKAFDR7\/download\/test.txt","media_display_type":"unknown","permalink":"https:\/\/popsql.slack.com\/files\/U08B21TJJ4B\/F08BXKAFDR7\/test.txt","permalink_public":"https:\/\/slack-files.com\/T39A0BY8P-F08BXKAFDR7-ac04bf417c","comments_count":0,"is_starred":false,"shares":{},"channels":[],"groups":[],"ims":[],"has_more_shares":false,"has_rich_preview":false,"file_access":"visible"}]}'
+  recorded_at: Mon, 03 Feb 2025 19:07:21 GMT
 recorded_with: VCR 6.3.1
