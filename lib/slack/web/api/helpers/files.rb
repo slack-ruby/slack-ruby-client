@@ -43,8 +43,8 @@ module Slack
             upload_url = get_upload_url_response[:upload_url]
             file_id = get_upload_url_response[:file_id]
 
-            # 2. upload the file
-            post(upload_url, content)
+            # 2. upload the file and do not process the return body
+            post(upload_url, content, false)
 
             # 3. complete the upload
             complete_upload_request_params = options.slice(:channels, :initial_comment, :thread_ts)
