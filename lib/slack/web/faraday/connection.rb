@@ -37,7 +37,7 @@ module Slack
         end
 
         def connection_without_response_parsing
-          @connection_without_response_parsing ||= create_connection(false)
+          @connection_without_response_parsing ||= create_connection(expect_json_response: false)
         end
 
         private :create_connection

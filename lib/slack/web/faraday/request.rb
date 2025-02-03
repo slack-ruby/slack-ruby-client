@@ -3,25 +3,26 @@ module Slack
   module Web
     module Faraday
       module Request
-        def get(path, options = {}, expect_json_response: true)
-          request(:get, path, options, expect_json_response)
+        def get(path, options = {})
+          request(:get, path, options)
         end
 
-        def post(path, options = {}, expect_json_response: true)
-          request(:post, path, options, expect_json_response)
+        def post(path, options = {})
+          request(:post, path, options)
         end
 
-        def put(path, options = {}, expect_json_response: true)
-          request(:put, path, options, expect_json_response)
+        def put(path, options = {})
+          request(:put, path, options)
         end
 
-        def delete(path, options = {}, expect_json_response: true)
-          request(:delete, path, options, expect_json_response)
+        def delete(path, options = {})
+          request(:delete, path, options)
         end
 
         private
 
-        def request(method, path, options, expect_json_response)
+        def request(method, path, options)
+          expect_json_response = options.is_a? Hash
           connection_to_use = expect_json_response ? connection : connection_without_response_parsing
           response = connection_to_use.send(method) do |request|
             case method
