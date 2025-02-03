@@ -4,39 +4,14 @@ module Slack
     module Faraday
       module Response
         class RaiseError < ::Faraday::Middleware
-          def raise_if_too_many_requests!(env)
-            raise Slack::Web::Api::Errors::TooManyRequestsError, env.response if env.status == 429
-          end
-
-          def raise_if_response_is_invalid_json!(env)
-            return if response_content_type_is_a_string?(env) || env.body.is_a?(Hash)
-
-            begin
-              raise JSON::ParserError
-            rescue StandardError => e
-              raise ::Faraday::ParsingError.new(e, env.response)
-            end
-          end
-
-          def response_content_type_is_a_string?(env)
-            env.response&.headers&.[]('content-type')&.include?('text/plain') || false
-          end
-
-          def should_return?(env)
-            body = env.body
-            return true unless env.success?
-            return true if env.success? && body.is_a?(String) && response_content_type_is_a_string?(env)
-            return true if !body || body['ok']
-
-            false
-          end
-
           def on_complete(env)
-            raise_if_too_many_requests!(env)
-            raise_if_response_is_invalid_json!(env)
+            raise Slack::Web::Api::Errors::TooManyRequestsError, env.response if env.status == 429
+
+            return unless env.success?
 
             body = env.body
-            return if should_return?(env)
+            return unless body
+            return if body['ok']
 
             error_message = body['error'] || body['errors'].map { |message| message['error'] }.join(',')
             error_class = Slack::Web::Api::Errors::ERROR_CLASSES[error_message]
