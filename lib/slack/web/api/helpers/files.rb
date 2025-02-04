@@ -38,15 +38,18 @@ module Slack
             upload_url_request_params = options.slice(:filename, :alt_txt, :snippet_type)
             upload_url_request_params[:length] = content.bytesize
 
-            # 1. get the upload url
+            # Get the upload url.
             get_upload_url_response = files_getUploadURLExternal(upload_url_request_params)
             upload_url = get_upload_url_response[:upload_url]
             file_id = get_upload_url_response[:file_id]
 
-            # 2. upload the file and do not process the return body
-            post(upload_url, content)
+            # Upload the file.
+            plain_text_connection.post do |request|
+              request.url upload_url
+              request.body = content
+            end
 
-            # 3. complete the upload
+            # Complete the upload.
             complete_upload_request_params = options.slice(:channels, :initial_comment, :thread_ts)
             complete_upload_request_params[:files] = [{ id: file_id, title: title }].to_json
 

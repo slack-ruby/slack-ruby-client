@@ -22,9 +22,7 @@ module Slack
         private
 
         def request(method, path, options)
-          expect_json_response = options.is_a? Hash
-          connection_to_use = expect_json_response ? connection : connection_without_response_parsing
-          response = connection_to_use.send(method) do |request|
+          response = connection.send(method) do |request|
             case method
             when :get, :delete
               request.url(path, options)
@@ -35,7 +33,7 @@ module Slack
             end
             request.headers['Authorization'] = "Bearer #{token}" if token
 
-            request.options.merge!(options.delete(:request)) if options.respond_to?(:key) && options.key?(:request)
+            request.options.merge!(options.delete(:request)) if options.key?(:request)
           end
           response.body
         rescue ::Faraday::ParsingError => e
