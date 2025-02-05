@@ -93,7 +93,7 @@ http_interactions:
       string: Test File Contents
     headers:
       Accept:
-      - application/json; charset=utf-8
+      - '*/*'
       User-Agent:
       - Slack Ruby Client/2.4.1
       Content-Type:
