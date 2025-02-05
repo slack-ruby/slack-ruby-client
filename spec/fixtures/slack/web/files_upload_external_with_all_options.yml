@@ -96,8 +96,6 @@ http_interactions:
       - application/json; charset=utf-8
       User-Agent:
       - Slack Ruby Client/2.4.1
-      Authorization:
-      - Bearer <SLACK_API_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
