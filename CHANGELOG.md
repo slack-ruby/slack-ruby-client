@@ -1,11 +1,10 @@
-### 2.4.1 (Next)
+### 2.5.0 (Next)
 
 * [#525](https://github.com/slack-ruby/slack-ruby-client/pull/525): Exclude spec files from gem package - [@amatsuda](https://github.com/amatsuda).
 * [#527](https://github.com/slack-ruby/slack-ruby-client/pull/527): Explicitly require `racc` and `ostruct` - [@dblock](https://github.com/dblock).
 * [#528](https://github.com/slack-ruby/slack-ruby-client/pull/528): Don't treat asterisks in list items as italic in markdown - [@rspeicher](https://github.com/rspeicher).
-* [#530](https://github.com/slack-ruby/slack-ruby-client/pull/530): Specify dependency on logger - [@rwstauner](https://github.com/rwstauner).
-* [#533](https://github.com/slack-ruby/slack-ruby-client/pull/533): Added `files_upload_external` - [@gregsaab](https://github.com/gregsaab).
-* [#536](https://github.com/slack-ruby/slack-ruby-client/pull/536): Rename `files_upload_external` to `files_upload_v2` - [@gregsaab](https://github.com/gregsaab).
+* [#530](https://github.com/slack-ruby/slack-ruby-client/pull/530): Specify dependency on `logger` - [@rwstauner](https://github.com/rwstauner).
+* [#533](https://github.com/slack-ruby/slack-ruby-client/pull/533), [#536](https://github.com/slack-ruby/slack-ruby-client/pull/536): Added `files_upload_v2` - [@gregsaab](https://github.com/gregsaab).
 * Your contribution here.
 
 ### 2.4.0 (2024/07/14)

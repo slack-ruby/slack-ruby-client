@@ -3,7 +3,6 @@ module Slack
   module Web
     class Client
       include Faraday::Connection
-      include Faraday::PlainTextConnection
       include Faraday::Request
       include Api::Endpoints
       include Api::Helpers

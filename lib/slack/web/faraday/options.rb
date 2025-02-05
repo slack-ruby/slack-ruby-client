@@ -2,9 +2,9 @@
 module Slack
   module Web
     module Faraday
-      module ConnectionOptions
-        def connection_options
-          @connection_options ||= begin
+      module Options
+        def options
+          @options ||= begin
             options = { headers: {} }
             options[:headers]['User-Agent'] = user_agent if user_agent
             options[:proxy] = proxy if proxy
