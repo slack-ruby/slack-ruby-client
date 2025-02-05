@@ -20,15 +20,15 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
 
       it 'raises an argument error' do
         expect do
-          client.files_upload_external(params)
+          client.files_upload_v2(params)
         end.to raise_error ArgumentError, /Required argument :#{arg} missing/
       end
     end
   end
 
-  context 'when all required options are sent', vcr: { cassette_name: 'web/files_upload_external' } do
+  context 'when all required options are sent', vcr: { cassette_name: 'web/files_upload_v2' } do
     it 'completes the upload' do
-      expect(client.files_upload_external(
+      expect(client.files_upload_v2(
         filename: 'test.txt',
         content: 'Test File Contents',
         channels: 'C08AZ76CA4V'
@@ -36,9 +36,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
 
-  context 'when using a list for channels', vcr: { cassette_name: 'web/files_upload_external_with_channels_list' } do
+  context 'when using a list for channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_list' } do
     it 'completes the upload' do
-      expect(client.files_upload_external(
+      expect(client.files_upload_v2(
         filename: 'test.txt',
         content: 'Test File Contents',
         channels: 'C08AZ76CA4V,C08BHPZBZ8A'
@@ -46,9 +46,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
 
-  context 'when all options specified', vcr: { cassette_name: 'web/files_upload_external_with_all_options' } do
+  context 'when all options specified', vcr: { cassette_name: 'web/files_upload_v2_with_all_options' } do
     it 'completes the upload' do
-      expect(client.files_upload_external(
+      expect(client.files_upload_v2(
         title: 'title',
         filename: 'test.txt',
         content: 'Test File Contents',
