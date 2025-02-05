@@ -171,7 +171,25 @@ general_channel = channels.detect { |c| c.name == 'general' }
 
 ##### Upload a File
 
-Upload a file with [files_upload](https://api.slack.com/methods/files.upload).
+Upload files with [sequenced API calls](https://api.slack.com/messaging/files#uploading_files).
+
+This library provides a helper method `files_upload_external` that wraps the three separate API calls.
+
+```ruby
+client.files_upload_external(
+  # required options
+  channels: 'C000000,C000001', # comma delimited channel ids, only one channel is required
+  filename: 'results.pdf', # this is used for the file title, unless a :title option is provided
+  contents: File.read('/users/me/results.pdf'), # the string contents of the file
+  
+  # optional options
+  initial_comment: 'Sharing the Q1 results :tada:', # the message that is included with the file share thread
+  snippet_type: 'text', # the type of snippet
+  title: 'Q1 Results', # sets the title of the file, overriding the filename
+  thread_ts: '1738331487.481469' # specifies a thread to add this file to
+)
+```
+Note: This library includes a `files_upload` method that uses a deprecated endpoint `files.upload` that will [no longer be supported on 3/11/2025](https://api.slack.com/methods/files.upload#markdown).
 
 ```ruby
 client.files_upload(
