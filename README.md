@@ -178,7 +178,7 @@ This library provides a helper method `files_upload_v2` that wraps the three sep
 ```ruby
 client.files_upload_v2(
   # required options
-  channels: 'C000000,C000001', # comma delimited channel ids, only one channel is required
+  channels: ['C000000', 'C000001'], # channel IDs, one is required (:channel_id, :channel, or :channels are all supported)
   filename: 'results.pdf', # this is used for the file title, unless a :title option is provided
   contents: File.read('/users/me/results.pdf'), # the string contents of the file
   
@@ -190,7 +190,7 @@ client.files_upload_v2(
 )
 ```
 
-You can use all of channel ID, an array of channel IDs, or a channel name (prefixed with `#`) in `files_upload_v2`. Lookup by name is not supported by the Slack API and this method called invokes `conversations_list` in order to locate the channel ID. This invocation can have a cost if you have many Slack channels and is only recommended when you intend to list channels anyway.
+You can use a channel ID passed as `channel_id`, a single channel as `channel`, an array of channel IDs as `channels`, or a channel name or names (prefixed with `#`) in `files_upload_v2`. Lookup by name is not supported by the Slack API and this method called invokes `conversations_list` in order to locate the channel ID. This invocation can have a cost if you have many Slack channels and is only recommended when you intend to list channels anyway.
 
 Note: This library includes a `files_upload` method that uses a deprecated endpoint `files.upload` that will [no longer be supported on 3/11/2025](https://api.slack.com/methods/files.upload#markdown).
 

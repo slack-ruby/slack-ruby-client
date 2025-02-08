@@ -19,6 +19,10 @@ module Slack
           #   Syntax type of the snippet being uploaded.
           # @option params [string] :title
           #   Title of file.
+          # @option params [string] :channel_id
+          #   Channel ID where the file will be shared. If not specified the file will be private.
+          # @option params [string] :channel
+          #   Channel where the file will be shared, alias of channel_id. If not specified the file will be private.
           # @option params [string] :channels
           #   Comma-separated string of channel IDs where the file will be shared. If not specified the file will be private.
           # @option params [string] :initial_comment
@@ -28,13 +32,30 @@ module Slack
           #   Never use a reply's ts value; use its parent instead.
           #   Also make sure to provide only one channel when using 'thread_ts'.
           def files_upload_v2(params = {})
-            %i[filename content channels].each do |param|
+            %i[filename content].each do |param|
               raise ArgumentError, "Required argument :#{param} missing" if params[param].nil?
             end
 
-            channels = Array(params[:channels]).map do |channel|
-              conversations_id(channel: channel)['channel']['id']
-            end.uniq.join(',')
+            channel_params = %i[channel channels channel_id].map { |param| params[param] }.compact
+            raise ArgumentError, 'Only one of :channel, :channels, or :channel_id is required' if channel_params.size > 1
+
+            complete_upload_request_params = params.slice(:initial_comment, :thread_ts)
+
+            if params[:channels]
+              complete_upload_request_params[:channels] = Array(params[:channels]).map do |channel|
+                conversations_id(channel: channel)['channel']['id']
+              end.uniq.join(',')
+            elsif params[:channel_id]
+              complete_upload_request_params[:channel_id] = conversations_id(
+                channel: params[:channel_id]
+              )['channel']['id']
+            elsif params[:channel]
+              complete_upload_request_params[:channel] = conversations_id(
+                channel: params[:channel]
+              )['channel']['id']
+            else
+              raise ArgumentError, 'At least one of :channel, :channels, or :channel_id is required'
+            end
 
             content = params[:content]
             title = params[:title] || params[:filename]
@@ -59,8 +80,6 @@ module Slack
             end
 
             # Complete the upload.
-            complete_upload_request_params = params.slice(:initial_comment, :thread_ts)
-            complete_upload_request_params[:channels] = channels
             complete_upload_request_params[:files] = [{ id: file_id, title: title }].to_json
 
             files_completeUploadExternal(complete_upload_request_params)
