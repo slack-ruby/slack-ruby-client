@@ -11,8 +11,9 @@ module Slack
         g.command 'completeUploadExternal' do |c|
           c.flag 'files', desc: 'Array of file ids and their corresponding (optional) titles.'
           c.flag 'channel_id', desc: 'Channel ID where the file will be shared. If not specified the file will be private.'
+          c.flag 'channels', desc: 'Comma-separated string of channel IDs where the file will be shared.'
           c.flag 'initial_comment', desc: 'The message text introducing the file in specified channels.'
-          c.flag 'thread_ts', desc: "Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead."
+          c.flag 'thread_ts', desc: "Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead. Also make sure to provide only one channel when using 'thread_ts'."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.files_completeUploadExternal(options))
           end

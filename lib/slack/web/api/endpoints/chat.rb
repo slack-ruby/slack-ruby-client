@@ -112,6 +112,8 @@ module Slack
           #   URL to an image to use as the icon for this message.
           # @option options [boolean] :link_names
           #   Find and link channel names and usernames.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.
           # @option options [string] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @option options [string] :thread_ts
@@ -133,7 +135,7 @@ module Slack
           # Sends a message to a channel.
           #
           # @option options [channel] :channel
-          #   Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.
+          #   An encoded ID or channel name that represents a channel, private group, or IM channel to send the message to. See below for more details.
           # @option options [string] :attachments
           #   A JSON-based array of structured attachments, presented as a URL-encoded string.
           # @option options [blocks[] as string] :blocks
@@ -141,13 +143,15 @@ module Slack
           # @option options [string] :text
           #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
           # @option options [boolean] :as_user
-          #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.
+          #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic apps. See legacy as_user parameter below.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
           #   URL to an image to use as the icon for this message.
           # @option options [boolean] :link_names
           #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.
           # @option options [string] :metadata
           #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [boolean] :mrkdwn
@@ -169,6 +173,7 @@ module Slack
           def chat_postMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postMessage', options)
           end
@@ -190,6 +195,8 @@ module Slack
           #   Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.
           # @option options [boolean] :link_names
           #   Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.
           # @option options [string] :metadata
           #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [enum] :parse
@@ -248,7 +255,7 @@ module Slack
           # Updates a message.
           #
           # @option options [channel] :channel
-          #   Channel containing the message to be updated.
+          #   Channel containing the message to be updated. For direct messages, ensure that this value is a DM ID (starts with D) instead of a User ID (starts with either U or W).
           # @option options [timestamp] :ts
           #   Timestamp of the message to be updated.
           # @option options [string] :attachments
@@ -263,6 +270,8 @@ module Slack
           #   Array of new file ids that will be sent with this message.
           # @option options [boolean] :link_names
           #   Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.
           # @option options [string] :metadata
           #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. If you don't include this field, the message's previous metadata will be retained. To remove previous metadata, include an empty object for this field. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [string] :parse

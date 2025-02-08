@@ -29,8 +29,12 @@ module Slack
           #   The encoded ID of the user group to update.
           # @option options [array] :users
           #   A comma separated string of encoded user IDs that represent the entire list of users for the user group.
+          # @option options [array] :additional_channels
+          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [boolean] :include_count
           #   Include the number of users in the user group.
+          # @option options [boolean] :is_shared
+          #   Boolean to identify if the API is getting called when a shared section is getting shared.
           # @option options [string] :team_id
           #   encoded team id where the user group exists, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.users.update

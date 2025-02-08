@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Canvases
           #
-          # Create Canvas for a user.
+          # Create canvas for a user
           #
           # @option options [Object] :document_content
           #   Structure describing the type and value of the content to create.
@@ -20,7 +20,7 @@ module Slack
           end
 
           #
-          # Deletes a canvas.
+          # Deletes a canvas
           #
           # @option options [Object] :canvas_id
           #   Encoded ID of the canvas.

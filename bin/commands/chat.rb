@@ -71,6 +71,7 @@ module Slack
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
           c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread."
           c.flag 'username', desc: "Set your bot's user name."
@@ -82,14 +83,15 @@ module Slack
         g.desc 'Sends a message to a channel.'
         g.long_desc %( Sends a message to a channel. )
         g.command 'postMessage' do |c|
-          c.flag 'channel', desc: 'Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See below for more details.'
+          c.flag 'channel', desc: 'An encoded ID or channel name that represents a channel, private group, or IM channel to send the message to. See below for more details.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
-          c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic Slack apps. See authorship below.'
+          c.flag 'as_user', desc: '(Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic apps. See legacy as_user parameter below.'
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
           c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
           c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
           c.flag 'parse', desc: 'Change how messages are treated. See below.'
@@ -113,6 +115,7 @@ module Slack
           c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
           c.flag 'as_user', desc: 'Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See chat.postMessage.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
           c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
           c.flag 'parse', desc: 'Change how messages are treated. See chat.postMessage.'
           c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
@@ -144,7 +147,7 @@ module Slack
         g.desc 'Updates a message.'
         g.long_desc %( Updates a message. )
         g.command 'update' do |c|
-          c.flag 'channel', desc: 'Channel containing the message to be updated.'
+          c.flag 'channel', desc: 'Channel containing the message to be updated. For direct messages, ensure that this value is a DM ID (starts with D) instead of a User ID (starts with either U or W).'
           c.flag 'ts', desc: 'Timestamp of the message to be updated.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
@@ -152,6 +155,7 @@ module Slack
           c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
           c.flag 'file_ids', desc: 'Array of new file ids that will be sent with this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
           c.flag 'metadata', desc: "JSON object with event_type and event_payload fields, presented as a URL-encoded string. If you don't include this field, the message's previous metadata will be retained. To remove previous metadata, include an empty object for this field. Metadata you post to Slack is accessible to any app or user who is a member of that workspace."
           c.flag 'parse', desc: 'Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.'
           c.flag 'reply_broadcast', desc: 'Broadcast an existing thread reply to make it visible to everyone in the channel or conversation.'
