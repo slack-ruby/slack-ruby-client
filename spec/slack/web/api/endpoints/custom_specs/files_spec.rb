@@ -80,4 +80,25 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
       ).files.size).to eq 1
     end
   end
+
+  context 'with an array of channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_list' } do
+    before do
+      allow(client).to receive(:conversations_list).and_yield(
+        Slack::Messages::Message.new(
+          'channels' => [{
+            'id' => 'C08BHPZBZ8A',
+            'name' => 'general'
+          }]
+        )
+      )
+    end
+
+    it 'completes the upload' do
+      expect(client.files_upload_v2(
+        filename: 'test.txt',
+        content: 'Test File Contents',
+        channels: ['C08AZ76CA4V', '#general']
+      ).files.size).to eq 1
+    end
+  end
 end
