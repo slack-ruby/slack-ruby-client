@@ -178,11 +178,11 @@ This library provides a helper method `files_upload_v2` that wraps the three sep
 ```ruby
 client.files_upload_v2(
   # required options
-  channels: ['C000000', 'C000001'], # channel IDs, one is required (:channel_id, :channel, or :channels are all supported)
   filename: 'results.pdf', # this is used for the file title, unless a :title option is provided
   contents: File.read('/users/me/results.pdf'), # the string contents of the file
   
   # optional options
+  channels: ['C000000', 'C000001'], # channel IDs to share the file in (:channel_id, :channel, or :channels are all supported)
   initial_comment: 'Sharing the Q1 results :tada:', # the message that is included with the file share thread
   snippet_type: 'text', # the type of snippet
   title: 'Q1 Results', # sets the title of the file, overriding the filename

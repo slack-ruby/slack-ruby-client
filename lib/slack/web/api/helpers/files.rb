@@ -53,8 +53,6 @@ module Slack
               complete_upload_request_params[:channel] = conversations_id(
                 channel: params[:channel]
               )['channel']['id']
-            else
-              raise ArgumentError, 'At least one of :channel, :channels, or :channel_id is required'
             end
 
             content = params[:content]

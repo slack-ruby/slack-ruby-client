@@ -26,23 +26,34 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
 
-  it 'requires at least one of :channel, :channels, or :channel_id' do
-    expect do
-      client.files_upload_v2(filename: 'test.txt', content: 'Test File Contents')
-    end.to raise_error ArgumentError, 'At least one of :channel, :channels, or :channel_id is required'
+  context 'without a channel', vcr: { cassette_name: 'web/files_upload_v2' } do
+    it 'completes the upload' do
+      expect(client.files_upload_v2(
+        filename: 'test.txt',
+        content: 'Test File Contents'
+      ).files.size).to eq 1
+    end
   end
 
-  it 'requires only one of :channel or :channels' do
-    expect do
-      client.files_upload_v2(filename: 'test.txt', content: 'Test File Contents', channels: 'C08AZ76CA4V',
-                             channel_id: 'C08AZ76CA4V')
-    end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
+  %i[channel channels channel_id].permutation(2).map(&:sort).uniq.each do |permutation|
+    it "requires only one of #{permutation.join(' or ')}" do
+      expect do
+        client.files_upload_v2({
+          filename: 'test.txt',
+          content: 'Test File Contents'
+        }.merge(permutation.map { |arg| [arg, 'C08AZ76CA4V'] }.to_h))
+      end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
+    end
   end
 
   it 'requires only one of :channels, or :channel_id' do
     expect do
-      client.files_upload_v2(filename: 'test.txt', content: 'Test File Contents', channels: 'C08AZ76CA4V',
-                             channel_id: 'C08AZ76CA4V')
+      client.files_upload_v2(
+        filename: 'test.txt',
+        content: 'Test File Contents',
+        channels: 'C08AZ76CA4V',
+        channel_id: 'C08AZ76CA4V'
+      )
     end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
   end
 
