@@ -5,6 +5,7 @@
 * [#528](https://github.com/slack-ruby/slack-ruby-client/pull/528): Don't treat asterisks in list items as italic in markdown - [@rspeicher](https://github.com/rspeicher).
 * [#530](https://github.com/slack-ruby/slack-ruby-client/pull/530): Specify dependency on `logger` - [@rwstauner](https://github.com/rwstauner).
 * [#533](https://github.com/slack-ruby/slack-ruby-client/pull/533), [#536](https://github.com/slack-ruby/slack-ruby-client/pull/536): Added `files_upload_v2` - [@gregsaab](https://github.com/gregsaab).
+* [#538](https://github.com/slack-ruby/slack-ruby-client/pull/538): Translate channel names and support an array of channels in `files_upload_v2` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.4.0 (2024/07/14)

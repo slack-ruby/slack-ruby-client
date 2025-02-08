@@ -54,14 +54,14 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
     - [Verifying the Request Signature](#verifying-the-request-signature)
   - [Message Handling](#message-handling)
     - [Formatting Messages](#formatting-messages)
-      - [Date and time formatting](#date-and-time-formatting)
-      - [Channel ID formatting](#channel-id-formatting)
-      - [User ID formatting](#user-id-formatting)
-      - [URL formatting](#url-formatting)
-      - [Markdown formatting](#markdown-formatting)
+      - [Date and Time Formatting](#date-and-time-formatting)
+      - [Channel ID Formatting](#channel-id-formatting)
+      - [User ID Formatting](#user-id-formatting)
+      - [URL Formatting](#url-formatting)
+      - [Markdown Formatting](#markdown-formatting)
     - [Parsing Messages](#parsing-messages)
-      - [Unescaping message content](#unescaping-message-content)
-      - [Escaping message content](#escaping-message-content)
+      - [Unescaping Message Content](#unescaping-message-content)
+      - [Escaping Message Content](#escaping-message-content)
   - [Command-Line Client](#command-line-client)
     - [Authenticate with Slack](#authenticate-with-slack)
     - [Send a Message](#send-a-message)
@@ -189,6 +189,9 @@ client.files_upload_v2(
   thread_ts: '1738331487.481469' # specifies a thread to add this file to
 )
 ```
+
+You can use all of channel ID, an array of channel IDs, or a channel name (prefixed with `#`) in `files_upload_v2`. Lookup by name is not supported by the Slack API and this method called invokes `conversations_list` in order to locate the channel ID. This invocation can have a cost if you have many Slack channels and is only recommended when you intend to list channels anyway.
+
 Note: This library includes a `files_upload` method that uses a deprecated endpoint `files.upload` that will [no longer be supported on 3/11/2025](https://api.slack.com/methods/files.upload#markdown).
 
 ```ruby
@@ -613,15 +616,15 @@ The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Sl
 
 ### Message Handling
 
-All text in Slack uses the same [system of formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
+All text in Slack uses the same [system of Formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
 
 #### Formatting Messages
 
-`Slack::Messages::Formatting` provides a number of methods for formatting objects that you can then embed in outgoing messages.
+`Slack::Messages::Formatting` provides a number of methods for Formatting objects that you can then embed in outgoing messages.
 
-##### Date and time formatting
+##### Date and Time Formatting
 
-You can embed a pre-formatted date in a message as a string like any other text, but using Slack's date formatting allows you to display dates based on user preferences for dates and times, incorporating users' local time zones, and optionally using relative values like "yesterday", "today", or "tomorrow" when appropriate.
+You can embed a pre-formatted date in a message as a string like any other text, but using Slack's date Formatting allows you to display dates based on user preferences for dates and times, incorporating users' local time zones, and optionally using relative values like "yesterday", "today", or "tomorrow" when appropriate.
 
 ```ruby
 date = Time.now
@@ -644,7 +647,7 @@ Slack::Messages::Formatting.date(date, text: 'party time!')
   # => "<!date^1688150386^{date_num} {time_secs}|party time!>"
 ```
 
-##### Channel ID formatting
+##### Channel ID Formatting
 
 If you already know the channel name you can just embed it in the message as `#some-channel`, but if you only have the ID you can embed it using special syntax which Slack will display as the channel name (while respecting channel visibility).
 
@@ -654,7 +657,7 @@ Slack::Messages::Formatting.channel_link(channel_id)
   # => "<#C0000000001>"
 ```
 
-##### User ID formatting
+##### User ID Formatting
 
 If you already know the user name you can just embed it in the message as `@some_username`, but if you only have the ID you can embed it using special syntax which Slack will display as the user name.
 
@@ -664,9 +667,9 @@ Slack::Messages::Formatting.user_link(user_id)
   # => "<@U0000000001>"
 ```
 
-##### URL formatting
+##### URL Formatting
 
-Slack will automatically parse fully qualified URLs in messages, but you need special formatting to embed a link with different text.
+Slack will automatically parse fully qualified URLs in messages, but you need special Formatting to embed a link with different text.
 
 ```ruby
 text = 'party time'
@@ -675,9 +678,9 @@ Slack::Messages::Formatting.url_link(text, url)
   # => "<https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif|party time>"
 ```
 
-##### Markdown formatting
+##### Markdown Formatting
 
-Slack uses a mishmash of regular markdown formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
+Slack uses a mishmash of regular markdown Formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
 
 ```ruby
 text = """
@@ -703,7 +706,7 @@ Slack::Messages::Formatting.markdown(text)
 
 `Slack::Messages::Formatting` also provides ways to escape or unescape messages. This comes handy, for example, you want to treat all input to a real time bot as plain text.
 
-##### Unescaping message content
+##### Unescaping Message Content
 
 ```ruby
 Slack::Messages::Formatting.unescape('Hello &amp; &lt;world&gt;')
@@ -728,7 +731,7 @@ Slack::Messages::Formatting.unescape('‘hello’')
   # => "'hello'"
 ```
 
-##### Escaping message content
+##### Escaping Message Content
 
 ```ruby
 Slack::Messages::Formatting.escape('Hello & <world>')
