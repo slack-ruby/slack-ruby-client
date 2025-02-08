@@ -141,7 +141,7 @@ http_interactions:
     uri: https://slack.com/api/files.completeUploadExternal
     body:
       encoding: UTF-8
-      string: files=%5B%7B%22id%22%3A%22F08BXKAFDR7%22%2C%22title%22%3A%22test.txt%22%7D%5D
+      string: channel=C08AZ76CA4V&files=%5B%7B%22id%22%3A%22F08BXKAFDR7%22%2C%22title%22%3A%22test.txt%22%7D%5D
     headers:
       Accept:
       - application/json; charset=utf-8

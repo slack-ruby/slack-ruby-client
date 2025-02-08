@@ -4,7 +4,7 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::Files do
   let(:client) { Slack::Web::Client.new }
 
-  %w[filename channels content].each do |arg|
+  %w[filename content].each do |arg|
     context "when #{arg} is missing from options" do
       let(:params) do
         {
@@ -26,35 +26,75 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
 
-  context 'when all required options are sent', vcr: { cassette_name: 'web/files_upload_v2' } do
+  context 'without a channel', vcr: { cassette_name: 'web/files_upload_v2' } do
     it 'completes the upload' do
       expect(client.files_upload_v2(
         filename: 'test.txt',
-        content: 'Test File Contents',
-        channels: 'C08AZ76CA4V'
+        content: 'Test File Contents'
       ).files.size).to eq 1
     end
   end
 
-  context 'when a channel is referenced by name', vcr: { cassette_name: 'web/files_upload_v2_with_channel_name' } do
-    before do
-      allow(client).to receive(:conversations_list).and_yield(
-        Slack::Messages::Message.new(
-          'channels' => [{
-            'id' => 'C08AZ76CA4V',
-            'name' => 'general'
-          }]
-        )
-      )
+  %i[channel channels channel_id].permutation(2).map(&:sort).uniq.each do |permutation|
+    it "requires only one of #{permutation.join(' or ')}" do
+      expect do
+        client.files_upload_v2({
+          filename: 'test.txt',
+          content: 'Test File Contents'
+        }.merge(permutation.map { |arg| [arg, 'C08AZ76CA4V'] }.to_h))
+      end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
     end
+  end
 
-    it 'translates the channel name to an ID and completes the upload' do
+  it 'requires only one of :channels, or :channel_id' do
+    expect do
+      client.files_upload_v2(
+        filename: 'test.txt',
+        content: 'Test File Contents',
+        channels: 'C08AZ76CA4V',
+        channel_id: 'C08AZ76CA4V'
+      )
+    end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
+  end
+
+  %i[channel channels].each do |arg|
+    it "completes the upload with #{arg}", vcr: { cassette_name: "web/files_upload_v2_#{arg}" } do
       expect(client.files_upload_v2(
         filename: 'test.txt',
         content: 'Test File Contents',
-        channels: '#general'
+        arg => 'C08AZ76CA4V'
       ).files.size).to eq 1
     end
+
+    context 'when a channel is referenced by name', vcr: { cassette_name: "web/files_upload_v2_with_channel_name_#{arg}" } do
+      before do
+        allow(client).to receive(:conversations_list).and_yield(
+          Slack::Messages::Message.new(
+            'channels' => [{
+              'id' => 'C08AZ76CA4V',
+              'name' => 'general'
+            }]
+          )
+        )
+      end
+
+      it "translates the channel name to an ID and completes the upload with #{arg}" do
+        expect(client.files_upload_v2(
+          filename: 'test.txt',
+          content: 'Test File Contents',
+          arg => '#general'
+        ).files.size).to eq 1
+      end
+    end
+  end
+
+  it 'completes the upload with channel_id', vcr: { cassette_name: 'web/files_upload_v2_channel_id' } do
+    expect(client).not_to receive(:conversations_list)
+    expect(client.files_upload_v2(
+      filename: 'test.txt',
+      content: 'Test File Contents',
+      channel_id: 'C08AZ76CA4V'
+    ).files.size).to eq 1
   end
 
   context 'when using a list for channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_list' } do
