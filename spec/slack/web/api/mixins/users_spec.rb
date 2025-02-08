@@ -29,7 +29,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
       expect(users.users_id(user: 'U123456')).to eq('ok' => true, 'user' => { 'id' => 'U123456' })
     end
 
-    it 'translates a user that starts with a #' do
+    it 'translates a user that starts with a @' do
       expect(users.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
     end
 

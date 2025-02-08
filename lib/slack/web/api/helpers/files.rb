@@ -32,6 +32,7 @@ module Slack
               raise ArgumentError, "Required argument :#{param} missing" if params[param].nil?
             end
 
+            channel = conversations_id(channel: params[:channels])['channel']['id']
             content = params[:content]
             title = params[:title] || params[:filename]
 
@@ -55,7 +56,8 @@ module Slack
             end
 
             # Complete the upload.
-            complete_upload_request_params = params.slice(:channels, :initial_comment, :thread_ts)
+            complete_upload_request_params = params.slice(:initial_comment, :thread_ts)
+            complete_upload_request_params[:channels] = channel
             complete_upload_request_params[:files] = [{ id: file_id, title: title }].to_json
 
             files_completeUploadExternal(complete_upload_request_params)
