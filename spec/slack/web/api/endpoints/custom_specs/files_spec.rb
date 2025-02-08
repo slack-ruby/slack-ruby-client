@@ -57,7 +57,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
   end
 
-  %i[channel channel_id channels].each do |arg|
+  %i[channel channels].each do |arg|
     it "completes the upload with #{arg}", vcr: { cassette_name: "web/files_upload_v2_#{arg}" } do
       expect(client.files_upload_v2(
         filename: 'test.txt',
@@ -86,6 +86,15 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
         ).files.size).to eq 1
       end
     end
+  end
+
+  it 'completes the upload with channel_id', vcr: { cassette_name: 'web/files_upload_v2_channel_id' } do
+    expect(client).not_to receive(:conversations_list)
+    expect(client.files_upload_v2(
+      filename: 'test.txt',
+      content: 'Test File Contents',
+      channel_id: 'C08AZ76CA4V'
+    ).files.size).to eq 1
   end
 
   context 'when using a list for channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_list' } do

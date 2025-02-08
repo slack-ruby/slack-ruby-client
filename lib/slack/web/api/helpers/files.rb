@@ -45,14 +45,12 @@ module Slack
               complete_upload_request_params[:channels] = Array(params[:channels]).map do |channel|
                 conversations_id(channel: channel)['channel']['id']
               end.uniq.join(',')
-            elsif params[:channel_id]
-              complete_upload_request_params[:channel_id] = conversations_id(
-                channel: params[:channel_id]
-              )['channel']['id']
             elsif params[:channel]
               complete_upload_request_params[:channel] = conversations_id(
                 channel: params[:channel]
               )['channel']['id']
+            elsif params[:channel_id]
+              complete_upload_request_params[:channel_id] = params[:channel_id]
             end
 
             content = params[:content]

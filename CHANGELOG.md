@@ -6,6 +6,7 @@
 * [#530](https://github.com/slack-ruby/slack-ruby-client/pull/530): Specify dependency on `logger` - [@rwstauner](https://github.com/rwstauner).
 * [#533](https://github.com/slack-ruby/slack-ruby-client/pull/533), [#536](https://github.com/slack-ruby/slack-ruby-client/pull/536): Added `files_upload_v2` - [@gregsaab](https://github.com/gregsaab).
 * [#538](https://github.com/slack-ruby/slack-ruby-client/pull/538): Translate channel names and support an array of channels in `files_upload_v2` - [@dblock](https://github.com/dblock).
+* [#540](https://github.com/slack-ruby/slack-ruby-client/pull/540): Added support for `channel` and `channel_id`, do not require channel in `files_upload_v2` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.4.0 (2024/07/14)
