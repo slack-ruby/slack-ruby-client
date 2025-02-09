@@ -10,8 +10,10 @@ module Slack
         g.long_desc %( Create a User Group. )
         g.command 'create' do |c|
           c.flag 'name', desc: 'A name for the User Group. Must be unique among User Groups.'
+          c.flag 'additional_channels', desc: 'A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.'
           c.flag 'channels', desc: 'A comma separated string of encoded channel IDs for which the User Group uses as a default.'
           c.flag 'description', desc: 'A short description of the User Group.'
+          c.flag 'enable_section', desc: 'Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.'
           c.flag 'handle', desc: 'A mention handle. Must be unique among channels, users and User Groups.'
           c.flag 'include_count', desc: 'Include the number of users in each User Group.'
           c.flag 'team_id', desc: 'Encoded team id where the user group has to be created, required if org token is used.'
@@ -49,6 +51,7 @@ module Slack
           c.flag 'include_disabled', desc: 'Include disabled User Groups.'
           c.flag 'include_users', desc: 'Include the list of users for each User Group.'
           c.flag 'team_id', desc: 'encoded team id to list user groups in, required if org token is used.'
+          c.flag 'usergroup_id', desc: 'The id of the usergroup you would like to filter the results down to.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.usergroups_list(options))
           end
@@ -58,8 +61,10 @@ module Slack
         g.long_desc %( Update an existing User Group. )
         g.command 'update' do |c|
           c.flag 'usergroup', desc: 'The encoded ID of the User Group to update.'
+          c.flag 'additional_channels', desc: 'A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.'
           c.flag 'channels', desc: 'A comma separated string of encoded channel IDs for which the User Group uses as a default.'
           c.flag 'description', desc: 'A short description of the User Group.'
+          c.flag 'enable_section', desc: 'Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.'
           c.flag 'handle', desc: 'A mention handle. Must be unique among channels, users and User Groups.'
           c.flag 'include_count', desc: 'Include the number of users in the User Group.'
           c.flag 'name', desc: 'A name for the User Group. Must be unique among User Groups.'

@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module ConversationsCanvases
           #
-          # Create a Channel Canvas for a channel.
+          # Create a channel canvas for a channel
           #
           # @option options [string] :channel_id
           #   Channel ID of the channel we create the channel canvas for.

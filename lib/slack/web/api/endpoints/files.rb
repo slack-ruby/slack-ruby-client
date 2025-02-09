@@ -13,10 +13,12 @@ module Slack
           #   Array of file ids and their corresponding (optional) titles.
           # @option options [Object] :channel_id
           #   Channel ID where the file will be shared. If not specified the file will be private.
+          # @option options [string] :channels
+          #   Comma-separated string of channel IDs where the file will be shared.
           # @option options [string] :initial_comment
           #   The message text introducing the file in specified channels.
           # @option options [string] :thread_ts
-          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead.
+          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead. Also make sure to provide only one channel when using 'thread_ts'.
           # @see https://api.slack.com/methods/files.completeUploadExternal
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.completeUploadExternal.json
           def files_completeUploadExternal(options = {})
