@@ -1,3 +1,7 @@
+### 2.5.1 (Next)
+
+* Your contribution here.
+
 ### 2.5.0 (2025/02/09)
 
 * [#525](https://github.com/slack-ruby/slack-ruby-client/pull/525): Exclude spec files from gem package - [@amatsuda](https://github.com/amatsuda).
