@@ -1,5 +1,6 @@
 ### 2.5.1 (Next)
 
+* [#542](https://github.com/slack-ruby/slack-ruby-client/pull/542): Add support for ruby 3.4 - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.5.0 (2025/02/09)
