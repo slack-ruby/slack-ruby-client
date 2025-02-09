@@ -27,15 +27,15 @@ bundle exec rake
 
 ### Run Examples in Development
 
-Sign up for Slack, create a private slack group for yourself.
+Sign up for Slack, create a private Slack team for yourself, then [generate an API token](https://api.slack.com/tutorials/tracks/getting-a-token) for your app and use it for some interactions.
 
-Create a new App under [https://api.slack.com/apps](https://api.slack.com/apps).
+Try running the examples in the [examples](examples) directory.
 
-![](screenshots/create-app.png)
-
-On the next screen, note the API token.
-
-To run [the example in examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb), open a terminal, cd into _examples/hi_real_time_and_web_, run `bundle install`, followed by `SLACK_API_TOKEN=<your API token> bundle exec ruby hi.rb`.
+```bash
+cd examples/hi_web
+bundle install
+SLACK_API_TOKEN=... bundle exec ruby hi.rb
+```
 
 ## Contribute Code
 

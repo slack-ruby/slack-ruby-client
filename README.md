@@ -105,11 +105,9 @@ Run `bundle install`.
 
 To integrate your bot with Slack, you must first create a new [Slack App](https://api.slack.com/apps).
 
-![](screenshots/create-app.png)
-
 ### OAuth Code Grant
 
-Once created, go to the app's Basic Info tab and grab the Client ID and Client Secret.  You'll need these in order complete an [OAuth code grant flow](https://api.slack.com/docs/oauth#flow) as described at [slack-ruby-bot-server](https://github.com/slack-ruby/slack-ruby-bot-server).
+Once created, go to the app's Basic Info tab and grab the Client ID and Client Secret. You'll need these in order complete an [OAuth Workflow](https://api.slack.com/authentication/oauth-v2). A working sample that starts a local web server and obtains a bot or a user token for your app using OAuth v2 is available in [examples/oauth_v2](examples/oauth_v2).
 
 ### Using an API Token
 
