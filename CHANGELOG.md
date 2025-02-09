@@ -7,6 +7,7 @@
 * [#533](https://github.com/slack-ruby/slack-ruby-client/pull/533), [#536](https://github.com/slack-ruby/slack-ruby-client/pull/536): Added `files_upload_v2` - [@gregsaab](https://github.com/gregsaab).
 * [#538](https://github.com/slack-ruby/slack-ruby-client/pull/538): Translate channel names and support an array of channels in `files_upload_v2` - [@dblock](https://github.com/dblock).
 * [#540](https://github.com/slack-ruby/slack-ruby-client/pull/540): Added support for `channel` and `channel_id`, do not require channel in `files_upload_v2` - [@dblock](https://github.com/dblock).
+* [#541](https://github.com/slack-ruby/slack-ruby-client/pull/541): Added samples for `oauth_v2` and `files_upload_v2` - [@dblock](https://github.com/dblock).
 * [#524](https://github.com/slack-ruby-client/pulls/524): Update API from [slack-api-ref@3ec3c10](https://github.com/slack-ruby/slack-api-ref/commit/3ec3c10) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
