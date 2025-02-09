@@ -12,21 +12,21 @@
 * [#538](https://github.com/slack-ruby/slack-ruby-client/pull/538): Translate channel names and support an array of channels in `files_upload_v2` - [@dblock](https://github.com/dblock).
 * [#540](https://github.com/slack-ruby/slack-ruby-client/pull/540): Added support for `channel` and `channel_id`, do not require channel in `files_upload_v2` - [@dblock](https://github.com/dblock).
 * [#541](https://github.com/slack-ruby/slack-ruby-client/pull/541): Added samples for `oauth_v2` and `files_upload_v2` - [@dblock](https://github.com/dblock).
-* [#524](https://github.com/slack-ruby-client/pulls/524): Update API from [slack-api-ref@3ec3c10](https://github.com/slack-ruby/slack-api-ref/commit/3ec3c10) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#524](https://github.com/slack-ruby/slack-ruby-client/pull/524): Update API from [slack-api-ref@3ec3c10](https://github.com/slack-ruby/slack-api-ref/commit/3ec3c10) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 
 ### 2.4.0 (2024/07/14)
 
 * [#516](https://github.com/slack-ruby/slack-ruby-client/pull/516): Add support for Ruby 3.3 - [@olleolleolle](https://github.com/olleolleolle).
 * [#520](https://github.com/slack-ruby/slack-ruby-client/pull/520): Add support for basic markdown formatting - [@nbgoodall](https://github.com/nbgoodall).
 * [#523](https://github.com/slack-ruby/slack-ruby-client/pull/523): Fix coveralls handling parallel jobs - [@dblock](https://github.com/dblock).
-* [#522](https://github.com/slack-ruby-client/pulls/522): Update API from [slack-api-ref@8a22e57](https://github.com/slack-ruby/slack-api-ref/commit/8a22e57) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#522](https://github.com/slack-ruby/slack-ruby-client/pull/522): Update API from [slack-api-ref@8a22e57](https://github.com/slack-ruby/slack-api-ref/commit/8a22e57) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 
 ### 2.3.0 (2024/01/31)
 
 * [#494](https://github.com/slack-ruby/slack-ruby-client/pull/494): Configure Dependabot to update GitHub Actions - [@olleolleolle](https://github.com/olleolleolle).
 * [#508](https://github.com/slack-ruby/slack-ruby-client/pull/508): Fix `Slack::Events::Request#verify!` compatibility with Rack 3.x - [@dblock](https://github.com/dblock).
 * [#503](https://github.com/slack-ruby/slack-ruby-client/pull/503): Update Slack API Update API from [slack-api-ref@bc545649](https://github.com/slack-ruby/slack-api-ref/commit/bc545649) - [@dblock](https://github.com/dblock).
-* [#504](https://github.com/slack-ruby-client/pulls/504): Update API from [slack-api-ref@bc54564](https://github.com/slack-ruby/slack-api-ref/commit/bc54564) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#504](https://github.com/slack-ruby/slack-ruby-client/pull/504): Update API from [slack-api-ref@bc54564](https://github.com/slack-ruby/slack-api-ref/commit/bc54564) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 
 ### 2.2.0 (2023/09/17)
 
@@ -35,20 +35,20 @@
 * [#454](https://github.com/slack-ruby/slack-ruby-client/pull/454): Added `Slack::Messages::Formatting#escape` - [@marfoldi](https://github.com/marfoldi).
 * [#452](https://github.com/slack-ruby/slack-ruby-client/pull/452): Automatically generate Web API multi-argument requirements from docs - [@jmanian](https://github.com/jmanian).
 * [#448](https://github.com/slack-ruby/slack-ruby-client/pull/448), [#453](https://github.com/slack-ruby/slack-ruby-client/pull/453): Automatically convert more Web API arguments to JSON-encoded strings - [@jmanian](https://github.com/jmanian).
-* [#465](https://github.com/slack-ruby-client/pulls/465): Update API from [slack-api-ref@878be8f](https://github.com/slack-ruby/slack-api-ref/commit/878be8f) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#473](https://github.com/slack-ruby-client/pulls/473): Update API from [slack-api-ref@a29b520](https://github.com/slack-ruby/slack-api-ref/commit/a29b520) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#474](https://github.com/slack-ruby-client/pulls/474): Update API from [slack-api-ref@629967e](https://github.com/slack-ruby/slack-api-ref/commit/629967e) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#475](https://github.com/slack-ruby-client/pulls/475): Update API from [slack-api-ref@977dad5](https://github.com/slack-ruby/slack-api-ref/commit/977dad5) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#476](https://github.com/slack-ruby-client/pulls/476): Update API from [slack-api-ref@d0b2989](https://github.com/slack-ruby/slack-api-ref/commit/d0b2989) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#478](https://github.com/slack-ruby-client/pulls/478): Update API from [slack-api-ref@d797055](https://github.com/slack-ruby/slack-api-ref/commit/d797055) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#480](https://github.com/slack-ruby-client/pulls/480): Add common message formatting utilities - [@chrisbloom7](https://github.com/chrisbloom7).
-* [#481](https://github.com/slack-ruby-client/pulls/481): Update API from [slack-api-ref@7c22d0b](https://github.com/slack-ruby/slack-api-ref/commit/7c22d0b) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#488](https://github.com/slack-ruby-client/pulls/488): Update API from [slack-api-ref@a45def2](https://github.com/slack-ruby/slack-api-ref/commit/a45def2) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#465](https://github.com/slack-ruby/slack-ruby-client/pull/465): Update API from [slack-api-ref@878be8f](https://github.com/slack-ruby/slack-api-ref/commit/878be8f) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#473](https://github.com/slack-ruby/slack-ruby-client/pull/473): Update API from [slack-api-ref@a29b520](https://github.com/slack-ruby/slack-api-ref/commit/a29b520) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#474](https://github.com/slack-ruby/slack-ruby-client/pull/474): Update API from [slack-api-ref@629967e](https://github.com/slack-ruby/slack-api-ref/commit/629967e) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#475](https://github.com/slack-ruby/slack-ruby-client/pull/475): Update API from [slack-api-ref@977dad5](https://github.com/slack-ruby/slack-api-ref/commit/977dad5) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#476](https://github.com/slack-ruby/slack-ruby-client/pull/476): Update API from [slack-api-ref@d0b2989](https://github.com/slack-ruby/slack-api-ref/commit/d0b2989) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#478](https://github.com/slack-ruby/slack-ruby-client/pull/478): Update API from [slack-api-ref@d797055](https://github.com/slack-ruby/slack-api-ref/commit/d797055) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#480](https://github.com/slack-ruby/slack-ruby-client/pull/480): Add common message formatting utilities - [@chrisbloom7](https://github.com/chrisbloom7).
+* [#481](https://github.com/slack-ruby/slack-ruby-client/pull/481): Update API from [slack-api-ref@7c22d0b](https://github.com/slack-ruby/slack-api-ref/commit/7c22d0b) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#488](https://github.com/slack-ruby/slack-ruby-client/pull/488): Update API from [slack-api-ref@a45def2](https://github.com/slack-ruby/slack-api-ref/commit/a45def2) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#490](https://github.com/slack-ruby/slack-ruby-client/pull/490): Add changelog uri to gemspec - [@MatheusRich](https://github.com/MatheusRich).
 * [#491](https://github.com/slack-ruby/slack-ruby-client/pull/491): Added code coverage - [@dblock](https://github.com/dblock).
 * [#486](https://github.com/slack-ruby/slack-ruby-client/pull/486): Async handler support for Slack::RealTime::Config and Client - [@milestruecar](https://github.com/milestruecar).
-* [#489](https://github.com/slack-ruby-client/pulls/489): Update API from [slack-api-ref@0d3f0b6](https://github.com/slack-ruby/slack-api-ref/commit/0d3f0b6) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* [#493](https://github.com/slack-ruby-client/pulls/493): Update API from [slack-api-ref@f2e768a](https://github.com/slack-ruby/slack-api-ref/commit/f2e768a) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#489](https://github.com/slack-ruby/slack-ruby-client/pull/489): Update API from [slack-api-ref@0d3f0b6](https://github.com/slack-ruby/slack-api-ref/commit/0d3f0b6) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#493](https://github.com/slack-ruby/slack-ruby-client/pull/493): Update API from [slack-api-ref@f2e768a](https://github.com/slack-ruby/slack-api-ref/commit/f2e768a) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 
 ### 2.1.0 (2023/03/17)
 

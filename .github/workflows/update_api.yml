@@ -66,7 +66,7 @@ jobs:
         with:
           include: CHANGELOG.md
           find: "\\* Your contribution here."
-          replace: "* [#${{steps.cpr.outputs.pull-request-number}}](https://github.com/slack-ruby-client/pulls/${{steps.cpr.outputs.pull-request-number}}): Update API from [slack-api-ref@${{ steps.api-ref.outputs.api-ref }}](https://github.com/slack-ruby/slack-api-ref/commit/${{ steps.api-ref.outputs.api-ref }}) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).\n* Your contribution here."
+          replace: "* [#${{steps.cpr.outputs.pull-request-number}}](https://github.com/slack-ruby/slack-ruby-client/pull/${{steps.cpr.outputs.pull-request-number}}): Update API from [slack-api-ref@${{ steps.api-ref.outputs.api-ref }}](https://github.com/slack-ruby/slack-api-ref/commit/${{ steps.api-ref.outputs.api-ref }}) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).\n* Your contribution here."
       - name: Commit and Push
         if: ${{ steps.cpr.outputs.pull-request-number != '' }}
         run: |
