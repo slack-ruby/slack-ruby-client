@@ -6,6 +6,9 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::Views do
   let(:client) { Slack::Web::Client.new }
   context 'views_open' do
+    it 'requires view' do
+      expect { client.views_open(trigger_id: %q[12345.98765.abcd2358fdea]) }.to raise_error ArgumentError, /Required arguments :view missing/
+    end
     it 'requires one of trigger_id, interactivity_pointer' do
       expect { client.views_open(view: %q[]) }.to raise_error ArgumentError, /Exactly one of/
 
@@ -23,12 +26,21 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
     end
   end
   context 'views_publish' do
+    it 'requires user_id' do
+      expect { client.views_publish(view: %q[]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
+    end
+    it 'requires view' do
+      expect { client.views_publish(user_id: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /Required arguments :view missing/
+    end
     it 'encodes view as json' do
       expect(client).to receive(:post).with('views.publish', {user_id: %q[U0BPQUNTA], view: %q[{"data":["data"]}]})
       client.views_publish(user_id: %q[U0BPQUNTA], view: {:data=>["data"]})
     end
   end
   context 'views_push' do
+    it 'requires view' do
+      expect { client.views_push(trigger_id: %q[12345.98765.abcd2358fdea]) }.to raise_error ArgumentError, /Required arguments :view missing/
+    end
     it 'requires one of trigger_id, interactivity_pointer' do
       expect { client.views_push(view: %q[]) }.to raise_error ArgumentError, /Exactly one of/
 
@@ -46,6 +58,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
     end
   end
   context 'views_update' do
+    it 'requires view' do
+      expect { client.views_update(external_id: %q[bmarley_view2]) }.to raise_error ArgumentError, /Required arguments :view missing/
+    end
     it 'requires one of external_id, view_id' do
       expect { client.views_update(view: %q[]) }.to raise_error ArgumentError, /Exactly one of/
 

@@ -5,7 +5,53 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Chat do
   let(:client) { Slack::Web::Client.new }
+  context 'chat_command' do
+    it 'requires channel' do
+      expect { client.chat_command(command: %q[/who]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires command' do
+      expect { client.chat_command(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :command missing/
+    end
+  end
+  context 'chat_delete' do
+    it 'requires channel' do
+      expect { client.chat_delete(ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires ts' do
+      expect { client.chat_delete(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+    end
+  end
+  context 'chat_deleteScheduledMessage' do
+    it 'requires channel' do
+      expect { client.chat_deleteScheduledMessage(scheduled_message_id: %q[Q1234ABCD]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires scheduled_message_id' do
+      expect { client.chat_deleteScheduledMessage(channel: %q[C123456789]) }.to raise_error ArgumentError, /Required arguments :scheduled_message_id missing/
+    end
+  end
+  context 'chat_getPermalink' do
+    it 'requires channel' do
+      expect { client.chat_getPermalink(message_ts: %q[1234567890.123456]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires message_ts' do
+      expect { client.chat_getPermalink(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :message_ts missing/
+    end
+  end
+  context 'chat_meMessage' do
+    it 'requires channel' do
+      expect { client.chat_meMessage(text: %q[Hello world]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires text' do
+      expect { client.chat_meMessage(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :text missing/
+    end
+  end
   context 'chat_postEphemeral' do
+    it 'requires channel' do
+      expect { client.chat_postEphemeral(user: %q[U0BPQUNTA], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires user' do
+      expect { client.chat_postEphemeral(channel: %q[C1234567890], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :user missing/
+    end
     it 'requires one of attachments, blocks, text' do
       expect { client.chat_postEphemeral(channel: %q[C1234567890], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /At least one of/
 
@@ -36,6 +82,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     end
   end
   context 'chat_postMessage' do
+    it 'requires channel' do
+      expect { client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
     it 'requires one of attachments, blocks, text' do
       expect { client.chat_postMessage(channel: %q[C1234567890]) }.to raise_error ArgumentError, /At least one of/
 
@@ -66,6 +115,12 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     end
   end
   context 'chat_scheduleMessage' do
+    it 'requires channel' do
+      expect { client.chat_scheduleMessage(post_at: %q[299876400], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires post_at' do
+      expect { client.chat_scheduleMessage(channel: %q[C1234567890], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :post_at missing/
+    end
     it 'requires one of attachments, blocks, text' do
       expect { client.chat_scheduleMessage(channel: %q[C1234567890], post_at: %q[299876400]) }.to raise_error ArgumentError, /At least one of/
 
@@ -96,12 +151,27 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
     end
   end
   context 'chat_unfurl' do
+    it 'requires channel' do
+      expect { client.chat_unfurl(ts: %q[], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires ts' do
+      expect { client.chat_unfurl(channel: %q[C1234567890], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+    end
+    it 'requires unfurls' do
+      expect { client.chat_unfurl(channel: %q[C1234567890], ts: %q[]) }.to raise_error ArgumentError, /Required arguments :unfurls missing/
+    end
     it 'encodes unfurls, user_auth_blocks as json' do
       expect(client).to receive(:post).with('chat.unfurl', {channel: %q[C1234567890], ts: %q[], unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}]})
       client.chat_unfurl(channel: %q[C1234567890], ts: %q[], unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]})
     end
   end
   context 'chat_update' do
+    it 'requires channel' do
+      expect { client.chat_update(ts: %q["1405894322.002768"], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires ts' do
+      expect { client.chat_update(channel: %q[C1234567890], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+    end
     it 'requires one of attachments, blocks, text' do
       expect { client.chat_update(channel: %q[C1234567890], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /At least one of/
 

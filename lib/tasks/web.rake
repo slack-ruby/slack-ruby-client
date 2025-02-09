@@ -56,9 +56,7 @@ namespace :slack do
           snaked_group = group.tr('.', '_')
           rendered_method = method_template.result(group: group, names: names)
           File.write "lib/slack/web/api/endpoints/#{snaked_group}.rb", rendered_method
-          custom_spec_exists =
-            File.exist?("spec/slack/web/api/endpoints/custom_specs/#{group}_spec.rb")
-          rendered_method_spec = method_spec_template.result(group: group, names: names, custom_spec_exists: custom_spec_exists)
+          rendered_method_spec = method_spec_template.result(group: group, names: names)
           File.write "spec/slack/web/api/endpoints/#{snaked_group}_spec.rb", rendered_method_spec
 
           unless ENV.key?('SKIP_PATCH')

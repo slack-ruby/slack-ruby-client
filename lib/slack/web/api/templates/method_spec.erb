@@ -11,17 +11,15 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
 <% required_params = data['args'].select{ |k, v| v['required'] } %>
 <% all_required_params = data['args'].select{ |k, v| v['required'] || group_required_params.include?(k) } %>
 <% json_params = data['args'].map { |arg_name, arg_v| arg_name if arg_v['format'] == 'json' }.compact %>
-<% next if (all_required_params.none? || custom_spec_exists) && json_params.none? && data['arg_groups'].nil? %>
+<% next if all_required_params.none? && json_params.none? && data['arg_groups'].nil? %>
 <% method_name = [group.gsub(".", "_"), name].join('_') %>
 <% example_params = all_required_params.to_h { |var, opts| [var, opts['example']] } %>
   context '<%= group %>_<%= name %>' do
-<% unless custom_spec_exists %>
 <% required_params.each do |arg_name, arg_v| %>
     it 'requires <%= arg_name %>' do
 <% params_except_required = example_params.reject { |name, _| name == arg_name  }.map { |name, val| "#{name}: %q[#{val}]" }.join(', ') %>
       expect { client.<%= method_name %><%= params_except_required.empty? ? '' : "(#{params_except_required})" %> }.to raise_error ArgumentError, /Required arguments :<%= arg_name %> missing/
     end
-<% end %>
 <% end %>
 <% data['arg_groups']&.each do |arg_group| %>
     <% next if arg_group['args'].size <= 1 %>

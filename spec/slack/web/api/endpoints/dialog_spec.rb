@@ -6,6 +6,12 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::Dialog do
   let(:client) { Slack::Web::Client.new }
   context 'dialog_open' do
+    it 'requires dialog' do
+      expect { client.dialog_open(trigger_id: %q[12345.98765.abcd2358fdea]) }.to raise_error ArgumentError, /Required arguments :dialog missing/
+    end
+    it 'requires trigger_id' do
+      expect { client.dialog_open(dialog: %q[]) }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
+    end
     it 'encodes dialog as json' do
       expect(client).to receive(:post).with('dialog.open', {dialog: %q[{"data":["data"]}], trigger_id: %q[12345.98765.abcd2358fdea]})
       client.dialog_open(dialog: {:data=>["data"]}, trigger_id: %q[12345.98765.abcd2358fdea])
