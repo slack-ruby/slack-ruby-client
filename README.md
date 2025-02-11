@@ -614,15 +614,15 @@ The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Sl
 
 ### Message Handling
 
-All text in Slack uses the same [system of Formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
+All text in Slack uses the same [system of formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
 
 #### Formatting Messages
 
-`Slack::Messages::Formatting` provides a number of methods for Formatting objects that you can then embed in outgoing messages.
+`Slack::Messages::Formatting` provides a number of methods for formatting objects that you can then embed in outgoing messages.
 
 ##### Date and Time Formatting
 
-You can embed a pre-formatted date in a message as a string like any other text, but using Slack's date Formatting allows you to display dates based on user preferences for dates and times, incorporating users' local time zones, and optionally using relative values like "yesterday", "today", or "tomorrow" when appropriate.
+You can embed a pre-formatted date in a message as a string like any other text, but using Slack's date formatting allows you to display dates based on user preferences for dates and times, incorporating users' local time zones, and optionally using relative values like "yesterday", "today", or "tomorrow" when appropriate.
 
 ```ruby
 date = Time.now
@@ -667,7 +667,7 @@ Slack::Messages::Formatting.user_link(user_id)
 
 ##### URL Formatting
 
-Slack will automatically parse fully qualified URLs in messages, but you need special Formatting to embed a link with different text.
+Slack will automatically parse fully qualified URLs in messages, but you need special formatting to embed a link with different text.
 
 ```ruby
 text = 'party time'
@@ -678,7 +678,7 @@ Slack::Messages::Formatting.url_link(text, url)
 
 ##### Markdown Formatting
 
-Slack uses a mishmash of regular markdown Formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
+Slack uses a mishmash of regular markdown formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
 
 ```ruby
 text = """
