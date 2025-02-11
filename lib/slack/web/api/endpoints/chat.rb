@@ -173,7 +173,6 @@ module Slack
           def chat_postMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
-            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postMessage', options)
           end

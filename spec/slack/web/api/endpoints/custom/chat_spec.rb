@@ -92,6 +92,18 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
   end
 
   context 'chat_postMessage' do
+    it 'does not convert channel name to channel ID' do
+      expect(client).not_to receive(:conversations_id)
+      expect(client).to receive(:post).with(
+        'chat.postMessage',
+        {
+          channel: '#channel',
+          text: 'text'
+        }
+      )
+      client.chat_postMessage(channel: '#channel', text: 'text')
+    end
+
     it 'automatically converts attachments and blocks into JSON' do
       expect(client).to receive(:post).with(
         'chat.postMessage',

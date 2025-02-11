@@ -10,4 +10,19 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
       expect(json.channel.name).to eq 'mpdm-dblock--rubybot--player1-1'
     end
   end
+
+  context 'list' do
+    it 'resolves channel and includes all arguments into http requests' do
+      expect(client).to receive(:conversations_list).and_yield(
+        Slack::Messages::Message.new(
+          'channels' => [{
+            'id' => 'CDEADBEEF',
+            'name' => 'general'
+          }]
+        )
+      )
+      expect(client).to receive(:post).with('conversations.history', { channel: 'CDEADBEEF', limit: 10 })
+      client.conversations_history(channel: '#general', limit: 10)
+    end
+  end
 end

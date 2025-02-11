@@ -48,7 +48,7 @@ module Slack
 <% end %>
 <% if data['group'] == 'groups' && data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
             options = options.merge(channel: groups_id(options)['group']['id']) if options[:channel]
-<% elsif data['args']['channel'] && !data['args']['channel']['desc'].include?('Can be an encoded ID, or a name.') %>
+<% elsif data['args']['channel'] && ['Can be an encoded ID, or a name.', 'encoded ID or channel name'].none? { |desc| data['args']['channel']['desc'].include?(desc) } %>
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
 <% end %>
 <% if data['args']['user'] %>
