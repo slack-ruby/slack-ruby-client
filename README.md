@@ -177,7 +177,7 @@ This library provides a helper method `files_upload_v2` that wraps the three sep
 client.files_upload_v2(
   # required options
   filename: 'results.pdf', # this is used for the file title, unless a :title option is provided
-  contents: File.read('/users/me/results.pdf'), # the string contents of the file
+  content: File.read('/users/me/results.pdf'), # the string contents of the file
   
   # optional options
   channels: ['C000000', 'C000001'], # channel IDs to share the file in (:channel_id, :channel, or :channels are all supported)
