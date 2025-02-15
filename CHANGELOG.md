@@ -1,5 +1,6 @@
 ### 2.5.2 (Next)
 
+* [#515](https://github.com/slack-ruby/slack-ruby-client/pull/515): Compatibility with older servers that support #rewind - [@olleolleolle](https://github.com/olleolleolle).
 * Your contribution here.
 
 ### 2.5.1 (2025/02/11)
