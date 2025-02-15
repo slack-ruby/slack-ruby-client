@@ -1,5 +1,6 @@
 ### 2.5.2 (Next)
 
+* [#288](https://github.com/slack-ruby/slack-ruby-client/pull/288): Adjust ping worker logger level to debug when offline - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.5.1 (2025/02/11)
