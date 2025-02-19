@@ -1,5 +1,6 @@
 ### 2.5.2 (Next)
 
+* [#548](https://github.com/slack-ruby/slack-ruby-client/pull/548): Fix: `files_upload_v2` with `#channel` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 2.5.1 (2025/02/11)
