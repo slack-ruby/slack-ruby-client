@@ -46,7 +46,7 @@ module Slack
                 conversations_id(channel: channel)['channel']['id']
               end.uniq.join(',')
             elsif params[:channel]
-              complete_upload_request_params[:channel] = conversations_id(
+              complete_upload_request_params[:channel_id] = conversations_id(
                 channel: params[:channel]
               )['channel']['id']
             elsif params[:channel_id]
