@@ -57,6 +57,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
       - [Date and Time Formatting](#date-and-time-formatting)
       - [Channel ID Formatting](#channel-id-formatting)
       - [User ID Formatting](#user-id-formatting)
+      - [Group ID Formatting](#group-id-formatting)
       - [URL Formatting](#url-formatting)
       - [Markdown Formatting](#markdown-formatting)
     - [Parsing Messages](#parsing-messages)
@@ -663,6 +664,16 @@ If you already know the user name you can just embed it in the message as `@some
 user_id = 'U0000000001'
 Slack::Messages::Formatting.user_link(user_id)
   # => "<@U0000000001>"
+```
+
+##### Group ID Formatting
+
+If you already know the group name you can just embed it in the message as `@some_group`, but if you only have the ID you can embed it using special syntax which Slack will display as the group name.
+
+```ruby
+group_id = 'S0000000001'
+Slack::Messages::Formatting.group_link(group_id)
+  # => "<!subteam^S0000000001>"
 ```
 
 ##### URL Formatting
