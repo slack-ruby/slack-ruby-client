@@ -62,6 +62,14 @@ module Slack
         end
 
         #
+        # Embed a link to a group in a message by group ID
+        # @see https://api.slack.com/reference/surfaces/formatting#mentioning-groups
+        #
+        def group_link(group_id)
+          "<!subteam^#{group_id}>"
+        end
+
+        #
         # Embed a URL with custom link text in a message
         # @see https://api.slack.com/reference/surfaces/formatting#linking-urls
         #

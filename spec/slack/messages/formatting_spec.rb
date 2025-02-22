@@ -113,6 +113,14 @@ describe Slack::Messages::Formatting do
     end
   end
 
+  context '#group_link' do
+    let(:group_id) { 'S0000000001' }
+
+    it 'links to a group by its ID' do
+      expect(formatting.group_link(group_id)).to eq "<!subteam^#{group_id}>"
+    end
+  end
+
   context '#url_link' do
     let(:text) { 'super cool website' }
     let(:url) { 'https://theuselessweb.site/' }
