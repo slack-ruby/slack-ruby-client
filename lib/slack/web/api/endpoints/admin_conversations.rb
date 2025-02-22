@@ -338,7 +338,7 @@ module Slack
           # @option options [array] :target_team_ids
           #   A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.
           # @option options [Object] :team_id
-          #   The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.
+          #   The workspace to which the channel belongs if the channel is a local workspace channel. Omit this argument if the channel is a cross-workspace or org-wide shared channel.
           # @see https://api.slack.com/methods/admin.conversations.setTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setTeams.json
           def admin_conversations_setTeams(options = {})

@@ -137,6 +137,7 @@ module Slack
         class ConnectedUserDenied < SlackError; end
         class ConnectionLimitExceeded < SlackError; end
         class ConnectionLimitExceededPending < SlackError; end
+        class ContextChannelNotFound < SlackError; end
         class CouldNotArchiveChannel < SlackError; end
         class CouldNotConvertChannel < SlackError; end
         class CouldNotCreateChannel < SlackError; end
@@ -272,6 +273,7 @@ module Slack
         class InsecureRequest < SlackError; end
         class InternalError < SlackError; end
         class InvalidAction < SlackError; end
+        class InvalidActionToken < SlackError; end
         class InvalidActor < SlackError; end
         class InvalidApp < SlackError; end
         class InvalidAppActionType < SlackError; end
@@ -427,6 +429,7 @@ module Slack
         class MissingFileData < SlackError; end
         class MissingPostType < SlackError; end
         class MissingProfileId < SlackError; end
+        class MissingQuery < SlackError; end
         class MissingResource < SlackError; end
         class MissingScope < SlackError; end
         class MissingSource < SlackError; end
@@ -539,6 +542,7 @@ module Slack
         class PublicVideoNotAllowed < SlackError; end
         class PublishedAppOnly < SlackError; end
         class PushLimitReached < SlackError; end
+        class QueryTooLong < SlackError; end
         class RateLimited < SlackError; end
         class Ratelimit < SlackError; end
         class Ratelimited < SlackError; end
@@ -814,6 +818,7 @@ module Slack
           'connected_user_denied' => ConnectedUserDenied,
           'connection_limit_exceeded' => ConnectionLimitExceeded,
           'connection_limit_exceeded_pending' => ConnectionLimitExceededPending,
+          'context_channel_not_found' => ContextChannelNotFound,
           'could_not_archive_channel' => CouldNotArchiveChannel,
           'could_not_convert_channel' => CouldNotConvertChannel,
           'could_not_create_channel' => CouldNotCreateChannel,
@@ -949,6 +954,7 @@ module Slack
           'insecure_request' => InsecureRequest,
           'internal_error' => InternalError,
           'invalid_action' => InvalidAction,
+          'invalid_action_token' => InvalidActionToken,
           'invalid_actor' => InvalidActor,
           'invalid_app' => InvalidApp,
           'invalid_app_action_type' => InvalidAppActionType,
@@ -1104,6 +1110,7 @@ module Slack
           'missing_file_data' => MissingFileData,
           'missing_post_type' => MissingPostType,
           'missing_profile_id' => MissingProfileId,
+          'missing_query' => MissingQuery,
           'missing_resource' => MissingResource,
           'missing_scope' => MissingScope,
           'missing_source' => MissingSource,
@@ -1216,6 +1223,7 @@ module Slack
           'public_video_not_allowed' => PublicVideoNotAllowed,
           'published_app_only' => PublishedAppOnly,
           'push_limit_reached' => PushLimitReached,
+          'query_too_long' => QueryTooLong,
           'rate_limited' => RateLimited,
           'ratelimit' => Ratelimit,
           'ratelimited' => Ratelimited,
