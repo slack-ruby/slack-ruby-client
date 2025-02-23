@@ -219,7 +219,7 @@ module Slack
           c.flag 'channel_id', desc: 'The encoded channel_id to add or remove to workspaces.'
           c.flag 'org_channel', desc: 'True if channel has to be converted to an org channel.'
           c.flag 'target_team_ids', desc: 'A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.'
-          c.flag 'team_id', desc: 'The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.'
+          c.flag 'team_id', desc: 'The workspace to which the channel belongs if the channel is a local workspace channel. Omit this argument if the channel is a cross-workspace or org-wide shared channel.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_setTeams(options))
           end
