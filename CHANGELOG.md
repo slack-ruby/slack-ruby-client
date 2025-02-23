@@ -1,6 +1,7 @@
 ### 2.5.3 (Next)
 
 * [#549](https://github.com/slack-ruby/slack-ruby-client/pull/549): Add group ID formatting support for message mentions - [@n0h0](https://github.com/n0h0).
+* [#547](https://github.com/slack-ruby/slack-ruby-client/pull/547): Update API from [slack-api-ref@1ee282e](https://github.com/slack-ruby/slack-api-ref/commit/1ee282e) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.5.2 (2025/02/19)
