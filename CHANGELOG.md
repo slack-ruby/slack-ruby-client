@@ -1,6 +1,7 @@
 ### 2.5.3 (Next)
 
 * [#549](https://github.com/slack-ruby/slack-ruby-client/pull/549): Add group ID formatting support for message mentions - [@n0h0](https://github.com/n0h0).
+* [#553](https://github.com/slack-ruby/slack-ruby-client/pull/553): Use secure_compare during signature verification - [@hieuk09](https://github.com/hieuk09).
 * Your contribution here.
 
 ### 2.5.2 (2025/02/19)

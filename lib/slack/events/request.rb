@@ -59,7 +59,7 @@ module Slack
         signature_basestring = [version, timestamp, body].join(':')
         hex_hash = OpenSSL::HMAC.hexdigest(digest, signing_secret, signature_basestring)
         computed_signature = [version, hex_hash].join('=')
-        computed_signature == signature
+        secure_compare(computed_signature, signature)
       end
 
       # Validates the request signature and its expiration.
@@ -68,6 +68,19 @@ module Slack
         raise InvalidSignature unless valid?
 
         true
+      end
+
+      private
+
+      def secure_compare(computed_signature, signature)
+        return false if computed_signature.bytesize != signature.bytesize
+
+        l = computed_signature.unpack "C#{computed_signature.bytesize}"
+
+        result = 0
+        signature.each_byte { |byte| result |= byte ^ l.shift }
+
+        result.zero?
       end
     end
   end
