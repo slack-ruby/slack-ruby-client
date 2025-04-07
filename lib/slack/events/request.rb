@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+
+require 'openssl'
+
 module Slack
   module Events
     class Request
@@ -75,12 +78,7 @@ module Slack
       def secure_compare(computed_signature, signature)
         return false if computed_signature.bytesize != signature.bytesize
 
-        l = computed_signature.unpack "C#{computed_signature.bytesize}"
-
-        result = 0
-        signature.each_byte { |byte| result |= byte ^ l.shift }
-
-        result.zero?
+        OpenSSL.fixed_length_secure_compare(computed_signature, signature)
       end
     end
   end
