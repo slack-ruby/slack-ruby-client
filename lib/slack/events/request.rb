@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Slack
   module Events
     class Request
@@ -59,7 +60,7 @@ module Slack
         signature_basestring = [version, timestamp, body].join(':')
         hex_hash = OpenSSL::HMAC.hexdigest(digest, signing_secret, signature_basestring)
         computed_signature = [version, hex_hash].join('=')
-        computed_signature == signature
+        Utils::Security.secure_compare(computed_signature, signature)
       end
 
       # Validates the request signature and its expiration.

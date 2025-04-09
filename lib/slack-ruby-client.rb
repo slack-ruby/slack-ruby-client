@@ -22,7 +22,7 @@ end
 begin
   require 'openssl'
 rescue LoadError # rubocop:disable Lint/SuppressedException
-  # Used in slack/web/config
+  # Used in slack/web/config and slack/utils/security
 end
 require_relative 'slack/web/config'
 require_relative 'slack/web/api/errors/slack_error'
@@ -57,3 +57,5 @@ require_relative 'slack/real_time/client'
 # Events API
 require_relative 'slack/events/config'
 require_relative 'slack/events/request'
+
+require_relative 'slack/utils/security'
