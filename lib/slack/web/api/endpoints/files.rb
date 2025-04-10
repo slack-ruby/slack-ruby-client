@@ -11,6 +11,8 @@ module Slack
           #
           # @option options [array] :files
           #   Array of file ids and their corresponding (optional) titles.
+          # @option options [blocks[] as string] :blocks
+          #   A JSON-based array of structured rich text blocks, presented as a URL-encoded string. If the initial_comment field is provided, the blocks field is ignored.
           # @option options [Object] :channel_id
           #   Channel ID where the file will be shared. If not specified the file will be private.
           # @option options [string] :channels
@@ -23,6 +25,7 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.completeUploadExternal.json
           def files_completeUploadExternal(options = {})
             raise ArgumentError, 'Required arguments :files missing' if options[:files].nil?
+            options = encode_options_as_json(options, %i[blocks])
             post('files.completeUploadExternal', options)
           end
 

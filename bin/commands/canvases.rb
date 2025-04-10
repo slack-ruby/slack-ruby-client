@@ -9,6 +9,7 @@ module Slack
         g.desc 'Create canvas for a user'
         g.long_desc %( Create canvas for a user )
         g.command 'create' do |c|
+          c.flag 'channel_id', desc: 'Channel ID of the channel the canvas will be tabbed in. This is a required field for free teams.'
           c.flag 'document_content', desc: 'Structure describing the type and value of the content to create.'
           c.flag 'title', desc: 'Title of the newly created canvas.'
           c.action do |_global_options, options, _args|

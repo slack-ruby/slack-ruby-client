@@ -71,7 +71,7 @@ module Slack
           # @option options [integer] :limit
           #   Limit for how many users to be retrieved per page.
           # @option options [Object] :team_id
-          #   The ID (T1234) of the workspace. The team_id is required if you use an org-level token.
+          #   The ID (T1234) of a workspace. Filters results to just the specified workspace.
           # @see https://api.slack.com/methods/admin.users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.list.json
           def admin_users_list(options = {})
