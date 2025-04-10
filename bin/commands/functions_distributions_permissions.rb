@@ -18,8 +18,8 @@ module Slack
           end
         end
 
-        g.desc 'List the access type of a custom slack function and include the users with access if its permission_type is set to named_entities'
-        g.long_desc %( List the access type of a custom slack function and include the users with access if its permission_type is set to named_entities )
+        g.desc 'List the access type of a custom slack function and include the users or team or org ids with access if its permission_type is set to named_entities'
+        g.long_desc %( List the access type of a custom slack function and include the users or team or org ids with access if its permission_type is set to named_entities )
         g.command 'list' do |c|
           c.flag 'function_app_id', desc: 'The encoded ID of the app.'
           c.flag 'function_callback_id', desc: "The callback ID defined in the function's definition file."
@@ -41,13 +41,15 @@ module Slack
           end
         end
 
-        g.desc 'Set the access type of a custom slack function and define the users to be granted access if permission_type is set to named_entities'
-        g.long_desc %( Set the access type of a custom slack function and define the users to be granted access if permission_type is set to named_entities )
+        g.desc 'Set the access type of a custom slack function and define the users or team or org ids to be granted access if permission_type is set to named_entities'
+        g.long_desc %( Set the access type of a custom slack function and define the users or team or org ids to be granted access if permission_type is set to named_entities )
         g.command 'set' do |c|
           c.flag 'permission_type', desc: 'The type of permission that defines how the function can be distributed.'
           c.flag 'function_app_id', desc: 'The encoded ID of the app.'
           c.flag 'function_callback_id', desc: "The callback ID defined in the function's definition file."
           c.flag 'function_id', desc: 'The encoded ID of the function.'
+          c.flag 'org_ids', desc: 'List of org IDs to allow for named_entities permission.'
+          c.flag 'team_ids', desc: 'List of team IDs to allow for named_entities permission.'
           c.flag 'user_ids', desc: 'List of encoded user IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.functions_distributions_permissions_set(options))
