@@ -22,6 +22,12 @@ module Slack
           def response_metadata
             response.body.response_metadata
           end
+
+          def to_s
+            errors_message = ", errors=#{errors}" unless errors.nil?
+            response_metadata_message = ", response_metadata=#{response_metadata}" unless response_metadata.nil?
+            "#{error}#{errors_message || ''}#{response_metadata_message || ''}"
+          end
         end
       end
     end
