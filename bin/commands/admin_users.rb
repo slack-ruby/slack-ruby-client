@@ -44,7 +44,7 @@ module Slack
           c.flag 'include_deactivated_user_workspaces', desc: 'Only applies with org token and no team_id. If true, return workspaces for a user even if they may be deactivated on them. If false, return workspaces for a user only when user is active on them. Default is false.'
           c.flag 'is_active', desc: 'If true, only active users will be returned. If false, only deactivated users will be returned. Default is true.'
           c.flag 'limit', desc: 'Limit for how many users to be retrieved per page.'
-          c.flag 'team_id', desc: 'The ID (T1234) of the workspace. The team_id is required if you use an org-level token.'
+          c.flag 'team_id', desc: 'The ID (T1234) of a workspace. Filters results to just the specified workspace.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_users_list(options))
           end

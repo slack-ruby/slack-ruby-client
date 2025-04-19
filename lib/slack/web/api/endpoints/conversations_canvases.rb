@@ -13,6 +13,8 @@ module Slack
           #   Channel ID of the channel we create the channel canvas for.
           # @option options [Object] :document_content
           #   Structure describing the type and value of the content to create.
+          # @option options [string] :title
+          #   Title of the newly created canvas.
           # @see https://api.slack.com/methods/conversations.canvases.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations.canvases/conversations.canvases.create.json
           def conversations_canvases_create(options = {})
