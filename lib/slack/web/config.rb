@@ -15,6 +15,7 @@ module Slack
         timeout
         open_timeout
         default_page_size
+        conversations_id_page_size
         default_max_retries
         adapter
       ].freeze
@@ -32,6 +33,7 @@ module Slack
         self.timeout = nil
         self.open_timeout = nil
         self.default_page_size = 100
+        self.conversations_id_page_size = default_page_size
         self.default_max_retries = 100
         self.adapter = ::Faraday.default_adapter
       end

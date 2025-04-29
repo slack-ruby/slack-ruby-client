@@ -16,7 +16,15 @@ module Slack
             name = options[:channel]
             raise ArgumentError, 'Required arguments :channel missing' if name.nil?
 
-            id_for :channel, name, '#', :conversations_list, :channels, 'channel_not_found'
+            id_for(
+              :channel,
+              name,
+              '#',
+              :conversations_list,
+              :channels,
+              'channel_not_found',
+              enum_method_options: { limit: conversations_id_page_size }
+            )
           end
         end
       end
