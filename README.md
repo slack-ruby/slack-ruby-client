@@ -179,7 +179,7 @@ client.files_upload_v2(
   # required options
   filename: 'results.pdf', # this is used for the file title, unless a :title option is provided
   content: File.read('/users/me/results.pdf'), # the string contents of the file
-  
+
   # optional options
   channels: ['C000000', 'C000001'], # channel IDs to share the file in (:channel_id, :channel, or :channels are all supported)
   initial_comment: 'Sharing the Q1 results :tada:', # the message that is included with the file share thread
@@ -281,20 +281,21 @@ client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
 
 The following settings are supported.
 
-setting             | description
---------------------|-------------------------------------------------------------------------------------------------
-token               | Slack API token.
-user_agent          | User-agent, defaults to _Slack Ruby Client/version_.
-proxy               | Optional HTTP proxy.
-ca_path             | Optional SSL certificates path.
-ca_file             | Optional SSL certificates file.
-endpoint            | Slack endpoint, default is _https://slack.com/api_.
-logger              | Optional `Logger` instance that logs HTTP requests.
-timeout             | Optional open/read timeout in seconds.
-open_timeout        | Optional connection open timeout in seconds.
-default_page_size   | Optional page size for paginated requests, default is _100_.
-default_max_retries | Optional number of retries for paginated requests, default is _100_.
-adapter             | Optional HTTP adapter to use, defaults to `Faraday.default_adapter`.
+setting                      | description
+-----------------------------|-------------------------------------------------------------------------------------------------
+token                        | Slack API token.
+user_agent                   | User-agent, defaults to _Slack Ruby Client/version_.
+proxy                        | Optional HTTP proxy.
+ca_path                      | Optional SSL certificates path.
+ca_file                      | Optional SSL certificates file.
+endpoint                     | Slack endpoint, default is _https://slack.com/api_.
+logger                       | Optional `Logger` instance that logs HTTP requests.
+timeout                      | Optional open/read timeout in seconds.
+open_timeout                 | Optional connection open timeout in seconds.
+default_page_size            | Optional page size for paginated requests, default is _100_.
+conversations_id_page_size   | Optional page size for conversations_list requests made when calculating conversation id from a conversation name, default is _equal to default_page_size_.
+default_max_retries          | Optional number of retries for paginated requests, default is _100_.
+adapter                      | Optional HTTP adapter to use, defaults to `Faraday.default_adapter`.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
