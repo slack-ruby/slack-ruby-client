@@ -13,6 +13,7 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
   end
 
   before do
+    allow(conversations).to receive(:conversations_id_page_size).and_return(100)
     allow(conversations).to receive(:conversations_list).and_yield(
       Slack::Messages::Message.new(
         'channels' => [{
