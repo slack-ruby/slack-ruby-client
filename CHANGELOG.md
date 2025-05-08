@@ -2,7 +2,7 @@
 
 * [#549](https://github.com/slack-ruby/slack-ruby-client/pull/549): Add group ID formatting support for message mentions - [@n0h0](https://github.com/n0h0).
 * [#553](https://github.com/slack-ruby/slack-ruby-client/pull/553): Use `secure_compare` during signature verification - [@hieuk09](https://github.com/hieuk09).
-* [#555](https://github.com/slack-ruby/slack-ruby-client/pull/555): Make page size in resolving conversation IDs configurable - [@eizengan](https://github.com/eizengan).
+* [#555](https://github.com/slack-ruby/slack-ruby-client/pull/555): Make page size in resolving IDs configurable - [@eizengan](https://github.com/eizengan).
 * Your contribution here.
 
 ### 2.5.2 (2025/02/19)

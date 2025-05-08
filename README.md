@@ -294,6 +294,7 @@ timeout                      | Optional open/read timeout in seconds.
 open_timeout                 | Optional connection open timeout in seconds.
 default_page_size            | Optional page size for paginated requests, default is _100_.
 conversations_id_page_size   | Optional page size for conversations_list requests made when calculating conversation id from a conversation name, default is _equal to default_page_size_.
+users_id_page_size           | Optional page size for users_list requests made when calculating user id from a user name, default is _equal to default_page_size_.
 default_max_retries          | Optional number of retries for paginated requests, default is _100_.
 adapter                      | Optional HTTP adapter to use, defaults to `Faraday.default_adapter`.
 

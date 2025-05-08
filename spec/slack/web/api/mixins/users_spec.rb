@@ -13,6 +13,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
   end
 
   before do
+    allow(users).to receive(:users_id_page_size).and_return(100)
     allow(users).to receive(:users_list).and_yield(
       Slack::Messages::Message.new(
         'members' => [{
@@ -31,6 +32,11 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
 
     it 'translates a user that starts with a @' do
       expect(users.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
+    end
+
+    it 'forwards a provided limit to the underlying users_list calls' do
+      expect(users).to receive(:users_list).with(limit: 1234)
+      users.users_id(user: '@aws', limit: 1234)
     end
 
     it 'fails with an exception' do
