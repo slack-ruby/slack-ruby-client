@@ -13,6 +13,7 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
   end
 
   before do
+    allow(conversations).to receive(:conversations_id_page_size).and_return(100)
     allow(conversations).to receive(:conversations_list).and_yield(
       Slack::Messages::Message.new(
         'channels' => [{
@@ -34,6 +35,11 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
       expect(conversations.conversations_id(channel: '#general')).to(
         eq('ok' => true, 'channel' => { 'id' => 'CDEADBEEF' })
       )
+    end
+
+    it 'forwards a provided limit to the underlying conversations_list calls' do
+      expect(conversations).to receive(:conversations_list).with(limit: 1234)
+      conversations.conversations_id(channel: '#general', limit: 1234)
     end
 
     it 'fails with an exception' do
