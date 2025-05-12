@@ -12,22 +12,21 @@ module Slack
           #
           # @option options [user] :user
           #   User to get ID for, prefixed with '@'.
-          # @option options [integer] :limit
+          # @option options [integer] :id_limit
           #   The page size used for users_list calls required to find the user's ID
           def users_id(options = {})
             name = options[:user]
-            limit = options.fetch(:limit, users_id_page_size)
+            limit = options.fetch(:id_limit, users_id_page_size)
 
             raise ArgumentError, 'Required arguments :user missing' if name.nil?
 
             id_for(
-              :user,
-              name,
-              '@',
-              :users_list,
-              :members,
-              'user_not_found',
-              enum_method_options: { limit: limit }
+              key: :user,
+              name: name,
+              prefix: '@',
+              enum_method: :users_list,
+              list_method: :members,
+              options: { limit: limit }
             )
           end
         end

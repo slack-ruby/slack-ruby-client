@@ -40,7 +40,7 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
 
     it 'forwards a provided limit to the underlying conversations_list calls' do
       expect(conversations).to receive(:conversations_list).with(limit: 1234)
-      conversations.conversations_id(channel: '#general', limit: 1234)
+      conversations.conversations_id(channel: '#general', id_limit: 1234)
     end
 
     it 'fails with an exception' do
@@ -63,7 +63,7 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
 
       it 'forwards a provided limit to the underlying conversations_list calls' do
         expect(conversations).to receive(:conversations_list).with(limit: 1234)
-        conversations.conversations_id(channel: '#general', limit: 1234)
+        conversations.conversations_id(channel: '#general', id_limit: 1234)
       end
     end
   end

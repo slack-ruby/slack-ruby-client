@@ -6,15 +6,16 @@ module Slack
         module Ids
           private
 
-          def id_for(key, name, prefix, enum_method, list_method, not_found_error, enum_method_options: {}) # rubocop:disable Metrics/ParameterLists
+          def id_for(key:, name:, prefix:, enum_method:, list_method:, options: {})
             return { 'ok' => true, key.to_s => { 'id' => name } } unless name[0] == prefix
 
-            public_send(enum_method, **enum_method_options) do |list|
+            public_send(enum_method, **options) do |list|
               list.public_send(list_method).each do |li|
                 return Slack::Messages::Message.new('ok' => true, key.to_s => { 'id' => li.id }) if li.name == name[1..-1]
               end
             end
 
+            not_found_error = "#{key}_not_found"
             raise Slack::Web::Api::Errors::SlackError, not_found_error
           end
         end

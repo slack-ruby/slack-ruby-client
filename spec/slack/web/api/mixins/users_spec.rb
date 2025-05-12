@@ -37,7 +37,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
 
     it 'forwards a provided limit to the underlying users_list calls' do
       expect(users).to receive(:users_list).with(limit: 1234)
-      users.users_id(user: '@aws', limit: 1234)
+      users.users_id(user: '@aws', id_limit: 1234)
     end
 
     it 'fails with an exception' do
@@ -58,7 +58,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
 
       it 'forwards a provided limit to the underlying users_list calls' do
         expect(users).to receive(:users_list).with(limit: 1234)
-        users.users_id(user: '@aws', limit: 1234)
+        users.users_id(user: '@aws', id_limit: 1234)
       end
     end
   end
