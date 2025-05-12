@@ -16,7 +16,7 @@ module Slack
           #   The page size used for conversations_list calls required to find the channel's ID
           def conversations_id(options = {})
             name = options[:channel]
-            limit = options.fetch(:id_limit, conversations_id_page_size)
+            limit = options.fetch(:id_limit, Slack::Web.config.conversations_id_page_size)
 
             raise ArgumentError, 'Required arguments :channel missing' if name.nil?
 

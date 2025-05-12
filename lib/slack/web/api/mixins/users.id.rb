@@ -16,7 +16,7 @@ module Slack
           #   The page size used for users_list calls required to find the user's ID
           def users_id(options = {})
             name = options[:user]
-            limit = options.fetch(:id_limit, users_id_page_size)
+            limit = options.fetch(:id_limit, Slack::Web.config.users_id_page_size)
 
             raise ArgumentError, 'Required arguments :user missing' if name.nil?
 

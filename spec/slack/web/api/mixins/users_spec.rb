@@ -13,7 +13,6 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
   end
 
   before do
-    allow(users).to receive(:users_id_page_size) { Slack::Web.config.users_id_page_size }
     allow(users).to receive(:users_list).and_yield(
       Slack::Messages::Message.new(
         'members' => [{
