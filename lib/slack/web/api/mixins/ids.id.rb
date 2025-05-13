@@ -15,8 +15,7 @@ module Slack
               end
             end
 
-            not_found_error = "#{key}_not_found"
-            raise Slack::Web::Api::Errors::SlackError, not_found_error
+            raise Slack::Web::Api::Errors::SlackError, "#{key}_not_found"
           end
         end
       end
