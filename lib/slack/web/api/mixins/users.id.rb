@@ -26,7 +26,7 @@ module Slack
               prefix: '@',
               enum_method: :users_list,
               list_method: :members,
-              options: { limit: limit }
+              options: { limit: limit }.compact
             )
           end
         end

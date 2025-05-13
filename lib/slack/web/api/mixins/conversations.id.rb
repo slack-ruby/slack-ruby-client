@@ -26,7 +26,7 @@ module Slack
               prefix: '#',
               enum_method: :conversations_list,
               list_method: :channels,
-              options: { limit: limit }
+              options: { limit: limit }.compact
             )
           end
         end

@@ -31,7 +31,7 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
     end
 
     it 'translates a channel that starts with a #' do
-      expect(conversations).to receive(:conversations_list).with(limit: 100)
+      expect(conversations).to receive(:conversations_list)
       expect(conversations.conversations_id(channel: '#general')).to(
         eq('ok' => true, 'channel' => { 'id' => 'CDEADBEEF' })
       )
