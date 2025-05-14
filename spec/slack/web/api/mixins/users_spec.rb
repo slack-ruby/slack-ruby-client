@@ -30,13 +30,35 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
     end
 
     it 'translates a user that starts with a @' do
+      expect(users).to receive(:users_list)
       expect(users.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
+    end
+
+    it 'forwards a provided limit to the underlying users_list calls' do
+      expect(users).to receive(:users_list).with(limit: 1234)
+      users.users_id(user: '@aws', id_limit: 1234)
     end
 
     it 'fails with an exception' do
       expect { users.users_id(user: '@foo') }.to(
         raise_error(Slack::Web::Api::Errors::SlackError, 'user_not_found')
       )
+    end
+
+    context 'when a non-default conversations_id page size has been configured' do
+      before { Slack::Web.config.users_id_page_size = 500 }
+
+      after { Slack::Web.config.reset }
+
+      it 'translates a user that starts with a @' do
+        expect(users).to receive(:users_list).with(limit: 500)
+        expect(users.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
+      end
+
+      it 'forwards a provided limit to the underlying users_list calls' do
+        expect(users).to receive(:users_list).with(limit: 1234)
+        users.users_id(user: '@aws', id_limit: 1234)
+      end
     end
   end
 

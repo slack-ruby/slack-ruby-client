@@ -41,6 +41,7 @@ jobs:
           parallel: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           flag-name: run-${{ matrix.entry.ruby }}${{ matrix.entry.concurrency && '-'}}${{ matrix.entry.concurrency }}
+          allow-empty: ${{ matrix.entry.ignore || false }}
 
   finish:
     name: coveralls
