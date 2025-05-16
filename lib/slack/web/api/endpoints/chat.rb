@@ -142,6 +142,8 @@ module Slack
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [string] :text
           #   How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.
+          # @option options [Object] :agent_message_source_type
+          #   Identify how the message was posted for agentforce BE logging.
           # @option options [boolean] :as_user
           #   (Legacy) Pass true to post the message as the authed user instead of as a bot. Defaults to false. Can only be used by classic apps. See legacy as_user parameter below.
           # @option options [string] :icon_emoji
