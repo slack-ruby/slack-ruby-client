@@ -105,6 +105,23 @@ module Slack
           end
 
           #
+          # Create a Salesforce channel for the corresponding object provided.
+          #
+          # @option options [string] :object_id
+          #   Object / Record ID (15 or 18 digit accepted). See here for how to look up an ID.
+          # @option options [string] :salesforce_org_id
+          #   Salesforce org ID (15 or 18 digit accepted). See here for how to look up Salesforce org ID.
+          # @option options [boolean] :invite_object_team
+          #   Optional flag to add all team members related to the object to the newly created Salesforce channel. When true, adds a maximum of 100 team members to the channel.
+          # @see https://api.slack.com/methods/admin.conversations.createForObjects
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.createForObjects.json
+          def admin_conversations_createForObjects(options = {})
+            raise ArgumentError, 'Required arguments :object_id missing' if options[:object_id].nil?
+            raise ArgumentError, 'Required arguments :salesforce_org_id missing' if options[:salesforce_org_id].nil?
+            post('admin.conversations.createForObjects', options)
+          end
+
+          #
           # Delete a public or private channel.
           #
           # @option options [Object] :channel_id
@@ -338,7 +355,7 @@ module Slack
           # @option options [array] :target_team_ids
           #   A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.
           # @option options [Object] :team_id
-          #   The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.
+          #   The workspace to which the channel belongs if the channel is a local workspace channel. Omit this argument if the channel is a cross-workspace or org-wide shared channel.
           # @see https://api.slack.com/methods/admin.conversations.setTeams
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.setTeams.json
           def admin_conversations_setTeams(options = {})
