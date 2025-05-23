@@ -24,7 +24,7 @@ module Slack
           end
 
           #
-          # List the access type of a custom slack function and include the users with access if its permission_type is set to named_entities
+          # List the access type of a custom slack function and include the users or team or org ids with access if its permission_type is set to named_entities
           #
           # @option options [string] :function_app_id
           #   The encoded ID of the app.
@@ -56,7 +56,7 @@ module Slack
           end
 
           #
-          # Set the access type of a custom slack function and define the users to be granted access if permission_type is set to named_entities
+          # Set the access type of a custom slack function and define the users or team or org ids to be granted access if permission_type is set to named_entities
           #
           # @option options [enum] :permission_type
           #   The type of permission that defines how the function can be distributed.
@@ -66,6 +66,10 @@ module Slack
           #   The callback ID defined in the function's definition file.
           # @option options [string] :function_id
           #   The encoded ID of the function.
+          # @option options [array] :org_ids
+          #   List of org IDs to allow for named_entities permission.
+          # @option options [array] :team_ids
+          #   List of team IDs to allow for named_entities permission.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
           # @see https://api.slack.com/methods/functions.distributions.permissions.set

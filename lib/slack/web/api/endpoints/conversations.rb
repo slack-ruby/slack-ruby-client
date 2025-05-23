@@ -207,7 +207,6 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.kick.json
           def conversations_kick(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('conversations.kick', options)

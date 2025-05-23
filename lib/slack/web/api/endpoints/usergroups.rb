@@ -75,8 +75,6 @@ module Slack
           #   Include the list of users for each User Group.
           # @option options [string] :team_id
           #   encoded team id to list user groups in, required if org token is used.
-          # @option options [Object] :usergroup_id
-          #   The id of the usergroup you would like to filter the results down to.
           # @see https://api.slack.com/methods/usergroups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.list.json
           def usergroups_list(options = {})

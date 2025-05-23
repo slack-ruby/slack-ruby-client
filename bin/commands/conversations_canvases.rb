@@ -11,6 +11,7 @@ module Slack
         g.command 'create' do |c|
           c.flag 'channel_id', desc: 'Channel ID of the channel we create the channel canvas for.'
           c.flag 'document_content', desc: 'Structure describing the type and value of the content to create.'
+          c.flag 'title', desc: 'Title of the newly created canvas.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_canvases_create(options))
           end
