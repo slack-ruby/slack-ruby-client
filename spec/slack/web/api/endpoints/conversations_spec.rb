@@ -65,10 +65,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
   end
   context 'conversations_kick' do
     it 'requires channel' do
-      expect { client.conversations_kick(user: %q[W1234567890]) }.to raise_error ArgumentError, /Required arguments :channel missing/
-    end
-    it 'requires user' do
-      expect { client.conversations_kick(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :user missing/
+      expect { client.conversations_kick }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
   context 'conversations_leave' do

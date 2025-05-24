@@ -10,6 +10,7 @@ module Slack
         g.long_desc %( Finishes an upload started with files.getUploadURLExternal )
         g.command 'completeUploadExternal' do |c|
           c.flag 'files', desc: 'Array of file ids and their corresponding (optional) titles.'
+          c.flag 'blocks', desc: 'A JSON-based array of structured rich text blocks, presented as a URL-encoded string. If the initial_comment field is provided, the blocks field is ignored.'
           c.flag 'channel_id', desc: 'Channel ID where the file will be shared. If not specified the file will be private.'
           c.flag 'channels', desc: 'Comma-separated string of channel IDs where the file will be shared.'
           c.flag 'initial_comment', desc: 'The message text introducing the file in specified channels.'

@@ -9,6 +9,8 @@ module Slack
           #
           # Create canvas for a user
           #
+          # @option options [string] :channel_id
+          #   Channel ID of the channel the canvas will be tabbed in. This is a required field for free teams.
           # @option options [Object] :document_content
           #   Structure describing the type and value of the content to create.
           # @option options [string] :title

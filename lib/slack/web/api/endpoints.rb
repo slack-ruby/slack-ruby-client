@@ -41,6 +41,7 @@ require_relative 'endpoints/apps_connections'
 require_relative 'endpoints/apps_datastore'
 require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_manifest'
+require_relative 'endpoints/assistant_search'
 require_relative 'endpoints/assistant_threads'
 require_relative 'endpoints/auth'
 require_relative 'endpoints/auth_teams'
@@ -141,6 +142,7 @@ module Slack
         include AppsDatastore
         include AppsEventAuthorizations
         include AppsManifest
+        include AssistantSearch
         include AssistantThreads
         include Auth
         include AuthTeams

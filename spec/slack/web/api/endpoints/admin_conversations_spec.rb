@@ -46,6 +46,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_create(is_private: %q[true]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
   end
+  context 'admin.conversations_createForObjects' do
+    it 'requires object_id' do
+      expect { client.admin_conversations_createForObjects(salesforce_org_id: %q[00DGC00000024hsuWY]) }.to raise_error ArgumentError, /Required arguments :object_id missing/
+    end
+    it 'requires salesforce_org_id' do
+      expect { client.admin_conversations_createForObjects(object_id: %q[0019000000DmehKAAR]) }.to raise_error ArgumentError, /Required arguments :salesforce_org_id missing/
+    end
+  end
   context 'admin.conversations_delete' do
     it 'requires channel_id' do
       expect { client.admin_conversations_delete }.to raise_error ArgumentError, /Required arguments :channel_id missing/

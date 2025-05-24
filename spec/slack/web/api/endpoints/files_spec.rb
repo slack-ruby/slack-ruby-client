@@ -9,6 +9,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     it 'requires files' do
       expect { client.files_completeUploadExternal }.to raise_error ArgumentError, /Required arguments :files missing/
     end
+    it 'encodes blocks as json' do
+      expect(client).to receive(:post).with('files.completeUploadExternal', {files: %q[[{"id":"F044GKUHN9Z", "title":"slack-test"}]], blocks: %q[{"data":["data"]}]})
+      client.files_completeUploadExternal(files: %q[[{"id":"F044GKUHN9Z", "title":"slack-test"}]], blocks: {:data=>["data"]})
+    end
   end
   context 'files_delete' do
     it 'requires file' do

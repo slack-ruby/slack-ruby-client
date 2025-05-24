@@ -51,7 +51,6 @@ module Slack
           c.flag 'include_disabled', desc: 'Include disabled User Groups.'
           c.flag 'include_users', desc: 'Include the list of users for each User Group.'
           c.flag 'team_id', desc: 'encoded team id to list user groups in, required if org token is used.'
-          c.flag 'usergroup_id', desc: 'The id of the usergroup you would like to filter the results down to.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.usergroups_list(options))
           end
