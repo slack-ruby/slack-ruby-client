@@ -14,9 +14,12 @@ end
 
 group :test do
   gem 'activesupport'
+  gem 'base64'
+  gem 'bigdecimal'
   gem 'erubis'
   gem 'faraday-typhoeus'
   gem 'json-schema'
+  gem 'mutex_m'
   gem 'racc'
   gem 'rake', '~> 13'
   gem 'rspec'
