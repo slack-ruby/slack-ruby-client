@@ -1,3 +1,7 @@
+### 2.6.1 (Next)
+
+* Your contribution here.
+
 ### 2.6.0 (2025/05/24)
 
 * [#549](https://github.com/slack-ruby/slack-ruby-client/pull/549): Add group ID formatting support for message mentions - [@n0h0](https://github.com/n0h0).
