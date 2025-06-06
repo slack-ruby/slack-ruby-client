@@ -11,10 +11,11 @@ module Slack
           #
           # @option options [array] :app_ids
           #   An array of app IDs to get app configs for.
+          # @option options [array] :rich_link_preview_types
+          #   return apps with the corresponding rich link preview layouts.
           # @see https://api.slack.com/methods/admin.apps.config.lookup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.config/admin.apps.config.lookup.json
           def admin_apps_config_lookup(options = {})
-            raise ArgumentError, 'Required arguments :app_ids missing' if options[:app_ids].nil?
             post('admin.apps.config.lookup', options)
           end
 
