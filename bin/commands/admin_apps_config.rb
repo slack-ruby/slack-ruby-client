@@ -10,6 +10,7 @@ module Slack
         g.long_desc %( Look up the app config for connectors by their IDs )
         g.command 'lookup' do |c|
           c.flag 'app_ids', desc: 'An array of app IDs to get app configs for.'
+          c.flag 'rich_link_preview_types', desc: 'return apps with the corresponding rich link preview layouts.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_config_lookup(options))
           end
