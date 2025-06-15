@@ -1,6 +1,7 @@
 ### 2.6.1 (Next)
 
 * [#554](https://github.com/slack-ruby/slack-ruby-client/pull/557): Require Faraday >= 2.0.1 - [@anrichvs](https://github.com/AnrichVS).
+* [#558](https://github.com/slack-ruby/slack-ruby-client/pull/558): Update API from [slack-api-ref@c408935](https://github.com/slack-ruby/slack-api-ref/commit/c408935) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.6.0 (2025/05/24)
