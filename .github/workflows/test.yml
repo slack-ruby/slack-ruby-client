@@ -30,6 +30,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.entry.ruby }}
           bundler-cache: true # 'bundle install' and cache gems
+        continue-on-error: ${{ matrix.entry.ignore || false }}
       - name: Run Tests
         continue-on-error: ${{ matrix.entry.ignore || false }}
         env:
