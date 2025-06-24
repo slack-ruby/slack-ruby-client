@@ -37,9 +37,14 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
       )
     end
 
-    it 'forwards a provided limit to the underlying conversations_list calls' do
+    it 'forwards the provided limit to the underlying conversations_list calls' do
       expect(conversations).to receive(:conversations_list).with(limit: 1234)
       conversations.conversations_id(channel: '#general', id_limit: 1234)
+    end
+
+    it 'forwards a provided types to the underlying conversations_list calls' do
+      expect(conversations).to receive(:conversations_list).with(types: 'public_channel,private_channel')
+      conversations.conversations_id(channel: '#general', id_types: 'public_channel,private_channel')
     end
 
     it 'fails with an exception' do

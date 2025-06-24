@@ -14,9 +14,13 @@ module Slack
           #   Channel to get ID for, prefixed with #.
           # @option options [integer] :id_limit
           #   The page size used for conversations_list calls required to find the channel's ID
+          # @option options [string] :id_types
+          #   The types of conversations to use when searching for the ID. A comma-separated list
+          #   containing one or more of public_channel, private_channel, mpim, im
           def conversations_id(options = {})
             name = options[:channel]
             limit = options.fetch(:id_limit, Slack::Web.config.conversations_id_page_size)
+            types = options.fetch(:id_types, nil)
 
             raise ArgumentError, 'Required arguments :channel missing' if name.nil?
 
@@ -26,7 +30,7 @@ module Slack
               prefix: '#',
               enum_method: :conversations_list,
               list_method: :channels,
-              options: { limit: limit }.compact
+              options: { limit: limit, types: types }.compact
             )
           end
         end
