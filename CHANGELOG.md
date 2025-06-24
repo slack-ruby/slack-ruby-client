@@ -1,6 +1,7 @@
 ### 2.6.1 (Next)
 
 * [#554](https://github.com/slack-ruby/slack-ruby-client/pull/557): Require Faraday >= 2.0.1 - [@anrichvs](https://github.com/AnrichVS).
+* [#559](https://github.com/slack-ruby/slack-ruby-client/pull/559): Enable name-to-id translation of non-public channels - [@eizengan](https://github.com/eizengan).
 * Your contribution here.
 
 ### 2.6.0 (2025/05/24)
