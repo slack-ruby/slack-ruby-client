@@ -34,6 +34,11 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
       expect(users.users_id(user: '@aws')).to eq('ok' => true, 'user' => { 'id' => 'UDEADBEEF' })
     end
 
+    it 'forwards a provided team_id to the underlying users_list calls' do
+      expect(users).to receive(:users_list).with(team_id: 'T1234567890')
+      users.users_id(user: '@aws', team_id: 'T1234567890')
+    end
+
     it 'forwards a provided limit to the underlying users_list calls' do
       expect(users).to receive(:users_list).with(limit: 1234)
       users.users_id(user: '@aws', id_limit: 1234)
@@ -45,7 +50,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
       )
     end
 
-    context 'when a non-default conversations_id page size has been configured' do
+    context 'when a non-default users_id page size has been configured' do
       before { Slack::Web.config.users_id_page_size = 500 }
 
       after { Slack::Web.config.reset }
