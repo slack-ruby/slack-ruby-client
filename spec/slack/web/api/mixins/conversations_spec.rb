@@ -37,6 +37,16 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
       )
     end
 
+    it 'forwards a provided team_id to the underlying conversations_list calls' do
+      expect(conversations).to receive(:conversations_list).with(team_id: 'T1234567890')
+      conversations.conversations_id(channel: '#general', team_id: 'T1234567890')
+    end
+
+    it 'forwards a provided exclude_archived to the underlying conversations_list calls' do
+      expect(conversations).to receive(:conversations_list).with(exclude_archived: true)
+      conversations.conversations_id(channel: '#general', id_exclude_archived: true)
+    end
+
     it 'forwards the provided limit to the underlying conversations_list calls' do
       expect(conversations).to receive(:conversations_list).with(limit: 1234)
       conversations.conversations_id(channel: '#general', id_limit: 1234)
