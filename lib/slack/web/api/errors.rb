@@ -676,6 +676,7 @@ module Slack
         class UserEmailUnverified < SlackError; end
         class UserIsAlreadyDeleted < SlackError; end
         class UserIsBot < SlackError; end
+        class UserIsDeactivated < SlackError; end
         class UserIsNotAGuest < SlackError; end
         class UserIsRestricted < SlackError; end
         class UserIsUltraRestricted < SlackError; end
@@ -1369,6 +1370,7 @@ module Slack
           'user_email_unverified' => UserEmailUnverified,
           'user_is_already_deleted' => UserIsAlreadyDeleted,
           'user_is_bot' => UserIsBot,
+          'user_is_deactivated' => UserIsDeactivated,
           'user_is_not_a_guest' => UserIsNotAGuest,
           'user_is_restricted' => UserIsRestricted,
           'user_is_ultra_restricted' => UserIsUltraRestricted,
