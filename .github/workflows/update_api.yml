@@ -2,7 +2,7 @@ name: Update API
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 23 * * *"
+    - cron: "15 23 * * 1"
 jobs:
   update-api:
     if: ${{ github.repository == 'slack-ruby/slack-ruby-client' }}
