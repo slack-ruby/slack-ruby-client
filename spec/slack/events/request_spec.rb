@@ -47,6 +47,18 @@ RSpec.describe Slack::Events::Request do
     expect(http_request.body.read).to eq body
   end
 
+  context 'missing signature' do
+    subject(:request) do
+      described_class.new(http_request)
+    end
+
+    let(:signature) { nil }
+
+    it 'raises InvalidSignature' do
+      expect { request.valid? }.to raise_error Slack::Events::Request::InvalidSignature
+    end
+  end
+
   context 'with an already read body' do
     before do
       http_request.body.read
