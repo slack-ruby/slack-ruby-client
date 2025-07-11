@@ -55,6 +55,7 @@ module Slack
       # Returns true if the signature coming from Slack is valid.
       def valid?
         raise MissingSigningSecret unless signing_secret
+        raise InvalidSignature unless signature
 
         digest = OpenSSL::Digest.new('SHA256')
         signature_basestring = [version, timestamp, body].join(':')
