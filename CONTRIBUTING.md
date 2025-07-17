@@ -27,7 +27,7 @@ bundle exec rake
 
 ### Run Examples in Development
 
-Sign up for Slack, create a private Slack team for yourself, then [generate an API token](https://api.slack.com/tutorials/tracks/getting-a-token) for your app and use it for some interactions.
+Sign up for Slack, create a private Slack team for yourself, then [generate an API token](https://api.slack.com/tutorials/tracks/getting-a-token) for your app and use it for some interactions. To get a token you will need to install the app in a workspace, and use the "User OAuth Token" from installed app settings.
 
 Try running the examples in the [examples](examples) directory.
 

@@ -13,6 +13,8 @@ module Slack
           #   Name of the file being uploaded.
           # @option params [string] :content
           #   File contents via a POST variable.
+          # @option params [Array<Hash>] :files
+          #   Array of file objects with :filename, :content, and optionally :title, :alt_txt, :snippet_type.
           # @option params [string] :alt_txt
           #   Description of image for screen-reader.
           # @option params [string] :snippet_type
@@ -32,8 +34,16 @@ module Slack
           #   Never use a reply's ts value; use its parent instead.
           #   Also make sure to provide only one channel when using 'thread_ts'.
           def files_upload_v2(params = {})
-            %i[filename content].each do |param|
-              raise ArgumentError, "Required argument :#{param} missing" if params[param].nil?
+            files_to_upload = if params[:files] && params[:files].is_a?(Array)
+                                params[:files]
+                              else
+                                [params.slice(:filename, :content, :title, :alt_txt, :snippet_type)]
+                              end
+
+            files_to_upload.each_with_index do |file, index|
+              %i[filename content].each do |param|
+                raise ArgumentError, "Required argument :#{param} missing in file (#{index})" if file[param].nil?
+              end
             end
 
             channel_params = %i[channel channels channel_id].map { |param| params[param] }.compact
@@ -53,31 +63,31 @@ module Slack
               complete_upload_request_params[:channel_id] = params[:channel_id]
             end
 
-            content = params[:content]
-            title = params[:title] || params[:filename]
+            uploaded_files = files_to_upload.map do |file|
+              content = file[:content]
+              title = file[:title] || file[:filename]
 
-            upload_url_request_params = params.slice(:filename, :alt_txt, :snippet_type)
-            upload_url_request_params[:length] = content.bytesize
+              upload_url_request_params = file.slice(:filename, :alt_txt, :snippet_type)
+              upload_url_request_params[:length] = content.bytesize
 
-            # Get the upload url.
-            get_upload_url_response = files_getUploadURLExternal(upload_url_request_params)
-            upload_url = get_upload_url_response[:upload_url]
-            file_id = get_upload_url_response[:file_id]
+              get_upload_url_response = files_getUploadURLExternal(upload_url_request_params)
+              upload_url = get_upload_url_response[:upload_url]
+              file_id = get_upload_url_response[:file_id]
 
-            # Upload the file.
-            ::Faraday::Connection.new(upload_url, options) do |connection|
-              connection.request :multipart
-              connection.request :url_encoded
-              connection.use ::Slack::Web::Faraday::Response::WrapError
-              connection.response :logger, logger if logger
-              connection.adapter adapter
-            end.post do |request|
-              request.body = content
+              ::Faraday::Connection.new(upload_url, options) do |connection|
+                connection.request :multipart
+                connection.request :url_encoded
+                connection.use ::Slack::Web::Faraday::Response::WrapError
+                connection.response :logger, logger if logger
+                connection.adapter adapter
+              end.post do |request|
+                request.body = content
+              end
+
+              { id: file_id, title: title }
             end
 
-            # Complete the upload.
-            complete_upload_request_params[:files] = [{ id: file_id, title: title }].to_json
-
+            complete_upload_request_params[:files] = uploaded_files.to_json
             files_completeUploadExternal(complete_upload_request_params)
           end
         end

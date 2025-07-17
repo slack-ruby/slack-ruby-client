@@ -173,6 +173,8 @@ Upload files with [sequenced API calls](https://api.slack.com/messaging/files#up
 
 This library provides a helper method `files_upload_v2` that wraps the three separate API calls.
 
+Upload a single file.
+
 ```ruby
 client.files_upload_v2(
   # required options
@@ -185,6 +187,19 @@ client.files_upload_v2(
   snippet_type: 'text', # the type of snippet
   title: 'Q1 Results', # sets the title of the file, overriding the filename
   thread_ts: '1738331487.481469' # specifies a thread to add this file to
+)
+```
+
+Upload multiple files.
+
+```ruby
+client.files_upload_v2(
+  files: [
+    { filename: 'report.pdf', content: File.read('/users/me/report.pdf'), title: 'Monthly Report' },
+    { filename: 'data.csv', content: File.read('/users/me/data.csv'), title: 'Raw Data' }
+  ],
+  channels: ['#general'],
+  initial_comment: 'Here are the monthly results!'
 )
 ```
 

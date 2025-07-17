@@ -22,7 +22,7 @@ Dir[File.join(File.dirname(__FILE__), 'support', '**/*.rb')].each do |file|
 end
 
 Slack.configure do |config|
-  config.token = '<SLACK_API_TOKEN>' # ENV['SLACK_API_TOKEN']
+  config.token = ENV['SLACK_API_TOKEN'] || '<SLACK_API_TOKEN>'
 end
 
 RSpec.configure do |config|
