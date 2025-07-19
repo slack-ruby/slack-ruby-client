@@ -35,3 +35,11 @@ puts client.files_upload_v2(
   content: SecureRandom.hex,
   channel_id: channel_id
 ).files.first.permalink_public
+
+client.files_upload_v2(
+  files: [
+    { filename: 'files_upload_v2_to_general_first_file.txt', content: SecureRandom.hex },
+    { filename: 'files_upload_v2_to_general_second_file.txt', content: SecureRandom.hex }
+  ],
+  channels: ['#general']
+).files.each { |file| puts file.permalink_public }

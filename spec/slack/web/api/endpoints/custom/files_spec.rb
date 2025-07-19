@@ -141,4 +141,45 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
       ).files.size).to eq 1
     end
   end
+
+  context 'with multiple files', vcr: { cassette_name: 'web/files_upload_v2_multiple_files' } do
+    it 'completes the upload with multiple files' do
+      expect(client.files_upload_v2(
+        files: [
+          { filename: 'test1.txt', content: 'First file contents', title: 'First File' },
+          { filename: 'test2.txt', content: 'Second file contents', title: 'Second File' }
+        ],
+        channel_id: 'C04KB5X4D',
+        initial_comment: 'Multiple files upload test'
+      ).files.size).to eq 2
+    end
+  end
+
+  context 'with multiple files missing filename' do
+    it 'raises an argument error' do
+      expect do
+        client.files_upload_v2(
+          files: [
+            { content: 'First file contents', title: 'First File' },
+            { filename: 'test2.txt', content: 'Second file contents' }
+          ],
+          channel_id: 'C04KB5X4D'
+        )
+      end.to raise_error ArgumentError, /Required argument :filename missing in file \(0\)/
+    end
+  end
+
+  context 'with multiple files missing content' do
+    it 'raises an argument error' do
+      expect do
+        client.files_upload_v2(
+          files: [
+            { filename: 'test1.txt', title: 'First File' },
+            { filename: 'test2.txt', content: 'Second file contents' }
+          ],
+          channel_id: 'C04KB5X4D'
+        )
+      end.to raise_error ArgumentError, /Required argument :content missing in file \(0\)/
+    end
+  end
 end

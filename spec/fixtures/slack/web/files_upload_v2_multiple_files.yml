@@ -1,0 +1,370 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/files.getUploadURLExternal
+    body:
+      encoding: UTF-8
+      string: filename=test1.txt&length=19
+    headers:
+      User-Agent:
+      - Slack Ruby Client/2.6.1
+      Accept:
+      - application/json; charset=utf-8
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 19 Jul 2025 11:03:01 GMT
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Slack-Req-Id:
+      - 1b7b53d1a7fc55a967a18c5222e7ec91
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 26 Jul 1997 05:00:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Accepted-Oauth-Scopes:
+      - files:write
+      X-Oauth-Scopes:
+      - identify,channels:read,files:read,groups:read,chat:write,files:write
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Unique-Id:
+      - aHt7ZbdjgR7-x86G9k5D2QAAADc
+      X-Slack-Backend:
+      - r
+      Access-Control-Allow-Origin:
+      - "*"
+      Via:
+      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-dpfkgrva,envoy-edge-iad-kfsueobe
+      Content-Length:
+      - '254'
+      X-Envoy-Attempt-Count:
+      - '1'
+      X-Envoy-Upstream-Service-Time:
+      - '24'
+      X-Backend:
+      - main_normal main_canary_with_overflow main_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-tqrt
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      X-Edge-Backend:
+      - envoy-www
+      X-Geoname-Id:
+      - notfound
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"upload_url":"https:\/\/files.slack.com\/upload\/v1\/CwABAAAAWAoAAQHYqI2Lij63CgACGFOiKgoNiAAMAAMLAAEAAAAJVDA0S0I1V1FICwACAAAACVUwNEtCNVdRUgsAAwAAAAtGMDk3ODkzM0pHMAAKAAQAAAAAAAAAEwALAAIAAAAU750ABULpdgQ3g8RhclxTVm5KoSwA","file_id":"F0978933JG0"}'
+  recorded_at: Sat, 19 Jul 2025 11:03:01 GMT
+- request:
+    method: post
+    uri: https://files.slack.com/upload/v1/CwABAAAAWAoAAQHYqI2Lij63CgACGFOiKgoNiAAMAAMLAAEAAAAJVDA0S0I1V1FICwACAAAACVUwNEtCNVdRUgsAAwAAAAtGMDk3ODkzM0pHMAAKAAQAAAAAAAAAEwALAAIAAAAU750ABULpdgQ3g8RhclxTVm5KoSwA
+    body:
+      encoding: UTF-8
+      string: First file contents
+    headers:
+      User-Agent:
+      - Slack Ruby Client/2.6.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '7'
+      Connection:
+      - keep-alive
+      X-Backend:
+      - miata-prod-iad-v2-656bbc4dd6-qbjm5
+      Date:
+      - Sat, 19 Jul 2025 11:03:01 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '79'
+      Via:
+      - envoy-edge-iad-riuoxgax, 1.1 b2a97308187ed38f56c38676d5710b7e.cloudfront.net
+        (CloudFront)
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - shared-secret
+      Server:
+      - envoy
+      X-Cache:
+      - Miss from cloudfront
+      X-Amz-Cf-Pop:
+      - JFK52-P8
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - Gpfim--tP-ifn-U14Di1FIU7kyAvpdf8Ud_0WhklQMYyu05dfvEOpw==
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: OK - 19
+  recorded_at: Sat, 19 Jul 2025 11:03:01 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/files.getUploadURLExternal
+    body:
+      encoding: UTF-8
+      string: filename=test2.txt&length=20
+    headers:
+      User-Agent:
+      - Slack Ruby Client/2.6.1
+      Accept:
+      - application/json; charset=utf-8
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 19 Jul 2025 11:03:01 GMT
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Slack-Req-Id:
+      - 6ca648cc228b921af59dd7eb3f92d8c3
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 26 Jul 1997 05:00:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Accepted-Oauth-Scopes:
+      - files:write
+      X-Oauth-Scopes:
+      - identify,channels:read,files:read,groups:read,chat:write,files:write
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Unique-Id:
+      - aHt7ZeeUbe0qz-abNSqH2gAAEBE
+      X-Slack-Backend:
+      - r
+      Access-Control-Allow-Origin:
+      - "*"
+      Via:
+      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-fffxsxvx,envoy-edge-iad-dheiqrmv
+      Content-Length:
+      - '254'
+      X-Envoy-Attempt-Count:
+      - '1'
+      X-Envoy-Upstream-Service-Time:
+      - '35'
+      X-Backend:
+      - main_normal main_canary_with_overflow main_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-gxvr
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      X-Edge-Backend:
+      - envoy-www
+      X-Geoname-Id:
+      - notfound
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"upload_url":"https:\/\/files.slack.com\/upload\/v1\/CwABAAAAWAoAATIsbIUSUlMSCgACGFOiKhga-VAMAAMLAAEAAAAJVDA0S0I1V1FICwACAAAACVUwNEtCNVdRUgsAAwAAAAtGMDk2RzQ3RDc3MAAKAAQAAAAAAAAAFAALAAIAAAAU_2PlEUki1GHyP27eja7T735pOikA","file_id":"F096G47D770"}'
+  recorded_at: Sat, 19 Jul 2025 11:03:01 GMT
+- request:
+    method: post
+    uri: https://files.slack.com/upload/v1/CwABAAAAWAoAATIsbIUSUlMSCgACGFOiKhga-VAMAAMLAAEAAAAJVDA0S0I1V1FICwACAAAACVUwNEtCNVdRUgsAAwAAAAtGMDk2RzQ3RDc3MAAKAAQAAAAAAAAAFAALAAIAAAAU_2PlEUki1GHyP27eja7T735pOikA
+    body:
+      encoding: UTF-8
+      string: Second file contents
+    headers:
+      User-Agent:
+      - Slack Ruby Client/2.6.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '7'
+      Connection:
+      - keep-alive
+      X-Backend:
+      - miata-prod-iad-v2-656bbc4dd6-t7npg
+      Date:
+      - Sat, 19 Jul 2025 11:03:01 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '56'
+      Via:
+      - envoy-edge-iad-hktfrhrh, 1.1 ded721d3aeecfb4f35d39da9e2d34066.cloudfront.net
+        (CloudFront)
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - shared-secret
+      Server:
+      - envoy
+      X-Cache:
+      - Miss from cloudfront
+      X-Amz-Cf-Pop:
+      - JFK52-P8
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - Y_VbshpVtzmvcQYq9z_gNV9LMZuBIeyqvDss8e95yjEAKFdNGpLWxg==
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: OK - 20
+  recorded_at: Sat, 19 Jul 2025 11:03:01 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/files.completeUploadExternal
+    body:
+      encoding: UTF-8
+      string: channel_id=C04KB5X4D&files=%5B%7B%22id%22%3A%22F0978933JG0%22%2C%22title%22%3A%22First+File%22%7D%2C%7B%22id%22%3A%22F096G47D770%22%2C%22title%22%3A%22Second+File%22%7D%5D&initial_comment=Multiple+files+upload+test
+    headers:
+      User-Agent:
+      - Slack Ruby Client/2.6.1
+      Accept:
+      - application/json; charset=utf-8
+      Authorization:
+      - Bearer <SLACK_API_TOKEN>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 19 Jul 2025 11:03:01 GMT
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Slack-Req-Id:
+      - 247976076ad083f12a34d2d4a2a95f9c
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 26 Jul 1997 05:00:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Accepted-Oauth-Scopes:
+      - files:write
+      X-Oauth-Scopes:
+      - identify,channels:read,files:read,groups:read,chat:write,files:write
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Slack-Unique-Id:
+      - aHt7ZaiASTlKpExH1ZkXlwAAEBk
+      X-Slack-Backend:
+      - r
+      Access-Control-Allow-Origin:
+      - "*"
+      Via:
+      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-nrqrchxv,envoy-edge-iad-wvrdhwsv
+      Content-Length:
+      - '1838'
+      X-Envoy-Attempt-Count:
+      - '1'
+      X-Envoy-Upstream-Service-Time:
+      - '106'
+      X-Backend:
+      - main_normal main_canary_with_overflow main_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-guut
+      X-Slack-Shared-Secret-Outcome:
+      - no-match
+      X-Edge-Backend:
+      - envoy-www
+      X-Geoname-Id:
+      - notfound
+      X-Slack-Edge-Shared-Secret-Outcome:
+      - no-match
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"files":[{"id":"F0978933JG0","created":1752922981,"timestamp":1752922981,"name":"test1.txt","title":"First
+        File","mimetype":"","filetype":"","pretty_type":"","user":"U04KB5WQR","user_team":"T04KB5WQH","editable":false,"size":19,"mode":"hosted","is_external":false,"external_type":"","is_public":false,"public_url_shared":false,"display_as_bot":false,"username":"","url_private":"https:\/\/files.slack.com\/files-pri\/T04KB5WQH-F0978933JG0\/test1.txt","url_private_download":"https:\/\/files.slack.com\/files-pri\/T04KB5WQH-F0978933JG0\/download\/test1.txt","media_display_type":"unknown","permalink":"https:\/\/dblockdotorg.slack.com\/files\/U04KB5WQR\/F0978933JG0\/test1.txt","permalink_public":"https:\/\/slack-files.com\/T04KB5WQH-F0978933JG0-e214f43157","comments_count":0,"is_starred":false,"shares":{},"channels":[],"groups":[],"ims":[],"has_more_shares":false,"has_rich_preview":false,"file_access":"visible"},{"id":"F096G47D770","created":1752922981,"timestamp":1752922981,"name":"test2.txt","title":"Second
+        File","mimetype":"","filetype":"","pretty_type":"","user":"U04KB5WQR","user_team":"T04KB5WQH","editable":false,"size":20,"mode":"hosted","is_external":false,"external_type":"","is_public":false,"public_url_shared":false,"display_as_bot":false,"username":"","url_private":"https:\/\/files.slack.com\/files-pri\/T04KB5WQH-F096G47D770\/test2.txt","url_private_download":"https:\/\/files.slack.com\/files-pri\/T04KB5WQH-F096G47D770\/download\/test2.txt","media_display_type":"unknown","permalink":"https:\/\/dblockdotorg.slack.com\/files\/U04KB5WQR\/F096G47D770\/test2.txt","permalink_public":"https:\/\/slack-files.com\/T04KB5WQH-F096G47D770-a0a0f3b41d","comments_count":0,"is_starred":false,"shares":{},"channels":[],"groups":[],"ims":[],"has_more_shares":false,"has_rich_preview":false,"file_access":"visible"}]}'
+  recorded_at: Sat, 19 Jul 2025 11:03:01 GMT
+recorded_with: VCR 6.3.1
