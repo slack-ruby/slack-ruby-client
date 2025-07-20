@@ -1,3 +1,7 @@
+### 2.7.1 (Next)
+
+* Your contribution here.
+
 ### 2.7.0 (2025/07/20)
 
 * [#554](https://github.com/slack-ruby/slack-ruby-client/pull/557): Require Faraday >= 2.0.1 - [@anrichvs](https://github.com/AnrichVS).
