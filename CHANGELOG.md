@@ -1,11 +1,10 @@
-### 2.6.1 (Next)
+### 2.7.0 (2025/07/20)
 
 * [#554](https://github.com/slack-ruby/slack-ruby-client/pull/557): Require Faraday >= 2.0.1 - [@anrichvs](https://github.com/AnrichVS).
 * [#559](https://github.com/slack-ruby/slack-ruby-client/pull/559): Enable name-to-id translation of non-public channels - [@eizengan](https://github.com/eizengan).
 * [#560](https://github.com/slack-ruby/slack-ruby-client/pull/560): Name-to-id translation can supply all sensible list options - [@eizengan](https://github.com/eizengan).
 * [#561](https://github.com/slack-ruby/slack-ruby-client/issues/563): Raise InvalidSignature when verifying a request without a signature - [@wesleyjellis](https://github.com/wesleyjellis).
 * [#567](https://github.com/slack-ruby/slack-ruby-client/pull/567): Add support for multiple files in `files_upload_v2` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 2.6.0 (2025/05/24)
 
