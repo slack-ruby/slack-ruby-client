@@ -77,6 +77,7 @@ require_relative 'endpoints/reactions'
 require_relative 'endpoints/reminders'
 require_relative 'endpoints/rtm'
 require_relative 'endpoints/search'
+require_relative 'endpoints/slackLists_items'
 require_relative 'endpoints/stars'
 require_relative 'endpoints/team'
 require_relative 'endpoints/team_billing'
@@ -93,6 +94,7 @@ require_relative 'endpoints/users_prefs'
 require_relative 'endpoints/users_profile'
 require_relative 'endpoints/views'
 require_relative 'endpoints/workflows'
+require_relative 'endpoints/workflows_featured'
 require_relative 'endpoints/workflows_triggers_permissions'
 
 module Slack
@@ -178,6 +180,7 @@ module Slack
         include Reminders
         include Rtm
         include Search
+        include SlackListsItems
         include Stars
         include Team
         include TeamBilling
@@ -194,6 +197,7 @@ module Slack
         include UsersProfile
         include Views
         include Workflows
+        include WorkflowsFeatured
         include WorkflowsTriggersPermissions
       end
     end

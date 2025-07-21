@@ -30,6 +30,7 @@ module Slack
         class AppRestrictedOrgWide < SlackError; end
         class ApprovalInactive < SlackError; end
         class ApprovalNotFound < SlackError; end
+        class ArchiveNotSupported < SlackError; end
         class AsUserNotSupported < SlackError; end
         class AtLeastOneSessionSettingRequired < SlackError; end
         class AttachmentPayloadLimitExceeded < SlackError; end
@@ -185,9 +186,11 @@ module Slack
         class ErrorBadUpload < SlackError; end
         class ErrorBadWide < SlackError; end
         class ErrorInvalidAlias < SlackError; end
+        class ErrorInvalidChannels < SlackError; end
         class ErrorInvalidEmojiToRename < SlackError; end
         class ErrorLowerCaseNamesOnly < SlackError; end
         class ErrorMissingName < SlackError; end
+        class ErrorModifyingWorkflows < SlackError; end
         class ErrorNameTaken < SlackError; end
         class ErrorNameTakenI18n < SlackError; end
         class ErrorNoImage < SlackError; end
@@ -409,6 +412,7 @@ module Slack
         class LegacyConnectionLimitExceeded < SlackError; end
         class LimitRequired < SlackError; end
         class LinkNotFound < SlackError; end
+        class ListNotFound < SlackError; end
         class ListRecordCommentFetchFailed < SlackError; end
         class MalwareDetected < SlackError; end
         class ManagedChannelNotSupported < SlackError; end
@@ -676,6 +680,7 @@ module Slack
         class UserEmailUnverified < SlackError; end
         class UserIsAlreadyDeleted < SlackError; end
         class UserIsBot < SlackError; end
+        class UserIsDeactivated < SlackError; end
         class UserIsNotAGuest < SlackError; end
         class UserIsRestricted < SlackError; end
         class UserIsUltraRestricted < SlackError; end
@@ -723,6 +728,7 @@ module Slack
           'app_restricted_org_wide' => AppRestrictedOrgWide,
           'approval_inactive' => ApprovalInactive,
           'approval_not_found' => ApprovalNotFound,
+          'archive_not_supported' => ArchiveNotSupported,
           'as_user_not_supported' => AsUserNotSupported,
           'at_least_one_session_setting_required' => AtLeastOneSessionSettingRequired,
           'attachment_payload_limit_exceeded' => AttachmentPayloadLimitExceeded,
@@ -878,9 +884,11 @@ module Slack
           'error_bad_upload' => ErrorBadUpload,
           'error_bad_wide' => ErrorBadWide,
           'error_invalid_alias' => ErrorInvalidAlias,
+          'error_invalid_channels' => ErrorInvalidChannels,
           'error_invalid_emoji_to_rename' => ErrorInvalidEmojiToRename,
           'error_lower_case_names_only' => ErrorLowerCaseNamesOnly,
           'error_missing_name' => ErrorMissingName,
+          'error_modifying_workflows' => ErrorModifyingWorkflows,
           'error_name_taken' => ErrorNameTaken,
           'error_name_taken_i18n' => ErrorNameTakenI18n,
           'error_no_image' => ErrorNoImage,
@@ -1102,6 +1110,7 @@ module Slack
           'legacy_connection_limit_exceeded' => LegacyConnectionLimitExceeded,
           'limit_required' => LimitRequired,
           'link_not_found' => LinkNotFound,
+          'list_not_found' => ListNotFound,
           'list_record_comment_fetch_failed' => ListRecordCommentFetchFailed,
           'malware_detected' => MalwareDetected,
           'managed_channel_not_supported' => ManagedChannelNotSupported,
@@ -1369,6 +1378,7 @@ module Slack
           'user_email_unverified' => UserEmailUnverified,
           'user_is_already_deleted' => UserIsAlreadyDeleted,
           'user_is_bot' => UserIsBot,
+          'user_is_deactivated' => UserIsDeactivated,
           'user_is_not_a_guest' => UserIsNotAGuest,
           'user_is_restricted' => UserIsRestricted,
           'user_is_ultra_restricted' => UserIsUltraRestricted,
