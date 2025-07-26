@@ -1,5 +1,7 @@
 ### 2.7.1 (Next)
 
+* [#568](https://github.com/slack-ruby/slack-ruby-client/pull/568): Redact Authorization header in response stored in the error - [@levenleven](https://github.com/levenleven).
+
 * Your contribution here.
 
 ### 2.7.0 (2025/07/20)

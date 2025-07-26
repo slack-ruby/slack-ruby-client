@@ -13,12 +13,39 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
   describe '#on_complete' do
     context 'with status of 429' do
       let(:status) { 429 }
-      let(:response) { OpenStruct.new(headers: { 'retry-after' => 10 }) }
+      let(:env) do
+        env = ::Faraday::Env.from({
+                                    request_headers: {
+                                      'Authorization' => 'Bearer very-secret-token-12345'
+                                    },
+                                    response_headers: {
+                                      'retry-after' => 10
+                                    },
+                                    status: status
+                                  })
+
+        env[:response] = ::Faraday::Response.new(env)
+        env
+      end
 
       it 'raises a TooManyRequestsError' do
         expect { raise_error_obj.on_complete(env) }.to(
           raise_error(Slack::Web::Api::Errors::TooManyRequestsError)
         )
+      end
+
+      it 'redacts Authorization token' do
+        error = nil
+        begin
+          raise_error_obj.on_complete(env)
+        rescue Slack::Web::Api::Errors::TooManyRequestsError => e
+          error = e
+        end
+
+        expect(error).not_to be_nil
+        expect(error.response.env[:request_headers]['Authorization']).to eq('[REDACTED]')
+        expect(error.inspect).not_to include('very-secret-token-12345')
+        expect(error.inspect).to include('[REDACTED]')
       end
     end
 
@@ -80,6 +107,53 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
             'already_in_channel,something_else_terrible'
           )
         )
+      end
+    end
+
+    context 'with SLACK_API_TOKEN in the request headers' do
+      let(:body) do
+        {
+          'ok' => false,
+          'error' => 'test_error'
+        }
+      end
+      let(:env) do
+        env = ::Faraday::Env.from({
+                                    response_body: body,
+                                    request_headers: {
+                                      'Authorization' => 'Bearer very-secret-token-12345',
+                                      'User-Agent' => 'Test Client'
+                                    },
+                                    status: status
+                                  })
+
+        env[:response] = ::Faraday::Response.new(env)
+        env
+      end
+
+      it 'redacts the Authorization header in the raised error' do
+        error = nil
+        begin
+          raise_error_obj.on_complete(env)
+        rescue Slack::Web::Api::Errors::SlackError => e
+          error = e
+        end
+
+        expect(error).not_to be_nil
+        expect(error.response.env[:request_headers]['Authorization']).to eq('[REDACTED]')
+        expect(error.inspect).not_to include('very-secret-token-12345')
+        expect(error.inspect).to include('[REDACTED]')
+      end
+
+      it 'preserves other headers' do
+        error = nil
+        begin
+          raise_error_obj.on_complete(env)
+        rescue Slack::Web::Api::Errors::SlackError => e
+          error = e
+        end
+
+        expect(error.response.env[:request_headers]['User-Agent']).to eq('Test Client')
       end
     end
   end
