@@ -2,6 +2,7 @@
 
 * [#568](https://github.com/slack-ruby/slack-ruby-client/pull/568): Redact Authorization header in response stored in the error - [@levenleven](https://github.com/levenleven).
 
+* [#515](https://github.com/slack-ruby/slack-ruby-client/pull/515): Compatibility with older servers that support #rewind - [@olleolleolle](https://github.com/olleolleolle).
 * Your contribution here.
 
 ### 2.7.0 (2025/07/20)
