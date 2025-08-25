@@ -18,7 +18,7 @@ jobs:
     name: test (ruby=${{ matrix.entry.ruby }}${{ matrix.entry.concurrency && ', concurrency=' }}${{ matrix.entry.concurrency }})
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set Concurrency
         run: |
           if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
