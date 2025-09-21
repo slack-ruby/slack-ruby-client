@@ -36,8 +36,8 @@ module Slack
         g.desc 'Update an app from an app manifest'
         g.long_desc %( Update an app from an app manifest )
         g.command 'update' do |c|
+          c.flag 'manifest', desc: 'A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one. As this method entirely _replaces_ any previous configuration, manifest must contain both unmodified and modified fields.'
           c.flag 'app_id', desc: 'The ID of the app whose configuration you want to update.'
-          c.flag 'manifest', desc: 'A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one. As this method entirely replaces any previous configuration, manifest must contain both unmodified and modified fields.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_manifest_update(options))
           end

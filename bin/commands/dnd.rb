@@ -25,8 +25,8 @@ module Slack
         g.desc "Retrieves a user's current Do Not Disturb status."
         g.long_desc %( Retrieves a user's current Do Not Disturb status. )
         g.command 'info' do |c|
-          c.flag 'team_id', desc: 'Encoded team id where passed in user param belongs, required if org token is used. If no user param is passed, then a team which has access to the app should be passed.'
           c.flag 'user', desc: 'User to fetch status for (defaults to current user).'
+          c.flag 'team_id', desc: 'Encoded team id where passed in user param belongs, required if org token is used. If no user param is passed, then a team which has access to the app should be passed.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.dnd_info(options))
           end

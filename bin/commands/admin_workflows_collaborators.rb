@@ -9,8 +9,8 @@ module Slack
         g.desc 'Add collaborators to workflows within the team or enterprise'
         g.long_desc %( Add collaborators to workflows within the team or enterprise )
         g.command 'add' do |c|
-          c.flag 'collaborator_ids', desc: 'Array of collaborators (encoded user IDs) to add; max 50.'
           c.flag 'workflow_ids', desc: 'Array of workflow IDs to edit; max 50.'
+          c.flag 'collaborator_ids', desc: 'Array of collaborators (encoded user IDs) to add; max 50.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_workflows_collaborators_add(options))
           end
@@ -19,8 +19,8 @@ module Slack
         g.desc 'Remove collaborators from workflows within the team or enterprise'
         g.long_desc %( Remove collaborators from workflows within the team or enterprise )
         g.command 'remove' do |c|
-          c.flag 'collaborator_ids', desc: 'Array of collaborators (encoded user IDs) to remove; max 50.'
           c.flag 'workflow_ids', desc: 'Array of workflow IDs to edit; max 50.'
+          c.flag 'collaborator_ids', desc: 'Array of collaborators (encoded user IDs) to remove; max 50.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_workflows_collaborators_remove(options))
           end

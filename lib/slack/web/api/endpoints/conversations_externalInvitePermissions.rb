@@ -9,18 +9,18 @@ module Slack
           #
           # Upgrade or downgrade Slack Connect channel permissions between 'can post only' and 'can post and invite'.
           #
-          # @option options [enum] :action
-          #   Type of action to be taken: upgrade or downgrade.
           # @option options [channel] :channel
           #   The channel ID to change external invite permissions for.
           # @option options [Object] :target_team
           #   The encoded team ID of the target team.  Must be in the specified channel.
+          # @option options [enum] :action
+          #   Type of action to be taken: upgrade or downgrade.
           # @see https://api.slack.com/methods/conversations.externalInvitePermissions.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations.externalInvitePermissions/conversations.externalInvitePermissions.set.json
           def conversations_externalInvitePermissions_set(options = {})
-            raise ArgumentError, 'Required arguments :action missing' if options[:action].nil?
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :target_team missing' if options[:target_team].nil?
+            raise ArgumentError, 'Required arguments :action missing' if options[:action].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('conversations.externalInvitePermissions.set', options)
           end

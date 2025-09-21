@@ -11,11 +11,11 @@ RSpec.describe Slack::Web::Api::Endpoints::CanvasesAccess do
     end
   end
   context 'canvases.access_set' do
-    it 'requires access_level' do
-      expect { client.canvases_access_set(canvas_id: %q[F1234ABCD]) }.to raise_error ArgumentError, /Required arguments :access_level missing/
-    end
     it 'requires canvas_id' do
       expect { client.canvases_access_set(access_level: %q[]) }.to raise_error ArgumentError, /Required arguments :canvas_id missing/
+    end
+    it 'requires access_level' do
+      expect { client.canvases_access_set(canvas_id: %q[F1234ABCD]) }.to raise_error ArgumentError, /Required arguments :access_level missing/
     end
   end
 end

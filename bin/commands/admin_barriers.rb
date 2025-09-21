@@ -9,8 +9,8 @@ module Slack
         g.desc 'Create an Information Barrier'
         g.long_desc %( Create an Information Barrier )
         g.command 'create' do |c|
-          c.flag 'barriered_from_usergroup_ids', desc: 'A list of IDP Groups ids that the primary usergroup is to be barriered from.'
           c.flag 'primary_usergroup_id', desc: 'The id of the primary IDP Group.'
+          c.flag 'barriered_from_usergroup_ids', desc: 'A list of IDP Groups ids that the primary usergroup is to be barriered from.'
           c.flag 'restricted_subjects', desc: 'What kind of interactions are blocked by this barrier? For v1, we only support a list of all 3, eg im, mpim, call.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_barriers_create(options))
@@ -29,8 +29,8 @@ module Slack
         g.desc 'Get all Information Barriers for your organization'
         g.long_desc %( Get all Information Barriers for your organization )
         g.command 'list' do |c|
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_barriers_list(options))
           end
@@ -40,8 +40,8 @@ module Slack
         g.long_desc %( Update an existing Information Barrier )
         g.command 'update' do |c|
           c.flag 'barrier_id', desc: "The ID of the barrier you're trying to modify."
-          c.flag 'barriered_from_usergroup_ids', desc: 'A list of IDP Groups ids that the primary usergroup is to be barriered from.'
           c.flag 'primary_usergroup_id', desc: 'The id of the primary IDP Group.'
+          c.flag 'barriered_from_usergroup_ids', desc: 'A list of IDP Groups ids that the primary usergroup is to be barriered from.'
           c.flag 'restricted_subjects', desc: 'What kind of interactions are blocked by this barrier? For v1, we only support a list of all 3, eg im, mpim, call.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_barriers_update(options))

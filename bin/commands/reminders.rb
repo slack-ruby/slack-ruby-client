@@ -11,9 +11,9 @@ module Slack
         g.command 'add' do |c|
           c.flag 'text', desc: 'The content of the reminder.'
           c.flag 'time', desc: 'Can also take a type of integer. When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday").'
-          c.flag 'recurrence', desc: 'Specify the repeating behavior of a reminder. Available options: daily, weekly, monthly, or yearly. If weekly, may further specify the days of the week.'
-          c.flag 'team_id', desc: 'Encoded team id, required if org token is used.'
           c.flag 'user', desc: 'No longer supported - reminders cannot be set for other users. Previously, was the user who would receive the reminder.'
+          c.flag 'team_id', desc: 'Encoded team id, required if org token is used.'
+          c.flag 'recurrence', desc: 'Specify the repeating behavior of a reminder. Available options: daily, weekly, monthly, or yearly. If weekly, may further specify the days of the week.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.reminders_add(options))
           end

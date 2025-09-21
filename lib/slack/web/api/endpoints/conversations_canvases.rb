@@ -10,7 +10,7 @@ module Slack
           # Create a channel canvas for a channel
           #
           # @option options [string] :channel_id
-          #   Channel ID of the channel we create the channel canvas for.
+          #   Channel ID of the channel the canvas will be tabbed in.
           # @option options [Object] :document_content
           #   Structure describing the type and value of the content to create.
           # @option options [string] :title

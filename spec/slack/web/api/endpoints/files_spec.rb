@@ -28,11 +28,11 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
   context 'files_getUploadURLExternal' do
-    it 'requires filename' do
-      expect { client.files_getUploadURLExternal(length: %q[53072]) }.to raise_error ArgumentError, /Required arguments :filename missing/
-    end
     it 'requires length' do
       expect { client.files_getUploadURLExternal(filename: %q[laughingoutloudcat.jpg]) }.to raise_error ArgumentError, /Required arguments :length missing/
+    end
+    it 'requires filename' do
+      expect { client.files_getUploadURLExternal(length: %q[53072]) }.to raise_error ArgumentError, /Required arguments :filename missing/
     end
   end
   context 'files_info' do

@@ -10,8 +10,8 @@ module Slack
         g.long_desc %( Delete external auth tokens only on the Slack side )
         g.command 'delete' do |c|
           c.flag 'app_id', desc: 'The id of the app whose tokens you want to delete.'
-          c.flag 'external_token_id', desc: 'The id of the token that you want to delete.'
           c.flag 'provider_key', desc: 'The provider key of the provider whose tokens you want to delete.'
+          c.flag 'external_token_id', desc: 'The id of the token that you want to delete.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_auth_external_delete(options))
           end

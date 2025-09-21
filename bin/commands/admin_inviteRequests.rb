@@ -9,8 +9,8 @@ module Slack
         g.desc 'Approve a workspace invite request.'
         g.long_desc %( Approve a workspace invite request. )
         g.command 'approve' do |c|
-          c.flag 'invite_request_id', desc: 'ID of the request to invite.'
           c.flag 'team_id', desc: 'ID for the workspace where the invite request was made.'
+          c.flag 'invite_request_id', desc: 'ID of the request to invite.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_inviteRequests_approve(options))
           end
@@ -19,8 +19,8 @@ module Slack
         g.desc 'Deny a workspace invite request.'
         g.long_desc %( Deny a workspace invite request. )
         g.command 'deny' do |c|
-          c.flag 'invite_request_id', desc: 'ID of the request to invite.'
           c.flag 'team_id', desc: 'ID for the workspace where the invite request was made.'
+          c.flag 'invite_request_id', desc: 'ID of the request to invite.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_inviteRequests_deny(options))
           end
@@ -29,9 +29,9 @@ module Slack
         g.desc 'List all pending workspace invite requests.'
         g.long_desc %( List all pending workspace invite requests. )
         g.command 'list' do |c|
+          c.flag 'team_id', desc: 'ID for the workspace where the invite requests were made.'
           c.flag 'cursor', desc: 'Value of the next_cursor field sent as part of the previous API response.'
           c.flag 'limit', desc: 'The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive.'
-          c.flag 'team_id', desc: 'ID for the workspace where the invite requests were made.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_inviteRequests_list(options))
           end

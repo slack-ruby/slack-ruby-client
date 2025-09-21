@@ -11,16 +11,16 @@ module Slack
           #
           # @option options [array] :files
           #   Array of file ids and their corresponding (optional) titles.
-          # @option options [blocks[] as string] :blocks
-          #   A JSON-based array of structured rich text blocks, presented as a URL-encoded string. If the initial_comment field is provided, the blocks field is ignored.
           # @option options [Object] :channel_id
           #   Channel ID where the file will be shared. If not specified the file will be private.
+          # @option options [string] :thread_ts
+          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead. Also make sure to provide only one channel when using 'thread_ts'.
           # @option options [string] :channels
           #   Comma-separated string of channel IDs where the file will be shared.
           # @option options [string] :initial_comment
           #   The message text introducing the file in specified channels.
-          # @option options [string] :thread_ts
-          #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead. Also make sure to provide only one channel when using 'thread_ts'.
+          # @option options [string] :blocks
+          #   A JSON-based array of structured rich text blocks, presented as a URL-encoded string. If the initial_comment field is provided, the blocks field is ignored.
           # @see https://api.slack.com/methods/files.completeUploadExternal
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.completeUploadExternal.json
           def files_completeUploadExternal(options = {})
@@ -61,29 +61,29 @@ module Slack
           #
           # Gets a URL for an edge external file upload
           #
-          # @option options [string] :filename
-          #   Name of the file being uploaded.
           # @option options [integer] :length
           #   Size in bytes of the file being uploaded.
-          # @option options [string] :alt_txt
-          #   Description of image for screen-reader.
+          # @option options [string] :filename
+          #   Name of the file being uploaded.
           # @option options [string] :snippet_type
           #   Syntax type of the snippet being uploaded.
+          # @option options [string] :alt_txt
+          #   Description of image for screen-reader.
           # @see https://api.slack.com/methods/files.getUploadURLExternal
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.getUploadURLExternal.json
           def files_getUploadURLExternal(options = {})
-            raise ArgumentError, 'Required arguments :filename missing' if options[:filename].nil?
             raise ArgumentError, 'Required arguments :length missing' if options[:length].nil?
+            raise ArgumentError, 'Required arguments :filename missing' if options[:filename].nil?
             post('files.getUploadURLExternal', options)
           end
 
           #
           # Gets information about a file.
           #
-          # @option options [file] :file
-          #   Specify a file by providing its ID.
           # @option options [string] :cursor
           #   Parameter for pagination. File comments are paginated for a single file. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See pagination for more details.
+          # @option options [file] :file
+          #   Specify a file by providing its ID.
           # @option options [integer] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @see https://api.slack.com/methods/files.info

@@ -9,22 +9,22 @@ module Slack
           #
           # Create a User Group.
           #
-          # @option options [string] :name
-          #   A name for the User Group. Must be unique among User Groups.
-          # @option options [array] :additional_channels
-          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [array] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
+          # @option options [array] :additional_channels
+          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [string] :description
           #   A short description of the User Group.
-          # @option options [boolean] :enable_section
-          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [boolean] :include_count
           #   Include the number of users in each User Group.
+          # @option options [string] :name
+          #   A name for the User Group. Must be unique among User Groups.
           # @option options [string] :team_id
           #   Encoded team id where the user group has to be created, required if org token is used.
+          # @option options [boolean] :enable_section
+          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @see https://api.slack.com/methods/usergroups.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.create.json
           def usergroups_create(options = {})
@@ -35,12 +35,12 @@ module Slack
           #
           # Disable an existing User Group.
           #
-          # @option options [Object] :usergroup
-          #   The encoded ID of the User Group to disable.
           # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
           # @option options [Object] :team_id
           #   Encoded target team id where the user group is, required if org token is used.
+          # @option options [Object] :usergroup
+          #   The encoded ID of the User Group to disable.
           # @see https://api.slack.com/methods/usergroups.disable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.disable.json
           def usergroups_disable(options = {})
@@ -51,12 +51,12 @@ module Slack
           #
           # Enable a User Group.
           #
-          # @option options [string] :usergroup
-          #   The encoded ID of the User Group to enable.
           # @option options [boolean] :include_count
           #   Include the number of users in the User Group.
           # @option options [string] :team_id
           #   Encoded team id where the user group is, required if org token is used.
+          # @option options [string] :usergroup
+          #   The encoded ID of the User Group to enable.
           # @see https://api.slack.com/methods/usergroups.enable
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.enable.json
           def usergroups_enable(options = {})
@@ -70,11 +70,11 @@ module Slack
           # @option options [boolean] :include_count
           #   Include the number of users in each User Group.
           # @option options [boolean] :include_disabled
-          #   Include disabled User Groups.
+          #   Include results for disabled User Groups.
           # @option options [boolean] :include_users
           #   Include the list of users for each User Group.
           # @option options [string] :team_id
-          #   encoded team id to list user groups in, required if org token is used.
+          #   The user group's encoded team ID. Required if org token is used.
           # @see https://api.slack.com/methods/usergroups.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.list.json
           def usergroups_list(options = {})
@@ -84,16 +84,12 @@ module Slack
           #
           # Update an existing User Group.
           #
-          # @option options [Object] :usergroup
-          #   The encoded ID of the User Group to update.
-          # @option options [array] :additional_channels
-          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [array] :channels
           #   A comma separated string of encoded channel IDs for which the User Group uses as a default.
+          # @option options [array] :additional_channels
+          #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
           # @option options [string] :description
           #   A short description of the User Group.
-          # @option options [boolean] :enable_section
-          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @option options [string] :handle
           #   A mention handle. Must be unique among channels, users and User Groups.
           # @option options [boolean] :include_count
@@ -102,6 +98,10 @@ module Slack
           #   A name for the User Group. Must be unique among User Groups.
           # @option options [Object] :team_id
           #   encoded team id where the user group exists, required if org token is used.
+          # @option options [Object] :usergroup
+          #   The encoded ID of the User Group to update.
+          # @option options [boolean] :enable_section
+          #   Configure this user group to show as a sidebar section for all group members. Note: Only relevant if group has 1 or more default channels added.
           # @see https://api.slack.com/methods/usergroups.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups/usergroups.update.json
           def usergroups_update(options = {})

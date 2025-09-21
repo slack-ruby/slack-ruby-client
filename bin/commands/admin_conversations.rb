@@ -36,8 +36,8 @@ module Slack
         g.desc 'Move public or private channels in bulk.'
         g.long_desc %( Move public or private channels in bulk. )
         g.command 'bulkMove' do |c|
-          c.flag 'channel_ids', desc: 'An array of channel IDs.'
           c.flag 'target_team_id', desc: 'Target team ID.'
+          c.flag 'channel_ids', desc: 'An array of channel IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_bulkMove(options))
           end
@@ -65,9 +65,9 @@ module Slack
         g.desc 'Create a public or private channel-based conversation.'
         g.long_desc %( Create a public or private channel-based conversation. )
         g.command 'create' do |c|
-          c.flag 'is_private', desc: 'When true, creates a private channel instead of a public channel.'
           c.flag 'name', desc: 'Name of the public or private channel to create.'
           c.flag 'description', desc: 'Description of the public or private channel to create.'
+          c.flag 'is_private', desc: 'When true, creates a private channel instead of a public channel.'
           c.flag 'org_wide', desc: 'When true, the channel will be available org-wide. Note: if the channel is not org_wide=true, you must specify a team_id for this channel.'
           c.flag 'team_id', desc: 'The workspace to create the channel in. Note: this argument is required unless you set org_wide=true.'
           c.action do |_global_options, options, _args|
@@ -99,7 +99,7 @@ module Slack
         g.long_desc %( Disconnect a connected channel from one or more workspaces. )
         g.command 'disconnectShared' do |c|
           c.flag 'channel_id', desc: 'The channel to be disconnected from some workspaces.'
-          c.flag 'leaving_team_ids', desc: 'team IDs getting removed from the channel, optional if there are only two teams in the channel.'
+          c.flag 'leaving_team_ids', desc: 'Used for disconnecting a team from a shared channel. Only one team ID may be passed at a time.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_disconnectShared(options))
           end
@@ -137,8 +137,8 @@ module Slack
         g.desc 'Invite a user to a public or private channel.'
         g.long_desc %( Invite a user to a public or private channel. )
         g.command 'invite' do |c|
-          c.flag 'channel_id', desc: 'The channel that the users will be invited to.'
           c.flag 'user_ids', desc: 'The users to invite.'
+          c.flag 'channel_id', desc: 'The channel that the users will be invited to.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_invite(options))
           end
@@ -158,11 +158,11 @@ module Slack
         g.desc 'Returns channels on the given team using the filters.'
         g.long_desc %( Returns channels on the given team using the filters. )
         g.command 'lookup' do |c|
-          c.flag 'last_message_activity_before', desc: 'Filter by public channels where the most recent message was sent before last_message_activity.'
           c.flag 'team_ids', desc: 'Array of team IDs to filter by.'
+          c.flag 'max_member_count', desc: 'Filter by public channels with member count equal to or less than the specified number.'
+          c.flag 'last_message_activity_before', desc: 'Filter by public channels where the most recent message was sent before last_message_activity.'
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned in the previous call, to fetch the next page.'
           c.flag 'limit', desc: 'Maximum number of results.'
-          c.flag 'max_member_count', desc: 'Filter by public channels with member count equal to or less than the specified number.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_lookup(options))
           end
@@ -181,7 +181,7 @@ module Slack
         g.long_desc %( Rename a public or private channel. )
         g.command 'rename' do |c|
           c.flag 'channel_id', desc: 'The channel to rename.'
-          c.flag 'name', desc: '.'
+          c.flag 'name', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_rename(options))
           end
@@ -190,14 +190,14 @@ module Slack
         g.desc 'Search for public or private channels in an Enterprise organization.'
         g.long_desc %( Search for public or private channels in an Enterprise organization. )
         g.command 'search' do |c|
-          c.flag 'connected_team_ids', desc: 'Array of encoded team IDs, signifying the external orgs to search through.'
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
-          c.flag 'limit', desc: 'Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.'
-          c.flag 'query', desc: 'Name of the the channel to query by.'
-          c.flag 'search_channel_types', desc: 'The type of channel to include or exclude in the search. For example private will search private channels, while private_exclude will exclude them. For a full list of types, check the Types section.'
-          c.flag 'sort', desc: 'Possible values are relevant (search ranking based on what we think is closest), name (alphabetical), member_count (number of users in the channel), and created (date channel was created). You can optionally pair this with the sort_dir arg to change how it is sorted.'
-          c.flag 'sort_dir', desc: 'Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).'
           c.flag 'team_ids', desc: 'Comma separated string of team IDs, signifying the internal workspaces to search through.'
+          c.flag 'connected_team_ids', desc: 'Array of encoded team IDs, signifying the external orgs to search through.'
+          c.flag 'query', desc: 'Name of the the channel to query by.'
+          c.flag 'limit', desc: 'Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+          c.flag 'search_channel_types', desc: 'The type of channel to include or exclude in the search. For example private will search private channels, while private_exclude will exclude them. For a full list of types, check the Types section.'
+          c.flag 'sort', desc: 'Possible values are relevant (search ranking based on what we think is closest), name (alphabetical), member_count (number of users in the channel), and created (date channel was created). You can optionally pair this with the sort_dir arg to change how it is sorted .'
+          c.flag 'sort_dir', desc: 'Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).'
           c.flag 'total_count_only', desc: 'Only return the total_count of channels. Omits channel data and allows access for admins without channel manager permissions.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_search(options))
@@ -224,13 +224,13 @@ module Slack
           end
         end
 
-        g.desc 'Set the workspaces in an Enterprise grid org that connect to a public or private channel.'
-        g.long_desc %( Set the workspaces in an Enterprise grid org that connect to a public or private channel. )
+        g.desc 'Set the workspaces in an Enterprise org that connect to a public or private channel.'
+        g.long_desc %( Set the workspaces in an Enterprise org that connect to a public or private channel. )
         g.command 'setTeams' do |c|
           c.flag 'channel_id', desc: 'The encoded channel_id to add or remove to workspaces.'
-          c.flag 'org_channel', desc: 'True if channel has to be converted to an org channel.'
-          c.flag 'target_team_ids', desc: 'A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.'
           c.flag 'team_id', desc: 'The workspace to which the channel belongs if the channel is a local workspace channel. Omit this argument if the channel is a cross-workspace or org-wide shared channel.'
+          c.flag 'target_team_ids', desc: 'A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.'
+          c.flag 'org_channel', desc: 'True if channel has to be converted to an org channel.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_setTeams(options))
           end

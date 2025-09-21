@@ -14,7 +14,6 @@ module Slack
           # @option options [array] :ids
           #   IDs of items to be deleted.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.bulkDelete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.bulkDelete.json
           def apps_datastore_bulkDelete(options = {})
@@ -31,7 +30,6 @@ module Slack
           # @option options [array] :ids
           #   items' ids.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.bulkGet
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.bulkGet.json
           def apps_datastore_bulkGet(options = {})
@@ -48,7 +46,6 @@ module Slack
           # @option options [array] :items
           #   attribute names and values of the items; limit of 25.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.bulkPut
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.bulkPut.json
           def apps_datastore_bulkPut(options = {})
@@ -62,14 +59,14 @@ module Slack
           #
           # @option options [string] :datastore
           #   Name of the datastore.
-          # @option options [Object] :app_id
-          #   Required if calling with user token.
           # @option options [string] :expression
-          #   A query filter expression https://api.slack.com/future/datastores.
+          #   A query filter expression.
           # @option options [object] :expression_attributes
           #   A map of attributes referenced in expression.
           # @option options [object] :expression_values
           #   A map of values referenced in expression.
+          # @option options [Object] :app_id
+          #   Required if calling with user token.
           # @see https://api.slack.com/methods/apps.datastore.count
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.count.json
           def apps_datastore_count(options = {})
@@ -85,7 +82,6 @@ module Slack
           # @option options [string] :id
           #   item id.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.delete.json
           def apps_datastore_delete(options = {})
@@ -102,7 +98,6 @@ module Slack
           # @option options [string] :id
           #   item id.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.get
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.get.json
           def apps_datastore_get(options = {})
@@ -119,7 +114,6 @@ module Slack
           # @option options [object] :item
           #   attribute names and values of the item.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.put
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.put.json
           def apps_datastore_put(options = {})
@@ -133,16 +127,16 @@ module Slack
           #
           # @option options [string] :datastore
           #   Name of the datastore.
-          # @option options [Object] :app_id
-          #   Required if calling with user token.
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [string] :expression
-          #   A query filter expression https://api.slack.com/future/datastores.
+          #   A query filter expression.
           # @option options [object] :expression_attributes
           #   A map of attributes referenced in expression.
           # @option options [object] :expression_values
           #   A map of values referenced in expression.
+          # @option options [Object] :app_id
+          #   Required if calling with user token.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit
           #   The maximum number of items to evaluate for a given request (not necessarily the number of matching items). If the given request dataset size exceeds 1 MB before reaching the limit, the returned item count will likely be less than the limit. In any case where there are more items available beyond an imposed limit, a next_cursor value will be provided for use in subsequent requests.
           # @see https://api.slack.com/methods/apps.datastore.query
@@ -166,7 +160,6 @@ module Slack
           # @option options [object] :item
           #   attribute names and values to be updated.
           # @option options [Object] :app_id
-          #   .
           # @see https://api.slack.com/methods/apps.datastore.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.datastore/apps.datastore.update.json
           def apps_datastore_update(options = {})

@@ -9,9 +9,9 @@ module Slack
         g.desc 'Add an allowlist of IDP groups for accessing a channel'
         g.long_desc %( Add an allowlist of IDP groups for accessing a channel )
         g.command 'addGroup' do |c|
-          c.flag 'channel_id', desc: 'The channel to link this group to.'
-          c.flag 'group_id', desc: 'The IDP Group ID to be an allowlist for the private channel.'
           c.flag 'team_id', desc: 'The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.'
+          c.flag 'group_id', desc: 'The IDP Group ID to be an allowlist for the private channel.'
+          c.flag 'channel_id', desc: 'The channel to link this group to.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_restrictAccess_addGroup(options))
           end
@@ -20,7 +20,7 @@ module Slack
         g.desc 'List all IDP Groups linked to a channel'
         g.long_desc %( List all IDP Groups linked to a channel )
         g.command 'listGroups' do |c|
-          c.flag 'channel_id', desc: '.'
+          c.flag 'channel_id', desc: ''
           c.flag 'team_id', desc: 'The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_restrictAccess_listGroups(options))
@@ -30,9 +30,9 @@ module Slack
         g.desc 'Remove a linked IDP group linked from a private channel'
         g.long_desc %( Remove a linked IDP group linked from a private channel )
         g.command 'removeGroup' do |c|
-          c.flag 'channel_id', desc: 'The channel to remove the linked group from.'
-          c.flag 'group_id', desc: 'The IDP Group ID to remove from the private channel.'
           c.flag 'team_id', desc: 'The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.'
+          c.flag 'group_id', desc: 'The IDP Group ID to remove from the private channel.'
+          c.flag 'channel_id', desc: 'The channel to remove the linked group from.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_restrictAccess_removeGroup(options))
           end

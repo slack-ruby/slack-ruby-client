@@ -11,7 +11,7 @@ module Slack
         g.command 'bulkDelete' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'ids', desc: 'IDs of items to be deleted.'
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_bulkDelete(options))
           end
@@ -22,7 +22,7 @@ module Slack
         g.command 'bulkGet' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'ids', desc: "items' ids."
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_bulkGet(options))
           end
@@ -33,7 +33,7 @@ module Slack
         g.command 'bulkPut' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'items', desc: 'attribute names and values of the items; limit of 25.'
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_bulkPut(options))
           end
@@ -43,10 +43,10 @@ module Slack
         g.long_desc %( Count the number of items in a datastore that match a query )
         g.command 'count' do |c|
           c.flag 'datastore', desc: 'Name of the datastore.'
-          c.flag 'app_id', desc: 'Required if calling with user token.'
-          c.flag 'expression', desc: 'A query filter expression https://api.slack.com/future/datastores.'
+          c.flag 'expression', desc: 'A query filter expression.'
           c.flag 'expression_attributes', desc: 'A map of attributes referenced in expression.'
           c.flag 'expression_values', desc: 'A map of values referenced in expression.'
+          c.flag 'app_id', desc: 'Required if calling with user token.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_count(options))
           end
@@ -57,7 +57,7 @@ module Slack
         g.command 'delete' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'id', desc: 'item id.'
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_delete(options))
           end
@@ -68,7 +68,7 @@ module Slack
         g.command 'get' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'id', desc: 'item id.'
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_get(options))
           end
@@ -79,7 +79,7 @@ module Slack
         g.command 'put' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'item', desc: 'attribute names and values of the item.'
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_put(options))
           end
@@ -89,11 +89,11 @@ module Slack
         g.long_desc %( Query a datastore for items )
         g.command 'query' do |c|
           c.flag 'datastore', desc: 'Name of the datastore.'
-          c.flag 'app_id', desc: 'Required if calling with user token.'
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
-          c.flag 'expression', desc: 'A query filter expression https://api.slack.com/future/datastores.'
+          c.flag 'expression', desc: 'A query filter expression.'
           c.flag 'expression_attributes', desc: 'A map of attributes referenced in expression.'
           c.flag 'expression_values', desc: 'A map of values referenced in expression.'
+          c.flag 'app_id', desc: 'Required if calling with user token.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'limit', desc: 'The maximum number of items to evaluate for a given request (not necessarily the number of matching items). If the given request dataset size exceeds 1 MB before reaching the limit, the returned item count will likely be less than the limit. In any case where there are more items available beyond an imposed limit, a next_cursor value will be provided for use in subsequent requests.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_query(options))
@@ -105,7 +105,7 @@ module Slack
         g.command 'update' do |c|
           c.flag 'datastore', desc: 'name of the datastore.'
           c.flag 'item', desc: 'attribute names and values to be updated.'
-          c.flag 'app_id', desc: '.'
+          c.flag 'app_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_datastore_update(options))
           end

@@ -9,34 +9,34 @@ module Slack
           #
           # Search workflows within the team or enterprise
           #
+          # @option options [string] :query
+          #   A search query to filter for workflow name or description.
           # @option options [Object] :app_id
           #   The parent app ID for which to return workflows.
-          # @option options [array] :collaborator_ids
-          #   Only include workflows where all of the provided user IDs are a manager/collaborator of that workflow.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [boolean] :is_sales_elevate
-          #   Filter workflows by their Sales Elevate status.
           # @option options [integer] :limit
           #   The number of results that will be returned by the API on each invocation.
           # @option options [boolean] :no_collaborators
           #   Only include workflows with no collaborators in the result; default is false.
+          # @option options [array] :collaborator_ids
+          #   Only include workflows where all of the provided user IDs are a manager/collaborator of that workflow.
           # @option options [integer] :num_trigger_ids
           #   Number of trigger IDs to fetch for each workflow; default is 10.
-          # @option options [enum] :publish_status
-          #   Filter workflows by their published status.
-          # @option options [string] :query
-          #   A search query to filter for workflow name or description.
+          # @option options [boolean] :is_sales_elevate
+          #   Filter workflows by their Sales Elevate status.
+          # @option options [enum] :source
+          #   Source of workflow creation, either from code or workflow builder.
           # @option options [enum] :sort
           #   The field used to sort the returned workflows.
           # @option options [enum] :sort_dir
           #   Sort direction. Possible values are asc for ascending order like (1, 2, 3) or (a, b, c), and desc for descending order like (3, 2, 1) or (c, b, a).
-          # @option options [enum] :source
-          #   Source of workflow creation, either from code or workflow builder.
-          # @option options [array] :step_function_ids
-          #   Only include workflows that use all of the provided step function ids.
           # @option options [string] :trigger_type_id
           #   Only include workflows with this trigger type.
+          # @option options [enum] :publish_status
+          #   Filter workflows by their published status.
+          # @option options [array] :step_function_ids
+          #   Only include workflows that use all of the provided step function ids.
           # @see https://api.slack.com/methods/admin.workflows.search
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.workflows/admin.workflows.search.json
           def admin_workflows_search(options = {})

@@ -10,12 +10,12 @@ module Slack
         g.long_desc %( Registers a new Call. )
         g.command 'add' do |c|
           c.flag 'external_unique_id', desc: 'An ID supplied by the 3rd-party Call provider. It must be unique across all Calls from that service.'
-          c.flag 'join_url', desc: 'The URL required for a client to join the Call.'
-          c.flag 'created_by', desc: 'The valid Slack user ID of the user who created this Call. When this method is called with a user token, the created_by field is optional and defaults to the authed user of the token. Otherwise, the field is required.'
-          c.flag 'date_start', desc: 'Unix timestamp of the call start time.'
-          c.flag 'desktop_app_join_url', desc: 'When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL.'
           c.flag 'external_display_id', desc: 'An optional, human-readable ID supplied by the 3rd-party Call provider. If supplied, this ID will be displayed in the Call object.'
+          c.flag 'join_url', desc: 'The URL required for a client to join the Call.'
+          c.flag 'desktop_app_join_url', desc: 'When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL.'
+          c.flag 'date_start', desc: 'Unix timestamp of the call start time.'
           c.flag 'title', desc: 'The name of the Call.'
+          c.flag 'created_by', desc: 'The valid Slack user ID of the user who created this Call. When this method is called with a user token, the created_by field is optional and defaults to the authed user of the token. Otherwise, the field is required.'
           c.flag 'users', desc: 'The list of users to register as participants in the Call. Read more on how to specify users here.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.calls_add(options))
@@ -45,9 +45,9 @@ module Slack
         g.long_desc %( Updates information about a Call. )
         g.command 'update' do |c|
           c.flag 'id', desc: 'id returned by the calls.add method.'
-          c.flag 'desktop_app_join_url', desc: 'When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL.'
-          c.flag 'join_url', desc: 'The URL required for a client to join the Call.'
           c.flag 'title', desc: 'The name of the Call.'
+          c.flag 'join_url', desc: 'The URL required for a client to join the Call.'
+          c.flag 'desktop_app_join_url', desc: 'When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.calls_update(options))
           end

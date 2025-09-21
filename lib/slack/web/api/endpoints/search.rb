@@ -9,10 +9,10 @@ module Slack
           #
           # Searches for messages and files matching a query.
           #
-          # @option options [string] :query
-          #   Search query. May contains booleans, etc.
           # @option options [boolean] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
+          # @option options [string] :query
+          #   Search query. May contains booleans, etc.
           # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
           # @option options [enum] :sort_dir
@@ -29,10 +29,10 @@ module Slack
           #
           # Searches for files matching a query.
           #
-          # @option options [string] :query
-          #   Search query.
           # @option options [boolean] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
+          # @option options [string] :query
+          #   Search query.
           # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
           # @option options [enum] :sort_dir
@@ -49,12 +49,12 @@ module Slack
           #
           # Searches for messages matching a query.
           #
-          # @option options [string] :query
-          #   Search query.
-          # @option options [string] :cursor
-          #   Use this when getting results with cursormark pagination. For first call send * for subsequent calls, send the value of next_cursor returned in the previous call's results.
           # @option options [boolean] :highlight
           #   Pass a value of true to enable query highlight markers (see below).
+          # @option options [string] :cursor
+          #   Use this when getting results with cursormark pagination. For first call send * for subsequent calls, send the value of next_cursor returned in the previous call's results.
+          # @option options [string] :query
+          #   Search query.
           # @option options [string] :sort
           #   Return matches sorted by either score or timestamp.
           # @option options [enum] :sort_dir

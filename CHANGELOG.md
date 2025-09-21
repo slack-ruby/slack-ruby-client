@@ -2,6 +2,7 @@
 
 * [#568](https://github.com/slack-ruby/slack-ruby-client/pull/568): Redact Authorization header in response stored in the error - [@levenleven](https://github.com/levenleven).
 
+* [#558](https://github.com/slack-ruby/slack-ruby-client/pull/558): Update API from [slack-api-ref@c408935](https://github.com/slack-ruby/slack-api-ref/commit/c408935) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 2.7.0 (2025/07/20)

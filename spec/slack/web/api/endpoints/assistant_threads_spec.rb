@@ -7,24 +7,24 @@ RSpec.describe Slack::Web::Api::Endpoints::AssistantThreads do
   let(:client) { Slack::Web::Client.new }
   context 'assistant.threads_setStatus' do
     it 'requires channel_id' do
-      expect { client.assistant_threads_setStatus(status: %q[], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
-    end
-    it 'requires status' do
-      expect { client.assistant_threads_setStatus(channel_id: %q[C1234567890], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :status missing/
+      expect { client.assistant_threads_setStatus(thread_ts: %q[], status: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires thread_ts' do
-      expect { client.assistant_threads_setStatus(channel_id: %q[C1234567890], status: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+      expect { client.assistant_threads_setStatus(channel_id: %q[], status: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+    end
+    it 'requires status' do
+      expect { client.assistant_threads_setStatus(channel_id: %q[], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :status missing/
     end
   end
   context 'assistant.threads_setSuggestedPrompts' do
     it 'requires channel_id' do
-      expect { client.assistant_threads_setSuggestedPrompts(prompts: %q[], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
-    end
-    it 'requires prompts' do
-      expect { client.assistant_threads_setSuggestedPrompts(channel_id: %q[C1234567890], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :prompts missing/
+      expect { client.assistant_threads_setSuggestedPrompts(thread_ts: %q[], prompts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires thread_ts' do
-      expect { client.assistant_threads_setSuggestedPrompts(channel_id: %q[C1234567890], prompts: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+      expect { client.assistant_threads_setSuggestedPrompts(channel_id: %q[], prompts: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+    end
+    it 'requires prompts' do
+      expect { client.assistant_threads_setSuggestedPrompts(channel_id: %q[], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :prompts missing/
     end
   end
   context 'assistant.threads_setTitle' do
@@ -32,10 +32,10 @@ RSpec.describe Slack::Web::Api::Endpoints::AssistantThreads do
       expect { client.assistant_threads_setTitle(thread_ts: %q[], title: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires thread_ts' do
-      expect { client.assistant_threads_setTitle(channel_id: %q[C1234567890], title: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+      expect { client.assistant_threads_setTitle(channel_id: %q[], title: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
     end
     it 'requires title' do
-      expect { client.assistant_threads_setTitle(channel_id: %q[C1234567890], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :title missing/
+      expect { client.assistant_threads_setTitle(channel_id: %q[], thread_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :title missing/
     end
   end
 end

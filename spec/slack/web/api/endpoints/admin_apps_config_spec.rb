@@ -5,11 +5,6 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::AdminAppsConfig do
   let(:client) { Slack::Web::Client.new }
-  context 'admin.apps.config_lookup' do
-    it 'requires app_ids' do
-      expect { client.admin_apps_config_lookup }.to raise_error ArgumentError, /Required arguments :app_ids missing/
-    end
-  end
   context 'admin.apps.config_set' do
     it 'requires app_id' do
       expect { client.admin_apps_config_set }.to raise_error ArgumentError, /Required arguments :app_id missing/

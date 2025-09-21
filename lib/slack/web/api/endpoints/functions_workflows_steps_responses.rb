@@ -9,14 +9,14 @@ module Slack
           #
           # Download form responses of a workflow
           #
-          # @option options [string] :step_id
-          #   The ID of the OpenForm step to export.
+          # @option options [string] :workflow_id
+          #   The workflow ID, starts with Wf*.
           # @option options [string] :workflow
           #   The workflow encoded ID or workflow reference.
           # @option options [string] :workflow_app_id
           #   The app tied to the workflow reference.
-          # @option options [string] :workflow_id
-          #   The workflow ID, starts with Wf*.
+          # @option options [string] :step_id
+          #   The ID of the OpenForm step to export.
           # @see https://api.slack.com/methods/functions.workflows.steps.responses.export
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/functions.workflows.steps.responses/functions.workflows.steps.responses.export.json
           def functions_workflows_steps_responses_export(options = {})

@@ -10,9 +10,9 @@ module Slack
         g.long_desc %( List all disconnected channels—i.e., channels that were once connected to other workspaces and then disconnected—and the corresponding original channel IDs for key revocation with EKM. )
         g.command 'listOriginalConnectedChannelInfo' do |c|
           c.flag 'channel_ids', desc: 'A comma-separated list of channels to filter to.'
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
-          c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
           c.flag 'team_ids', desc: 'A comma-separated list of the workspaces to which the channels you would like returned belong.'
+          c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_conversations_ekm_listOriginalConnectedChannelInfo(options))
           end

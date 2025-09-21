@@ -9,15 +9,15 @@ module Slack
           #
           # Signal that a function failed to complete
           #
-          # @option options [string] :error
-          #   A human-readable error message that contains information about why the function failed to complete.
           # @option options [string] :function_execution_id
           #   Context identifier that maps to the executed function.
+          # @option options [string] :error
+          #   A human-readable error message that contains information about why the function failed to complete.
           # @see https://api.slack.com/methods/functions.completeError
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/functions/functions.completeError.json
           def functions_completeError(options = {})
-            raise ArgumentError, 'Required arguments :error missing' if options[:error].nil?
             raise ArgumentError, 'Required arguments :function_execution_id missing' if options[:function_execution_id].nil?
+            raise ArgumentError, 'Required arguments :error missing' if options[:error].nil?
             post('functions.completeError', options)
           end
 

@@ -24,20 +24,20 @@ module Slack
           #
           # Add an emoji alias.
           #
-          # @option options [string] :alias_for
-          #   Name of the emoji for which the alias is being made. Any wrapping whitespace or colons will be automatically trimmed.
           # @option options [string] :name
           #   The new alias for the specified emoji. Any wrapping whitespace or colons will be automatically trimmed.
+          # @option options [string] :alias_for
+          #   Name of the emoji for which the alias is being made. Any wrapping whitespace or colons will be automatically trimmed.
           # @see https://api.slack.com/methods/admin.emoji.addAlias
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.addAlias.json
           def admin_emoji_addAlias(options = {})
-            raise ArgumentError, 'Required arguments :alias_for missing' if options[:alias_for].nil?
             raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
+            raise ArgumentError, 'Required arguments :alias_for missing' if options[:alias_for].nil?
             post('admin.emoji.addAlias', options)
           end
 
           #
-          # List emoji for an Enterprise Grid organization.
+          # List emoji for an Enterprise organization.
           #
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
@@ -56,7 +56,7 @@ module Slack
           end
 
           #
-          # Remove an emoji across an Enterprise Grid organization
+          # Remove an emoji across an Enterprise organization
           #
           # @option options [string] :name
           #   The name of the emoji to be removed. Colons (:myemoji:) around the value are not required, although they may be included.

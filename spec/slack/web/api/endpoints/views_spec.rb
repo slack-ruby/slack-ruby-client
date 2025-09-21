@@ -21,8 +21,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       expect { client.views_open(trigger_id: %q[12345.98765.abcd2358fdea], interactivity_pointer: %q[12345.98765.abcd2358fdea], view: %q[]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.open', {view: %q[{"data":["data"]}], trigger_id: %q[12345.98765.abcd2358fdea]})
-      client.views_open(view: {:data=>["data"]}, trigger_id: %q[12345.98765.abcd2358fdea])
+      expect(client).to receive(:post).with('views.open', {trigger_id: %q[12345.98765.abcd2358fdea], view: %q[{"data":["data"]}]})
+      client.views_open(trigger_id: %q[12345.98765.abcd2358fdea], view: {:data=>["data"]})
     end
   end
   context 'views_publish' do
@@ -53,8 +53,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       expect { client.views_push(trigger_id: %q[12345.98765.abcd2358fdea], interactivity_pointer: %q[12345.98765.abcd2358fdea], view: %q[]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.push', {view: %q[{"data":["data"]}], trigger_id: %q[12345.98765.abcd2358fdea]})
-      client.views_push(view: {:data=>["data"]}, trigger_id: %q[12345.98765.abcd2358fdea])
+      expect(client).to receive(:post).with('views.push', {trigger_id: %q[12345.98765.abcd2358fdea], view: %q[{"data":["data"]}]})
+      client.views_push(trigger_id: %q[12345.98765.abcd2358fdea], view: {:data=>["data"]})
     end
   end
   context 'views_update' do
@@ -73,8 +73,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
       expect { client.views_update(external_id: %q[bmarley_view2], view_id: %q[VMM512F2U], view: %q[]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes view as json' do
-      expect(client).to receive(:post).with('views.update', {view: %q[{"data":["data"]}], external_id: %q[bmarley_view2]})
-      client.views_update(view: {:data=>["data"]}, external_id: %q[bmarley_view2])
+      expect(client).to receive(:post).with('views.update', {external_id: %q[bmarley_view2], view: %q[{"data":["data"]}]})
+      client.views_update(external_id: %q[bmarley_view2], view: {:data=>["data"]})
     end
   end
 end

@@ -9,12 +9,12 @@ module Slack
           #
           # List all approved workspace invite requests.
           #
+          # @option options [string] :team_id
+          #   ID for the workspace where the invite requests were made.
           # @option options [string] :cursor
           #   Value of the next_cursor field sent as part of the previous API response.
           # @option options [integer] :limit
           #   The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive.
-          # @option options [string] :team_id
-          #   ID for the workspace where the invite requests were made.
           # @see https://api.slack.com/methods/admin.inviteRequests.approved.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.inviteRequests.approved/admin.inviteRequests.approved.list.json
           def admin_inviteRequests_approved_list(options = {})

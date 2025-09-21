@@ -16,15 +16,31 @@ module Slack
           # @option options [array] :channel_types
           #   Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.
           # @option options [array] :content_types
-          #   Content types to include, a comma-separated list of any combination of messages, files.
+          #   Content types to include, a comma-separated list of any combination of messages, files, channels, users.
+          # @option options [boolean] :include_bots
+          #   If you want the results to include bots.
+          # @option options [integer] :before
+          #   UNIX timestamp filter. If present, filters for results before this date.
+          # @option options [integer] :after
+          #   UNIX timestamp filter. If present, filters for results after this date.
+          # @option options [boolean] :include_context_messages
+          #   Whether to include context messages surrounding the main message result. Defaults to false if unspecified.
           # @option options [Object] :context_channel_id
           #   Context channel ID to support scoping the search when applicable.
           # @option options [string] :cursor
           #   The cursor returned by the API. Leave this blank for the first request, and use this to get the next page of results.
-          # @option options [boolean] :include_bots
-          #   If you want the results to include bots.
           # @option options [integer] :limit
           #   Number of results to return, up to a max of 20. Defaults to 20.
+          # @option options [enum] :sort
+          #   The field to sort the results by. Defaults to score. Can be one of: score, timestamp.
+          # @option options [enum] :sort_dir
+          #   The direction to sort the results by. Defaults to desc.
+          # @option options [boolean] :include_message_blocks
+          #   Whether to return the message blocks in the response.
+          # @option options [boolean] :highlight
+          #   Whether to highlight the search query in the results. Defaults to false if unspecified.
+          # @option options [array] :term_clauses
+          #   A list of term clauses. A term clause is a string with search terms. Search results returned will match every term clause specified (i.e. conjunctive normal form).
           # @see https://api.slack.com/methods/assistant.search.context
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/assistant.search/assistant.search.context.json
           def assistant_search_context(options = {})
@@ -36,6 +52,15 @@ module Slack
             else
               post('assistant.search.context', options)
             end
+          end
+
+          #
+          # Returns search capabilities on a given team.
+          #
+          # @see https://api.slack.com/methods/assistant.search.info
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/assistant.search/assistant.search.info.json
+          def assistant_search_info(options = {})
+            post('assistant.search.info', options)
           end
         end
       end

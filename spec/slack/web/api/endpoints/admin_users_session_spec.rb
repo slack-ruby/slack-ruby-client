@@ -16,8 +16,11 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsersSession do
     end
   end
   context 'admin.users.session_invalidate' do
+    it 'requires user_id' do
+      expect { client.admin_users_session_invalidate(session_id: %q[12345]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
+    end
     it 'requires session_id' do
-      expect { client.admin_users_session_invalidate }.to raise_error ArgumentError, /Required arguments :session_id missing/
+      expect { client.admin_users_session_invalidate(user_id: %q[U12345]) }.to raise_error ArgumentError, /Required arguments :session_id missing/
     end
   end
   context 'admin.users.session_reset' do

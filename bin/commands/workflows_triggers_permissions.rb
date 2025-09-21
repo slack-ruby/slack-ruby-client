@@ -10,10 +10,10 @@ module Slack
         g.long_desc %( Allows users to run a trigger that has its permission type set to named_entities )
         g.command 'add' do |c|
           c.flag 'trigger_id', desc: 'Encoded ID of the trigger.'
-          c.flag 'channel_ids', desc: 'List of encoded channel IDs.'
-          c.flag 'org_ids', desc: 'List of encoded organization IDs.'
-          c.flag 'team_ids', desc: 'List of encoded workspace IDs.'
           c.flag 'user_ids', desc: 'List of encoded user IDs.'
+          c.flag 'channel_ids', desc: 'List of encoded channel IDs.'
+          c.flag 'team_ids', desc: 'List of encoded workspace IDs.'
+          c.flag 'org_ids', desc: 'List of encoded organization IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.workflows_triggers_permissions_add(options))
           end
@@ -32,10 +32,10 @@ module Slack
         g.long_desc %( Revoke an entity's access to a trigger that has its permission type set to named_entities )
         g.command 'remove' do |c|
           c.flag 'trigger_id', desc: 'Encoded ID of the trigger.'
-          c.flag 'channel_ids', desc: 'List of encoded channel IDs.'
-          c.flag 'org_ids', desc: 'List of encoded organization IDs.'
-          c.flag 'team_ids', desc: 'List of encoded workspace IDs.'
           c.flag 'user_ids', desc: 'List of encoded user IDs.'
+          c.flag 'channel_ids', desc: 'List of encoded channel IDs.'
+          c.flag 'team_ids', desc: 'List of encoded workspace IDs.'
+          c.flag 'org_ids', desc: 'List of encoded organization IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.workflows_triggers_permissions_remove(options))
           end
@@ -44,12 +44,12 @@ module Slack
         g.desc 'Set the permission type for who can run a trigger'
         g.long_desc %( Set the permission type for who can run a trigger )
         g.command 'set' do |c|
-          c.flag 'permission_type', desc: 'The type of permission that defines who can run a trigger.'
           c.flag 'trigger_id', desc: 'Encoded ID of the trigger.'
-          c.flag 'channel_ids', desc: 'List of encoded channel IDs.'
-          c.flag 'org_ids', desc: 'List of encoded organization IDs.'
-          c.flag 'team_ids', desc: 'List of encoded workspace IDs.'
+          c.flag 'permission_type', desc: 'The type of permission that defines who can run a trigger.'
           c.flag 'user_ids', desc: 'List of encoded user IDs.'
+          c.flag 'channel_ids', desc: 'List of encoded channel IDs.'
+          c.flag 'team_ids', desc: 'List of encoded workspace IDs.'
+          c.flag 'org_ids', desc: 'List of encoded organization IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.workflows_triggers_permissions_set(options))
           end

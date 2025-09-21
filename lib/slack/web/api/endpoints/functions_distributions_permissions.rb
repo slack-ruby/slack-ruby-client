@@ -9,12 +9,12 @@ module Slack
           #
           # Grant users access to a custom slack function if its permission_type is set to named_entities
           #
-          # @option options [string] :function_app_id
-          #   The encoded ID of the app.
-          # @option options [string] :function_callback_id
-          #   The callback ID defined in the function's definition file.
           # @option options [string] :function_id
           #   The encoded ID of the function.
+          # @option options [string] :function_callback_id
+          #   The callback ID defined in the function's definition file.
+          # @option options [string] :function_app_id
+          #   The encoded ID of the app.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
           # @see https://api.slack.com/methods/functions.distributions.permissions.add
@@ -24,14 +24,14 @@ module Slack
           end
 
           #
-          # List the access type of a custom slack function and include the users or team or org ids with access if its permission_type is set to named_entities
+          # List the access type of a custom slack function and include the users, team or org ids with access if its permission_type is set to named_entities
           #
-          # @option options [string] :function_app_id
-          #   The encoded ID of the app.
-          # @option options [string] :function_callback_id
-          #   The callback ID defined in the function's definition file.
           # @option options [string] :function_id
           #   The encoded ID of the function.
+          # @option options [string] :function_callback_id
+          #   The callback ID defined in the function's definition file.
+          # @option options [string] :function_app_id
+          #   The encoded ID of the app.
           # @see https://api.slack.com/methods/functions.distributions.permissions.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/functions.distributions.permissions/functions.distributions.permissions.list.json
           def functions_distributions_permissions_list(options = {})
@@ -41,12 +41,12 @@ module Slack
           #
           # Revoke user access to a custom slack function if permission_type set to named_entities
           #
-          # @option options [string] :function_app_id
-          #   The encoded ID of the app.
-          # @option options [string] :function_callback_id
-          #   The callback ID defined in the function's definition file.
           # @option options [string] :function_id
           #   The encoded ID of the function.
+          # @option options [string] :function_callback_id
+          #   The callback ID defined in the function's definition file.
+          # @option options [string] :function_app_id
+          #   The encoded ID of the app.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
           # @see https://api.slack.com/methods/functions.distributions.permissions.remove
@@ -56,22 +56,22 @@ module Slack
           end
 
           #
-          # Set the access type of a custom slack function and define the users or team or org ids to be granted access if permission_type is set to named_entities
+          # Set the access type of a custom slack function and define the users, team or org ids to be granted access if permission_type is set to named_entities
           #
-          # @option options [enum] :permission_type
-          #   The type of permission that defines how the function can be distributed.
-          # @option options [string] :function_app_id
-          #   The encoded ID of the app.
-          # @option options [string] :function_callback_id
-          #   The callback ID defined in the function's definition file.
           # @option options [string] :function_id
           #   The encoded ID of the function.
-          # @option options [array] :org_ids
-          #   List of org IDs to allow for named_entities permission.
-          # @option options [array] :team_ids
-          #   List of team IDs to allow for named_entities permission.
+          # @option options [string] :function_callback_id
+          #   The callback ID defined in the function's definition file.
+          # @option options [string] :function_app_id
+          #   The encoded ID of the app.
+          # @option options [enum] :permission_type
+          #   The type of permission that defines how the function can be distributed.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
+          # @option options [array] :team_ids
+          #   List of team IDs to allow for named_entities permission.
+          # @option options [array] :org_ids
+          #   List of org IDs to allow for named_entities permission.
           # @see https://api.slack.com/methods/functions.distributions.permissions.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/functions.distributions.permissions/functions.distributions.permissions.set.json
           def functions_distributions_permissions_set(options = {})

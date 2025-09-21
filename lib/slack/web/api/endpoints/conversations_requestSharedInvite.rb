@@ -11,10 +11,10 @@ module Slack
           #
           # @option options [Object] :invite_id
           #   ID of the requested shared channel invite to approve.
-          # @option options [string] :channel_id
-          #   Optional channel_id to which external user will be invited to. Will override the value on the requested invite.
           # @option options [boolean] :is_external_limited
           #   Optional boolean on whether the invited team will have post-only permissions in the channel. Will override the value on the requested invite.
+          # @option options [string] :channel_id
+          #   Optional channel_id to which external user will be invited to. Will override the value on the requested invite.
           # @option options [object] :message
           #   Object describing the text to send along with the invite. If this object is specified, both text and is_override are required properties. If is_override is set to true, text will override the original invitation message. Otherwise, text will be appended to the original invitation message. The total length of the message cannot exceed 560 characters. If is_override is set to false, the length of text and the user specified message on the invite request in total must be less than 560 characters.
           # @see https://api.slack.com/methods/conversations.requestSharedInvite.approve
@@ -41,20 +41,20 @@ module Slack
           #
           # Lists requests to add external users to channels with ability to filter.
           #
-          # @option options [string] :cursor
-          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. See pagination for more detail.
+          # @option options [Object] :user_id
+          #   Optional filter to return invitation requests for the inviting user.
+          # @option options [boolean] :include_expired
+          #   When true expired invitation requests will be returned, otherwise they will be excluded.
           # @option options [boolean] :include_approved
           #   When true approved invitation requests will be returned, otherwise they will be excluded.
           # @option options [boolean] :include_denied
           #   When true denied invitation requests will be returned, otherwise they will be excluded.
-          # @option options [boolean] :include_expired
-          #   When true expired invitation requests will be returned, otherwise they will be excluded.
           # @option options [array] :invite_ids
           #   An optional list of invitation ids to look up.
           # @option options [integer] :limit
           #   The number of items to return. Must be between 1 - 1000 (inclusive).
-          # @option options [Object] :user_id
-          #   Optional filter to return invitation requests for the inviting user.
+          # @option options [string] :cursor
+          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. See pagination for more detail.
           # @see https://api.slack.com/methods/conversations.requestSharedInvite.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations.requestSharedInvite/conversations.requestSharedInvite.list.json
           def conversations_requestSharedInvite_list(options = {})

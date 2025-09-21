@@ -21,11 +21,11 @@ RSpec.describe Slack::Web::Api::Endpoints::WorkflowsTriggersPermissions do
     end
   end
   context 'workflows.triggers.permissions_set' do
-    it 'requires permission_type' do
-      expect { client.workflows_triggers_permissions_set(trigger_id: %q[Ft0000000001]) }.to raise_error ArgumentError, /Required arguments :permission_type missing/
-    end
     it 'requires trigger_id' do
       expect { client.workflows_triggers_permissions_set(permission_type: %q[]) }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
+    end
+    it 'requires permission_type' do
+      expect { client.workflows_triggers_permissions_set(trigger_id: %q[Ft0000000001]) }.to raise_error ArgumentError, /Required arguments :permission_type missing/
     end
   end
 end

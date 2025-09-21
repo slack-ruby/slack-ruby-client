@@ -13,12 +13,12 @@ module Slack
           #   The content of the reminder.
           # @option options [string] :time
           #   Can also take a type of integer. When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday").
-          # @option options [object] :recurrence
-          #   Specify the repeating behavior of a reminder. Available options: daily, weekly, monthly, or yearly. If weekly, may further specify the days of the week.
-          # @option options [string] :team_id
-          #   Encoded team id, required if org token is used.
           # @option options [user] :user
           #   No longer supported - reminders cannot be set for other users. Previously, was the user who would receive the reminder.
+          # @option options [string] :team_id
+          #   Encoded team id, required if org token is used.
+          # @option options [object] :recurrence
+          #   Specify the repeating behavior of a reminder. Available options: daily, weekly, monthly, or yearly. If weekly, may further specify the days of the week.
           # @see https://api.slack.com/methods/reminders.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reminders/reminders.add.json
           def reminders_add(options = {})

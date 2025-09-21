@@ -9,11 +9,11 @@ module Slack
         g.desc 'List approved apps for an org or workspace.'
         g.long_desc %( List approved apps for an org or workspace. )
         g.command 'list' do |c|
-          c.flag 'certified', desc: 'Limit the results to only include certified apps. When false, no certified apps will appear in the result.'
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
-          c.flag 'enterprise_id', desc: '.'
           c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
-          c.flag 'team_id', desc: '.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+          c.flag 'team_id', desc: ''
+          c.flag 'enterprise_id', desc: ''
+          c.flag 'certified', desc: 'Limit the results to only include certified apps. When false, no certified apps will appear in the result.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_approved_list(options))
           end

@@ -10,11 +10,10 @@ module Slack
           # List all of the owners on a given workspace.
           #
           # @option options [Object] :team_id
-          #   .
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @see https://api.slack.com/methods/admin.teams.owners.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.owners/admin.teams.owners.list.json
           def admin_teams_owners_list(options = {})

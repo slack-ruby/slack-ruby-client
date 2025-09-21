@@ -19,15 +19,15 @@ module Slack
         g.desc 'Add an emoji alias.'
         g.long_desc %( Add an emoji alias. )
         g.command 'addAlias' do |c|
-          c.flag 'alias_for', desc: 'Name of the emoji for which the alias is being made. Any wrapping whitespace or colons will be automatically trimmed.'
           c.flag 'name', desc: 'The new alias for the specified emoji. Any wrapping whitespace or colons will be automatically trimmed.'
+          c.flag 'alias_for', desc: 'Name of the emoji for which the alias is being made. Any wrapping whitespace or colons will be automatically trimmed.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_emoji_addAlias(options))
           end
         end
 
-        g.desc 'List emoji for an Enterprise Grid organization.'
-        g.long_desc %( List emoji for an Enterprise Grid organization. )
+        g.desc 'List emoji for an Enterprise organization.'
+        g.long_desc %( List emoji for an Enterprise organization. )
         g.command 'list' do |c|
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'limit', desc: 'The maximum number of items to return. Must be between 1 - 1000 both inclusive.'
@@ -36,8 +36,8 @@ module Slack
           end
         end
 
-        g.desc 'Remove an emoji across an Enterprise Grid organization'
-        g.long_desc %( Remove an emoji across an Enterprise Grid organization )
+        g.desc 'Remove an emoji across an Enterprise organization'
+        g.long_desc %( Remove an emoji across an Enterprise organization )
         g.command 'remove' do |c|
           c.flag 'name', desc: 'The name of the emoji to be removed. Colons (:myemoji:) around the value are not required, although they may be included.'
           c.action do |_global_options, options, _args|

@@ -11,11 +11,11 @@ module Slack
         g.command 'add' do |c|
           c.flag 'channel_id', desc: 'Channel to add bookmark in.'
           c.flag 'title', desc: 'Title for the bookmark.'
+          c.flag 'link', desc: 'Link to bookmark.'
           c.flag 'type', desc: 'Type of the bookmark i.e link.'
-          c.flag 'access_level', desc: "The level that we are setting the file's permission to (read or write)."
           c.flag 'emoji', desc: 'Emoji tag to apply to the link.'
           c.flag 'entity_id', desc: 'ID of the entity being bookmarked. Only applies to message and file types.'
-          c.flag 'link', desc: 'Link to bookmark.'
+          c.flag 'access_level', desc: "The level that we are setting the file's permission to (read or write)."
           c.flag 'parent_id', desc: "Id of this bookmark's parent."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.bookmarks_add(options))
@@ -25,11 +25,11 @@ module Slack
         g.desc 'Edit bookmark.'
         g.long_desc %( Edit bookmark. )
         g.command 'edit' do |c|
-          c.flag 'bookmark_id', desc: 'Bookmark to update.'
           c.flag 'channel_id', desc: 'Channel to update bookmark in.'
-          c.flag 'emoji', desc: 'Emoji tag to apply to the link.'
-          c.flag 'link', desc: 'Link to bookmark.'
+          c.flag 'bookmark_id', desc: 'Bookmark to update.'
           c.flag 'title', desc: 'Title for the bookmark.'
+          c.flag 'link', desc: 'Link to bookmark.'
+          c.flag 'emoji', desc: 'Emoji tag to apply to the link.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.bookmarks_edit(options))
           end
@@ -47,8 +47,8 @@ module Slack
         g.desc 'Remove bookmark from the channel.'
         g.long_desc %( Remove bookmark from the channel. )
         g.command 'remove' do |c|
-          c.flag 'bookmark_id', desc: 'Bookmark to remove.'
           c.flag 'channel_id', desc: 'Channel to remove bookmark.'
+          c.flag 'bookmark_id', desc: 'Bookmark to remove.'
           c.flag 'quip_section_id', desc: 'Quip section ID to unbookmark.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.bookmarks_remove(options))

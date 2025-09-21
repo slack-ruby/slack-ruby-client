@@ -9,10 +9,10 @@ module Slack
           #
           # Retrieve analytics data for a given date, presented as a compressed JSON file
           #
-          # @option options [string] :type
-          #   The type of analytics to retrieve. The options are currently limited to member (for grid member analytics) and public_channel (for public channel analytics).
           # @option options [date] :date
           #   Date to retrieve the analytics data for, expressed as YYYY-MM-DD in UTC. Required unless metadata_only is set to true.
+          # @option options [string] :type
+          #   The type of analytics to retrieve. The options are currently limited to member (for Enterprise org member analytics) and public_channel (for public channel analytics).
           # @option options [boolean] :metadata_only
           #   Retrieve metadata for the type of analytics indicated. Can be used only with type set to public_channel analytics. See detail below. Omit the date parameter when using this argument.
           # @see https://api.slack.com/methods/admin.analytics.getFile

@@ -9,16 +9,14 @@ module Slack
           #
           # List restricted apps for an org or workspace.
           #
-          # @option options [boolean] :certified
-          #   Limit the results to only include certified apps. When false, no certified apps will appear in the result.
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [Object] :enterprise_id
-          #   .
           # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :team_id
-          #   .
+          # @option options [Object] :enterprise_id
+          # @option options [boolean] :certified
+          #   Limit the results to only include certified apps. When false, no certified apps will appear in the result.
           # @see https://api.slack.com/methods/admin.apps.restricted.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.restricted/admin.apps.restricted.list.json
           def admin_apps_restricted_list(options = {})

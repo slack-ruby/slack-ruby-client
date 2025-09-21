@@ -13,12 +13,12 @@ module Slack
           #   The ID (T1234) of the workspace.
           # @option options [Object] :user_id
           #   The ID of the user to add to the workspace.
-          # @option options [string] :channel_ids
-          #   Comma separated values of channel IDs to add user in the new workspace.
           # @option options [boolean] :is_restricted
           #   True if user should be added to the workspace as a guest.
           # @option options [boolean] :is_ultra_restricted
           #   True if user should be added to the workspace as a single-channel guest.
+          # @option options [string] :channel_ids
+          #   Comma separated values of channel IDs to add user in the new workspace.
           # @see https://api.slack.com/methods/admin.users.assign
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.assign.json
           def admin_users_assign(options = {})
@@ -30,48 +30,50 @@ module Slack
           #
           # Invite a user to a workspace.
           #
-          # @option options [string] :channel_ids
-          #   A comma-separated list of channel_ids for this user to join. At least one channel is required.
-          # @option options [string] :email
-          #   The email address of the person to invite.
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
+          # @option options [string] :email
+          #   The email address of the person to invite.
+          # @option options [string] :channel_ids
+          #   A comma-separated list of channel_ids for this user to join. At least one channel is required.
           # @option options [string] :custom_message
           #   An optional message to send to the user in the invite email.
-          # @option options [boolean] :email_password_policy_enabled
-          #   Allow invited user to sign in via email and password. Only available for Enterprise Grid teams via admin invite.
-          # @option options [string] :guest_expiration_ts
-          #   Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.
-          # @option options [boolean] :is_restricted
-          #   Is this user a multi-channel guest user? (default: false).
-          # @option options [boolean] :is_ultra_restricted
-          #   Is this user a single channel guest user? (default: false).
           # @option options [string] :real_name
           #   Full name of the user.
           # @option options [boolean] :resend
           #   Allow this invite to be resent in the future if a user has not signed up yet. Resending can only be done via the UI and has no expiration. (default: false).
+          # @option options [boolean] :is_restricted
+          #   Is this user a multi-channel guest user? (default: false).
+          # @option options [boolean] :is_ultra_restricted
+          #   Is this user a single channel guest user? (default: false).
+          # @option options [string] :guest_expiration_ts
+          #   Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.
+          # @option options [boolean] :email_password_policy_enabled
+          #   Allow invited user to sign in via email and password. Only available for Enterprise org teams via admin invite.
           # @see https://api.slack.com/methods/admin.users.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.invite.json
           def admin_users_invite(options = {})
-            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
-            raise ArgumentError, 'Required arguments :email missing' if options[:email].nil?
             raise ArgumentError, 'Required arguments :team_id missing' if options[:team_id].nil?
+            raise ArgumentError, 'Required arguments :email missing' if options[:email].nil?
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
             post('admin.users.invite', options)
           end
 
           #
           # List users on a workspace
           #
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [boolean] :include_deactivated_user_workspaces
-          #   Only applies with org token and no team_id. If true, return workspaces for a user even if they may be deactivated on them. If false, return workspaces for a user only when user is active on them. Default is false.
-          # @option options [boolean] :is_active
-          #   If true, only active users will be returned. If false, only deactivated users will be returned. Default is true.
-          # @option options [integer] :limit
-          #   Limit for how many users to be retrieved per page.
           # @option options [Object] :team_id
           #   The ID (T1234) of a workspace. Filters results to just the specified workspace.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
+          # @option options [boolean] :is_active
+          #   If true, only active users will be returned. If false, only deactivated users will be returned. Default is true.
+          # @option options [boolean] :include_deactivated_user_workspaces
+          #   Only applies with org token and no team_id. If true, return workspaces for a user even if they may be deactivated on them. If false, return workspaces for a user only when user is active on them. Default is false.
+          # @option options [boolean] :only_guests
+          #   If true, returns only guests and their expiration dates that belong to the team_id.
+          # @option options [integer] :limit
+          #   Limit for how many users to be retrieved per page.
           # @see https://api.slack.com/methods/admin.users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.list.json
           def admin_users_list(options = {})
@@ -117,17 +119,17 @@ module Slack
           #
           # Set an expiration for a guest user
           #
-          # @option options [integer] :expiration_ts
-          #   Epoch timestamp in seconds when guest account should be disabled.
-          # @option options [string] :user_id
-          #   The ID of the user to set an expiration for.
           # @option options [Object] :team_id
           #   The ID (T1234) of the workspace.
+          # @option options [string] :user_id
+          #   The ID of the user to set an expiration for.
+          # @option options [integer] :expiration_ts
+          #   Epoch timestamp in seconds when guest account should be disabled.
           # @see https://api.slack.com/methods/admin.users.setExpiration
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setExpiration.json
           def admin_users_setExpiration(options = {})
-            raise ArgumentError, 'Required arguments :expiration_ts missing' if options[:expiration_ts].nil?
             raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
+            raise ArgumentError, 'Required arguments :expiration_ts missing' if options[:expiration_ts].nil?
             post('admin.users.setExpiration', options)
           end
 

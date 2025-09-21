@@ -10,7 +10,6 @@ module Slack
           # Look up an email address to see if someone is discoverable on Slack
           #
           # @option options [string] :email
-          #   .
           # @see https://api.slack.com/methods/users.discoverableContacts.lookup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users.discoverableContacts/users.discoverableContacts.lookup.json
           def users_discoverableContacts_lookup(options = {})

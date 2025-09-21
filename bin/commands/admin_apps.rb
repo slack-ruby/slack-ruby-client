@@ -10,9 +10,9 @@ module Slack
         g.long_desc %( Approve an app for installation on a workspace. )
         g.command 'approve' do |c|
           c.flag 'app_id', desc: 'The id of the app to approve.'
-          c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
           c.flag 'request_id', desc: 'The id of the request to approve.'
           c.flag 'team_id', desc: 'The ID of the workspace to approve the app on.'
+          c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_approve(options))
           end
@@ -22,8 +22,8 @@ module Slack
         g.long_desc %( Clear an app resolution )
         g.command 'clearResolution' do |c|
           c.flag 'app_id', desc: 'The id of the app whose resolution you want to clear/undo.'
-          c.flag 'enterprise_id', desc: 'The enterprise to clear the app resolution from.'
           c.flag 'team_id', desc: 'The workspace to clear the app resolution from.'
+          c.flag 'enterprise_id', desc: 'The enterprise to clear the app resolution from.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_clearResolution(options))
           end
@@ -33,9 +33,9 @@ module Slack
         g.long_desc %( Restrict an app for installation on a workspace. )
         g.command 'restrict' do |c|
           c.flag 'app_id', desc: 'The id of the app to restrict.'
-          c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
           c.flag 'request_id', desc: 'The id of the request to restrict.'
           c.flag 'team_id', desc: 'The ID of the workspace to approve the app on.'
+          c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_restrict(options))
           end
@@ -45,8 +45,8 @@ module Slack
         g.long_desc %( Uninstall an app from one or many workspaces, or an entire enterprise organization. )
         g.command 'uninstall' do |c|
           c.flag 'app_id', desc: 'The ID of the app to uninstall.'
-          c.flag 'enterprise_id', desc: 'The enterprise to completely uninstall the application from (across all workspaces). With an org-level token, this or team_ids is required.'
           c.flag 'team_ids', desc: 'IDs of the teams to uninstall from (max 100). With an org-level token, this or enterprise_id is required.'
+          c.flag 'enterprise_id', desc: 'The enterprise to completely uninstall the application from (across all workspaces). With an org-level token, this or team_ids is required.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_uninstall(options))
           end

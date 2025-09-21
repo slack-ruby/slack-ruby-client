@@ -9,10 +9,10 @@ module Slack
           #
           # Ask Slackbot to send you an export listing all workspace members using unsupported software, presented as a zipped CSV file.
           #
-          # @option options [integer] :date_end_of_support
-          #   Unix timestamp of the date of past or upcoming end of support cycles. If not provided will include all announced end of support cycles.
           # @option options [integer] :date_sessions_started
           #   Unix timestamp of a date to start looking for user sessions. If not provided will start six months ago.
+          # @option options [integer] :date_end_of_support
+          #   Unix timestamp of the date of past or upcoming end of support cycles. If not provided will include all announced end of support cycles.
           # @see https://api.slack.com/methods/admin.users.unsupportedVersions.export
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.unsupportedVersions/admin.users.unsupportedVersions.export.json
           def admin_users_unsupportedVersions_export(options = {})

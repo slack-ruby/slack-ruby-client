@@ -6,14 +6,14 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::ConversationsExternalinvitepermissions do
   let(:client) { Slack::Web::Client.new }
   context 'conversations.externalInvitePermissions_set' do
-    it 'requires action' do
-      expect { client.conversations_externalInvitePermissions_set(channel: %q[C123456], target_team: %q[T726G27TT]) }.to raise_error ArgumentError, /Required arguments :action missing/
-    end
     it 'requires channel' do
-      expect { client.conversations_externalInvitePermissions_set(action: %q[upgrade], target_team: %q[T726G27TT]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.conversations_externalInvitePermissions_set(target_team: %q[T726G27TT], action: %q[upgrade]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires target_team' do
-      expect { client.conversations_externalInvitePermissions_set(action: %q[upgrade], channel: %q[C123456]) }.to raise_error ArgumentError, /Required arguments :target_team missing/
+      expect { client.conversations_externalInvitePermissions_set(channel: %q[C123456], action: %q[upgrade]) }.to raise_error ArgumentError, /Required arguments :target_team missing/
+    end
+    it 'requires action' do
+      expect { client.conversations_externalInvitePermissions_set(channel: %q[C123456], target_team: %q[T726G27TT]) }.to raise_error ArgumentError, /Required arguments :action missing/
     end
   end
 end

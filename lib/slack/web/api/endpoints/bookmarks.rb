@@ -13,16 +13,16 @@ module Slack
           #   Channel to add bookmark in.
           # @option options [string] :title
           #   Title for the bookmark.
+          # @option options [string] :link
+          #   Link to bookmark.
           # @option options [string] :type
           #   Type of the bookmark i.e link.
-          # @option options [enum] :access_level
-          #   The level that we are setting the file's permission to (read or write).
           # @option options [string] :emoji
           #   Emoji tag to apply to the link.
           # @option options [string] :entity_id
           #   ID of the entity being bookmarked. Only applies to message and file types.
-          # @option options [string] :link
-          #   Link to bookmark.
+          # @option options [enum] :access_level
+          #   The level that we are setting the file's permission to (read or write).
           # @option options [string] :parent_id
           #   Id of this bookmark's parent.
           # @see https://api.slack.com/methods/bookmarks.add
@@ -37,21 +37,21 @@ module Slack
           #
           # Edit bookmark.
           #
-          # @option options [string] :bookmark_id
-          #   Bookmark to update.
           # @option options [string] :channel_id
           #   Channel to update bookmark in.
-          # @option options [string] :emoji
-          #   Emoji tag to apply to the link.
-          # @option options [string] :link
-          #   Link to bookmark.
+          # @option options [string] :bookmark_id
+          #   Bookmark to update.
           # @option options [string] :title
           #   Title for the bookmark.
+          # @option options [string] :link
+          #   Link to bookmark.
+          # @option options [string] :emoji
+          #   Emoji tag to apply to the link.
           # @see https://api.slack.com/methods/bookmarks.edit
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.edit.json
           def bookmarks_edit(options = {})
-            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
             raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
             post('bookmarks.edit', options)
           end
 
@@ -70,17 +70,17 @@ module Slack
           #
           # Remove bookmark from the channel.
           #
-          # @option options [string] :bookmark_id
-          #   Bookmark to remove.
           # @option options [string] :channel_id
           #   Channel to remove bookmark.
+          # @option options [string] :bookmark_id
+          #   Bookmark to remove.
           # @option options [string] :quip_section_id
           #   Quip section ID to unbookmark.
           # @see https://api.slack.com/methods/bookmarks.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.remove.json
           def bookmarks_remove(options = {})
-            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
             raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
             post('bookmarks.remove', options)
           end
         end
