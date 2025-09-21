@@ -3,5 +3,6 @@ source 'http://rubygems.org'
 
 gem 'slack-ruby-client', path: '../..'
 
-gem 'async-websocket'
+gem 'async-websocket', '> 0.9'
+gem 'io-endpoint'
 gem 'foreman'

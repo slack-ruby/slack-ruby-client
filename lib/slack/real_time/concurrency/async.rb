@@ -2,6 +2,8 @@
 require 'async/websocket'
 require 'async/notification'
 require 'async/clock'
+require 'io/endpoint/host_endpoint'
+require 'io/endpoint/ssl_endpoint'
 
 module Slack
   module RealTime
@@ -47,10 +49,10 @@ module Slack
                 @client_task = task.async do |subtask|
                   subtask.annotate "#{client} run-loop"
                   client.run_loop
-                rescue ::Async::Wrapper::Cancelled => e
+                rescue ::Async::Timeout::CancelledError => e
                 # Will get restarted by ping worker.
                 rescue StandardError => e
-                  client.logger.error(subtask.to_s) { e.message }
+                  client.logger.error(subtask.to_s) { e.message + "\n\t" + e.backtrace.join("\n\t") }
                 end
 
                 @restart.wait
@@ -115,8 +117,8 @@ module Slack
           end
 
           def build_endpoint
-            endpoint = ::Async::IO::Endpoint.tcp(addr, port)
-            endpoint = ::Async::IO::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
+            endpoint = ::IO::Endpoint.tcp(addr, port)
+            endpoint = ::IO::Endpoint::SSLEndpoint.new(endpoint, ssl_context: build_ssl_context) if secure?
             endpoint
           end
 
@@ -134,9 +136,9 @@ module Slack
   end
 end
 
-if Gem::Version.new(Async::WebSocket::VERSION) >= Gem::Version.new('0.9.0')
+if Gem::Version.new(Async::WebSocket::VERSION) < Gem::Version.new('0.9.0')
   raise(
     "Incompatible version of async-websocket, #{Async::WebSocket::VERSION}, " \
-    "use \"gem 'async-websocket', '~> 0.8.0'\"."
+    "use the latest \"gem 'async-websocket'\" and \"gem 'io-endpoint'\"."
   )
 end
