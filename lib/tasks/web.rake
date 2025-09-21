@@ -33,10 +33,6 @@ namespace :slack do
           parsed = JSON.parse(File.read(path))
           parsed['undocumented'] = true if path =~ /undocumented/
           JSON::Validator.validate(method_schema, parsed, insert_defaults: true)
-          if parsed['deprecated'] && parsed['deprecation']['deprecation_warning'] =~ /It will stop functioning in February 2021/
-            next
-          end
-
           result[prefix][name] = parsed
         end
 

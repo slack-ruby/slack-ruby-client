@@ -2,11 +2,10 @@ Slack Ruby Client
 =================
 
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
-[![Integration Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integration_test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/integration_test.yml)
 [![Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/slack-ruby/slack-ruby-client/badge.svg?branch=master)](https://coveralls.io/github/slack-ruby/slack-ruby-client?branch=master)
 
-A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messaging](https://api.slack.com/rtm) and [Events](https://api.slack.com/events-api) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
+A Ruby client for the Slack [Web](https://api.slack.com/web) and [Events](https://api.slack.com/events-api) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 
 ![](slack.png)
 
@@ -38,16 +37,6 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
       - [Slack Errors](#slack-errors)
       - [Rate Limiting](#rate-limiting)
       - [Other Errors](#other-errors)
-  - [RealTime Client](#realtime-client)
-    - [Configuring Slack::RealTime::Client](#configuring-slackrealtimeclient)
-      - [Caveats](#caveats)
-        - [websocket_ping](#websocket_ping)
-    - [RealTime Store](#realtime-store)
-      - [Slack::RealTime::Stores::Starter](#slackrealtimestoresstarter)
-      - [Slack::RealTime::Stores::Store](#slackrealtimestoresstore)
-  - [Combining RealTime and Web Clients](#combining-realtime-and-web-clients)
-    - [Concurrency](#concurrency)
-      - [Async](#async)
   - [Events API](#events-api)
     - [Configuring Slack::Events](#configuring-slackevents)
     - [Verifying the Request Signature](#verifying-the-request-signature)
@@ -67,7 +56,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
     - [Send a Message](#send-a-message)
     - [Get Channel Info](#get-channel-info-1)
     - [List Users](#list-users)
-- [Enterprise Support](#enterprise-support)
+- [Sponsorship and Enterprise Support](#sponsorship-and-enterprise-support)
 - [History](#history)
 - [Security](#security)
 - [Contributing](#contributing)
@@ -75,7 +64,7 @@ A Ruby client for the Slack [Web](https://api.slack.com/web), [RealTime Messagin
 
 ## Useful to Me?
 
-* This library lets you send messages to Slack via the Web API, send and receive messages via the Real Time Messaging API, and facilitates integration with the Events API.
+* This library lets you send messages to Slack via the Web API and facilitates integration with the Events API.
 * To write a complete bot for Slack you need more than this library, and it's much easier to start with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events).
 * To respond to slash commands, interactive components, or events at the lowest level, implement a web application using your favorite web framework, and use this library to call the Slack Web API, and to verify that events are coming from Slack.
 
@@ -89,12 +78,6 @@ Add to Gemfile.
 
 ```
 gem 'slack-ruby-client'
-```
-
-If you're going to be using the RealTime client, add `async-websocket`. See below for more information about concurrency.
-
-```
-gem 'async-websocket', '~> 0.8.0'
 ```
 
 Run `bundle install`.
@@ -285,12 +268,12 @@ You can configure the Web client either globally or via the initializer.
 
 ```ruby
 Slack::Web::Client.configure do |config|
-  config.user_agent = 'Slack Ruby Client/1.0'
+  config.user_agent = 'Slack Ruby Client/3.0'
 end
 ```
 
 ```ruby
-client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/1.0')
+client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/3.0')
 ```
 
 The following settings are supported.
@@ -318,7 +301,7 @@ You can also pass request options, including `timeout` and `open_timeout` into i
 client.conversations_list(request: { timeout: 180 })
 ```
 
-You can also control what proxy options are used by modifying the `http_proxy` environment variable per [Net::HTTP's documentation](https://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html#class-Net::HTTP-label-Proxies).
+You can control what proxy options are used by modifying the `http_proxy` environment variable per [Net::HTTP's documentation](https://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html#class-Net::HTTP-label-Proxies).
 
 Note that Docker on OSX seems to incorrectly set the proxy, causing `Faraday::ConnectionFailed, ERROR -- : Failed to open TCP connection to : (getaddrinfo: Name or service not known)`. You might need to manually unset `http_proxy` in that case, eg. `http_proxy="" bundle exec ruby ./my_bot.rb`.
 
@@ -402,194 +385,6 @@ Specifically `Slack::Web::Api::Errors::ParsingError` will be raised on non-json 
 
 In any other case, a `Faraday::ClientError` will be raised.
 
-### RealTime Client
-
-The Real Time Messaging API is a WebSocket-based API that allows you to receive events from Slack in real time and send messages as user.
-
-```ruby
-client = Slack::RealTime::Client.new
-
-client.on :hello do
-  puts "Successfully connected, welcome '#{client.self.name}' to the '#{client.team.name}' team at https://#{client.team.domain}.slack.com."
-end
-
-client.on :message do |data|
-  case data.text
-  when 'bot hi' then
-    client.message(channel: data.channel, text: "Hi <@#{data.user}>!")
-  when /^bot/ then
-    client.message(channel: data.channel, text: "Sorry <@#{data.user}>, what?")
-  end
-end
-
-client.on :close do |_data|
-  puts "Client is about to disconnect"
-end
-
-client.on :closed do |_data|
-  puts "Client has disconnected successfully!"
-end
-
-client.start!
-```
-
-You can send typing indicators with `typing`.
-
-```ruby
-client.typing channel: data.channel
-```
-
-You can send a ping with `ping`.
-
-```ruby
-client.ping
-```
-
-#### Configuring Slack::RealTime::Client
-
-You can configure the RealTime client either globally or via the initializer.
-
-```ruby
-Slack::RealTime::Client.configure do |config|
-  config.websocket_ping = 42
-end
-```
-
-```ruby
-client = Slack::RealTime::Client.new(websocket_ping: 42)
-```
-
-The following settings are supported.
-
-setting         | description
-----------------|-----------------------------------------------------------------------------------------------------
-token           | Slack API token.
-websocket_ping  | How long the socket can be idle before sending a ping message to confirm it's still connected, default is 30.
-websocket_proxy | Connect via proxy, include `:origin` and `:headers`.
-start_options   | Options to pass to `rtm.connect`, default is `{ request: { timeout: 180 } }`.
-store_class     | Local store class, default is an in-memory `Slack::RealTime::Stores::Starter`.
-store_options   | Options to initialize the store, default is `{}`.
-async_handlers  | Option to run handlers asynchronously. Valid options are `:all` or `:none`, default is `:none`.
-logger          | Optional `Logger` instance that logs RealTime requests and socket data.
-
-Note that the RealTime client uses a Web client to obtain the WebSocket URL via [rtm.connect](https://api.slack.com/methods/rtm.connect). While `token` and `logger` options are passed down from the RealTime client, you may also configure Web client options via `Slack::Web::Client.configure` as described above.
-
-See a fully working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb).
-
-![](examples/hi_real_time_and_web/hi.gif)
-
-##### Caveats
-
-###### `websocket_ping`
-
-This setting determines how long the socket can be idle before sending a ping message to confirm it's still connected.
-
-It's important to note that if a ping message was sent and no response was received within the amount of time specified in `websocket_ping` the client will attempt to reestablish it's connection to the message server.
-
-Note that the ping may take between `websocket_ping` and `websocket_ping * 3/2` seconds to actually trigger when there is no activity on the socket. This is because the timer that checks whether to ping is triggered at every `websocket_ping / 2` interval.
-
-To disable this feature set `websocket_ping` to 0.
-
-#### RealTime Store
-
-The RealTime client exposes and maintains a local store upon successful connection.
-Event hooks keep the store's cached data up-to-date.
-
-Tracking with a local store can be disabled with `Slack::RealTime::Client.new(store_class: nil)`.
-
-##### `Slack::RealTime::Stores::Starter`
-
-A small store that only caches and tracks data returned in the [rtm.connect](https://api.slack.com/methods/rtm.connect#examples) response.
-This store provides `self` and `team` for accessing the limited data about the authenticated user and its workspace, but does not cache other users or bots, channels, or direct messages.
-
-##### `Slack::RealTime::Stores::Store`
-
-A more complete store that tracks most changes visible to the authenticated user.
-
-You can see all of the cache types in the table below (each is a hash indexed by its objects' `id`).
-
-Cache              | Description
--------------------|-------------------------------------------------------------------------------------------------
-`teams`            | Workspaces (teams). Will likely contain only one `team`.
-`users`            | All [user](https://api.slack.com/types/user) objects, including `self`.
-`bots`             | All [bot users](https://api.slack.com/bot-users) (from Slack Apps and legacy custom integrations).
-`public_channels`  | Public [conversation](https://api.slack.com/types/conversation) objects.
-`private_channels` | Private [conversation](https://api.slack.com/types/conversation) and [group](https://api.slack.com/types/group) objects with the authenticated user as a member.
-`ims`              | Visible [im](https://api.slack.com/types/im) objects, direct message channels with the authenticated user.
-`mpims`            | Visible [mpim](https://api.slack.com/types/mpim) objects, multiparty direct message channels that include the authenticated user.
-
-By default, none of these caches are initialized with data beyond what is returned from [rtm.connect](https://api.slack.com/methods/rtm.connect#examples), same as [Slack::RealTime::Stores::Starter](#slackrealtimestoresstarter).
-When configured, this store initializes its caches by making additional calls to Web API methods upon successful connection to the RTM API (i.e. "hello" message).
-
-Configure by specifying which caches to fetch:
-```ruby
-Slack::RealTime::Client.configure do |config|
-  config.store_class = Slack::RealTime::Stores::Store
-  config.store_options = { caches: %i[teams users public_channels private_channels ims] }
-end
-```
-or with the `:all` option:
-```ruby
-Slack::RealTime::Client.configure do |config|
-  config.store_class = Slack::RealTime::Stores::Store
-  config.store_options = { caches: :all }
-end
-```
-
-Note: For `teams`, this makes a single call to `team.info`, while for `users` and all conversation-like types, this makes paginated calls to `users.list` and `conversations.list` respectively.
-Only `bots` requires a separate call for every bot user, so may be slow if your workplace has a lot of bot users.
-
-### Combining RealTime and Web Clients
-
-Since the Web client is used to obtain the RealTime client's WebSocket URL, you can continue using the Web client in combination with the RealTime client.
-
-```ruby
-client = Slack::RealTime::Client.new
-
-client.on :message do |data|
-  case data.text
-  when 'bot hi' then
-    client.web_client.chat_postMessage(channel: data.channel, text: "Hi <@#{data.user}>!")
-  when /^bot/ then
-    client.web_client.chat_postMessage(channel: data.channel, text: "Sorry <@#{data.user}>, what?")
-  end
-end
-
-client.start!
-```
-
-See a fully working example in [examples/hi_real_time_and_web](examples/hi_real_time_and_web/hi.rb).
-
-![](examples/hi_real_time_and_web/hi.gif)
-
-#### Concurrency
-
-`Slack::RealTime::Client` needs help from a concurrency library and supports [Async](https://github.com/socketry/async).
-
-```ruby
-Slack::RealTime.configure do |config|
-  config.concurrency = Slack::RealTime::Concurrency::Async
-end
-```
-
-Use `client.start_async` instead of `client.start!`. A good example of such application is [slack-ruby-bot-server](https://github.com/slack-ruby/slack-ruby-bot-server).
-
-```ruby
-client = Slack::RealTime::Client.new
-
-client.start_async
-```
-
-##### Async
-
-Add `async-websocket` to your Gemfile.
-
-```
-gem 'async-websocket'
-```
-
-See a fully working example in [examples/hi_real_time_async_async](examples/hi_real_time_async_async/hi.rb).
-
 ### Events API
 
 This library provides limited support for the [Slack Events API](https://api.slack.com/events-api).
@@ -622,9 +417,11 @@ slack_request.verify!
 
 To specify secrets on a per-request basis:
 ```ruby
-Slack::Events::Request.new(http_request,
-                           signing_secret: signing_secret,
-                           signature_expires_in: signature_expires_in)
+Slack::Events::Request.new(
+  http_request,
+  signing_secret: signing_secret,
+  signature_expires_in: signature_expires_in
+)
 ```
 
 The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Slack::Events::Request::InvalidSignature` or `Slack::Events::Request::TimestampExpired` errors.
@@ -807,11 +604,11 @@ $ slack users list | jq '.members | map({(.id): .name})'
 
 See `slack help` for a complete command-line reference.
 
-## Enterprise Support
+## Sponsorship and Enterprise Support
 
-Available as part of the Tidelift Subscription.
+This library was created and has been maintained for a decade by [@dblock](https://github.com/dblock). Please consider [a sponsorship](https://github.com/sponsors/dblock).
 
-The maintainers of slack-ruby-client are working with Tidelift to deliver commercial support and maintenance. Save time, reduce risk, and improve code health, while paying the maintainers of slack-ruby-client. Click [here](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) for more details.
+Enterprise Support is available as part of a Tidelift Subscription. Click [here](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) for more details.
 
 ## History
 
@@ -827,6 +624,6 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
-Copyright (c) 2015-2021, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
+Copyright (c) 2015-2025, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
 
 This project is licensed under the [MIT License](LICENSE.md).

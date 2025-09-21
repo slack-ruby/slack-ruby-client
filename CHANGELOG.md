@@ -1,7 +1,7 @@
-### 2.7.1 (Next)
+### 3.0.0 (Next)
 
+* [#573](https://github.com/slack-ruby/slack-ruby-client/pull/573): Removed support for RTM APIs - [@dblock](https://github.com/dblock).
 * [#568](https://github.com/slack-ruby/slack-ruby-client/pull/568): Redact Authorization header in response stored in the error - [@levenleven](https://github.com/levenleven).
-
 * [#558](https://github.com/slack-ruby/slack-ruby-client/pull/558): Update API from [slack-api-ref@c408935](https://github.com/slack-ruby/slack-api-ref/commit/c408935) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#571](https://github.com/slack-ruby/slack-ruby-client/pull/571): Update API from [slack-api-ref@e1a2c4d](https://github.com/slack-ruby/slack-api-ref/commit/e1a2c4d) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.

@@ -42,18 +42,6 @@ require_relative 'slack/web/api/helpers'
 require_relative 'slack/web/pagination/cursor'
 require_relative 'slack/web/client'
 
-# RealTime API
-require_relative 'slack/real_time/concurrency'
-require_relative 'slack/real_time/socket'
-require_relative 'slack/real_time/api/message_id'
-require_relative 'slack/real_time/api/ping'
-require_relative 'slack/real_time/api/message'
-require_relative 'slack/real_time/api/typing'
-require_relative 'slack/real_time/models'
-require_relative 'slack/real_time/stores'
-require_relative 'slack/real_time/config'
-require_relative 'slack/real_time/client'
-
 # Events API
 require_relative 'slack/events/config'
 require_relative 'slack/events/request'
