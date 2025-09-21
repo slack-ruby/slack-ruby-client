@@ -9,12 +9,12 @@ module Slack
           #
           # List all denied workspace invite requests.
           #
+          # @option options [Object] :team_id
+          #   ID for the workspace where the invite requests were made.
           # @option options [string] :cursor
           #   Value of the next_cursor field sent as part of the previous api response.
           # @option options [integer] :limit
           #   The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive.
-          # @option options [Object] :team_id
-          #   ID for the workspace where the invite requests were made.
           # @see https://api.slack.com/methods/admin.inviteRequests.denied.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.inviteRequests.denied/admin.inviteRequests.denied.list.json
           def admin_inviteRequests_denied_list(options = {})

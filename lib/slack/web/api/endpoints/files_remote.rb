@@ -13,14 +13,14 @@ module Slack
           #   Creator defined GUID for the file.
           # @option options [string] :external_url
           #   URL of the remote file.
-          # @option options [string] :title
-          #   Title of the file being shared.
           # @option options [string] :filetype
           #   type of file.
           # @option options [Object] :indexable_file_contents
           #   A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
           # @option options [Object] :preview_image
           #   Preview of the document via multipart/form-data.
+          # @option options [string] :title
+          #   Title of the file being shared.
           # @see https://api.slack.com/methods/files.remote.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files.remote/files.remote.add.json
           def files_remote_add(options = {})

@@ -11,14 +11,14 @@ module Slack
           #
           # @option options [string] :channel_name
           #   Name of the channel. If the channel does not exist already in your workspace, this name is the one that the channel will take.
-          # @option options [Object] :channel_id
-          #   ID of the channel that you'd like to accept. Must provide either invite_id or channel_id.
+          # @option options [boolean] :is_private
+          #   Whether the channel should be private.
           # @option options [boolean] :free_trial_accepted
           #   Whether you'd like to use your workspace's free trial to begin using Slack Connect.
           # @option options [Object] :invite_id
           #   ID of the invite that you'd like to accept. Must provide either invite_id or channel_id. See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation.
-          # @option options [boolean] :is_private
-          #   Whether the channel should be private.
+          # @option options [Object] :channel_id
+          #   ID of the channel that you'd like to accept. Must provide either invite_id or channel_id.
           # @option options [Object] :team_id
           #   The ID of the workspace to accept the channel in. If an org-level token is used to call this method, the team_id argument is required.
           # @see https://api.slack.com/methods/conversations.acceptSharedInvite
@@ -71,10 +71,10 @@ module Slack
           #
           # Initiates a public or private channel-based conversation
           #
-          # @option options [string] :name
-          #   Name of the public or private channel to create.
           # @option options [boolean] :is_private
           #   Create a private channel instead of a public one.
+          # @option options [string] :name
+          #   Name of the public or private channel to create.
           # @option options [string] :team_id
           #   encoded team id to create the channel in, required if org token is used.
           # @see https://api.slack.com/methods/conversations.create
@@ -151,10 +151,10 @@ module Slack
           #
           # @option options [channel] :channel
           #   The ID of the public or private channel to invite user(s) to.
-          # @option options [string] :users
-          #   A comma separated list of user IDs. Up to 1000 users may be listed.
           # @option options [boolean] :force
           #   When set to true and multiple user IDs are provided, continue inviting the valid ones while disregarding invalid IDs. Defaults to false.
+          # @option options [string] :users
+          #   A comma separated list of user IDs. Up to 100 users may be listed.
           # @see https://api.slack.com/methods/conversations.invite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.invite.json
           def conversations_invite(options = {})
@@ -171,10 +171,10 @@ module Slack
           #   ID of the channel on your team that you'd like to share.
           # @option options [array] :emails
           #   Optional email to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.
-          # @option options [boolean] :external_limited
-          #   Optional boolean on whether invite is to an external limited member. Defaults to true.
           # @option options [array] :user_ids
           #   Optional user_id to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.
+          # @option options [boolean] :external_limited
+          #   Optional boolean on whether invite is to an external limited member. Defaults to true.
           # @see https://api.slack.com/methods/conversations.inviteShared
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.inviteShared.json
           def conversations_inviteShared(options = {})
@@ -253,10 +253,10 @@ module Slack
           #
           # Lists shared channel invites that have been generated or received but have not been approved by all parties
           #
-          # @option options [string] :cursor
-          #   Set to next_cursor returned by previous call to list items in subsequent page.
           # @option options [string] :team_id
           #   Encoded team id for the workspace to retrieve invites for, required if org token is used.
+          # @option options [string] :cursor
+          #   Set to next_cursor returned by previous call to list items in subsequent page.
           # @see https://api.slack.com/methods/conversations.listConnectInvites
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.listConnectInvites.json
           def conversations_listConnectInvites(options = {})
@@ -313,12 +313,12 @@ module Slack
           #
           # @option options [channel] :channel
           #   Resume a conversation by supplying an im or mpim's ID. Or provide the users field instead.
-          # @option options [boolean] :prevent_creation
-          #   Do not create a direct message or multi-person direct message. This is used to see if there is an existing dm or mpdm.
           # @option options [boolean] :return_im
           #   Boolean, indicates you want the full IM channel definition in the response.
           # @option options [string] :users
           #   Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a channel when not supplying users.
+          # @option options [boolean] :prevent_creation
+          #   Do not create a direct message or multi-person direct message. This is used to see if there is an existing dm or mpdm.
           # @see https://api.slack.com/methods/conversations.open
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.open.json
           def conversations_open(options = {})
@@ -347,8 +347,6 @@ module Slack
           #
           # @option options [channel] :channel
           #   Conversation ID to fetch thread from.
-          # @option options [timestamp] :ts
-          #   Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message.
           # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
           # @option options [boolean] :include_all_metadata
@@ -361,6 +359,8 @@ module Slack
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           # @option options [timestamp] :oldest
           #   Only messages after this Unix timestamp will be included in results.
+          # @option options [timestamp] :ts
+          #   Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message.
           # @see https://api.slack.com/methods/conversations.replies
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.replies.json
           def conversations_replies(options = {})

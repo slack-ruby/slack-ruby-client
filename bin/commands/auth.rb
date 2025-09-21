@@ -9,7 +9,7 @@ module Slack
         g.desc 'Revokes a token.'
         g.long_desc %( Revokes a token. )
         g.command 'revoke' do |c|
-          c.flag 'test', desc: 'Setting this parameter to 1 triggers a testing mode where the specified token will not actually be revoked.'
+          c.flag 'test', desc: 'Setting this parameter to 1 triggers a _testing mode_ where the specified token will not actually be revoked.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.auth_revoke(options))
           end

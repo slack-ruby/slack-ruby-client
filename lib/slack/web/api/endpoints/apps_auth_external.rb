@@ -11,10 +11,10 @@ module Slack
           #
           # @option options [string] :app_id
           #   The id of the app whose tokens you want to delete.
-          # @option options [string] :external_token_id
-          #   The id of the token that you want to delete.
           # @option options [string] :provider_key
           #   The provider key of the provider whose tokens you want to delete.
+          # @option options [string] :external_token_id
+          #   The id of the token that you want to delete.
           # @see https://api.slack.com/methods/apps.auth.external.delete
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.auth.external/apps.auth.external.delete.json
           def apps_auth_external_delete(options = {})

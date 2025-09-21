@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminAuditAnomalyAllow
           #
-          # API to allow enterprise grid admins to read the allow list of IP blocks and ASNs from the enterprise configuration.
+          # API to allow Enterprise org admins to read the allow list of IP blocks and ASNs from the enterprise configuration.
           #
           # @see https://api.slack.com/methods/admin.audit.anomaly.allow.getItem
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.audit.anomaly.allow/admin.audit.anomaly.allow.getItem.json
@@ -16,12 +16,12 @@ module Slack
           end
 
           #
-          # API to allow enterprise grid admins to write/overwrite the allow list of IP blocks and ASNs from the enterprise configuration.
+          # API to allow Enterprise org admins to write/overwrite the allow list of IP blocks and ASNs from the enterprise configuration.
           #
-          # @option options [array] :trusted_asns
-          #   allow list of Autonomous System Numbers (ASN) in the enterprise grid configuarion.
           # @option options [array] :trusted_cidr
-          #   allow list of IPv4 addressses using cidr notation in the enterprise grid configuarion.
+          #   allow list of IPv4 addresses using cidr notation in the Enterprise organization configuration.
+          # @option options [array] :trusted_asns
+          #   allow list of Autonomous System Numbers (ASN) in the Enterprise organization configuration.
           # @see https://api.slack.com/methods/admin.audit.anomaly.allow.updateItem
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.audit.anomaly.allow/admin.audit.anomaly.allow.updateItem.json
           def admin_audit_anomaly_allow_updateItem(options = {})

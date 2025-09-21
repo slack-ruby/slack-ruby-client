@@ -9,14 +9,14 @@ module Slack
           #
           # List the steps of a specific function of a workflow's versions
           #
-          # @option options [string] :function_id
-          #   The ID of the function to query.
+          # @option options [string] :workflow_id
+          #   The workflow ID, starts with Wf*.
           # @option options [string] :workflow
           #   The workflow encoded ID or workflow reference.
           # @option options [string] :workflow_app_id
           #   The app tied to the workflow reference.
-          # @option options [string] :workflow_id
-          #   The workflow ID, starts with Wf*.
+          # @option options [string] :function_id
+          #   The ID of the function to query.
           # @see https://api.slack.com/methods/functions.workflows.steps.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/functions.workflows.steps/functions.workflows.steps.list.json
           def functions_workflows_steps_list(options = {})

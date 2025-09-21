@@ -14,11 +14,11 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminEmoji do
     end
   end
   context 'admin.emoji_addAlias' do
-    it 'requires alias_for' do
-      expect { client.admin_emoji_addAlias(name: %q[]) }.to raise_error ArgumentError, /Required arguments :alias_for missing/
-    end
     it 'requires name' do
       expect { client.admin_emoji_addAlias(alias_for: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
+    end
+    it 'requires alias_for' do
+      expect { client.admin_emoji_addAlias(name: %q[]) }.to raise_error ArgumentError, /Required arguments :alias_for missing/
     end
   end
   context 'admin.emoji_remove' do

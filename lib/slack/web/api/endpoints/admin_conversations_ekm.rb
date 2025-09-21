@@ -11,12 +11,12 @@ module Slack
           #
           # @option options [string] :channel_ids
           #   A comma-separated list of channels to filter to.
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [integer] :limit
-          #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @option options [string] :team_ids
           #   A comma-separated list of the workspaces to which the channels you would like returned belong.
+          # @option options [integer] :limit
+          #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @see https://api.slack.com/methods/admin.conversations.ekm.listOriginalConnectedChannelInfo
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations.ekm/admin.conversations.ekm.listOriginalConnectedChannelInfo.json
           def admin_conversations_ekm_listOriginalConnectedChannelInfo(options = {})

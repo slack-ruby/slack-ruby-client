@@ -12,13 +12,29 @@ module Slack
           c.flag 'query', desc: 'User prompt or search query.'
           c.flag 'action_token', desc: 'Send action_token as received in a message event.'
           c.flag 'channel_types', desc: 'Mix and match channel types by providing a comma-separated list of any combination of public_channel, private_channel, mpim, im.'
-          c.flag 'content_types', desc: 'Content types to include, a comma-separated list of any combination of messages, files.'
+          c.flag 'content_types', desc: 'Content types to include, a comma-separated list of any combination of messages, files, channels, users.'
+          c.flag 'include_bots', desc: 'If you want the results to include bots.'
+          c.flag 'before', desc: 'UNIX timestamp filter. If present, filters for results before this date.'
+          c.flag 'after', desc: 'UNIX timestamp filter. If present, filters for results after this date.'
+          c.flag 'include_context_messages', desc: 'Whether to include context messages surrounding the main message result. Defaults to false if unspecified.'
           c.flag 'context_channel_id', desc: 'Context channel ID to support scoping the search when applicable.'
           c.flag 'cursor', desc: 'The cursor returned by the API. Leave this blank for the first request, and use this to get the next page of results.'
-          c.flag 'include_bots', desc: 'If you want the results to include bots.'
           c.flag 'limit', desc: 'Number of results to return, up to a max of 20. Defaults to 20.'
+          c.flag 'sort', desc: 'The field to sort the results by. Defaults to score. Can be one of: score, timestamp.'
+          c.flag 'sort_dir', desc: 'The direction to sort the results by. Defaults to desc.'
+          c.flag 'include_message_blocks', desc: 'Whether to return the message blocks in the response.'
+          c.flag 'highlight', desc: 'Whether to highlight the search query in the results. Defaults to false if unspecified.'
+          c.flag 'term_clauses', desc: 'A list of term clauses. A term clause is a string with search terms. Search results returned will match every term clause specified (i.e. conjunctive normal form).'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.assistant_search_context(options))
+          end
+        end
+
+        g.desc 'Returns search capabilities on a given team.'
+        g.long_desc %( Returns search capabilities on a given team. )
+        g.command 'info' do |c|
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.assistant_search_info(options))
           end
         end
       end

@@ -10,10 +10,10 @@ module Slack
         g.long_desc %( Accepts an invitation to a Slack Connect channel. )
         g.command 'acceptSharedInvite' do |c|
           c.flag 'channel_name', desc: 'Name of the channel. If the channel does not exist already in your workspace, this name is the one that the channel will take.'
-          c.flag 'channel_id', desc: "ID of the channel that you'd like to accept. Must provide either invite_id or channel_id."
+          c.flag 'is_private', desc: 'Whether the channel should be private.'
           c.flag 'free_trial_accepted', desc: "Whether you'd like to use your workspace's free trial to begin using Slack Connect."
           c.flag 'invite_id', desc: "ID of the invite that you'd like to accept. Must provide either invite_id or channel_id. See the shared_channel_invite_received event payload for more details on how to retrieve the ID of the invitation."
-          c.flag 'is_private', desc: 'Whether the channel should be private.'
+          c.flag 'channel_id', desc: "ID of the channel that you'd like to accept. Must provide either invite_id or channel_id."
           c.flag 'team_id', desc: 'The ID of the workspace to accept the channel in. If an org-level token is used to call this method, the team_id argument is required.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_acceptSharedInvite(options))
@@ -51,8 +51,8 @@ module Slack
         g.desc 'Initiates a public or private channel-based conversation'
         g.long_desc %( Initiates a public or private channel-based conversation )
         g.command 'create' do |c|
-          c.flag 'name', desc: 'Name of the public or private channel to create.'
           c.flag 'is_private', desc: 'Create a private channel instead of a public one.'
+          c.flag 'name', desc: 'Name of the public or private channel to create.'
           c.flag 'team_id', desc: 'encoded team id to create the channel in, required if org token is used.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_create(options))
@@ -99,8 +99,8 @@ module Slack
         g.long_desc %( Invites users to a channel. )
         g.command 'invite' do |c|
           c.flag 'channel', desc: 'The ID of the public or private channel to invite user(s) to.'
-          c.flag 'users', desc: 'A comma separated list of user IDs. Up to 1000 users may be listed.'
           c.flag 'force', desc: 'When set to true and multiple user IDs are provided, continue inviting the valid ones while disregarding invalid IDs. Defaults to false.'
+          c.flag 'users', desc: 'A comma separated list of user IDs. Up to 100 users may be listed.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_invite(options))
           end
@@ -111,8 +111,8 @@ module Slack
         g.command 'inviteShared' do |c|
           c.flag 'channel', desc: "ID of the channel on your team that you'd like to share."
           c.flag 'emails', desc: 'Optional email to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.'
-          c.flag 'external_limited', desc: 'Optional boolean on whether invite is to an external limited member. Defaults to true.'
           c.flag 'user_ids', desc: 'Optional user_id to receive this invite. Either emails or user_ids must be provided. Only one email or one user ID may be invited at a time.'
+          c.flag 'external_limited', desc: 'Optional boolean on whether invite is to an external limited member. Defaults to true.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_inviteShared(options))
           end
@@ -162,8 +162,8 @@ module Slack
         g.desc 'Lists shared channel invites that have been generated or received but have not been approved by all parties'
         g.long_desc %( Lists shared channel invites that have been generated or received but have not been approved by all parties )
         g.command 'listConnectInvites' do |c|
-          c.flag 'cursor', desc: 'Set to next_cursor returned by previous call to list items in subsequent page.'
           c.flag 'team_id', desc: 'Encoded team id for the workspace to retrieve invites for, required if org token is used.'
+          c.flag 'cursor', desc: 'Set to next_cursor returned by previous call to list items in subsequent page.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_listConnectInvites(options))
           end
@@ -194,9 +194,9 @@ module Slack
         g.long_desc %( Opens or resumes a direct message or multi-person direct message. )
         g.command 'open' do |c|
           c.flag 'channel', desc: "Resume a conversation by supplying an im or mpim's ID. Or provide the users field instead."
-          c.flag 'prevent_creation', desc: 'Do not create a direct message or multi-person direct message. This is used to see if there is an existing dm or mpdm.'
           c.flag 'return_im', desc: 'Boolean, indicates you want the full IM channel definition in the response.'
           c.flag 'users', desc: 'Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a channel when not supplying users.'
+          c.flag 'prevent_creation', desc: 'Do not create a direct message or multi-person direct message. This is used to see if there is an existing dm or mpdm.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_open(options))
           end
@@ -216,13 +216,13 @@ module Slack
         g.long_desc %( Retrieve a thread of messages posted to a conversation )
         g.command 'replies' do |c|
           c.flag 'channel', desc: 'Conversation ID to fetch thread from.'
-          c.flag 'ts', desc: "Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message."
           c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
           c.flag 'include_all_metadata', desc: 'Return all metadata associated with this message.'
           c.flag 'inclusive', desc: 'Include messages with oldest or latest timestamps in results. Ignored unless either timestamp is specified.'
           c.flag 'latest', desc: 'Only messages before this Unix timestamp will be included in results.'
           c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
           c.flag 'oldest', desc: 'Only messages after this Unix timestamp will be included in results.'
+          c.flag 'ts', desc: "Unique identifier of either a thread's parent message or a message in the thread. ts must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by ts will return - it is just an ordinary, unthreaded message."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_replies(options))
           end

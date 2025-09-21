@@ -12,8 +12,8 @@ module Slack
           c.flag 'client_id', desc: 'Issued when you created your application.'
           c.flag 'client_secret', desc: 'Issued when you created your application.'
           c.flag 'code', desc: 'The code param returned via the OAuth callback.'
-          c.flag 'grant_type', desc: 'The grant_type param as described in the OAuth spec.'
           c.flag 'redirect_uri', desc: 'This must match the originally submitted URI (if one was sent).'
+          c.flag 'grant_type', desc: 'The grant_type param as described in the OAuth spec.'
           c.flag 'refresh_token', desc: 'The refresh_token param as described in the OAuth spec.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.openid_connect_token(options))

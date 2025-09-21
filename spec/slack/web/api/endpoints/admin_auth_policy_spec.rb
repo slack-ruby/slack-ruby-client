@@ -6,14 +6,14 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::AdminAuthPolicy do
   let(:client) { Slack::Web::Client.new }
   context 'admin.auth.policy_assignEntities' do
-    it 'requires entity_ids' do
-      expect { client.admin_auth_policy_assignEntities(entity_type: %q[], policy_name: %q[email_password]) }.to raise_error ArgumentError, /Required arguments :entity_ids missing/
+    it 'requires policy_name' do
+      expect { client.admin_auth_policy_assignEntities(entity_type: %q[], entity_ids: %q[['U12345','U27345']]) }.to raise_error ArgumentError, /Required arguments :policy_name missing/
     end
     it 'requires entity_type' do
-      expect { client.admin_auth_policy_assignEntities(entity_ids: %q[['U12345','U27345']], policy_name: %q[email_password]) }.to raise_error ArgumentError, /Required arguments :entity_type missing/
+      expect { client.admin_auth_policy_assignEntities(policy_name: %q[email_password], entity_ids: %q[['U12345','U27345']]) }.to raise_error ArgumentError, /Required arguments :entity_type missing/
     end
-    it 'requires policy_name' do
-      expect { client.admin_auth_policy_assignEntities(entity_ids: %q[['U12345','U27345']], entity_type: %q[]) }.to raise_error ArgumentError, /Required arguments :policy_name missing/
+    it 'requires entity_ids' do
+      expect { client.admin_auth_policy_assignEntities(policy_name: %q[email_password], entity_type: %q[]) }.to raise_error ArgumentError, /Required arguments :entity_ids missing/
     end
   end
   context 'admin.auth.policy_getEntities' do
@@ -22,14 +22,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminAuthPolicy do
     end
   end
   context 'admin.auth.policy_removeEntities' do
-    it 'requires entity_ids' do
-      expect { client.admin_auth_policy_removeEntities(entity_type: %q[], policy_name: %q[email_password]) }.to raise_error ArgumentError, /Required arguments :entity_ids missing/
+    it 'requires policy_name' do
+      expect { client.admin_auth_policy_removeEntities(entity_type: %q[], entity_ids: %q[['U1234']]) }.to raise_error ArgumentError, /Required arguments :policy_name missing/
     end
     it 'requires entity_type' do
-      expect { client.admin_auth_policy_removeEntities(entity_ids: %q[['U1234']], policy_name: %q[email_password]) }.to raise_error ArgumentError, /Required arguments :entity_type missing/
+      expect { client.admin_auth_policy_removeEntities(policy_name: %q[email_password], entity_ids: %q[['U1234']]) }.to raise_error ArgumentError, /Required arguments :entity_type missing/
     end
-    it 'requires policy_name' do
-      expect { client.admin_auth_policy_removeEntities(entity_ids: %q[['U1234']], entity_type: %q[]) }.to raise_error ArgumentError, /Required arguments :policy_name missing/
+    it 'requires entity_ids' do
+      expect { client.admin_auth_policy_removeEntities(policy_name: %q[email_password], entity_type: %q[]) }.to raise_error ArgumentError, /Required arguments :entity_ids missing/
     end
   end
 end

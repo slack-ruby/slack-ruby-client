@@ -6,11 +6,11 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::AdminConversationsRestrictaccess do
   let(:client) { Slack::Web::Client.new }
   context 'admin.conversations.restrictAccess_addGroup' do
-    it 'requires channel_id' do
-      expect { client.admin_conversations_restrictAccess_addGroup(group_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
-    end
     it 'requires group_id' do
       expect { client.admin_conversations_restrictAccess_addGroup(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :group_id missing/
+    end
+    it 'requires channel_id' do
+      expect { client.admin_conversations_restrictAccess_addGroup(group_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
   context 'admin.conversations.restrictAccess_listGroups' do
@@ -19,14 +19,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversationsRestrictaccess do
     end
   end
   context 'admin.conversations.restrictAccess_removeGroup' do
-    it 'requires channel_id' do
-      expect { client.admin_conversations_restrictAccess_removeGroup(group_id: %q[], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    it 'requires team_id' do
+      expect { client.admin_conversations_restrictAccess_removeGroup(group_id: %q[], channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
     it 'requires group_id' do
-      expect { client.admin_conversations_restrictAccess_removeGroup(channel_id: %q[], team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :group_id missing/
+      expect { client.admin_conversations_restrictAccess_removeGroup(team_id: %q[], channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :group_id missing/
     end
-    it 'requires team_id' do
-      expect { client.admin_conversations_restrictAccess_removeGroup(channel_id: %q[], group_id: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+    it 'requires channel_id' do
+      expect { client.admin_conversations_restrictAccess_removeGroup(team_id: %q[], group_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
 end

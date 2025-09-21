@@ -11,12 +11,12 @@ module Slack
           #
           # @option options [string] :app_id
           #   The id of the app to approve.
-          # @option options [Object] :enterprise_id
-          #   The ID of the enterprise to approve the app on.
           # @option options [string] :request_id
           #   The id of the request to approve.
           # @option options [Object] :team_id
           #   The ID of the workspace to approve the app on.
+          # @option options [Object] :enterprise_id
+          #   The ID of the enterprise to approve the app on.
           # @see https://api.slack.com/methods/admin.apps.approve
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.approve.json
           def admin_apps_approve(options = {})
@@ -28,10 +28,10 @@ module Slack
           #
           # @option options [string] :app_id
           #   The id of the app whose resolution you want to clear/undo.
-          # @option options [Object] :enterprise_id
-          #   The enterprise to clear the app resolution from.
           # @option options [Object] :team_id
           #   The workspace to clear the app resolution from.
+          # @option options [Object] :enterprise_id
+          #   The enterprise to clear the app resolution from.
           # @see https://api.slack.com/methods/admin.apps.clearResolution
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.clearResolution.json
           def admin_apps_clearResolution(options = {})
@@ -44,12 +44,12 @@ module Slack
           #
           # @option options [string] :app_id
           #   The id of the app to restrict.
-          # @option options [Object] :enterprise_id
-          #   The ID of the enterprise to approve the app on.
           # @option options [string] :request_id
           #   The id of the request to restrict.
           # @option options [Object] :team_id
           #   The ID of the workspace to approve the app on.
+          # @option options [Object] :enterprise_id
+          #   The ID of the enterprise to approve the app on.
           # @see https://api.slack.com/methods/admin.apps.restrict
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.restrict.json
           def admin_apps_restrict(options = {})
@@ -61,10 +61,10 @@ module Slack
           #
           # @option options [string] :app_id
           #   The ID of the app to uninstall.
-          # @option options [string] :enterprise_id
-          #   The enterprise to completely uninstall the application from (across all workspaces). With an org-level token, this or team_ids is required.
           # @option options [string] :team_ids
           #   IDs of the teams to uninstall from (max 100). With an org-level token, this or enterprise_id is required.
+          # @option options [string] :enterprise_id
+          #   The enterprise to completely uninstall the application from (across all workspaces). With an org-level token, this or team_ids is required.
           # @see https://api.slack.com/methods/admin.apps.uninstall
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.uninstall.json
           def admin_apps_uninstall(options = {})

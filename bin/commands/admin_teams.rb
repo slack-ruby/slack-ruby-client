@@ -18,11 +18,11 @@ module Slack
           end
         end
 
-        g.desc 'List all teams on an Enterprise organization'
-        g.long_desc %( List all teams on an Enterprise organization )
+        g.desc 'List all teams in an Enterprise organization'
+        g.long_desc %( List all teams in an Enterprise organization )
         g.command 'list' do |c|
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'limit', desc: 'The maximum number of items to return. Must be a positive integer no larger than 1000.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_teams_list(options))
           end

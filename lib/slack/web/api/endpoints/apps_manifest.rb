@@ -9,7 +9,7 @@ module Slack
           #
           # Create an app from an app manifest.
           #
-          # @option options [manifest object as string] :manifest
+          # @option options [string] :manifest
           #   A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one.
           # @see https://api.slack.com/methods/apps.manifest.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.create.json
@@ -46,15 +46,15 @@ module Slack
           #
           # Update an app from an app manifest
           #
+          # @option options [string] :manifest
+          #   A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one. As this method entirely _replaces_ any previous configuration, manifest must contain both unmodified and modified fields.
           # @option options [Object] :app_id
           #   The ID of the app whose configuration you want to update.
-          # @option options [manifest object as string] :manifest
-          #   A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one. As this method entirely replaces any previous configuration, manifest must contain both unmodified and modified fields.
           # @see https://api.slack.com/methods/apps.manifest.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.update.json
           def apps_manifest_update(options = {})
-            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             raise ArgumentError, 'Required arguments :manifest missing' if options[:manifest].nil?
+            raise ArgumentError, 'Required arguments :app_id missing' if options[:app_id].nil?
             options = encode_options_as_json(options, %i[manifest])
             post('apps.manifest.update', options)
           end
@@ -62,7 +62,7 @@ module Slack
           #
           # Validate an app manifest
           #
-          # @option options [manifest object as string] :manifest
+          # @option options [string] :manifest
           #   The manifest to be validated. Will be validated against the app manifest schema - read our guide.
           # @option options [Object] :app_id
           #   The ID of the app whose configuration you want to validate.

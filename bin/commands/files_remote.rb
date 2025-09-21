@@ -11,10 +11,10 @@ module Slack
         g.command 'add' do |c|
           c.flag 'external_id', desc: 'Creator defined GUID for the file.'
           c.flag 'external_url', desc: 'URL of the remote file.'
-          c.flag 'title', desc: 'Title of the file being shared.'
           c.flag 'filetype', desc: 'type of file.'
           c.flag 'indexable_file_contents', desc: 'A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.'
           c.flag 'preview_image', desc: 'Preview of the document via multipart/form-data.'
+          c.flag 'title', desc: 'Title of the file being shared.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.files_remote_add(options))
           end

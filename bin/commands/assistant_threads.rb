@@ -10,8 +10,8 @@ module Slack
         g.long_desc %( Set the status for an AI assistant thread. )
         g.command 'setStatus' do |c|
           c.flag 'channel_id', desc: 'Channel ID containing the assistant thread.'
-          c.flag 'status', desc: "Status of the specified bot user, e.g. 'is thinking...'."
           c.flag 'thread_ts', desc: 'Message timestamp of the thread of where to set the status.'
+          c.flag 'status', desc: "Status of the specified bot user, e.g. 'is thinking...'."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.assistant_threads_setStatus(options))
           end
@@ -21,8 +21,8 @@ module Slack
         g.long_desc %( Set suggested prompts for the given assistant thread )
         g.command 'setSuggestedPrompts' do |c|
           c.flag 'channel_id', desc: 'Channel ID containing the assistant thread.'
-          c.flag 'prompts', desc: 'Each prompt should be supplied with its title and message attribute.'
           c.flag 'thread_ts', desc: 'Message timestamp of the thread to set suggested prompts for.'
+          c.flag 'prompts', desc: 'Each prompt should be supplied with its title and message attribute.'
           c.flag 'title', desc: 'Title for the list of provided prompts. For example: Suggested Prompts, Related Questions.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.assistant_threads_setSuggestedPrompts(options))

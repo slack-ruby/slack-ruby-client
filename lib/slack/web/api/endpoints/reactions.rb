@@ -48,16 +48,16 @@ module Slack
           #
           # Lists reactions made by a user.
           #
-          # @option options [string] :cursor
-          #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
+          # @option options [user] :user
+          #   Show reactions made by this user. Defaults to the authed user.
           # @option options [boolean] :full
           #   If true always return the complete reaction list.
+          # @option options [string] :cursor
+          #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
           # @option options [integer] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           # @option options [string] :team_id
           #   encoded team id to list reactions in, required if org token is used.
-          # @option options [user] :user
-          #   Show reactions made by this user. Defaults to the authed user.
           # @see https://api.slack.com/methods/reactions.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/reactions/reactions.list.json
           def reactions_list(options = {})
@@ -76,12 +76,12 @@ module Slack
           #
           # @option options [string] :name
           #   Reaction (emoji) name.
-          # @option options [channel] :channel
-          #   Channel where the message to remove reaction from was posted.
           # @option options [file] :file
           #   File to remove reaction from.
           # @option options [string] :file_comment
           #   File comment to remove reaction from.
+          # @option options [channel] :channel
+          #   Channel where the message to remove reaction from was posted.
           # @option options [string] :timestamp
           #   Timestamp of the message to remove reaction from.
           # @see https://api.slack.com/methods/reactions.remove

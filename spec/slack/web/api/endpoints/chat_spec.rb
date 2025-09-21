@@ -18,7 +18,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect { client.chat_delete(ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.chat_delete(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+      expect { client.chat_delete(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
   end
   context 'chat_deleteScheduledMessage' do
@@ -31,10 +31,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
   end
   context 'chat_getPermalink' do
     it 'requires channel' do
-      expect { client.chat_getPermalink(message_ts: %q[1234567890.123456]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.chat_getPermalink(message_ts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires message_ts' do
-      expect { client.chat_getPermalink(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :message_ts missing/
+      expect { client.chat_getPermalink(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :message_ts missing/
     end
   end
   context 'chat_meMessage' do
@@ -42,43 +42,43 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect { client.chat_meMessage(text: %q[Hello world]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires text' do
-      expect { client.chat_meMessage(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :text missing/
+      expect { client.chat_meMessage(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :text missing/
     end
   end
   context 'chat_postEphemeral' do
     it 'requires channel' do
-      expect { client.chat_postEphemeral(user: %q[U0BPQUNTA], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires user' do
-      expect { client.chat_postEphemeral(channel: %q[C1234567890], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :user missing/
+      expect { client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]) }.to raise_error ArgumentError, /Required arguments :user missing/
     end
     it 'requires one of attachments, blocks, text' do
-      expect { client.chat_postEphemeral(channel: %q[C1234567890], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /At least one of/
+      expect { client.chat_postEphemeral(channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /At least one of/
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA]})
-      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], user: %q[U0BPQUNTA])
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA])
     end
     it 'encodes attachments, blocks as json' do
-      expect(client).to receive(:post).with('chat.postEphemeral', {channel: %q[C1234567890], user: %q[U0BPQUNTA], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}]})
-      client.chat_postEphemeral(channel: %q[C1234567890], user: %q[U0BPQUNTA], attachments: {:data=>["data"]}, blocks: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[{"data":["data"]}], channel: %q[], user: %q[U0BPQUNTA], blocks: %q[{"data":["data"]}]})
+      client.chat_postEphemeral(attachments: {:data=>["data"]}, channel: %q[], user: %q[U0BPQUNTA], blocks: {:data=>["data"]})
     end
   end
   context 'chat_postMessage' do
@@ -86,68 +86,68 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect { client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires one of attachments, blocks, text' do
-      expect { client.chat_postMessage(channel: %q[C1234567890]) }.to raise_error ArgumentError, /At least one of/
+      expect { client.chat_postMessage(channel: %q[]) }.to raise_error ArgumentError, /At least one of/
 
-      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890]})
-      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]})
+      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[])
 
-      expect(client).to receive(:post).with('chat.postMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890]})
-      client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[]})
+      client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[])
 
-      expect(client).to receive(:post).with('chat.postMessage', {text: %q[Hello world], channel: %q[C1234567890]})
-      client.chat_postMessage(text: %q[Hello world], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {text: %q[Hello world], channel: %q[]})
+      client.chat_postMessage(text: %q[Hello world], channel: %q[])
 
-      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890]})
-      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[]})
+      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[])
 
-      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890]})
-      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[]})
+      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[])
 
-      expect(client).to receive(:post).with('chat.postMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890]})
-      client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[]})
+      client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[])
 
-      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890]})
-      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890])
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[]})
+      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[])
     end
     it 'encodes attachments, blocks, metadata as json' do
-      expect(client).to receive(:post).with('chat.postMessage', {channel: %q[C1234567890], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
-      client.chat_postMessage(channel: %q[C1234567890], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[{"data":["data"]}], channel: %q[], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_postMessage(attachments: {:data=>["data"]}, channel: %q[], blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
   context 'chat_scheduleMessage' do
     it 'requires channel' do
-      expect { client.chat_scheduleMessage(post_at: %q[299876400], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], post_at: %q[299876400]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires post_at' do
-      expect { client.chat_scheduleMessage(channel: %q[C1234567890], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :post_at missing/
+      expect { client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]) }.to raise_error ArgumentError, /Required arguments :post_at missing/
     end
     it 'requires one of attachments, blocks, text' do
-      expect { client.chat_scheduleMessage(channel: %q[C1234567890], post_at: %q[299876400]) }.to raise_error ArgumentError, /At least one of/
+      expect { client.chat_scheduleMessage(channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /At least one of/
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400])
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], post_at: %q[299876400])
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {text: %q[Hello world], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(text: %q[Hello world], channel: %q[], post_at: %q[299876400])
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], post_at: %q[299876400])
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400])
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400])
 
-      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400]})
-      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], post_at: %q[299876400])
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400])
     end
     it 'encodes attachments, blocks, metadata as json' do
-      expect(client).to receive(:post).with('chat.scheduleMessage', {channel: %q[C1234567890], post_at: %q[299876400], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
-      client.chat_scheduleMessage(channel: %q[C1234567890], post_at: %q[299876400], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[{"data":["data"]}], channel: %q[], post_at: %q[299876400], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_scheduleMessage(attachments: {:data=>["data"]}, channel: %q[], post_at: %q[299876400], blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
   context 'chat_unfurl' do
@@ -155,50 +155,50 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect { client.chat_unfurl(ts: %q[], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.chat_unfurl(channel: %q[C1234567890], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+      expect { client.chat_unfurl(channel: %q[], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
     it 'requires unfurls' do
-      expect { client.chat_unfurl(channel: %q[C1234567890], ts: %q[]) }.to raise_error ArgumentError, /Required arguments :unfurls missing/
+      expect { client.chat_unfurl(channel: %q[], ts: %q[]) }.to raise_error ArgumentError, /Required arguments :unfurls missing/
     end
     it 'encodes unfurls, user_auth_blocks as json' do
-      expect(client).to receive(:post).with('chat.unfurl', {channel: %q[C1234567890], ts: %q[], unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}]})
-      client.chat_unfurl(channel: %q[C1234567890], ts: %q[], unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.unfurl', {channel: %q[], ts: %q[], unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}]})
+      client.chat_unfurl(channel: %q[], ts: %q[], unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]})
     end
   end
   context 'chat_update' do
     it 'requires channel' do
-      expect { client.chat_update(ts: %q["1405894322.002768"], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.chat_update(channel: %q[C1234567890], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+      expect { client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
     it 'requires one of attachments, blocks, text' do
-      expect { client.chat_update(channel: %q[C1234567890], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /At least one of/
+      expect { client.chat_update(channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /At least one of/
 
-      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect(client).to receive(:post).with('chat.update', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect(client).to receive(:post).with('chat.update', {text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect(client).to receive(:post).with('chat.update', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"]})
-      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[C1234567890], ts: %q["1405894322.002768"])
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"])
     end
     it 'encodes attachments, blocks, metadata as json' do
-      expect(client).to receive(:post).with('chat.update', {channel: %q[C1234567890], ts: %q["1405894322.002768"], attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
-      client.chat_update(channel: %q[C1234567890], ts: %q["1405894322.002768"], attachments: {:data=>["data"]}, blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[{"data":["data"]}], channel: %q[], ts: %q["1405894322.002768"], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_update(attachments: {:data=>["data"]}, channel: %q[], ts: %q["1405894322.002768"], blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
 end

@@ -9,18 +9,18 @@ module Slack
           #
           # Assign entities to a particular authentication policy.
           #
-          # @option options [array] :entity_ids
-          #   Array of IDs to assign to the policy.
-          # @option options [Object] :entity_type
-          #   The type of entity to assign to the policy. Currently, USER is supported.
           # @option options [string] :policy_name
           #   The name of the authentication policy to assign the entities to. Currently, email_password is the only policy that may be used with this method.
+          # @option options [Object] :entity_type
+          #   The type of entity to assign to the policy. Currently, USER is supported.
+          # @option options [array] :entity_ids
+          #   Array of IDs to assign to the policy.
           # @see https://api.slack.com/methods/admin.auth.policy.assignEntities
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.auth.policy/admin.auth.policy.assignEntities.json
           def admin_auth_policy_assignEntities(options = {})
-            raise ArgumentError, 'Required arguments :entity_ids missing' if options[:entity_ids].nil?
-            raise ArgumentError, 'Required arguments :entity_type missing' if options[:entity_type].nil?
             raise ArgumentError, 'Required arguments :policy_name missing' if options[:policy_name].nil?
+            raise ArgumentError, 'Required arguments :entity_type missing' if options[:entity_type].nil?
+            raise ArgumentError, 'Required arguments :entity_ids missing' if options[:entity_ids].nil?
             post('admin.auth.policy.assignEntities', options)
           end
 
@@ -29,12 +29,12 @@ module Slack
           #
           # @option options [string] :policy_name
           #   The name of the policy to fetch entities for. Currently, email_password is the only policy that may be used with this method.
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [Object] :entity_type
           #   The type of entity to assign to the policy. Currently, USER is supported.
           # @option options [integer] :limit
           #   The maximum number of items to return. Must be between 1 and 1000, both inclusive.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @see https://api.slack.com/methods/admin.auth.policy.getEntities
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.auth.policy/admin.auth.policy.getEntities.json
           def admin_auth_policy_getEntities(options = {})
@@ -51,18 +51,18 @@ module Slack
           #
           # Remove specified entities from a specified authentication policy.
           #
-          # @option options [array] :entity_ids
-          #   Encoded IDs of the entities you'd like to remove from the policy.
-          # @option options [Object] :entity_type
-          #   The type of entity to assign to the policy. Currently, USER is supported.
           # @option options [string] :policy_name
           #   The name of the policy to remove entities from. Currently, email_password is the only policy that may be used with this method.
+          # @option options [Object] :entity_type
+          #   The type of entity to assign to the policy. Currently, USER is supported.
+          # @option options [array] :entity_ids
+          #   Encoded IDs of the entities you'd like to remove from the policy.
           # @see https://api.slack.com/methods/admin.auth.policy.removeEntities
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.auth.policy/admin.auth.policy.removeEntities.json
           def admin_auth_policy_removeEntities(options = {})
-            raise ArgumentError, 'Required arguments :entity_ids missing' if options[:entity_ids].nil?
-            raise ArgumentError, 'Required arguments :entity_type missing' if options[:entity_type].nil?
             raise ArgumentError, 'Required arguments :policy_name missing' if options[:policy_name].nil?
+            raise ArgumentError, 'Required arguments :entity_type missing' if options[:entity_type].nil?
+            raise ArgumentError, 'Required arguments :entity_ids missing' if options[:entity_ids].nil?
             post('admin.auth.policy.removeEntities', options)
           end
         end

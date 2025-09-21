@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'Migration methods.'
       command 'migration' do |g|
-        g.desc 'For Enterprise Grid workspaces, map local user IDs to global user IDs'
-        g.long_desc %( For Enterprise Grid workspaces, map local user IDs to global user IDs )
+        g.desc 'For Enterprise organization workspaces, map local user IDs to global user IDs'
+        g.long_desc %( For Enterprise organization workspaces, map local user IDs to global user IDs )
         g.command 'exchange' do |c|
           c.flag 'users', desc: 'A comma-separated list of user ids, up to 400 per request.'
           c.flag 'team_id', desc: 'Specify team_id starts with T in case of Org Token.'

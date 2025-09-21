@@ -47,10 +47,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
   end
   context 'conversations_invite' do
     it 'requires channel' do
-      expect { client.conversations_invite(users: %q[W1234567890,U2345678901,U3456789012]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.conversations_invite(users: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires users' do
-      expect { client.conversations_invite(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :users missing/
+      expect { client.conversations_invite(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :users missing/
     end
   end
   context 'conversations_inviteShared' do
@@ -91,15 +91,15 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
       expect { client.conversations_rename(name: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires name' do
-      expect { client.conversations_rename(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :name missing/
+      expect { client.conversations_rename(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
   end
   context 'conversations_replies' do
     it 'requires channel' do
-      expect { client.conversations_replies(ts: %q[1234567890.123456]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.conversations_replies(ts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.conversations_replies(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+      expect { client.conversations_replies(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
   end
   context 'conversations_setPurpose' do
@@ -107,7 +107,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
       expect { client.conversations_setPurpose(purpose: %q[This is the random channel, anything goes!]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires purpose' do
-      expect { client.conversations_setPurpose(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :purpose missing/
+      expect { client.conversations_setPurpose(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :purpose missing/
     end
   end
   context 'conversations_setTopic' do
@@ -115,7 +115,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Conversations do
       expect { client.conversations_setTopic(topic: %q[Apply topically for best effects]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires topic' do
-      expect { client.conversations_setTopic(channel: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :topic missing/
+      expect { client.conversations_setTopic(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :topic missing/
     end
   end
   context 'conversations_unarchive' do

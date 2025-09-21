@@ -11,10 +11,11 @@ module Slack
           #
           # @option options [array] :app_ids
           #   An array of app IDs to get app configs for.
+          # @option options [array] :rich_link_preview_types
+          #   return apps with the corresponding rich link preview layouts.
           # @see https://api.slack.com/methods/admin.apps.config.lookup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.config/admin.apps.config.lookup.json
           def admin_apps_config_lookup(options = {})
-            raise ArgumentError, 'Required arguments :app_ids missing' if options[:app_ids].nil?
             post('admin.apps.config.lookup', options)
           end
 
@@ -23,10 +24,12 @@ module Slack
           #
           # @option options [Object] :app_id
           #   The encoded app ID to set the app config for.
-          # @option options [object] :domain_restrictions
-          #   Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.
           # @option options [enum] :workflow_auth_strategy
           #   The workflow auth permission. Can be one of builder_choice or end_user_only.
+          # @option options [enum] :rich_link_preview_type
+          #   Indicates the app-level override for rich link preview. Unsupported for free teams.
+          # @option options [object] :domain_restrictions
+          #   Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.
           # @see https://api.slack.com/methods/admin.apps.config.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.config/admin.apps.config.set.json
           def admin_apps_config_set(options = {})

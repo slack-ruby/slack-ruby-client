@@ -6,11 +6,11 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::Functions do
   let(:client) { Slack::Web::Client.new }
   context 'functions_completeError' do
-    it 'requires error' do
-      expect { client.functions_completeError(function_execution_id: %q[Fx12345ABCDE]) }.to raise_error ArgumentError, /Required arguments :error missing/
-    end
     it 'requires function_execution_id' do
       expect { client.functions_completeError(error: %q[]) }.to raise_error ArgumentError, /Required arguments :function_execution_id missing/
+    end
+    it 'requires error' do
+      expect { client.functions_completeError(function_execution_id: %q[Fx12345ABCDE]) }.to raise_error ArgumentError, /Required arguments :error missing/
     end
   end
   context 'functions_completeSuccess' do

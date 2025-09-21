@@ -9,8 +9,8 @@ module Slack
         g.desc 'Signal that a function failed to complete'
         g.long_desc %( Signal that a function failed to complete )
         g.command 'completeError' do |c|
-          c.flag 'error', desc: 'A human-readable error message that contains information about why the function failed to complete.'
           c.flag 'function_execution_id', desc: 'Context identifier that maps to the executed function.'
+          c.flag 'error', desc: 'A human-readable error message that contains information about why the function failed to complete.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.functions_completeError(options))
           end

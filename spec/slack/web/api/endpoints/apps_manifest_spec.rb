@@ -25,15 +25,15 @@ RSpec.describe Slack::Web::Api::Endpoints::AppsManifest do
     end
   end
   context 'apps.manifest_update' do
-    it 'requires app_id' do
-      expect { client.apps_manifest_update(manifest: %q[]) }.to raise_error ArgumentError, /Required arguments :app_id missing/
-    end
     it 'requires manifest' do
       expect { client.apps_manifest_update(app_id: %q[]) }.to raise_error ArgumentError, /Required arguments :manifest missing/
     end
+    it 'requires app_id' do
+      expect { client.apps_manifest_update(manifest: %q[]) }.to raise_error ArgumentError, /Required arguments :app_id missing/
+    end
     it 'encodes manifest as json' do
-      expect(client).to receive(:post).with('apps.manifest.update', {app_id: %q[], manifest: %q[{"data":["data"]}]})
-      client.apps_manifest_update(app_id: %q[], manifest: {:data=>["data"]})
+      expect(client).to receive(:post).with('apps.manifest.update', {manifest: %q[{"data":["data"]}], app_id: %q[]})
+      client.apps_manifest_update(manifest: {:data=>["data"]}, app_id: %q[])
     end
   end
   context 'apps.manifest_validate' do

@@ -9,12 +9,12 @@ module Slack
           #
           # List all users in a User Group.
           #
-          # @option options [string] :usergroup
-          #   The encoded ID of the User Group to list users for.
           # @option options [boolean] :include_disabled
-          #   Allow results that involve disabled User Groups.
+          #   Include results for disabled User Groups.
+          # @option options [string] :usergroup
+          #   The encoded ID of the User Group.
           # @option options [string] :team_id
-          #   encoded team id where the user group exists, required if org token is used.
+          #   The user group's encoded team ID. Required if org token is used.
           # @see https://api.slack.com/methods/usergroups.users.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups.users/usergroups.users.list.json
           def usergroups_users_list(options = {})
@@ -25,18 +25,18 @@ module Slack
           #
           # Update the list of users for a user group.
           #
+          # @option options [boolean] :include_count
+          #   Include the number of users in the user group.
+          # @option options [string] :team_id
+          #   encoded team id where the user group exists, required if org token is used.
           # @option options [string] :usergroup
           #   The encoded ID of the user group to update.
           # @option options [array] :users
           #   A comma separated string of encoded user IDs that represent the entire list of users for the user group.
           # @option options [array] :additional_channels
           #   A comma separated string of encoded channel IDs for which the User Group can custom add usergroup members too.
-          # @option options [boolean] :include_count
-          #   Include the number of users in the user group.
           # @option options [boolean] :is_shared
           #   Boolean to identify if the API is getting called when a shared section is getting shared.
-          # @option options [string] :team_id
-          #   encoded team id where the user group exists, required if org token is used.
           # @see https://api.slack.com/methods/usergroups.users.update
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/usergroups.users/usergroups.users.update.json
           def usergroups_users_update(options = {})

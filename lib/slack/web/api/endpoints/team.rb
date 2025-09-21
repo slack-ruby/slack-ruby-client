@@ -9,7 +9,7 @@ module Slack
           #
           # Gets the access logs for the current team.
           #
-          # @option options [string] :before
+          # @option options [["string", "string"]] :before
           #   End of time range of logs to include in results (inclusive).
           # @option options [string] :cursor
           #   Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See pagination for more details.
@@ -36,10 +36,10 @@ module Slack
           #   Set cursor to next_cursor returned by previous call, to indicate from where you want to list next page of users list. Default value fetches the first page.
           # @option options [integer] :limit
           #   The maximum number of items to return.
-          # @option options [string] :team_id
-          #   encoded team id to get the billable information from, required if org token is used.
           # @option options [user] :user
           #   A user to retrieve the billable information for. Defaults to all users.
+          # @option options [string] :team_id
+          #   encoded team id to get the billable information from, required if org token is used.
           # @see https://api.slack.com/methods/team.billableInfo
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.billableInfo.json
           def team_billableInfo(options = {})

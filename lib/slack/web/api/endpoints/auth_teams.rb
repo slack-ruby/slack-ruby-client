@@ -9,12 +9,12 @@ module Slack
           #
           # Obtain a full list of workspaces your org-wide app has been approved for.
           #
+          # @option options [integer] :limit
+          #   The maximum number of workspaces to return. Must be a positive integer no larger than 1000.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [boolean] :include_icon
           #   Whether to return icon paths for each workspace. An icon path represents a URI pointing to the image signifying the workspace.
-          # @option options [integer] :limit
-          #   The maximum number of workspaces to return. Must be a positive integer no larger than 1000.
           # @see https://api.slack.com/methods/auth.teams.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/auth.teams/auth.teams.list.json
           def auth_teams_list(options = {})

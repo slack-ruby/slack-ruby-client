@@ -11,14 +11,14 @@ module Slack
           #
           # @option options [string] :trigger_id
           #   Encoded ID of the trigger.
-          # @option options [array] :channel_ids
-          #   List of encoded channel IDs.
-          # @option options [array] :org_ids
-          #   List of encoded organization IDs.
-          # @option options [array] :team_ids
-          #   List of encoded workspace IDs.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
+          # @option options [array] :channel_ids
+          #   List of encoded channel IDs.
+          # @option options [array] :team_ids
+          #   List of encoded workspace IDs.
+          # @option options [array] :org_ids
+          #   List of encoded organization IDs.
           # @see https://api.slack.com/methods/workflows.triggers.permissions.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows.triggers.permissions/workflows.triggers.permissions.add.json
           def workflows_triggers_permissions_add(options = {})
@@ -43,14 +43,14 @@ module Slack
           #
           # @option options [string] :trigger_id
           #   Encoded ID of the trigger.
-          # @option options [array] :channel_ids
-          #   List of encoded channel IDs.
-          # @option options [array] :org_ids
-          #   List of encoded organization IDs.
-          # @option options [array] :team_ids
-          #   List of encoded workspace IDs.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
+          # @option options [array] :channel_ids
+          #   List of encoded channel IDs.
+          # @option options [array] :team_ids
+          #   List of encoded workspace IDs.
+          # @option options [array] :org_ids
+          #   List of encoded organization IDs.
           # @see https://api.slack.com/methods/workflows.triggers.permissions.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows.triggers.permissions/workflows.triggers.permissions.remove.json
           def workflows_triggers_permissions_remove(options = {})
@@ -61,23 +61,23 @@ module Slack
           #
           # Set the permission type for who can run a trigger
           #
-          # @option options [enum] :permission_type
-          #   The type of permission that defines who can run a trigger.
           # @option options [string] :trigger_id
           #   Encoded ID of the trigger.
-          # @option options [array] :channel_ids
-          #   List of encoded channel IDs.
-          # @option options [array] :org_ids
-          #   List of encoded organization IDs.
-          # @option options [array] :team_ids
-          #   List of encoded workspace IDs.
+          # @option options [enum] :permission_type
+          #   The type of permission that defines who can run a trigger.
           # @option options [array] :user_ids
           #   List of encoded user IDs.
+          # @option options [array] :channel_ids
+          #   List of encoded channel IDs.
+          # @option options [array] :team_ids
+          #   List of encoded workspace IDs.
+          # @option options [array] :org_ids
+          #   List of encoded organization IDs.
           # @see https://api.slack.com/methods/workflows.triggers.permissions.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/workflows.triggers.permissions/workflows.triggers.permissions.set.json
           def workflows_triggers_permissions_set(options = {})
-            raise ArgumentError, 'Required arguments :permission_type missing' if options[:permission_type].nil?
             raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
+            raise ArgumentError, 'Required arguments :permission_type missing' if options[:permission_type].nil?
             post('workflows.triggers.permissions.set', options)
           end
         end

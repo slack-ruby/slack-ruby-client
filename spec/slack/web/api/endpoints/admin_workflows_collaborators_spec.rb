@@ -6,19 +6,19 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::AdminWorkflowsCollaborators do
   let(:client) { Slack::Web::Client.new }
   context 'admin.workflows.collaborators_add' do
-    it 'requires collaborator_ids' do
-      expect { client.admin_workflows_collaborators_add(workflow_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :collaborator_ids missing/
-    end
     it 'requires workflow_ids' do
       expect { client.admin_workflows_collaborators_add(collaborator_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :workflow_ids missing/
     end
+    it 'requires collaborator_ids' do
+      expect { client.admin_workflows_collaborators_add(workflow_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :collaborator_ids missing/
+    end
   end
   context 'admin.workflows.collaborators_remove' do
-    it 'requires collaborator_ids' do
-      expect { client.admin_workflows_collaborators_remove(workflow_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :collaborator_ids missing/
-    end
     it 'requires workflow_ids' do
       expect { client.admin_workflows_collaborators_remove(collaborator_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :workflow_ids missing/
+    end
+    it 'requires collaborator_ids' do
+      expect { client.admin_workflows_collaborators_remove(workflow_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :collaborator_ids missing/
     end
   end
 end

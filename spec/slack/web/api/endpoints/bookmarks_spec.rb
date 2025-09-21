@@ -10,18 +10,18 @@ RSpec.describe Slack::Web::Api::Endpoints::Bookmarks do
       expect { client.bookmarks_add(title: %q[], type: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
     it 'requires title' do
-      expect { client.bookmarks_add(channel_id: %q[C1234567890], type: %q[]) }.to raise_error ArgumentError, /Required arguments :title missing/
+      expect { client.bookmarks_add(channel_id: %q[], type: %q[]) }.to raise_error ArgumentError, /Required arguments :title missing/
     end
     it 'requires type' do
-      expect { client.bookmarks_add(channel_id: %q[C1234567890], title: %q[]) }.to raise_error ArgumentError, /Required arguments :type missing/
+      expect { client.bookmarks_add(channel_id: %q[], title: %q[]) }.to raise_error ArgumentError, /Required arguments :type missing/
     end
   end
   context 'bookmarks_edit' do
-    it 'requires bookmark_id' do
-      expect { client.bookmarks_edit(channel_id: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :bookmark_id missing/
-    end
     it 'requires channel_id' do
       expect { client.bookmarks_edit(bookmark_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+    it 'requires bookmark_id' do
+      expect { client.bookmarks_edit(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :bookmark_id missing/
     end
   end
   context 'bookmarks_list' do
@@ -30,11 +30,11 @@ RSpec.describe Slack::Web::Api::Endpoints::Bookmarks do
     end
   end
   context 'bookmarks_remove' do
-    it 'requires bookmark_id' do
-      expect { client.bookmarks_remove(channel_id: %q[C1234567890]) }.to raise_error ArgumentError, /Required arguments :bookmark_id missing/
-    end
     it 'requires channel_id' do
       expect { client.bookmarks_remove(bookmark_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+    it 'requires bookmark_id' do
+      expect { client.bookmarks_remove(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :bookmark_id missing/
     end
   end
 end

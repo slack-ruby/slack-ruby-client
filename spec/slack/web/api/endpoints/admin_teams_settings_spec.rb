@@ -11,27 +11,27 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminTeamsSettings do
     end
   end
   context 'admin.teams.settings_setDefaultChannels' do
-    it 'requires channel_ids' do
-      expect { client.admin_teams_settings_setDefaultChannels(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
-    end
     it 'requires team_id' do
       expect { client.admin_teams_settings_setDefaultChannels(channel_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
+    it 'requires channel_ids' do
+      expect { client.admin_teams_settings_setDefaultChannels(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+    end
   end
   context 'admin.teams.settings_setDescription' do
-    it 'requires description' do
-      expect { client.admin_teams_settings_setDescription(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :description missing/
-    end
     it 'requires team_id' do
       expect { client.admin_teams_settings_setDescription(description: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
     end
+    it 'requires description' do
+      expect { client.admin_teams_settings_setDescription(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :description missing/
+    end
   end
   context 'admin.teams.settings_setDiscoverability' do
-    it 'requires discoverability' do
-      expect { client.admin_teams_settings_setDiscoverability(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :discoverability missing/
-    end
     it 'requires team_id' do
       expect { client.admin_teams_settings_setDiscoverability(discoverability: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+    end
+    it 'requires discoverability' do
+      expect { client.admin_teams_settings_setDiscoverability(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :discoverability missing/
     end
   end
   context 'admin.teams.settings_setIcon' do
@@ -43,11 +43,11 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminTeamsSettings do
     end
   end
   context 'admin.teams.settings_setName' do
-    it 'requires name' do
-      expect { client.admin_teams_settings_setName(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
-    end
     it 'requires team_id' do
       expect { client.admin_teams_settings_setName(name: %q[]) }.to raise_error ArgumentError, /Required arguments :team_id missing/
+    end
+    it 'requires name' do
+      expect { client.admin_teams_settings_setName(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
     end
   end
 end

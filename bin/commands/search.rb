@@ -9,8 +9,8 @@ module Slack
         g.desc 'Searches for messages and files matching a query.'
         g.long_desc %( Searches for messages and files matching a query. )
         g.command 'all' do |c|
-          c.flag 'query', desc: 'Search query. May contains booleans, etc.'
           c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
+          c.flag 'query', desc: 'Search query. May contains booleans, etc.'
           c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
           c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
           c.flag 'team_id', desc: 'encoded team id to search in, required if org token is used.'
@@ -22,8 +22,8 @@ module Slack
         g.desc 'Searches for files matching a query.'
         g.long_desc %( Searches for files matching a query. )
         g.command 'files' do |c|
-          c.flag 'query', desc: 'Search query.'
           c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
+          c.flag 'query', desc: 'Search query.'
           c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
           c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
           c.flag 'team_id', desc: 'encoded team id to search in, required if org token is used.'
@@ -35,9 +35,9 @@ module Slack
         g.desc 'Searches for messages matching a query.'
         g.long_desc %( Searches for messages matching a query. )
         g.command 'messages' do |c|
-          c.flag 'query', desc: 'Search query.'
-          c.flag 'cursor', desc: "Use this when getting results with cursormark pagination. For first call send * for subsequent calls, send the value of next_cursor returned in the previous call's results."
           c.flag 'highlight', desc: 'Pass a value of true to enable query highlight markers (see below).'
+          c.flag 'cursor', desc: "Use this when getting results with cursormark pagination. For first call send * for subsequent calls, send the value of next_cursor returned in the previous call's results."
+          c.flag 'query', desc: 'Search query.'
           c.flag 'sort', desc: 'Return matches sorted by either score or timestamp.'
           c.flag 'sort_dir', desc: 'Change sort direction to ascending (asc) or descending (desc).'
           c.flag 'team_id', desc: 'encoded team id to search in, required if org token is used.'

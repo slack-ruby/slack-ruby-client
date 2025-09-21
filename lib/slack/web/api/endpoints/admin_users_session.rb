@@ -33,13 +33,16 @@ module Slack
           #
           # Revoke a single session for a user. The user will be forced to login to Slack.
           #
-          # @option options [integer] :session_id
-          #   ID of the session to invalidate.
+          # @option options [Object] :team_id
+          #   ID of the workspace that the session belongs to.
           # @option options [Object] :user_id
           #   ID of the user that the session belongs to.
+          # @option options [integer] :session_id
+          #   ID of the session to invalidate.
           # @see https://api.slack.com/methods/admin.users.session.invalidate
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.invalidate.json
           def admin_users_session_invalidate(options = {})
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             raise ArgumentError, 'Required arguments :session_id missing' if options[:session_id].nil?
             post('admin.users.session.invalidate', options)
           end
@@ -47,14 +50,14 @@ module Slack
           #
           # List active user sessions for an organization
           #
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
-          # @option options [integer] :limit
-          #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           # @option options [string] :team_id
           #   The ID of the workspace you'd like active sessions for. If you pass a team_id, you'll need to pass a user_id as well.
           # @option options [string] :user_id
           #   The ID of user you'd like active sessions for. If you pass a user_id, you'll need to pass a team_id as well.
+          # @option options [integer] :limit
+          #   The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @see https://api.slack.com/methods/admin.users.session.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.list.json
           def admin_users_session_list(options = {})
@@ -87,7 +90,7 @@ module Slack
           # Enqueues an asynchronous job to wipe all valid sessions on all devices for a given list of users
           #
           # @option options [array] :user_ids
-          #   The ID of the user to wipe sessions for.
+          #   The list of up to 1,000 user IDs to wipe sessions for.
           # @option options [boolean] :mobile_only
           #   Only expire mobile sessions (default: false).
           # @option options [boolean] :web_only
@@ -104,10 +107,10 @@ module Slack
           #
           # @option options [array] :user_ids
           #   The list of up to 1,000 user IDs to apply the session settings for.
-          # @option options [boolean] :desktop_app_browser_quit
-          #   Terminate the session when the client—either the desktop app or a browser window—is closed.
           # @option options [integer] :duration
           #   The session duration, in seconds. The minimum value is 28800, which represents 8 hours; the max value is 315569520 or 10 years (that's a long Slack session).
+          # @option options [boolean] :desktop_app_browser_quit
+          #   Terminate the session when the client—either the desktop app or a browser window—is closed.
           # @see https://api.slack.com/methods/admin.users.session.setSettings
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users.session/admin.users.session.setSettings.json
           def admin_users_session_setSettings(options = {})

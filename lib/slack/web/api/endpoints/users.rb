@@ -67,10 +67,10 @@ module Slack
           #
           # Gets information about a user.
           #
-          # @option options [user] :user
-          #   User to get info on.
           # @option options [boolean] :include_locale
           #   Set this to true to receive the locale for this user. Defaults to false.
+          # @option options [user] :user
+          #   User to get info on.
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.info.json
           def users_info(options = {})

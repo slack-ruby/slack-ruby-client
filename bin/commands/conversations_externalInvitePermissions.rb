@@ -9,9 +9,9 @@ module Slack
         g.desc "Upgrade or downgrade Slack Connect channel permissions between 'can post only' and 'can post and invite'."
         g.long_desc %( Upgrade or downgrade Slack Connect channel permissions between 'can post only' and 'can post and invite'. )
         g.command 'set' do |c|
-          c.flag 'action', desc: 'Type of action to be taken: upgrade or downgrade.'
           c.flag 'channel', desc: 'The channel ID to change external invite permissions for.'
           c.flag 'target_team', desc: 'The encoded team ID of the target team.  Must be in the specified channel.'
+          c.flag 'action', desc: 'Type of action to be taken: upgrade or downgrade.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_externalInvitePermissions_set(options))
           end

@@ -57,8 +57,8 @@ module Slack
         g.desc 'Gets information about a user.'
         g.long_desc %( Gets information about a user. )
         g.command 'info' do |c|
-          c.flag 'user', desc: 'User to get info on.'
           c.flag 'include_locale', desc: 'Set this to true to receive the locale for this user. Defaults to false.'
+          c.flag 'user', desc: 'User to get info on.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.users_info(options))
           end

@@ -10,6 +10,7 @@ module Slack
         g.long_desc %( Look up the app config for connectors by their IDs )
         g.command 'lookup' do |c|
           c.flag 'app_ids', desc: 'An array of app IDs to get app configs for.'
+          c.flag 'rich_link_preview_types', desc: 'return apps with the corresponding rich link preview layouts.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_config_lookup(options))
           end
@@ -19,8 +20,9 @@ module Slack
         g.long_desc %( Set the app config for a connector )
         g.command 'set' do |c|
           c.flag 'app_id', desc: 'The encoded app ID to set the app config for.'
-          c.flag 'domain_restrictions', desc: 'Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.'
           c.flag 'workflow_auth_strategy', desc: 'The workflow auth permission. Can be one of builder_choice or end_user_only.'
+          c.flag 'rich_link_preview_type', desc: 'Indicates the app-level override for rich link preview. Unsupported for free teams.'
+          c.flag 'domain_restrictions', desc: 'Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_config_set(options))
           end

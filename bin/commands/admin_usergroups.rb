@@ -9,9 +9,9 @@ module Slack
         g.desc 'Add up to one hundred default channels to an IDP group.'
         g.long_desc %( Add up to one hundred default channels to an IDP group. )
         g.command 'addChannels' do |c|
-          c.flag 'channel_ids', desc: 'Comma separated string of channel IDs.'
           c.flag 'usergroup_id', desc: 'ID of the IDP group to add default channels for.'
           c.flag 'team_id', desc: 'The workspace to add default channels in.'
+          c.flag 'channel_ids', desc: 'Comma separated string of channel IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_usergroups_addChannels(options))
           end
@@ -20,8 +20,8 @@ module Slack
         g.desc 'Associate one or more default workspaces with an organization-wide IDP group.'
         g.long_desc %( Associate one or more default workspaces with an organization-wide IDP group. )
         g.command 'addTeams' do |c|
-          c.flag 'team_ids', desc: 'A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.'
           c.flag 'usergroup_id', desc: 'An encoded usergroup (IDP Group) ID.'
+          c.flag 'team_ids', desc: 'A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.'
           c.flag 'auto_provision', desc: 'When true, this method automatically creates new workspace accounts for the IDP group members.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_usergroups_addTeams(options))
@@ -32,8 +32,8 @@ module Slack
         g.long_desc %( List the channels linked to an org-level IDP group (user group). )
         g.command 'listChannels' do |c|
           c.flag 'usergroup_id', desc: 'ID of the IDP group to list default channels for.'
-          c.flag 'include_num_members', desc: 'Flag to include or exclude the count of members per channel.'
           c.flag 'team_id', desc: 'ID of the the workspace.'
+          c.flag 'include_num_members', desc: 'Flag to include or exclude the count of members per channel.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_usergroups_listChannels(options))
           end
@@ -42,8 +42,8 @@ module Slack
         g.desc 'Remove one or more default channels from an org-level IDP group (user group).'
         g.long_desc %( Remove one or more default channels from an org-level IDP group (user group). )
         g.command 'removeChannels' do |c|
-          c.flag 'channel_ids', desc: 'Comma-separated string of channel IDs.'
           c.flag 'usergroup_id', desc: 'ID of the IDP Group.'
+          c.flag 'channel_ids', desc: 'Comma-separated string of channel IDs.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_usergroups_removeChannels(options))
           end

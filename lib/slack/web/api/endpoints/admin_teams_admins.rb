@@ -9,12 +9,11 @@ module Slack
           #
           # List all of the admins on a given workspace.
           #
-          # @option options [Object] :team_id
-          #   .
-          # @option options [string] :cursor
-          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit
           #   The maximum number of items to return.
+          # @option options [string] :cursor
+          #   Set cursor to next_cursor returned by the previous call to list items in the next page.
+          # @option options [Object] :team_id
           # @see https://api.slack.com/methods/admin.teams.admins.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.teams.admins/admin.teams.admins.list.json
           def admin_teams_admins_list(options = {})

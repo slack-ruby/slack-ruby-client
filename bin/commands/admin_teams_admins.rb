@@ -9,9 +9,9 @@ module Slack
         g.desc 'List all of the admins on a given workspace.'
         g.long_desc %( List all of the admins on a given workspace. )
         g.command 'list' do |c|
-          c.flag 'team_id', desc: '.'
-          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'limit', desc: 'The maximum number of items to return.'
+          c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
+          c.flag 'team_id', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_teams_admins_list(options))
           end

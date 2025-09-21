@@ -9,14 +9,14 @@ module Slack
           #
           # Look up functions by a set of apps
           #
+          # @option options [Object] :team_id
+          #   The team context to retrieve functions from.
           # @option options [array] :app_ids
           #   Comma-separated array of app IDs to get functions for; max 50.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit
           #   The number of results that will be returned by the API on each invocation. Must be between 1 and 1000, both inclusive.
-          # @option options [Object] :team_id
-          #   The team context to retrieve functions from.
           # @see https://api.slack.com/methods/admin.functions.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.functions/admin.functions.list.json
           def admin_functions_list(options = {})

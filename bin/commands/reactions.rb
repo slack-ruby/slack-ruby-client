@@ -33,11 +33,11 @@ module Slack
         g.desc 'Lists reactions made by a user.'
         g.long_desc %( Lists reactions made by a user. )
         g.command 'list' do |c|
-          c.flag 'cursor', desc: "Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection. See pagination for more details."
+          c.flag 'user', desc: 'Show reactions made by this user. Defaults to the authed user.'
           c.flag 'full', desc: 'If true always return the complete reaction list.'
+          c.flag 'cursor', desc: "Parameter for pagination. Set cursor equal to the next_cursor attribute returned by the previous request's response_metadata. This parameter is optional, but pagination is mandatory: the default value simply fetches the first 'page' of the collection. See pagination for more details."
           c.flag 'limit', desc: "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
           c.flag 'team_id', desc: 'encoded team id to list reactions in, required if org token is used.'
-          c.flag 'user', desc: 'Show reactions made by this user. Defaults to the authed user.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.reactions_list(options))
           end
@@ -47,9 +47,9 @@ module Slack
         g.long_desc %( Removes a reaction from an item. )
         g.command 'remove' do |c|
           c.flag 'name', desc: 'Reaction (emoji) name.'
-          c.flag 'channel', desc: 'Channel where the message to remove reaction from was posted.'
           c.flag 'file', desc: 'File to remove reaction from.'
           c.flag 'file_comment', desc: 'File comment to remove reaction from.'
+          c.flag 'channel', desc: 'Channel where the message to remove reaction from was posted.'
           c.flag 'timestamp', desc: 'Timestamp of the message to remove reaction from.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.reactions_remove(options))

@@ -6,14 +6,14 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::AdminBarriers do
   let(:client) { Slack::Web::Client.new }
   context 'admin.barriers_create' do
-    it 'requires barriered_from_usergroup_ids' do
-      expect { client.admin_barriers_create(primary_usergroup_id: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :barriered_from_usergroup_ids missing/
-    end
     it 'requires primary_usergroup_id' do
       expect { client.admin_barriers_create(barriered_from_usergroup_ids: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :primary_usergroup_id missing/
     end
+    it 'requires barriered_from_usergroup_ids' do
+      expect { client.admin_barriers_create(primary_usergroup_id: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :barriered_from_usergroup_ids missing/
+    end
     it 'requires restricted_subjects' do
-      expect { client.admin_barriers_create(barriered_from_usergroup_ids: %q[], primary_usergroup_id: %q[]) }.to raise_error ArgumentError, /Required arguments :restricted_subjects missing/
+      expect { client.admin_barriers_create(primary_usergroup_id: %q[], barriered_from_usergroup_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :restricted_subjects missing/
     end
   end
   context 'admin.barriers_delete' do
@@ -23,16 +23,16 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminBarriers do
   end
   context 'admin.barriers_update' do
     it 'requires barrier_id' do
-      expect { client.admin_barriers_update(barriered_from_usergroup_ids: %q[], primary_usergroup_id: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :barrier_id missing/
-    end
-    it 'requires barriered_from_usergroup_ids' do
-      expect { client.admin_barriers_update(barrier_id: %q[], primary_usergroup_id: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :barriered_from_usergroup_ids missing/
+      expect { client.admin_barriers_update(primary_usergroup_id: %q[], barriered_from_usergroup_ids: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :barrier_id missing/
     end
     it 'requires primary_usergroup_id' do
       expect { client.admin_barriers_update(barrier_id: %q[], barriered_from_usergroup_ids: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :primary_usergroup_id missing/
     end
+    it 'requires barriered_from_usergroup_ids' do
+      expect { client.admin_barriers_update(barrier_id: %q[], primary_usergroup_id: %q[], restricted_subjects: %q[]) }.to raise_error ArgumentError, /Required arguments :barriered_from_usergroup_ids missing/
+    end
     it 'requires restricted_subjects' do
-      expect { client.admin_barriers_update(barrier_id: %q[], barriered_from_usergroup_ids: %q[], primary_usergroup_id: %q[]) }.to raise_error ArgumentError, /Required arguments :restricted_subjects missing/
+      expect { client.admin_barriers_update(barrier_id: %q[], primary_usergroup_id: %q[], barriered_from_usergroup_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :restricted_subjects missing/
     end
   end
 end
