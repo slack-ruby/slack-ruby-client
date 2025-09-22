@@ -6,6 +6,5 @@ RSpec.configure do |config|
   config.after do
     Slack::Config.token = @old_token
     Slack::Web::Config.reset
-    Slack::RealTime::Config.reset
   end
 end

@@ -7,7 +7,6 @@ jobs:
       matrix:
         entry:
           - { ruby: "2.7" }
-          - { ruby: "2.7", concurrency: async-websocket }
           - { ruby: "3.0" }
           - { ruby: "3.1" }
           - { ruby: "3.2" }
@@ -15,16 +14,10 @@ jobs:
           - { ruby: "3.4" }
           - { ruby: ruby-head, ignore: true }
           - { ruby: jruby-head, ignore: true }
-    name: test (ruby=${{ matrix.entry.ruby }}${{ matrix.entry.concurrency && ', concurrency=' }}${{ matrix.entry.concurrency }})
+    name: test (ruby=${{ matrix.entry.ruby }})
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set Concurrency
-        run: |
-          if [[ ! -z "${{ matrix.entry.concurrency }}" ]]; then
-            echo "Setting concurrency to ${{ matrix.entry.concurrency }}."
-            echo "CONCURRENCY=${{ matrix.entry.concurrency }}" >> $GITHUB_ENV
-          fi
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -41,7 +34,7 @@ jobs:
         with:
           parallel: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          flag-name: run-${{ matrix.entry.ruby }}${{ matrix.entry.concurrency && '-'}}${{ matrix.entry.concurrency }}
+          flag-name: run-${{ matrix.entry.ruby }}
           allow-empty: ${{ matrix.entry.ignore || false }}
 
   finish:
@@ -53,4 +46,4 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           parallel-finished: true
-          carryforward: 'run-2.7,run-2.7-async-websocket,run-3.0,run-3.1,run-3.2,run-3.3'
+          carryforward: 'run-2.7,run-2.7-async-websocket,run-3.0,run-3.1,run-3.2,run-3.3,run-3.4'

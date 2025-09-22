@@ -1,6 +1,10 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 3.0.0
+
+Support for the [RTM API](https://docs.slack.dev/tools/java-slack-sdk/guides/rtm/) has been removed in [#573](https://github.com/slack-ruby/slack-ruby-client/pull/573). By now you should have [migrated your app to granular permissions](https://code.dblock.org/2020/11/30/migrating-classic-slack-ruby-bots-to-granular-permissions.html), and you should lock your slack-ruby-client to 2.x for those bots. Next, to remove RTM components we found it more effective to just [write a new version of a bot](https://code.dblock.org/2024/06/30/writing-a-channel-slack-bot.html) and avoid a complex migration.
+
 ### Upgrading to >= 2.0.0
 
 [#416](https://github.com/slack-ruby/slack-ruby-client/pull/416) Removes default values for Faraday's SSL settings `ca_file` and `ca_path`.
