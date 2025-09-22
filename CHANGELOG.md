@@ -1,3 +1,7 @@
+### 3.0.1 (Next)
+
+* Your contribution here.
+
 ### 3.0.0 (2025/09/22)
 
 * [#573](https://github.com/slack-ruby/slack-ruby-client/pull/573): Removed support for RTM APIs - [@dblock](https://github.com/dblock).
