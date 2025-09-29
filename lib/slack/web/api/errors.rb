@@ -31,6 +31,7 @@ module Slack
         class ApprovalNotFound < SlackError; end
         class ArchiveNotSupported < SlackError; end
         class AsUserNotSupported < SlackError; end
+        class AssistantSearchContextDisabled < SlackError; end
         class AtLeastOneSessionSettingRequired < SlackError; end
         class AttachmentPayloadLimitExceeded < SlackError; end
         class AuthMismatch < SlackError; end
@@ -169,6 +170,10 @@ module Slack
         class DescriptionTooLong < SlackError; end
         class DiscoverabilitySettingInvalid < SlackError; end
         class DomainTaken < SlackError; end
+        class DraftAlreadyDeleted < SlackError; end
+        class DraftAlreadySent < SlackError; end
+        class DraftHasConflict < SlackError; end
+        class DraftNotFound < SlackError; end
         class DuplicateChannelNotFound < SlackError; end
         class DuplicateExternalId < SlackError; end
         class DuplicateMessageNotFound < SlackError; end
@@ -305,6 +310,7 @@ module Slack
         class InvalidChildType < SlackError; end
         class InvalidClientId < SlackError; end
         class InvalidCode < SlackError; end
+        class InvalidCodeVerifier < SlackError; end
         class InvalidColumnId < SlackError; end
         class InvalidColumnType < SlackError; end
         class InvalidCopyAndSchemaArgs < SlackError; end
@@ -560,6 +566,7 @@ module Slack
         class PartialProfileSetFailed < SlackError; end
         class PermissionDenied < SlackError; end
         class PermissionTypeRequired < SlackError; end
+        class PkceNotAllowed < SlackError; end
         class PlanUpgradeRequired < SlackError; end
         class PolicyNotFound < SlackError; end
         class PostContentsTooLarge < SlackError; end
@@ -745,6 +752,7 @@ module Slack
           'approval_not_found' => ApprovalNotFound,
           'archive_not_supported' => ArchiveNotSupported,
           'as_user_not_supported' => AsUserNotSupported,
+          'assistant_search_context_disabled' => AssistantSearchContextDisabled,
           'at_least_one_session_setting_required' => AtLeastOneSessionSettingRequired,
           'attachment_payload_limit_exceeded' => AttachmentPayloadLimitExceeded,
           'auth_mismatch' => AuthMismatch,
@@ -883,6 +891,10 @@ module Slack
           'description_too_long' => DescriptionTooLong,
           'discoverability_setting_invalid' => DiscoverabilitySettingInvalid,
           'domain_taken' => DomainTaken,
+          'draft_already_deleted' => DraftAlreadyDeleted,
+          'draft_already_sent' => DraftAlreadySent,
+          'draft_has_conflict' => DraftHasConflict,
+          'draft_not_found' => DraftNotFound,
           'duplicate_channel_not_found' => DuplicateChannelNotFound,
           'duplicate_external_id' => DuplicateExternalId,
           'duplicate_message_not_found' => DuplicateMessageNotFound,
@@ -1019,6 +1031,7 @@ module Slack
           'invalid_child_type' => InvalidChildType,
           'invalid_client_id' => InvalidClientId,
           'invalid_code' => InvalidCode,
+          'invalid_code_verifier' => InvalidCodeVerifier,
           'invalid_column_id' => InvalidColumnId,
           'invalid_column_type' => InvalidColumnType,
           'invalid_copy_and_schema_args' => InvalidCopyAndSchemaArgs,
@@ -1274,6 +1287,7 @@ module Slack
           'partial_profile_set_failed' => PartialProfileSetFailed,
           'permission_denied' => PermissionDenied,
           'permission_type_required' => PermissionTypeRequired,
+          'pkce_not_allowed' => PkceNotAllowed,
           'plan_upgrade_required' => PlanUpgradeRequired,
           'policy_not_found' => PolicyNotFound,
           'post_contents_too_large' => PostContentsTooLarge,

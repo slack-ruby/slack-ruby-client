@@ -87,6 +87,7 @@ module Slack
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'channel', desc: 'An encoded ID or channel name that represents a channel, private group, or IM channel to send the message to. See below for more details.'
+          c.flag 'current_draft_last_updated_ts', desc: "This field represents the timestamp of the draft's last update at the time this API is called. If the current message is a draft, this field can be provided to ensure synchronization with the server."
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
