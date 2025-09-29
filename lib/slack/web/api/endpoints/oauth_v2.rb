@@ -15,6 +15,8 @@ module Slack
           #   Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.
           # @option options [string] :code
           #   The code param returned via the OAuth callback.
+          # @option options [string] :code_verifier
+          #   The code_verifier param used to generate the code_challenge originally. Used for PKCE.
           # @option options [string] :redirect_uri
           #   This must match the originally submitted URI (if one was sent).
           # @option options [string] :grant_type

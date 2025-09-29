@@ -142,6 +142,8 @@ module Slack
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [channel] :channel
           #   An encoded ID or channel name that represents a channel, private group, or IM channel to send the message to. See below for more details.
+          # @option options [string] :current_draft_last_updated_ts
+          #   This field represents the timestamp of the draft's last update at the time this API is called. If the current message is a draft, this field can be provided to ensure synchronization with the server.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
