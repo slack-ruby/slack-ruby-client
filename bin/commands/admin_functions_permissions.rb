@@ -15,8 +15,8 @@ module Slack
           end
         end
 
-        g.desc 'Set the visibility of a Slack function and define the users or workspaces if it is set to named_entities'
-        g.long_desc %( Set the visibility of a Slack function and define the users or workspaces if it is set to named_entities )
+        g.desc 'Set the visibility of a Slack function and define the users or workspaces if it is set to named_entities.'
+        g.long_desc %( Set the visibility of a Slack function and define the users or workspaces if it is set to named_entities. )
         g.command 'set' do |c|
           c.flag 'function_id', desc: 'The function ID to set permissions for.'
           c.flag 'visibility', desc: 'The function visibility.'
