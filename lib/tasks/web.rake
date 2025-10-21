@@ -28,6 +28,7 @@ namespace :slack do
         ].flatten.each_with_object({}) do |path, result|
           file_name = File.basename(path, '.json')
           next if File.dirname(path).split('/').last.start_with?('_') # skip _common, _errors, etc.
+
           prefix = file_name.split('.')[0..-2].join('.')
           name = file_name.split('.')[-1]
           result[prefix] ||= {}
