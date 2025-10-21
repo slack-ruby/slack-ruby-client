@@ -7,6 +7,25 @@ module Slack
       module Endpoints
         module Chat
           #
+          # Appends text to an existing streaming conversation.
+          #
+          # @option options [channel] :channel
+          #   An encoded ID that represents a channel, private group, or DM.
+          # @option options [timestamp] :ts
+          #   The timestamp of the streaming message.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. Limit this field to 12,000 characters. This text is what will be appended to the message received so far.
+          # @see https://api.slack.com/methods/chat.appendStream
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.appendStream.json
+          def chat_appendStream(options = {})
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
+            raise ArgumentError, 'Required arguments :markdown_text missing' if options[:markdown_text].nil?
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
+            post('chat.appendStream', options)
+          end
+
+          #
           # Execute a slash command in a public channel (undocumented)
           #
           # @option options [channel] :channel
@@ -142,6 +161,8 @@ module Slack
           #   A JSON-based array of structured blocks, presented as a URL-encoded string.
           # @option options [channel] :channel
           #   An encoded ID or channel name that represents a channel, private group, or IM channel to send the message to. See below for more details.
+          # @option options [string] :current_draft_last_updated_ts
+          #   This field represents the timestamp of the draft's last update at the time this API is called. If the current message is a draft, this field can be provided to ensure synchronization with the server.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
@@ -216,6 +237,51 @@ module Slack
             raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.scheduleMessage', options)
+          end
+
+          #
+          # Starts a new streaming conversation.
+          #
+          # @option options [channel] :channel
+          #   An encoded ID that represents a channel, private group, or DM.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. Limit this field to 12,000 characters.
+          # @option options [string] :thread_ts
+          #   Provide another message's ts value to reply to. Streamed messages should always be replies to a user request.
+          # @option options [Object] :recipient_user_id
+          #   The encoded ID of the user to receive the streaming text. Required when streaming to channels.
+          # @option options [string] :recipient_team_id
+          #   The encoded ID of the team the user receiving the streaming text belongs to. Required when streaming to channels.
+          # @see https://api.slack.com/methods/chat.startStream
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.startStream.json
+          def chat_startStream(options = {})
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :thread_ts missing' if options[:thread_ts].nil?
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
+            post('chat.startStream', options)
+          end
+
+          #
+          # Stops a streaming conversation.
+          #
+          # @option options [channel] :channel
+          #   An encoded ID that represents a channel, private group, or DM.
+          # @option options [timestamp] :ts
+          #   The timestamp of the streaming message.
+          # @option options [string] :markdown_text
+          #   Accepts message text formatted in markdown. Limit this field to 12,000 characters.
+          # @option options [Object] :blocks
+          #   A list of blocks that will be rendered at the bottom of the finalized message.
+          # @option options [string] :metadata
+          #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+          # @see https://api.slack.com/methods/chat.stopStream
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.stopStream.json
+          def chat_stopStream(options = {})
+            raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
+            raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
+            options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
+            options = encode_options_as_json(options, %i[metadata])
+            post('chat.stopStream', options)
           end
 
           #

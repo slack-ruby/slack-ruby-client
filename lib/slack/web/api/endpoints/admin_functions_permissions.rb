@@ -19,7 +19,7 @@ module Slack
           end
 
           #
-          # Set the visibility of a Slack function and define the users or workspaces if it is set to named_entities
+          # Set the visibility of a Slack function and define the users or workspaces if it is set to named_entities.
           #
           # @option options [string] :function_id
           #   The function ID to set permissions for.
