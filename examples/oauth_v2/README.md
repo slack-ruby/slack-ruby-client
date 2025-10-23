@@ -1,11 +1,11 @@
 Obtain a user OAuth token from Slack.
 
-Create a Slack app [here](https://api.slack.com/tutorials/tracks/getting-a-token). 
+Create a Slack app [here](https://api.slack.com/tutorials/tracks/getting-a-token).
 
 The new app has a pre-configured User OAuth Token which you can use for most of the examples.
 However you may want to obtain a token for a different user, which can be accomplished as follows.
 
-To test locally use [ngrok](https://ngrok.com/) to expose your local server to the internet. 
+To test locally use [ngrok](https://ngrok.com/) to expose your local server to the internet.
 
 ```sh
 ngrok http 4242
@@ -27,7 +27,7 @@ Run the example.
 
 ```sh
 bundle install
-bundle exec dotenv ruby oauth_v2.rb 
+bundle exec dotenv ruby oauth_v2.rb
 ```
 
 A browser window will open to complete the OAuth flow.

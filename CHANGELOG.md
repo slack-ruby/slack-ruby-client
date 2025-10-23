@@ -1,6 +1,7 @@
 ### 3.0.1 (Next)
 
 * Your contribution here.
+* [#576](https://github.com/slack-ruby/slack-ruby-client/pull/576): Add support for `blocks` in `files_upload_v2` - [@childish-sambino](https://github.com/childish-sambino).
 
 ### 3.0.0 (2025/09/22)
 
