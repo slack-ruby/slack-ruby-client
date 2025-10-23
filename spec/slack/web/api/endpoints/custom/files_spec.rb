@@ -121,6 +121,27 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
     end
   end
 
+  context 'when blocks parameter is specified', vcr: { cassette_name: 'web/files_upload_v2_with_blocks' } do
+    it 'completes the upload with blocks' do
+      blocks = [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: 'This is a test file upload with blocks'
+          }
+        }
+      ]
+
+      expect(client.files_upload_v2(
+        filename: 'test.txt',
+        content: 'Test File Contents',
+        channel_id: 'C07GQLY5Q3Z',
+        blocks: blocks
+      ).files.size).to eq 1
+    end
+  end
+
   context 'with an array of channels', vcr: { cassette_name: 'web/files_upload_v2_with_channels_list' } do
     before do
       allow(client).to receive(:conversations_list).and_yield(

@@ -29,6 +29,9 @@ module Slack
           #   Comma-separated string of channel IDs where the file will be shared. If not specified the file will be private.
           # @option params [string] :initial_comment
           #   The message text introducing the file in specified channels.
+          # @option params [string] :blocks
+          #   A JSON-based array of structured rich text blocks, presented as a URL-encoded string.
+          #   If the initial_comment field is provided, the blocks field is ignored.
           # @option params [string] :thread_ts
           #   Provide another message's ts value to upload this file as a reply.
           #   Never use a reply's ts value; use its parent instead.
@@ -49,7 +52,7 @@ module Slack
             channel_params = %i[channel channels channel_id].map { |param| params[param] }.compact
             raise ArgumentError, 'Only one of :channel, :channels, or :channel_id is required' if channel_params.size > 1
 
-            complete_upload_request_params = params.slice(:initial_comment, :thread_ts)
+            complete_upload_request_params = params.slice(:initial_comment, :blocks, :thread_ts)
 
             if params[:channels]
               complete_upload_request_params[:channels] = Array(params[:channels]).map do |channel|
