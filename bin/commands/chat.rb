@@ -6,6 +6,17 @@ module Slack
     class App
       desc 'Chat methods.'
       command 'chat' do |g|
+        g.desc 'Appends text to an existing streaming conversation.'
+        g.long_desc %( Appends text to an existing streaming conversation. )
+        g.command 'appendStream' do |c|
+          c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'ts', desc: 'The timestamp of the streaming message.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters. This text is what will be appended to the message received so far.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.chat_appendStream(options))
+          end
+        end
+
         g.desc 'Execute a slash command in a public channel (undocumented)'
         g.long_desc %( Execute a slash command in a public channel )
         g.command 'command' do |c|
@@ -87,6 +98,7 @@ module Slack
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'channel', desc: 'An encoded ID or channel name that represents a channel, private group, or IM channel to send the message to. See below for more details.'
+          c.flag 'current_draft_last_updated_ts', desc: "This field represents the timestamp of the draft's last update at the time this API is called. If the current message is a draft, this field can be provided to ensure synchronization with the server."
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
@@ -127,18 +139,45 @@ module Slack
           end
         end
 
+        g.desc 'Starts a new streaming conversation.'
+        g.long_desc %( Starts a new streaming conversation. )
+        g.command 'startStream' do |c|
+          c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
+          c.flag 'thread_ts', desc: "Provide another message's ts value to reply to. Streamed messages should always be replies to a user request."
+          c.flag 'recipient_user_id', desc: 'The encoded ID of the user to receive the streaming text. Required when streaming to channels.'
+          c.flag 'recipient_team_id', desc: 'The encoded ID of the team the user receiving the streaming text belongs to. Required when streaming to channels.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.chat_startStream(options))
+          end
+        end
+
+        g.desc 'Stops a streaming conversation.'
+        g.long_desc %( Stops a streaming conversation. )
+        g.command 'stopStream' do |c|
+          c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'ts', desc: 'The timestamp of the streaming message.'
+          c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
+          c.flag 'blocks', desc: 'A list of blocks that will be rendered at the bottom of the finalized message.'
+          c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.chat_stopStream(options))
+          end
+        end
+
         g.desc 'Provide custom unfurl behavior for user-posted URLs'
         g.long_desc %( Provide custom unfurl behavior for user-posted URLs )
         g.command 'unfurl' do |c|
           c.flag 'channel', desc: 'Channel ID of the message. Both channel and ts must be provided together, or unfurl_id and source must be provided together.'
           c.flag 'ts', desc: 'Timestamp of the message to add unfurl behavior to.'
-          c.flag 'unfurls', desc: 'URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.'
+          c.flag 'unfurls', desc: 'URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments. Either unfurls or metadata must be provided.'
           c.flag 'user_auth_message', desc: 'Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior. Provides two buttons, Not now or Never ask me again.'
           c.flag 'user_auth_required', desc: 'Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain.'
           c.flag 'user_auth_url', desc: 'Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.'
           c.flag 'user_auth_blocks', desc: 'Provide a JSON based array of structured blocks presented as URL-encoded string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior.'
           c.flag 'unfurl_id', desc: 'The ID of the link to unfurl. Both unfurl_id and source must be provided together, or channel and ts must be provided together.'
           c.flag 'source', desc: 'The source of the link to unfurl. The source may either be composer, when the link is inside the message composer, or conversations_history, when the link has been posted to a conversation.'
+          c.flag 'metadata', desc: 'JSON object with entity_type and entity_payload fields, presented as a URL-encoded string. Either unfurls or metadata must be provided.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_unfurl(options))
           end
