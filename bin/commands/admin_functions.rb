@@ -6,11 +6,12 @@ module Slack
     class App
       desc 'AdminFunctions methods.'
       command 'admin_functions' do |g|
-        g.desc 'Look up functions by a set of apps'
-        g.long_desc %( Look up functions by a set of apps )
+        g.desc 'Look up functions by a set of apps.'
+        g.long_desc %( Look up functions by a set of apps. )
         g.command 'list' do |c|
           c.flag 'team_id', desc: 'The team context to retrieve functions from.'
           c.flag 'app_ids', desc: 'Comma-separated array of app IDs to get functions for; max 50.'
+          c.flag 'include_non_distributed_functions', desc: 'Whether to also include functions that are not yet distributed to any users in the function count. This is needed for admins that are approving an app request and will only work if the team owns the app.'
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'limit', desc: 'The number of results that will be returned by the API on each invocation. Must be between 1 and 1000, both inclusive.'
           c.action do |_global_options, options, _args|

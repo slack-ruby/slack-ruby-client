@@ -5,6 +5,17 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Chat do
   let(:client) { Slack::Web::Client.new }
+  context 'chat_appendStream' do
+    it 'requires channel' do
+      expect { client.chat_appendStream(ts: %q[], markdown_text: %q[**This is bold text**]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires ts' do
+      expect { client.chat_appendStream(channel: %q[], markdown_text: %q[**This is bold text**]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+    end
+    it 'requires markdown_text' do
+      expect { client.chat_appendStream(channel: %q[], ts: %q[]) }.to raise_error ArgumentError, /Required arguments :markdown_text missing/
+    end
+  end
   context 'chat_command' do
     it 'requires channel' do
       expect { client.chat_command(command: %q[/who]) }.to raise_error ArgumentError, /Required arguments :channel missing/
@@ -150,19 +161,30 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       client.chat_scheduleMessage(attachments: {:data=>["data"]}, channel: %q[], post_at: %q[299876400], blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
-  context 'chat_unfurl' do
+  context 'chat_startStream' do
     it 'requires channel' do
-      expect { client.chat_unfurl(ts: %q[], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.chat_startStream(thread_ts: %q[1721609600]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+    end
+    it 'requires thread_ts' do
+      expect { client.chat_startStream(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+    end
+  end
+  context 'chat_stopStream' do
+    it 'requires channel' do
+      expect { client.chat_stopStream(ts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.chat_unfurl(channel: %q[], unfurls: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
+      expect { client.chat_stopStream(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
-    it 'requires unfurls' do
-      expect { client.chat_unfurl(channel: %q[], ts: %q[]) }.to raise_error ArgumentError, /Required arguments :unfurls missing/
+    it 'encodes metadata as json' do
+      expect(client).to receive(:post).with('chat.stopStream', {channel: %q[], ts: %q[], metadata: %q[{"data":["data"]}]})
+      client.chat_stopStream(channel: %q[], ts: %q[], metadata: {:data=>["data"]})
     end
-    it 'encodes unfurls, user_auth_blocks as json' do
-      expect(client).to receive(:post).with('chat.unfurl', {channel: %q[], ts: %q[], unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}]})
-      client.chat_unfurl(channel: %q[], ts: %q[], unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]})
+  end
+  context 'chat_unfurl' do
+    it 'encodes unfurls, user_auth_blocks, metadata as json' do
+      expect(client).to receive(:post).with('chat.unfurl', {unfurls: %q[{"data":["data"]}], user_auth_blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_unfurl(unfurls: {:data=>["data"]}, user_auth_blocks: {:data=>["data"]}, metadata: {:data=>["data"]})
     end
   end
   context 'chat_update' do
