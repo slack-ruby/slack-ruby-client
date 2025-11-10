@@ -9,12 +9,14 @@ module Slack
           #
           # Set the status for an AI assistant thread.
           #
-          # @option options [Object] :channel_id
+          # @option options [string] :channel_id
           #   Channel ID containing the assistant thread.
           # @option options [string] :thread_ts
           #   Message timestamp of the thread of where to set the status.
           # @option options [string] :status
           #   Status of the specified bot user, e.g. 'is thinking...'.
+          # @option options [array] :loading_messages
+          #   The list of messages to rotate through as a loading indicator.
           # @see https://api.slack.com/methods/assistant.threads.setStatus
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/assistant.threads/assistant.threads.setStatus.json
           def assistant_threads_setStatus(options = {})

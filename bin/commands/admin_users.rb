@@ -19,6 +19,16 @@ module Slack
           end
         end
 
+        g.desc 'Fetches the expiration timestamp for a guest'
+        g.long_desc %( Fetches the expiration timestamp for a guest )
+        g.command 'getExpiration' do |c|
+          c.flag 'user_id', desc: 'The ID of the guest user to get the expiration for.'
+          c.flag 'target_team', desc: 'If an org token is passed in and this team is on the org, it will operate on the workspace level on the specified team. Otherwise it will operate on the org or team in context.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_users_getExpiration(options))
+          end
+        end
+
         g.desc 'Invite a user to a workspace.'
         g.long_desc %( Invite a user to a workspace. )
         g.command 'invite' do |c|

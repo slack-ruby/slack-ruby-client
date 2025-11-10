@@ -16,7 +16,7 @@ module Slack
           # @option options [string] :thread_ts
           #   Provide another message's ts value to upload this file as a reply. Never use a reply's ts value; use its parent instead. Also make sure to provide only one channel when using 'thread_ts'.
           # @option options [string] :channels
-          #   Comma-separated string of channel IDs where the file will be shared.
+          #   Comma-separated string of channel IDs or user IDs where the file will be shared.
           # @option options [string] :initial_comment
           #   The message text introducing the file in specified channels.
           # @option options [string] :blocks

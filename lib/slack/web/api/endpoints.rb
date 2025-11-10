@@ -61,6 +61,7 @@ require_relative 'endpoints/conversations_requestSharedInvite'
 require_relative 'endpoints/dialog'
 require_relative 'endpoints/dnd'
 require_relative 'endpoints/emoji'
+require_relative 'endpoints/entity'
 require_relative 'endpoints/files'
 require_relative 'endpoints/files_comments'
 require_relative 'endpoints/files_remote'
@@ -166,6 +167,7 @@ module Slack
         include Dialog
         include Dnd
         include Emoji
+        include Entity
         include Files
         include FilesComments
         include FilesRemote
