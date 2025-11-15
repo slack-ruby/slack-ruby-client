@@ -28,6 +28,19 @@ module Slack
           end
 
           #
+          # Fetches the expiration timestamp for a guest
+          #
+          # @option options [Object] :user_id
+          #   The ID of the guest user to get the expiration for.
+          # @option options [Object] :target_team
+          #   If an org token is passed in and this team is on the org, it will operate on the workspace level on the specified team. Otherwise it will operate on the org or team in context.
+          # @see https://api.slack.com/methods/admin.users.getExpiration
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.getExpiration.json
+          def admin_users_getExpiration(options = {})
+            post('admin.users.getExpiration', options)
+          end
+
+          #
           # Invite a user to a workspace.
           #
           # @option options [Object] :team_id

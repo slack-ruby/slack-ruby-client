@@ -12,6 +12,7 @@ module Slack
           c.flag 'channel_id', desc: 'Channel ID containing the assistant thread.'
           c.flag 'thread_ts', desc: 'Message timestamp of the thread of where to set the status.'
           c.flag 'status', desc: "Status of the specified bot user, e.g. 'is thinking...'."
+          c.flag 'loading_messages', desc: 'The list of messages to rotate through as a loading indicator.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.assistant_threads_setStatus(options))
           end

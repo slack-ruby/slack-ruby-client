@@ -12,6 +12,7 @@ module Slack
           c.flag 'client_id', desc: 'Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.'
           c.flag 'client_secret', desc: 'Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.'
           c.flag 'code', desc: 'The code param returned via the OAuth callback.'
+          c.flag 'code_verifier', desc: 'The code_verifier param used to generate the code_challenge originally. Used for PKCE.'
           c.flag 'redirect_uri', desc: 'This must match the originally submitted URI (if one was sent).'
           c.flag 'grant_type', desc: 'The grant_type param as described in the OAuth spec.'
           c.flag 'refresh_token', desc: 'The refresh_token param as described in the OAuth spec.'

@@ -44,7 +44,7 @@ RSpec.describe Slack::Web::Api::Endpoints::SlackListsItems do
       expect { client.slackLists_items_update(cells: %q[[{"row_id":"Rec014K005UQJ","column_id":"Col014K005UQJ","user":["U01284PCR98", "U0137181B5H"]}]]) }.to raise_error ArgumentError, /Required arguments :list_id missing/
     end
     it 'requires cells' do
-      expect { client.slackLists_items_update(list_id: %q[F03PSRPN4CE]) }.to raise_error ArgumentError, /Required arguments :cells missing/
+      expect { client.slackLists_items_update(list_id: %q[F01ABCDE2FG]) }.to raise_error ArgumentError, /Required arguments :cells missing/
     end
   end
 end

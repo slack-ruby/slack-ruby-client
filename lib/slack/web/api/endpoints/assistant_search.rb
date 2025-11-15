@@ -18,7 +18,9 @@ module Slack
           # @option options [array] :content_types
           #   Content types to include, a comma-separated list of any combination of messages, files, channels, users.
           # @option options [boolean] :include_bots
-          #   If you want the results to include bots.
+          #   Whether the results should include bots.
+          # @option options [boolean] :include_deleted_users
+          #   Whether to include deleted users in the user search results. Defaults to false.
           # @option options [integer] :before
           #   UNIX timestamp filter. If present, filters for results before this date.
           # @option options [integer] :after
@@ -28,7 +30,7 @@ module Slack
           # @option options [Object] :context_channel_id
           #   Context channel ID to support scoping the search when applicable.
           # @option options [string] :cursor
-          #   The cursor returned by the API. Leave this blank for the first request, and use this to get the next page of results.
+          #   The cursor returned by the API. Leave this blank for the first request and use this to get the next page of results.
           # @option options [integer] :limit
           #   Number of results to return, up to a max of 20. Defaults to 20.
           # @option options [enum] :sort
@@ -40,7 +42,11 @@ module Slack
           # @option options [boolean] :highlight
           #   Whether to highlight the search query in the results. Defaults to false if unspecified.
           # @option options [array] :term_clauses
-          #   A list of term clauses. A term clause is a string with search terms. Search results returned will match every term clause specified (i.e. conjunctive normal form).
+          #   A list of term clauses. A term clause is a string with search terms. Search results returned will match every term clause specified (i.e., conjunctive normal form).
+          # @option options [string] :modifiers
+          #   A string containing only modifiers in the format of modifier:value. Search results returned will match the modifier value. For now modifiers only affect term clauses.
+          # @option options [boolean] :include_archived_channels
+          #   Whether to include archived channels in the search results.
           # @see https://api.slack.com/methods/assistant.search.context
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/assistant.search/assistant.search.context.json
           def assistant_search_context(options = {})
