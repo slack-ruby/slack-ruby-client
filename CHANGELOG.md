@@ -1,4 +1,8 @@
-### 3.1.0 (Next)
+### 3.1.1 (Next)
+
+* Your contribution here.
+
+### 3.1.0 (2025/11/15)
 
 * [#576](https://github.com/slack-ruby/slack-ruby-client/pull/576): Add support for `blocks` in `files_upload_v2` - [@childish-sambino](https://github.com/childish-sambino).
 * [#574](https://github.com/slack-ruby/slack-ruby-client/pull/574): Update API from [slack-api-ref@bd5dd34](https://github.com/slack-ruby/slack-api-ref/commit/bd5dd34) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
