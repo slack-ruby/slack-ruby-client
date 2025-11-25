@@ -72,10 +72,7 @@ jobs:
         run: |
           git config --local user.name 'slack-ruby-ci-bot'
           git config --local user.email 'noreply@github.com'
-          git config --local --unset-all http.https://github.com/.extraheader || true
-          AUTH=$(echo -n "x-access-token:${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}" | base64)
-          echo "::add-mask::${AUTH}"
-          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${AUTH}"
           git add CHANGELOG.md
           git commit --amend --no-edit
+          git remote set-url origin https://x-access-token:${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push origin automated-api-update -f
