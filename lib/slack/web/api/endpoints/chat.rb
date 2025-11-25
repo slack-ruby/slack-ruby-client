@@ -243,7 +243,7 @@ module Slack
           # Starts a new streaming conversation.
           #
           # @option options [channel] :channel
-          #   An encoded ID that represents a channel, private group, or DM.
+          #   An encoded ID that represents a channel thread or DM.
           # @option options [string] :markdown_text
           #   Accepts message text formatted in markdown. Limit this field to 12,000 characters.
           # @option options [string] :thread_ts
