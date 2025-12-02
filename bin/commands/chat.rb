@@ -142,7 +142,7 @@ module Slack
         g.desc 'Starts a new streaming conversation.'
         g.long_desc %( Starts a new streaming conversation. )
         g.command 'startStream' do |c|
-          c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'channel', desc: 'An encoded ID that represents a channel thread or DM.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to reply to. Streamed messages should always be replies to a user request."
           c.flag 'recipient_user_id', desc: 'The encoded ID of the user to receive the streaming text. Required when streaming to channels.'
