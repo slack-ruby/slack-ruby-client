@@ -1,5 +1,6 @@
 ### 3.1.1 (Next)
 
+* [#578](https://github.com/slack-ruby/slack-ruby-client/pull/578): Update API from [slack-api-ref@3275786](https://github.com/slack-ruby/slack-api-ref/commit/3275786) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.1.0 (2025/11/15)
