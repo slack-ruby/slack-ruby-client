@@ -265,9 +265,11 @@ module Slack
         class FileCommentNotFound < SlackError; end
         class FileDeleted < SlackError; end
         class FileDeletingDisabled < SlackError; end
+        class FileIsDeleted < SlackError; end
         class FileNotFound < SlackError; end
         class FileNotShared < SlackError; end
         class FileNotYetAvailable < SlackError; end
+        class FileShareLimitReached < SlackError; end
         class FileUnderReview < SlackError; end
         class FileUpdateFailed < SlackError; end
         class FileUploadSizeRestricted < SlackError; end
@@ -359,6 +361,7 @@ module Slack
         class InvalidOrgId < SlackError; end
         class InvalidParameters < SlackError; end
         class InvalidParentType < SlackError; end
+        class InvalidPermissionSet < SlackError; end
         class InvalidPermissionType < SlackError; end
         class InvalidPermissions < SlackError; end
         class InvalidPhoneNumber < SlackError; end
@@ -446,11 +449,13 @@ module Slack
         class MalwareDetected < SlackError; end
         class ManagedChannelNotSupported < SlackError; end
         class MarkdownTextConflict < SlackError; end
+        class MaxFileSharingExceeded < SlackError; end
         class MemberAnalyticsDisabled < SlackError; end
         class MemberLimitExceeded < SlackError; end
         class MessageLimitExceeded < SlackError; end
         class MessageNotFound < SlackError; end
         class MessageNotInStreamingState < SlackError; end
+        class MessageNotOwnedByApp < SlackError; end
         class MessageTooLong < SlackError; end
         class MessagesTabDisabled < SlackError; end
         class MessagingProcessingFailed < SlackError; end
@@ -612,7 +617,9 @@ module Slack
         class RequestIdOrAppIdIsRequired < SlackError; end
         class RequestIdRequiredForCustomIntegrations < SlackError; end
         class RequestTimeout < SlackError; end
+        class RequiredVisibility < SlackError; end
         class ReservedName < SlackError; end
+        class ReservedUsername < SlackError; end
         class ResizedButStillTooLarge < SlackError; end
         class RestrictedAction < SlackError; end
         class RestrictedActionNonThreadableChannel < SlackError; end
@@ -651,6 +658,7 @@ module Slack
         class TeamAddedToOrg < SlackError; end
         class TeamIdOrOrgRequired < SlackError; end
         class TeamIdRequiredForEnterprise < SlackError; end
+        class TeamLimitExceeded < SlackError; end
         class TeamNotConnected < SlackError; end
         class TeamNotFound < SlackError; end
         class TeamNotOnEnterprise < SlackError; end
@@ -698,6 +706,7 @@ module Slack
         class UnableToFetchCustomEmojis < SlackError; end
         class UnableToLinkIdpGroupAndChannel < SlackError; end
         class UnableToProcessPostRequest < SlackError; end
+        class UnableToShareFiles < SlackError; end
         class UnableToUnlinkIdpGroupAndChannel < SlackError; end
         class UnableToUpdateExistingSessions < SlackError; end
         class UneditableColumn < SlackError; end
@@ -1013,9 +1022,11 @@ module Slack
           'file_comment_not_found' => FileCommentNotFound,
           'file_deleted' => FileDeleted,
           'file_deleting_disabled' => FileDeletingDisabled,
+          'file_is_deleted' => FileIsDeleted,
           'file_not_found' => FileNotFound,
           'file_not_shared' => FileNotShared,
           'file_not_yet_available' => FileNotYetAvailable,
+          'file_share_limit_reached' => FileShareLimitReached,
           'file_under_review' => FileUnderReview,
           'file_update_failed' => FileUpdateFailed,
           'file_upload_size_restricted' => FileUploadSizeRestricted,
@@ -1107,6 +1118,7 @@ module Slack
           'invalid_org_id' => InvalidOrgId,
           'invalid_parameters' => InvalidParameters,
           'invalid_parent_type' => InvalidParentType,
+          'invalid_permission_set' => InvalidPermissionSet,
           'invalid_permission_type' => InvalidPermissionType,
           'invalid_permissions' => InvalidPermissions,
           'invalid_phone_number' => InvalidPhoneNumber,
@@ -1194,11 +1206,13 @@ module Slack
           'malware_detected' => MalwareDetected,
           'managed_channel_not_supported' => ManagedChannelNotSupported,
           'markdown_text_conflict' => MarkdownTextConflict,
+          'max_file_sharing_exceeded' => MaxFileSharingExceeded,
           'member_analytics_disabled' => MemberAnalyticsDisabled,
           'member_limit_exceeded' => MemberLimitExceeded,
           'message_limit_exceeded' => MessageLimitExceeded,
           'message_not_found' => MessageNotFound,
           'message_not_in_streaming_state' => MessageNotInStreamingState,
+          'message_not_owned_by_app' => MessageNotOwnedByApp,
           'message_too_long' => MessageTooLong,
           'messages_tab_disabled' => MessagesTabDisabled,
           'messaging_processing_failed' => MessagingProcessingFailed,
@@ -1360,7 +1374,9 @@ module Slack
           'request_id_or_app_id_is_required' => RequestIdOrAppIdIsRequired,
           'request_id_required_for_custom_integrations' => RequestIdRequiredForCustomIntegrations,
           'request_timeout' => RequestTimeout,
+          'required_visibility' => RequiredVisibility,
           'reserved_name' => ReservedName,
+          'reserved_username' => ReservedUsername,
           'resized_but_still_too_large' => ResizedButStillTooLarge,
           'restricted_action' => RestrictedAction,
           'restricted_action_non_threadable_channel' => RestrictedActionNonThreadableChannel,
@@ -1399,6 +1415,7 @@ module Slack
           'team_added_to_org' => TeamAddedToOrg,
           'team_id_or_org_required' => TeamIdOrOrgRequired,
           'team_id_required_for_enterprise' => TeamIdRequiredForEnterprise,
+          'team_limit_exceeded' => TeamLimitExceeded,
           'team_not_connected' => TeamNotConnected,
           'team_not_found' => TeamNotFound,
           'team_not_on_enterprise' => TeamNotOnEnterprise,
@@ -1446,6 +1463,7 @@ module Slack
           'unable_to_fetch_custom_emojis' => UnableToFetchCustomEmojis,
           'unable_to_link_idp_group_and_channel' => UnableToLinkIdpGroupAndChannel,
           'unable_to_process_post_request' => UnableToProcessPostRequest,
+          'unable_to_share_files' => UnableToShareFiles,
           'unable_to_unlink_idp_group_and_channel' => UnableToUnlinkIdpGroupAndChannel,
           'unable_to_update_existing_sessions' => UnableToUpdateExistingSessions,
           'uneditable_column' => UneditableColumn,
