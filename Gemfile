@@ -7,6 +7,9 @@ group :test do
   gem 'activesupport'
   gem 'base64'
   gem 'bigdecimal'
+  gem 'danger-changelog', require: false
+  gem 'danger-pr-comment', require: false
+  gem 'danger-toc', require: false
   gem 'erubis'
   gem 'faraday-typhoeus'
   gem 'json-schema'
