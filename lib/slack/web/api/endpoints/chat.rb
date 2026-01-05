@@ -144,7 +144,8 @@ module Slack
           def chat_postEphemeral(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
-            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             options = encode_options_as_json(options, %i[attachments blocks])
             post('chat.postEphemeral', options)
@@ -172,7 +173,7 @@ module Slack
           # @option options [string] :markdown_text
           #   Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.
           # @option options [string] :metadata
-          #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+          #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. You can also provide Work Object entity metadata using this parameter. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
           # @option options [boolean] :mrkdwn
           #   Disable Slack markup parsing by setting to false. Enabled by default.
           # @option options [string] :parse
@@ -193,7 +194,8 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postMessage', options)
           end
@@ -234,7 +236,8 @@ module Slack
           def chat_scheduleMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :post_at missing' if options[:post_at].nil?
-            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.scheduleMessage', options)
           end
@@ -243,7 +246,7 @@ module Slack
           # Starts a new streaming conversation.
           #
           # @option options [channel] :channel
-          #   An encoded ID that represents a channel, private group, or DM.
+          #   An encoded ID that represents a channel thread or DM.
           # @option options [string] :markdown_text
           #   Accepts message text formatted in markdown. Limit this field to 12,000 characters.
           # @option options [string] :thread_ts
@@ -306,7 +309,7 @@ module Slack
           # @option options [enum] :source
           #   The source of the link to unfurl. The source may either be composer, when the link is inside the message composer, or conversations_history, when the link has been posted to a conversation.
           # @option options [string] :metadata
-          #   JSON object with entity_type and entity_payload fields, presented as a URL-encoded string. Either unfurls or metadata must be provided.
+          #   JSON object with an entities field providing an array of Work Object entities. Either unfurls or metadata must be provided.
           # @see https://api.slack.com/methods/chat.unfurl
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.unfurl.json
           def chat_unfurl(options = {})
@@ -347,7 +350,8 @@ module Slack
           def chat_update(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
-            raise ArgumentError, 'At least one of :attachments, :blocks, :text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil?
+            raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.update', options)
