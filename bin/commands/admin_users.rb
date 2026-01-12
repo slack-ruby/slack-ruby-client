@@ -71,10 +71,10 @@ module Slack
           end
         end
 
-        g.desc 'Set an existing regular user or owner to be a workspace admin.'
-        g.long_desc %( Set an existing regular user or owner to be a workspace admin. )
+        g.desc 'Set an existing regular user or owner to be a workspace or org admin.'
+        g.long_desc %( Set an existing regular user or owner to be a workspace or org admin. )
         g.command 'setAdmin' do |c|
-          c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
+          c.flag 'team_id', desc: 'The ID of the workspace or organization.'
           c.flag 'user_id', desc: 'The ID of the user to designate as an admin.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_users_setAdmin(options))
@@ -92,11 +92,11 @@ module Slack
           end
         end
 
-        g.desc 'Set an existing regular user or admin to be a workspace owner.'
-        g.long_desc %( Set an existing regular user or admin to be a workspace owner. )
+        g.desc 'Set an existing regular user or admin to be a workspace or org owner.'
+        g.long_desc %( Set an existing regular user or admin to be a workspace or org owner. )
         g.command 'setOwner' do |c|
-          c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
-          c.flag 'user_id', desc: 'Id of the user to promote to owner.'
+          c.flag 'team_id', desc: 'The ID of the workspace or organization.'
+          c.flag 'user_id', desc: 'ID of the user to promote to owner.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_users_setOwner(options))
           end
@@ -105,7 +105,7 @@ module Slack
         g.desc 'Set an existing guest user, admin user, or owner to be a regular user.'
         g.long_desc %( Set an existing guest user, admin user, or owner to be a regular user. )
         g.command 'setRegular' do |c|
-          c.flag 'team_id', desc: 'The ID (T1234) of the workspace.'
+          c.flag 'team_id', desc: 'The ID of the workspace or organization.'
           c.flag 'user_id', desc: 'The ID of the user to designate as a regular user.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_users_setRegular(options))
