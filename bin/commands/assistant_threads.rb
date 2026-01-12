@@ -11,8 +11,8 @@ module Slack
         g.command 'setStatus' do |c|
           c.flag 'channel_id', desc: 'Channel ID containing the assistant thread.'
           c.flag 'thread_ts', desc: 'Message timestamp of the thread of where to set the status.'
-          c.flag 'status', desc: "Status of the specified bot user, e.g. 'is thinking...'."
-          c.flag 'loading_messages', desc: 'The list of messages to rotate through as a loading indicator.'
+          c.flag 'status', desc: "Status of the specified bot user, e.g., 'is thinking...'. A two minute timeout applies, which will cause the status to be removed if no message has been sent."
+          c.flag 'loading_messages', desc: 'The list of messages to rotate through as a loading indicator. Maximum of 10 messages.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.assistant_threads_setStatus(options))
           end

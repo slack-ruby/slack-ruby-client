@@ -7,10 +7,10 @@ module Slack
       module Endpoints
         module AdminWorkflowsTriggersTypesPermissions
           #
-          # list the permissions for using each trigger type
+          # List the permissions for using each trigger type.
           #
           # @option options [array] :trigger_type_ids
-          #   The trigger types IDs for which to get the permissions.
+          #   The trigger type IDs for which to get the permissions.
           # @see https://api.slack.com/methods/admin.workflows.triggers.types.permissions.lookup
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.workflows.triggers.types.permissions/admin.workflows.triggers.types.permissions.lookup.json
           def admin_workflows_triggers_types_permissions_lookup(options = {})
@@ -27,11 +27,11 @@ module Slack
           #   The function visibility.
           # @option options [array] :user_ids
           #   List of user IDs to allow for named_entities visibility.
+          # @option options [object] :permissions
           # @see https://api.slack.com/methods/admin.workflows.triggers.types.permissions.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.workflows.triggers.types.permissions/admin.workflows.triggers.types.permissions.set.json
           def admin_workflows_triggers_types_permissions_set(options = {})
             raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
-            raise ArgumentError, 'Required arguments :visibility missing' if options[:visibility].nil?
             post('admin.workflows.triggers.types.permissions.set', options)
           end
         end
