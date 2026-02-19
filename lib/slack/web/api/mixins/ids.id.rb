@@ -15,7 +15,9 @@ module Slack
               end
             end
 
-            raise Slack::Web::Api::Errors::SlackError, "#{key}_not_found"
+            error_message = "#{key}_not_found"
+            error_class = Slack::Web::Api::Errors::ERROR_CLASSES[error_message] || Slack::Web::Api::Errors::SlackError
+            raise error_class, error_message
           end
         end
       end

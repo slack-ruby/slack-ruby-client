@@ -59,7 +59,7 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
 
     it 'fails with an exception' do
       expect { conversations.conversations_id(channel: '#invalid') }.to(
-        raise_error(Slack::Web::Api::Errors::SlackError, 'channel_not_found')
+        raise_error(Slack::Web::Api::Errors::ChannelNotFound, 'channel_not_found')
       )
     end
 

@@ -46,7 +46,7 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
 
     it 'fails with an exception' do
       expect { users.users_id(user: '@foo') }.to(
-        raise_error(Slack::Web::Api::Errors::SlackError, 'user_not_found')
+        raise_error(Slack::Web::Api::Errors::UserNotFound, 'user_not_found')
       )
     end
 
