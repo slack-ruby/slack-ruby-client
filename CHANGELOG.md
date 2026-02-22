@@ -1,4 +1,4 @@
-### 3.1.1 (Next)
+### 3.2.0 (Next)
 
 * [#581](https://github.com/slack-ruby/slack-ruby-client/pull/581): Migrate Danger to use danger-pr-comment workflow - [@dblock](https://github.com/dblock).
 * [#583](https://github.com/slack-ruby/slack-ruby-client/pull/583): Not found errors raised by id_for use more specific error classes when they exist - [@eizengan](https://github.com/eizengan).
