@@ -59,13 +59,16 @@ namespace :slack do
 
           unless ENV.key?('SKIP_PATCH')
             Dir.glob("lib/slack/web/api/patches/#{group}*.patch").sort.each do |patch|
-              puts "- patching #{patch}"
+              puts "#{' ' * 7}patching #{patch}"
               system("git apply #{patch}") || raise('failed to apply patch')
             end
           end
 
           # command
-          raise "Missing group #{group}" unless groups.key?(group)
+          unless groups.key?(group)
+            puts "#{' ' * 7}undocumented group #{group}"
+            groups[group] = { 'name' => group }
+          end
 
           rendered_command = command_template.result(group: groups[group], names: names)
           File.write "bin/commands/#{snaked_group}.rb", rendered_command
