@@ -41,6 +41,7 @@ require_relative 'endpoints/apps_connections'
 require_relative 'endpoints/apps_datastore'
 require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_manifest'
+require_relative 'endpoints/apps_user_connection'
 require_relative 'endpoints/assistant_search'
 require_relative 'endpoints/assistant_threads'
 require_relative 'endpoints/auth'
@@ -72,6 +73,7 @@ require_relative 'endpoints/functions_workflows_steps_responses'
 require_relative 'endpoints/migration'
 require_relative 'endpoints/oauth'
 require_relative 'endpoints/oauth_v2'
+require_relative 'endpoints/oauth_v2_user'
 require_relative 'endpoints/openid_connect'
 require_relative 'endpoints/pins'
 require_relative 'endpoints/reactions'
@@ -147,6 +149,7 @@ module Slack
         include AppsDatastore
         include AppsEventAuthorizations
         include AppsManifest
+        include AppsUserConnection
         include AssistantSearch
         include AssistantThreads
         include Auth
@@ -178,6 +181,7 @@ module Slack
         include Migration
         include Oauth
         include OauthV2
+        include OauthV2User
         include OpenidConnect
         include Pins
         include Reactions

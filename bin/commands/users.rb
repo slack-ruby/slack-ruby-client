@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'Users methods.'
       command 'users' do |g|
-        g.desc 'List conversations the calling user may access.'
-        g.long_desc %( List conversations the calling user may access. )
+        g.desc 'List conversations the calling user is a member of.'
+        g.long_desc %( List conversations the calling user is a member of. )
         g.command 'conversations' do |c|
           c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
           c.flag 'exclude_archived', desc: 'Set to true to exclude archived channels from the list.'

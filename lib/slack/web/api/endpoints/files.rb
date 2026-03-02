@@ -100,7 +100,7 @@ module Slack
           end
 
           #
-          # List for a team, in a channel, or from a user with applied filters.
+          # List files for a team, in a channel, or from a user with applied filters.
           #
           # @option options [channel] :channel
           #   Filter files appearing in a specific channel, indicated by its ID.
