@@ -63,8 +63,8 @@ module Slack
           end
         end
 
-        g.desc 'List for a team, in a channel, or from a user with applied filters.'
-        g.long_desc %( List for a team, in a channel, or from a user with applied filters. )
+        g.desc 'List files for a team, in a channel, or from a user with applied filters.'
+        g.long_desc %( List files for a team, in a channel, or from a user with applied filters. )
         g.command 'list' do |c|
           c.flag 'channel', desc: 'Filter files appearing in a specific channel, indicated by its ID.'
           c.flag 'show_files_hidden_by_limit', desc: 'Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.'
