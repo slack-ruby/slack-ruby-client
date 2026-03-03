@@ -45,7 +45,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}
           commit-message: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
           title: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}
           body: |
