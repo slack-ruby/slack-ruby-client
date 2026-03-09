@@ -6,10 +6,10 @@ module Slack
     class App
       desc 'AdminWorkflowsTriggersTypesPermissions methods.'
       command 'admin_workflows_triggers_types_permissions' do |g|
-        g.desc 'list the permissions for using each trigger type'
-        g.long_desc %( list the permissions for using each trigger type )
+        g.desc 'List the permissions for using each trigger type.'
+        g.long_desc %( List the permissions for using each trigger type. )
         g.command 'lookup' do |c|
-          c.flag 'trigger_type_ids', desc: 'The trigger types IDs for which to get the permissions.'
+          c.flag 'trigger_type_ids', desc: 'The trigger type IDs for which to get the permissions.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_workflows_triggers_types_permissions_lookup(options))
           end
@@ -21,6 +21,7 @@ module Slack
           c.flag 'id', desc: 'The trigger type ID for which to set the permissions.'
           c.flag 'visibility', desc: 'The function visibility.'
           c.flag 'user_ids', desc: 'List of user IDs to allow for named_entities visibility.'
+          c.flag 'permissions', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_workflows_triggers_types_permissions_set(options))
           end

@@ -10,6 +10,7 @@ module Slack
         g.long_desc %( Appends text to an existing streaming conversation. )
         g.command 'appendStream' do |c|
           c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'chunks', desc: 'An array of streaming chunks. Chunks can be markdown text chunks, task update chunks, and plan update chunks.'
           c.flag 'ts', desc: 'The timestamp of the streaming message.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters. This text is what will be appended to the message received so far.'
           c.action do |_global_options, options, _args|
@@ -103,7 +104,7 @@ module Slack
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link user groups. No longer supports linking individual users; use syntax shown in Mentioning Users instead.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
-          c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
+          c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. You can also provide Work Object entity metadata using this parameter. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
           c.flag 'mrkdwn', desc: 'Disable Slack markup parsing by setting to false. Enabled by default.'
           c.flag 'parse', desc: 'Change how messages are treated. See below.'
           c.flag 'reply_broadcast', desc: 'Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.'
@@ -142,11 +143,13 @@ module Slack
         g.desc 'Starts a new streaming conversation.'
         g.long_desc %( Starts a new streaming conversation. )
         g.command 'startStream' do |c|
-          c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'channel', desc: 'An encoded ID that represents a channel thread or DM.'
+          c.flag 'chunks', desc: 'An array of streaming chunks. Chunks can be markdown text chunks, task update chunks, and plan update chunks.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to reply to. Streamed messages should always be replies to a user request."
           c.flag 'recipient_user_id', desc: 'The encoded ID of the user to receive the streaming text. Required when streaming to channels.'
           c.flag 'recipient_team_id', desc: 'The encoded ID of the team the user receiving the streaming text belongs to. Required when streaming to channels.'
+          c.flag 'task_display_mode', desc: "Specifies how tasks are displayed in the message. A timeline displays individual tasks with text in sequential order, and plan displays all tasks together, with the first tasks's placement determining the placement of the rest of the tasks."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_startStream(options))
           end
@@ -156,6 +159,7 @@ module Slack
         g.long_desc %( Stops a streaming conversation. )
         g.command 'stopStream' do |c|
           c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
+          c.flag 'chunks', desc: 'An array of streaming chunks. Chunks can be markdown text chunks, task update chunks, and plan update chunks.'
           c.flag 'ts', desc: 'The timestamp of the streaming message.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
           c.flag 'blocks', desc: 'A list of blocks that will be rendered at the bottom of the finalized message.'
@@ -177,7 +181,7 @@ module Slack
           c.flag 'user_auth_blocks', desc: 'Provide a JSON based array of structured blocks presented as URL-encoded string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior.'
           c.flag 'unfurl_id', desc: 'The ID of the link to unfurl. Both unfurl_id and source must be provided together, or channel and ts must be provided together.'
           c.flag 'source', desc: 'The source of the link to unfurl. The source may either be composer, when the link is inside the message composer, or conversations_history, when the link has been posted to a conversation.'
-          c.flag 'metadata', desc: 'JSON object with entity_type and entity_payload fields, presented as a URL-encoded string. Either unfurls or metadata must be provided.'
+          c.flag 'metadata', desc: 'JSON object with an entities field providing an array of Work Object entities. Either unfurls or metadata must be provided.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_unfurl(options))
           end
@@ -188,6 +192,7 @@ module Slack
         g.command 'update' do |c|
           c.flag 'as_user', desc: 'Pass true to update the message as the authed user. Bot users in this context are considered authed users.'
           c.flag 'attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
+          c.flag 'unfurled_attachments', desc: 'A JSON-based array of structured attachments, presented as a URL-encoded string.'
           c.flag 'blocks', desc: 'A JSON-based array of structured blocks, presented as a URL-encoded string.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
           c.flag 'metadata', desc: "JSON object with event_type and event_payload fields, presented as a URL-encoded string. If you don't include this field, the message's previous metadata will be retained. To remove previous metadata, include an empty object for this field. Metadata you post to Slack is accessible to any app or user who is a member of that workspace."

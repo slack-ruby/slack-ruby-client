@@ -43,6 +43,16 @@ module Slack
           end
         end
 
+        g.desc 'Exclude channels from Slack AI in bulk'
+        g.long_desc %( Exclude channels from Slack AI in bulk )
+        g.command 'bulkSetExcludeFromSlackAi' do |c|
+          c.flag 'channel_ids', desc: 'An array of channel IDs to exclude from Slack AI.'
+          c.flag 'exclude', desc: 'Whether the channels should be excluded from Slack AI.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_bulkSetExcludeFromSlackAi(options))
+          end
+        end
+
         g.desc 'Convert a public channel to a private channel.'
         g.long_desc %( Convert a public channel to a private channel. )
         g.command 'convertToPrivate' do |c|
