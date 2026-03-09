@@ -58,6 +58,21 @@ module Slack
           end
 
           #
+          # Exclude channels from Slack AI in bulk
+          #
+          # @option options [array] :channel_ids
+          #   An array of channel IDs to exclude from Slack AI.
+          # @option options [boolean] :exclude
+          #   Whether the channels should be excluded from Slack AI.
+          # @see https://api.slack.com/methods/admin.conversations.bulkSetExcludeFromSlackAi
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.bulkSetExcludeFromSlackAi.json
+          def admin_conversations_bulkSetExcludeFromSlackAi(options = {})
+            raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
+            raise ArgumentError, 'Required arguments :exclude missing' if options[:exclude].nil?
+            post('admin.conversations.bulkSetExcludeFromSlackAi', options)
+          end
+
+          #
           # Convert a public channel to a private channel.
           #
           # @option options [Object] :channel_id

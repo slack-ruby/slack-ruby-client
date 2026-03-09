@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AssistantSearch
           #
-          # Searches messages across your Slack organization—perfect for broad, specific, and real-time data retrieval.
+          # Searches messages, files, channels and users across your Slack organization.
           #
           # @option options [string] :query
           #   User prompt or search query.

@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'AssistantSearch methods.'
       command 'assistant_search' do |g|
-        g.desc 'Searches messages across your Slack organization—perfect for broad, specific, and real-time data retrieval.'
-        g.long_desc %( Searches messages across your Slack organization—perfect for broad, specific, and real-time data retrieval. )
+        g.desc 'Searches messages, files, channels and users across your Slack organization.'
+        g.long_desc %( Searches messages, files, channels and users across your Slack organization. )
         g.command 'context' do |c|
           c.flag 'query', desc: 'User prompt or search query.'
           c.flag 'action_token', desc: 'Send action_token as received in a message event.'
