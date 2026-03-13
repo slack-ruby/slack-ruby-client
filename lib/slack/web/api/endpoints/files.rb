@@ -186,6 +186,7 @@ module Slack
           # @see https://api.slack.com/methods/files.upload
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.upload.json
           def files_upload(options = {})
+            options = options.merge(filename: 'file') if options[:file] && !options[:filename]
             post('files.upload', options)
           end
         end
