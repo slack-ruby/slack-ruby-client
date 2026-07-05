@@ -40,8 +40,10 @@ module Slack
 <% data['arg_groups']&.each do |arg_group| %>
   <% next if arg_group['args'].size <= 1 %>
 <% arg_string = arg_group['args'].map { |arg_name| ":#{arg_name}" }.join(', ') %>
-<% if arg_group['mutually_exclusive'] %>
+<% if arg_group['mutually_exclusive'] && arg_group['required'] != false %>
             raise ArgumentError, 'Exactly one of <%= arg_string %> is required' unless <%= arg_group['args'].map { |arg_name| "options[:#{arg_name}].nil?" }.join(' ^ ') %>
+<% elsif arg_group['mutually_exclusive'] %>
+            raise ArgumentError, '<%= arg_string %> are mutually exclusive' if <%= arg_group['args'].map { |arg_name| "!options[:#{arg_name}].nil?" }.join(' && ') %>
 <% else %>
             raise ArgumentError, 'At least one of <%= arg_string %> is required' if <%= arg_group['args'].map { |arg_name| "options[:#{arg_name}].nil?"}.join(' && ') %>
 <% end %>
