@@ -16,7 +16,7 @@ Check that the last build succeeded in [GitHub Actions](https://github.com/slack
 Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
 
 ```
-### 0.2.2 (7/10/2015)
+### 0.2.2 (2015/07/10)
 ```
 
 Remove the line with "Your contribution here.", since there will be no more contributions to this release.
@@ -44,7 +44,7 @@ $ rake release
 
 slack-ruby-client 0.2.2 built to pkg/slack-ruby-client-0.2.2.gem.
 Tagged v0.2.2.
-Pushed git commits and tags.
+Pushed git commits and release tag.
 Pushed slack-ruby-client 0.2.2 to rubygems.org.
 ```
 
