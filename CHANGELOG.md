@@ -1,3 +1,7 @@
+### 3.2.1 (Next)
+
+* Your contribution here.
+
 ### 3.2.0 (2026/07/05)
 
 * [#581](https://github.com/slack-ruby/slack-ruby-client/pull/581): Migrate Danger to use danger-pr-comment workflow - [@dblock](https://github.com/dblock).
