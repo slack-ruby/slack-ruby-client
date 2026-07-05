@@ -1,4 +1,4 @@
-### 3.2.0 (Next)
+### 3.2.0 (2026/07/05)
 
 * [#581](https://github.com/slack-ruby/slack-ruby-client/pull/581): Migrate Danger to use danger-pr-comment workflow - [@dblock](https://github.com/dblock).
 * [#583](https://github.com/slack-ruby/slack-ruby-client/pull/583): Not found errors raised by id_for use more specific error classes when they exist - [@eizengan](https://github.com/eizengan).
@@ -6,7 +6,6 @@
 * [#588](https://github.com/slack-ruby/slack-ruby-client/pull/588): Fix text/markdown_text mutual exclusion in chat methods - [@dblock](https://github.com/dblock).
 * [#589](https://github.com/slack-ruby/slack-ruby-client/pull/589): Fix Ruby-version-dependent hash literal syntax in generated specs - [@dblock](https://github.com/dblock).
 * [#578](https://github.com/slack-ruby/slack-ruby-client/pull/578): Update API from [slack-api-ref@38cb2f4](https://github.com/slack-ruby/slack-api-ref/commit/38cb2f4) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* Your contribution here.
 
 ### 3.1.0 (2025/11/15)
 
