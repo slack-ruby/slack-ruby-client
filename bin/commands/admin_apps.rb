@@ -9,10 +9,13 @@ module Slack
         g.desc 'Approve an app for installation on a workspace.'
         g.long_desc %( Approve an app for installation on a workspace. )
         g.command 'approve' do |c|
+          c.flag 'allow_child_auto_install', desc: 'Auto-create an Admin-Approved App automation rule that pre-approves future child app installs from this manager app.'
           c.flag 'app_id', desc: 'The id of the app to approve.'
           c.flag 'request_id', desc: 'The id of the request to approve.'
           c.flag 'team_id', desc: 'The ID of the workspace to approve the app on.'
           c.flag 'enterprise_id', desc: 'The ID of the enterprise to approve the app on.'
+          c.flag 'user_scopes', desc: 'User scopes to approve for the app.'
+          c.flag 'bot_scopes', desc: 'Bot scopes to approve for the app.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_approve(options))
           end

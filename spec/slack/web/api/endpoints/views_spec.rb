@@ -22,7 +22,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
     end
     it 'encodes view as json' do
       expect(client).to receive(:post).with('views.open', {trigger_id: %q[12345.98765.abcd2358fdea], view: %q[{"data":["data"]}]})
-      client.views_open(trigger_id: %q[12345.98765.abcd2358fdea], view: {:data=>["data"]})
+      client.views_open(trigger_id: %q[12345.98765.abcd2358fdea], view: {data: ["data"]})
     end
   end
   context 'views_publish' do
@@ -34,7 +34,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
     end
     it 'encodes view as json' do
       expect(client).to receive(:post).with('views.publish', {user_id: %q[U0BPQUNTA], view: %q[{"data":["data"]}]})
-      client.views_publish(user_id: %q[U0BPQUNTA], view: {:data=>["data"]})
+      client.views_publish(user_id: %q[U0BPQUNTA], view: {data: ["data"]})
     end
   end
   context 'views_push' do
@@ -54,7 +54,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
     end
     it 'encodes view as json' do
       expect(client).to receive(:post).with('views.push', {trigger_id: %q[12345.98765.abcd2358fdea], view: %q[{"data":["data"]}]})
-      client.views_push(trigger_id: %q[12345.98765.abcd2358fdea], view: {:data=>["data"]})
+      client.views_push(trigger_id: %q[12345.98765.abcd2358fdea], view: {data: ["data"]})
     end
   end
   context 'views_update' do
@@ -74,7 +74,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Views do
     end
     it 'encodes view as json' do
       expect(client).to receive(:post).with('views.update', {external_id: %q[bmarley_view2], view: %q[{"data":["data"]}]})
-      client.views_update(external_id: %q[bmarley_view2], view: {:data=>["data"]})
+      client.views_update(external_id: %q[bmarley_view2], view: {data: ["data"]})
     end
   end
 end

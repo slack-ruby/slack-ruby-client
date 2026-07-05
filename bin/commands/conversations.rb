@@ -24,7 +24,7 @@ module Slack
         g.long_desc %( Approves an invitation to a Slack Connect channel )
         g.command 'approveSharedInvite' do |c|
           c.flag 'invite_id', desc: 'ID of the shared channel invite to approve.'
-          c.flag 'target_team', desc: 'The team or enterprise id of the other party involved in the invitation you are approving.'
+          c.flag 'target_team', desc: 'The team or enterprise ID of the receiving party involved in the invitation you are approving.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.conversations_approveSharedInvite(options))
           end

@@ -34,7 +34,7 @@ module Slack
           # @option options [Object] :invite_id
           #   ID of the shared channel invite to approve.
           # @option options [Object] :target_team
-          #   The team or enterprise id of the other party involved in the invitation you are approving.
+          #   The team or enterprise ID of the receiving party involved in the invitation you are approving.
           # @see https://api.slack.com/methods/conversations.approveSharedInvite
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/conversations/conversations.approveSharedInvite.json
           def conversations_approveSharedInvite(options = {})

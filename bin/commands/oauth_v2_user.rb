@@ -4,10 +4,10 @@
 module Slack
   module Cli
     class App
-      desc 'OauthV2 methods.'
-      command 'oauth_v2' do |g|
-        g.desc 'Exchanges a temporary OAuth verifier code for an access token.'
-        g.long_desc %( Exchanges a temporary OAuth verifier code for an access token. )
+      desc 'OauthV2User methods.'
+      command 'oauth_v2_user' do |g|
+        g.desc 'Exchanges a temporary OAuth verifier code for a user access token.'
+        g.long_desc %( Exchanges a temporary OAuth verifier code for a user access token. )
         g.command 'access' do |c|
           c.flag 'client_id', desc: 'Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.'
           c.flag 'client_secret', desc: 'Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.'
@@ -18,17 +18,7 @@ module Slack
           c.flag 'refresh_token', desc: 'The refresh_token param as described in the OAuth spec.'
           c.flag 'assertion', desc: 'Identity assertion JWT authorization grant.'
           c.action do |_global_options, options, _args|
-            puts JSON.dump(@client.oauth_v2_access(options))
-          end
-        end
-
-        g.desc 'Exchanges a legacy access token for a new expiring access token and refresh token'
-        g.long_desc %( Exchanges a legacy access token for a new expiring access token and refresh token )
-        g.command 'exchange' do |c|
-          c.flag 'client_id', desc: 'Issued when you created your application.'
-          c.flag 'client_secret', desc: 'Issued when you created your application.'
-          c.action do |_global_options, options, _args|
-            puts JSON.dump(@client.oauth_v2_exchange(options))
+            puts JSON.dump(@client.oauth_v2_user_access(options))
           end
         end
       end

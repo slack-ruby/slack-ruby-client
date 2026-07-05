@@ -23,6 +23,7 @@ module Slack
           c.flag 'user_id', desc: 'id of the user you want publish a view to.'
           c.flag 'view', desc: 'A view payload. This must be a JSON-encoded string.'
           c.flag 'hash', desc: 'A string that represents view state to protect against possible race conditions.'
+          c.flag 'interactivity_pointer', desc: ''
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.views_publish(options))
           end

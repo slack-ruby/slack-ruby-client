@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AssistantSearch
           #
-          # Searches messages across your Slack organization—perfect for broad, specific, and real-time data retrieval.
+          # Searches messages, files, channels and users across your Slack organization.
           #
           # @option options [string] :query
           #   User prompt or search query.
@@ -47,6 +47,8 @@ module Slack
           #   A string containing only modifiers in the format of modifier:value. Search results returned will match the modifier value. For now modifiers only affect term clauses.
           # @option options [boolean] :include_archived_channels
           #   Whether to include archived channels in the search results.
+          # @option options [boolean] :disable_semantic_search
+          #   Whether to disable semantic search. When true, only keyword-based search is used. Defaults to false.
           # @see https://api.slack.com/methods/assistant.search.context
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/assistant.search/assistant.search.context.json
           def assistant_search_context(options = {})

@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module Users
           #
-          # List conversations the calling user may access.
+          # List conversations the calling user is a member of.
           #
           # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.

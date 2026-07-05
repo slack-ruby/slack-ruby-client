@@ -21,6 +21,8 @@ module Slack
           #   The grant_type param as described in the OAuth spec.
           # @option options [string] :refresh_token
           #   The refresh_token param as described in the OAuth spec.
+          # @option options [string] :code_verifier
+          #   PKCE code verifier (RFC 7636). Required when the authorization request included a code_challenge.
           # @see https://api.slack.com/methods/openid.connect.token
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/openid.connect/openid.connect.token.json
           def openid_connect_token(options = {})

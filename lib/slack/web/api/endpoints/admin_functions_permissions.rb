@@ -27,11 +27,12 @@ module Slack
           #   The function visibility.
           # @option options [array] :user_ids
           #   List of user IDs to allow for named_entities visibility.
+          # @option options [array] :permissions
+          #   Array of permissions for the function.
           # @see https://api.slack.com/methods/admin.functions.permissions.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.functions.permissions/admin.functions.permissions.set.json
           def admin_functions_permissions_set(options = {})
             raise ArgumentError, 'Required arguments :function_id missing' if options[:function_id].nil?
-            raise ArgumentError, 'Required arguments :visibility missing' if options[:visibility].nil?
             post('admin.functions.permissions.set', options)
           end
         end

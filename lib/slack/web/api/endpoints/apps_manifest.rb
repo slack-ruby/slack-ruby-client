@@ -11,6 +11,8 @@ module Slack
           #
           # @option options [string] :manifest
           #   A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one.
+          # @option options [string] :team_id
+          #   When called with an org token, which specific team to create app on.
           # @see https://api.slack.com/methods/apps.manifest.create
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/apps.manifest/apps.manifest.create.json
           def apps_manifest_create(options = {})
@@ -20,7 +22,7 @@ module Slack
           end
 
           #
-          # Permanently deletes an app created through app manifests
+          # Permanently deletes an app created through app manifests. When called with a manager app token, this method can only delete apps that were created by that manager app.
           #
           # @option options [Object] :app_id
           #   The ID of the app you want to delete.
@@ -32,7 +34,7 @@ module Slack
           end
 
           #
-          # Export an app manifest from an existing app
+          # Export an app manifest from an existing app. When called with a manager app token, this method can only export apps that were created by that manager app.
           #
           # @option options [Object] :app_id
           #   The ID of the app whose configuration you want to export as a manifest.
@@ -44,7 +46,7 @@ module Slack
           end
 
           #
-          # Update an app from an app manifest
+          # Update an app from an app manifest. When called with a manager app token, this method can only update apps that were created by that manager app.
           #
           # @option options [string] :manifest
           #   A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one. As this method entirely _replaces_ any previous configuration, manifest must contain both unmodified and modified fields.

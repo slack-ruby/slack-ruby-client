@@ -21,23 +21,37 @@ RSpec.describe Slack::Web::Api::Endpoints::<%= group.gsub(".", "_").camelize %> 
       expect { client.<%= method_name %><%= params_except_required.empty? ? '' : "(#{params_except_required})" %> }.to raise_error ArgumentError, /Required arguments :<%= arg_name %> missing/
     end
 <% end %>
+<% at_most_one_groups = data['arg_groups']&.select { |g| g['mutually_exclusive'] && g['required'] == false } || [] %>
 <% data['arg_groups']&.each do |arg_group| %>
     <% next if arg_group['args'].size <= 1 %>
+<% at_most_one = arg_group['mutually_exclusive'] && arg_group['required'] == false %>
+<% if at_most_one %>
+    it 'does not allow both <%= arg_group['args'].join(' and ') %>' do
+<% else %>
     it 'requires one of <%= arg_group['args'].join(', ') %>' do
+<% end %>
 <% params_except_required = example_params.reject { |name, _| arg_group['args'].include?(name)  }.map { |name, val| "#{name}: %q[#{val}]" }.join(', ') %>
+<% if at_most_one %>
+<% error_message = 'mutually exclusive' %>
+<% else %>
 <% error_message = arg_group['mutually_exclusive'] ? 'Exactly' : 'At least' %>
       expect { client.<%= method_name %><%= params_except_required.empty? ? '' : "(#{params_except_required})" %> }.to raise_error ArgumentError, /<%= error_message %> one of/
+<% end %>
 <% (1..arg_group['args'].length).each do |n| %>
 <% arg_group['args'].combination(n) do |names| %>
 <% params = names.map { |name| "#{name}: %q[#{data['args'][name]['example']}]" }.join(', ') %>
 <% params = "#{params}, #{params_except_required}" unless params_except_required.empty? %>
-<% if n == 1 || !arg_group['mutually_exclusive'] %>
+<% violates_at_most_one = at_most_one_groups.any? { |g| (names & g['args']).length > 1 } %>
+<% if violates_at_most_one %>
+
+      expect { client.<%= method_name %><%= "(#{params})" %> }.to raise_error ArgumentError, /mutually exclusive/
+<% elsif n == 1 || !arg_group['mutually_exclusive'] %>
 
       expect(client).to receive(:post).with('<%= group %>.<%= name %>', {<%= params %>})
       client.<%= method_name %><%= "(#{params})" %>
 <% else %>
 
-      expect { client.<%= method_name %><%= "(#{params})" %> }.to raise_error ArgumentError, /<%= error_message %> one of/
+      expect { client.<%= method_name %><%= "(#{params})" %> }.to raise_error ArgumentError, /<%= at_most_one ? error_message : "#{error_message} one of" %>/
 <% end %>
 <% end %>
 <% end %>
