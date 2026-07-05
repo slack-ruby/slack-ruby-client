@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'AssistantSearch methods.'
       command 'assistant_search' do |g|
-        g.desc 'Searches messages across your Slack organization—perfect for broad, specific, and real-time data retrieval.'
-        g.long_desc %( Searches messages across your Slack organization—perfect for broad, specific, and real-time data retrieval. )
+        g.desc 'Searches messages, files, channels and users across your Slack organization.'
+        g.long_desc %( Searches messages, files, channels and users across your Slack organization. )
         g.command 'context' do |c|
           c.flag 'query', desc: 'User prompt or search query.'
           c.flag 'action_token', desc: 'Send action_token as received in a message event.'
@@ -28,6 +28,7 @@ module Slack
           c.flag 'term_clauses', desc: 'A list of term clauses. A term clause is a string with search terms. Search results returned will match every term clause specified (i.e., conjunctive normal form).'
           c.flag 'modifiers', desc: 'A string containing only modifiers in the format of modifier:value. Search results returned will match the modifier value. For now modifiers only affect term clauses.'
           c.flag 'include_archived_channels', desc: 'Whether to include archived channels in the search results.'
+          c.flag 'disable_semantic_search', desc: 'Whether to disable semantic search. When true, only keyword-based search is used. Defaults to false.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.assistant_search_context(options))
           end

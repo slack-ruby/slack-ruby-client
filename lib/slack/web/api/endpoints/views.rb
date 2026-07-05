@@ -33,6 +33,7 @@ module Slack
           #   A view payload. This must be a JSON-encoded string.
           # @option options [string] :hash
           #   A string that represents view state to protect against possible race conditions.
+          # @option options [string] :interactivity_pointer
           # @see https://api.slack.com/methods/views.publish
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/views/views.publish.json
           def views_publish(options = {})

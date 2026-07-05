@@ -10,7 +10,7 @@ module Slack
           # Add bookmark to a channel.
           #
           # @option options [string] :channel_id
-          #   Channel to add bookmark in.
+          #   Channel to add bookmark in. Required for public channels.
           # @option options [string] :title
           #   Title for the bookmark.
           # @option options [string] :link
@@ -28,7 +28,6 @@ module Slack
           # @see https://api.slack.com/methods/bookmarks.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.add.json
           def bookmarks_add(options = {})
-            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             raise ArgumentError, 'Required arguments :title missing' if options[:title].nil?
             raise ArgumentError, 'Required arguments :type missing' if options[:type].nil?
             post('bookmarks.add', options)
@@ -38,9 +37,9 @@ module Slack
           # Edit bookmark.
           #
           # @option options [string] :channel_id
-          #   Channel to update bookmark in.
+          #   Channel to update bookmark in. Required for public channels.
           # @option options [string] :bookmark_id
-          #   Bookmark to update.
+          #   Bookmark to update. Required for public channels.
           # @option options [string] :title
           #   Title for the bookmark.
           # @option options [string] :link
@@ -50,8 +49,6 @@ module Slack
           # @see https://api.slack.com/methods/bookmarks.edit
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.edit.json
           def bookmarks_edit(options = {})
-            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
-            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
             post('bookmarks.edit', options)
           end
 
@@ -59,11 +56,10 @@ module Slack
           # List bookmark for the channel.
           #
           # @option options [string] :channel_id
-          #   Channel to list bookmarks in.
+          #   Channel to list bookmarks in. Required for public channels.
           # @see https://api.slack.com/methods/bookmarks.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.list.json
           def bookmarks_list(options = {})
-            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
             post('bookmarks.list', options)
           end
 
@@ -71,16 +67,14 @@ module Slack
           # Remove bookmark from the channel.
           #
           # @option options [string] :channel_id
-          #   Channel to remove bookmark.
+          #   Channel to remove bookmark. Required for public channels.
           # @option options [string] :bookmark_id
-          #   Bookmark to remove.
+          #   Bookmark to remove. Required for public channels.
           # @option options [string] :quip_section_id
           #   Quip section ID to unbookmark.
           # @see https://api.slack.com/methods/bookmarks.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/bookmarks/bookmarks.remove.json
           def bookmarks_remove(options = {})
-            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
-            raise ArgumentError, 'Required arguments :bookmark_id missing' if options[:bookmark_id].nil?
             post('bookmarks.remove', options)
           end
         end

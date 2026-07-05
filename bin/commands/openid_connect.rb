@@ -15,6 +15,7 @@ module Slack
           c.flag 'redirect_uri', desc: 'This must match the originally submitted URI (if one was sent).'
           c.flag 'grant_type', desc: 'The grant_type param as described in the OAuth spec.'
           c.flag 'refresh_token', desc: 'The refresh_token param as described in the OAuth spec.'
+          c.flag 'code_verifier', desc: 'PKCE code verifier (RFC 7636). Required when the authorization request included a code_challenge.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.openid_connect_token(options))
           end

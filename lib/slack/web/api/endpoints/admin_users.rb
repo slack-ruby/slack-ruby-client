@@ -85,6 +85,10 @@ module Slack
           #   Only applies with org token and no team_id. If true, return workspaces for a user even if they may be deactivated on them. If false, return workspaces for a user only when user is active on them. Default is false.
           # @option options [boolean] :only_guests
           #   If true, returns only guests and their expiration dates that belong to the team_id.
+          # @option options [boolean] :include_admins
+          #   If true, only admin users will be returned (excludes owners). Returns all admins and owners when combined with include_owners. Cannot be used together with only_guests.
+          # @option options [boolean] :include_owners
+          #   If true, only owner users will be returned. Cannot be used together with only_guests.
           # @option options [integer] :limit
           #   Limit for how many users to be retrieved per page.
           # @see https://api.slack.com/methods/admin.users.list
@@ -115,10 +119,10 @@ module Slack
           end
 
           #
-          # Set an existing regular user or owner to be a workspace admin.
+          # Set an existing regular user or owner to be a workspace or org admin.
           #
           # @option options [Object] :team_id
-          #   The ID (T1234) of the workspace.
+          #   The ID of the workspace or organization.
           # @option options [string] :user_id
           #   The ID of the user to designate as an admin.
           # @see https://api.slack.com/methods/admin.users.setAdmin
@@ -147,12 +151,12 @@ module Slack
           end
 
           #
-          # Set an existing regular user or admin to be a workspace owner.
+          # Set an existing regular user or admin to be a workspace or org owner.
           #
           # @option options [Object] :team_id
-          #   The ID (T1234) of the workspace.
+          #   The ID of the workspace or organization.
           # @option options [Object] :user_id
-          #   Id of the user to promote to owner.
+          #   ID of the user to promote to owner.
           # @see https://api.slack.com/methods/admin.users.setOwner
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.setOwner.json
           def admin_users_setOwner(options = {})
@@ -165,7 +169,7 @@ module Slack
           # Set an existing guest user, admin user, or owner to be a regular user.
           #
           # @option options [Object] :team_id
-          #   The ID (T1234) of the workspace.
+          #   The ID of the workspace or organization.
           # @option options [string] :user_id
           #   The ID of the user to designate as a regular user.
           # @see https://api.slack.com/methods/admin.users.setRegular

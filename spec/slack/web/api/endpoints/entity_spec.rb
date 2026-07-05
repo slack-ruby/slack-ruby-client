@@ -11,7 +11,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Entity do
     end
     it 'encodes metadata as json' do
       expect(client).to receive(:post).with('entity.presentDetails', {trigger_id: %q[], metadata: %q[{"data":["data"]}]})
-      client.entity_presentDetails(trigger_id: %q[], metadata: {:data=>["data"]})
+      client.entity_presentDetails(trigger_id: %q[], metadata: {data: ["data"]})
     end
   end
 end

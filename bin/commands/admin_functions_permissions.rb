@@ -21,6 +21,7 @@ module Slack
           c.flag 'function_id', desc: 'The function ID to set permissions for.'
           c.flag 'visibility', desc: 'The function visibility.'
           c.flag 'user_ids', desc: 'List of user IDs to allow for named_entities visibility.'
+          c.flag 'permissions', desc: 'Array of permissions for the function.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_functions_permissions_set(options))
           end

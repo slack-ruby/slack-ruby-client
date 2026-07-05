@@ -12,10 +12,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminWorkflowsTriggersTypesPermission
   end
   context 'admin.workflows.triggers.types.permissions_set' do
     it 'requires id' do
-      expect { client.admin_workflows_triggers_types_permissions_set(visibility: %q[]) }.to raise_error ArgumentError, /Required arguments :id missing/
-    end
-    it 'requires visibility' do
-      expect { client.admin_workflows_triggers_types_permissions_set(id: %q[['FTT01', 'FTT02', 'FTT03']]) }.to raise_error ArgumentError, /Required arguments :visibility missing/
+      expect { client.admin_workflows_triggers_types_permissions_set }.to raise_error ArgumentError, /Required arguments :id missing/
     end
   end
 end

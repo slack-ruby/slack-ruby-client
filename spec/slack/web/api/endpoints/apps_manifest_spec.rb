@@ -11,7 +11,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AppsManifest do
     end
     it 'encodes manifest as json' do
       expect(client).to receive(:post).with('apps.manifest.create', {manifest: %q[{"data":["data"]}]})
-      client.apps_manifest_create(manifest: {:data=>["data"]})
+      client.apps_manifest_create(manifest: {data: ["data"]})
     end
   end
   context 'apps.manifest_delete' do
@@ -33,7 +33,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AppsManifest do
     end
     it 'encodes manifest as json' do
       expect(client).to receive(:post).with('apps.manifest.update', {manifest: %q[{"data":["data"]}], app_id: %q[]})
-      client.apps_manifest_update(manifest: {:data=>["data"]}, app_id: %q[])
+      client.apps_manifest_update(manifest: {data: ["data"]}, app_id: %q[])
     end
   end
   context 'apps.manifest_validate' do

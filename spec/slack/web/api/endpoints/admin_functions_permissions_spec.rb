@@ -12,10 +12,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminFunctionsPermissions do
   end
   context 'admin.functions.permissions_set' do
     it 'requires function_id' do
-      expect { client.admin_functions_permissions_set(visibility: %q[]) }.to raise_error ArgumentError, /Required arguments :function_id missing/
-    end
-    it 'requires visibility' do
-      expect { client.admin_functions_permissions_set(function_id: %q[]) }.to raise_error ArgumentError, /Required arguments :visibility missing/
+      expect { client.admin_functions_permissions_set }.to raise_error ArgumentError, /Required arguments :function_id missing/
     end
   end
 end

@@ -10,13 +10,14 @@ module Slack
         g.long_desc %( Create an app from an app manifest. )
         g.command 'create' do |c|
           c.flag 'manifest', desc: 'A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one.'
+          c.flag 'team_id', desc: 'When called with an org token, which specific team to create app on.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.apps_manifest_create(options))
           end
         end
 
-        g.desc 'Permanently deletes an app created through app manifests'
-        g.long_desc %( Permanently deletes an app created through app manifests )
+        g.desc 'Permanently deletes an app created through app manifests. When called with a manager app token, this method can only delete apps that were created by that manager app.'
+        g.long_desc %( Permanently deletes an app created through app manifests. When called with a manager app token, this method can only delete apps that were created by that manager app. )
         g.command 'delete' do |c|
           c.flag 'app_id', desc: 'The ID of the app you want to delete.'
           c.action do |_global_options, options, _args|
@@ -24,8 +25,8 @@ module Slack
           end
         end
 
-        g.desc 'Export an app manifest from an existing app'
-        g.long_desc %( Export an app manifest from an existing app )
+        g.desc 'Export an app manifest from an existing app. When called with a manager app token, this method can only export apps that were created by that manager app.'
+        g.long_desc %( Export an app manifest from an existing app. When called with a manager app token, this method can only export apps that were created by that manager app. )
         g.command 'export' do |c|
           c.flag 'app_id', desc: 'The ID of the app whose configuration you want to export as a manifest.'
           c.action do |_global_options, options, _args|
@@ -33,8 +34,8 @@ module Slack
           end
         end
 
-        g.desc 'Update an app from an app manifest'
-        g.long_desc %( Update an app from an app manifest )
+        g.desc 'Update an app from an app manifest. When called with a manager app token, this method can only update apps that were created by that manager app.'
+        g.long_desc %( Update an app from an app manifest. When called with a manager app token, this method can only update apps that were created by that manager app. )
         g.command 'update' do |c|
           c.flag 'manifest', desc: 'A JSON app manifest encoded as a string. This manifest must use a valid app manifest schema - read our guide to creating one. As this method entirely _replaces_ any previous configuration, manifest must contain both unmodified and modified fields.'
           c.flag 'app_id', desc: 'The ID of the app whose configuration you want to update.'

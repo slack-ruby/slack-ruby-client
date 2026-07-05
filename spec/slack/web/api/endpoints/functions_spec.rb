@@ -22,7 +22,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Functions do
     end
     it 'encodes outputs as json' do
       expect(client).to receive(:post).with('functions.completeSuccess', {function_execution_id: %q[Fx12345ABCDE], outputs: %q[{"data":["data"]}]})
-      client.functions_completeSuccess(function_execution_id: %q[Fx12345ABCDE], outputs: {:data=>["data"]})
+      client.functions_completeSuccess(function_execution_id: %q[Fx12345ABCDE], outputs: {data: ["data"]})
     end
   end
 end

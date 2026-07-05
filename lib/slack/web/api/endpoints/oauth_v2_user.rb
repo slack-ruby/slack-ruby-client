@@ -5,9 +5,9 @@ module Slack
   module Web
     module Api
       module Endpoints
-        module OauthV2
+        module OauthV2User
           #
-          # Exchanges a temporary OAuth verifier code for an access token.
+          # Exchanges a temporary OAuth verifier code for a user access token.
           #
           # @option options [string] :client_id
           #   Issued when you created your application. If possible, avoid sending client_id and client_secret as parameters in your request and instead supply the Client ID and Client Secret using the HTTP Basic authentication scheme.
@@ -25,25 +25,10 @@ module Slack
           #   The refresh_token param as described in the OAuth spec.
           # @option options [string] :assertion
           #   Identity assertion JWT authorization grant.
-          # @see https://api.slack.com/methods/oauth.v2.access
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.access.json
-          def oauth_v2_access(options = {})
-            post('oauth.v2.access', options)
-          end
-
-          #
-          # Exchanges a legacy access token for a new expiring access token and refresh token
-          #
-          # @option options [string] :client_id
-          #   Issued when you created your application.
-          # @option options [string] :client_secret
-          #   Issued when you created your application.
-          # @see https://api.slack.com/methods/oauth.v2.exchange
-          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.exchange.json
-          def oauth_v2_exchange(options = {})
-            raise ArgumentError, 'Required arguments :client_id missing' if options[:client_id].nil?
-            raise ArgumentError, 'Required arguments :client_secret missing' if options[:client_secret].nil?
-            post('oauth.v2.exchange', options)
+          # @see https://api.slack.com/methods/oauth.v2.user.access
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2.user/oauth.v2.user.access.json
+          def oauth_v2_user_access(options = {})
+            post('oauth.v2.user.access', options)
           end
         end
       end

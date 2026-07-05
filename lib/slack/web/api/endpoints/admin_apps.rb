@@ -9,6 +9,8 @@ module Slack
           #
           # Approve an app for installation on a workspace.
           #
+          # @option options [boolean] :allow_child_auto_install
+          #   Auto-create an Admin-Approved App automation rule that pre-approves future child app installs from this manager app.
           # @option options [string] :app_id
           #   The id of the app to approve.
           # @option options [string] :request_id
@@ -17,6 +19,10 @@ module Slack
           #   The ID of the workspace to approve the app on.
           # @option options [Object] :enterprise_id
           #   The ID of the enterprise to approve the app on.
+          # @option options [string] :user_scopes
+          #   User scopes to approve for the app.
+          # @option options [string] :bot_scopes
+          #   Bot scopes to approve for the app.
           # @see https://api.slack.com/methods/admin.apps.approve
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps/admin.apps.approve.json
           def admin_apps_approve(options = {})
