@@ -5,6 +5,7 @@
 * [#585](https://github.com/slack-ruby/slack-ruby-client/pull/585): Fix ci not triggering on automated api update prs - [@Copilot](https://github.com/Copilot).
 * [#588](https://github.com/slack-ruby/slack-ruby-client/pull/588): Fix text/markdown_text mutual exclusion in chat methods - [@dblock](https://github.com/dblock).
 * [#589](https://github.com/slack-ruby/slack-ruby-client/pull/589): Fix Ruby-version-dependent hash literal syntax in generated specs - [@dblock](https://github.com/dblock).
+* [#578](https://github.com/slack-ruby/slack-ruby-client/pull/578): Update API from [slack-api-ref@38cb2f4](https://github.com/slack-ruby/slack-api-ref/commit/38cb2f4) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.1.0 (2025/11/15)
