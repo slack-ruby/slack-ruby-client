@@ -4,6 +4,7 @@
 * [#583](https://github.com/slack-ruby/slack-ruby-client/pull/583): Not found errors raised by id_for use more specific error classes when they exist - [@eizengan](https://github.com/eizengan).
 * [#585](https://github.com/slack-ruby/slack-ruby-client/pull/585): Fix ci not triggering on automated api update prs - [@Copilot](https://github.com/Copilot).
 * [#588](https://github.com/slack-ruby/slack-ruby-client/pull/588): Fix text/markdown_text mutual exclusion in chat methods - [@dblock](https://github.com/dblock).
+* [#589](https://github.com/slack-ruby/slack-ruby-client/pull/589): Fix Ruby-version-dependent hash literal syntax in generated specs - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 3.1.0 (2025/11/15)
