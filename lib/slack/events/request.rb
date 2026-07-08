@@ -40,9 +40,9 @@ module Slack
       def body
         @body ||= begin
           input = http_request.body
-          input.rewind
+          input.rewind if input.respond_to?(:rewind)
           body = input.read
-          input.rewind
+          input.rewind if input.respond_to?(:rewind)
           body
         end
       end
