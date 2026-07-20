@@ -6,6 +6,33 @@ module Slack
     class App
       desc 'Entity methods.'
       command 'entity' do |g|
+        g.desc 'Acknowledge a comment mutation (edit, delete, or post) on a work object entity. Apps call this endpoint to confirm they have processed a comment action, and the backend emits a dedicated RTM event to the user.'
+        g.long_desc %( Acknowledge a comment mutation (edit, delete, or post) on a work object entity. Apps call this endpoint to confirm they have processed a comment action, and the backend emits a dedicated RTM event to the user. )
+        g.command 'acknowledgeCommentAction' do |c|
+          c.flag 'trigger_id', desc: 'A reference to the original user action that initiated the comment mutation.'
+          c.flag 'comment', desc: 'The full comment data. Required for edit and post actions. See the comment schema for the full list of properties.'
+          c.flag 'error', desc: 'Error message if the action failed in the app. When present, signals that the mutation could not be completed.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.entity_acknowledgeCommentAction(options))
+          end
+        end
+
+        g.desc 'Provide comments for work objects. Apps call this endpoint to send per-user flexpane comment data to the client.'
+        g.long_desc %( Provide comments for work objects. Apps call this endpoint to send per-user flexpane comment data to the client. )
+        g.command 'presentComments' do |c|
+          c.flag 'comments', desc: 'Array of comments to present to the user. See the comment schema for the full list of properties.'
+          c.flag 'cursor', desc: 'App supplied cursor used for pagination, will be sent in the next request for comments.'
+          c.flag 'can_post_comment', desc: 'Indicates whether the user has permissions to post comments.'
+          c.flag 'trigger_id', desc: 'A reference to the original user action that initiated the request.'
+          c.flag 'delete_action_id', desc: 'The block action id that will be sent when a delete request is initiated for a comment.'
+          c.flag 'user_auth_required', desc: 'Set to true (or 1) to indicate that the user must authenticate to see the comments data.'
+          c.flag 'user_auth_url', desc: 'A custom URL to which users are directed for authentication if required.'
+          c.flag 'error', desc: ''
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.entity_presentComments(options))
+          end
+        end
+
         g.desc 'Provide custom flexpane behavior for Work Objects. Apps call this endpoint to send per-user flexpane metadata to the client.'
         g.long_desc %( Provide custom flexpane behavior for Work Objects. Apps call this endpoint to send per-user flexpane metadata to the client. )
         g.command 'presentDetails' do |c|

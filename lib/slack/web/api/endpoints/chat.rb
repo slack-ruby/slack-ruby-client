@@ -147,7 +147,7 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
-            raise ArgumentError, ':text, :markdown_text are mutually exclusive' if !options[:text].nil? && !options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             options = encode_options_as_json(options, %i[attachments blocks])
             post('chat.postEphemeral', options)
@@ -197,7 +197,7 @@ module Slack
           def chat_postMessage(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
-            raise ArgumentError, ':text, :markdown_text are mutually exclusive' if !options[:text].nil? && !options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postMessage', options)
           end
@@ -239,7 +239,7 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :post_at missing' if options[:post_at].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
-            raise ArgumentError, ':text, :markdown_text are mutually exclusive' if !options[:text].nil? && !options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.scheduleMessage', options)
           end
@@ -365,7 +365,7 @@ module Slack
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
             raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
-            raise ArgumentError, ':text, :markdown_text are mutually exclusive' if !options[:text].nil? && !options[:markdown_text].nil?
+            raise ArgumentError, 'Exactly one of :text, :markdown_text is required' unless options[:text].nil? ^ options[:markdown_text].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             options = encode_options_as_json(options, %i[attachments unfurled_attachments blocks metadata])
             post('chat.update', options)
