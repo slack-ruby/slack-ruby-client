@@ -93,7 +93,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.postEphemeral', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]})
       client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect { client.chat_postEphemeral(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postEphemeral', {text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA])
 
       expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA]})
       client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], user: %q[U0BPQUNTA])
@@ -101,13 +102,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]})
       client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect { client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect { client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postEphemeral', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect { client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA]})
+      client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], user: %q[U0BPQUNTA])
     end
-    it 'does not allow both text and markdown_text' do
+    it 'requires one of text, markdown_text' do
+      expect { client.chat_postEphemeral(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /Exactly one of/
 
       expect(client).to receive(:post).with('chat.postEphemeral', {text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]})
       client.chat_postEphemeral(text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA])
@@ -115,7 +120,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.postEphemeral', {markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]})
       client.chat_postEphemeral(markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA])
 
-      expect { client.chat_postEphemeral(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect { client.chat_postEphemeral(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes attachments, blocks as json' do
       expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[{"data":["data"]}], channel: %q[], text: %q[Hello world], user: %q[U0BPQUNTA], blocks: %q[{"data":["data"]}]})
@@ -156,7 +161,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.postMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[]})
       client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[])
 
-      expect { client.chat_postMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postMessage', {text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]})
+      client.chat_postMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[])
 
       expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[]})
       client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[])
@@ -164,13 +170,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[]})
       client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[])
 
-      expect { client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]})
+      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[])
 
-      expect { client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]})
+      client.chat_postMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[])
 
-      expect { client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[]})
+      client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[])
     end
-    it 'does not allow both text and markdown_text' do
+    it 'requires one of text, markdown_text' do
+      expect { client.chat_postMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]) }.to raise_error ArgumentError, /Exactly one of/
 
       expect(client).to receive(:post).with('chat.postMessage', {text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]})
       client.chat_postMessage(text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[])
@@ -178,7 +188,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.postMessage', {markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]})
       client.chat_postMessage(markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[])
 
-      expect { client.chat_postMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect { client.chat_postMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes attachments, blocks, metadata as json' do
       expect(client).to receive(:post).with('chat.postMessage', {attachments: %q[{"data":["data"]}], channel: %q[], text: %q[Hello world], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
@@ -222,7 +232,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.scheduleMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]})
       client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400])
 
-      expect { client.chat_scheduleMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.scheduleMessage', {text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400])
 
       expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400]})
       client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], post_at: %q[299876400])
@@ -230,13 +241,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]})
       client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400])
 
-      expect { client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400])
 
-      expect { client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.scheduleMessage', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400])
 
-      expect { client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400]})
+      client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], post_at: %q[299876400])
     end
-    it 'does not allow both text and markdown_text' do
+    it 'requires one of text, markdown_text' do
+      expect { client.chat_scheduleMessage(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /Exactly one of/
 
       expect(client).to receive(:post).with('chat.scheduleMessage', {text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400]})
       client.chat_scheduleMessage(text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400])
@@ -244,7 +259,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.scheduleMessage', {markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400]})
       client.chat_scheduleMessage(markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400])
 
-      expect { client.chat_scheduleMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect { client.chat_scheduleMessage(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], post_at: %q[299876400]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes attachments, blocks, metadata as json' do
       expect(client).to receive(:post).with('chat.scheduleMessage', {attachments: %q[{"data":["data"]}], channel: %q[], post_at: %q[299876400], text: %q[Hello world], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
@@ -314,7 +329,8 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.update', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]})
       client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect { client.chat_update(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.update', {text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"])
 
       expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"]})
       client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], channel: %q[], ts: %q["1405894322.002768"])
@@ -322,13 +338,17 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]})
       client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect { client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect { client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.update', {blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect { client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect(client).to receive(:post).with('chat.update', {attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"]})
+      client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], blocks: %q[[{"type": "section", "text": {"type": "plain_text", "text": "Hello world"}}]], text: %q[Hello world], markdown_text: %q[**This is bold text**], channel: %q[], ts: %q["1405894322.002768"])
     end
-    it 'does not allow both text and markdown_text' do
+    it 'requires one of text, markdown_text' do
+      expect { client.chat_update(attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /Exactly one of/
 
       expect(client).to receive(:post).with('chat.update', {text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"]})
       client.chat_update(text: %q[Hello world], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"])
@@ -336,7 +356,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
       expect(client).to receive(:post).with('chat.update', {markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"]})
       client.chat_update(markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"])
 
-      expect { client.chat_update(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /mutually exclusive/
+      expect { client.chat_update(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], ts: %q["1405894322.002768"]) }.to raise_error ArgumentError, /Exactly one of/
     end
     it 'encodes attachments, unfurled_attachments, blocks, metadata as json' do
       expect(client).to receive(:post).with('chat.update', {attachments: %q[{"data":["data"]}], channel: %q[], text: %q[Hello world], ts: %q["1405894322.002768"], unfurled_attachments: %q[{"data":["data"]}], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})

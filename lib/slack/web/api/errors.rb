@@ -411,6 +411,7 @@ module Slack
         class InvalidSchema < SlackError; end
         class InvalidScopes < SlackError; end
         class InvalidSearchChannelType < SlackError; end
+        class InvalidSenderSchema < SlackError; end
         class InvalidSetting < SlackError; end
         class InvalidShortcutType < SlackError; end
         class InvalidSort < SlackError; end
@@ -495,6 +496,7 @@ module Slack
         class MetadataOnlyDoesNotSupportDate < SlackError; end
         class MetadataTooLarge < SlackError; end
         class MethodDeprecated < SlackError; end
+        class MethodNotFound < SlackError; end
         class MethodNotSupported < SlackError; end
         class MethodNotSupportedForChannelType < SlackError; end
         class MigrationInProgress < SlackError; end
@@ -503,6 +505,8 @@ module Slack
         class MissingArgument < SlackError; end
         class MissingArguments < SlackError; end
         class MissingChannel < SlackError; end
+        class MissingCommentData < SlackError; end
+        class MissingDeleteActionId < SlackError; end
         class MissingDialog < SlackError; end
         class MissingDuration < SlackError; end
         class MissingFileData < SlackError; end
@@ -1212,6 +1216,7 @@ module Slack
           'invalid_schema' => InvalidSchema,
           'invalid_scopes' => InvalidScopes,
           'invalid_search_channel_type' => InvalidSearchChannelType,
+          'invalid_sender_schema' => InvalidSenderSchema,
           'invalid_setting' => InvalidSetting,
           'invalid_shortcut_type' => InvalidShortcutType,
           'invalid_sort' => InvalidSort,
@@ -1296,6 +1301,7 @@ module Slack
           'metadata_only_does_not_support_date' => MetadataOnlyDoesNotSupportDate,
           'metadata_too_large' => MetadataTooLarge,
           'method_deprecated' => MethodDeprecated,
+          'method_not_found' => MethodNotFound,
           'method_not_supported' => MethodNotSupported,
           'method_not_supported_for_channel_type' => MethodNotSupportedForChannelType,
           'migration_in_progress' => MigrationInProgress,
@@ -1304,6 +1310,8 @@ module Slack
           'missing_argument' => MissingArgument,
           'missing_arguments' => MissingArguments,
           'missing_channel' => MissingChannel,
+          'missing_comment_data' => MissingCommentData,
+          'missing_delete_action_id' => MissingDeleteActionId,
           'missing_dialog' => MissingDialog,
           'missing_duration' => MissingDuration,
           'missing_file_data' => MissingFileData,
