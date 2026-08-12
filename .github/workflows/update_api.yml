@@ -44,8 +44,8 @@ jobs:
       - name: Prepare diff for AI summary
         if: steps.changes.outputs.changed == 'true'
         run: |
-          git diff --stat > /tmp/diff_stat.txt
-          git diff | head -c 20000 > /tmp/diff.txt
+          git diff --stat | sed 's/^/      /' > /tmp/diff_stat.txt
+          git diff | head -c 20000 | sed 's/^/      /' > /tmp/diff.txt
       - name: Generate changelog entries with AI
         if: steps.changes.outputs.changed == 'true'
         id: ai
