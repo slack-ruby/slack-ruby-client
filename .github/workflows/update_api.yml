@@ -10,7 +10,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      models: read
     steps:
       - uses: actions/checkout@v7
         with:
@@ -46,21 +45,30 @@ jobs:
         run: |
           git diff --stat | sed 's/^/      /' > /tmp/diff_stat.txt
           git diff | head -c 20000 | sed 's/^/      /' > /tmp/diff.txt
+      - name: Set up Node
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/setup-node@v6
+      - name: Install Copilot CLI
+        if: steps.changes.outputs.changed == 'true'
+        run: npm install -g @github/copilot
       - name: Generate changelog entries with AI
         if: steps.changes.outputs.changed == 'true'
         id: ai
-        uses: actions/ai-inference@v1
+        uses: actions/ai-inference@v3
         with:
           prompt-file: ./.github/prompts/changelog-entries.prompt.yml
+          model: ''
           file_input: |
             diff_stat: /tmp/diff_stat.txt
             diff: /tmp/diff.txt
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
       - name: Build changelog entries
         id: entries
         run: |
           entries=""
           if [ "${{ steps.changes.outputs.changed }}" = "true" ]; then
-            entries="$(jq -r '.entries[]? // empty' "${{ steps.ai.outputs.response-file }}" 2>/dev/null)"
+            entries="$(grep -v '^```' "${{ steps.ai.outputs.response-file }}" 2>/dev/null | jq -r '.entries[]? // empty' 2>/dev/null)"
           fi
           if [ -z "$entries" ]; then
             entries="Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}"
