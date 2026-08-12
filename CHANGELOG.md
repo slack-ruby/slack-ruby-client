@@ -2,6 +2,7 @@
 
 * [#591](https://github.com/slack-ruby/slack-ruby-client/pull/591): Generate AI CHANGELOG entries and PR summaries for automated API update PRs, lock simplecov below 1.1.0 to avoid breaking Coveralls - [@dblock](https://github.com/dblock).
 * [#592](https://github.com/slack-ruby/slack-ruby-client/pull/592): Fix a YAML indentation bug in AI CHANGELOG entry generation that broke the automated API update workflow - [@dblock](https://github.com/dblock).
+* [#593](https://github.com/slack-ruby/slack-ruby-client/pull/593): Migrate AI CHANGELOG entry generation to Copilot CLI after GitHub Models retirement - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

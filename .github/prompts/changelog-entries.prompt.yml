@@ -6,7 +6,8 @@ messages:
       are code-generated from JSON method definitions vendored from
       https://github.com/slack-ruby/slack-api-ref (via a git submodule and rake task).
 
-      Given a diffstat and a diff of the regenerated files, respond with a JSON object:
+      Given a diffstat and a diff of the regenerated files, respond with ONLY a single JSON
+      object (no markdown code fences, no other text) in exactly this shape:
       {"entries": [string, ...]}
 
       Rules for entries:
@@ -29,24 +30,3 @@ messages:
 
       Diff (may be truncated):
       {{diff}}
-model: openai/gpt-4o-mini
-responseFormat: json_schema
-jsonSchema: |-
-  {
-    "name": "changelog_entries",
-    "strict": true,
-    "schema": {
-      "type": "object",
-      "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "1-8 short, imperative-mood CHANGELOG entry descriptions, no leading bullet or trailing period"
-        }
-      },
-      "additionalProperties": false,
-      "required": ["entries"]
-    }
-  }
