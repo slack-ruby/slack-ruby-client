@@ -7,6 +7,54 @@ module Slack
       module Endpoints
         module Entity
           #
+          # Acknowledge a comment mutation (edit, delete, or post) on a work object entity. Apps call this endpoint to confirm they have processed a comment action, and the backend emits a dedicated RTM event to the user.
+          #
+          # @option options [string] :trigger_id
+          #   A reference to the original user action that initiated the comment mutation.
+          # @option options [object] :comment
+          #   The full comment data. Required for edit and post actions. See the comment schema for the full list of properties.
+          # @option options [string] :error
+          #   Error message if the action failed in the app. When present, signals that the mutation could not be completed.
+          # @see https://api.slack.com/methods/entity.acknowledgeCommentAction
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/entity/entity.acknowledgeCommentAction.json
+          def entity_acknowledgeCommentAction(options = {})
+            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
+            post('entity.acknowledgeCommentAction', options)
+          end
+
+          #
+          # Provide comments for work objects. Apps call this endpoint to send per-user flexpane comment data to the client.
+          #
+          # @option options [array] :comments
+          #   Array of comments to present to the user. See the comment schema for the full list of properties.
+          # @option options [string] :cursor
+          #   App supplied cursor used for pagination, will be sent in the next request for comments.
+          # @option options [boolean] :can_post_comment
+          #   Indicates whether the user has permissions to post comments.
+          # @option options [string] :trigger_id
+          #   A reference to the original user action that initiated the request.
+          # @option options [string] :delete_action_id
+          #   The block action id that will be sent when a delete request is initiated for a comment.
+          # @option options [boolean] :user_auth_required
+          #   Set to true (or 1) to indicate that the user must authenticate to see the comments data.
+          # @option options [string] :user_auth_url
+          #   A custom URL to which users are directed for authentication if required.
+          # @option options [Object] :error
+          # @see https://api.slack.com/methods/entity.presentComments
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/entity/entity.presentComments.json
+          def entity_presentComments(options = {})
+            raise ArgumentError, 'Required arguments :comments missing' if options[:comments].nil?
+            raise ArgumentError, 'Required arguments :trigger_id missing' if options[:trigger_id].nil?
+            if block_given?
+              Pagination::Cursor.new(self, :entity_presentComments, options).each do |page|
+                yield page
+              end
+            else
+              post('entity.presentComments', options)
+            end
+          end
+
+          #
           # Provide custom flexpane behavior for Work Objects. Apps call this endpoint to send per-user flexpane metadata to the client.
           #
           # @option options [object] :metadata

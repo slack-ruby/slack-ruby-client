@@ -82,6 +82,7 @@ module Slack
           c.flag 'icon_url', desc: 'URL to an image to use as the icon for this message.'
           c.flag 'link_names', desc: 'Find and link channel names and usernames.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.'
+          c.flag 'metadata', desc: 'JSON object with an entities array of work object entity metadata, presented as a URL-encoded string. Only entity metadata is supported: ephemeral messages are not persisted and never dispatch message_metadata_* events, so event_type/event_payload message metadata is ignored here. Each entity requires entity_type, entity_payload, external_ref, and url.'
           c.flag 'parse', desc: 'Change how messages are treated. Defaults to none. See below.'
           c.flag 'text', desc: 'How this field works and whether it is required depends on other fields you use in your API call. See below for more detail.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to post this message in a thread. Avoid using a reply's ts value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread."

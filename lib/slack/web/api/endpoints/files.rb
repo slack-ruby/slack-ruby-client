@@ -21,6 +21,12 @@ module Slack
           #   The message text introducing the file in specified channels.
           # @option options [string] :blocks
           #   A JSON-based array of structured rich text blocks, presented as a URL-encoded string. If the initial_comment field is provided, the blocks field is ignored.
+          # @option options [string] :username
+          #   Set your bot's user name for the file share message. Requires the chat:write.customize scope.
+          # @option options [string] :icon_url
+          #   URL to an image to use as the icon for the file share message. Requires the chat:write.customize scope.
+          # @option options [string] :icon_emoji
+          #   Emoji to use as the icon for the file share message. Overrides icon_url. Requires the chat:write.customize scope.
           # @see https://api.slack.com/methods/files.completeUploadExternal
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.completeUploadExternal.json
           def files_completeUploadExternal(options = {})

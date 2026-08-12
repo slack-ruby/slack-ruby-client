@@ -13,6 +13,12 @@ module Slack
           #   ID of the List to export.
           # @option options [string] :job_id
           #   The ID of the recently started job to export the List.
+          # @option options [Object] :format
+          #   Format the export was started with. Must match the format passed to slackLists.download.start. Defaults to csv.
+          # @option options [boolean] :include_threads
+          #   Must match the include_threads passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.
+          # @option options [boolean] :include_attachments
+          #   Must match the include_attachments passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.
           # @see https://api.slack.com/methods/slackLists.download.get
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/slackLists.download/slackLists.download.get.json
           def slackLists_download_get(options = {})
@@ -27,6 +33,12 @@ module Slack
           # @option options [string] :list_id
           #   ID of the List to export.
           # @option options [boolean] :include_archived
+          # @option options [Object] :format
+          #   Format of the export. Defaults to csv for backward compatibility. Use json for a complete, hierarchical export.
+          # @option options [boolean] :include_threads
+          #   Include each item's conversation thread in the export. Only applies when format is json.
+          # @option options [boolean] :include_attachments
+          #   Include file attachment metadata and access paths in the export. Only applies when format is json.
           # @see https://api.slack.com/methods/slackLists.download.start
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/slackLists.download/slackLists.download.start.json
           def slackLists_download_start(options = {})

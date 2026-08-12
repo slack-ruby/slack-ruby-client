@@ -131,6 +131,8 @@ module Slack
           #   Find and link channel names and usernames.
           # @option options [string] :markdown_text
           #   Accepts message text formatted in markdown. This argument should not be used in conjunction with blocks or text. Limit this field to 12,000 characters.
+          # @option options [string] :metadata
+          #   JSON object with an entities array of work object entity metadata, presented as a URL-encoded string. Only entity metadata is supported: ephemeral messages are not persisted and never dispatch message_metadata_* events, so event_type/event_payload message metadata is ignored here. Each entity requires entity_type, entity_payload, external_ref, and url.
           # @option options [string] :parse
           #   Change how messages are treated. Defaults to none. See below.
           # @option options [string] :text
@@ -149,7 +151,7 @@ module Slack
             raise ArgumentError, 'At least one of :attachments, :blocks, :text, :markdown_text is required' if options[:attachments].nil? && options[:blocks].nil? && options[:text].nil? && options[:markdown_text].nil?
             raise ArgumentError, ':text, :markdown_text are mutually exclusive' if !options[:text].nil? && !options[:markdown_text].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
-            options = encode_options_as_json(options, %i[attachments blocks])
+            options = encode_options_as_json(options, %i[attachments blocks metadata])
             post('chat.postEphemeral', options)
           end
 

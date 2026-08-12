@@ -12,7 +12,7 @@ module Slack
           # @option options [string] :channel_id
           #   Channel ID of the channel the canvas will be tabbed in.
           # @option options [Object] :document_content
-          #   Structure describing the type and value of the content to create.
+          #   Structure describing the type and value of the content to create. The markdown content is limited to 1 MiB (1,048,576 characters).
           # @option options [string] :title
           #   Title of the newly created canvas.
           # @see https://api.slack.com/methods/conversations.canvases.create

@@ -12,7 +12,7 @@ module Slack
           # @option options [string] :title
           #   Title of the newly created canvas.
           # @option options [Object] :document_content
-          #   Structure describing the type and value of the content to create.
+          #   Structure describing the type and value of the content to create. The markdown content is limited to 1 MiB (1,048,576 characters).
           # @option options [string] :channel_id
           #   Channel ID of the channel the canvas will be tabbed in. This is a required field for free teams.
           # @see https://api.slack.com/methods/canvases.create
@@ -39,7 +39,7 @@ module Slack
           # @option options [Object] :canvas_id
           #   Encoded ID of the canvas.
           # @option options [array] :changes
-          #   List of changes to apply on the specified canvas.
+          #   List of changes to apply on the specified canvas. The markdown content of each change is limited to 1 MiB (1,048,576 characters).
           # @see https://api.slack.com/methods/canvases.edit
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/canvases/canvases.edit.json
           def canvases_edit(options = {})

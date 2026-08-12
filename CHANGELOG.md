@@ -3,6 +3,14 @@
 * [#591](https://github.com/slack-ruby/slack-ruby-client/pull/591): Generate AI CHANGELOG entries and PR summaries for automated API update PRs, lock simplecov below 1.1.0 to avoid breaking Coveralls - [@dblock](https://github.com/dblock).
 * [#592](https://github.com/slack-ruby/slack-ruby-client/pull/592): Fix a YAML indentation bug in AI CHANGELOG entry generation that broke the automated API update workflow - [@dblock](https://github.com/dblock).
 * [#593](https://github.com/slack-ruby/slack-ruby-client/pull/593): Migrate AI CHANGELOG entry generation to Copilot CLI after GitHub Models retirement - [@dblock](https://github.com/dblock).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add entity.acknowledgeCommentAction and entity.presentComments methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add admin.apps.mcpServers, admin.apps.mcpServers.permissions, and admin.apps.permissions endpoints - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add a metadata argument to chat.postEphemeral - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Remove required :url validation from admin.emoji.add - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add username, icon_url, and icon_emoji arguments to files.completeUploadExternal - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add format, include_threads, and include_attachments arguments to slackLists.download.start and slackLists.download.get - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add exclude_muted argument to users.conversations - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add new error codes to errors.rb and update slack-api-ref submodule - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

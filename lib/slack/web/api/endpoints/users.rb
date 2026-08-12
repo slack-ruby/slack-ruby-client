@@ -13,6 +13,8 @@ module Slack
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
           # @option options [boolean] :exclude_archived
           #   Set to true to exclude archived channels from the list.
+          # @option options [boolean] :exclude_muted
+          #   Set to true to exclude muted channels from the list.
           # @option options [number] :limit
           #   The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer with a max value of 999.
           # @option options [string] :team_id

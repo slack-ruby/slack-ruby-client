@@ -5,6 +5,19 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Entity do
   let(:client) { Slack::Web::Client.new }
+  context 'entity_acknowledgeCommentAction' do
+    it 'requires trigger_id' do
+      expect { client.entity_acknowledgeCommentAction }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
+    end
+  end
+  context 'entity_presentComments' do
+    it 'requires comments' do
+      expect { client.entity_presentComments(trigger_id: %q[]) }.to raise_error ArgumentError, /Required arguments :comments missing/
+    end
+    it 'requires trigger_id' do
+      expect { client.entity_presentComments(comments: %q[]) }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
+    end
+  end
   context 'entity_presentDetails' do
     it 'requires trigger_id' do
       expect { client.entity_presentDetails }.to raise_error ArgumentError, /Required arguments :trigger_id missing/
