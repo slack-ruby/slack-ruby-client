@@ -1,5 +1,6 @@
 ### 3.2.1 (Next)
 
+* [#591](https://github.com/slack-ruby/slack-ruby-client/pull/591): Generate AI CHANGELOG entries and PR summaries for automated API update PRs, lock simplecov below 1.1.0 to avoid breaking Coveralls - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

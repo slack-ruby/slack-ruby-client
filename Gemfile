@@ -21,7 +21,10 @@ group :test do
   gem 'rubocop-performance'
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
-  gem 'simplecov'
+  # Lock below 1.1.0, which started writing float timestamps to
+  # coverage/.resultset.json, breaking coverallsapp/github-action's parser
+  # (coverallsapp/github-action#269, coverallsapp/coverage-reporter#191).
+  gem 'simplecov', '< 1.1.0'
   gem 'simplecov-lcov'
   gem 'timecop'
   gem 'vcr'
