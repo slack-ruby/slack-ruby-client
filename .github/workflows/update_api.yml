@@ -96,7 +96,10 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.github_app_token.outputs.token || secrets.GITHUB_TOKEN }}
-          commit-message: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
+          commit-message: |
+            Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }} (${{ steps.date.outputs.date }})
+
+            ${{ steps.entries.outputs.body_list }}
           title: Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}
           body: |
             Update API from [slack-api-ref](https://github.com/slack-ruby/slack-api-ref).
