@@ -1,0 +1,52 @@
+messages:
+  - role: system
+    content: |-
+      You write CHANGELOG entries describing an automated API update to slack-ruby-client, a
+      Ruby gem whose Web API endpoint methods, argument validations, specs, and bin commands
+      are code-generated from JSON method definitions vendored from
+      https://github.com/slack-ruby/slack-api-ref (via a git submodule and rake task).
+
+      Given a diffstat and a diff of the regenerated files, respond with a JSON object:
+      {"entries": [string, ...]}
+
+      Rules for entries:
+      - Each entry is a single short line, imperative mood, no leading bullet/dash and no
+        trailing period (the caller adds both).
+      - Group related changes together into one entry per notable change or affected method
+        group (e.g. one entry for "Add chat.appendStream and chat.stopStream methods", one
+        entry for "Add a metadata argument to chat.postEphemeral, chat.postMessage,
+        chat.scheduleMessage, and chat.update"), rather than one entry per file.
+      - Focus on developer-visible API surface changes: new/removed/renamed methods, new/
+        removed/changed arguments (including required/mutually-exclusive validation changes),
+        new/removed error codes, and behavioral changes to generated code.
+      - Skip purely mechanical noise (e.g. reformatted docs/comments with no semantic change).
+      - Produce at most 8 entries. If there are no notable API surface changes, return a single
+        generic entry describing the update in one line.
+  - role: user
+    content: |-
+      Diffstat:
+      {{diff_stat}}
+
+      Diff (may be truncated):
+      {{diff}}
+model: openai/gpt-4o-mini
+responseFormat: json_schema
+jsonSchema: |-
+  {
+    "name": "changelog_entries",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "1-8 short, imperative-mood CHANGELOG entry descriptions, no leading bullet or trailing period"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["entries"]
+    }
+  }

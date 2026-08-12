@@ -10,6 +10,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      models: read
     steps:
       - uses: actions/checkout@v7
         with:
@@ -32,6 +33,47 @@ jobs:
       - name: Get slack-api-ref ref
         id: api-ref
         run: echo "api-ref=$(git rev-parse --short HEAD:lib/slack/web/api/slack-api-ref)" >> $GITHUB_OUTPUT
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Prepare diff for AI summary
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git diff --stat > /tmp/diff_stat.txt
+          git diff | head -c 20000 > /tmp/diff.txt
+      - name: Generate changelog entries with AI
+        if: steps.changes.outputs.changed == 'true'
+        id: ai
+        uses: actions/ai-inference@v1
+        with:
+          prompt-file: ./.github/prompts/changelog-entries.prompt.yml
+          file_input: |
+            diff_stat: /tmp/diff_stat.txt
+            diff: /tmp/diff.txt
+      - name: Build changelog entries
+        id: entries
+        run: |
+          entries=""
+          if [ "${{ steps.changes.outputs.changed }}" = "true" ]; then
+            entries="$(jq -r '.entries[]? // empty' "${{ steps.ai.outputs.response-file }}" 2>/dev/null)"
+          fi
+          if [ -z "$entries" ]; then
+            entries="Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}"
+          fi
+          body_list="$(printf '%s\n' "$entries" | sed 's/^/- /')"
+          {
+            echo 'entries<<CHANGELOG_ENTRIES_EOF'
+            echo "$entries"
+            echo 'CHANGELOG_ENTRIES_EOF'
+            echo 'body_list<<CHANGELOG_BODY_EOF'
+            echo "$body_list"
+            echo 'CHANGELOG_BODY_EOF'
+          } >> "$GITHUB_OUTPUT"
       - name: GitHub App token
         if: ${{ github.repository == 'slack-ruby/slack-ruby-client' }}
         id: github_app_token
@@ -52,6 +94,10 @@ jobs:
             Update API from [slack-api-ref](https://github.com/slack-ruby/slack-api-ref).
             Rev: ${{ steps.api-ref.outputs.api-ref }}
             Date: ${{ steps.date.outputs.date }}
+
+            ## Changes
+
+            ${{ steps.entries.outputs.body_list }}
           branch: automated-api-update
           base: master
           committer: slack-ruby-ci-bot <noreply@github.com>
@@ -62,12 +108,24 @@ jobs:
           git fetch origin automated-api-update
           git checkout automated-api-update
       - name: Update CHANGELOG
-        uses: jacobtomlinson/gha-find-replace@v3
         if: ${{ steps.cpr.outputs.pull-request-number != '' }}
-        with:
-          include: CHANGELOG.md
-          find: "\\* Your contribution here."
-          replace: "* [#${{steps.cpr.outputs.pull-request-number}}](https://github.com/slack-ruby/slack-ruby-client/pull/${{steps.cpr.outputs.pull-request-number}}): Update API from [slack-api-ref@${{ steps.api-ref.outputs.api-ref }}](https://github.com/slack-ruby/slack-api-ref/commit/${{ steps.api-ref.outputs.api-ref }}) - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).\n* Your contribution here."
+        env:
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          ENTRIES: ${{ steps.entries.outputs.entries }}
+        run: |
+          ruby - <<'RUBYEOF'
+          pr_number = ENV.fetch("PR_NUMBER")
+          pr_url = "https://github.com/slack-ruby/slack-ruby-client/pull/#{pr_number}"
+          entries = ENV.fetch("ENTRIES").each_line.map(&:strip).reject(&:empty?)
+
+          lines = entries.map do |entry|
+            "* [##{pr_number}](#{pr_url}): #{entry} - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot)."
+          end.join("\n")
+
+          content = File.read("CHANGELOG.md")
+          content = content.sub("* Your contribution here.", "#{lines}\n* Your contribution here.")
+          File.write("CHANGELOG.md", content)
+          RUBYEOF
       - name: Commit and Push
         if: ${{ steps.cpr.outputs.pull-request-number != '' }}
         run: |
