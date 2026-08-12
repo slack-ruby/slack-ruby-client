@@ -17,7 +17,6 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.emoji/admin.emoji.add.json
           def admin_emoji_add(options = {})
             raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
-            raise ArgumentError, 'Required arguments :url missing' if options[:url].nil?
             post('admin.emoji.add', options)
           end
 

@@ -15,6 +15,9 @@ module Slack
           c.flag 'channels', desc: 'Comma-separated string of channel IDs or user IDs where the file will be shared.'
           c.flag 'initial_comment', desc: 'The message text introducing the file in specified channels.'
           c.flag 'blocks', desc: 'A JSON-based array of structured rich text blocks, presented as a URL-encoded string. If the initial_comment field is provided, the blocks field is ignored.'
+          c.flag 'username', desc: "Set your bot's user name for the file share message. Requires the chat:write.customize scope."
+          c.flag 'icon_url', desc: 'URL to an image to use as the icon for the file share message. Requires the chat:write.customize scope.'
+          c.flag 'icon_emoji', desc: 'Emoji to use as the icon for the file share message. Overrides icon_url. Requires the chat:write.customize scope.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.files_completeUploadExternal(options))
           end

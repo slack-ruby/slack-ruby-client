@@ -10,7 +10,7 @@ module Slack
         g.long_desc %( Create canvas for a user )
         g.command 'create' do |c|
           c.flag 'title', desc: 'Title of the newly created canvas.'
-          c.flag 'document_content', desc: 'Structure describing the type and value of the content to create.'
+          c.flag 'document_content', desc: 'Structure describing the type and value of the content to create. The markdown content is limited to 1 MiB (1,048,576 characters).'
           c.flag 'channel_id', desc: 'Channel ID of the channel the canvas will be tabbed in. This is a required field for free teams.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.canvases_create(options))
@@ -30,7 +30,7 @@ module Slack
         g.long_desc %( Update an existing canvas )
         g.command 'edit' do |c|
           c.flag 'canvas_id', desc: 'Encoded ID of the canvas.'
-          c.flag 'changes', desc: 'List of changes to apply on the specified canvas.'
+          c.flag 'changes', desc: 'List of changes to apply on the specified canvas. The markdown content of each change is limited to 1 MiB (1,048,576 characters).'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.canvases_edit(options))
           end

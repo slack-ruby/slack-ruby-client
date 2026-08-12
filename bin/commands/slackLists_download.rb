@@ -11,6 +11,9 @@ module Slack
         g.command 'get' do |c|
           c.flag 'list_id', desc: 'ID of the List to export.'
           c.flag 'job_id', desc: 'The ID of the recently started job to export the List.'
+          c.flag 'format', desc: 'Format the export was started with. Must match the format passed to slackLists.download.start. Defaults to csv.'
+          c.flag 'include_threads', desc: 'Must match the include_threads passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.'
+          c.flag 'include_attachments', desc: 'Must match the include_attachments passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.slackLists_download_get(options))
           end
@@ -21,6 +24,9 @@ module Slack
         g.command 'start' do |c|
           c.flag 'list_id', desc: 'ID of the List to export.'
           c.flag 'include_archived', desc: ''
+          c.flag 'format', desc: 'Format of the export. Defaults to csv for backward compatibility. Use json for a complete, hierarchical export.'
+          c.flag 'include_threads', desc: "Include each item's conversation thread in the export. Only applies when format is json."
+          c.flag 'include_attachments', desc: 'Include file attachment metadata and access paths in the export. Only applies when format is json.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.slackLists_download_start(options))
           end

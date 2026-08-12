@@ -7,10 +7,7 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminEmoji do
   let(:client) { Slack::Web::Client.new }
   context 'admin.emoji_add' do
     it 'requires name' do
-      expect { client.admin_emoji_add(url: %q[]) }.to raise_error ArgumentError, /Required arguments :name missing/
-    end
-    it 'requires url' do
-      expect { client.admin_emoji_add(name: %q[]) }.to raise_error ArgumentError, /Required arguments :url missing/
+      expect { client.admin_emoji_add }.to raise_error ArgumentError, /Required arguments :name missing/
     end
   end
   context 'admin.emoji_addAlias' do

@@ -117,9 +117,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
 
       expect { client.chat_postEphemeral(text: %q[Hello world], markdown_text: %q[**This is bold text**], attachments: %q[[{"pretext": "pre-hello", "text": "text-world"}]], channel: %q[], user: %q[U0BPQUNTA]) }.to raise_error ArgumentError, /mutually exclusive/
     end
-    it 'encodes attachments, blocks as json' do
-      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[{"data":["data"]}], channel: %q[], text: %q[Hello world], user: %q[U0BPQUNTA], blocks: %q[{"data":["data"]}]})
-      client.chat_postEphemeral(attachments: {data: ["data"]}, channel: %q[], text: %q[Hello world], user: %q[U0BPQUNTA], blocks: {data: ["data"]})
+    it 'encodes attachments, blocks, metadata as json' do
+      expect(client).to receive(:post).with('chat.postEphemeral', {attachments: %q[{"data":["data"]}], channel: %q[], text: %q[Hello world], user: %q[U0BPQUNTA], blocks: %q[{"data":["data"]}], metadata: %q[{"data":["data"]}]})
+      client.chat_postEphemeral(attachments: {data: ["data"]}, channel: %q[], text: %q[Hello world], user: %q[U0BPQUNTA], blocks: {data: ["data"]}, metadata: {data: ["data"]})
     end
   end
   context 'chat_postMessage' do

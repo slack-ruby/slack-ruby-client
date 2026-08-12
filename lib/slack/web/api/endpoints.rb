@@ -7,6 +7,9 @@ require_relative 'endpoints/admin_apps'
 require_relative 'endpoints/admin_apps_activities'
 require_relative 'endpoints/admin_apps_approved'
 require_relative 'endpoints/admin_apps_config'
+require_relative 'endpoints/admin_apps_mcp_servers'
+require_relative 'endpoints/admin_apps_mcp_servers_permissions'
+require_relative 'endpoints/admin_apps_permissions'
 require_relative 'endpoints/admin_apps_requests'
 require_relative 'endpoints/admin_apps_restricted'
 require_relative 'endpoints/admin_audit_anomaly_allow'
@@ -118,6 +121,9 @@ module Slack
         include AdminAppsActivities
         include AdminAppsApproved
         include AdminAppsConfig
+        include AdminAppsMcpServers
+        include AdminAppsMcpServersPermissions
+        include AdminAppsPermissions
         include AdminAppsRequests
         include AdminAppsRestricted
         include AdminAuditAnomalyAllow
