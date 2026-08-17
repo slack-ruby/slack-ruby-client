@@ -47,7 +47,7 @@ jobs:
           git diff | head -c 20000 | sed 's/^/      /' > /tmp/diff.txt
       - name: Set up Node
         if: steps.changes.outputs.changed == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
       - name: Install Copilot CLI
         if: steps.changes.outputs.changed == 'true'
         run: npm install -g @github/copilot
