@@ -25,7 +25,7 @@ module Slack
         g.long_desc %( Set suggested prompts for the given assistant thread )
         g.command 'setSuggestedPrompts' do |c|
           c.flag 'channel_id', desc: 'Channel ID containing the assistant thread.'
-          c.flag 'thread_ts', desc: 'Message timestamp of the thread to set suggested prompts for.'
+          c.flag 'thread_ts', desc: 'Message timestamp of the thread to set suggested prompts for. If not provided, the prompts will be set for the latest message in the channel.'
           c.flag 'prompts', desc: 'Each prompt should be supplied with its title and message attribute.'
           c.flag 'title', desc: 'Title for the list of provided prompts. For example: Suggested Prompts, Related Questions.'
           c.action do |_global_options, options, _args|

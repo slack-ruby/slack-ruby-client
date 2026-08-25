@@ -34,4 +34,12 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsergroups do
       expect { client.admin_usergroups_removeChannels(usergroup_id: %q[S00000000]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
     end
   end
+  context 'admin.usergroups_removeTeams' do
+    it 'requires usergroup_id' do
+      expect { client.admin_usergroups_removeTeams(team_ids: %q[T12345678,T98765432]) }.to raise_error ArgumentError, /Required arguments :usergroup_id missing/
+    end
+    it 'requires team_ids' do
+      expect { client.admin_usergroups_removeTeams(usergroup_id: %q[S12345678]) }.to raise_error ArgumentError, /Required arguments :team_ids missing/
+    end
+  end
 end

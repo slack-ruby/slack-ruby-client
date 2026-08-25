@@ -53,6 +53,16 @@ module Slack
           end
         end
 
+        g.desc 'Set properties on channels in bulk.'
+        g.long_desc %( Set properties on channels in bulk. )
+        g.command 'bulkSetProperties' do |c|
+          c.flag 'channel_ids', desc: 'An array of channel IDs on which to set the property.'
+          c.flag 'property', desc: 'The property for this channel in a key value format. Only one property can be updated at a time.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_bulkSetProperties(options))
+          end
+        end
+
         g.desc 'Convert a public channel to a private channel.'
         g.long_desc %( Convert a public channel to a private channel. )
         g.command 'convertToPrivate' do |c|

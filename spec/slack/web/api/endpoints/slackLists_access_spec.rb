@@ -12,7 +12,7 @@ RSpec.describe Slack::Web::Api::Endpoints::SlackListsAccess do
   end
   context 'slackLists.access_set' do
     it 'requires list_id' do
-      expect { client.slackLists_access_set(access_level: %q[]) }.to raise_error ArgumentError, /Required arguments :list_id missing/
+      expect { client.slackLists_access_set(access_level: %q[read]) }.to raise_error ArgumentError, /Required arguments :list_id missing/
     end
     it 'requires access_level' do
       expect { client.slackLists_access_set(list_id: %q[F1234ABCD]) }.to raise_error ArgumentError, /Required arguments :access_level missing/

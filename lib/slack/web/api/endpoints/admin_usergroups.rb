@@ -70,6 +70,21 @@ module Slack
             raise ArgumentError, 'Required arguments :channel_ids missing' if options[:channel_ids].nil?
             post('admin.usergroups.removeChannels', options)
           end
+
+          #
+          # Remove one or more default workspaces from an organization-wide IDP Group or Admin Group.
+          #
+          # @option options [string] :usergroup_id
+          #   An encoded usergroup (IDP Group) ID.
+          # @option options [array] :team_ids
+          #   A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.
+          # @see https://api.slack.com/methods/admin.usergroups.removeTeams
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.removeTeams.json
+          def admin_usergroups_removeTeams(options = {})
+            raise ArgumentError, 'Required arguments :usergroup_id missing' if options[:usergroup_id].nil?
+            raise ArgumentError, 'Required arguments :team_ids missing' if options[:team_ids].nil?
+            post('admin.usergroups.removeTeams', options)
+          end
         end
       end
     end

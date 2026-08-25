@@ -7,13 +7,10 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
   let(:client) { Slack::Web::Client.new }
   context 'chat_appendStream' do
     it 'requires channel' do
-      expect { client.chat_appendStream(ts: %q[], markdown_text: %q[**This is bold text**]) }.to raise_error ArgumentError, /Required arguments :channel missing/
+      expect { client.chat_appendStream(ts: %q[]) }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
     it 'requires ts' do
-      expect { client.chat_appendStream(channel: %q[], markdown_text: %q[**This is bold text**]) }.to raise_error ArgumentError, /Required arguments :ts missing/
-    end
-    it 'requires markdown_text' do
-      expect { client.chat_appendStream(channel: %q[], ts: %q[]) }.to raise_error ArgumentError, /Required arguments :markdown_text missing/
+      expect { client.chat_appendStream(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :ts missing/
     end
   end
   context 'chat_command' do
@@ -253,10 +250,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Chat do
   end
   context 'chat_startStream' do
     it 'requires channel' do
-      expect { client.chat_startStream(thread_ts: %q[1721609600.123456]) }.to raise_error ArgumentError, /Required arguments :channel missing/
-    end
-    it 'requires thread_ts' do
-      expect { client.chat_startStream(channel: %q[]) }.to raise_error ArgumentError, /Required arguments :thread_ts missing/
+      expect { client.chat_startStream }.to raise_error ArgumentError, /Required arguments :channel missing/
     end
   end
   context 'chat_stopStream' do
