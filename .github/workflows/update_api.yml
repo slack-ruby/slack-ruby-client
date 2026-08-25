@@ -71,8 +71,15 @@ jobs:
             response_file="${{ steps.ai.outputs.response-file }}"
             echo "AI changelog response:"
             cat "$response_file" || true
-            filtered="$(grep -v '^```' "$response_file" 2>/dev/null)"
-            entries="$(printf '%s' "$filtered" | jq -r '.entries[]? // empty' 2>/dev/null || true)"
+            # Copilot CLI's response file may include narration/thinking lines
+            # before the final JSON answer, so grab the last line that looks
+            # like a JSON object rather than trying to parse the whole file.
+            json_line="$(grep -E '^\{.*\}$' "$response_file" 2>/dev/null | tail -n 1)"
+            if [ -z "$json_line" ]; then
+              echo "::error::AI changelog response did not contain a JSON object, see response above."
+              exit 1
+            fi
+            entries="$(printf '%s' "$json_line" | jq -r '.entries[]? // empty')"
           fi
           if [ -z "$entries" ]; then
             entries="Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}"
