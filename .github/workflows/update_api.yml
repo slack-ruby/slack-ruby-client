@@ -68,7 +68,11 @@ jobs:
         run: |
           entries=""
           if [ "${{ steps.changes.outputs.changed }}" = "true" ]; then
-            entries="$(grep -v '^```' "${{ steps.ai.outputs.response-file }}" 2>/dev/null | jq -r '.entries[]? // empty' 2>/dev/null)"
+            response_file="${{ steps.ai.outputs.response-file }}"
+            echo "AI changelog response:"
+            cat "$response_file" || true
+            filtered="$(grep -v '^```' "$response_file" 2>/dev/null)"
+            entries="$(printf '%s' "$filtered" | jq -r '.entries[]? // empty' 2>/dev/null || true)"
           fi
           if [ -z "$entries" ]; then
             entries="Update API from slack-api-ref@${{ steps.api-ref.outputs.api-ref }}"

@@ -3,6 +3,7 @@
 * [#591](https://github.com/slack-ruby/slack-ruby-client/pull/591): Generate AI CHANGELOG entries and PR summaries for automated API update PRs, lock simplecov below 1.1.0 to avoid breaking Coveralls - [@dblock](https://github.com/dblock).
 * [#592](https://github.com/slack-ruby/slack-ruby-client/pull/592): Fix a YAML indentation bug in AI CHANGELOG entry generation that broke the automated API update workflow - [@dblock](https://github.com/dblock).
 * [#593](https://github.com/slack-ruby/slack-ruby-client/pull/593): Migrate AI CHANGELOG entry generation to Copilot CLI after GitHub Models retirement - [@dblock](https://github.com/dblock).
+* [#596](https://github.com/slack-ruby/slack-ruby-client/pull/596): Fix the `update_api` workflow failing with exit code 5 when the AI-generated changelog response isn't valid JSON, and always log the raw AI response for debugging - [@dblock](https://github.com/dblock).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add entity.acknowledgeCommentAction and entity.presentComments methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add admin.apps.mcpServers, admin.apps.mcpServers.permissions, and admin.apps.permissions endpoints - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add a metadata argument to chat.postEphemeral - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
