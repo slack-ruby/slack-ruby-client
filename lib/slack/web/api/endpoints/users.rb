@@ -76,7 +76,6 @@ module Slack
           # @see https://api.slack.com/methods/users.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/users/users.info.json
           def users_info(options = {})
-            raise ArgumentError, 'Required arguments :user missing' if options[:user].nil?
             options = options.merge(user: users_id(options)['user']['id']) if options[:user]
             post('users.info', options)
           end

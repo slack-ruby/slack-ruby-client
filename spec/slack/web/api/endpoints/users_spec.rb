@@ -5,11 +5,6 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::Users do
   let(:client) { Slack::Web::Client.new }
-  context 'users_info' do
-    it 'requires user' do
-      expect { client.users_info }.to raise_error ArgumentError, /Required arguments :user missing/
-    end
-  end
   context 'users_lookupByEmail' do
     it 'requires email' do
       expect { client.users_lookupByEmail }.to raise_error ArgumentError, /Required arguments :email missing/

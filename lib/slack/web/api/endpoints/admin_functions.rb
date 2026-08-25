@@ -14,7 +14,7 @@ module Slack
           # @option options [array] :app_ids
           #   Comma-separated array of app IDs to get functions for; max 50.
           # @option options [boolean] :include_non_distributed_functions
-          #   Whether to also include functions that are not yet distributed to any users in the function count. This is needed for admins that are approving an app request and will only work if the team owns the app.
+          #   Whether to also include functions that are not yet distributed to any users in the function list. This is needed for admins that are approving an app request and will only work if the team owns the app.
           # @option options [string] :cursor
           #   Set cursor to next_cursor returned by the previous call to list items in the next page.
           # @option options [integer] :limit

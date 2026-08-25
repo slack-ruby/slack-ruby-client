@@ -37,6 +37,7 @@ module Slack
           # @see https://api.slack.com/methods/admin.users.getExpiration
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.getExpiration.json
           def admin_users_getExpiration(options = {})
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
             post('admin.users.getExpiration', options)
           end
 

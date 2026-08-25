@@ -13,7 +13,7 @@ module Slack
           c.flag 'oldest_ts', desc: 'Oldest timestamp to include in the results. Defaults to 7 days before current time. If not passed while still passing the latest_ts parameter, defaults to 7 days before latest_ts.'
           c.flag 'latest_ts', desc: 'Most recent timestamp to include in results. Defaults to current time. If not passed while still passing the oldest_ts parameter, defaults to 7 days after oldest_ts.'
           c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection."
-          c.flag 'limit', desc: 'Maximum number of entries to return. The maximum limit is 100.'
+          c.flag 'limit', desc: 'Maximum number of entries to return. Defaults to 50 if not passed. Max allowed is 100.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_analytics_messages_activity(options))
           end
@@ -25,7 +25,7 @@ module Slack
           c.flag 'channel', desc: 'Channel ID for channel containing the messages to query.'
           c.flag 'oldest_ts', desc: 'Oldest timestamp to include in the results.'
           c.flag 'latest_ts', desc: 'Most recent timestamp to include in the results. If not passed, defaults to current time.'
-          c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more details."
+          c.flag 'cursor', desc: "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first 'page' of the collection. See pagination for more detail."
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_analytics_messages_metadata(options))
           end

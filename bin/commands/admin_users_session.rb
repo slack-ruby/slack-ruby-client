@@ -27,7 +27,6 @@ module Slack
         g.desc 'Revoke a single session for a user. The user will be forced to login to Slack.'
         g.long_desc %( Revoke a single session for a user. The user will be forced to login to Slack. )
         g.command 'invalidate' do |c|
-          c.flag 'team_id', desc: 'ID of the workspace that the session belongs to.'
           c.flag 'user_id', desc: 'ID of the user that the session belongs to.'
           c.flag 'session_id', desc: 'ID of the session to invalidate.'
           c.action do |_global_options, options, _args|

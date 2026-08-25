@@ -18,7 +18,7 @@ module Slack
           # @option options [string] :cursor
           #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection.
           # @option options [integer] :limit
-          #   Maximum number of entries to return. The maximum limit is 100.
+          #   Maximum number of entries to return. Defaults to 50 if not passed. Max allowed is 100.
           # @see https://api.slack.com/methods/admin.analytics.messages.activity
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.analytics.messages/admin.analytics.messages.activity.json
           def admin_analytics_messages_activity(options = {})
@@ -43,7 +43,7 @@ module Slack
           # @option options [string] :latest_ts
           #   Most recent timestamp to include in the results. If not passed, defaults to current time.
           # @option options [string] :cursor
-          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more details.
+          #   Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first "page" of the collection. See pagination for more detail.
           # @see https://api.slack.com/methods/admin.analytics.messages.metadata
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.analytics.messages/admin.analytics.messages.metadata.json
           def admin_analytics_messages_metadata(options = {})

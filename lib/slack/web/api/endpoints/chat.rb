@@ -22,7 +22,6 @@ module Slack
           def chat_appendStream(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
             raise ArgumentError, 'Required arguments :ts missing' if options[:ts].nil?
-            raise ArgumentError, 'Required arguments :markdown_text missing' if options[:markdown_text].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.appendStream', options)
           end
@@ -194,6 +193,8 @@ module Slack
           #   Pass false to disable unfurling of media content.
           # @option options [string] :username
           #   Set your bot's user name.
+          # @option options [boolean] :unfurl_app_links
+          #   Pass true to unfurl links from installed apps, or false to prevent app links from unfurling. When omitted, app links follow the unfurl_links setting.
           # @see https://api.slack.com/methods/chat.postMessage
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.postMessage.json
           def chat_postMessage(options = {})
@@ -250,19 +251,19 @@ module Slack
           # Starts a new streaming conversation.
           #
           # @option options [channel] :channel
-          #   An encoded ID that represents a channel thread or DM.
+          #   An encoded ID that represents a channel, thread, or DM.
           # @option options [array] :chunks
           #   Array of streaming chunks.
           # @option options [string] :markdown_text
           #   Accepts message text formatted in markdown. Limit this field to 12,000 characters.
           # @option options [string] :thread_ts
-          #   Provide another message's ts value to reply to. Streamed messages should always be replies to a user request.
+          #   Provide another message's ts value to reply to. Omit it to stream a top-level message instead of a thread reply; this is only supported in channels where the whole channel is one session, such as Slack Code, and returns invalid_thread_ts elsewhere. Passing "0" is equivalent to omitting it.
           # @option options [Object] :recipient_user_id
           #   The encoded ID of the user to receive the streaming text. Required when streaming to channels.
           # @option options [string] :recipient_team_id
           #   The encoded ID of the team the user receiving the streaming text belongs to. Required when streaming to channels.
           # @option options [enum] :task_display_mode
-          #   Specifies how tasks are displayed in the message. A timeline displays individual tasks with text in sequential order, plan displays all tasks together, with the first tasks's placement determining the placement of the rest of the tasks, and dense collapses consecutive tool calls into a single summarized task card.
+          #   Specifies how tasks are displayed in the message. timeline task updates render as individual task cards interleaved with streamed text. plan task updates render together in a plan block.
           # @option options [string] :icon_emoji
           #   Emoji to use as the icon for this message. Overrides icon_url.
           # @option options [string] :icon_url
@@ -273,7 +274,6 @@ module Slack
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.startStream.json
           def chat_startStream(options = {})
             raise ArgumentError, 'Required arguments :channel missing' if options[:channel].nil?
-            raise ArgumentError, 'Required arguments :thread_ts missing' if options[:thread_ts].nil?
             options = options.merge(channel: conversations_id(options)['channel']['id']) if options[:channel]
             post('chat.startStream', options)
           end
@@ -311,7 +311,7 @@ module Slack
           # @option options [timestamp] :ts
           #   Timestamp of the message to add unfurl behavior to. Required for public channels.
           # @option options [string] :unfurls
-          #   URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments. Required for public channels.
+          #   URL-encoded JSON map with keys set to URLs featured in the message, pointing to their unfurl blocks or message attachments. Required for public channels.
           # @option options [string] :user_auth_message
           #   Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior. Provides two buttons, Not now or Never ask me again.
           # @option options [boolean] :user_auth_required

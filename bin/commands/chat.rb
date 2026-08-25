@@ -114,6 +114,7 @@ module Slack
           c.flag 'unfurl_links', desc: 'Pass true to enable unfurling of primarily text-based content.'
           c.flag 'unfurl_media', desc: 'Pass false to disable unfurling of media content.'
           c.flag 'username', desc: "Set your bot's user name."
+          c.flag 'unfurl_app_links', desc: 'Pass true to unfurl links from installed apps, or false to prevent app links from unfurling. When omitted, app links follow the unfurl_links setting.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_postMessage(options))
           end
@@ -144,13 +145,13 @@ module Slack
         g.desc 'Starts a new streaming conversation.'
         g.long_desc %( Starts a new streaming conversation. )
         g.command 'startStream' do |c|
-          c.flag 'channel', desc: 'An encoded ID that represents a channel thread or DM.'
+          c.flag 'channel', desc: 'An encoded ID that represents a channel, thread, or DM.'
           c.flag 'chunks', desc: 'Array of streaming chunks.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
-          c.flag 'thread_ts', desc: "Provide another message's ts value to reply to. Streamed messages should always be replies to a user request."
+          c.flag 'thread_ts', desc: "Provide another message's ts value to reply to. Omit it to stream a top-level message instead of a thread reply; this is only supported in channels where the whole channel is one session, such as Slack Code, and returns invalid_thread_ts elsewhere. Passing '0' is equivalent to omitting it."
           c.flag 'recipient_user_id', desc: 'The encoded ID of the user to receive the streaming text. Required when streaming to channels.'
           c.flag 'recipient_team_id', desc: 'The encoded ID of the team the user receiving the streaming text belongs to. Required when streaming to channels.'
-          c.flag 'task_display_mode', desc: "Specifies how tasks are displayed in the message. A timeline displays individual tasks with text in sequential order, plan displays all tasks together, with the first tasks's placement determining the placement of the rest of the tasks, and dense collapses consecutive tool calls into a single summarized task card."
+          c.flag 'task_display_mode', desc: 'Specifies how tasks are displayed in the message. timeline task updates render as individual task cards interleaved with streamed text. plan task updates render together in a plan block.'
           c.flag 'icon_emoji', desc: 'Emoji to use as the icon for this message. Overrides icon_url.'
           c.flag 'icon_url', desc: 'Image URL to use as the icon for this message.'
           c.flag 'username', desc: "The bot's username to display."
@@ -178,7 +179,7 @@ module Slack
         g.command 'unfurl' do |c|
           c.flag 'channel', desc: 'Channel ID of the message. Both channel and ts must be provided together, or unfurl_id and source must be provided together. Required for public channels.'
           c.flag 'ts', desc: 'Timestamp of the message to add unfurl behavior to. Required for public channels.'
-          c.flag 'unfurls', desc: 'URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments. Required for public channels.'
+          c.flag 'unfurls', desc: 'URL-encoded JSON map with keys set to URLs featured in the message, pointing to their unfurl blocks or message attachments. Required for public channels.'
           c.flag 'user_auth_message', desc: 'Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior. Provides two buttons, Not now or Never ask me again.'
           c.flag 'user_auth_required', desc: 'Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain.'
           c.flag 'user_auth_url', desc: 'Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.'

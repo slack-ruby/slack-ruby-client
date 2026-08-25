@@ -33,8 +33,6 @@ module Slack
           #
           # Revoke a single session for a user. The user will be forced to login to Slack.
           #
-          # @option options [Object] :team_id
-          #   ID of the workspace that the session belongs to.
           # @option options [Object] :user_id
           #   ID of the user that the session belongs to.
           # @option options [integer] :session_id

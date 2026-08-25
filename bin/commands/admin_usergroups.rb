@@ -48,6 +48,16 @@ module Slack
             puts JSON.dump(@client.admin_usergroups_removeChannels(options))
           end
         end
+
+        g.desc 'Remove one or more default workspaces from an organization-wide IDP Group or Admin Group.'
+        g.long_desc %( Remove one or more default workspaces from an organization-wide IDP Group or Admin Group. )
+        g.command 'removeTeams' do |c|
+          c.flag 'usergroup_id', desc: 'An encoded usergroup (IDP Group) ID.'
+          c.flag 'team_ids', desc: 'A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_removeTeams(options))
+          end
+        end
       end
     end
   end

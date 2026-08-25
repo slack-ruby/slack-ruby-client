@@ -38,7 +38,7 @@ module Slack
           # @option options [Object] :channel_id
           #   Channel ID containing the assistant thread.
           # @option options [string] :thread_ts
-          #   Message timestamp of the thread to set suggested prompts for.
+          #   Message timestamp of the thread to set suggested prompts for. If not provided, the prompts will be set for the latest message in the channel.
           # @option options [Object] :prompts
           #   Each prompt should be supplied with its title and message attribute.
           # @option options [string] :title

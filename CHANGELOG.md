@@ -9,6 +9,13 @@
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add format, include_threads, and include_attachments arguments to slackLists.download.start and slackLists.download.get - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add exclude_muted argument to users.conversations - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add new error codes to errors.rb and update slack-api-ref submodule - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add admin.conversations.bulkSetProperties method for bulk-setting channel properties - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add admin.usergroups.removeTeams method for removing default workspaces from an organization-wide IDP Group or Admin Group - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add unfurl_app_links argument to chat.postMessage - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Remove required team_id argument from admin.users.session.invalidate - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add AgentsSessions and AppsManagedPermissions endpoint modules for agents.sessions and apps.managedPermissions methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Increase conversations.invite users limit from 100 to 1000 - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add new Slack API error codes - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

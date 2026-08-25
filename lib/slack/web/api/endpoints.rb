@@ -37,6 +37,7 @@ require_relative 'endpoints/admin_workflows'
 require_relative 'endpoints/admin_workflows_collaborators'
 require_relative 'endpoints/admin_workflows_permissions'
 require_relative 'endpoints/admin_workflows_triggers_types_permissions'
+require_relative 'endpoints/agents_sessions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
 require_relative 'endpoints/apps_activities'
@@ -45,6 +46,7 @@ require_relative 'endpoints/apps_connections'
 require_relative 'endpoints/apps_datastore'
 require_relative 'endpoints/apps_event_authorizations'
 require_relative 'endpoints/apps_icon'
+require_relative 'endpoints/apps_managed_permissions'
 require_relative 'endpoints/apps_manifest'
 require_relative 'endpoints/apps_user_connection'
 require_relative 'endpoints/assistant_search'
@@ -151,6 +153,7 @@ module Slack
         include AdminWorkflowsCollaborators
         include AdminWorkflowsPermissions
         include AdminWorkflowsTriggersTypesPermissions
+        include AgentsSessions
         include Api
         include Apps
         include AppsActivities
@@ -159,6 +162,7 @@ module Slack
         include AppsDatastore
         include AppsEventAuthorizations
         include AppsIcon
+        include AppsManagedPermissions
         include AppsManifest
         include AppsUserConnection
         include AssistantSearch

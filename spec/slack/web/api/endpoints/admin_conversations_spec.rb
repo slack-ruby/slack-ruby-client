@@ -36,6 +36,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_bulkSetExcludeFromSlackAi(channel_ids: %q[["C12345", "C98765"]]) }.to raise_error ArgumentError, /Required arguments :exclude missing/
     end
   end
+  context 'admin.conversations_bulkSetProperties' do
+    it 'requires channel_ids' do
+      expect { client.admin_conversations_bulkSetProperties(property: %q[{"exclude_from_slack_ai": true }]) }.to raise_error ArgumentError, /Required arguments :channel_ids missing/
+    end
+    it 'requires property' do
+      expect { client.admin_conversations_bulkSetProperties(channel_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :property missing/
+    end
+  end
   context 'admin.conversations_convertToPrivate' do
     it 'requires channel_id' do
       expect { client.admin_conversations_convertToPrivate }.to raise_error ArgumentError, /Required arguments :channel_id missing/
