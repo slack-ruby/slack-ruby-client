@@ -4,6 +4,25 @@ require 'spec_helper'
 RSpec.describe Slack::Web::Api::Endpoints::Files do
   let(:client) { Slack::Web::Client.new }
 
+  describe '#files_upload' do
+    it 'defaults the filename when a file is supplied' do
+      options = { file: 'file contents' }
+      expect(client).to receive(:post).with('files.upload', { file: 'file contents', filename: 'file' })
+      client.files_upload(options)
+      expect(options).to eq(file: 'file contents')
+    end
+
+    it 'preserves an explicit filename' do
+      expect(client).to receive(:post).with('files.upload', { file: 'file contents', filename: 'image.png' })
+      client.files_upload(file: 'file contents', filename: 'image.png')
+    end
+
+    it 'does not add a filename when no file is supplied' do
+      expect(client).to receive(:post).with('files.upload', { content: 'text' })
+      client.files_upload(content: 'text')
+    end
+  end
+
   %w[filename content].each do |arg|
     context "when #{arg} is missing from options" do
       let(:params) do
