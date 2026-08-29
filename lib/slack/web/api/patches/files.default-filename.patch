@@ -1,0 +1,12 @@
+diff --git a/lib/slack/web/api/endpoints/files.rb b/lib/slack/web/api/endpoints/files.rb
+index 13a1889..9ce4894 100644
+--- a/lib/slack/web/api/endpoints/files.rb
++++ b/lib/slack/web/api/endpoints/files.rb
+@@ -192,6 +192,7 @@ module Slack
+           # @see https://api.slack.com/methods/files.upload
+           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/files/files.upload.json
+           def files_upload(options = {})
++            options = options.merge(filename: 'file') if options[:file] && !options[:filename]
+             post('files.upload', options)
+           end
+         end

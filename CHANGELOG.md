@@ -1,5 +1,6 @@
 ### 3.2.1 (Next)
 
+* [#375](https://github.com/slack-ruby/slack-ruby-client/pull/375): Set a default filename in `files_upload` so Slack displays image previews correctly when none is specified - [@ts-3156](https://github.com/ts-3156), [@dblock](https://github.com/dblock).
 * [#591](https://github.com/slack-ruby/slack-ruby-client/pull/591): Generate AI CHANGELOG entries and PR summaries for automated API update PRs, lock simplecov below 1.1.0 to avoid breaking Coveralls - [@dblock](https://github.com/dblock).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add entity.acknowledgeCommentAction and entity.presentComments methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#590](https://github.com/slack-ruby/slack-ruby-client/pull/590): Add admin.apps.mcpServers, admin.apps.mcpServers.permissions, and admin.apps.permissions endpoints - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
