@@ -293,6 +293,8 @@ module Slack
           #   A list of blocks that will be rendered at the bottom of the finalized message.
           # @option options [string] :metadata
           #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+          # @option options [enum] :session_status
+          #   The session status to set after stopping the stream.
           # @see https://api.slack.com/methods/chat.stopStream
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.stopStream.json
           def chat_stopStream(options = {})

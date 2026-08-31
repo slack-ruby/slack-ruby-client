@@ -699,6 +699,7 @@ module Slack
         class RestrictedPlanLevel < SlackError; end
         class RestrictedTooMany < SlackError; end
         class RetentionOverrideNotAllowed < SlackError; end
+        class RotationNotFound < SlackError; end
         class RowIdNotProvided < SlackError; end
         class RowNotFound < SlackError; end
         class RtmConnectRequired < SlackError; end
@@ -754,6 +755,7 @@ module Slack
         class TokenNotFound < SlackError; end
         class TokenRevoked < SlackError; end
         class TokenRotationNotEnabled < SlackError; end
+        class TokenTooLong < SlackError; end
         class TooLarge < SlackError; end
         class TooLong < SlackError; end
         class TooManyAttachments < SlackError; end
@@ -825,11 +827,13 @@ module Slack
         class UserIsAlreadyDeleted < SlackError; end
         class UserIsBot < SlackError; end
         class UserIsDeactivated < SlackError; end
+        class UserIsExternalGuest < SlackError; end
         class UserIsNotAGuest < SlackError; end
         class UserIsNotGuest < SlackError; end
         class UserIsRestricted < SlackError; end
         class UserMustBeAdmin < SlackError; end
         class UserMustBeInWorkspace < SlackError; end
+        class UserNotAuthenticated < SlackError; end
         class UserNotFound < SlackError; end
         class UserNotInChannel < SlackError; end
         class UserNotVisible < SlackError; end
@@ -1542,6 +1546,7 @@ module Slack
           'restricted_plan_level' => RestrictedPlanLevel,
           'restricted_too_many' => RestrictedTooMany,
           'retention_override_not_allowed' => RetentionOverrideNotAllowed,
+          'rotation_not_found' => RotationNotFound,
           'row_id_not_provided' => RowIdNotProvided,
           'row_not_found' => RowNotFound,
           'rtm_connect_required' => RtmConnectRequired,
@@ -1597,6 +1602,7 @@ module Slack
           'token_not_found' => TokenNotFound,
           'token_revoked' => TokenRevoked,
           'token_rotation_not_enabled' => TokenRotationNotEnabled,
+          'token_too_long' => TokenTooLong,
           'too_large' => TooLarge,
           'too_long' => TooLong,
           'too_many_attachments' => TooManyAttachments,
@@ -1668,11 +1674,13 @@ module Slack
           'user_is_already_deleted' => UserIsAlreadyDeleted,
           'user_is_bot' => UserIsBot,
           'user_is_deactivated' => UserIsDeactivated,
+          'user_is_external_guest' => UserIsExternalGuest,
           'user_is_not_a_guest' => UserIsNotAGuest,
           'user_is_not_guest' => UserIsNotGuest,
           'user_is_restricted' => UserIsRestricted,
           'user_must_be_admin' => UserMustBeAdmin,
           'user_must_be_in_workspace' => UserMustBeInWorkspace,
+          'user_not_authenticated' => UserNotAuthenticated,
           'user_not_found' => UserNotFound,
           'user_not_in_channel' => UserNotInChannel,
           'user_not_visible' => UserNotVisible,

@@ -16,6 +16,11 @@
 * [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add AgentsSessions and AppsManagedPermissions endpoint modules for agents.sessions and apps.managedPermissions methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Increase conversations.invite users limit from 100 to 1000 - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add new Slack API error codes - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add oauth.v2.beginShortTokenRotation and oauth.v2.completeShortTokenRotation methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add an is_embedded_preview_enabled argument to admin.apps.config.set - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add a session_status argument to chat.stopStream - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add an include_list argument to slackLists.items.list - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add rotation_not_found, token_too_long, user_is_external_guest, and user_not_authenticated error codes - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

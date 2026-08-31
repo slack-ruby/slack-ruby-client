@@ -23,6 +23,7 @@ module Slack
           c.flag 'workflow_auth_strategy', desc: 'The workflow auth permission. Can be one of builder_choice or end_user_only.'
           c.flag 'rich_link_preview_type', desc: 'Indicates the app-level override for rich link preview. Unsupported for free teams.'
           c.flag 'domain_restrictions', desc: 'Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.'
+          c.flag 'is_embedded_preview_enabled', desc: 'Whether the app is allowed to render embedded previews of its work objects on this team. Only settable for apps that have declared embed domains, as the setting does not apply to any other app, and only where the embedded preview feature is available to the caller.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_apps_config_set(options))
           end
