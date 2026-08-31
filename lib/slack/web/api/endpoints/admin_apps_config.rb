@@ -30,6 +30,8 @@ module Slack
           #   Indicates the app-level override for rich link preview. Unsupported for free teams.
           # @option options [object] :domain_restrictions
           #   Domain restrictions for the app. Should be an object with two properties: urls and emails. Each is an array of strings, and each sets the allowed URLs and emails for connector authorization, respectively.
+          # @option options [boolean] :is_embedded_preview_enabled
+          #   Whether the app is allowed to render embedded previews of its work objects on this team. Only settable for apps that have declared embed domains, as the setting does not apply to any other app, and only where the embedded preview feature is available to the caller.
           # @see https://api.slack.com/methods/admin.apps.config.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.config/admin.apps.config.set.json
           def admin_apps_config_set(options = {})

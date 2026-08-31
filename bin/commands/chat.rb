@@ -169,6 +169,7 @@ module Slack
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
           c.flag 'blocks', desc: 'A list of blocks that will be rendered at the bottom of the finalized message.'
           c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
+          c.flag 'session_status', desc: 'The session status to set after stopping the stream.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_stopStream(options))
           end
