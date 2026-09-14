@@ -146,7 +146,7 @@ module Slack
         g.long_desc %( Starts a new streaming conversation. )
         g.command 'startStream' do |c|
           c.flag 'channel', desc: 'An encoded ID that represents a channel, thread, or DM.'
-          c.flag 'chunks', desc: 'Array of streaming chunks.'
+          c.flag 'chunks', desc: 'Array of streaming chunks. Can include markdown text chunk objects, task update chunk objects, plan update chunks, or blocks chunks.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
           c.flag 'thread_ts', desc: "Provide another message's ts value to reply to. Omit it to stream a top-level message instead of a thread reply; this is only supported in channels where the whole channel is one session, such as Slack Code, and returns invalid_thread_ts elsewhere. Passing '0' is equivalent to omitting it."
           c.flag 'recipient_user_id', desc: 'The encoded ID of the user to receive the streaming text. Required when streaming to channels.'
@@ -164,11 +164,12 @@ module Slack
         g.long_desc %( Stops a streaming conversation. )
         g.command 'stopStream' do |c|
           c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
-          c.flag 'chunks', desc: 'Array of streaming chunks.'
+          c.flag 'chunks', desc: 'Array of streaming chunks. Can include markdown text chunk objects, task update chunk objects, plan update chunks, or blocks chunks.'
           c.flag 'ts', desc: 'The timestamp of the streaming message.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters.'
           c.flag 'blocks', desc: 'A list of blocks that will be rendered at the bottom of the finalized message.'
           c.flag 'metadata', desc: 'JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.'
+          c.flag 'session_status', desc: 'The session status to set after stopping the stream.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.chat_stopStream(options))
           end
