@@ -15,6 +15,8 @@ module Slack
           #   List of user IDs to allow for named_entities visibility.
           # @option options [array] :usergroup_ids
           #   List of encoded usergroup IDs.
+          # @option options [array] :channel_ids
+          #   List of encoded channel IDs to add to the channel restriction list. Interpretation depends on the app's channel_restriction_mode, which is configured via the admin.apps.permissions.set method.
           # @see https://api.slack.com/methods/admin.apps.permissions.add
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.permissions/admin.apps.permissions.add.json
           def admin_apps_permissions_add(options = {})
@@ -43,6 +45,8 @@ module Slack
           #   List of user IDs whose named_entities access will be revoked.
           # @option options [array] :usergroup_ids
           #   List of encoded usergroup IDs.
+          # @option options [array] :channel_ids
+          #   List of encoded channel IDs to remove from the channel restriction list. Interpretation depends on the app's channel_restriction_mode, which is configured via the admin.apps.permissions.set method.
           # @see https://api.slack.com/methods/admin.apps.permissions.remove
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.permissions/admin.apps.permissions.remove.json
           def admin_apps_permissions_remove(options = {})
@@ -61,6 +65,10 @@ module Slack
           #   List of user IDs to allow for named_entities visibility.
           # @option options [array] :usergroup_ids
           #   List of encoded usergroup IDs.
+          # @option options [enum] :channel_restriction_mode
+          #   The mode that defines where the app can be used in channels.
+          # @option options [array] :channel_ids
+          #   List of encoded channel IDs for channel restrictions. Semantics depend on channel_restriction_mode: allowlist for specific_channels, exclusion list for all_channels_except.
           # @see https://api.slack.com/methods/admin.apps.permissions.set
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.apps.permissions/admin.apps.permissions.set.json
           def admin_apps_permissions_set(options = {})
