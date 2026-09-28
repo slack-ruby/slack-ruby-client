@@ -17,6 +17,12 @@
 * [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add AgentsSessions and AppsManagedPermissions endpoint modules for agents.sessions and apps.managedPermissions methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Increase conversations.invite users limit from 100 to 1000 - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#597](https://github.com/slack-ruby/slack-ruby-client/pull/597): Add new Slack API error codes - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add channel_ids argument to admin.apps.permissions.add and admin.apps.permissions.remove, and channel_restriction_mode/channel_ids arguments to admin.apps.permissions.set - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add oauth.v2.beginShortTokenRotation and oauth.v2.completeShortTokenRotation methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add session_status argument to chat.stopStream - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add include_list argument to slackLists.items.list - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Update chat.startStream and chat.stopStream chunks argument documentation to mention markdown text, task update, plan update, and blocks chunk objects - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add new error codes including AgentPromptDisplayNotAllowed, ChannelRestrictionRequiresAppAccess, ChannelRestrictionsNotAvailable, RotationNotFound, TokenTooLong, TooManyChannels, UserIsExternalGuest, and UserNotAuthenticated - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

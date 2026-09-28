@@ -56,6 +56,7 @@ module Slack
           c.flag 'limit', desc: 'The maximum number of records to return.'
           c.flag 'cursor', desc: 'Next cursor for pagination.'
           c.flag 'archived', desc: 'Boolean indicating whether archived items or normal items should be returned.'
+          c.flag 'include_list', desc: 'Set to true to also return the parent list object, including its title, column schema, and total row count. Defaults to false to keep the response small.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.slackLists_items_list(options))
           end

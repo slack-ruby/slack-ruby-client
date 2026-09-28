@@ -32,6 +32,39 @@ module Slack
           end
 
           #
+          # Call this to rotate the secret on an old API token with a short secret. Must be paired with a call to oauth.v2.completeShortTokenRotation to confirm the change.
+          #
+          # @option options [string] :client_id
+          #   Issued when you created your application. Must be the app the token being rotated was issued to.
+          # @option options [string] :client_secret
+          #   Issued when you created your application.
+          # @see https://api.slack.com/methods/oauth.v2.beginShortTokenRotation
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.beginShortTokenRotation.json
+          def oauth_v2_beginShortTokenRotation(options = {})
+            raise ArgumentError, 'Required arguments :client_id missing' if options[:client_id].nil?
+            raise ArgumentError, 'Required arguments :client_secret missing' if options[:client_secret].nil?
+            post('oauth.v2.beginShortTokenRotation', options)
+          end
+
+          #
+          # Call this to finish rotating the secret on an old API token with a short secret. Must be paired with a call to oauth.v2.beginShortTokenRotation to start the process.
+          #
+          # @option options [string] :client_id
+          #   Issued when you created your application. Must be the app the token being rotated was issued to.
+          # @option options [string] :client_secret
+          #   Issued when you created your application.
+          # @option options [string] :new_token
+          #   The new xoxp token returned by oauth.v2.beginShortTokenRotation.
+          # @see https://api.slack.com/methods/oauth.v2.completeShortTokenRotation
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/oauth.v2/oauth.v2.completeShortTokenRotation.json
+          def oauth_v2_completeShortTokenRotation(options = {})
+            raise ArgumentError, 'Required arguments :client_id missing' if options[:client_id].nil?
+            raise ArgumentError, 'Required arguments :client_secret missing' if options[:client_secret].nil?
+            raise ArgumentError, 'Required arguments :new_token missing' if options[:new_token].nil?
+            post('oauth.v2.completeShortTokenRotation', options)
+          end
+
+          #
           # Exchanges a legacy access token for a new expiring access token and refresh token
           #
           # @option options [string] :client_id
