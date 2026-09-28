@@ -82,6 +82,8 @@ module Slack
           #   Next cursor for pagination.
           # @option options [boolean] :archived
           #   Boolean indicating whether archived items or normal items should be returned.
+          # @option options [boolean] :include_list
+          #   Set to true to also return the parent list object, including its title, column schema, and total row count. Defaults to false to keep the response small.
           # @see https://api.slack.com/methods/slackLists.items.list
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/slackLists.items/slackLists.items.list.json
           def slackLists_items_list(options = {})

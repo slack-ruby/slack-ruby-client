@@ -22,6 +22,27 @@ module Slack
           end
         end
 
+        g.desc 'Call this to rotate the secret on an old API token with a short secret. Must be paired with a call to oauth.v2.completeShortTokenRotation to confirm the change.'
+        g.long_desc %( Call this to rotate the secret on an old API token with a short secret. Must be paired with a call to oauth.v2.completeShortTokenRotation to confirm the change. )
+        g.command 'beginShortTokenRotation' do |c|
+          c.flag 'client_id', desc: 'Issued when you created your application. Must be the app the token being rotated was issued to.'
+          c.flag 'client_secret', desc: 'Issued when you created your application.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.oauth_v2_beginShortTokenRotation(options))
+          end
+        end
+
+        g.desc 'Call this to finish rotating the secret on an old API token with a short secret. Must be paired with a call to oauth.v2.beginShortTokenRotation to start the process.'
+        g.long_desc %( Call this to finish rotating the secret on an old API token with a short secret. Must be paired with a call to oauth.v2.beginShortTokenRotation to start the process. )
+        g.command 'completeShortTokenRotation' do |c|
+          c.flag 'client_id', desc: 'Issued when you created your application. Must be the app the token being rotated was issued to.'
+          c.flag 'client_secret', desc: 'Issued when you created your application.'
+          c.flag 'new_token', desc: 'The new xoxp token returned by oauth.v2.beginShortTokenRotation.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.oauth_v2_completeShortTokenRotation(options))
+          end
+        end
+
         g.desc 'Exchanges a legacy access token for a new expiring access token and refresh token'
         g.long_desc %( Exchanges a legacy access token for a new expiring access token and refresh token )
         g.command 'exchange' do |c|
