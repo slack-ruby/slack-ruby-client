@@ -5,6 +5,25 @@ require 'spec_helper'
 
 RSpec.describe Slack::Web::Api::Endpoints::OauthV2 do
   let(:client) { Slack::Web::Client.new }
+  context 'oauth.v2_beginShortTokenRotation' do
+    it 'requires client_id' do
+      expect { client.oauth_v2_beginShortTokenRotation(client_secret: %q[e1b9e11dfcd19c1982d5de12921e17e8c]) }.to raise_error ArgumentError, /Required arguments :client_id missing/
+    end
+    it 'requires client_secret' do
+      expect { client.oauth_v2_beginShortTokenRotation(client_id: %q[4123121235.9872358710]) }.to raise_error ArgumentError, /Required arguments :client_secret missing/
+    end
+  end
+  context 'oauth.v2_completeShortTokenRotation' do
+    it 'requires client_id' do
+      expect { client.oauth_v2_completeShortTokenRotation(client_secret: %q[e1b9e11dfcd19c1982d5de12921e17e8c], new_token: %q[xoxp-12345-67890-1928471-qemwiiwglagjacakvqbvbfkmvbsvsuzn]) }.to raise_error ArgumentError, /Required arguments :client_id missing/
+    end
+    it 'requires client_secret' do
+      expect { client.oauth_v2_completeShortTokenRotation(client_id: %q[4123121235.9872358710], new_token: %q[xoxp-12345-67890-1928471-qemwiiwglagjacakvqbvbfkmvbsvsuzn]) }.to raise_error ArgumentError, /Required arguments :client_secret missing/
+    end
+    it 'requires new_token' do
+      expect { client.oauth_v2_completeShortTokenRotation(client_id: %q[4123121235.9872358710], client_secret: %q[e1b9e11dfcd19c1982d5de12921e17e8c]) }.to raise_error ArgumentError, /Required arguments :new_token missing/
+    end
+  end
   context 'oauth.v2_exchange' do
     it 'requires client_id' do
       expect { client.oauth_v2_exchange(client_secret: %q[e1b9e11dfcd19c1982d5de12921e17e8c]) }.to raise_error ArgumentError, /Required arguments :client_id missing/

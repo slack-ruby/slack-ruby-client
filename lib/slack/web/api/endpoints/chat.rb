@@ -253,7 +253,7 @@ module Slack
           # @option options [channel] :channel
           #   An encoded ID that represents a channel, thread, or DM.
           # @option options [array] :chunks
-          #   Array of streaming chunks.
+          #   Array of streaming chunks. Can include markdown text chunk objects, task update chunk objects, plan update chunks, or blocks chunks.
           # @option options [string] :markdown_text
           #   Accepts message text formatted in markdown. Limit this field to 12,000 characters.
           # @option options [string] :thread_ts
@@ -284,7 +284,7 @@ module Slack
           # @option options [channel] :channel
           #   An encoded ID that represents a channel, private group, or DM.
           # @option options [array] :chunks
-          #   Array of streaming chunks.
+          #   Array of streaming chunks. Can include markdown text chunk objects, task update chunk objects, plan update chunks, or blocks chunks.
           # @option options [timestamp] :ts
           #   The timestamp of the streaming message.
           # @option options [string] :markdown_text
@@ -293,6 +293,8 @@ module Slack
           #   A list of blocks that will be rendered at the bottom of the finalized message.
           # @option options [string] :metadata
           #   JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+          # @option options [enum] :session_status
+          #   The session status to set after stopping the stream.
           # @see https://api.slack.com/methods/chat.stopStream
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/chat/chat.stopStream.json
           def chat_stopStream(options = {})
