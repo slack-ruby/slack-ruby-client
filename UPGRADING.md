@@ -3,7 +3,7 @@ Upgrading Slack-Ruby-Client
 
 ### Upgrading to >= 3.2.1
 
-[#XXX](https://github.com/slack-ruby/slack-ruby-client/pull/XXX) removes [gli](https://github.com/davetron5000/gli) from slack-ruby-client's runtime dependencies. Only the `slack` command-line client uses it. If you use the command-line client, add `gem 'gli'` to your Gemfile or run `gem install gli`. Without it, `slack` exits with a message saying so. The library itself is unaffected.
+[#602](https://github.com/slack-ruby/slack-ruby-client/pull/602) removes [gli](https://github.com/davetron5000/gli) from slack-ruby-client's runtime dependencies. Only the `slack` command-line client uses it. If you use the command-line client, add `gem 'gli'` to your Gemfile or run `gem install gli`. Without it, `slack` exits with a message saying so. The library itself is unaffected.
 
 ### Upgrading to >= 3.2.0
 
