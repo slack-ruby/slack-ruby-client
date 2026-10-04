@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday', '>= 2.0.1'
   s.add_dependency 'faraday-mashify'
   s.add_dependency 'faraday-multipart'
-  s.add_dependency 'gli'
   s.add_dependency 'hashie'
   s.add_dependency 'logger'
   s.metadata['rubygems_mfa_required'] = 'true'

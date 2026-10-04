@@ -12,6 +12,7 @@ group :test do
   gem 'danger-toc', require: false
   gem 'erubis'
   gem 'faraday-typhoeus'
+  gem 'gli'
   gem 'json-schema'
   gem 'mutex_m'
   gem 'racc'

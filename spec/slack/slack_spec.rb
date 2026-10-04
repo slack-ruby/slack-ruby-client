@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'spec_helper'
+require 'open3'
 
 describe Slack do
   let(:slack) { File.expand_path(File.join(__FILE__, '../../../bin/slack')) }
@@ -16,6 +17,16 @@ describe Slack do
     it 'displays help' do
       help = `"#{slack}" help`
       expect(help).to include 'slack - Slack client.'
+    end
+  end
+
+  context 'without gli installed' do
+    let(:without_gli) { File.expand_path(File.join(__FILE__, '../../fixtures/without_gli.rb')) }
+
+    it 'exits with instructions to install it' do
+      output, status = Open3.capture2e(RbConfig.ruby, '-r', without_gli, slack, 'help')
+      expect(status.exitstatus).to eq 1
+      expect(output).to include "The slack command-line client requires the gli gem. Add `gem 'gli'` to your Gemfile"
     end
   end
 

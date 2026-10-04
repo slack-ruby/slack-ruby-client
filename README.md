@@ -562,7 +562,13 @@ Slack::Messages::Formatting.escape('Hello & <world>')
 
 ### Command-Line Client
 
-The slack command-line client returns JSON data from the Slack API.
+The slack command-line client returns JSON data from the Slack API. It uses [GLI](https://github.com/davetron5000/gli), which is not a dependency of slack-ruby-client, so install it alongside the client.
+
+```
+gem install gli
+```
+
+Or add `gem 'gli'` to your Gemfile.
 
 #### Authenticate with Slack
 
