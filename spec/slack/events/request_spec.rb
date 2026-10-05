@@ -70,6 +70,31 @@ RSpec.describe Slack::Events::Request do
     end
   end
 
+  context 'with a non-rewindable body' do
+    let(:input) { double(read: body) }
+
+    before do
+      allow(http_request).to receive(:body).and_return(input)
+    end
+
+    it 'reads and caches the body without rewinding' do
+      expect(input).to receive(:read).once.and_return(body)
+      2.times { expect(request.body).to eq body }
+    end
+
+    it 'validates the signature' do
+      expect(request).to be_valid
+    end
+
+    context 'with an already consumed body' do
+      let(:input) { double(read: '') }
+
+      it 'rejects the signature rather than accepting an incomplete body' do
+        expect(request).not_to be_valid
+      end
+    end
+  end
+
   context 'time' do
     after do
       Timecop.return
