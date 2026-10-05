@@ -31,6 +31,12 @@ module Slack
         with_callback(:@request_callbacks, block)
       end
 
+      def with_error(&block)
+        raise ArgumentError, 'error callback block is required' unless block
+
+        with_callback(:@error_callbacks, block)
+      end
+
       class << self
         def configure
           block_given? ? yield(Config) : Config

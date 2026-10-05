@@ -321,6 +321,21 @@ Request callbacks receive a `Faraday::Request` after authentication and request 
 
 Chaining registers callbacks in order. Copies preserve client configuration but use independent connections and callback lists; the original client is unchanged. Callback exceptions propagate and request callback failures prevent dispatch. Callbacks are synchronous; avoid storing sensitive authorization headers, and synchronize any shared state if using a client concurrently.
 
+Use `with_error` to observe Slack and transport errors without recovering from them:
+
+```ruby
+observed_client = client.with_error do |error|
+  logger.warn(
+    message: error.message,
+    errors: error.respond_to?(:errors) && error.response ? error.errors : nil,
+    response_metadata: error.respond_to?(:response_metadata) && error.response ? error.response_metadata : nil
+  )
+end
+observed_client.auth_test
+```
+
+Error callbacks receive the exception and then it is re-raised unchanged. They run for every failed HTTP attempt, including failures that pagination subsequently retries. Successful calls and exceptions from request or response callbacks do not trigger them. If an error callback raises, its exception propagates instead and later callbacks are not invoked. As with other callbacks, these methods return a configured copy and can be chained.
+
 You can control what proxy options are used by modifying the `http_proxy` environment variable per [Net::HTTP's documentation](https://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html#class-Net::HTTP-label-Proxies).
 
 Note that Docker on OSX seems to incorrectly set the proxy, causing `Faraday::ConnectionFailed, ERROR -- : Failed to open TCP connection to : (getaddrinfo: Name or service not known)`. You might need to manually unset `http_proxy` in that case, eg. `http_proxy="" bundle exec ruby ./my_bot.rb`.

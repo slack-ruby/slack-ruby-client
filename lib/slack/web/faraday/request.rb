@@ -29,7 +29,7 @@ module Slack
 
         def perform_request(method, path, options)
           configuring_request = false
-          connection.send(method) do |request|
+          perform_http_request(method, -> { configuring_request }) do |request|
             case method
             when :get, :delete
               request.url(path, options)
@@ -45,8 +45,17 @@ module Slack
             Array(@request_callbacks).each { |callback| callback.call(request) }
             configuring_request = false
           end
-        rescue ::Faraday::ParsingError => e
+        rescue ::Faraday::Error => e
           raise if configuring_request
+
+          Array(@error_callbacks).each { |callback| callback.call(e) }
+          raise
+        end
+
+        def perform_http_request(method, configuring_request, &block)
+          connection.send(method, &block)
+        rescue ::Faraday::ParsingError => e
+          raise if configuring_request.call
 
           raise Slack::Web::Api::Errors::ParsingError, e.response
         end

@@ -1,5 +1,6 @@
 ### 3.3.0 (Next)
 
+* [#606](https://github.com/slack-ruby/slack-ruby-client/pull/606): Add configured client copies with error callbacks for Slack and transport failures - [@dblock](https://github.com/dblock).
 * [#605](https://github.com/slack-ruby/slack-ruby-client/pull/605): Add configured client copies with request and response callbacks, including pagination - [@dblock](https://github.com/dblock).
 * [#603](https://github.com/slack-ruby/slack-ruby-client/pull/603): Enforce consistent exception messages with rubocop-exception_messages and run lint separately from the test matrix - [@dblock](https://github.com/dblock).
 * [#602](https://github.com/slack-ruby/slack-ruby-client/pull/602): Make gli an optional dependency; only the `slack` command-line client needs it - [@corsonknowles](https://github.com/corsonknowles).
