@@ -13,7 +13,6 @@ group :test do
   gem 'erubis'
   gem 'faraday-typhoeus'
   gem 'gli'
-  gem 'json', '< 3' # Faraday's JSON middleware passes options as a positional hash.
   gem 'json-schema'
   gem 'mutex_m'
   gem 'racc'
