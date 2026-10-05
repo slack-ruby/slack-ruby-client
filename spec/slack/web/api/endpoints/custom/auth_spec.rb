@@ -20,7 +20,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Auth do
     it 'fails with an specific exception' do
       client.auth_test
     rescue Slack::Web::Api::Errors::TooManyRequestsError => e
-      expect(e.message).to eq('Retry after 3600 seconds')
+      expect(e.message).to eq('retry after 3600 seconds')
       expect(e.retry_after).to eq(3600)
     end
   end

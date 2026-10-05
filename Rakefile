@@ -12,10 +12,14 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
-require 'rubocop/rake_task'
-RuboCop::RakeTask.new
+desc 'Run RuboCop (Ruby 3.2+).'
+task :rubocop do
+  abort 'RuboCop requires Ruby 3.2 or newer' if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.2')
 
-task default: %i[spec rubocop]
+  sh 'bundle exec rubocop'
+end
+
+task default: :spec
 
 load 'tasks/git.rake'
 load 'tasks/web.rake'

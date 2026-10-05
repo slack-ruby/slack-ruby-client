@@ -153,7 +153,7 @@ RSpec.describe Slack::Web::Client do
         end
 
         it 'creates a connection with a logger' do
-          expect(client.send(:connection).builder.handlers).to include ::Faraday::Response::Logger
+          expect(client.send(:connection).builder.handlers).to include Faraday::Response::Logger
         end
       end
     end

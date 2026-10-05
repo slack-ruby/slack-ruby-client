@@ -45,12 +45,12 @@ module Slack
 
             files_to_upload.each_with_index do |file, index|
               %i[filename content].each do |param|
-                raise ArgumentError, "Required argument :#{param} missing in file (#{index})" if file[param].nil?
+                raise ArgumentError, "required argument :`#{param}` missing in file (`#{index}`)" if file[param].nil?
               end
             end
 
             channel_params = %i[channel channels channel_id].map { |param| params[param] }.compact
-            raise ArgumentError, 'Only one of :channel, :channels, or :channel_id is required' if channel_params.size > 1
+            raise ArgumentError, 'only one of :channel, :channels, or :channel_id is required' if channel_params.size > 1
 
             complete_upload_request_params = params.slice(:initial_comment, :blocks, :thread_ts)
 

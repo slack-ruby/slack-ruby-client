@@ -14,7 +14,7 @@ if defined?(Picky)
             #   Free-formed text to search for.
             def users_search(options = {})
               query = options[:user]
-              raise ArgumentError, 'Required arguments :user missing' if query.nil?
+              raise ArgumentError, 'required arguments :user missing' if query.nil?
 
               index = Picky::Index.new(:users) do
                 category :name

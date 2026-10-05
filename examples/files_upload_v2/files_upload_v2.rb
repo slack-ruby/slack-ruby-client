@@ -3,7 +3,7 @@ require 'slack-ruby-client'
 require 'securerandom'
 
 Slack.configure do |config|
-  config.token = ENV['SLACK_API_TOKEN']
+  config.token = ENV.fetch('SLACK_API_TOKEN', nil)
   raise 'Missing ENV[SLACK_API_TOKEN]!' unless config.token
 end
 

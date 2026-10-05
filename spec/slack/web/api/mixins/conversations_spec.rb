@@ -24,6 +24,12 @@ RSpec.describe Slack::Web::Api::Mixins::Conversations do
   end
 
   describe '#conversations_id' do
+    it 'requires a channel' do
+      expect { conversations.conversations_id }.to(
+        raise_error(ArgumentError, 'required arguments :channel missing')
+      )
+    end
+
     it 'leaves channels specified by ID alone' do
       expect(conversations.conversations_id(channel: 'C123456')).to(
         eq('ok' => true, 'channel' => { 'id' => 'C123456' })

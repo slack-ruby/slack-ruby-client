@@ -40,7 +40,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
       it 'raises an argument error' do
         expect do
           client.files_upload_v2(params)
-        end.to raise_error ArgumentError, /Required argument :#{arg} missing/
+        end.to raise_error ArgumentError, /required argument :`#{arg}` missing/
       end
     end
   end
@@ -61,7 +61,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
           filename: 'test.txt',
           content: 'Test File Contents'
         }.merge(permutation.map { |arg| [arg, 'C08AZ76CA4V'] }.to_h))
-      end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
+      end.to raise_error ArgumentError, 'only one of :channel, :channels, or :channel_id is required'
     end
   end
 
@@ -73,7 +73,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
         channels: 'C08AZ76CA4V',
         channel_id: 'C08AZ76CA4V'
       )
-    end.to raise_error ArgumentError, 'Only one of :channel, :channels, or :channel_id is required'
+    end.to raise_error ArgumentError, 'only one of :channel, :channels, or :channel_id is required'
   end
 
   %i[channel channels].each do |arg|
@@ -205,7 +205,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
           ],
           channel_id: 'C04KB5X4D'
         )
-      end.to raise_error ArgumentError, /Required argument :filename missing in file \(0\)/
+      end.to raise_error ArgumentError, /required argument :`filename` missing in file \(`0`\)/
     end
   end
 
@@ -219,7 +219,7 @@ RSpec.describe Slack::Web::Api::Endpoints::Files do
           ],
           channel_id: 'C04KB5X4D'
         )
-      end.to raise_error ArgumentError, /Required argument :content missing in file \(0\)/
+      end.to raise_error ArgumentError, /required argument :`content` missing in file \(`0`\)/
     end
   end
 end

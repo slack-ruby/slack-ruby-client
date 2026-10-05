@@ -59,7 +59,16 @@ We definitely appreciate pull requests that highlight or reproduce a problem, ev
 
 Implement your feature or bug fix.
 
-Ruby style is enforced with [Rubocop](https://github.com/bbatsov/rubocop). Run `bundle exec rubocop` and fix any style issues highlighted, auto-correct issues when possible with `bundle exec rubocop -a`. To silence generally ignored issues, including line lengths or code complexity metrics, run `bundle exec rubocop --auto-gen-config`.
+Ruby style is enforced with [RuboCop](https://github.com/rubocop/rubocop), including [exception message conventions](https://github.com/dblock/rubocop-exception_messages). The main Gemfile includes lint dependencies only on Ruby 3.2+ so tests can continue running on older supported Ruby versions.
+
+```bash
+bundle install
+bundle exec rubocop
+```
+
+Fix any style issues highlighted, auto-correcting safe issues with `bundle exec rubocop -a`. Exception message corrections require `-A`; review them and update message expectations in tests. To regenerate the baseline for generally ignored issues, including line lengths or code complexity metrics, run `bundle exec rubocop --auto-gen-config`.
+
+On Ruby 3.2+, `bundle exec rake rubocop` also runs lint. The default `bundle exec rake` runs tests only; CI runs lint separately on Ruby 3.3.
 
 Make sure that `bundle exec rake` completes without errors.
 

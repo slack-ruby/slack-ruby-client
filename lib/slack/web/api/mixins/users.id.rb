@@ -7,6 +7,7 @@ module Slack
       module Mixins
         module Users
           include Ids
+
           #
           # This method returns a user ID given a user name.
           #
@@ -19,7 +20,7 @@ module Slack
           #   The page size used for users_list calls required to find the user's ID
           def users_id(options = {})
             name = options[:user]
-            raise ArgumentError, 'Required arguments :user missing' if name.nil?
+            raise ArgumentError, 'required arguments :user missing' if name.nil?
 
             id_for(
               key: :user,

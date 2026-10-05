@@ -7,6 +7,7 @@ module Slack
       module Mixins
         module Conversations
           include Ids
+
           #
           # This method returns a channel ID given a channel name.
           #
@@ -24,7 +25,7 @@ module Slack
           #   containing one or more of public_channel, private_channel, mpim, im
           def conversations_id(options = {})
             name = options[:channel]
-            raise ArgumentError, 'Required arguments :channel missing' if name.nil?
+            raise ArgumentError, 'required arguments :channel missing' if name.nil?
 
             id_for(
               key: :channel,
