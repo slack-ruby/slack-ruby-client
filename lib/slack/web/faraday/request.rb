@@ -22,7 +22,14 @@ module Slack
         private
 
         def request(method, path, options)
-          response = connection.send(method) do |request|
+          response = perform_request(method, path, options)
+          Array(@response_callbacks).each { |callback| callback.call(response) }
+          response.body
+        end
+
+        def perform_request(method, path, options)
+          configuring_request = false
+          connection.send(method) do |request|
             case method
             when :get, :delete
               request.url(path, options)
@@ -34,9 +41,13 @@ module Slack
             request.headers['Authorization'] = "Bearer #{token}" if token
 
             request.options.merge!(options.delete(:request)) if options.key?(:request)
+            configuring_request = true
+            Array(@request_callbacks).each { |callback| callback.call(request) }
+            configuring_request = false
           end
-          response.body
         rescue ::Faraday::ParsingError => e
+          raise if configuring_request
+
           raise Slack::Web::Api::Errors::ParsingError, e.response
         end
       end
