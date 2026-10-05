@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'spec_helper'
+require 'open3'
 
 describe Slack do
   let(:slack) { File.expand_path(File.join(__FILE__, '../../../bin/slack')) }
@@ -16,6 +17,17 @@ describe Slack do
     it 'displays help' do
       help = `"#{slack}" help`
       expect(help).to include 'slack - Slack client.'
+    end
+  end
+
+  context 'without gli installed' do
+    # --disable-gems (and no inherited bundler setup) leaves gli unloadable on every Ruby.
+    let(:env) { { 'RUBYOPT' => nil, 'RUBYLIB' => nil, 'BUNDLE_GEMFILE' => nil, 'BUNDLE_BIN_PATH' => nil } }
+
+    it 'exits with instructions to install it' do
+      output, status = Open3.capture2e(env, RbConfig.ruby, '--disable-gems', slack, 'help')
+      expect(status.exitstatus).to eq 1
+      expect(output).to include "The slack command-line client requires the gli gem. Add `gem 'gli'` to your Gemfile"
     end
   end
 

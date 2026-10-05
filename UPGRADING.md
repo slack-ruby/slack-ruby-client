@@ -1,6 +1,10 @@
 Upgrading Slack-Ruby-Client
 ===========================
 
+### Upgrading to >= 3.3.0
+
+[#602](https://github.com/slack-ruby/slack-ruby-client/pull/602) removes [gli](https://github.com/davetron5000/gli) from slack-ruby-client's runtime dependencies. Only the `slack` command-line client uses it. If you use the command-line client, add `gem 'gli'` to your Gemfile or run `gem install gli`. Without it, `slack` exits with a message saying so. The library itself is unaffected.
+
 ### Upgrading to >= 3.2.0
 
 [#583](https://github.com/slack-ruby/slack-ruby-client/pull/583) modifies the error types raised when a nonexistent #channel-name or @user-handle is looked up. These will now raise `ChannelNotFound` and `UserNotFound` respectively, whereas they previously raised a `SlackError`. If your code relies on these types without accounting for inheritance, it will need to be migrated. Notably, `rescue SlackError` will continue to work as normal, since both error classes inherit from it.

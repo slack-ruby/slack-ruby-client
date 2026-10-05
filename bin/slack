@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
-require 'gli'
+begin
+  require 'gli'
+rescue LoadError
+  abort "The slack command-line client requires the gli gem. Add `gem 'gli'` to your Gemfile, or run `gem install gli`."
+end
 require 'slack_ruby_client'
 
 module Slack
