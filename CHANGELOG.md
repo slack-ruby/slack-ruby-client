@@ -28,6 +28,9 @@
 * [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add include_list argument to slackLists.items.list - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Update chat.startStream and chat.stopStream chunks argument documentation to mention markdown text, task update, plan update, and blocks chunk objects - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#600](https://github.com/slack-ruby/slack-ruby-client/pull/600): Add new error codes including AgentPromptDisplayNotAllowed, ChannelRestrictionRequiresAppAccess, ChannelRestrictionsNotAvailable, RotationNotFound, TokenTooLong, TooManyChannels, UserIsExternalGuest, and UserNotAuthenticated - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add admin.usergroups.addUsers, admin.usergroups.removeUsers, admin.usergroups.create, admin.usergroups.fetch, admin.usergroups.update, and admin.usergroups.uploadUsers methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add canvases.getContent method to fetch canvas content as markdown or HTML - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add new Slack API error codes to Errors - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.2.0 (2026/07/05)

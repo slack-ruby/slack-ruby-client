@@ -47,6 +47,20 @@ module Slack
             raise ArgumentError, 'Required arguments :changes missing' if options[:changes].nil?
             post('canvases.edit', options)
           end
+
+          #
+          # Get the content of a canvas as markdown (default) or HTML.
+          #
+          # @option options [Object] :canvas_id
+          #   Encoded ID of the canvas.
+          # @option options [enum] :content_type
+          #   Format in which to return the canvas content. Defaults to markdown.
+          # @see https://api.slack.com/methods/canvases.getContent
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/canvases/canvases.getContent.json
+          def canvases_getContent(options = {})
+            raise ArgumentError, 'Required arguments :canvas_id missing' if options[:canvas_id].nil?
+            post('canvases.getContent', options)
+          end
         end
       end
     end

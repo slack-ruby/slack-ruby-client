@@ -28,6 +28,37 @@ module Slack
           end
         end
 
+        g.desc 'Add members to an existing organizational usergroup. This method is only available to Enterprise Grid organizations.'
+        g.long_desc %( Add members to an existing organizational usergroup. This method is only available to Enterprise Grid organizations. )
+        g.command 'addUsers' do |c|
+          c.flag 'id', desc: 'ID of the usergroup to add users to.'
+          c.flag 'users', desc: 'The encoded user IDs to add to the usergroup, provided as a JSON array or a comma-separated string.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_addUsers(options))
+          end
+        end
+
+        g.desc 'Create a new organizational usergroup. This method is only available to Enterprise Grid organizations.'
+        g.long_desc %( Create a new organizational usergroup. This method is only available to Enterprise Grid organizations. )
+        g.command 'create' do |c|
+          c.flag 'name', desc: 'Unique name for the usergroup.'
+          c.flag 'handle', desc: 'Optional handle used to mention the usergroup in channel, must be unique.'
+          c.flag 'purpose', desc: 'Optional purpose that describes what the usergroup is about.'
+          c.flag 'is_visible', desc: 'Configure whether or not this usergroup should be visible in the client.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_create(options))
+          end
+        end
+
+        g.desc 'Fetch an organizational usergroup.'
+        g.long_desc %( Fetch an organizational usergroup. )
+        g.command 'fetch' do |c|
+          c.flag 'id', desc: 'ID of the usergroup to fetch.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_fetch(options))
+          end
+        end
+
         g.desc 'List the channels linked to an org-level IDP group (user group).'
         g.long_desc %( List the channels linked to an org-level IDP group (user group). )
         g.command 'listChannels' do |c|
@@ -56,6 +87,39 @@ module Slack
           c.flag 'team_ids', desc: 'A comma separated list of encoded team (workspace) IDs. Each workspace MUST belong to the organization associated with the token.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.admin_usergroups_removeTeams(options))
+          end
+        end
+
+        g.desc 'Remove members from an existing organizational usergroup. This method is only available to Enterprise Grid organizations.'
+        g.long_desc %( Remove members from an existing organizational usergroup. This method is only available to Enterprise Grid organizations. )
+        g.command 'removeUsers' do |c|
+          c.flag 'id', desc: 'ID of the usergroup to remove users from.'
+          c.flag 'users', desc: 'The encoded user IDs to remove from the usergroup, provided as a JSON array or a comma-separated string.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_removeUsers(options))
+          end
+        end
+
+        g.desc 'Update one or more properties of an existing organizational usergroup.'
+        g.long_desc %( Update one or more properties of an existing organizational usergroup. )
+        g.command 'update' do |c|
+          c.flag 'id', desc: 'ID of the usergroup to update.'
+          c.flag 'name', desc: 'The name of the group.'
+          c.flag 'handle', desc: 'The handle used for mentioning the group in a channel, must be unique.'
+          c.flag 'description', desc: "The usergroup's purpose or description."
+          c.flag 'is_visible', desc: 'Configure whether or not this usergroup should be visible in the client.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_update(options))
+          end
+        end
+
+        g.desc 'Add members to an existing organizational usergroup in bulk via CSV upload. This method is only available to Enterprise Grid organizations.'
+        g.long_desc %( Add members to an existing organizational usergroup in bulk via CSV upload. This method is only available to Enterprise Grid organizations. )
+        g.command 'uploadUsers' do |c|
+          c.flag 'id', desc: 'ID of the usergroup to upload users to.'
+          c.flag 'file', desc: 'Csv of users to upload in format member id, email.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_usergroups_uploadUsers(options))
           end
         end
       end

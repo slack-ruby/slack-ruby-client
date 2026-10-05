@@ -35,6 +35,16 @@ module Slack
             puts JSON.dump(@client.canvases_edit(options))
           end
         end
+
+        g.desc 'Get the content of a canvas as markdown (default) or HTML.'
+        g.long_desc %( Get the content of a canvas as markdown (default) or HTML. )
+        g.command 'getContent' do |c|
+          c.flag 'canvas_id', desc: 'Encoded ID of the canvas.'
+          c.flag 'content_type', desc: 'Format in which to return the canvas content. Defaults to markdown.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.canvases_getContent(options))
+          end
+        end
       end
     end
   end

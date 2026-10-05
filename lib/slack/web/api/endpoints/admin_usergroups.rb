@@ -41,6 +41,52 @@ module Slack
           end
 
           #
+          # Add members to an existing organizational usergroup. This method is only available to Enterprise Grid organizations.
+          #
+          # @option options [string] :id
+          #   ID of the usergroup to add users to.
+          # @option options [array] :users
+          #   The encoded user IDs to add to the usergroup, provided as a JSON array or a comma-separated string.
+          # @see https://api.slack.com/methods/admin.usergroups.addUsers
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.addUsers.json
+          def admin_usergroups_addUsers(options = {})
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
+            options = encode_options_as_json(options, %i[users])
+            post('admin.usergroups.addUsers', options)
+          end
+
+          #
+          # Create a new organizational usergroup. This method is only available to Enterprise Grid organizations.
+          #
+          # @option options [string] :name
+          #   Unique name for the usergroup.
+          # @option options [string] :handle
+          #   Optional handle used to mention the usergroup in channel, must be unique.
+          # @option options [string] :purpose
+          #   Optional purpose that describes what the usergroup is about.
+          # @option options [boolean] :is_visible
+          #   Configure whether or not this usergroup should be visible in the client.
+          # @see https://api.slack.com/methods/admin.usergroups.create
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.create.json
+          def admin_usergroups_create(options = {})
+            raise ArgumentError, 'Required arguments :name missing' if options[:name].nil?
+            post('admin.usergroups.create', options)
+          end
+
+          #
+          # Fetch an organizational usergroup.
+          #
+          # @option options [string] :id
+          #   ID of the usergroup to fetch.
+          # @see https://api.slack.com/methods/admin.usergroups.fetch
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.fetch.json
+          def admin_usergroups_fetch(options = {})
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            post('admin.usergroups.fetch', options)
+          end
+
+          #
           # List the channels linked to an org-level IDP group (user group).
           #
           # @option options [Object] :usergroup_id
@@ -84,6 +130,56 @@ module Slack
             raise ArgumentError, 'Required arguments :usergroup_id missing' if options[:usergroup_id].nil?
             raise ArgumentError, 'Required arguments :team_ids missing' if options[:team_ids].nil?
             post('admin.usergroups.removeTeams', options)
+          end
+
+          #
+          # Remove members from an existing organizational usergroup. This method is only available to Enterprise Grid organizations.
+          #
+          # @option options [string] :id
+          #   ID of the usergroup to remove users from.
+          # @option options [array] :users
+          #   The encoded user IDs to remove from the usergroup, provided as a JSON array or a comma-separated string.
+          # @see https://api.slack.com/methods/admin.usergroups.removeUsers
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.removeUsers.json
+          def admin_usergroups_removeUsers(options = {})
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            raise ArgumentError, 'Required arguments :users missing' if options[:users].nil?
+            options = encode_options_as_json(options, %i[users])
+            post('admin.usergroups.removeUsers', options)
+          end
+
+          #
+          # Update one or more properties of an existing organizational usergroup.
+          #
+          # @option options [string] :id
+          #   ID of the usergroup to update.
+          # @option options [string] :name
+          #   The name of the group.
+          # @option options [string] :handle
+          #   The handle used for mentioning the group in a channel, must be unique.
+          # @option options [string] :description
+          #   The usergroup's purpose or description.
+          # @option options [boolean] :is_visible
+          #   Configure whether or not this usergroup should be visible in the client.
+          # @see https://api.slack.com/methods/admin.usergroups.update
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.update.json
+          def admin_usergroups_update(options = {})
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            post('admin.usergroups.update', options)
+          end
+
+          #
+          # Add members to an existing organizational usergroup in bulk via CSV upload. This method is only available to Enterprise Grid organizations.
+          #
+          # @option options [string] :id
+          #   ID of the usergroup to upload users to.
+          # @option options [file] :file
+          #   Csv of users to upload in format member id, email.
+          # @see https://api.slack.com/methods/admin.usergroups.uploadUsers
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.usergroups/admin.usergroups.uploadUsers.json
+          def admin_usergroups_uploadUsers(options = {})
+            raise ArgumentError, 'Required arguments :id missing' if options[:id].nil?
+            post('admin.usergroups.uploadUsers', options)
           end
         end
       end

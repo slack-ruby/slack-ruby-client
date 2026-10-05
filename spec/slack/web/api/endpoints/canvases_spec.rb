@@ -18,4 +18,9 @@ RSpec.describe Slack::Web::Api::Endpoints::Canvases do
       expect { client.canvases_edit(canvas_id: %q[F1234ABCD]) }.to raise_error ArgumentError, /Required arguments :changes missing/
     end
   end
+  context 'canvases_getContent' do
+    it 'requires canvas_id' do
+      expect { client.canvases_getContent }.to raise_error ArgumentError, /Required arguments :canvas_id missing/
+    end
+  end
 end
