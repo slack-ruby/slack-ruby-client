@@ -14,17 +14,17 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
     context 'with status of 429' do
       let(:status) { 429 }
       let(:env) do
-        env = ::Faraday::Env.from({
-                                    request_headers: {
-                                      'Authorization' => 'Bearer very-secret-token-12345'
-                                    },
-                                    response_headers: {
-                                      'retry-after' => 10
-                                    },
-                                    status: status
-                                  })
+        env = Faraday::Env.from({
+                                  request_headers: {
+                                    'Authorization' => 'Bearer very-secret-token-12345'
+                                  },
+                                  response_headers: {
+                                    'retry-after' => 10
+                                  },
+                                  status: status
+                                })
 
-        env[:response] = ::Faraday::Response.new(env)
+        env[:response] = Faraday::Response.new(env)
         env
       end
 
@@ -118,16 +118,16 @@ RSpec.describe Slack::Web::Faraday::Response::RaiseError do
         }
       end
       let(:env) do
-        env = ::Faraday::Env.from({
-                                    response_body: body,
-                                    request_headers: {
-                                      'Authorization' => 'Bearer very-secret-token-12345',
-                                      'User-Agent' => 'Test Client'
-                                    },
-                                    status: status
-                                  })
+        env = Faraday::Env.from({
+                                  response_body: body,
+                                  request_headers: {
+                                    'Authorization' => 'Bearer very-secret-token-12345',
+                                    'User-Agent' => 'Test Client'
+                                  },
+                                  status: status
+                                })
 
-        env[:response] = ::Faraday::Response.new(env)
+        env[:response] = Faraday::Response.new(env)
         env
       end
 

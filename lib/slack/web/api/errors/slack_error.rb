@@ -7,7 +7,7 @@ module Slack
           attr_reader :response
 
           def initialize(message, response = nil)
-            super message
+            super(message)
             @response = response
           end
 

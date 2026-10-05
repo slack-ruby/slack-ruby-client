@@ -6,6 +6,16 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Remaining offenses after safe autocorrection with modern RuboCop.
+Naming/PredicateMethod:
+  Exclude:
+    - 'lib/slack/events/request.rb'
+    - 'lib/slack/utils/security.rb'
+
+Style/DirectiveScope:
+  Exclude:
+    - 'lib/slack/utils/security.rb'
+
 # Offense count: 1
 # This cop supports unsafe auto-correction (--auto-correct-all).
 Lint/NonDeterministicRequireOrder:
@@ -107,7 +117,7 @@ RSpec/ExampleLength:
 # Offense count: 10
 # Configuration parameters: Include, CustomTransform, IgnoreMethods, SpecSuffixOnly.
 # Include: **/*_spec*rb*, **/spec/**/*
-RSpec/FilePath:
+RSpec/SpecFilePathFormat:
   Exclude:
     - 'spec/slack/version_spec.rb'
     - 'spec/slack/web/api/endpoints/custom/auth_spec.rb'
@@ -163,7 +173,8 @@ RSpec/SubjectStub:
 # Configuration parameters: .
 # SupportedStyles: constant, string
 RSpec/VerifiedDoubleReference:
-  EnforcedStyle: string
+  Exclude:
+    - 'spec/slack/web/faraday/request_spec.rb'
 
 # Offense count: 2
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.

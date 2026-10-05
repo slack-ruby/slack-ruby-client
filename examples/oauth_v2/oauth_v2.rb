@@ -18,8 +18,8 @@ server.mount_proc '/' do |req, res|
 
   response = client.oauth_v2_access(
     req.query.merge(
-      client_id: ENV['SLACK_CLIENT_ID'],
-      client_secret: ENV['SLACK_CLIENT_SECRET'],
+      client_id: ENV.fetch('SLACK_CLIENT_ID', nil),
+      client_secret: ENV.fetch('SLACK_CLIENT_SECRET', nil),
       grant_type: 'authorization_code'
     )
   )
@@ -47,10 +47,10 @@ server.mount_proc '/' do |req, res|
 end
 
 query = {
-  client_id: ENV['SLACK_CLIENT_ID'],
-  redirect_uri: ENV['REDIRECT_URI'],
-  scope: ENV['SCOPE'],
-  user_scope: ENV['USER_SCOPE']
+  client_id: ENV.fetch('SLACK_CLIENT_ID', nil),
+  redirect_uri: ENV.fetch('REDIRECT_URI', nil),
+  scope: ENV.fetch('SCOPE', nil),
+  user_scope: ENV.fetch('USER_SCOPE', nil)
 }
 
 url = "https://slack.com/oauth/v2/authorize?#{query.to_query}"

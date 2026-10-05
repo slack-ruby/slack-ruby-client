@@ -1,9 +1,10 @@
 inherit_from: .rubocop_todo.yml
 
-require:
+plugins:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-exception_messages
 
 AllCops:
   TargetRubyVersion: 2.7

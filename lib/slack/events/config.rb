@@ -12,7 +12,7 @@ module Slack
       attr_accessor(*Config::ATTRIBUTES)
 
       def reset
-        self.signing_secret = ENV['SLACK_SIGNING_SECRET']
+        self.signing_secret = ENV.fetch('SLACK_SIGNING_SECRET', nil)
         self.signature_expires_in = 5 * 60
       end
     end

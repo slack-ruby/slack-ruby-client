@@ -8,7 +8,7 @@ module Slack
 
           def initialize(response)
             @response = response
-            super "Retry after #{retry_after} seconds"
+            super("retry after #{retry_after} seconds")
           end
 
           def retry_after

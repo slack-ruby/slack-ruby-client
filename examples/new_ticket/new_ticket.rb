@@ -2,7 +2,7 @@
 require 'slack-ruby-client'
 
 Slack.configure do |config|
-  config.token = ENV['SLACK_API_TOKEN']
+  config.token = ENV.fetch('SLACK_API_TOKEN', nil)
   raise 'Missing ENV[SLACK_API_TOKEN]!' unless config.token
 end
 

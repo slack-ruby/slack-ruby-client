@@ -13,15 +13,12 @@ group :test do
   gem 'erubis'
   gem 'faraday-typhoeus'
   gem 'gli'
+  gem 'json', '< 3' # Faraday's JSON middleware passes options as a positional hash.
   gem 'json-schema'
   gem 'mutex_m'
   gem 'racc'
   gem 'rake', '~> 13'
   gem 'rspec'
-  gem 'rubocop', '1.26.1' # Lock to specific version to avoid breaking cops/changes
-  gem 'rubocop-performance'
-  gem 'rubocop-rake'
-  gem 'rubocop-rspec'
   # Lock below 1.1.0, which started writing float timestamps to
   # coverage/.resultset.json, breaking coverallsapp/github-action's parser
   # (coverallsapp/github-action#269, coverallsapp/coverage-reporter#191).
@@ -30,4 +27,14 @@ group :test do
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
+end
+
+if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2')
+  group :lint do
+    gem 'rubocop', '~> 1.72'
+    gem 'rubocop-exception_messages', '~> 0.2.0', require: false
+    gem 'rubocop-performance', '~> 1.27'
+    gem 'rubocop-rake', '~> 0.7'
+    gem 'rubocop-rspec', '~> 3.10'
+  end
 end

@@ -25,6 +25,10 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
   end
 
   context '#users_id' do
+    it 'requires a user' do
+      expect { users.users_id }.to raise_error(ArgumentError, 'required arguments :user missing')
+    end
+
     it 'leaves users specified by ID alone' do
       expect(users.users_id(user: 'U123456')).to eq('ok' => true, 'user' => { 'id' => 'U123456' })
     end
@@ -69,6 +73,10 @@ RSpec.describe Slack::Web::Api::Mixins::Users do
 
   if defined?(Picky)
     context '#users_search' do
+      it 'requires a search query' do
+        expect { users.users_search }.to raise_error(ArgumentError, 'required arguments :user missing')
+      end
+
       it 'finds a user' do
         expect(users.users_search(user: 'aws')).to(
           eq('ok' => true, 'members' => [{ 'id' => 'UDEADBEEF', 'name' => 'aws', 'profile' => {} }])
