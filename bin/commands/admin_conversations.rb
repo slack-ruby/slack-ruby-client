@@ -43,8 +43,8 @@ module Slack
           end
         end
 
-        g.desc 'Exclude channels from Slack AI in bulk'
-        g.long_desc %( Exclude channels from Slack AI in bulk )
+        g.desc 'Exclude channels from Slack AI in bulk.'
+        g.long_desc %( Exclude channels from Slack AI in bulk. )
         g.command 'bulkSetExcludeFromSlackAi' do |c|
           c.flag 'channel_ids', desc: 'An array of channel IDs to exclude from Slack AI.'
           c.flag 'exclude', desc: 'Whether the channels should be excluded from Slack AI.'

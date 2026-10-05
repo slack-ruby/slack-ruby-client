@@ -58,7 +58,7 @@ module Slack
           end
 
           #
-          # Exclude channels from Slack AI in bulk
+          # Exclude channels from Slack AI in bulk.
           #
           # @option options [array] :channel_ids
           #   An array of channel IDs to exclude from Slack AI.

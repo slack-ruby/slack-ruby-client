@@ -21,6 +21,28 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsergroups do
       expect { client.admin_usergroups_addTeams(usergroup_id: %q[S12345678]) }.to raise_error ArgumentError, /Required arguments :team_ids missing/
     end
   end
+  context 'admin.usergroups_addUsers' do
+    it 'requires id' do
+      expect { client.admin_usergroups_addUsers(users: %q[U060R4BJ4,U060RNRCZ]) }.to raise_error ArgumentError, /Required arguments :id missing/
+    end
+    it 'requires users' do
+      expect { client.admin_usergroups_addUsers(id: %q[S0604QSJC]) }.to raise_error ArgumentError, /Required arguments :users missing/
+    end
+    it 'encodes users as json' do
+      expect(client).to receive(:post).with('admin.usergroups.addUsers', {id: %q[S0604QSJC], users: %q[{"data":["data"]}]})
+      client.admin_usergroups_addUsers(id: %q[S0604QSJC], users: {data: ["data"]})
+    end
+  end
+  context 'admin.usergroups_create' do
+    it 'requires name' do
+      expect { client.admin_usergroups_create }.to raise_error ArgumentError, /Required arguments :name missing/
+    end
+  end
+  context 'admin.usergroups_fetch' do
+    it 'requires id' do
+      expect { client.admin_usergroups_fetch }.to raise_error ArgumentError, /Required arguments :id missing/
+    end
+  end
   context 'admin.usergroups_listChannels' do
     it 'requires usergroup_id' do
       expect { client.admin_usergroups_listChannels }.to raise_error ArgumentError, /Required arguments :usergroup_id missing/
@@ -40,6 +62,28 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsergroups do
     end
     it 'requires team_ids' do
       expect { client.admin_usergroups_removeTeams(usergroup_id: %q[S12345678]) }.to raise_error ArgumentError, /Required arguments :team_ids missing/
+    end
+  end
+  context 'admin.usergroups_removeUsers' do
+    it 'requires id' do
+      expect { client.admin_usergroups_removeUsers(users: %q[U060R4BJ4,U060RNRCZ]) }.to raise_error ArgumentError, /Required arguments :id missing/
+    end
+    it 'requires users' do
+      expect { client.admin_usergroups_removeUsers(id: %q[S0604QSJC]) }.to raise_error ArgumentError, /Required arguments :users missing/
+    end
+    it 'encodes users as json' do
+      expect(client).to receive(:post).with('admin.usergroups.removeUsers', {id: %q[S0604QSJC], users: %q[{"data":["data"]}]})
+      client.admin_usergroups_removeUsers(id: %q[S0604QSJC], users: {data: ["data"]})
+    end
+  end
+  context 'admin.usergroups_update' do
+    it 'requires id' do
+      expect { client.admin_usergroups_update }.to raise_error ArgumentError, /Required arguments :id missing/
+    end
+  end
+  context 'admin.usergroups_uploadUsers' do
+    it 'requires id' do
+      expect { client.admin_usergroups_uploadUsers }.to raise_error ArgumentError, /Required arguments :id missing/
     end
   end
 end
