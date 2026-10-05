@@ -10,4 +10,3 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) first for setup, tests, lint, changelog,
 - Do not edit the API-reference submodule or include existing submodule changes unless requested.
 - The API update task pulls the latest reference and can generate unrelated changes. Verify the patch against both the latest and pinned reference; keep unrelated generated updates out of a focused PR. Custom endpoint specs are handwritten despite their location under `endpoints/`.
 - Do not suppress environment warnings in application code or tests. Report local validation limitations explicitly; CLI specs compare subprocess output and can fail when Bundler emits unrelated warnings.
-- Keep the test bundle on JSON below 3 until Faraday's JSON middleware supports JSON 3's keyword-only parse options.
