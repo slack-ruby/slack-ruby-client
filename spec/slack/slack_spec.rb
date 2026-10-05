@@ -21,10 +21,11 @@ describe Slack do
   end
 
   context 'without gli installed' do
-    let(:without_gli) { File.expand_path(File.join(__FILE__, '../../fixtures/without_gli.rb')) }
+    # --disable-gems (and no inherited bundler setup) leaves gli unloadable on every Ruby.
+    let(:env) { { 'RUBYOPT' => nil, 'RUBYLIB' => nil, 'BUNDLE_GEMFILE' => nil, 'BUNDLE_BIN_PATH' => nil } }
 
     it 'exits with instructions to install it' do
-      output, status = Open3.capture2e(RbConfig.ruby, '-r', without_gli, slack, 'help')
+      output, status = Open3.capture2e(env, RbConfig.ruby, '--disable-gems', slack, 'help')
       expect(status.exitstatus).to eq 1
       expect(output).to include "The slack command-line client requires the gli gem. Add `gem 'gli'` to your Gemfile"
     end
