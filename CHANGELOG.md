@@ -1,5 +1,6 @@
 ### 3.3.0 (Next)
 
+* [#607](https://github.com/slack-ruby/slack-ruby-client/pull/607): Support non-rewindable Rack 3 request bodies when verifying Events API signatures, with WEBrick integration coverage; follows [#515](https://github.com/slack-ruby/slack-ruby-client/pull/515) - [@olleolleolle](https://github.com/olleolleolle), [@dblock](https://github.com/dblock).
 * [#606](https://github.com/slack-ruby/slack-ruby-client/pull/606): Add configured client copies with error callbacks for Slack and transport failures - [@dblock](https://github.com/dblock).
 * [#605](https://github.com/slack-ruby/slack-ruby-client/pull/605): Add configured client copies with request and response callbacks, including pagination - [@dblock](https://github.com/dblock).
 * [#603](https://github.com/slack-ruby/slack-ruby-client/pull/603): Enforce consistent exception messages with rubocop-exception_messages and run lint separately from the test matrix - [@dblock](https://github.com/dblock).

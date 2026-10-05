@@ -16,6 +16,7 @@ group :test do
   gem 'json-schema'
   gem 'mutex_m'
   gem 'racc'
+  gem 'rackup', '~> 2.1'
   gem 'rake', '~> 13'
   gem 'rspec'
   # Lock below 1.1.0, which started writing float timestamps to
@@ -26,6 +27,7 @@ group :test do
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
+  gem 'webrick', '~> 1.8'
 end
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2')

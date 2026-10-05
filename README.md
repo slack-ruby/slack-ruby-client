@@ -461,6 +461,10 @@ Slack::Events::Request.new(
 
 The `verify!` call may raise `Slack::Events::Request::MissingSigningSecret`, `Slack::Events::Request::InvalidSignature` or `Slack::Events::Request::TimestampExpired` errors.
 
+Both rewindable request bodies and non-rewindable streams permitted by Rack 3 are supported. `Slack::Events::Request#body` caches the raw body. Rewindable inputs are rewound before and after reading, preserving access for other consumers. Non-rewindable inputs are consumed once; use `slack_request.body` for subsequent access to the raw body.
+
+Verify the signature before middleware or application code reads a non-rewindable input. Bytes already consumed from a one-shot stream cannot be recovered, and verification will fail. If multiple consumers need to read `rack.input`, install `Rack::RewindableInput::Middleware` (Rack 3) before any body-reading middleware to buffer the input.
+
 ### Message Handling
 
 All text in Slack uses the same [system of formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
