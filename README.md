@@ -301,6 +301,26 @@ You can also pass request options, including `timeout` and `open_timeout` into i
 client.conversations_list(request: { timeout: 180 })
 ```
 
+Use `with_request` and `with_response` to create a configured client copy with HTTP callbacks, without changing the original client or parsed-body return values:
+
+```ruby
+scopes = nil
+observed_client = client.with_request do |request|
+  request.headers['X-Custom'] = 'value'
+end.with_response do |response|
+  scopes = response.headers['x-oauth-scopes']&.split(',')&.map(&:strip)
+end
+
+result = observed_client.auth_test
+observed_client.users_list do |page|
+  puts page.members
+end
+```
+
+Request callbacks receive a `Faraday::Request` after authentication and request options are configured, before dispatch. They can change headers, body, and options. Response callbacks receive a `Faraday::Response` with the parsed body, headers, and status after successful completion; they do not run when Slack or transport errors are raised. Callbacks apply to each HTTP call, including pagination pages and requests made by helpers. Endpoint blocks retain their existing meaning.
+
+Chaining registers callbacks in order. Copies preserve client configuration but use independent connections and callback lists; the original client is unchanged. Callback exceptions propagate and request callback failures prevent dispatch. Callbacks are synchronous; avoid storing sensitive authorization headers, and synchronize any shared state if using a client concurrently.
+
 You can control what proxy options are used by modifying the `http_proxy` environment variable per [Net::HTTP's documentation](https://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html#class-Net::HTTP-label-Proxies).
 
 Note that Docker on OSX seems to incorrectly set the proxy, causing `Faraday::ConnectionFailed, ERROR -- : Failed to open TCP connection to : (getaddrinfo: Name or service not known)`. You might need to manually unset `http_proxy` in that case, eg. `http_proxy="" bundle exec ruby ./my_bot.rb`.
