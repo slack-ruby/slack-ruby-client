@@ -3,7 +3,15 @@ Upgrading Slack-Ruby-Client
 
 ### Upgrading to >= 3.3.0
 
+#### Command-Line Client Dependency
+
 [#602](https://github.com/slack-ruby/slack-ruby-client/pull/602) removes [gli](https://github.com/davetron5000/gli) from slack-ruby-client's runtime dependencies. Only the `slack` command-line client uses it. If you use the command-line client, add `gem 'gli'` to your Gemfile or run `gem install gli`. Without it, `slack` exits with a message saying so. The library itself is unaffected.
+
+#### Exception Messages
+
+[#603](https://github.com/slack-ruby/slack-ruby-client/pull/603) standardizes handwritten exception messages to start with lowercase letters and omit trailing periods. Some messages also quote argument names and values with backticks. For example, `TooManyRequestsError` now reports `retry after 3600 seconds` instead of `Retry after 3600 seconds`, and file-upload validation reports ``required argument :`filename` missing in file (`0`)`` instead of `Required argument :filename missing in file (0)`.
+
+Update tests, regular expressions, or application logic that match these messages exactly. Exception classes and rescue behavior are unchanged; upstream Slack error codes (such as `invalid_auth`) and dynamically supplied messages are preserved. Prefer matching exception classes and structured error attributes rather than human-readable message text.
 
 ### Upgrading to >= 3.2.0
 
