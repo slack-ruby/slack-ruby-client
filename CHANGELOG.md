@@ -1,3 +1,7 @@
+### 3.3.1 (Next)
+
+* Your contribution here.
+
 ### 3.3.0 (2026/10/09)
 
 * [#607](https://github.com/slack-ruby/slack-ruby-client/pull/607): Support non-rewindable Rack 3 request bodies when verifying Events API signatures, with WEBrick integration coverage; follows [#515](https://github.com/slack-ruby/slack-ruby-client/pull/515) - [@olleolleolle](https://github.com/olleolleolle), [@dblock](https://github.com/dblock).
