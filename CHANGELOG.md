@@ -1,4 +1,4 @@
-### 3.3.0 (Next)
+### 3.3.0 (2026/10/09)
 
 * [#607](https://github.com/slack-ruby/slack-ruby-client/pull/607): Support non-rewindable Rack 3 request bodies when verifying Events API signatures, with WEBrick integration coverage; follows [#515](https://github.com/slack-ruby/slack-ruby-client/pull/515) - [@olleolleolle](https://github.com/olleolleolle), [@dblock](https://github.com/dblock).
 * [#606](https://github.com/slack-ruby/slack-ruby-client/pull/606): Add configured client copies with error callbacks for Slack and transport failures - [@dblock](https://github.com/dblock).
@@ -31,8 +31,6 @@
 * [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add admin.usergroups.addUsers, admin.usergroups.removeUsers, admin.usergroups.create, admin.usergroups.fetch, admin.usergroups.update, and admin.usergroups.uploadUsers methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add canvases.getContent method to fetch canvas content as markdown or HTML - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add new Slack API error codes to Errors - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
-* Your contribution here.
-
 ### 3.2.0 (2026/07/05)
 
 * [#581](https://github.com/slack-ruby/slack-ruby-client/pull/581): Migrate Danger to use danger-pr-comment workflow - [@dblock](https://github.com/dblock).
