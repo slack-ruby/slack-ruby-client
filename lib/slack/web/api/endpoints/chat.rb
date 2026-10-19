@@ -12,7 +12,7 @@ module Slack
           # @option options [channel] :channel
           #   An encoded ID that represents a channel, private group, or DM.
           # @option options [array] :chunks
-          #   Array of streaming chunks.
+          #   Array of streaming chunks that can contain either markdown text or task updates.
           # @option options [timestamp] :ts
           #   The timestamp of the streaming message.
           # @option options [string] :markdown_text
