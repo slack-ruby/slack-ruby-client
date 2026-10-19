@@ -1,5 +1,7 @@
 ### 3.3.1 (Next)
 
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose agents.conversations endpoints in the Web API client - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add error classes for additional agent, canvas, channel, invitation, validation, and resource-limit error codes - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.3.0 (2026/10/09)

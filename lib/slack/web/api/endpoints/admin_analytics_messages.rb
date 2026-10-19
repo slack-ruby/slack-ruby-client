@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AdminAnalyticsMessages
           #
-          # Retrieves activity metrics for messages from a given channel.
+          # Retrieves activity metrics for messages from a given channel, created between oldest_ts and latest_ts
           #
           # @option options [channel] :channel
           #   Channel ID for channel of the message activity to query.
