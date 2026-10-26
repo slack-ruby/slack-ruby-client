@@ -37,6 +37,7 @@ require_relative 'endpoints/admin_workflows'
 require_relative 'endpoints/admin_workflows_collaborators'
 require_relative 'endpoints/admin_workflows_permissions'
 require_relative 'endpoints/admin_workflows_triggers_types_permissions'
+require_relative 'endpoints/agents_conversations'
 require_relative 'endpoints/agents_sessions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
@@ -153,6 +154,7 @@ module Slack
         include AdminWorkflowsCollaborators
         include AdminWorkflowsPermissions
         include AdminWorkflowsTriggersTypesPermissions
+        include AgentsConversations
         include AgentsSessions
         include Api
         include Apps
