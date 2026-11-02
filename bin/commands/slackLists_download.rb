@@ -14,6 +14,7 @@ module Slack
           c.flag 'format', desc: 'Format the export was started with. Must match the format passed to slackLists.download.start. Defaults to csv.'
           c.flag 'include_threads', desc: 'Must match the include_threads passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.'
           c.flag 'include_attachments', desc: 'Must match the include_attachments passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.'
+          c.flag 'include_archived', desc: 'Must match the include_archived passed to slackLists.download.start. The returned download_url carries this through so the served export includes archived items when they were requested.'
           c.action do |_global_options, options, _args|
             puts JSON.dump(@client.slackLists_download_get(options))
           end

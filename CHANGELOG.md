@@ -1,5 +1,12 @@
 ### 3.3.1 (Next)
 
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add admin.users.deactivate with required user_id validation and a CLI command - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose admin.slackbot.skills, slackbot.skills, and slackbot.skills.library endpoint groups - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose the admin.users.access endpoint group - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose the agents.conversations endpoint group - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add include_archived to slackLists.download.get - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add include_slackbot_availability to team.info - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add API error classes including AgentRequired, AlreadyASkill, and AudienceTooLarge - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.3.0 (2026/10/09)
