@@ -64,7 +64,7 @@ module Slack
           # @option options [array] :user_ids
           #   List of user IDs to allow for named_entities visibility.
           # @option options [array] :usergroup_ids
-          #   List of encoded usergroup IDs.
+          #   List of encoded usergroup IDs the permission applies to. With named_entities the listed groups may access the app; with named_entities_exclude they may not.
           # @option options [enum] :channel_restriction_mode
           #   The mode that defines where the app can be used in channels.
           # @option options [array] :channel_ids
