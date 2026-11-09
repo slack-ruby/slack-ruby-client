@@ -164,6 +164,16 @@ module Slack
           end
         end
 
+        g.desc 'Remove multiple users from a conversation. Admin version of conversations.kick with support for bulk user removal.'
+        g.long_desc %( Remove multiple users from a conversation. Admin version of conversations.kick with support for bulk user removal. )
+        g.command 'kick' do |c|
+          c.flag 'channel_id', desc: 'ID of conversation to remove users from.'
+          c.flag 'user_ids', desc: 'The users to remove from the channel.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_conversations_kick(options))
+          end
+        end
+
         g.desc 'Link a Salesforce record to a channel'
         g.long_desc %( Link a Salesforce record to a channel )
         g.command 'linkObjects' do |c|
@@ -212,7 +222,7 @@ module Slack
         g.command 'search' do |c|
           c.flag 'team_ids', desc: 'Comma separated string of team IDs, signifying the internal workspaces to search through.'
           c.flag 'connected_team_ids', desc: 'Array of encoded team IDs, signifying the external orgs to search through.'
-          c.flag 'query', desc: 'Name of the the channel to query by.'
+          c.flag 'query', desc: 'Name of the channel to query by.'
           c.flag 'limit', desc: 'Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.'
           c.flag 'cursor', desc: 'Set cursor to next_cursor returned by the previous call to list items in the next page.'
           c.flag 'search_channel_types', desc: 'The type of channel to include or exclude in the search. For example private will search private channels, while private_exclude will exclude them. For a full list of types, check the Types section.'

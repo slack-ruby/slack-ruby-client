@@ -53,7 +53,7 @@ module Slack
         g.long_desc %( Get records from a List. )
         g.command 'list' do |c|
           c.flag 'list_id', desc: 'ID of the List.'
-          c.flag 'limit', desc: 'The maximum number of records to return.'
+          c.flag 'limit', desc: 'The maximum number of records to return, up to the list row limit of 5000.'
           c.flag 'cursor', desc: 'Next cursor for pagination.'
           c.flag 'archived', desc: 'Boolean indicating whether archived items or normal items should be returned.'
           c.flag 'include_list', desc: 'Set to true to also return the parent list object, including its title, column schema, and total row count. Defaults to false to keep the response small.'

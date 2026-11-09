@@ -1,5 +1,11 @@
 ### 3.3.1 (Next)
 
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add admin.conversations.kick with required channel_id and user_ids arguments for bulk user removal - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add admin.users.deactivate with a required user_id argument - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose admin.slackbot.skills, admin.users.access, agents.conversations, slackbot.skills, and slackbot.skills.library endpoint groups - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_archived argument to slackLists.download.get - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_slackbot_availability argument to team.info - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add mappings for additional Slack API error codes - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.3.0 (2026/10/09)
