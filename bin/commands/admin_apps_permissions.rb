@@ -45,7 +45,7 @@ module Slack
           c.flag 'app_id', desc: 'Encoded ID of the app.'
           c.flag 'permission_type', desc: 'The type of permission that defines who can access the app.'
           c.flag 'user_ids', desc: 'List of user IDs to allow for named_entities visibility.'
-          c.flag 'usergroup_ids', desc: 'List of encoded usergroup IDs.'
+          c.flag 'usergroup_ids', desc: 'List of encoded usergroup IDs the permission applies to. With named_entities the listed groups may access the app; with named_entities_exclude they may not.'
           c.flag 'channel_restriction_mode', desc: 'The mode that defines where the app can be used in channels.'
           c.flag 'channel_ids', desc: 'List of encoded channel IDs for channel restrictions. Semantics depend on channel_restriction_mode: allowlist for specific_channels, exclusion list for all_channels_except.'
           c.action do |_global_options, options, _args|

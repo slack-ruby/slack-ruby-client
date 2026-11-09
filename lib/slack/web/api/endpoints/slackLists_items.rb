@@ -77,7 +77,7 @@ module Slack
           # @option options [string] :list_id
           #   ID of the List.
           # @option options [integer] :limit
-          #   The maximum number of records to return.
+          #   The maximum number of records to return, up to the list row limit of 5000.
           # @option options [string] :cursor
           #   Next cursor for pagination.
           # @option options [boolean] :archived

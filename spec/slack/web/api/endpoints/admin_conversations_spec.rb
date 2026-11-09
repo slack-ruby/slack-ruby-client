@@ -103,6 +103,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminConversations do
       expect { client.admin_conversations_invite(user_ids: %q[U1234,U2345,U3456]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
     end
   end
+  context 'admin.conversations_kick' do
+    it 'requires channel_id' do
+      expect { client.admin_conversations_kick(user_ids: %q[]) }.to raise_error ArgumentError, /Required arguments :channel_id missing/
+    end
+    it 'requires user_ids' do
+      expect { client.admin_conversations_kick(channel_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user_ids missing/
+    end
+  end
   context 'admin.conversations_linkObjects' do
     it 'requires channel' do
       expect { client.admin_conversations_linkObjects(record_id: %q[0019000000DmehKAAR], salesforce_org_id: %q[00DGC00000024hsuWY]) }.to raise_error ArgumentError, /Required arguments :channel missing/
