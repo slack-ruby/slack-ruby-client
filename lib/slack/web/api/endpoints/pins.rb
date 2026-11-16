@@ -10,7 +10,7 @@ module Slack
           # Pins an item to a channel.
           #
           # @option options [channel] :channel
-          #   Channel to pin the messsage to. You must also include a timestamp when pinning messages.
+          #   Channel to pin the message to. You must also include a timestamp when pinning messages.
           # @option options [string] :timestamp
           #   Timestamp of the message to pin. You must also include the channel.
           # @see https://api.slack.com/methods/pins.add

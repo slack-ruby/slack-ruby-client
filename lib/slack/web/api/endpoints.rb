@@ -3,6 +3,7 @@
 
 require_relative 'endpoints/admin_analytics'
 require_relative 'endpoints/admin_analytics_messages'
+require_relative 'endpoints/admin_analytics_slackbot'
 require_relative 'endpoints/admin_apps'
 require_relative 'endpoints/admin_apps_activities'
 require_relative 'endpoints/admin_apps_approved'
@@ -25,18 +26,21 @@ require_relative 'endpoints/admin_inviteRequests'
 require_relative 'endpoints/admin_inviteRequests_approved'
 require_relative 'endpoints/admin_inviteRequests_denied'
 require_relative 'endpoints/admin_roles'
+require_relative 'endpoints/admin_slackbot_skills'
 require_relative 'endpoints/admin_teams'
 require_relative 'endpoints/admin_teams_admins'
 require_relative 'endpoints/admin_teams_owners'
 require_relative 'endpoints/admin_teams_settings'
 require_relative 'endpoints/admin_usergroups'
 require_relative 'endpoints/admin_users'
+require_relative 'endpoints/admin_users_access'
 require_relative 'endpoints/admin_users_session'
 require_relative 'endpoints/admin_users_unsupportedVersions'
 require_relative 'endpoints/admin_workflows'
 require_relative 'endpoints/admin_workflows_collaborators'
 require_relative 'endpoints/admin_workflows_permissions'
 require_relative 'endpoints/admin_workflows_triggers_types_permissions'
+require_relative 'endpoints/agents_conversations'
 require_relative 'endpoints/agents_sessions'
 require_relative 'endpoints/api'
 require_relative 'endpoints/apps'
@@ -92,6 +96,8 @@ require_relative 'endpoints/slackLists'
 require_relative 'endpoints/slackLists_access'
 require_relative 'endpoints/slackLists_download'
 require_relative 'endpoints/slackLists_items'
+require_relative 'endpoints/slackbot_skills'
+require_relative 'endpoints/slackbot_skills_library'
 require_relative 'endpoints/stars'
 require_relative 'endpoints/team'
 require_relative 'endpoints/team_billing'
@@ -119,6 +125,7 @@ module Slack
 
         include AdminAnalytics
         include AdminAnalyticsMessages
+        include AdminAnalyticsSlackbot
         include AdminApps
         include AdminAppsActivities
         include AdminAppsApproved
@@ -141,18 +148,21 @@ module Slack
         include AdminInviterequestsApproved
         include AdminInviterequestsDenied
         include AdminRoles
+        include AdminSlackbotSkills
         include AdminTeams
         include AdminTeamsAdmins
         include AdminTeamsOwners
         include AdminTeamsSettings
         include AdminUsergroups
         include AdminUsers
+        include AdminUsersAccess
         include AdminUsersSession
         include AdminUsersUnsupportedversions
         include AdminWorkflows
         include AdminWorkflowsCollaborators
         include AdminWorkflowsPermissions
         include AdminWorkflowsTriggersTypesPermissions
+        include AgentsConversations
         include AgentsSessions
         include Api
         include Apps
@@ -208,6 +218,8 @@ module Slack
         include SlackListsAccess
         include SlackListsDownload
         include SlackListsItems
+        include SlackbotSkills
+        include SlackbotSkillsLibrary
         include Stars
         include Team
         include TeamBilling

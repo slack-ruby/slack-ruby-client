@@ -19,6 +19,15 @@ module Slack
           end
         end
 
+        g.desc 'Deactivate a user from an enterprise organization and all its workspaces.'
+        g.long_desc %( Deactivate a user from an enterprise organization and all its workspaces. )
+        g.command 'deactivate' do |c|
+          c.flag 'user_id', desc: 'The ID of the user to deactivate.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_users_deactivate(options))
+          end
+        end
+
         g.desc 'Fetches the expiration timestamp for a guest'
         g.long_desc %( Fetches the expiration timestamp for a guest )
         g.command 'getExpiration' do |c|
