@@ -10,7 +10,7 @@ module Slack
         g.long_desc %( Appends text to an existing streaming conversation. )
         g.command 'appendStream' do |c|
           c.flag 'channel', desc: 'An encoded ID that represents a channel, private group, or DM.'
-          c.flag 'chunks', desc: 'Array of streaming chunks.'
+          c.flag 'chunks', desc: 'Array of streaming chunks that can contain either markdown text or task updates.'
           c.flag 'ts', desc: 'The timestamp of the streaming message.'
           c.flag 'markdown_text', desc: 'Accepts message text formatted in markdown. Limit this field to 12,000 characters. This text is what will be appended to the message received so far.'
           c.action do |_global_options, options, _args|

@@ -23,14 +23,14 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsergroups do
   end
   context 'admin.usergroups_addUsers' do
     it 'requires id' do
-      expect { client.admin_usergroups_addUsers(users: %q[U060R4BJ4,U060RNRCZ]) }.to raise_error ArgumentError, /Required arguments :id missing/
+      expect { client.admin_usergroups_addUsers(users: %q[U1111AAA111,U222BBB222]) }.to raise_error ArgumentError, /Required arguments :id missing/
     end
     it 'requires users' do
-      expect { client.admin_usergroups_addUsers(id: %q[S0604QSJC]) }.to raise_error ArgumentError, /Required arguments :users missing/
+      expect { client.admin_usergroups_addUsers(id: %q[S0123ABC456]) }.to raise_error ArgumentError, /Required arguments :users missing/
     end
     it 'encodes users as json' do
-      expect(client).to receive(:post).with('admin.usergroups.addUsers', {id: %q[S0604QSJC], users: %q[{"data":["data"]}]})
-      client.admin_usergroups_addUsers(id: %q[S0604QSJC], users: {data: ["data"]})
+      expect(client).to receive(:post).with('admin.usergroups.addUsers', {id: %q[S0123ABC456], users: %q[{"data":["data"]}]})
+      client.admin_usergroups_addUsers(id: %q[S0123ABC456], users: {data: ["data"]})
     end
   end
   context 'admin.usergroups_create' do

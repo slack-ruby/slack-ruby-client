@@ -1,5 +1,12 @@
 ### 3.3.1 (Next)
 
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add admin.conversations.kick for bulk user removal and admin.users.deactivate for enterprise-wide deactivation - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose admin.analytics.slackbot, admin.slackbot.skills, slackbot.skills, and slackbot.skills.library endpoint groups - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose the admin.users.access endpoint group - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose the agents.conversations endpoint group - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_archived argument to slackLists.download.get - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_slackbot_availability argument to team.info - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Remove require_sc_channel_for_sc_dm from the documented slack_connect_pref_filter values for team.externalTeams.list - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * Your contribution here.
 
 ### 3.3.0 (2026/10/09)

@@ -6,8 +6,8 @@ module Slack
     class App
       desc 'AdminAnalyticsMessages methods.'
       command 'admin_analytics_messages' do |g|
-        g.desc 'Retrieves activity metrics for messages from a given channel.'
-        g.long_desc %( Retrieves activity metrics for messages from a given channel. )
+        g.desc 'Retrieves activity metrics for messages from a given channel, created between oldest_ts and latest_ts'
+        g.long_desc %( Retrieves activity metrics for messages from a given channel, created between oldest_ts and latest_ts )
         g.command 'activity' do |c|
           c.flag 'channel', desc: 'Channel ID for channel of the message activity to query.'
           c.flag 'oldest_ts', desc: 'Oldest timestamp to include in the results. Defaults to 7 days before current time. If not passed while still passing the latest_ts parameter, defaults to 7 days before latest_ts.'
