@@ -19,6 +19,15 @@ module Slack
           end
         end
 
+        g.desc 'Deactivate a user from an enterprise organization and all its workspaces.'
+        g.long_desc %( Deactivate a user from an enterprise organization and all its workspaces. )
+        g.command 'deactivate' do |c|
+          c.flag 'user_id', desc: 'The ID of the user to deactivate.'
+          c.action do |_global_options, options, _args|
+            puts JSON.dump(@client.admin_users_deactivate(options))
+          end
+        end
+
         g.desc 'Fetches the expiration timestamp for a guest'
         g.long_desc %( Fetches the expiration timestamp for a guest )
         g.command 'getExpiration' do |c|
@@ -104,8 +113,8 @@ module Slack
           end
         end
 
-        g.desc 'Set an existing guest user, admin user, or owner to be a regular user.'
-        g.long_desc %( Set an existing guest user, admin user, or owner to be a regular user. )
+        g.desc 'Set an existing guest user, admin user, or owner to be a regular user. When team_id is an organization, the user is also set to a regular user on every workspace where they are a workspace owner, including workspaces where they were an owner before becoming an org admin or owner.'
+        g.long_desc %( Set an existing guest user, admin user, or owner to be a regular user. When team_id is an organization, the user is also set to a regular user on every workspace where they are a workspace owner, including workspaces where they were an owner before becoming an org admin or owner. )
         g.command 'setRegular' do |c|
           c.flag 'team_id', desc: 'The ID of the workspace or organization.'
           c.flag 'user_id', desc: 'The ID of the user to designate as a regular user.'

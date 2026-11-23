@@ -22,7 +22,7 @@ module Slack
           c.flag 'cursor', desc: "Paginate through collections of data by setting parameter to the team_id attribute returned by a previous request's response_metadata. If not provided, the first page of the collection is returned. See pagination for more detail."
           c.flag 'sort_field', desc: 'Name of the parameter that we are sorting by.'
           c.flag 'sort_direction', desc: 'Direction to sort in asc or desc.'
-          c.flag 'slack_connect_pref_filter', desc: 'Filters connected orgs by Slack Connect pref override(s). Value can be: approved_orgs_only allow_sc_file_uploads profile_visibility away_team_sc_invite_permissions accept_sc_invites sc_mpdm_to_private require_sc_channel_for_sc_dm external_awareness_context_bar.'
+          c.flag 'slack_connect_pref_filter', desc: 'Filters connected orgs by Slack Connect pref override(s). Value can be: approved_orgs_only allow_sc_file_uploads profile_visibility away_team_sc_invite_permissions accept_sc_invites sc_mpdm_to_private external_awareness_context_bar.'
           c.flag 'workspace_filter', desc: 'Shows connected orgs which are connected on a specified encoded workspace ID.'
           c.flag 'connection_status_filter', desc: 'Status of the connected team.'
           c.action do |_global_options, options, _args|

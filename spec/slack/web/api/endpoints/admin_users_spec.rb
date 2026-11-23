@@ -13,6 +13,11 @@ RSpec.describe Slack::Web::Api::Endpoints::AdminUsers do
       expect { client.admin_users_assign(team_id: %q[]) }.to raise_error ArgumentError, /Required arguments :user_id missing/
     end
   end
+  context 'admin.users_deactivate' do
+    it 'requires user_id' do
+      expect { client.admin_users_deactivate }.to raise_error ArgumentError, /Required arguments :user_id missing/
+    end
+  end
   context 'admin.users_getExpiration' do
     it 'requires user_id' do
       expect { client.admin_users_getExpiration }.to raise_error ArgumentError, /Required arguments :user_id missing/

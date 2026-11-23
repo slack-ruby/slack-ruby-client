@@ -28,6 +28,18 @@ module Slack
           end
 
           #
+          # Deactivate a user from an enterprise organization and all its workspaces.
+          #
+          # @option options [string] :user_id
+          #   The ID of the user to deactivate.
+          # @see https://api.slack.com/methods/admin.users.deactivate
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.users/admin.users.deactivate.json
+          def admin_users_deactivate(options = {})
+            raise ArgumentError, 'Required arguments :user_id missing' if options[:user_id].nil?
+            post('admin.users.deactivate', options)
+          end
+
+          #
           # Fetches the expiration timestamp for a guest
           #
           # @option options [Object] :user_id
@@ -167,7 +179,7 @@ module Slack
           end
 
           #
-          # Set an existing guest user, admin user, or owner to be a regular user.
+          # Set an existing guest user, admin user, or owner to be a regular user. When team_id is an organization, the user is also set to a regular user on every workspace where they are a workspace owner, including workspaces where they were an owner before becoming an org admin or owner.
           #
           # @option options [Object] :team_id
           #   The ID of the workspace or organization.

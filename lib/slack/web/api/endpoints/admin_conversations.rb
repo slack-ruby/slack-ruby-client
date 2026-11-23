@@ -239,6 +239,21 @@ module Slack
           end
 
           #
+          # Remove multiple users from a conversation. Admin version of conversations.kick with support for bulk user removal.
+          #
+          # @option options [Object] :channel_id
+          #   ID of conversation to remove users from.
+          # @option options [array] :user_ids
+          #   The users to remove from the channel.
+          # @see https://api.slack.com/methods/admin.conversations.kick
+          # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/admin.conversations/admin.conversations.kick.json
+          def admin_conversations_kick(options = {})
+            raise ArgumentError, 'Required arguments :channel_id missing' if options[:channel_id].nil?
+            raise ArgumentError, 'Required arguments :user_ids missing' if options[:user_ids].nil?
+            post('admin.conversations.kick', options)
+          end
+
+          #
           # Link a Salesforce record to a channel
           #
           # @option options [channel] :channel
@@ -318,7 +333,7 @@ module Slack
           # @option options [array] :connected_team_ids
           #   Array of encoded team IDs, signifying the external orgs to search through.
           # @option options [string] :query
-          #   Name of the the channel to query by.
+          #   Name of the channel to query by.
           # @option options [integer] :limit
           #   Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.
           # @option options [string] :cursor
