@@ -60,6 +60,8 @@ module Slack
           #   Query by domain instead of team (only when team is null). This only works for domains in the same enterprise as the querying team token. This also expects the domain to belong to a team and not the enterprise itself. This is the value set up for the 'Joining This Workspace' workspace setting. If it contains more than one domain, the field will contain multiple comma-separated domain values. If no domain is set, the field is empty.
           # @option options [string] :team
           #   Team to get info about; if omitted, will return information about the current team.
+          # @option options [boolean] :include_slackbot_availability
+          #   Include advisory Slackbot availability for the returned workspace or organization. Only applies to a single team in the caller's own workspace or organization; omitted for external teams. Does not guarantee individual eligibility, remaining usage, or access to a particular app.
           # @see https://api.slack.com/methods/team.info
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/team/team.info.json
           def team_info(options = {})

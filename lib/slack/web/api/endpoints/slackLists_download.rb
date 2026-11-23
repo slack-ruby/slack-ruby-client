@@ -19,6 +19,8 @@ module Slack
           #   Must match the include_threads passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.
           # @option options [boolean] :include_attachments
           #   Must match the include_attachments passed to slackLists.download.start. The returned download_url carries this through so the served export matches what was generated. Only applies when format is json.
+          # @option options [boolean] :include_archived
+          #   Must match the include_archived passed to slackLists.download.start. The returned download_url carries this through so the served export includes archived items when they were requested.
           # @see https://api.slack.com/methods/slackLists.download.get
           # @see https://github.com/slack-ruby/slack-api-ref/blob/master/methods/slackLists.download/slackLists.download.get.json
           def slackLists_download_get(options = {})

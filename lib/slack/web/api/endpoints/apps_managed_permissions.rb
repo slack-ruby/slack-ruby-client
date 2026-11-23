@@ -7,7 +7,7 @@ module Slack
       module Endpoints
         module AppsManagedPermissions
           #
-          # Set who can interact with a managed app. Lets the builder who created a managed app on a partner platform configure the app's permissions as themselves, using a user token from the manager app. Permissions can only be set before the app is installed: if the app is already installed, this method makes no change and returns the app's current permissions.
+          # Set who can interact with a managed app. Lets the builder who created a managed app on a partner platform configure the app's permissions, using a user token or bot token from the manager app. Permissions can only be set before the app is installed: if the app is already installed, this method makes no change and returns the app's current permissions.
           #
           # @option options [Object] :app_id
           #   Encoded ID of the managed app to configure.
