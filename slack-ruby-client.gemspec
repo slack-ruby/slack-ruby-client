@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-$LOAD_PATH.push File.expand_path('lib', __dir__)
-require 'slack/version'
+require_relative 'lib/slack/version'
 
 Gem::Specification.new do |s|
   s.name = 'slack-ruby-client'
