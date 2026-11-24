@@ -1,4 +1,4 @@
-# Contributor guidance
+# Contributor Guidance
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) first for setup, tests, lint, changelog, pull request, and API patch instructions. Keep those instructions there rather than duplicating them here.
 

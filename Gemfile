@@ -32,10 +32,14 @@ end
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2')
   group :lint do
-    gem 'rubocop', '~> 1.72'
+    gem 'rubocop', '~> 1.92'
     gem 'rubocop-exception_messages', '~> 0.2.0', require: false
-    gem 'rubocop-performance', '~> 1.27'
-    gem 'rubocop-rake', '~> 0.7'
-    gem 'rubocop-rspec', '~> 3.10'
+    gem 'rubocop-md', '~> 3.0', require: false
+    gem 'rubocop-performance', '~> 1.27', require: false
+    gem 'rubocop-prose', '~> 0.2', require: false
+    gem 'rubocop-rake', '~> 0.7', require: false
+    gem 'rubocop-rspec', '~> 3.10', require: false
+    gem 'rubocop-spellcheck', '~> 0.2', require: false
+    gem 'rubocop-yaml', '~> 0.1.0', require: false
   end
 end

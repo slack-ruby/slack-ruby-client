@@ -19,6 +19,9 @@ task :rubocop do
   sh 'bundle exec rubocop'
 end
 
+desc 'Lint Ruby, Markdown, YAML, and spelling (Ruby 3.2+).'
+task lint: :rubocop
+
 task default: :spec
 
 load 'tasks/git.rake'
