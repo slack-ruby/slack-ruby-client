@@ -173,4 +173,60 @@ describe Slack::Messages::Formatting do
       expect(formatting.markdown('## A heading\n_Italics_\n`code`')).to eq '## A heading\n_Italics_\n`code`'
     end
   end
+
+  context 'fast paths' do
+    # The implementations before fast paths skipped passes whose trigger characters are absent.
+    let(:reference) do
+      Module.new do
+        def self.unescape(message)
+          CGI.unescapeHTML(message.gsub(/[“”]/, '"').gsub(/[‘’]/, "'").gsub(/<(?<sign>[?@#!]?)(?<dt>.*?)>/) do
+            sign = Regexp.last_match[:sign]
+            rhs = Regexp.last_match[:dt].split('|', 2).last
+            case sign
+            when '@', '!' then "@#{rhs}"
+            when '#' then "##{rhs}"
+            else rhs
+            end
+          end)
+        end
+
+        def self.markdown(text)
+          text
+            .gsub(/(?<!\*)\*([^*\n]+)\*(?!\*)/, '_\1_')
+            .gsub(/\*\*\*(.*?)\*\*\*/, '*_\1_*')
+            .gsub(/\*\*(.*?)\*\*/, '*\1*')
+            .gsub(/~~(.*?)~~/, '~\1~')
+            .gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>')
+        end
+      end
+    end
+
+    let(:samples) do
+      tokens = ['a', ' ', "\n", '*', '**', '~', '~~', '[', ']', '(', ')', '](', '<', '>', '|', '@', '#', '!', '?',
+                '&', '&amp;', '&lt;', '&gt;', '&#39;', '“', '”', '‘', '’', 'U123', 'http://x.com']
+      random = Random.new(42)
+      Array.new(2_000) { Array.new(random.rand(0..12)) { tokens.sample(random: random) }.join }
+    end
+
+    it 'unescapes like the reference implementation' do
+      samples.each do |sample|
+        expect(formatting.unescape(sample)).to eq(reference.unescape(sample)), sample.inspect
+      end
+    end
+
+    it 'converts markdown like the reference implementation' do
+      samples.each do |sample|
+        expect(formatting.markdown(sample)).to eq(reference.markdown(sample)), sample.inspect
+      end
+    end
+
+    it 'returns new, unfrozen strings without changing frozen inputs' do
+      ['plain text', '“quoted”', '<@U1|bob>', '&amp;', '*italic*', 'no markup'].map(&:freeze).each do |input|
+        [formatting.unescape(input), formatting.markdown(input)].each do |result|
+          expect(result).not_to be_frozen
+          expect(result).not_to equal(input)
+        end
+      end
+    end
+  end
 end

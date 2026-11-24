@@ -9,9 +9,10 @@ module Slack
           def id_for(key:, name:, prefix:, enum_method:, list_method:, options: {})
             return { 'ok' => true, key.to_s => { 'id' => name } } unless name[0] == prefix
 
+            target = name[1..]
             public_send(enum_method, **options) do |list|
               list.public_send(list_method).each do |li|
-                return Slack::Messages::Message.new('ok' => true, key.to_s => { 'id' => li.id }) if li.name == name[1..-1]
+                return Slack::Messages::Message.new('ok' => true, key.to_s => { 'id' => li.id }) if li.name == target
               end
             end
 
