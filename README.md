@@ -67,7 +67,7 @@ A Ruby client for the Slack [Web](https://docs.slack.dev/apis/web-api/) and [Eve
 
 ## Stable Release
 
-You're reading the documentation for the **stable** release of slack-ruby-client, 3.4.0. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **next** release of slack-ruby-client. Please see the documentation for the [last stable release, v3.4.0](https://github.com/slack-ruby/slack-ruby-client/blob/v3.4.0/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ## Installation
 

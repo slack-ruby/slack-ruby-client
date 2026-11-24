@@ -1,3 +1,7 @@
+### 3.4.1 (Next)
+
+* Your contribution here.
+
 ### 3.4.0 (2026/11/24)
 
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add admin.conversations.kick with required channel_id and user_ids arguments and admin.users.deactivate with a required user_id argument - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
