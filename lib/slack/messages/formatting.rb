@@ -8,21 +8,11 @@ module Slack
         # @see https://api.slack.com/docs/formatting
         #
         def unescape(message)
-          CGI.unescapeHTML(message.gsub(/[“”]/, '"')
-            .gsub(/[‘’]/, "'")
-            .gsub(/<(?<sign>[?@#!]?)(?<dt>.*?)>/) do
-              sign = Regexp.last_match[:sign]
-              dt = Regexp.last_match[:dt]
-              rhs = dt.split('|', 2).last
-              case sign
-              when '@', '!'
-                "@#{rhs}"
-              when '#'
-                "##{rhs}"
-              else
-                rhs
-              end
-            end)
+          message = message.tr('“”‘’', %(""''))
+          if message.include?('<')
+            message = message.gsub(/<(?<sign>[?@#!]?)(?<dt>.*?)>/) { unescape_reference(Regexp.last_match) }
+          end
+          message.include?('&') ? CGI.unescapeHTML(message) : message
         end
 
         #
@@ -82,12 +72,31 @@ module Slack
         # @see https://api.slack.com/reference/surfaces/formatting#basic-formatting
         #
         def markdown(text)
+          return text.dup unless text.include?('*') || text.include?('~~') || text.include?('](')
+
+          if text.include?('*')
+            text = text
+                   .gsub(/(?<!\*)\*([^*\n]+)\*(?!\*)/, '_\1_') # italic
+                   .gsub(/\*\*\*(.*?)\*\*\*/, '*_\1_*') # bold & italic
+                   .gsub(/\*\*(.*?)\*\*/, '*\1*') # bold
+          end
+          text = text.gsub(/~~(.*?)~~/, '~\1~') if text.include?('~~') # strikethrough
+          text = text.gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>') if text.include?('](') # links
           text
-            .gsub(/(?<!\*)\*([^*\n]+)\*(?!\*)/, '_\1_') # italic
-            .gsub(/\*\*\*(.*?)\*\*\*/, '*_\1_*') # bold & italic
-            .gsub(/\*\*(.*?)\*\*/, '*\1*') # bold
-            .gsub(/~~(.*?)~~/, '~\1~') # strikethrough
-            .gsub(/\[(.*?)\]\((.*?)\)/, '<\2|\1>') # links
+        end
+
+        private
+
+        def unescape_reference(match)
+          rhs = match[:dt].split('|', 2).last
+          case match[:sign]
+          when '@', '!'
+            "@#{rhs}"
+          when '#'
+            "##{rhs}"
+          else
+            rhs
+          end
         end
       end
     end
