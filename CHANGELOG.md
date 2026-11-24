@@ -1,4 +1,4 @@
-### 3.3.1 (Next)
+### 3.4.0 (2026/11/24)
 
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add admin.conversations.kick with required channel_id and user_ids arguments and admin.users.deactivate with a required user_id argument - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Expose admin.analytics.members and admin.analytics.slackbot endpoint groups - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
@@ -13,7 +13,6 @@
 * [#617](https://github.com/slack-ruby/slack-ruby-client/pull/617): Release with ruby-gem-release through a manually dispatched GitHub Actions workflow and RubyGems Trusted Publishing - [@dblock](https://github.com/dblock).
 * [#618](https://github.com/slack-ruby/slack-ruby-client/pull/618): Add benchmarks for message formatting, Events API signature verification, and Web client requests - [@dblock](https://github.com/dblock).
 * [#619](https://github.com/slack-ruby/slack-ruby-client/pull/619): Speed up `Slack::Messages::Formatting.unescape` and `markdown` by skipping passes that cannot match, and avoid per-entry allocations when looking up channel and user IDs by name - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 3.3.0 (2026/10/09)
 
