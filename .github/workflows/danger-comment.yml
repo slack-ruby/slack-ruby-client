@@ -5,7 +5,16 @@ on:
     workflows: [Danger]
     types: [completed]
 
+permissions:
+  actions: read
+  issues: write
+  pull-requests: write
+
 jobs:
   comment:
-    uses: numbata/danger-pr-comment/.github/workflows/danger-comment.yml@v0.1.0
-    secrets: inherit
+    name: Post Review Comment
+    # danger/danger-pr-comment v0.3.0
+    uses: danger/danger-pr-comment/.github/workflows/danger-comment.yml@645e89bcc7be89ee7e8362166110b05cbced8e59
+    with:
+      base-branch: '*'
+      comment-empty: false

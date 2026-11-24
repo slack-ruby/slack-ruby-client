@@ -8,6 +8,7 @@
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_archived argument to slackLists.download.get - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_slackbot_availability argument to team.info - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Remove require_sc_channel_for_sc_dm from the documented team.externalTeams.list slack_connect_pref_filter values - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+* [#614](https://github.com/slack-ruby/slack-ruby-client/pull/614): Upgrade to danger/danger-pr-comment 0.3.0, pinned by commit, skip empty Danger comments, allow stacked pull request targets, and cancel superseded Danger runs - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 3.3.0 (2026/10/09)
