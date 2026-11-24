@@ -8,3 +8,4 @@ Gemfile.lock
 Gemfile.danger.lock
 pkg
 coverage
+/vendor/bundle

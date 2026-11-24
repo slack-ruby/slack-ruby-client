@@ -155,6 +155,7 @@ pre
 presentComments
 PRs
 prs
+Rakefile
 rb
 README
 RealTime
@@ -175,6 +176,7 @@ RuboCop
 Rubocop
 rubocop
 rubybot
+RubyGems
 RUBYLIB
 RUBYOPT
 rwstauner
@@ -188,6 +190,7 @@ simplecov
 slackbot
 SlackError
 slackLists
+SlackRubyClientRelease
 sonicdoe
 SSL
 ssl
