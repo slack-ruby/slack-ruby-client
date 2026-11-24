@@ -70,6 +70,16 @@ Fix any style issues highlighted, auto-correcting safe issues with `bundle exec 
 
 The default `bundle exec rake` runs tests only. CI runs lint separately on Ruby 4.0.
 
+### Run Benchmarks
+
+Benchmarks in [benchmarks](benchmarks) measure iterations per second and allocations with [benchmark-ips](https://github.com/evanphx/benchmark-ips) and [benchmark-memory](https://github.com/michaelherold/benchmark-memory). Web client benchmarks answer requests in process with canned JSON, so they measure the client stack without network latency. Run them before and after a performance change and include the results in your pull request.
+
+```bash
+bundle exec rake benchmark
+bundle exec ruby benchmarks/formatting.rb
+BENCHMARK_TIME=5 bundle exec ruby benchmarks/web_client.rb
+```
+
 ### Write Documentation
 
 Document any external behavior in the [README](README.md). Keep each Markdown paragraph on a single line.
