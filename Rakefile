@@ -36,6 +36,13 @@ task lint: :rubocop
 
 task default: :spec
 
+desc 'Run the benchmarks in benchmarks/.'
+task :benchmark do
+  FileList['benchmarks/*.rb'].exclude('benchmarks/support.rb').each do |file|
+    ruby file
+  end
+end
+
 load 'tasks/git.rake'
 load 'tasks/web.rake'
 load 'tasks/update.rake'

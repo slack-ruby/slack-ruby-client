@@ -30,6 +30,11 @@ group :test do
   gem 'webrick', '~> 1.8'
 end
 
+group :benchmark do
+  gem 'benchmark-ips', '~> 2.15', require: false
+  gem 'benchmark-memory', '~> 0.2', require: false
+end
+
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2')
   group :lint do
     gem 'rubocop', '~> 1.92'
