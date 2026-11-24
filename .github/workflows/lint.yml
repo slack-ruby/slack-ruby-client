@@ -1,16 +1,29 @@
 name: Lint
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
-  rubocop:
-    name: RuboCop
+  lint:
+    name: Lint Code and Documentation
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Check Out Code
         uses: actions/checkout@v7
-      - name: Set up Ruby
+      - name: Set Up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
-          bundler: latest
+          ruby-version: '4.0'
           bundler-cache: true
-      - run: bundle exec rubocop
+      - name: Run Lint
+        run: bundle exec rake lint

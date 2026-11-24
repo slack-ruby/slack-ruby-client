@@ -1,13 +1,10 @@
-Slack Ruby Client
-=================
+# Slack Ruby Client
 
-[![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client)
-[![Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/slack-ruby/slack-ruby-client/badge.svg?branch=master)](https://coveralls.io/github/slack-ruby/slack-ruby-client?branch=master)
+[![Gem Version](https://badge.fury.io/rb/slack-ruby-client.svg)](http://badge.fury.io/rb/slack-ruby-client) [![Tests](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/slack-ruby/slack-ruby-client/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/slack-ruby/slack-ruby-client/badge.svg?branch=master)](https://coveralls.io/github/slack-ruby/slack-ruby-client?branch=master)
 
-A Ruby client for the Slack [Web](https://api.slack.com/web) and [Events](https://api.slack.com/events-api) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
+A Ruby client for the Slack [Web](https://docs.slack.dev/apis/web-api/) and [Events](https://docs.slack.dev/apis/events-api/) APIs. Comes with a handy command-line client, too. If you are not familiar with these concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
 
-![](slack.png)
+![Slack Ruby Client](slack.png)
 
 # Table of Contents
 
@@ -64,9 +61,9 @@ A Ruby client for the Slack [Web](https://api.slack.com/web) and [Events](https:
 
 ## Useful to Me?
 
-* This library lets you send messages to Slack via the Web API and facilitates integration with the Events API.
-* To write a complete bot for Slack you need more than this library, and it's much easier to start with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events).
-* To respond to slash commands, interactive components, or events at the lowest level, implement a web application using your favorite web framework, and use this library to call the Slack Web API, and to verify that events are coming from Slack.
+- This library lets you send messages to Slack via the Web API and facilitates integration with the Events API.
+- To write a complete bot for Slack you need more than this library, and it's much easier to start with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events).
+- To respond to slash commands, interactive components, or events at the lowest level, implement a web application using your favorite web framework, and use this library to call the Slack Web API, and to verify that events are coming from Slack.
 
 ## Stable Release
 
@@ -76,7 +73,7 @@ You're reading the documentation for the **next** release of slack-ruby-client. 
 
 Add to Gemfile.
 
-```
+```ruby
 gem 'slack-ruby-client'
 ```
 
@@ -90,28 +87,28 @@ To integrate your bot with Slack, you must first create a new [Slack App](https:
 
 ### OAuth Code Grant
 
-Once created, go to the app's Basic Info tab and grab the Client ID and Client Secret. You'll need these in order complete an [OAuth Workflow](https://api.slack.com/authentication/oauth-v2). A working sample that starts a local web server and obtains a bot or a user token for your app using OAuth v2 is available in [examples/oauth_v2](examples/oauth_v2).
+Once created, go to the app's Basic Info tab and grab the Client ID and Client Secret. You'll need these in order to complete an [OAuth workflow](https://docs.slack.dev/authentication/installing-with-oauth/). A working sample that starts a local web server and obtains a bot or a user token for your app using OAuth v2 is available in [examples/oauth_v2](examples/oauth_v2).
 
 ### Using an API Token
 
-Although OAuth is recommended, you can also [generate an API token](https://api.slack.com/tutorials/tracks/getting-a-token) for your app and use it for some interactions.
+Although OAuth is recommended, you can also [generate an API token](https://docs.slack.dev/authentication/tokens/) for your app and use it for some interactions.
 
 ```ruby
 Slack.configure do |config|
-  config.token = ENV['SLACK_API_TOKEN']
+  config.token = ENV.fetch('SLACK_API_TOKEN', nil)
 end
 ```
 
-This sets a global default token. You can also pass a token into the initializer of both `Slack::Web::Client` and `Slack::RealTime::Client` or configure those separately via `Slack::Web::Config.configure` and `Slack::RealTime::Config.configure`. The instance token will be used over the client type token over the global default.
+This sets a global default token. You can also pass a token into the `Slack::Web::Client` initializer or configure Web clients separately via `Slack::Web::Config.configure`. An instance token takes precedence over the Web client token, which takes precedence over the global default.
 
 ### Global Settings
 
 The following global settings are supported via `Slack.configure`.
 
-setting      | description
--------------|-------------------------------------------------------------------------------------------------
-token        | Slack API token.
-logger       | An optional logger, defaults to `::Logger.new(STDOUT)` at `Logger::WARN` level.
+setting       | description
+------------- | -------------------------------------------------------------------------------------------------
+token         | Slack API token.
+logger        | An optional logger, defaults to `::Logger.new(STDOUT)` at `Logger::WARN` level.
 
 ### Web Client
 
@@ -130,7 +127,7 @@ client.auth_test
 
 ##### Send Messages
 
-Send messages with [chat_PostMessage](https://api.slack.com/methods/chat.postMessage).
+Send messages with [chat_postMessage](https://docs.slack.dev/reference/methods/chat.postMessage/).
 
 ```ruby
 client.chat_postMessage(channel: '#general', text: 'Hello World', as_user: true)
@@ -138,11 +135,11 @@ client.chat_postMessage(channel: '#general', text: 'Hello World', as_user: true)
 
 See a fully working example in [examples/hi_web](examples/hi_web/hi.rb).
 
-![](examples/hi_web/hi.gif)
+![Sending a message with the hi_web example](examples/hi_web/hi.gif)
 
 ##### List Channels
 
-List channels with [conversations_list](https://api.slack.com/methods/conversations.list).
+List channels with [conversations_list](https://docs.slack.dev/reference/methods/conversations.list/).
 
 ```ruby
 channels = client.conversations_list.channels
@@ -152,7 +149,7 @@ general_channel = channels.detect { |c| c.name == 'general' }
 
 ##### Upload a File
 
-Upload files with [sequenced API calls](https://api.slack.com/messaging/files#uploading_files).
+Upload files with [sequenced API calls](https://docs.slack.dev/messaging/working-with-files/).
 
 This library provides a helper method `files_upload_v2` that wraps the three separate API calls.
 
@@ -165,7 +162,7 @@ client.files_upload_v2(
   content: File.read('/users/me/results.pdf'), # the string contents of the file
 
   # optional options
-  channels: ['C000000', 'C000001'], # channel IDs to share the file in (:channel_id, :channel, or :channels are all supported)
+  channels: %w[C000000 C000001], # channel IDs to share the file in (:channel_id, :channel, or :channels are all supported)
   initial_comment: 'Sharing the Q1 results :tada:', # the message that is included with the file share thread
   snippet_type: 'text', # the type of snippet
   title: 'Q1 Results', # sets the title of the file, overriding the filename
@@ -186,24 +183,13 @@ client.files_upload_v2(
 )
 ```
 
-You can use a channel ID passed as `channel_id`, a single channel as `channel`, an array of channel IDs as `channels`, or a channel name or names (prefixed with `#`) in `files_upload_v2`. Lookup by name is not supported by the Slack API and this method called invokes `conversations_list` in order to locate the channel ID. This invocation can have a cost if you have many Slack channels and is only recommended when you intend to list channels anyway.
+You can use a channel ID passed as `channel_id`, a single channel as `channel`, an array of channel IDs as `channels`, or a channel name or names (prefixed with `#`) in `files_upload_v2`. Lookup by name is not supported by the Slack API, so this method invokes `conversations_list` to locate the channel ID. This invocation can have a cost if you have many Slack channels and is only recommended when you intend to list channels anyway.
 
-Note: This library includes a `files_upload` method that uses a deprecated endpoint `files.upload` that will [no longer be supported on 3/11/2025](https://api.slack.com/methods/files.upload#markdown).
-
-```ruby
-client.files_upload(
-  channels: '#general',
-  as_user: true,
-  file: Faraday::Multipart::FilePart.new('/path/to/avatar.jpg', 'image/jpeg'),
-  title: 'My Avatar',
-  filename: 'avatar.jpg',
-  initial_comment: 'Attached a selfie.'
-)
-```
+Note: The generated `files_upload` method calls the [`files.upload`](https://docs.slack.dev/reference/methods/files.upload/) endpoint, which Slack sunset on November 12, 2025. Use `files_upload_v2` instead.
 
 ##### Get Channel Info
 
-You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API and the `channels_id` method called invokes `conversations_list` in order to locate the channel ID. This invocation can have a cost if you have many Slack channels. In this scenario, we encourage you to use channel id.
+You can use a channel ID or name (prefixed with `#`) in all functions that take a `:channel` argument. Lookup by name is not supported by the Slack API, so the `channels_id` method invokes `conversations_list` to locate the channel ID. This invocation can have a cost if you have many Slack channels. In this scenario, we encourage you to use channel IDs.
 
 ```ruby
 client.conversations_info(channel: 'C04KB5X4D') # calls conversations_info
@@ -215,7 +201,7 @@ client.conversations_info(channel: '#general') # calls conversations_list follow
 
 ##### Get User Info
 
-You can use a user ID or name (prefixed with `@`) in all functions that take a `:user` argument. Lookup by name is not supported by the Slack API and the `users_id` method called invokes `users_list` in order to locate the user ID.
+You can use a user ID or name (prefixed with `@`) in all functions that take a `:user` argument. Lookup by name is not supported by the Slack API, so the `users_id` method invokes `users_list` to locate the user ID.
 
 ```ruby
 client.users_info(user: 'U092BDCLV') # calls users_info
@@ -235,25 +221,25 @@ client.users_search(user: 'dblock')
 
 ##### Other
 
-Refer to the [Slack Web API Method Reference](https://api.slack.com/methods) for the list of all available functions.
+Refer to the [Slack Web API method reference](https://docs.slack.dev/reference/methods/) for the list of all available functions.
 
 #### JSON Arguments
 
-The Web API expects certain arguments to be sent as JSON-encoded strings. With the client you can pass these args as ruby hashes or arrays and they will be converted automatically to JSON, or you can provide the JSON directly.
+The Web API expects certain arguments to be sent as JSON-encoded strings. With the client you can pass these arguments as Ruby hashes or arrays and they will be converted automatically to JSON, or you can provide the JSON directly.
 
 ```ruby
-# As ruby objects
+# As Ruby objects
 client.chat_postMessage(
   channel: 'C123456',
   text: 'Hello World',
-  blocks: [{type: 'section', text: {type: 'mrkdwn', text: 'Hello World'}}]
+  blocks: [{ type: 'section', text: { type: 'mrkdwn', text: 'Hello World' } }]
 )
 
 # As a JSON string
 client.chat_postMessage(
   channel: 'C123456',
   text: 'Hello World',
-  blocks: JSON.dump([{type: 'section', text: {type: 'mrkdwn', text: 'Hello World'}}])
+  blocks: JSON.dump([{ type: 'section', text: { type: 'mrkdwn', text: 'Hello World' } }])
 )
 client.chat_postMessage(
   channel: 'C123456',
@@ -278,22 +264,22 @@ client = Slack::Web::Client.new(user_agent: 'Slack Ruby Client/3.0')
 
 The following settings are supported.
 
-setting                      | description
------------------------------|-------------------------------------------------------------------------------------------------
-token                        | Slack API token.
-user_agent                   | User-agent, defaults to _Slack Ruby Client/version_.
-proxy                        | Optional HTTP proxy.
-ca_path                      | Optional SSL certificates path.
-ca_file                      | Optional SSL certificates file.
-endpoint                     | Slack endpoint, default is _https://slack.com/api_.
-logger                       | Optional `Logger` instance that logs HTTP requests.
-timeout                      | Optional open/read timeout in seconds.
-open_timeout                 | Optional connection open timeout in seconds.
-default_page_size            | Optional page size for paginated requests, default is _100_.
-conversations_id_page_size   | Optional page size for conversations_list requests made when calculating conversation id from a conversation name, default is _nil_, which will use the default_page_size.
-users_id_page_size           | Optional page size for users_list requests made when calculating user id from a user name, default is _nil_, which will use the default_page_size.
-default_max_retries          | Optional number of retries for paginated requests, default is _100_.
-adapter                      | Optional HTTP adapter to use, defaults to `Faraday.default_adapter`.
+setting                       | description
+----------------------------- | -------------------------------------------------------------------------------------------------
+token                         | Slack API token.
+user_agent                    | User-agent, defaults to _Slack Ruby Client/version_.
+proxy                         | Optional HTTP proxy.
+ca_path                       | Optional SSL certificates path.
+ca_file                       | Optional SSL certificates file.
+endpoint                      | Slack endpoint, default is _https://slack.com/api_.
+logger                        | Optional `Logger` instance that logs HTTP requests.
+timeout                       | Optional open/read timeout in seconds.
+open_timeout                  | Optional connection open timeout in seconds.
+default_page_size             | Optional page size for paginated requests, default is _100_.
+conversations_id_page_size    | Optional page size for conversations_list requests made when calculating conversation id from a conversation name, default is _nil_, which will use the default_page_size.
+users_id_page_size            | Optional page size for users_list requests made when calculating user id from a user name, default is _nil_, which will use the default_page_size.
+default_max_retries           | Optional number of retries for paginated requests, default is _100_.
+adapter                       | Optional HTTP adapter to use, defaults to `Faraday.default_adapter`.
 
 You can also pass request options, including `timeout` and `open_timeout` into individual calls.
 
@@ -336,13 +322,13 @@ observed_client.auth_test
 
 Error callbacks receive the exception and then it is re-raised unchanged. They run for every failed HTTP attempt, including failures that pagination subsequently retries. Successful calls and exceptions from request or response callbacks do not trigger them. If an error callback raises, its exception propagates instead and later callbacks are not invoked. As with other callbacks, these methods return a configured copy and can be chained.
 
-You can control what proxy options are used by modifying the `http_proxy` environment variable per [Net::HTTP's documentation](https://docs.ruby-lang.org/en/2.0.0/Net/HTTP.html#class-Net::HTTP-label-Proxies).
+You can control what proxy options are used by modifying the `http_proxy` environment variable per the [Net::HTTP documentation](https://docs.ruby-lang.org/en/master/Net/HTTP.html#class-Net::HTTP-label-Proxies).
 
-Note that Docker on OSX seems to incorrectly set the proxy, causing `Faraday::ConnectionFailed, ERROR -- : Failed to open TCP connection to : (getaddrinfo: Name or service not known)`. You might need to manually unset `http_proxy` in that case, eg. `http_proxy="" bundle exec ruby ./my_bot.rb`.
+Note that Docker on macOS seems to incorrectly set the proxy, causing `Faraday::ConnectionFailed, ERROR -- : Failed to open TCP connection to : (getaddrinfo: Name or service not known)`. You might need to manually unset `http_proxy` in that case, e.g. `http_proxy="" bundle exec ruby ./my_bot.rb`.
 
 #### Pagination Support
 
-The Web client natively supports [cursor pagination](https://api.slack.com/docs/pagination#cursors) for methods that allow it, such as `users_list`. Supply a block and the client will make repeated requests adjusting the value of `cursor` with every response. The default limit is set to 100 and can be adjusted via `Slack::Web::Client.config.default_page_size` or by passing it directly into the API call.
+The Web client natively supports [cursor pagination](https://docs.slack.dev/apis/web-api/pagination/) for methods that allow it, such as `users_list`. Supply a block and the client will make repeated requests adjusting the value of `cursor` with every response. The default limit is set to 100 and can be adjusted via `Slack::Web::Client.config.default_page_size` or by passing it directly into the API call.
 
 ```ruby
 all_members = []
@@ -373,7 +359,7 @@ Note that Slack expects `text` to be UTF-8 encoded. If your messages appear with
 ```ruby
 text = 'characters such as "Ñ", "Á", "É"'
 text.encoding
-=> #<Encoding:UTF-8>
+# => #<Encoding:UTF-8>
 client.chat_postMessage(channel: '#general', text: text, as_user: true)
 # renders 'characters such as "Ñ", "Á", "É"' in Slack
 
@@ -391,6 +377,8 @@ client.chat_postMessage(channel: '#general', text: text, as_user: true)
 If Slack returns an error for the request, then an error will be raised. The error class is specific to the type of error that Slack returns. For instance if Slack returns `account_inactive` then the error will be `Slack::Web::Api::Errors::AccountInactive`. This allows you to handle certain types of errors as needed:
 
 ```ruby
+begin
+  client.auth_test
 rescue Slack::Web::Api::Errors::AccountInactive => e
   # deal with inactive account
 end
@@ -399,6 +387,8 @@ end
 All of these errors inherit from `Slack::Web::Api::Errors::SlackError`, so you can handle or silence all errors if necessary:
 
 ```ruby
+begin
+  client.auth_test
 rescue Slack::Web::Api::Errors::SlackError => e
   # capture all Slack errors
 end
@@ -410,19 +400,19 @@ In all of these cases the error message contains the error code, which is also a
 
 ##### Rate Limiting
 
-If you exceed [Slack’s rate limits](https://api.slack.com/docs/rate-limits), a `Slack::Web::Api::Errors::TooManyRequestsError` will be raised instead. (This does not inherit from `Slack::Web::Api::Errors::SlackError`.)
+If you exceed [Slack's rate limits](https://docs.slack.dev/apis/web-api/rate-limits/), a `Slack::Web::Api::Errors::TooManyRequestsError` will be raised instead. (This does not inherit from `Slack::Web::Api::Errors::SlackError`.)
 
 ##### Other Errors
 
-When Slack is temporarily unavailable a subclass of `Slack::Web::Api::Errors::ServerError` will be raised and the original `Faraday::Error` will be accesible via `exception.cause`. (Starting with 0.18.0 this is no longer a subclass of `Slack::Web::Api::Errors::SlackError`.)
+When Slack is temporarily unavailable a subclass of `Slack::Web::Api::Errors::ServerError` will be raised and the original `Faraday::Error` will be accessible via `exception.cause`. (Starting with 0.18.0 this is no longer a subclass of `Slack::Web::Api::Errors::SlackError`.)
 
-Specifically `Slack::Web::Api::Errors::ParsingError` will be raised on non-json response (i.e. 200 OK with `Slack unavailable` HTML page) and `Slack::Web::Api::Errors::HttpRequestError` subclasses for connection failures (`Slack::Web::Api::Errors::TimeoutError` for read/open timeouts & `Slack::Web::Api::Errors::UnavailableError` for 5xx HTTP responses).
+Specifically `Slack::Web::Api::Errors::ParsingError` will be raised on a non-JSON response (i.e. 200 OK with `Slack unavailable` HTML page) and `Slack::Web::Api::Errors::HttpRequestError` subclasses for connection failures (`Slack::Web::Api::Errors::TimeoutError` for read/open timeouts & `Slack::Web::Api::Errors::UnavailableError` for 5xx HTTP responses).
 
 In any other case, a `Faraday::ClientError` will be raised.
 
 ### Events API
 
-This library provides limited support for the [Slack Events API](https://api.slack.com/events-api).
+This library provides limited support for the [Slack Events API](https://docs.slack.dev/apis/events-api/).
 
 #### Configuring Slack::Events
 
@@ -436,10 +426,10 @@ end
 
 The following settings are supported.
 
-setting               | description
-----------------------|---------------------------------------------------------------------------------------------------
-signing_secret        | Slack signing secret, defaults is `ENV['SLACK_SIGNING_SECRET']`.
-signature_expires_in  | Signature expiration window in seconds, default is `300`.
+setting                | description
+---------------------- | ---------------------------------------------------------------------------------------------------
+signing_secret         | Slack signing secret, default is `ENV['SLACK_SIGNING_SECRET']`.
+signature_expires_in   | Signature expiration window in seconds, default is `300`.
 
 #### Verifying the Request Signature
 
@@ -451,6 +441,7 @@ slack_request.verify!
 ```
 
 To specify secrets on a per-request basis:
+
 ```ruby
 Slack::Events::Request.new(
   http_request,
@@ -467,7 +458,7 @@ Verify the signature before middleware or application code reads a non-rewindabl
 
 ### Message Handling
 
-All text in Slack uses the same [system of formatting and escaping](https://api.slack.com/docs/formatting): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
+All text in Slack uses the same [system of formatting and escaping](https://docs.slack.dev/messaging/formatting-message-text/): chat messages, direct messages, file comments, etc. [Slack::Messages::Formatting](lib/slack/messages/formatting.rb) provides convenience methods to format and parse messages.
 
 #### Formatting Messages
 
@@ -485,13 +476,13 @@ Slack::Messages::Formatting.date(date)
   # => "<!date^1688150386^{date_num} {time_secs}|2023-06-30 18:39:46 +0000>"
 
 # Specify a different format
-# See https://api.slack.com/reference/surfaces/formatting#date-formatting for supported formats
+# See https://docs.slack.dev/messaging/formatting-message-text/ for supported formats
 Slack::Messages::Formatting.date(date, format: 'date_long_pretty')
   # => "<!date^1688150386^date_long_pretty|2023-06-30 18:39:46 +0000>"
 
 # Link your timestamp to a fully qualified URL
-Slack::Messages::Formatting.date(date, link: 'https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif')
-  # => "<!date^1688150386^{date_num} {time_secs}^https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif|2023-06-30 18:39:46 +0000>"
+Slack::Messages::Formatting.date(date, link: 'https://example.com/party')
+  # => "<!date^1688150386^{date_num} {time_secs}^https://example.com/party|2023-06-30 18:39:46 +0000>"
 
 # Specify custom fallback text to use if the client is unable to process the date
 Slack::Messages::Formatting.date(date, text: 'party time!')
@@ -541,31 +532,30 @@ Slack::Messages::Formatting.url_link(text, url)
 
 ##### Markdown Formatting
 
-Slack uses a mishmash of regular markdown formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
+Slack uses a mishmash of regular Markdown formatting with its own syntax. Some features like headings aren't supported and will be left as-is, but others like bold, strikethrough, and links are converted.
 
 ```ruby
-text = """
-## A heading
-**Bold text**
-~~Strikethrough text~~
-_Italic text_
-[A link](https://example.com)
-`code`
-"""
+text = <<~MARKDOWN
+  ## A heading
+  **Bold text**
+  ~~Strikethrough text~~
+  _Italic text_
+  [A link](https://example.com)
+  `code`
+MARKDOWN
+
 Slack::Messages::Formatting.markdown(text)
-  # => """
-  # ## A heading
-  # *Bold text*
-  # ~Strikethrough text~
-  # _Italic text_
-  # <https://example.com|A link>
-  # `code`
-  # """
+# ## A heading
+# *Bold text*
+# ~Strikethrough text~
+# _Italic text_
+# <https://example.com|A link>
+# `code`
 ```
 
 #### Parsing Messages
 
-`Slack::Messages::Formatting` also provides ways to escape or unescape messages. This comes handy, for example, you want to treat all input to a real time bot as plain text.
+`Slack::Messages::Formatting` also provides ways to escape or unescape messages. This comes in handy, for example, when you want to treat all input to a bot as plain text.
 
 ##### Unescaping Message Content
 
@@ -603,7 +593,7 @@ Slack::Messages::Formatting.escape('Hello & <world>')
 
 The slack command-line client returns JSON data from the Slack API. It uses [GLI](https://github.com/davetron5000/gli), which is not a dependency of slack-ruby-client, so install it alongside the client.
 
-```
+```bash
 gem install gli
 ```
 
@@ -611,14 +601,14 @@ Or add `gem 'gli'` to your Gemfile.
 
 #### Authenticate with Slack
 
-```
+```console
 $ slack --slack-api-token=[token] auth test
 {"ok":true,"url":"...","team":"...","user":"...","team_id":"...","user_id":"..."}
 ```
 
 #### Send a Message
 
-```
+```console
 export SLACK_API_TOKEN=...
 $ slack chat postMessage --text="hello world" --channel="#general"
 {"ok":true,"channel":"...","ts":"...","message":{"text":"hello world","username":"bot","type":"message","subtype":"bot_message","ts":"..."}}
@@ -626,16 +616,16 @@ $ slack chat postMessage --text="hello world" --channel="#general"
 
 #### Get Channel Info
 
-```
+```console
 $ slack conversations info --channel=#general
 {"ok":true,"channel":{"id":"C04KB5X4D","name":"general", ...}}
 ```
 
 #### List Users
 
-Combine with [jq](http://stedolan.github.io/jq), a command-line JSON parser.
+Combine with [jq](https://jqlang.org/), a command-line JSON processor.
 
-```
+```console
 $ slack users list | jq '.members | map({(.id): .name})'
 [
   {
@@ -653,11 +643,11 @@ See `slack help` for a complete command-line reference.
 
 This library was created and has been maintained for a decade by [@dblock](https://github.com/dblock). Please consider [a sponsorship](https://github.com/sponsors/dblock).
 
-Enterprise Support is available as part of a Tidelift Subscription. Click [here](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise) for more details.
+Enterprise Support is available as part of a [Tidelift Subscription](https://tidelift.com/subscription/request-a-demo?utm_source=rubygems-slack-ruby-client&utm_medium=referral&utm_campaign=enterprise).
 
 ## History
 
-This gem is based on [slack-ruby-gem](https://github.com/aki017/slack-ruby-gem), but it more clearly separates the Web and RTM APIs, is more thoroughly tested and is in active development.
+This gem is based on [slack-ruby-gem](https://github.com/aki017/slack-ruby-gem), but it more clearly separates the Web and Events APIs, is more thoroughly tested, and is in active development. The RealTime (RTM) client was removed in 2.0.0, see [UPGRADING](UPGRADING.md).
 
 ## Security
 
@@ -669,6 +659,6 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
-Copyright (c) 2015-2025, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
+Copyright (c) 2015-2026, [Daniel Doubrovkine](https://twitter.com/dblockdotorg), [Artsy](https://www.artsy.net) and [Contributors](CHANGELOG.md).
 
 This project is licensed under the [MIT License](LICENSE.md).

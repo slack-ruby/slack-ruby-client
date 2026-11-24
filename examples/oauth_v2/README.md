@@ -1,9 +1,10 @@
+# OAuth V2 Example
+
 Obtain a user OAuth token from Slack.
 
-Create a Slack app [here](https://api.slack.com/tutorials/tracks/getting-a-token).
+[Create a Slack app](https://api.slack.com/apps).
 
-The new app has a pre-configured User OAuth Token which you can use for most of the examples.
-However you may want to obtain a token for a different user, which can be accomplished as follows.
+The new app has a pre-configured User OAuth Token which you can use for most of the examples. However you may want to obtain a token for a different user, which can be accomplished as follows.
 
 To test locally use [ngrok](https://ngrok.com/) to expose your local server to the internet.
 
@@ -15,7 +16,7 @@ Add the ngrok URL to the app's "Redirect URLs" under "OAuth & Permissions" in th
 
 Create a `.env` file with the following:
 
-```
+```dotenv
 SLACK_CLIENT_ID=[App Client ID]
 SLACK_CLIENT_SECRET=[App Client Secret]
 REDIRECT_URI=[Your ngrok URL, e.g. https://...ngrok-free.app]

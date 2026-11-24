@@ -1,18 +1,32 @@
 inherit_from: .rubocop_todo.yml
 
 plugins:
+  - rubocop-exception_messages
+  - rubocop-md
   - rubocop-performance
+  - rubocop-prose
   - rubocop-rake
   - rubocop-rspec
-  - rubocop-exception_messages
+  - rubocop-spellcheck
+  - rubocop-yaml
 
 AllCops:
   TargetRubyVersion: 2.7
   NewCops: enable
   DisplayCopNames: true
+  SuggestExtensions: false
+  inherit_mode:
+    merge:
+      - Include
+  Include:
+    - .github/**/*.yml
+    - .rubocop.yml
   Exclude:
     - bin/**/*
     - vendor/**/*
+    - coverage/**/*
+    - pkg/**/*
+    - spec/fixtures/**/*
     - lib/slack/web/api/slack-api-ref/**/*
     - lib/slack/web/api/endpoints/* # Auto-generated
     - lib/slack/web/api/errors.rb # Auto-generated
@@ -29,6 +43,9 @@ Metrics/ClassLength:
 
 Layout/LineLength:
   Max: 128
+  Exclude:
+    # Workflow shell steps embed long GitHub Actions expressions.
+    - .github/workflows/*.yml
 
 Style/Documentation:
   Enabled: false
@@ -46,3 +63,70 @@ RSpec/InstanceVariable:
 Naming/FileName:
   Exclude:
     - lib/slack-ruby-client.rb # Required to match gemspec name
+    - "**/*.md"
+    - .github/**/*.yml
+
+YAML/Lint/InvalidSyntax:
+  Include:
+    - "**/*.yml"
+    - "**/*.yaml"
+
+YAML/Lint/DuplicateKey:
+  Include:
+    - "**/*.yml"
+    - "**/*.yaml"
+
+Markdown/HeadingCapitalization:
+  Enabled: true
+  Style: title_case
+
+Prose/MaxLength:
+  Max: false
+  Exclude:
+    - LICENSE.md
+
+Spellcheck:
+  DictionaryFiles:
+    en:
+      - gem:rubocop-spellcheck/data/en/en.dic
+      - .spellcheck.txt
+
+Spellcheck/Spelling:
+  Exclude:
+    - LICENSE.md
+    # French and full-width Markdown inputs exercise formatting, not prose.
+    - spec/slack/messages/formatting_spec.rb
+
+# Ruby snippets in Markdown are illustrative fragments, not standalone files.
+Lint/UselessAssignment:
+  inherit_mode:
+    merge:
+      - Exclude
+  Exclude:
+    - "**/*.md"
+
+Lint/Void:
+  inherit_mode:
+    merge:
+      - Exclude
+  Exclude:
+    - "**/*.md"
+
+# Released CHANGELOG entries are kept verbatim; danger-changelog rejects edits outside the (Next) section.
+Markdown/OutsideSpacing:
+  Exclude:
+    - CHANGELOG.md
+
+Style/MultilineBlockChain:
+  inherit_mode:
+    merge:
+      - Exclude
+  Exclude:
+    - "**/*.md"
+
+Style/OneClassPerFile:
+  inherit_mode:
+    merge:
+      - Exclude
+  Exclude:
+    - "**/*.md"

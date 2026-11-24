@@ -315,7 +315,7 @@ RSpec.describe Slack::Web::Client do
         context 'open timeout' do
           before { stub_slack_request.to_timeout }
 
-          it 'raises TimoutError' do
+          it 'raises TimeoutError' do
             expect { request }.to raise_error(Slack::Web::Api::Errors::TimeoutError).with_message('timeout_error')
             expect(exception.cause).to be_a(Faraday::ConnectionFailed)
             expect(exception.cause.cause).to be_a(Net::OpenTimeout)

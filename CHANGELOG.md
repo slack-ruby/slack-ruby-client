@@ -9,6 +9,7 @@
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Add an include_slackbot_availability argument to team.info - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#609](https://github.com/slack-ruby/slack-ruby-client/pull/609): Remove require_sc_channel_for_sc_dm from the documented team.externalTeams.list slack_connect_pref_filter values - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#614](https://github.com/slack-ruby/slack-ruby-client/pull/614): Upgrade to danger/danger-pr-comment 0.3.0, pinned by commit, skip empty Danger comments, allow stacked pull request targets, and cancel superseded Danger runs - [@dblock](https://github.com/dblock).
+* [#615](https://github.com/slack-ruby/slack-ruby-client/pull/615): Lint Markdown, YAML, and spelling with rubocop-md, rubocop-prose, rubocop-spellcheck, and rubocop-yaml, and refresh the documentation for `docs.slack.dev` and the removed RealTime client - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 3.3.0 (2026/10/09)
@@ -44,6 +45,7 @@
 * [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add admin.usergroups.addUsers, admin.usergroups.removeUsers, admin.usergroups.create, admin.usergroups.fetch, admin.usergroups.update, and admin.usergroups.uploadUsers methods - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add canvases.getContent method to fetch canvas content as markdown or HTML - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
 * [#608](https://github.com/slack-ruby/slack-ruby-client/pull/608): Add new Slack API error codes to Errors - [@slack-ruby-ci-bot](https://github.com/apps/slack-ruby-ci-bot).
+
 ### 3.2.0 (2026/07/05)
 
 * [#581](https://github.com/slack-ruby/slack-ruby-client/pull/581): Migrate Danger to use danger-pr-comment workflow - [@dblock](https://github.com/dblock).
